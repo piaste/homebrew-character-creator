@@ -10,346 +10,10 @@ open Bolero.Templating.Client
 open FSharp.SystemTextJson
 open Microsoft.AspNetCore.Components
 open Microsoft.JSInterop
-
-
-type Collections.Map<'K, 'V when 'K : comparison > with
-    member this.GetOrDefault k = 
-        match this.TryGetValue k with
-        | false, _ -> Unchecked.defaultof<'V>
-        | true, v -> v
-
-
-type Page =
-    | [<EndPoint "/">] Forge
-
-type Ability =
-    | STR
-    | DEX
-    | CON
-    | INT
-    | WIS
-    | CHA
-
-type Passive = 
-    {
-        Name : string
-        Description : string
-        Effect: string
-    }
-
-type RaceDef =
-    {
-        Name: string
-        Description: string
-        Trait: string
-    }
-
-type ClassId = Fighter | Wizard
-
-type ClassDef =
-    {
-        Name: string
-        Description: string
-        InitialSpellChoices: int
-        IsSpellcaster: bool
-    }
-
-type SubclassId = Champion | BattleMaster | Evoker | Illusionist
-
-type SubclassDef =
-    {
-        Name: string
-        Description: string
-        BaseClass: ClassDef
-    }
-
-type ChoiceDef =
-    {
-        Id: string
-        Name: string
-        Description: string
-    }
-
-type LevelRecord =
-    {
-        Level: int
-        Subclass: SubclassId
-        FeatId: string option
-        SpellId: string option
-    }
-
-type [<Measure>] pointbuy
-type Race = Human | Elf
-
-type AbilityBuy = 
-    {
-        PointBuy: Map<Ability, int<pointbuy>>
-        BonusPlusThree: Ability
-        BonusPlusOne: Ability
-    } with
-        member this.BoughtStat ab = 
-            match this.PointBuy.TryGetValue ab with
-            | false, _ -> 8
-            | true, x -> 
-               if x <= 5<pointbuy> then 8 + x/1<pointbuy>
-               else 13 + (x - 5<pointbuy>) / 2<pointbuy>
-
-            + if this.BonusPlusOne = ab then 1
-              elif this.BonusPlusThree = ab then 3
-              else 0
-
-type StatModifiers = {
-    Abilities: Map<Ability, int>
-    Initiative: int
-    HP : int
-} with static member None = { Abilities = Map []; Initiative = 0; HP = 0 }
-
-type Character =
-    {
-        Name: string
-        Race: Race
-        Subclass: SubclassId
-        AbilityBuy: AbilityBuy
-        SelectedSkillIds: Set<string>
-        SelectedSpellIds: Set<string>
-        ChosenFeatIds: Set<string>
-        LevelHistory: LevelRecord list
-        IsCreated: bool
-        StatModifiers : StatModifiers
-    } with
-        member this.Ability ab = 
-            this.AbilityBuy.BoughtStat ab + 
-            this.StatModifiers.Abilities.GetOrDefault ab
-
-        member this.AbilityModifier ab = 
-            (this.Ability ab - 10) / 2
-        member this.Initiative = 
-            this.AbilityModifier DEX 
-            + this.AbilityModifier INT
-            + this.StatModifiers.Initiative
-
-
-type LevelUpDraft =
-    {
-        ClassId: string
-        FeatId: string option
-        SpellId: string option
-    }
-
-type PersistedState =
-    {
-        Character: Character
-        UndoStack: Character list
-    }
-
-type Model =
-    {
-        Page: Page
-        Character: Character
-        UndoStack: Character list
-        LevelUp: LevelUpDraft option
-        Error: string option
-        Hydrated: bool
-    }
-
-type Message =
-    | SetPage of Page
-    | LoadState
-    | LoadedState of PersistedState option
-    | SetName of string
-    | SetRace of string
-    | SetClass of string
-    | SetSubclass of string
-    | SetAbilityScore of Ability * int
-    | SetBonusPlusThree of Ability
-    | SetBonusPlusOne of Ability
-    | ToggleSkill of string
-    | ToggleSpell of string
-    | FinalizeCharacter
-    | BeginLevelUp
-    | CancelLevelUp
-    | SetLevelUpClass of string
-    | SetLevelUpFeat of string
-    | SetLevelUpSpell of string
-    | ApplyLevelUp
-    | Undo
-    | SavedState
-    | PersistFailed of string
-    | ClearError
-
-type Main = Template<"wwwroot/main.html">
-
-
-let human =
-        {
-            Name = "Human"
-            Description = "Adaptable and relentless, ready to fill any gap in the party."
-            Trait = "Init bonus"
-        }
-let elf =
-        {
-            Name = "Elf"
-            Description = "Keen senses and measured patience make every decision feel deliberate."
-            Trait = "Fey perception"
-        }
-
-let fighter = {
-            Name = "Fighter"
-            Description = "Front-line martial expert with durable defenses and weapon mastery."
-            InitialSpellChoices = 0
-            IsSpellcaster = false
-        }
-
-let wizard =
-        {
-            Name = "Wizard"
-            Description = "Arcane scholar with fragile defenses and flexible spell access."
-            InitialSpellChoices = 2
-            IsSpellcaster = true
-        }
-let classes = [fighter;wizard]
-
-
-let champion =
-        {
-            Name = "Champion"
-            Description = "Direct, dependable martial skill with no wasted motion."
-            BaseClass = fighter
-        }
-let battlemaster =
-        {
-            Name = "Battle Master"
-            Description = "A tactical duelist who wins by precision and positioning."
-            BaseClass = fighter
-
-        }
-let evoker =
-
-        {
-            Name = "School of Evocation"
-            Description = "Specializes in raw elemental force and precise battlefield shaping."
-            BaseClass = wizard
-
-        }
-let illusionist =
-        {
-            Name = "School of Illusion"
-            Description = "Controls the room with misdirection, trickery, and layered magic."
-            BaseClass = wizard
-
-        }
-
-let private skills =
-    [
-        {
-            Id = "athletics"
-            Name = "Athletics"
-            Description = "Climbing, grappling, and other raw physical efforts."
-        }
-        {
-            Id = "arcana"
-            Name = "Arcana"
-            Description = "Knowledge of spells, magical traditions, and planar oddities."
-        }
-        {
-            Id = "perception"
-            Name = "Perception"
-            Description = "Spotting hidden movement, faint sounds, and subtle danger."
-        }
-        {
-            Id = "persuasion"
-            Name = "Persuasion"
-            Description = "Winning people over with calm authority or charm."
-        }
-    ]
-
-let private spells =
-    [
-        {
-            Id = "magic-missile"
-            Name = "Magic Missile"
-            Description = "Reliable force bolts that always find a target."
-        }
-        {
-            Id = "shield"
-            Name = "Shield"
-            Description = "A split-second ward that turns a lethal strike aside."
-        }
-        {
-            Id = "mage-armor"
-            Name = "Mage Armor"
-            Description = "Hours of magical protection for an unarmored caster."
-        }
-        {
-            Id = "sleep"
-            Name = "Sleep"
-            Description = "Drops weakened enemies before they can regroup."
-        }
-    ]
-
-let private feats =
-    [
-        {
-            Id = "alert"
-            Name = "Alert"
-            Description = "Quick reactions and iron focus make ambushes far less likely."
-        }
-        {
-            Id = "tough"
-            Name = "Tough"
-            Description = "A reserve of grit that keeps you upright when others drop."
-        }
-        {
-            Id = "war-caster"
-            Name = "War Caster"
-            Description = "Keeps spells stable in the chaos of close combat."
-        }
-        {
-            Id = "sharpshooter"
-            Name = "Sharpshooter"
-            Description = "A daring attacker who trades safety for damage."
-        }
-    ]
-
-let private allAbilities =
-    [ STR;DEX;CON;INT;WIS;CHA ]
-
-let private abilityName = function
-    | STR -> "Strength"
-    | DEX -> "Dexterity"
-    | CON -> "Constitution"
-    | INT -> "Intelligence"
-    | WIS -> "Wisdom"
-    | CHA -> "Charisma"
-
-let private abilityAbbreviation = function
-    | STR -> "STR"
-    | DEX -> "DEX"
-    | CON -> "CON"
-    | INT -> "INT"
-    | WIS -> "WIS"
-    | CHA -> "CHA"
-
-let private clamp lower upper value =
-    max lower (min upper value)
-
-
-let private classById =
-    function | Fighter -> fighter | Wizard -> wizard
-
-let private raceById (raceId: string) =
-    function | Human -> human | Elf -> elf
-
-let private subclassById =
-    function
-         | Champion -> champion | BattleMaster -> battlemaster
-         | Evoker -> evoker | Illusionist -> illusionist
-
-let private choiceById (choices: ChoiceDef list) (choiceId: string) =
-    choices |> List.find (fun choice -> choice.Id = choiceId)
+open Domain
 
 // todo: can we make this bidirectional?
-let private pointBuyCost score =
+let pointBuyCost score =
     match score with
     | 8 -> 0
     | 9 -> 1
@@ -361,20 +25,20 @@ let private pointBuyCost score =
     | 15 -> 9
     | _ -> 99
 
-let private pointBuyOptions = [ 8 .. 15 ]
+let pointBuyOptions = [ 8 .. 15 ]
 
-let private serializerOptions =
+let serializerOptions =
     let options = JsonSerializerOptions(JsonSerializerDefaults.Web)
     options.Converters.Add(JsonFSharpConverter())
     options.WriteIndented <- false
     options
 
-let private storageKey = "forge-of-heroes-state"
+let storageKey = "forge-of-heroes-state"
 
-let private pointBuyTemplate =
+let pointBuyTemplate =
     allAbilities |> List.map (fun ability -> ability, 8<pointbuy>) |> Map.ofList
 
-let private defaultCharacter =
+let defaultCharacter =
     {
         Name = "John Baldur"
         Race = Human
@@ -392,7 +56,7 @@ let private defaultCharacter =
         IsCreated = false
     }
 
-let private initModel =
+let initModel =
     {
         Page = Forge
         Character = defaultCharacter
@@ -402,13 +66,13 @@ let private initModel =
         Hydrated = false
     }
 
-let private normaliseDistinctBonus plusThree plusOne =
+let normaliseDistinctBonus plusThree plusOne =
     if plusThree <> plusOne then
         plusOne
     else
         allAbilities |> List.find (fun ability -> ability <> plusThree)
 
-let private normaliseLevelHistory (character: Character) =
+let normaliseLevelHistory (character: Character) =
     if not character.IsCreated then
         []
     else
@@ -428,7 +92,7 @@ let private normaliseLevelHistory (character: Character) =
                     SpellId = level.SpellId |> Option.filter (fun spellId -> spells |> List.exists (fun spell -> spell.Id = spellId))
             })
 
-let private normaliseCharacter (character: Character) =
+let normaliseCharacter (character: Character) =
     let classDef = classById character.ClassId
     let subclassId =
         if classDef.Subclasses |> List.exists (fun subclass -> subclass.Id = character.SubclassId) then
@@ -463,41 +127,41 @@ let private normaliseCharacter (character: Character) =
             LevelHistory = normaliseLevelHistory character
     }
 
-let private totalPointBuySpent (character: Character) =
+let totalPointBuySpent (character: Character) =
     allAbilities
     |> List.sumBy (fun ability -> pointBuyCost character.PointBuy[ability])
 
-let private abilityScore (character: Character) ability =
+let abilityScore (character: Character) ability =
     let bonus =
         (if character.BonusPlusThree = ability then 3 else 0)
         + (if character.BonusPlusOne = ability then 1 else 0)
 
     character.PointBuy[ability] + bonus
 
-let private abilityModifier score =
+let abilityModifier score =
     Math.Floor((float score - 10.0) / 2.0) |> int
 
-let private modifierText score =
+let modifierText score =
     abilityModifier score |> sprintf "%+i"
 
-let private parseAbility (value: string) =
+let parseAbility (value: string) =
     Enum.Parse(typeof<Ability>, value) :?> Ability
 
-let private trimSet limit values =
+let trimSet limit values =
     values |> Set.toList |> List.sort |> List.truncate limit |> Set.ofList
 
-let private characterLevel (character: Character) =
+let characterLevel (character: Character) =
     if character.IsCreated then List.length character.LevelHistory else 0
 
-let private proficiencyBonus level =
+let proficiencyBonus level =
     if level = 0 then 2 else 2 + ((level - 1) / 4)
 
-let private classLevels (character: Character) =
+let classLevels (character: Character) =
     character.LevelHistory
-    |> List.countBy (fun level -> level.ClassId)
+    |> List.countBy (fun level -> level.Subclass)
     |> List.sortByDescending snd
 
-let private hitPoints (character: Character) =
+let hitPoints (character: Character) =
     if not character.IsCreated then
         0
     else
@@ -511,19 +175,19 @@ let private hitPoints (character: Character) =
 
         classTotals + (constitutionMod * character.LevelHistory.Length)
 
-let private nextLevel (character: Character) = characterLevel character + 1
+let nextLevel (character: Character) = characterLevel character + 1
 
-let private levelUpNeedsFeat (character: Character) =
+let levelUpNeedsFeat (character: Character) =
     character.IsCreated && nextLevel character % 4 = 0
 
-let private remainingInitialSkills (character: Character) =
+let remainingInitialSkills (character: Character) =
     (classById character.ClassId).SkillChoices - character.SelectedSkillIds.Count
 
-let private remainingInitialSpells (character: Character) =
+let remainingInitialSpells (character: Character) =
     let classDef = classById character.ClassId
     if classDef.IsSpellcaster then classDef.InitialSpellChoices - character.SelectedSpellIds.Count else 0
 
-let private creationValidation (character: Character) =
+let creationValidation (character: Character) =
     let classDef = classById character.ClassId
     [
         if String.IsNullOrWhiteSpace character.Name then
@@ -538,7 +202,7 @@ let private creationValidation (character: Character) =
             $"Choose exactly {classDef.InitialSpellChoices} starting spells."
     ]
 
-let private levelUpValidation (character: Character) (draft: LevelUpDraft) =
+let levelUpValidation (character: Character) (draft: LevelUpDraft) =
     let classDef = classById draft.ClassId
     [
         if classDef.IsSpellcaster && draft.SpellId.IsNone then
@@ -547,7 +211,7 @@ let private levelUpValidation (character: Character) (draft: LevelUpDraft) =
             "This level grants a feat choice."
     ]
 
-let private statusText (model: Model) =
+let statusText (model: Model) =
     let character = model.Character
     if not character.IsCreated then
         let remaining = 27 - totalPointBuySpent character
@@ -560,20 +224,20 @@ let private statusText (model: Model) =
         let className = (classById character.ClassId).Name
         $"{character.Name} is a level {characterLevel character} {race.Name} {className}. Use level up to extend the build, or undo to roll back changes."
 
-let private levelUpDefault (character: Character) : LevelUpDraft =
+let levelUpDefault (character: Character) : LevelUpDraft =
     {
         ClassId = character.ClassId
         FeatId = None
         SpellId = None
     }
 
-let private toPersistedState (model: Model) =
+let toPersistedState (model: Model) =
     {
         Character = model.Character
         UndoStack = model.UndoStack
     }
 
-let private buildStorage (getJsRuntime: unit -> IJSRuntime) =
+let buildStorage (getJsRuntime: unit -> IJSRuntime) =
     {
         new obj() with
             member _.ToString() = "storage"
@@ -597,15 +261,15 @@ let private buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     load, save
 
-let private router = Router.infer SetPage (fun model -> model.Page)
+let router = Router.infer SetPage (fun model -> model.Page)
 
-let private saveCmd save (model: Model) =
+let saveCmd save (model: Model) =
     if model.Hydrated then
         Cmd.OfAsync.either save (toPersistedState model) (fun () -> SavedState) (fun ex -> PersistFailed ex.Message)
     else
         Cmd.none
 
-let private applyCharacterChange save (change: Character -> Character) (model: Model) =
+let applyCharacterChange save (change: Character -> Character) (model: Model) =
     let nextCharacter = normaliseCharacter (change model.Character)
     if nextCharacter = model.Character then
         model, Cmd.none
@@ -621,7 +285,7 @@ let private applyCharacterChange save (change: Character -> Character) (model: M
 
         nextModel, saveCmd save nextModel
 
-let private applyDraftChange save (change: Character -> Character) (model: Model) =
+let applyDraftChange save (change: Character -> Character) (model: Model) =
     if model.Character.IsCreated then
         model, Cmd.none
     else
@@ -819,7 +483,7 @@ let update load save message model =
     | ClearError ->
         { model with Error = None }, Cmd.none
 
-let private actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) =
+let actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) =
     Main.ActionButton()
         .Text(text)
         .ToneClass(tone)
@@ -827,40 +491,40 @@ let private actionButton (text: string) (tone: string) isDisabled (action: obj -
         .Action(action)
         .Elt()
 
-let private fieldOption (value: string) (label: string) =
+let fieldOption (value: string) (label: string) =
     Main.FieldOption()
         .Value(value)
         .Label(label)
         .Elt()
 
-let private abilityOption ability =
+let abilityOption ability =
     fieldOption (string ability) (abilityName ability)
 
-let private scoreOption score =
+let scoreOption score =
     fieldOption (string score) ($"{score} ({pointBuyCost score} pts)")
 
-let private fieldCard (title: string) (helper: string) (body: Node) =
+let fieldCard (title: string) (helper: string) (body: Node) =
     Main.SectionCard()
         .Title(title)
         .Helper(helper)
         .Body(body)
         .Elt()
 
-let private summaryRow (label: string) (value: string) =
+let summaryRow (label: string) (value: string) =
     Main.SummaryRow()
         .Label(label)
         .Value(value)
         .Elt()
 
-let private chip (text: string) (tone: string) =
+let chip (text: string) (tone: string) =
     Main.Chip()
         .Text(text)
         .ToneClass(tone)
         .Elt()
 
-let private validationChip text = chip text "warning"
+let validationChip text = chip text "warning"
 
-let private choiceCard isActive (meta: string) (title: string) (description: string) (action: obj -> unit) =
+let choiceCard isActive (meta: string) (title: string) (description: string) (action: obj -> unit) =
     Main.ChoiceCard()
         .ActiveClass(if isActive then "is-active" else "")
         .Meta(meta)
@@ -869,14 +533,14 @@ let private choiceCard isActive (meta: string) (title: string) (description: str
         .Action(action)
         .Elt()
 
-let private textField (label: string) (helper: string) (value: string) (action: string -> unit) =
+let textField (label: string) (helper: string) (value: string) (action: string -> unit) =
     Main.TextField()
         .Label(label)
         .Helper(helper)
         .Value(value, action)
         .Elt()
 
-let private selectField (label: string) (helper: string) (currentValue: string) (options: Node) (action: string -> unit) =
+let selectField (label: string) (helper: string) (currentValue: string) (options: Node) (action: string -> unit) =
     Main.SelectField()
         .Label(label)
         .Helper(helper)
@@ -884,7 +548,7 @@ let private selectField (label: string) (helper: string) (currentValue: string) 
         .Options(options)
         .Elt()
 
-let private pointBuyRow (character: Character) ability dispatch =
+let pointBuyRow (character: Character) ability dispatch =
     let finalScore = abilityScore character ability
     let totalText = $"Total {finalScore} ({modifierText finalScore})"
     Main.AbilityRow()
@@ -902,7 +566,7 @@ let private pointBuyRow (character: Character) ability dispatch =
             .Total(totalText)
         .Elt()
 
-let private characterSummaryChips (character: Character) =
+let characterSummaryChips (character: Character) =
     let race = raceById character.RaceId
     let classDef = classById character.ClassId
     let subclass = subclassById character.ClassId character.SubclassId
@@ -914,7 +578,7 @@ let private characterSummaryChips (character: Character) =
             chip $"Level {characterLevel character}" "success"
     }
 
-let private creationSection (model: Model) dispatch =
+let creationSection (model: Model) dispatch =
     let character = model.Character
     let classDef = classById character.ClassId
     let validationIssues = creationValidation character
@@ -1009,7 +673,7 @@ let private creationSection (model: Model) dispatch =
             })
     }
 
-let private advancementSection (model: Model) dispatch =
+let advancementSection (model: Model) dispatch =
     let character = model.Character
     let nextFeat = if levelUpNeedsFeat character then "Feat at next level" else "No feat on next level"
     fieldCard
@@ -1027,7 +691,7 @@ let private advancementSection (model: Model) dispatch =
             actionButton "Level Up" "primary" false (fun _ -> dispatch BeginLevelUp)
         })
 
-let private summarySection (model: Model) =
+let summarySection (model: Model) =
     let character = model.Character
     let validationIssues = creationValidation character
     let level = characterLevel character
@@ -1114,7 +778,7 @@ let private summarySection (model: Model) =
                     (forEach validationIssues validationChip)
     }
 
-let private levelUpModal (model: Model) dispatch =
+let levelUpModal (model: Model) dispatch =
     cond model.LevelUp <| function
         | None -> empty()
         | Some draft ->
@@ -1159,7 +823,7 @@ let private levelUpModal (model: Model) dispatch =
                 .Confirm(fun _ -> dispatch ApplyLevelUp)
                 .Elt()
 
-let private view (model: Model) dispatch =
+let view (model: Model) dispatch =
     let undoDisabled = List.isEmpty model.UndoStack
     Main()
         .StatusText(statusText model)
