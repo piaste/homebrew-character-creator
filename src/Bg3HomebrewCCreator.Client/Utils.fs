@@ -16,5 +16,3 @@ let serializerOptions =
     options.Converters.Add(JsonFSharpConverter())
     options.WriteIndented <- false
     options
-
-let storageKey = "forge-of-heroes-state"

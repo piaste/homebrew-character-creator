@@ -13,6 +13,61 @@ open Microsoft.JSInterop
 
 open Domain
 
+
+type Message =
+    | SetPage of Page
+    | LoadState
+    | LoadedState of PersistedState option
+    | SetName of string
+    | SetRace of string
+    | SetClass of string
+    | SetSubclass of string
+    | SetAbilityScore of Ability * int
+    | SetBonusPlusThree of Ability
+    | SetBonusPlusOne of Ability
+    | ToggleSkill of string
+    | ToggleSpell of string
+    | FinalizeCharacter
+    | BeginLevelUp
+    | CancelLevelUp
+    | SetLevelUpClass of string
+    | SetLevelUpFeat of string
+    | SetLevelUpSpell of string
+    | ApplyLevelUp
+    | Undo
+    | SavedState
+    | PersistFailed of string
+    | ClearError
+
+    
+let saveCmd save (model: Model) =
+    if model.Hydrated then
+        Cmd.OfAsync.either save (toPersistedState model) (fun () -> SavedState) (fun ex -> PersistFailed ex.Message)
+    else
+        Cmd.none
+
+let applyCharacterChange save (change: Character -> Character) (model: Model) =
+    let nextCharacter = normaliseCharacter (change model.Character)
+    if nextCharacter = model.Character then
+        model, Cmd.none
+    else
+        let nextModel =
+            {
+                model with
+                    Character = nextCharacter
+                    UndoStack = model.Character :: model.UndoStack
+                    LevelUp = None
+                    Error = None
+            }
+
+        nextModel, saveCmd save nextModel
+
+let applyDraftChange save (change: Character -> Character) (model: Model) =
+    if model.Character.IsCreated then
+        model, Cmd.none
+    else
+        applyCharacterChange save change model
+
 let update load save message model =
     match message with
     | SetPage page ->

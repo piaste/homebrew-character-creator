@@ -1,18 +1,16 @@
 module Bg3HomebrewCCreator.Client.View
 
 open System
-open System.Text.Json
-open System.Text.Json.Serialization
-open Elmish
 open Bolero
 open Bolero.Html
-open Bolero.Templating.Client
-open FSharp.SystemTextJson
-open Microsoft.AspNetCore.Components
-open Microsoft.JSInterop
 
 open Domain
+open Model
+
 let pointBuyOptions = [ 8 .. 15 ]
+
+
+type Main = Template<"wwwroot/main.html">
 
 let actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) =
     Main.ActionButton()
@@ -32,7 +30,17 @@ let abilityOption ability =
     fieldOption (string ability) (abilityName ability)
 
 let scoreOption score =
-    fieldOption (string score) ($"{score} ({pointBuyCost score} pts)")
+    let displayPointBuyCost = function
+        | 8 -> 0<pointbuy>
+        | 9 -> 1<pointbuy>
+        | 10 -> 2<pointbuy>
+        | 11 -> 3<pointbuy>
+        | 12 -> 4<pointbuy>
+        | 13 -> 5<pointbuy>
+        | 14 -> 7<pointbuy>
+        | 15 -> 9<pointbuy>
+        | _ -> 99<pointbuy>
+    fieldOption (string score) ($"{score} ({displayPointBuyCost score} pts)")
 
 let fieldCard (title: string) (helper: string) (body: Node) =
     Main.SectionCard()

@@ -44,23 +44,29 @@ type RaceDef =
         Trait: string
     }
 
+type SpellList = Versatile | Divine | Primal | Arcane | Innate | Bargained
+type CasterType = 
+    | FullCaster of SpellList
+    | HalfCaster of SpellList
+    | Martial
+
 type ClassId = Fighter | Wizard
 
 type ClassDef =
     {
         Name: string
         Description: string
-        InitialSpellChoices: int
-        IsSpellcaster: bool
     }
 
 type SubclassId = Champion | BattleMaster | Evoker | Illusionist
 
-type SubclassDef =
+
+type Subclass =
     {
         Name: string
         Description: string
         BaseClass: ClassDef
+        CasterType: CasterType
     }
 
 type ChoiceDef =
@@ -85,9 +91,15 @@ type AbilityBuy =
     {
         PointBuy: Map<Ability, int<pointbuy>>
         BonusPlusThree: Ability
-        BonusPlusOne: Ability
+        SelectedBonusPlusOne: Ability
     } with
-        member this.BoughtStat ab = 
+        member this.BonusPlusOne = 
+            match this.BonusPlusThree with
+            | t when t <> this.SelectedBonusPlusOne
+                -> this.SelectedBonusPlusOne
+            | STR -> DEX
+            | _ -> STR
+        member this.BoughtAbility ab = 
             match this.PointBuy.TryGetValue ab with
             | false, _ -> 8
             | true, x -> 
@@ -114,11 +126,12 @@ type Character =
         SelectedSpellIds: Set<string>
         ChosenFeatIds: Set<string>
         LevelHistory: LevelRecord list
-        IsCreated: bool
         StatModifiers : StatModifiers
     } with
+
+        member this.CharacterLevel = List.length this.LevelHistory
         member this.Ability ab = 
-            this.AbilityBuy.BoughtStat ab + 
+            this.AbilityBuy.BoughtAbility ab + 
             this.StatModifiers.Abilities.GetOrDefault ab
 
         member this.AbilityModifier ab = 
@@ -131,7 +144,7 @@ type Character =
 
 type LevelUpDraft =
     {
-        ClassId: string
+        Subclass: SubclassId
         FeatId: string option
         SpellId: string option
     }
@@ -152,32 +165,6 @@ type Model =
         Hydrated: bool
     }
 
-type Message =
-    | SetPage of Page
-    | LoadState
-    | LoadedState of PersistedState option
-    | SetName of string
-    | SetRace of string
-    | SetClass of string
-    | SetSubclass of string
-    | SetAbilityScore of Ability * int
-    | SetBonusPlusThree of Ability
-    | SetBonusPlusOne of Ability
-    | ToggleSkill of string
-    | ToggleSpell of string
-    | FinalizeCharacter
-    | BeginLevelUp
-    | CancelLevelUp
-    | SetLevelUpClass of string
-    | SetLevelUpFeat of string
-    | SetLevelUpSpell of string
-    | ApplyLevelUp
-    | Undo
-    | SavedState
-    | PersistFailed of string
-    | ClearError
-
-type Main = Template<"wwwroot/main.html">
 
 
 let human =
@@ -196,16 +183,13 @@ let elf =
 let fighter = {
             Name = "Fighter"
             Description = "Front-line martial expert with durable defenses and weapon mastery."
-            InitialSpellChoices = 0
-            IsSpellcaster = false
+            
         }
 
 let wizard =
         {
             Name = "Wizard"
-            Description = "Arcane scholar with fragile defenses and flexible spell access."
-            InitialSpellChoices = 2
-            IsSpellcaster = true
+            Description = "Arcane scholar with fragile defenses and flexible spell access."            
         }
 let classes = [fighter;wizard]
 
@@ -215,12 +199,14 @@ let champion =
             Name = "Champion"
             Description = "Direct, dependable martial skill with no wasted motion."
             BaseClass = fighter
+            CasterType = Martial
         }
 let battlemaster =
         {
             Name = "Battle Master"
             Description = "A tactical duelist who wins by precision and positioning."
             BaseClass = fighter
+            CasterType = Martial
 
         }
 let evoker =
@@ -229,6 +215,7 @@ let evoker =
             Name = "School of Evocation"
             Description = "Specializes in raw elemental force and precise battlefield shaping."
             BaseClass = wizard
+            CasterType = FullCaster Arcane
 
         }
 let illusionist =
@@ -236,7 +223,7 @@ let illusionist =
             Name = "School of Illusion"
             Description = "Controls the room with misdirection, trickery, and layered magic."
             BaseClass = wizard
-
+            CasterType = FullCaster Arcane
         }
 
 let skills =
@@ -337,7 +324,7 @@ let clamp lower upper value =
 let classById =
     function | Fighter -> fighter | Wizard -> wizard
 
-let raceById (raceId: string) =
+let raceById =
     function | Human -> human | Elf -> elf
 
 let subclassById =
