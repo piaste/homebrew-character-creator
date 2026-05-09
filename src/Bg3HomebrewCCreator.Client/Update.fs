@@ -11,7 +11,9 @@ open FSharp.SystemTextJson
 open Microsoft.AspNetCore.Components
 open Microsoft.JSInterop
 
+open Utils
 open Domain
+open Model
 
 
 type Message =
@@ -39,15 +41,22 @@ type Message =
     | PersistFailed of string
     | ClearError
 
-    
+
 let saveCmd save (model: Model) =
+
+    let toPersistedState (model: Model) =
+        {
+            Character = model.Character
+            UndoStack = model.UndoStack
+        }
+
     if model.Hydrated then
         Cmd.OfAsync.either save (toPersistedState model) (fun () -> SavedState) (fun ex -> PersistFailed ex.Message)
     else
         Cmd.none
 
 let applyCharacterChange save (change: Character -> Character) (model: Model) =
-    let nextCharacter = normaliseCharacter (change model.Character)
+    let nextCharacter = change model.Character
     if nextCharacter = model.Character then
         model, Cmd.none
     else
@@ -69,6 +78,10 @@ let applyDraftChange save (change: Character -> Character) (model: Model) =
         applyCharacterChange save change model
 
 let update load save message model =
+
+    let upd' f = 
+        applyDraftChange save f model
+
     match message with
     | SetPage page ->
         { model with Page = page }, Cmd.none
@@ -82,73 +95,72 @@ let update load save message model =
     | LoadedState (Some state) ->
         {
             model with
-                Character = normaliseCharacter state.Character
-                UndoStack = state.UndoStack |> List.map normaliseCharacter
+                Character = state.Character
+                UndoStack = state.UndoStack
                 Hydrated = true
                 Error = None
         }, Cmd.none
 
     | SetName name ->
-        applyDraftChange save (fun character -> { character with Name = name }) model
+        upd' <| fun character -> { character with CharName = name }
 
-    | SetRace raceId ->
-        applyDraftChange save (fun character -> { character with RaceId = raceId }) model
+    | SetRace race ->
+        upd' <| fun character -> { character with Race = parseCase<Race> race }
 
     | SetClass classId ->
-        applyDraftChange save (fun character ->
-            let classDef = classById classId
-            let nextSpells =
-                if classDef.IsSpellcaster then character.SelectedSpellIds else Set.empty
-
+        let newSubclass = classId |> parseCase<ClassId> |> defaultSubclassId
+        upd' <| fun character -> 
             {
                 character with
-                    ClassId = classId
-                    SubclassId = defaultSubclassId classId
-                    SelectedSkillIds = character.SelectedSkillIds |> trimSet classDef.SkillChoices
-                    SelectedSpellIds = nextSpells
-            }) model
+                    Subclass = newSubclass
+                    SelectedSpellIds = newSubclass |> subclassById |> _.CasterType |> defaultSpellPicks |> List.map _.Id |> Set.ofList
+            }
 
     | SetSubclass subclassId ->
-        applyDraftChange save (fun character -> { character with SubclassId = subclassId }) model
-
-    | SetAbilityScore (ability, score) ->
-        applyDraftChange save (fun character ->
+        let newSubclass = subclassId |> parseCase<SubclassId>
+        upd' <| fun character -> 
             {
                 character with
-                    PointBuy = character.PointBuy |> Map.add ability (clamp 8 15 score)
-            }) model
+                    Subclass = newSubclass
+                    SelectedSpellIds = newSubclass |> subclassById |> _.CasterType |> defaultSpellPicks |> List.map _.Id |> Set.ofList
+            }
+
+    | SetAbilityScore (ability, score) ->
+        upd' <| fun character ->
+            {
+                character with
+                    PointBuy = character.PointBuy |> Map.add ability (clamp 8<pointbuy>15<pointbuy> (score * 1<pointbuy>))
+            }
 
     | SetBonusPlusThree ability ->
-        applyDraftChange save (fun character ->
+        upd' <| fun character ->
             {
                 character with
                     BonusPlusThree = ability
-                    BonusPlusOne = normaliseDistinctBonus ability character.BonusPlusOne
-            }) model
+            }
 
     | SetBonusPlusOne ability ->
-        applyDraftChange save (fun character ->
+        upd' <| fun character ->
             {
                 character with
-                    BonusPlusOne = normaliseDistinctBonus character.BonusPlusThree ability
-            }) model
+                    SelectedBonusPlusOne = ability
+            }
 
     | ToggleSkill skillId ->
-        applyDraftChange save (fun character ->
-            let classDef = classById character.ClassId
+        upd' <| fun character ->
             let updatedSkills =
                 if character.SelectedSkillIds.Contains skillId then
                     character.SelectedSkillIds.Remove skillId
-                elif character.SelectedSkillIds.Count < classDef.SkillChoices then
+                elif character.SelectedSkillIds.Count < PROFICIENCIES_PICKS then
                     character.SelectedSkillIds.Add skillId
                 else
                     character.SelectedSkillIds
 
-            { character with SelectedSkillIds = updatedSkills }) model
+            { character with SelectedSkillIds = updatedSkills }
 
     | ToggleSpell spellId ->
-        applyDraftChange save (fun character ->
-            let classDef = classById character.ClassId
+        upd' <| fun character ->
+            let classDef = classById character.Subclass
             let updatedSpells =
                 if not classDef.IsSpellcaster then
                     Set.empty
@@ -159,19 +171,19 @@ let update load save message model =
                 else
                     character.SelectedSpellIds
 
-            { character with SelectedSpellIds = updatedSpells }) model
+            { character with SelectedSpellIds = updatedSpells }
 
     | FinalizeCharacter ->
         let issues = creationValidation model.Character
         if not issues.IsEmpty then
             { model with Error = Some(String.concat " " issues) }, Cmd.none
         else
-            applyDraftChange save (fun character ->
+            upd' <| fun character ->
                 {
                     character with
                         IsCreated = true
                         LevelHistory = [ { Level = 1; ClassId = character.ClassId; FeatId = None; SpellId = None } ]
-                }) model
+                }
 
     | BeginLevelUp ->
         if model.Character.IsCreated then
@@ -209,7 +221,7 @@ let update load save message model =
             if not issues.IsEmpty then
                 { model with Error = Some(String.concat " " issues) }, Cmd.none
             else
-                applyCharacterChange save (fun character ->
+                upd' <| fun character ->
                     let newLevel = nextLevel character
                     let spellIds =
                         match draft.SpellId with
@@ -234,7 +246,7 @@ let update load save message model =
                                         SpellId = draft.SpellId
                                     }
                                   ]
-                    }) model
+                    }
 
     | Undo ->
         match model.UndoStack with

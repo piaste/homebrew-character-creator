@@ -20,12 +20,6 @@ open View
 let router = Router.infer SetPage (fun model -> model.Page)
 
 
-let toPersistedState (model: Model) =
-    {
-        Character = model.Character
-        UndoStack = model.UndoStack
-    }
-
 let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     let storageKey = "forge-of-heroes-state"

@@ -112,7 +112,7 @@ let characterSummaryChips (character: Character) =
     concat {
         chip race.Name "accent"
         chip classDef.Name "neutral"
-        chip subclass.Name "neutral"
+        chip subclass.CharName "neutral"
         if character.IsCreated then
             chip $"Level {characterLevel character}" "success"
     }
@@ -126,7 +126,7 @@ let creationSection (model: Model) dispatch =
             "Identity"
             "Lock in the hero concept before level-up opens."
             (concat {
-                textField "Character name" "Used everywhere in the live summary." character.Name (fun value -> dispatch (SetName value))
+                textField "Character name" "Used everywhere in the live summary." character.CharName (fun value -> dispatch (SetName value))
                 selectField
                     "Race"
                     "Two placeholder ancestries are wired for testing."
@@ -220,10 +220,10 @@ let advancementSection (model: Model) dispatch =
         "The base sheet is now locked. Use level up for future choices, or undo to roll back."
         (concat {
             Main.LockedSummary()
-                .Name(character.Name)
+                .Name(character.CharName)
                 .Race((raceById character.RaceId).Name)
                 .Class((classById character.ClassId).Name)
-                .Subclass((subclassById character.ClassId character.SubclassId).Name)
+                .Subclass((subclassById character.ClassId character.SubclassId).CharName)
                 .Elt()
             summaryRow "Next level" (string (nextLevel character))
             summaryRow "Prompt" nextFeat
@@ -256,7 +256,7 @@ let summarySection (model: Model) =
             "The right rail updates from the current local state."
             (concat {
                 Main.Nameplate()
-                    .Name(if String.IsNullOrWhiteSpace character.Name then "Unnamed Adventurer" else character.Name)
+                    .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
                     .Details(characterSummaryChips character)
                     .Elt()
                 summaryRow "Status" (if character.IsCreated then "Levelled character" else "Draft level 1 build")

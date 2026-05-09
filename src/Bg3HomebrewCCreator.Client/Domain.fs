@@ -60,6 +60,9 @@ type ClassDef =
 
 type SubclassId = Champion | BattleMaster | Evoker | Illusionist
 
+let defaultSubclassId = function
+    | Fighter -> Champion
+    | Wizard -> Evoker
 
 type Subclass =
     {
@@ -68,6 +71,7 @@ type Subclass =
         BaseClass: ClassDef
         CasterType: CasterType
     }
+
 
 type ChoiceDef =
     {
@@ -118,7 +122,7 @@ type StatModifiers = {
 
 type Character =
     {
-        Name: string
+        CharName: string
         Race: Race
         Subclass: SubclassId
         AbilityBuy: AbilityBuy
@@ -144,7 +148,7 @@ type Character =
 
 type LevelUpDraft =
     {
-        Subclass: SubclassId
+        SubclassId: SubclassId
         FeatId: string option
         SpellId: string option
     }
@@ -298,6 +302,15 @@ let feats =
         }
     ]
 
+let defaultSpellPicks = 
+    function
+    | Martial -> []
+    // todo
+    | FullCaster _ -> spells |> List.take 2
+    | HalfCaster _ -> spells |> List.take 1
+
+
+
 let allAbilities =
     [ STR;DEX;CON;INT;WIS;CHA ]
 
@@ -316,9 +329,6 @@ let abilityAbbreviation = function
     | INT -> "INT"
     | WIS -> "WIS"
     | CHA -> "CHA"
-
-let clamp lower upper value =
-    max lower (min upper value)
 
 
 let classById =

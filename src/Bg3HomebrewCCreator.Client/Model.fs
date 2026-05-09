@@ -16,7 +16,7 @@ open Domain
 
 let defaultCharacter =
     {
-        Name = "John Baldur"
+        CharName = "John Baldur"
         Race = Human
         Subclass = Champion
         AbilityBuy = {
@@ -75,7 +75,7 @@ let hitPoints (character: Character) =
 let creationValidation (character: Character) =
     // let classDef = classById character.ClassId
     [
-        if String.IsNullOrWhiteSpace character.Name then
+        if String.IsNullOrWhiteSpace character.CharName then
             "Give the character a name before locking the sheet."
         if totalPointBuySpent character > 27<pointbuy> then
             "Point buy exceeds 27 points."
@@ -98,4 +98,4 @@ let statusText (model: Model) =
     else
         let race = raceById character.Race
         let className = (subclassById character.Subclass).Name
-        $"{character.Name} is a level {character.CharacterLevel} {race.Name} {className}. Use level up to extend the build, or undo to roll back changes."
+        $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {className}. Use level up to extend the build, or undo to roll back changes."
