@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  color-scheme: light;
+  --page-bg: #f3e9dc;
+  --page-bg-deep: #ead8c0;
+  --ink: #2d2018;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top, rgba(229, 188, 118, 0.45), transparent 30%),
+    linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-deep) 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Alegreya', serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+#main {
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem);
+  box-sizing: border-box;
+}

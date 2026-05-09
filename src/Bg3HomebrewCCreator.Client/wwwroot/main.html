@@ -1,0 +1,161 @@
+<div class="app-shell">
+  <header class="hero-panel">
+    <div>
+      <p class="eyebrow">D&amp;D 5E SPA Prototype</p>
+      <h1 class="hero-title">Forge of Heroes</h1>
+      <p class="hero-copy">
+        Build a level 1 character, persist it to localStorage, then drive the rest of the campaign with reversible level-ups.
+      </p>
+    </div>
+    <div class="hero-actions">${PrimaryActions}</div>
+    <p class="hero-status">${StatusText}</p>
+  </header>
+
+  <div class="workspace">
+    <main class="builder-column">${BuilderContent}</main>
+    <aside class="summary-column">${SummaryContent}</aside>
+  </div>
+
+  ${LevelUp}
+
+  <div id="notification-area">${Error}</div>
+
+  <template id="SectionCard">
+    <section class="section-card">
+      <div class="section-head">
+        <div>
+          <h2>${Title}</h2>
+          <p>${Helper}</p>
+        </div>
+      </div>
+      <div class="section-body">${Body}</div>
+    </section>
+  </template>
+
+  <template id="ActionButton">
+    <button class="action-button ${ToneClass} ${DisabledClass}" onclick="${Action}">${Text}</button>
+  </template>
+
+  <template id="TextField">
+    <label class="field-card">
+      <span class="field-label">${Label}</span>
+      <span class="field-helper">${Helper}</span>
+      <input class="field-input" bind="${Value}" />
+    </label>
+  </template>
+
+  <template id="SelectField">
+    <label class="field-card">
+      <span class="field-label">${Label}</span>
+      <span class="field-helper">${Helper}</span>
+      <select class="field-select" bind="${Value}">${Options}</select>
+    </label>
+  </template>
+
+  <template id="FieldOption">
+    <option value="${Value}">${Label}</option>
+  </template>
+
+  <template id="AbilityRow">
+    <div class="ability-row">
+      <div>
+        <p class="ability-name">${Ability}</p>
+        <p class="ability-abbrev">${Abbreviation}</p>
+      </div>
+      <div class="ability-controls">
+        <select class="field-select compact" bind="${Score}">${Options}</select>
+        <div class="ability-bonuses">${BonusInfo}</div>
+      </div>
+      <div class="ability-total">${Total}</div>
+    </div>
+  </template>
+
+  <template id="Chip">
+    <span class="chip ${ToneClass}">${Text}</span>
+  </template>
+
+  <template id="ChoiceCard">
+    <button class="choice-card ${ActiveClass}" onclick="${Action}">
+      <span class="choice-meta">${Meta}</span>
+      <strong>${Title}</strong>
+      <span>${Description}</span>
+    </button>
+  </template>
+
+  <template id="PointBudget">
+    <div class="meter-row">
+      <span class="meter-label">Point buy</span>
+      <span class="meter-value">${Used} used / ${Remaining} remaining</span>
+    </div>
+  </template>
+
+  <template id="SelectionMeter">
+    <div class="meter-row">
+      <span class="meter-label">${Label}</span>
+      <span class="meter-value">${Selected} / ${Maximum}</span>
+    </div>
+  </template>
+
+  <template id="SummaryRow">
+    <div class="summary-row">
+      <span>${Label}</span>
+      <strong>${Value}</strong>
+    </div>
+  </template>
+
+  <template id="Nameplate">
+    <div class="nameplate">
+      <div>
+        <p class="eyebrow">Current character</p>
+        <h3>${Name}</h3>
+      </div>
+      <div class="chip-row">${Details}</div>
+    </div>
+  </template>
+
+  <template id="LockedSummary">
+    <div class="locked-summary">
+      <div><span>Name</span><strong>${Name}</strong></div>
+      <div><span>Race</span><strong>${Race}</strong></div>
+      <div><span>Class</span><strong>${Class}</strong></div>
+      <div><span>Subclass</span><strong>${Subclass}</strong></div>
+    </div>
+  </template>
+
+  <template id="TimelineRow">
+    <div class="timeline-row">
+      <strong>${Level}</strong>
+      <span>${ClassName}</span>
+      <small>${Detail}</small>
+    </div>
+  </template>
+
+  <template id="EmptyState">
+    <div class="empty-state">${Text}</div>
+  </template>
+
+  <template id="LevelUpModal">
+    <div class="modal-scrim">
+      <div class="modal-card">
+        <div class="section-head">
+          <div>
+            <h2>Level Up</h2>
+            <p>Choose the class for the new level, then add any spell or feat the prototype requires.</p>
+          </div>
+        </div>
+        <div class="section-body">${Body}</div>
+        <div class="modal-actions">
+          <button class="action-button secondary" onclick="${Cancel}">Cancel</button>
+          <button class="action-button primary" onclick="${Confirm}">Apply Level</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="ErrorNotification">
+    <div class="error-banner">
+      <span>${Text}</span>
+      <button class="dismiss-button" onclick="${Hide}">Dismiss</button>
+    </div>
+  </template>
+</div>
