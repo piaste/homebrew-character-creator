@@ -178,7 +178,7 @@ body {
 .section-body {
   padding: 1rem 1.25rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
@@ -244,8 +244,8 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-muted);
-  flex: 1 1 120px;
   min-width: 120px;
+  text-align: left;
 }
 
 .field-helper {
