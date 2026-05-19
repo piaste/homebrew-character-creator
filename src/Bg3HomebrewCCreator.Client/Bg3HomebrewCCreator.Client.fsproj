@@ -7,8 +7,8 @@
     <Compile Include="Utils.fs" />
     <Compile Include="DomainTypes.fs" /><Compile Include="DomainEntitities.fs" /><Compile Include="DomainFetchers.fs" />
     <Compile Include="Model.fs" />
-    <Compile Include="Update.fs" />
-    <Compile Include="View.fs" />
+    <Compile Include="Update.fs" /><Compile Include="View.fs" />
+    
     <Compile Include="Main.fs" />
     <Compile Include="Startup.fs" />
   </ItemGroup>

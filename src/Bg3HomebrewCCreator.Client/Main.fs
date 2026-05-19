@@ -2,19 +2,17 @@ module Bg3HomebrewCCreator.Client.Main
 
 open System
 open System.Text.Json
-open System.Text.Json.Serialization
 open Elmish
 open Bolero
-open Bolero.Html
 open Bolero.Templating.Client
-open FSharp.SystemTextJson
 open Microsoft.AspNetCore.Components
 open Microsoft.JSInterop
 open Utils
-open Domain
+
 open Model
 open Update
 open View
+open Bg3HomebrewCCreator.Client.Domain.Types
 
 
 let router = Router.infer SetPage (fun model -> model.Page)
