@@ -128,6 +128,9 @@ let update load save message model =
                     AbilityBuy = {
                         character.AbilityBuy with 
                             BonusPlusThree = ability
+                            BonusPlusOne = 
+                                character.AbilityBuy.BonusPlusOne
+                                |> nextFreeIf ability
                     }
             }
 
@@ -137,7 +140,10 @@ let update load save message model =
                 character with
                     AbilityBuy = {
                         character.AbilityBuy with 
-                            SelectedBonusPlusOne = ability
+                            BonusPlusOne = ability
+                            BonusPlusThree = 
+                                character.AbilityBuy.BonusPlusThree
+                                |> nextFreeIf ability
                     }
             }
 
@@ -145,18 +151,16 @@ let update load save message model =
     | ToggleSkill skillId ->
         apply <| fun character ->
             let updatedSkills =
-                character.SelectedSkillIds.Toggle skillId
+                character.SkillIds.Toggle skillId
 
-            let temp = { character with SelectedSkillIds = updatedSkills }
-            in { character with SelectedSkillIds = temp.SkillIds }
+            { character with SkillIds = withDebug updatedSkills }            
 
     | ToggleSpell spellId ->
         apply <| fun character ->
             let updatedSpells =
                 character.SelectedSpellIds.Toggle spellId
 
-            let temp = { character with SelectedSpellIds = updatedSpells }
-            in { character with SelectedSpellIds = temp.SpellIds }
+            { character with SelectedSpellIds = withDebug updatedSpells }
 
     | LevelUp ->
         if model.Errors.IsEmpty then

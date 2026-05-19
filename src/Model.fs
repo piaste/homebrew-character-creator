@@ -23,10 +23,10 @@ let defaultCharacter =
                     CHA, 7<pbuy>
                 ]
             BonusPlusThree = STR
-            SelectedBonusPlusOne = CON
+            BonusPlusOne = CON
         }
         StatModifiers = StatModifiers.None
-        SelectedSkillIds = Set.empty
+        SkillIds = Set.empty
         SelectedSpellIds = Set.empty
         ChosenFeatIds = Set.empty
         PreviousLevelHistory = []
@@ -35,12 +35,6 @@ let defaultCharacter =
             SubclassId = Champion
         }
     }
-
-let NUM_PROFICIENCIES_PICKS = 4
-let EXPERTISES_PICKS = 8
-
-let parseAbility (value: string) =
-    Enum.Parse(typeof<Ability>, value) :?> Ability
 
 let trimSet limit values =
     values |> Set.toList |> List.sort |> List.truncate limit |> Set.ofList
@@ -66,10 +60,11 @@ let checkErrors (character: Character) =
             sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
         // if character.BonusPlusThree = character.BonusPlusOne then
         //     "+3 and +1 bonuses must target different abilities."
-        // if character.SelectedSkillIds.Count <> classDef.SkillChoices then
-        //     $"Choose exactly {classDef.SkillChoices} starting skills."
-        // if classDef.IsSpellcaster && character.SelectedSpellIds.Count <> classDef.InitialSpellChoices then
-        //     $"Choose exactly {classDef.InitialSpellChoices} starting spells."
+        if character.SkillIds.Count <> NUM_SKILL_PROFICIENCIES then
+             $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
+        let numSpellPicks =  numSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
+        if character.SelectedSpellIds.Count <> numSpellPicks then
+             $"Choose exactly {numSpellPicks} starting spells."
     ]
 
 type Model =

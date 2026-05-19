@@ -4,15 +4,23 @@ open System.Text.Json
 open System.Text.Json.Serialization
 open Microsoft.FSharp.Reflection
 
+let debug x = 
+#if DEBUG
+    System.Console.WriteLine(sprintf "%A" x |> _.PadRight(200).Substring(0,200))
+#endif
+    ()
+
+let withDebug x = debug x; x
+
 let serializerOptions =
     let options = JsonSerializerOptions(JsonSerializerDefaults.Web)
     options.Converters.Add(JsonFSharpConverter())
     options.WriteIndented <- false
     options
 
-let inline clamp a   b value =
-    if a >= b then value |> min b |> max a
-              else value |> min a |> max b
+let inline clamp a b value =
+    if a >= b then value |> min a |> max b
+              else value |> min b |> max a
 
 let parseCase<'T> (input: string) : 'T =
     let t = typeof<'T>

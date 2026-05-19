@@ -38,16 +38,3 @@ let levelDown character =
                 NextLevelUp = l
                 PreviousLevelHistory = ls
         }
-
-type Character with
-    member this.SpellIds =
-        let cType = this.NextLevelUp.SubclassId
-                    |> subclassById
-                    |> _.CasterType
-        
-        cType
-        |> defaultSpellPicks
-        |> List.map _.Id
-        |> List.append (Set.toList this.SelectedSpellIds)
-        |> List.take (numSpellPicksPerLevel cType * this.CharacterLevel)
-        |> Set.ofList

@@ -152,7 +152,7 @@ let levelUpSection (model: Model) dispatch = concat {
         "Subclass"
         "This is chosen up front for the placeholder build flow."
         character.NextLevelUp.SubclassId
-        (forEach allSubclasses (fun subclass -> fieldOption subclass.Key subclass.Value.Name))
+        (forEach allSubclassesByClass[classId] (fun subclass -> fieldOption subclass.Key subclass.Value.Name))
         (fun value -> dispatch (SetSubclass value))
 
     
@@ -205,13 +205,13 @@ let creationSection (model: Model) dispatch =
                     "Must target a different ability than the +1 bonus."
                     (string character.AbilityBuy.BonusPlusThree)
                     (forEach allAbilities abilityOption)
-                    (fun value -> dispatch (SetBonusPlusThree(parseAbility value)))
+                    (fun value -> dispatch (SetBonusPlusThree(parseCase<Ability> value)))
                 selectField
                     "+1 bonus"
                     "Bolero will normalize duplicate choices, but the validation panel also calls it out."
                     (string character.AbilityBuy.BonusPlusOne)
                     (forEach allAbilities abilityOption)
-                    (fun value -> dispatch (SetBonusPlusOne(parseAbility value)))
+                    (fun value -> dispatch (SetBonusPlusOne(parseCase<Ability> value)))
             })
 
         fieldCard
@@ -219,24 +219,13 @@ let creationSection (model: Model) dispatch =
             $"Choose 4 trained skills."
             (concat {
                 Main.SelectionMeter()
-                    .Selected(string character.SelectedSkillIds.Count)
+                    .Selected(string character.SkillIds.Count)
                     .Maximum(string 4)
                     .Label("skills")
                     .Elt()
                 forEach skills (fun skill ->
-                    let active = character.SelectedSkillIds.Contains skill.Id
+                    let active = character.SkillIds.Contains skill.Id
                     choiceCard active "Skill" skill.Name skill.Description (fun _ -> dispatch (ToggleSkill skill.Id)))
-            })
-
-
-        fieldCard
-            "Ready Check"
-            "The summary panel reflects every change immediately. Finalize only when this checklist is clean."
-            (concat {
-                cond validationIssues.IsEmpty <| function
-                    | true -> chip "Ready to finalize" "success"
-                    | false -> empty()
-                forEach validationIssues validationChip
             })
     }
 
@@ -281,6 +270,15 @@ let summarySection (model: Model) =
         |> String.concat ", "
 
     concat {
+        
+        cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
+            | true -> empty()
+            | false ->
+                fieldCard
+                    "Issues"
+                    "These must be resolved before level 1 can be locked."
+                    (forEach validationIssues validationChip)
+
         fieldCard
             "Live Sheet"
             "The right rail updates from the current local state."
@@ -310,7 +308,7 @@ let summarySection (model: Model) =
                 cond classBreakdown.IsEmpty <| function
                     | true -> summaryRow "Class levels" "No levels assigned yet"
                     | false -> concat { for row in classBreakdown do row }
-                summaryRow "Skills" (character.SelectedSkillIds |> Seq.map (choiceById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
+                summaryRow "Skills" (character.SkillIds |> Seq.map (choiceById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
                 summaryRow "Spells" (if String.IsNullOrWhiteSpace spellNames then "None" else spellNames)
                 summaryRow "Feats" (if String.IsNullOrWhiteSpace featNames then "None" else featNames)
             })
@@ -336,13 +334,6 @@ let summarySection (model: Model) =
                     .Detail(detail)
                     .Elt()))
 
-        cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
-            | true -> empty()
-            | false ->
-                fieldCard
-                    "Issues"
-                    "These must be resolved before level 1 can be locked."
-                    (forEach validationIssues validationChip)
     }
 
 // let levelUpModal (model: Model) dispatch =

@@ -49,6 +49,11 @@ type MyApp() =
     override _.CssScope = CssScopes.MyApp
 
     override this.Program =
+#if DEBUG
+        let update load save msg model = 
+            System.Console.WriteLine((sprintf "Update: %A" msg).PadRight(200).Substring(0, 200))
+            update load save msg model
+#endif 
         let load, save = buildStorage (fun () -> this.JSRuntime)
         Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) view
         |> Program.withRouter router

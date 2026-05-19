@@ -179,6 +179,7 @@ body {
   padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 0.75rem;
 }
 
@@ -232,6 +233,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  flex: 1 1 120px;
+  min-width: 120px;
 }
 
 .field-label {
@@ -241,6 +244,8 @@ body {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-muted);
+  flex: 1 1 120px;
+  min-width: 120px;
 }
 
 .field-helper {
@@ -280,7 +285,7 @@ body {
 
 /* Compact variant used inside AbilityRow */
 .field-select.compact {
-  width: 72px;
+  width: clamp(100px, 14ch, 160px);
   padding: 0.3rem 1.75rem 0.3rem 0.5rem;
   font-size: 0.9rem;
 }
@@ -288,7 +293,7 @@ body {
 /* ── Ability Row ─────────────────────────────────────────────────────────── */
 .ability-row {
   display: grid;
-  grid-template-columns: 7rem 1fr 3rem;
+  grid-template-columns: 7rem 1fr;
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 0.75rem;
@@ -326,16 +331,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
-}
-
-.ability-total {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--gold-dim);
-  text-align: center;
-  min-width: 2.5rem;
-  line-height: 1;
 }
 
 /* ── Chip ────────────────────────────────────────────────────────────────── */
@@ -378,7 +373,8 @@ body {
   transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
   font-family: var(--font-body);
   color: var(--text);
-  width: 100%;
+  flex: 1 1 160px;
+  min-width: 160px;
 }
 
 .choice-card:hover {

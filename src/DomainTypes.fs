@@ -77,26 +77,23 @@ let getAbilityFromPoints (x: int<pbuy>) =
     if x <= 5<pbuy> then 8 + x/1<pbuy>
     else 13 + (x - 5<pbuy>) / 2<pbuy>
 
+let nextFreeIf selected older = 
+    if selected <> older then older else
+    match selected with
+    | STR -> DEX | DEX -> CON | CON -> INT
+    | INT -> WIS | WIS -> CHA | CHA -> STR
 
 type AbilityBuy = 
     {
         PointBuy: Map<Ability, int<pbuy>>
         BonusPlusThree: Ability
-        SelectedBonusPlusOne: Ability
+        BonusPlusOne: Ability
     } with
 
         member this.SpentPoints = 
             this.PointBuy |> Map.toArray |> Array.sumBy snd
         member this.UnspentPoints = 
             POINT_BUDGET - this.SpentPoints
-
-        member this.BonusPlusOne = 
-            match this.BonusPlusThree with
-            | t when t <> this.SelectedBonusPlusOne
-                -> this.SelectedBonusPlusOne
-            | STR -> DEX
-            | _ -> STR
-
         member this.BoughtAbilityBeforeBonuses ab = 
             this.PointBuy[ab] |> getAbilityFromPoints
         member this.BoughtAbility ab = 
@@ -117,7 +114,7 @@ type Character =
 
         RaceId: RaceId
         AbilityBuy: AbilityBuy
-        SelectedSkillIds: Set<string>
+        SkillIds: Set<string>
 
         PreviousLevelHistory: LevelRecord list
         SelectedSpellIds: Set<string>

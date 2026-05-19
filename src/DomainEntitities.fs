@@ -138,15 +138,7 @@ let skills =
     ]
 
 let NUM_SKILL_PROFICIENCIES = 4
-let defaultSkills = skills |> List.map _.Id |> List.take NUM_SKILL_PROFICIENCIES
-
-
-type Character with
-    member this.SkillIds =
-        defaultSkills 
-        |> List.append (Set.toList this.SelectedSkillIds)
-        |> List.take NUM_SKILL_PROFICIENCIES
-        |> Set.ofList
+let NUM_SKILL_EXPERTISES = 2
 
 let spells =
     [
@@ -202,7 +194,3 @@ let numSpellPicksPerLevel =
     // todo
     | FullCaster _ -> 2
     | HalfCaster _ -> 1
-
-let defaultSpellPicks = 
-    numSpellPicksPerLevel 
-    >> fun n -> List.take n spells
