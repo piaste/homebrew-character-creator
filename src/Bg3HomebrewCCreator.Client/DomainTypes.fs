@@ -1,10 +1,7 @@
 module Bg3HomebrewCCreator.Client.Domain.Types
 
-open Bolero
-open Utils
+open Bg3HomebrewCCreator.Client.Utils
 
-type Page =
-    | [<EndPoint "/">] Forge
 
 type Ability =
     | STR
@@ -20,6 +17,8 @@ type Passive =
         Description : string
         Effect: string
     }
+
+type RaceId = Human | Elf
 
 type RaceDef =
     {
@@ -66,14 +65,13 @@ type ChoiceDef =
 
 type LevelRecord =
     {
-        Level: int
+        ClassLevel: int
         Subclass: SubclassId
-        FeatId: string option
-        SpellId: string option
     }
 
 type [<Measure>] pointbuy
-type Race = Human | Elf
+
+let [<Literal>] POINT_BUDGET = 27<pointbuy>
 
 type AbilityBuy = 
     {
@@ -81,12 +79,17 @@ type AbilityBuy =
         BonusPlusThree: Ability
         SelectedBonusPlusOne: Ability
     } with
+        member this.UnspentPoints = 
+            let spent = this.PointBuy |> Map.toArray |> Array.sumBy snd
+            POINT_BUDGET - spent
+
         member this.BonusPlusOne = 
             match this.BonusPlusThree with
             | t when t <> this.SelectedBonusPlusOne
                 -> this.SelectedBonusPlusOne
             | STR -> DEX
             | _ -> STR
+
         member this.BoughtAbility ab = 
             match this.PointBuy.TryGetValue ab with
             | false, _ -> 8
@@ -107,17 +110,24 @@ type StatModifiers = {
 type Character =
     {
         CharName: string
-        Race: Race
-        Subclass: SubclassId
+
+        Race: RaceId
         AbilityBuy: AbilityBuy
         SelectedSkillIds: Set<string>
+
+        PreviousLevelHistory: LevelRecord list
         SelectedSpellIds: Set<string>
         ChosenFeatIds: Set<string>
-        LevelHistory: LevelRecord list
+
+        NextLevelUp: LevelRecord
+
         StatModifiers : StatModifiers
     } with
 
-        member this.CharacterLevel = List.length this.LevelHistory
+        member this.LevelHistory = 
+            this.NextLevelUp :: this.PreviousLevelHistory
+        member this.CharacterLevel = 
+            List.length this.LevelHistory
         member this.Ability ab = 
             this.AbilityBuy.BoughtAbility ab + 
             this.StatModifiers.Abilities.GetOrDefault ab
@@ -127,41 +137,11 @@ type Character =
         member this.Initiative = 
             this.AbilityModifier DEX 
             + this.AbilityModifier INT
-            + this.StatModifiers.Initiative
-
-
-type LevelUpDraft =
-    {
-        SubclassId: SubclassId
-        FeatId: string option
-        SpellId: string option
-    }
+            + this.StatModifiers.Initiative        
 
 type PersistedState =
     {
         Character: Character
         UndoStack: Character list
     }
-
-
-
-
-let allAbilities =
-    [ STR;DEX;CON;INT;WIS;CHA ]
-
-let abilityName = function
-    | STR -> "Strength"
-    | DEX -> "Dexterity"
-    | CON -> "Constitution"
-    | INT -> "Intelligence"
-    | WIS -> "Wisdom"
-    | CHA -> "Charisma"
-
-let abilityAbbreviation = function
-    | STR -> "STR"
-    | DEX -> "DEX"
-    | CON -> "CON"
-    | INT -> "INT"
-    | WIS -> "WIS"
-    | CHA -> "CHA"
 

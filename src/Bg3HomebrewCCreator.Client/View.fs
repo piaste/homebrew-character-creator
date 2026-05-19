@@ -4,11 +4,26 @@ open System
 open Bolero
 open Bolero.Html
 
-open Domain
+open Domain.Types
 open Model
 
 let pointBuyOptions = [ 8 .. 15 ]
 
+let abilityName = function
+    | STR -> "Strength"
+    | DEX -> "Dexterity"
+    | CON -> "Constitution"
+    | INT -> "Intelligence"
+    | WIS -> "Wisdom"
+    | CHA -> "Charisma"
+
+let abilityAbbreviation = function
+    | STR -> "STR"
+    | DEX -> "DEX"
+    | CON -> "CON"
+    | INT -> "INT"
+    | WIS -> "WIS"
+    | CHA -> "CHA"
 
 type Main = Template<"wwwroot/main.html">
 
@@ -303,7 +318,7 @@ let summarySection (model: Model) =
                                 | xs -> String.concat " • " xs
 
                         Main.TimelineRow()
-                            .Level($"Level {levelRecord.Level}")
+                            .Level($"Level {levelRecord.ClassLevel}")
                             .ClassName(classDef.Name)
                             .Detail(detail)
                             .Elt()))

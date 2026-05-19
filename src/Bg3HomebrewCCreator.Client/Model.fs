@@ -1,24 +1,27 @@
 module Bg3HomebrewCCreator.Client.Model
 
 open System
-open System.Text.Json
-open System.Text.Json.Serialization
-open Elmish
-open Bolero
-open Bolero.Html
-open Bolero.Templating.Client
-open FSharp.SystemTextJson
-open Microsoft.AspNetCore.Components
-open Microsoft.JSInterop
 
-open Domain
+open Domain.Types
+open Domain.Entities
+open Domain.Fetchers
 
+type Page =
+    | [<Bolero.EndPoint "/">] Forge
+
+type Model =
+    {
+        Page: Page
+        Character: Character
+        UndoStack: Character list
+        Error: string option
+        Loaded: bool
+    }
 
 let defaultCharacter =
     {
         CharName = "John Baldur"
         Race = Human
-        Subclass = Champion
         AbilityBuy = {
             PointBuy = 
                 Map [for ab in allAbilities -> ab, 8<pointbuy> ]
@@ -29,7 +32,11 @@ let defaultCharacter =
         SelectedSkillIds = Set.empty
         SelectedSpellIds = Set.empty
         ChosenFeatIds = Set.empty
-        LevelHistory = []
+        PreviousLevelHistory = []
+        NextLevelUp = {
+            ClassLevel = 1
+            Subclass = Champion
+        }
     }
 
 let initModel =
@@ -37,12 +44,11 @@ let initModel =
         Page = Forge
         Character = defaultCharacter
         UndoStack = []
-        LevelUp = None
         Error = None
-        Hydrated = false
+        Loaded = false
     }
 
-let PROFICIENCIES_PICKS = 4
+let NUM_PROFICIENCIES_PICKS = 4
 let EXPERTISES_PICKS = 8
 
 let totalPointBuySpent (character: Character) =
@@ -77,8 +83,10 @@ let creationValidation (character: Character) =
     [
         if String.IsNullOrWhiteSpace character.CharName then
             "Give the character a name before locking the sheet."
-        if totalPointBuySpent character > 27<pointbuy> then
+        if character.AbilityBuy.UnspentPoints < 0<pointbuy> then
             "Point buy exceeds 27 points."
+        if character.AbilityBuy.UnspentPoints > 0<pointbuy> then
+            sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
         // if character.BonusPlusThree = character.BonusPlusOne then
         //     "+3 and +1 bonuses must target different abilities."
         // if character.SelectedSkillIds.Count <> classDef.SkillChoices then
@@ -97,5 +105,10 @@ let statusText (model: Model) =
             $"You are {abs remaining} point-buy points over the 27-point budget."
     else
         let race = raceById character.Race
-        let className = (subclassById character.Subclass).Name
-        $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {className}. Use level up to extend the build, or undo to roll back changes."
+        let classNames = 
+            character.NextLevelUp :: character.LevelHistory
+            |> List.map (_.Subclass >> subclassById >> _.Name)
+            |> String.concat "/"
+        $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."
+
+        
