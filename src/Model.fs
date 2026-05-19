@@ -14,7 +14,14 @@ let defaultCharacter =
         RaceId = Human
         AbilityBuy = {
             PointBuy = 
-                Map [for ab in allAbilities -> ab, 8<pointbuy> ]
+                Map [
+                    STR, 9<pbuy>
+                    DEX, 2<pbuy>
+                    CON, 7<pbuy>
+                    INT, 0<pbuy>
+                    WIS, 2<pbuy>
+                    CHA, 7<pbuy>
+                ]
             BonusPlusThree = STR
             SelectedBonusPlusOne = CON
         }
@@ -53,9 +60,9 @@ let checkErrors (character: Character) =
     [
         if String.IsNullOrWhiteSpace character.CharName then
             "Give the character a name before locking the sheet."
-        if character.AbilityBuy.UnspentPoints < 0<pointbuy> then
-            "Point buy exceeds 27 points."
-        if character.AbilityBuy.UnspentPoints > 0<pointbuy> then
+        if character.AbilityBuy.UnspentPoints < 0<pbuy> then
+            sprintf "Point buy exceeds 27 points. (%i excess points)" (-1 * character.AbilityBuy.UnspentPoints)
+        if character.AbilityBuy.UnspentPoints > 0<pbuy> then
             sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
         // if character.BonusPlusThree = character.BonusPlusOne then
         //     "+3 and +1 bonuses must target different abilities."

@@ -69,13 +69,18 @@ type LevelRecord =
         SubclassId: SubclassId
     }
 
-type [<Measure>] pointbuy
+type [<Measure>] pbuy
 
-let [<Literal>] POINT_BUDGET = 27<pointbuy>
+let [<Literal>] POINT_BUDGET = 27<pbuy>
+
+let getAbilityFromPoints (x: int<pbuy>) = 
+    if x <= 5<pbuy> then 8 + x/1<pbuy>
+    else 13 + (x - 5<pbuy>) / 2<pbuy>
+
 
 type AbilityBuy = 
     {
-        PointBuy: Map<Ability, int<pointbuy>>
+        PointBuy: Map<Ability, int<pbuy>>
         BonusPlusThree: Ability
         SelectedBonusPlusOne: Ability
     } with
@@ -92,13 +97,10 @@ type AbilityBuy =
             | STR -> DEX
             | _ -> STR
 
+        member this.BoughtAbilityBeforeBonuses ab = 
+            this.PointBuy[ab] |> getAbilityFromPoints
         member this.BoughtAbility ab = 
-            match this.PointBuy.TryGetValue ab with
-            | false, _ -> 8
-            | true, x -> 
-               if x <= 5<pointbuy> then 8 + x/1<pointbuy>
-               else 13 + (x - 5<pointbuy>) / 2<pointbuy>
-
+            this.BoughtAbilityBeforeBonuses ab
             + if this.BonusPlusOne = ab then 1
               elif this.BonusPlusThree = ab then 3
               else 0
@@ -138,7 +140,7 @@ type Character =
             (this.Ability ab - 10) / 2
         member this.Initiative = 
             this.AbilityModifier DEX 
-            + this.AbilityModifier INT
+            + this.AbilityModifier WIS
             + this.StatModifiers.Initiative        
 
 type PersistedState =

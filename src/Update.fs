@@ -117,7 +117,7 @@ let update load save message model =
                         character.AbilityBuy with 
                             PointBuy = 
                                 character.AbilityBuy.PointBuy
-                                |> Map.add ability (clamp 8<pointbuy>15<pointbuy> (score * 1<pointbuy>)) 
+                                |> Map.add ability (clamp 0<pbuy>9<pbuy> (score * 1<pbuy>)) 
                     } 
             }
 

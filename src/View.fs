@@ -11,7 +11,7 @@ open Model
 open Update
 open Utils
 
-let pointBuyOptions = [ 8 .. 15 ]
+let pointBuyOptions = [ 0;1;2;3;4;5;7;9 ] |> List.map ((*) 1<pbuy>)
 
 let abilityName = function
     | STR -> "Strength"
@@ -50,18 +50,9 @@ let fieldOption value (label: string) =
 let abilityOption ability =
     fieldOption (string ability) (abilityName ability)
 
-let scoreOption score =
-    let displayPointBuyCost = function
-        | 8 -> 0<pointbuy>
-        | 9 -> 1<pointbuy>
-        | 10 -> 2<pointbuy>
-        | 11 -> 3<pointbuy>
-        | 12 -> 4<pointbuy>
-        | 13 -> 5<pointbuy>
-        | 14 -> 7<pointbuy>
-        | 15 -> 9<pointbuy>
-        | _ -> 99<pointbuy>
-    fieldOption (string score) ($"{score} ({displayPointBuyCost score} pts)")
+let scoreOption points =
+    let score = getAbilityFromPoints points
+    fieldOption (string points) ($"{score} ({points} pts)")
 
 let fieldCard (title: string) (helper: string) (body: Node) =
     Main.SectionCard()
@@ -117,7 +108,8 @@ let pointBuyRow (character: Character) ability dispatch =
     Main.AbilityRow()
         .Ability(abilityName ability)
         .Abbreviation(abilityAbbreviation ability)
-        .Score(string character.AbilityBuy.PointBuy[ability], fun value -> dispatch (SetAbilityScore(ability, Int32.Parse value)))
+        .Score(string (character.AbilityBuy.PointBuy[ability]), 
+               fun value -> dispatch (SetAbilityScore(ability, Int32.Parse value)))
         .Options(forEach pointBuyOptions scoreOption)
         .BonusInfo(
             concat {
