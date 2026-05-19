@@ -17,8 +17,8 @@ let defaultCharacter =
                 Map [
                     STR, 9<pbuy>
                     DEX, 2<pbuy>
-                    CON, 7<pbuy>
-                    INT, 0<pbuy>
+                    CON, 5<pbuy>
+                    INT, 2<pbuy>
                     WIS, 2<pbuy>
                     CHA, 7<pbuy>
                 ]
@@ -96,8 +96,8 @@ let statusText (model: Model) =
     | [] -> 
         let race = raceById character.RaceId
         let classNames = 
-            character.NextLevelUp :: character.LevelHistory
-            |> List.map (_.SubclassId >> subclassById >> _.Name)
+            character.LevelHistory
+            |> List.map (_.SubclassId >> subclassById >> _.Name)            
             |> String.concat "/"
         $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."
     | errs -> String.concat "\n" errs

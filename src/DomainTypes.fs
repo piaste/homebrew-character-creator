@@ -41,7 +41,7 @@ type ClassDef =
         Description: string
     }
 
-type SubclassId = Champion | BattleMaster | Evoker | Illusionist
+type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
 
 let defaultSubclassId = function
     | Fighter -> Champion

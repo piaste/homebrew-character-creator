@@ -58,15 +58,15 @@ let battlemaster =
 let evoker =
 
         {
-            Name = "School of Evocation"
+            Name = "Cormyr War Wizard Tradition"
             Description = "Specializes in raw elemental force and precise battlefield shaping."
             BaseClass = Wizard
             CasterType = FullCaster Arcane
 
         }
-let illusionist =
+let luminalConfluence =
         {
-            Name = "School of Illusion"
+            Name = "Netherese Variator Tradition"
             Description = "Controls the room with misdirection, trickery, and layered magic."
             BaseClass = Wizard
             CasterType = FullCaster Arcane
@@ -74,7 +74,7 @@ let illusionist =
 
 let allSubclassesByClass = Map [
     Fighter, Map [Champion, champion; BattleMaster, battlemaster ]
-    Wizard, Map [Evoker, evoker; Illusionist, illusionist]
+    Wizard, Map [Evoker, evoker; LuminalConfluence, luminalConfluence]
 ]
 
 let allSubclasses = 
@@ -88,22 +88,52 @@ let skills =
         {
             Id = "athletics"
             Name = "Athletics"
-            Description = "Climbing, grappling, and other raw physical efforts."
+            Description = "Push people. Carry stuff."
         }
         {
             Id = "arcana"
             Name = "Arcana"
-            Description = "Knowledge of spells, magical traditions, and planar oddities."
+            Description = "Understand magic."
+        }
+        {
+            Id = "intimidate"
+            Name = "Intimidate"
+            Description = "Bully people."
+        }
+        {
+            Id = "nature"
+            Name = "Nature"
+            Description = "Hug trees."
+        }
+        {
+            Id = "history"
+            Name = "History"
+            Description = "Remember old stuff."
+        }
+        {
+            Id = "religion"
+            Name = "Religion"
+            Description = "Understand gods."
         }
         {
             Id = "perception"
             Name = "Perception"
-            Description = "Spotting hidden movement, faint sounds, and subtle danger."
+            Description = "Spot hidden things and creatures."
         }
         {
             Id = "persuasion"
             Name = "Persuasion"
-            Description = "Winning people over with calm authority or charm."
+            Description = "Skip fights. Haggle with merchants."
+        }
+        {
+            Id = "deceit"
+            Name = "Deceit"
+            Description = "Lie your ass off."
+        }
+        {
+            Id = "insight"
+            Name = "Insight"
+            Description = "Call bullshit."
         }
     ]
 

@@ -52,6 +52,3 @@ type MyApp() =
         let load, save = buildStorage (fun () -> this.JSRuntime)
         Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) view
         |> Program.withRouter router
-    #if DEBUG
-        |> Program.withHotReload
-    #endif

@@ -77,7 +77,7 @@ let validationChip text = chip text "warning"
 
 let choiceCard isActive (meta: string) (title: string) (description: string) (action: obj -> unit) =
     Main.ChoiceCard()
-        .ActiveClass(if isActive then "is-active" else "")
+        .ActiveClass(if isActive then "active" else "")
         .Meta(meta)
         .Title(title)
         .Description(description)
@@ -123,20 +123,61 @@ let pointBuyRow (character: Character) ability dispatch =
 
 let characterSummaryChips (character: Character) =
     let race = raceById character.RaceId
-    let classDef = classBySubclassId character.NextLevelUp.SubclassId
-    let subclass = subclassById character.NextLevelUp.SubclassId
+    let subclassIds =
+        character.LevelHistory
+        |> List.map _.SubclassId
+        |> List.distinct
+        
+    let classTags = subclassIds |> List.map (classBySubclassId >> _.Name)
+    let subclassTags = subclassIds |> List.map (subclassById >> _.Name)
     
     concat {
-        chip race.Name "accent"
-        chip classDef.Name "neutral"
-        chip character.CharName "neutral"
         chip $"Level {character.CharacterLevel}" "success"
+        chip race.Name "accent"
+        forEach classTags (fun ct -> chip ct "neutral")
+        forEach subclassTags (fun ct -> chip ct "neutral")
+    }
+
+let levelUpSection (model: Model) dispatch = concat {
+    let character = model.Character
+
+    let classId = classIdBySubclassId character.NextLevelUp.SubclassId
+    let subclass = subclassById character.NextLevelUp.SubclassId
+    
+    selectCase
+        "Class"
+        "Fighter and wizard are enough to test martial and spellcasting flows."
+        classId
+        (forEach allClasses (fun classDef -> fieldOption classDef.Key classDef.Value.Name))
+        (fun value -> dispatch (SetSubclass (allSubclassesByClass[value].Keys |> Seq.head)))
+    selectCase
+        "Subclass"
+        "This is chosen up front for the placeholder build flow."
+        character.NextLevelUp.SubclassId
+        (forEach allSubclasses (fun subclass -> fieldOption subclass.Key subclass.Value.Name))
+        (fun value -> dispatch (SetSubclass value))
+
+    
+    cond subclass.CasterType <| function
+        | Martial -> empty()
+        | caster ->
+            fieldCard
+                "Spellbook"
+                $"Choose {numSpellPicksPerLevel caster} starting spells. Later wizard levels add more."
+                (concat {
+                    Main.SelectionMeter()
+                        .Selected(string character.SelectedSpellIds.Count)
+                        .Maximum(string <| numSpellPicksPerLevel caster)
+                        .Label("spells")
+                        .Elt()
+                    forEach spells (fun spell ->
+                        let active = character.SelectedSpellIds.Contains spell.Id
+                        choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
+                })
     }
 
 let creationSection (model: Model) dispatch =
     let character = model.Character
-    let classId = classIdBySubclassId character.NextLevelUp.SubclassId
-    let subclass = subclassById character.NextLevelUp.SubclassId
     let validationIssues = checkErrors character
     concat {
         fieldCard
@@ -150,18 +191,6 @@ let creationSection (model: Model) dispatch =
                     character.RaceId
                     (forEach allRaces (fun race -> fieldOption race.Key race.Value.Name))
                     (fun value -> dispatch (SetRace value))
-                selectCase
-                    "Class"
-                    "Fighter and wizard are enough to test martial and spellcasting flows."
-                    classId
-                    (forEach allClasses (fun classDef -> fieldOption classDef.Key classDef.Value.Name))
-                    (fun value -> dispatch (SetSubclass (allSubclassesByClass[value].Keys |> Seq.head)))
-                selectCase
-                    "Subclass"
-                    "This is chosen up front for the placeholder build flow."
-                    character.NextLevelUp.SubclassId
-                    (forEach allSubclasses (fun subclass -> fieldOption subclass.Key subclass.Value.Name))
-                    (fun value -> dispatch (SetSubclass value))
             })
 
         fieldCard
@@ -201,22 +230,6 @@ let creationSection (model: Model) dispatch =
                     choiceCard active "Skill" skill.Name skill.Description (fun _ -> dispatch (ToggleSkill skill.Id)))
             })
 
-        cond subclass.CasterType <| function
-            | Martial -> empty()
-            | caster ->
-                fieldCard
-                    "Spellbook"
-                    $"Choose {numSpellPicksPerLevel caster} starting spells. Later wizard levels add more."
-                    (concat {
-                        Main.SelectionMeter()
-                            .Selected(string character.SelectedSpellIds.Count)
-                            .Maximum(string <| numSpellPicksPerLevel caster)
-                            .Label("spells")
-                            .Elt()
-                        forEach spells (fun spell ->
-                            let active = character.SelectedSpellIds.Contains spell.Id
-                            choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
-                    })
 
         fieldCard
             "Ready Check"
@@ -307,26 +320,23 @@ let summarySection (model: Model) =
         fieldCard
             "Timeline"
             "Every confirmed level is recorded below."
-            (cond character.LevelHistory.IsEmpty <| function
-                | true -> Main.EmptyState().Text("Finalize the character to start the level timeline.").Elt()
-                | false ->
-                    forEach character.LevelHistory (fun levelRecord ->
-                        let classDef = classBySubclassId levelRecord.SubclassId
-                        let detail =
-                            [
-                                // levelRecord.FeatId |> Option.map (choiceById feats >> fun feat -> $"Feat: {feat.Name}")
-                                // levelRecord.SpellId |> Option.map (choiceById spells >> fun spell -> $"Spell: {spell.Name}")
-                            ]
-                            |> List.choose id
-                            |> function
-                                | [] -> "No extra choices"
-                                | xs -> String.concat " • " xs
+            (forEach character.LevelHistory (fun levelRecord ->
+                let classDef = classBySubclassId levelRecord.SubclassId
+                let detail =
+                    [
+                        // levelRecord.FeatId |> Option.map (choiceById feats >> fun feat -> $"Feat: {feat.Name}")
+                        // levelRecord.SpellId |> Option.map (choiceById spells >> fun spell -> $"Spell: {spell.Name}")
+                    ]
+                    |> List.choose id
+                    |> function
+                        | [] -> "No extra choices"
+                        | xs -> String.concat " • " xs
 
-                        Main.TimelineRow()
-                            .Level($"Level {levelRecord.ClassLevel}")
-                            .ClassName(classDef.Name)
-                            .Detail(detail)
-                            .Elt()))
+                Main.TimelineRow()
+                    .Level($"Level {levelRecord.ClassLevel}")
+                    .ClassName(classDef.Name)
+                    .Detail(detail)
+                    .Elt()))
 
         cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
             | true -> empty()
@@ -400,9 +410,10 @@ let view (model: Model) dispatch =
             })
         .BuilderContent(
             concat {
-                cond model.Errors <| function
-                    | [] -> advancementSection model dispatch
+                cond (model.Character.CharacterLevel > 1) <| function
+                    | true -> empty()
                     | _ -> creationSection model dispatch
+                levelUpSection model dispatch
             })
         .SummaryContent(summarySection model)
         // .LevelUp(levelUpModal model dispatch)
