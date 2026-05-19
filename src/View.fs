@@ -104,7 +104,6 @@ let selectCase<'T> label helper (currentValue: 'T) options action =
 
 let pointBuyRow (character: Character) ability dispatch =
     let finalScore = character.Ability ability
-    let totalText = $"Total {finalScore} ({character.AbilityModifier ability})"
     Main.AbilityRow()
         .Ability(abilityName ability)
         .Abbreviation(abilityAbbreviation ability)
@@ -118,7 +117,6 @@ let pointBuyRow (character: Character) ability dispatch =
                 if character.AbilityBuy.BonusPlusOne = ability then
                     chip "+1 bonus" "neutral"
             })
-            .Total(totalText)
         .Elt()
 
 let characterSummaryChips (character: Character) =
