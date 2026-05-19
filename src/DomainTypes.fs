@@ -51,7 +51,7 @@ type Subclass =
     {
         Name: string
         Description: string
-        BaseClass: ClassDef
+        BaseClass: ClassId
         CasterType: CasterType
     }
 
@@ -66,7 +66,7 @@ type ChoiceDef =
 type LevelRecord =
     {
         ClassLevel: int
-        Subclass: SubclassId
+        SubclassId: SubclassId
     }
 
 type [<Measure>] pointbuy
@@ -79,9 +79,11 @@ type AbilityBuy =
         BonusPlusThree: Ability
         SelectedBonusPlusOne: Ability
     } with
+
+        member this.SpentPoints = 
+            this.PointBuy |> Map.toArray |> Array.sumBy snd
         member this.UnspentPoints = 
-            let spent = this.PointBuy |> Map.toArray |> Array.sumBy snd
-            POINT_BUDGET - spent
+            POINT_BUDGET - this.SpentPoints
 
         member this.BonusPlusOne = 
             match this.BonusPlusThree with
@@ -111,7 +113,7 @@ type Character =
     {
         CharName: string
 
-        Race: RaceId
+        RaceId: RaceId
         AbilityBuy: AbilityBuy
         SelectedSkillIds: Set<string>
 

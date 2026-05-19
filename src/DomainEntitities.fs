@@ -20,32 +20,38 @@ let elf =
             Trait = "Fey perception"
         }
 
+let allRaces = Map [
+    Human, human
+    Elf, elf
+]
+
 let fighter = {
-            Name = "Fighter"
-            Description = "Front-line martial expert with durable defenses and weapon mastery."
-            
-        }
+        Name = "Fighter"
+        Description = "Front-line martial expert with durable defenses and weapon mastery."        
+    }
 
 let wizard =
         {
             Name = "Wizard"
             Description = "Arcane scholar with fragile defenses and flexible spell access."            
         }
-let classes = [fighter;wizard]
-
+let allClasses = Map [
+    Fighter, fighter
+    Wizard, wizard
+]
 
 let champion =
         {
             Name = "Champion"
             Description = "Direct, dependable martial skill with no wasted motion."
-            BaseClass = fighter
+            BaseClass = Fighter
             CasterType = Martial
         }
 let battlemaster =
         {
             Name = "Battle Master"
             Description = "A tactical duelist who wins by precision and positioning."
-            BaseClass = fighter
+            BaseClass = Fighter
             CasterType = Martial
 
         }
@@ -54,7 +60,7 @@ let evoker =
         {
             Name = "School of Evocation"
             Description = "Specializes in raw elemental force and precise battlefield shaping."
-            BaseClass = wizard
+            BaseClass = Wizard
             CasterType = FullCaster Arcane
 
         }
@@ -62,9 +68,20 @@ let illusionist =
         {
             Name = "School of Illusion"
             Description = "Controls the room with misdirection, trickery, and layered magic."
-            BaseClass = wizard
+            BaseClass = Wizard
             CasterType = FullCaster Arcane
         }
+
+let allSubclassesByClass = Map [
+    Fighter, Map [Champion, champion; BattleMaster, battlemaster ]
+    Wizard, Map [Evoker, evoker; Illusionist, illusionist]
+]
+
+let allSubclasses = 
+    allSubclassesByClass.Values
+    |> Seq.concat
+    |> Seq.map (fun kv -> kv.Key, kv.Value)
+    |> Map.ofSeq
 
 let skills =
     [

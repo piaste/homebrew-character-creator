@@ -16,8 +16,8 @@ type Message =
     | LoadedState of PersistedState option
 
     | SetName of string
-    | SetRace of string
-    | SetSubclass of string
+    | SetRace of RaceId
+    | SetSubclass of SubclassId
     | SetAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
@@ -97,7 +97,7 @@ let update load save message model =
         apply <| fun character -> { character with CharName = name }
 
     | SetRace race ->
-        apply <| fun character -> { character with Race = parseCase<RaceId> race }
+        apply <| fun character -> { character with RaceId = race }
 
     | SetSubclass subclassId ->
         apply <| fun character -> 
@@ -108,7 +108,7 @@ let update load save message model =
                     NextLevelUp = { 
                         character.NextLevelUp with
                             ClassLevel = 1
-                            Subclass = parseCase<SubclassId> subclassId
+                            SubclassId = subclassId
                     }
             }
 

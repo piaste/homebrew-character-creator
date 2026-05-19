@@ -5,7 +5,11 @@ open Bolero
 open Bolero.Html
 
 open Domain.Types
+open Domain.Entities
+open Domain.Fetchers
 open Model
+open Update
+open Utils
 
 let pointBuyOptions = [ 8 .. 15 ]
 
@@ -27,6 +31,8 @@ let abilityAbbreviation = function
 
 type Main = Template<"wwwroot/main.html">
 
+let modifierText i = if i >= 0 then $"+{i}" else i.ToString()
+
 let actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) =
     Main.ActionButton()
         .Text(text)
@@ -35,9 +41,9 @@ let actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) 
         .Action(action)
         .Elt()
 
-let fieldOption (value: string) (label: string) =
+let fieldOption value (label: string) =
     Main.FieldOption()
-        .Value(value)
+        .Value(value.ToString())
         .Label(label)
         .Elt()
 
@@ -102,39 +108,43 @@ let selectField (label: string) (helper: string) (currentValue: string) (options
         .Options(options)
         .Elt()
 
+let selectCase<'T> label helper (currentValue: 'T) options action = 
+    selectField label helper (currentValue.ToString()) options (parseCase<'T> >> action)
+
 let pointBuyRow (character: Character) ability dispatch =
-    let finalScore = abilityScore character ability
-    let totalText = $"Total {finalScore} ({modifierText finalScore})"
+    let finalScore = character.Ability ability
+    let totalText = $"Total {finalScore} ({character.AbilityModifier ability})"
     Main.AbilityRow()
         .Ability(abilityName ability)
         .Abbreviation(abilityAbbreviation ability)
-        .Score(string character.PointBuy[ability], fun value -> dispatch (SetAbilityScore(ability, Int32.Parse value)))
+        .Score(string character.AbilityBuy.PointBuy[ability], fun value -> dispatch (SetAbilityScore(ability, Int32.Parse value)))
         .Options(forEach pointBuyOptions scoreOption)
         .BonusInfo(
             concat {
-                if character.BonusPlusThree = ability then
-                    chip "+3 ancestry bonus" "accent"
-                if character.BonusPlusOne = ability then
-                    chip "+1 ancestry bonus" "neutral"
+                if character.AbilityBuy.BonusPlusThree = ability then
+                    chip "+3 bonus" "accent"
+                if character.AbilityBuy.BonusPlusOne = ability then
+                    chip "+1 bonus" "neutral"
             })
             .Total(totalText)
         .Elt()
 
 let characterSummaryChips (character: Character) =
     let race = raceById character.RaceId
-    let classDef = classById character.ClassId
-    let subclass = subclassById character.ClassId character.SubclassId
+    let classDef = classBySubclassId character.NextLevelUp.SubclassId
+    let subclass = subclassById character.NextLevelUp.SubclassId
+    
     concat {
         chip race.Name "accent"
         chip classDef.Name "neutral"
-        chip subclass.CharName "neutral"
-        if character.IsCreated then
-            chip $"Level {characterLevel character}" "success"
+        chip character.CharName "neutral"
+        chip $"Level {character.CharacterLevel}" "success"
     }
 
 let creationSection (model: Model) dispatch =
     let character = model.Character
-    let classDef = classById character.ClassId
+    let classId = classIdBySubclassId character.NextLevelUp.SubclassId
+    let subclass = subclassById character.NextLevelUp.SubclassId
     let validationIssues = creationValidation character
     concat {
         fieldCard
@@ -142,23 +152,23 @@ let creationSection (model: Model) dispatch =
             "Lock in the hero concept before level-up opens."
             (concat {
                 textField "Character name" "Used everywhere in the live summary." character.CharName (fun value -> dispatch (SetName value))
-                selectField
+                selectCase
                     "Race"
                     "Two placeholder ancestries are wired for testing."
                     character.RaceId
-                    (forEach races (fun race -> fieldOption race.Id race.Name))
+                    (forEach allRaces (fun race -> fieldOption race.Key race.Value.Name))
                     (fun value -> dispatch (SetRace value))
-                selectField
+                selectCase
                     "Class"
                     "Fighter and wizard are enough to test martial and spellcasting flows."
-                    character.ClassId
-                    (forEach classes (fun classDef -> fieldOption classDef.Id classDef.Name))
-                    (fun value -> dispatch (SetClass value))
-                selectField
+                    classId
+                    (forEach allClasses (fun classDef -> fieldOption classDef.Key classDef.Value.Name))
+                    (fun value -> dispatch (SetSubclass (allSubclassesByClass[value].Keys |> Seq.head)))
+                selectCase
                     "Subclass"
                     "This is chosen up front for the placeholder build flow."
-                    character.SubclassId
-                    (forEach classDef.Subclasses (fun subclass -> fieldOption subclass.Id subclass.Name))
+                    character.NextLevelUp.SubclassId
+                    (forEach allSubclasses (fun subclass -> fieldOption subclass.Key subclass.Value.Name))
                     (fun value -> dispatch (SetSubclass value))
             })
 
@@ -167,8 +177,8 @@ let creationSection (model: Model) dispatch =
             "Base scores use the standard 27-point buy before a +3 and +1 bonus land on different abilities."
             (concat {
                 Main.PointBudget()
-                    .Used(string (totalPointBuySpent character))
-                    .Remaining(string (27 - totalPointBuySpent character))
+                    .Used(string character.AbilityBuy.SpentPoints)
+                    .Remaining(string character.AbilityBuy.UnspentPoints)
                     .Elt()
                 forEach allAbilities (fun ability -> pointBuyRow character ability dispatch)
                 selectField
@@ -180,7 +190,7 @@ let creationSection (model: Model) dispatch =
                 selectField
                     "+1 bonus"
                     "Bolero will normalize duplicate choices, but the validation panel also calls it out."
-                    (string character.bilityBuy.BonusPlusOne)
+                    (string character.AbilityBuy.BonusPlusOne)
                     (forEach allAbilities abilityOption)
                     (fun value -> dispatch (SetBonusPlusOne(parseAbility value)))
             })
@@ -199,16 +209,16 @@ let creationSection (model: Model) dispatch =
                     choiceCard active "Skill" skill.Name skill.Description (fun _ -> dispatch (ToggleSkill skill.Id)))
             })
 
-        cond classDef.IsSpellcaster <| function
-            | false -> empty()
-            | true ->
+        cond subclass.CasterType <| function
+            | Martial -> empty()
+            | caster ->
                 fieldCard
                     "Spellbook"
-                    $"Choose {classDef.InitialSpellChoices} starting spells. Later wizard levels add more."
+                    $"Choose {numSpellPicksPerLevel caster} starting spells. Later wizard levels add more."
                     (concat {
                         Main.SelectionMeter()
                             .Selected(string character.SelectedSpellIds.Count)
-                            .Maximum(string classDef.InitialSpellChoices)
+                            .Maximum(string <| numSpellPicksPerLevel caster)
                             .Label("spells")
                             .Elt()
                         forEach spells (fun spell ->
@@ -229,7 +239,9 @@ let creationSection (model: Model) dispatch =
 
 let advancementSection (model: Model) dispatch =
     let character = model.Character
-    let nextFeat = if levelUpNeedsFeat character then "Feat at next level" else "No feat on next level"
+    // TODO: handle multiclass
+    let nextLevelText = sprintf "Level %i" (character.CharacterLevel + 1)
+    let nextFeatText = if character.CharacterLevel % 4 = 3 then "Feat at next level" else "No feat on next level"
     fieldCard
         "Advancement"
         "The base sheet is now locked. Use level up for future choices, or undo to roll back."
@@ -237,21 +249,21 @@ let advancementSection (model: Model) dispatch =
             Main.LockedSummary()
                 .Name(character.CharName)
                 .Race((raceById character.RaceId).Name)
-                .Class((classById character.ClassId).Name)
-                .Subclass((subclassById character.ClassId character.SubclassId).CharName)
+                .Class((classBySubclassId character.NextLevelUp.SubclassId).Name)
+                .Subclass((subclassById character.NextLevelUp.SubclassId).Name)
                 .Elt()
-            summaryRow "Next level" (string (nextLevel character))
-            summaryRow "Prompt" nextFeat
-            actionButton "Level Up" "primary" false (fun _ -> dispatch BeginLevelUp)
+            summaryRow "Next level" (string nextLevelText)
+            summaryRow "Prompt" nextFeatText
+            actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
         })
 
 let summarySection (model: Model) =
     let character = model.Character
     let validationIssues = creationValidation character
-    let level = characterLevel character
+    let level = character.CharacterLevel
     let classBreakdown =
         classLevels character
-        |> List.map (fun (classId, count) -> summaryRow (classById classId).Name (string count))
+        |> List.map (fun (classId, count) -> summaryRow (subclassById classId).Name (string count))
 
     let featNames =
         character.ChosenFeatIds
@@ -274,18 +286,18 @@ let summarySection (model: Model) =
                     .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
                     .Details(characterSummaryChips character)
                     .Elt()
-                summaryRow "Status" (if character.IsCreated then "Levelled character" else "Draft level 1 build")
+                summaryRow "Status" (if model.Error.IsNone then "Levelled character" else "Draft level 1 build")
                 summaryRow "Proficiency bonus" (proficiencyBonus (max level 1) |> sprintf "%+i")
                 summaryRow "Hit points" (string (hitPoints character))
-                summaryRow "Point buy spent" (string (totalPointBuySpent character))
+                summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
             })
 
         fieldCard
             "Ability Scores"
-            "Final scores after the two ancestry bonuses are applied."
+            "Final scores after the two bonuses are applied."
             (forEach allAbilities (fun ability ->
-                let score = abilityScore character ability
-                summaryRow (abilityAbbreviation ability) ($"{score} ({modifierText score})")))
+                let score = character.AbilityBuy.BoughtAbility ability
+                summaryRow (abilityAbbreviation ability) $"{score} ({modifierText <| character.AbilityModifier ability})"))
 
         fieldCard
             "Progression"
@@ -306,11 +318,11 @@ let summarySection (model: Model) =
                 | true -> Main.EmptyState().Text("Finalize the character to start the level timeline.").Elt()
                 | false ->
                     forEach character.LevelHistory (fun levelRecord ->
-                        let classDef = classById levelRecord.ClassId
+                        let classDef = classBySubclassId levelRecord.SubclassId
                         let detail =
                             [
-                                levelRecord.FeatId |> Option.map (choiceById feats >> fun feat -> $"Feat: {feat.Name}")
-                                levelRecord.SpellId |> Option.map (choiceById spells >> fun spell -> $"Spell: {spell.Name}")
+                                // levelRecord.FeatId |> Option.map (choiceById feats >> fun feat -> $"Feat: {feat.Name}")
+                                // levelRecord.SpellId |> Option.map (choiceById spells >> fun spell -> $"Spell: {spell.Name}")
                             ]
                             |> List.choose id
                             |> function
@@ -323,59 +335,59 @@ let summarySection (model: Model) =
                             .Detail(detail)
                             .Elt()))
 
-        cond (not validationIssues.IsEmpty && not character.IsCreated) <| function
-            | false -> empty()
-            | true ->
+        cond (validationIssues, model.Error) <| function
+            | [], None -> empty()
+            | vIs, errs ->
                 fieldCard
                     "Issues"
                     "These must be resolved before level 1 can be locked."
-                    (forEach validationIssues validationChip)
+                    (forEach vIs validationChip)
     }
 
-let levelUpModal (model: Model) dispatch =
-    cond model.LevelUp <| function
-        | None -> empty()
-        | Some draft ->
-            let character = model.Character
-            let classDef = classById draft.ClassId
-            let featRequired = levelUpNeedsFeat character
-            Main.LevelUpModal()
-                .Body(
-                    concat {
-                        selectField
-                            "Class for the new level"
-                            "Choose fighter or wizard for the multiclass test path."
-                            draft.ClassId
-                            (forEach classes (fun classOption -> fieldOption classOption.Id classOption.Name))
-                            (fun value -> dispatch (SetLevelUpClass value))
-                        cond classDef.IsSpellcaster <| function
-                            | false -> empty()
-                            | true ->
-                                selectField
-                                    "Spell learned"
-                                    "Spellcasting levels add one placeholder spell."
-                                    (draft.SpellId |> Option.defaultValue "")
-                                    (concat {
-                                        fieldOption "" "Choose a spell"
-                                        forEach spells (fun spell -> fieldOption spell.Id spell.Name)
-                                    })
-                                    (fun value -> dispatch (SetLevelUpSpell value))
-                        cond featRequired <| function
-                            | false -> empty()
-                            | true ->
-                                selectField
-                                    "Feat gained"
-                                    "Every fourth character level grants a feat in this prototype."
-                                    (draft.FeatId |> Option.defaultValue "")
-                                    (concat {
-                                        fieldOption "" "Choose a feat"
-                                        forEach feats (fun feat -> fieldOption feat.Id feat.Name)
-                                    })
-                                    (fun value -> dispatch (SetLevelUpFeat value))
-                    })
-                .Cancel(fun _ -> dispatch CancelLevelUp)
-                .Confirm(fun _ -> dispatch ApplyLevelUp)
-                .Elt()
+// let levelUpModal (model: Model) dispatch =
+//     cond model.LevelUp <| function
+//         | None -> empty()
+//         | Some draft ->
+//             let character = model.Character
+//             let classDef = classById draft.ClassId
+//             let featRequired = levelUpNeedsFeat character
+//             Main.LevelUpModal()
+//                 .Body(
+//                     concat {
+//                         selectField
+//                             "Class for the new level"
+//                             "Choose fighter or wizard for the multiclass test path."
+//                             draft.ClassId
+//                             (forEach classes (fun classOption -> fieldOption classOption.Id classOption.Name))
+//                             (fun value -> dispatch (SetLevelUpClass value))
+//                         cond classDef.IsSpellcaster <| function
+//                             | false -> empty()
+//                             | true ->
+//                                 selectField
+//                                     "Spell learned"
+//                                     "Spellcasting levels add one placeholder spell."
+//                                     (draft.SpellId |> Option.defaultValue "")
+//                                     (concat {
+//                                         fieldOption "" "Choose a spell"
+//                                         forEach spells (fun spell -> fieldOption spell.Id spell.Name)
+//                                     })
+//                                     (fun value -> dispatch (SetLevelUpSpell value))
+//                         cond featRequired <| function
+//                             | false -> empty()
+//                             | true ->
+//                                 selectField
+//                                     "Feat gained"
+//                                     "Every fourth character level grants a feat in this prototype."
+//                                     (draft.FeatId |> Option.defaultValue "")
+//                                     (concat {
+//                                         fieldOption "" "Choose a feat"
+//                                         forEach feats (fun feat -> fieldOption feat.Id feat.Name)
+//                                     })
+//                                     (fun value -> dispatch (SetLevelUpFeat value))
+//                     })
+//                 .Cancel(fun _ -> dispatch CancelLevelUp)
+//                 .Confirm(fun _ -> dispatch ApplyLevelUp)
+//                 .Elt()
 
 let view (model: Model) dispatch =
     let undoDisabled = List.isEmpty model.UndoStack
@@ -383,19 +395,19 @@ let view (model: Model) dispatch =
         .StatusText(statusText model)
         .PrimaryActions(
             concat {
-                cond model.Character.IsCreated <| function
-                    | false -> actionButton "Finalize Character" "primary" false (fun _ -> dispatch FinalizeCharacter)
-                    | true -> actionButton "Level Up" "primary" false (fun _ -> dispatch BeginLevelUp)
+                cond model.Error <| function
+                    | Some _ -> actionButton "Finalize Character" "primary" false (fun _ -> dispatch FinalizeCharacter)
+                    | None -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
                 actionButton "Undo" "secondary" undoDisabled (fun _ -> if not undoDisabled then dispatch Undo)
             })
         .BuilderContent(
             concat {
-                cond model.Character.IsCreated <| function
-                    | false -> creationSection model dispatch
-                    | true -> advancementSection model dispatch
+                cond model.Error <| function
+                    | Some _ -> creationSection model dispatch
+                    | None -> advancementSection model dispatch
             })
         .SummaryContent(summarySection model)
-        .LevelUp(levelUpModal model dispatch)
+        // .LevelUp(levelUpModal model dispatch)
         .Error(
             cond model.Error <| function
                 | None -> empty()

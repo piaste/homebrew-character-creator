@@ -4,16 +4,18 @@ open Entities
 open Types
 
 
-let classById =
-    function | Fighter -> fighter | Wizard -> wizard
+let classById x = allClasses[x]
 
-let raceById =
-    function | Human -> human | Elf -> elf
+let raceById x = allRaces[x]
 
-let subclassById =
-    function
-    | Champion -> champion | BattleMaster -> battlemaster
-    | Evoker -> evoker | Illusionist -> illusionist
+let subclassById x = 
+    allSubclassesByClass.Values |> Seq.collect id |> Seq.find (fun kv -> kv.Key = x) |> _.Value
+
+let classIdBySubclassId = 
+    subclassById >> _.BaseClass
+
+let classBySubclassId = 
+    classIdBySubclassId >> classById
 
 let choiceById (choices: ChoiceDef list) (choiceId: string) =
     choices |> List.find (fun choice -> choice.Id = choiceId)
@@ -39,7 +41,7 @@ let levelDown character =
 
 type Character with
     member this.SpellIds =
-        let cType = this.NextLevelUp.Subclass
+        let cType = this.NextLevelUp.SubclassId
                     |> subclassById
                     |> _.CasterType
         

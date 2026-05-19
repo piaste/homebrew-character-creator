@@ -21,7 +21,7 @@ type Model =
 let defaultCharacter =
     {
         CharName = "John Baldur"
-        Race = Human
+        RaceId = Human
         AbilityBuy = {
             PointBuy = 
                 Map [for ab in allAbilities -> ab, 8<pointbuy> ]
@@ -35,7 +35,7 @@ let defaultCharacter =
         PreviousLevelHistory = []
         NextLevelUp = {
             ClassLevel = 1
-            Subclass = Champion
+            SubclassId = Champion
         }
     }
 
@@ -51,16 +51,6 @@ let initModel =
 let NUM_PROFICIENCIES_PICKS = 4
 let EXPERTISES_PICKS = 8
 
-let totalPointBuySpent (character: Character) =
-    allAbilities
-    |> List.sumBy (fun ability -> character.AbilityBuy.PointBuy[ability])
-
-let abilityModifier score =
-    Math.Floor((float score - 10.0) / 2.0) |> int
-
-let modifierText score =
-    abilityModifier score |> sprintf "%+i"
-
 let parseAbility (value: string) =
     Enum.Parse(typeof<Ability>, value) :?> Ability
 
@@ -72,7 +62,7 @@ let proficiencyBonus level =
 
 let classLevels (character: Character) =
     character.LevelHistory
-    |> List.countBy (fun level -> level.Subclass)
+    |> List.countBy (fun level -> level.SubclassId)
     |> List.sortByDescending snd
 
 let hitPoints (character: Character) =
@@ -98,16 +88,16 @@ let creationValidation (character: Character) =
 let statusText (model: Model) =
     let character = model.Character
     if creationValidation character |> List.isEmpty |> not then
-        let remaining = 27<pointbuy> - totalPointBuySpent character
+        let remaining = character.AbilityBuy.UnspentPoints
         if remaining >= 0<pointbuy> then
             $"You have {remaining} point-buy points left before finalizing level 1."
         else
             $"You are {abs remaining} point-buy points over the 27-point budget."
     else
-        let race = raceById character.Race
+        let race = raceById character.RaceId
         let classNames = 
             character.NextLevelUp :: character.LevelHistory
-            |> List.map (_.Subclass >> subclassById >> _.Name)
+            |> List.map (_.SubclassId >> subclassById >> _.Name)
             |> String.concat "/"
         $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."
 
