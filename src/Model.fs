@@ -8,16 +8,6 @@ open Domain.Fetchers
 
 type Page =
     | [<Bolero.EndPoint "/">] Forge
-
-type Model =
-    {
-        Page: Page
-        Character: Character
-        UndoStack: Character list
-        Error: string option
-        Loaded: bool
-    }
-
 let defaultCharacter =
     {
         CharName = "John Baldur"
@@ -37,15 +27,6 @@ let defaultCharacter =
             ClassLevel = 1
             SubclassId = Champion
         }
-    }
-
-let initModel =
-    {
-        Page = Forge
-        Character = defaultCharacter
-        UndoStack = []
-        Error = None
-        Loaded = false
     }
 
 let NUM_PROFICIENCIES_PICKS = 4
@@ -68,8 +49,7 @@ let classLevels (character: Character) =
 let hitPoints (character: Character) =
     12 + character.CharacterLevel * (8 + character.AbilityModifier CON )
 
-let creationValidation (character: Character) =
-    // let classDef = classById character.ClassId
+let checkErrors (character: Character) =
     [
         if String.IsNullOrWhiteSpace character.CharName then
             "Give the character a name before locking the sheet."
@@ -85,20 +65,34 @@ let creationValidation (character: Character) =
         //     $"Choose exactly {classDef.InitialSpellChoices} starting spells."
     ]
 
+type Model =
+    {
+        Page: Page
+        Character: Character
+        UndoStack: Character list
+        Loaded: bool
+        SystemErrors : string list
+    } with 
+        member this.Errors = checkErrors this.Character
+        static member Initial = 
+            {
+                Page = Forge
+                Character = defaultCharacter
+                UndoStack = []
+                Loaded = false
+                SystemErrors = []
+            }
+
 let statusText (model: Model) =
     let character = model.Character
-    if creationValidation character |> List.isEmpty |> not then
-        let remaining = character.AbilityBuy.UnspentPoints
-        if remaining >= 0<pointbuy> then
-            $"You have {remaining} point-buy points left before finalizing level 1."
-        else
-            $"You are {abs remaining} point-buy points over the 27-point budget."
-    else
+    match model.Errors with    
+    | [] -> 
         let race = raceById character.RaceId
         let classNames = 
             character.NextLevelUp :: character.LevelHistory
             |> List.map (_.SubclassId >> subclassById >> _.Name)
             |> String.concat "/"
         $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."
+    | errs -> String.concat "\n" errs
 
         

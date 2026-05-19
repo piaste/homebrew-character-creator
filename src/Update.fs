@@ -24,17 +24,16 @@ type Message =
     | ToggleSkill of string
     | ToggleSpell of string
 
-    | FinalizeCharacter
     | LevelUp
     | LevelDown
-    | SetLevelUpClass of string
+    | SetLevelUpSubclass of string
     | SetLevelUpFeat of string
     | SetLevelUpSpell of string
     
     | Undo
     | SavedState
     | PersistFailed of string
-    | ClearError
+    | ClearSystemError
 
 
 let saveCmd save (model: Model) =
@@ -57,13 +56,12 @@ let applyCharacterChange save (change: Character -> Character) (model: Model) =
     let nextCharacter = change model.Character
     if nextCharacter = model.Character then
         model, Cmd.none
-    else
+    else    
         let nextModel =
             {
                 model with
                     Character = nextCharacter
                     UndoStack = model.Character :: model.UndoStack
-                    Error = None
             }
 
         nextModel, saveCmd save nextModel
@@ -90,7 +88,6 @@ let update load save message model =
                 Character = state.Character
                 UndoStack = state.UndoStack
                 Loaded = true
-                Error = None
         }, Cmd.none
 
     | SetName name ->
@@ -161,15 +158,8 @@ let update load save message model =
             let temp = { character with SelectedSpellIds = updatedSpells }
             in { character with SelectedSpellIds = temp.SpellIds }
 
-    | FinalizeCharacter ->
-        let issues = creationValidation model.Character
-        if not issues.IsEmpty then
-            { model with Error = Some(String.concat " " issues) }, Cmd.none
-        else
-            apply <| levelUpDefault
-
     | LevelUp ->
-        if model.Error.IsNone then
+        if model.Errors.IsEmpty then
             apply <| levelUpDefault
         else
             model, Cmd.none
@@ -187,7 +177,6 @@ let update load save message model =
                     model with
                         Character = previous
                         UndoStack = remaining
-                        Error = None
                 }
             nextModel, saveCmd save nextModel
         | [] ->
@@ -197,8 +186,9 @@ let update load save message model =
         model, Cmd.none
 
     | PersistFailed message ->
-        { model with Error = Some message }, Cmd.none
+        { model with SystemErrors = [ message ] }, Cmd.none
 
-    | ClearError ->
-        { model with Error = None }, Cmd.none
+    
+    | ClearSystemError -> 
+        { model with SystemErrors = [] }, Cmd.none
 

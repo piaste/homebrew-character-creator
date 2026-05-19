@@ -50,7 +50,7 @@ type MyApp() =
 
     override this.Program =
         let load, save = buildStorage (fun () -> this.JSRuntime)
-        Program.mkProgram (fun _ -> initModel, Cmd.ofMsg LoadState) (update load save) view
+        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) view
         |> Program.withRouter router
     #if DEBUG
         |> Program.withHotReload

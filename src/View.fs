@@ -145,7 +145,7 @@ let creationSection (model: Model) dispatch =
     let character = model.Character
     let classId = classIdBySubclassId character.NextLevelUp.SubclassId
     let subclass = subclassById character.NextLevelUp.SubclassId
-    let validationIssues = creationValidation character
+    let validationIssues = checkErrors character
     concat {
         fieldCard
             "Identity"
@@ -259,7 +259,7 @@ let advancementSection (model: Model) dispatch =
 
 let summarySection (model: Model) =
     let character = model.Character
-    let validationIssues = creationValidation character
+    let validationIssues = checkErrors character
     let level = character.CharacterLevel
     let classBreakdown =
         classLevels character
@@ -286,8 +286,9 @@ let summarySection (model: Model) =
                     .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
                     .Details(characterSummaryChips character)
                     .Elt()
-                summaryRow "Status" (if model.Error.IsNone then "Levelled character" else "Draft level 1 build")
+                summaryRow "Status" (if model.Errors.IsEmpty then "Levelled character" else "Draft level 1 build")
                 summaryRow "Proficiency bonus" (proficiencyBonus (max level 1) |> sprintf "%+i")
+                summaryRow "Initiative" (modifierText character.Initiative)
                 summaryRow "Hit points" (string (hitPoints character))
                 summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
             })
@@ -335,13 +336,13 @@ let summarySection (model: Model) =
                             .Detail(detail)
                             .Elt()))
 
-        cond (validationIssues, model.Error) <| function
-            | [], None -> empty()
-            | vIs, errs ->
+        cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
+            | true -> empty()
+            | false ->
                 fieldCard
                     "Issues"
                     "These must be resolved before level 1 can be locked."
-                    (forEach vIs validationChip)
+                    (forEach validationIssues validationChip)
     }
 
 // let levelUpModal (model: Model) dispatch =
@@ -395,25 +396,30 @@ let view (model: Model) dispatch =
         .StatusText(statusText model)
         .PrimaryActions(
             concat {
-                cond model.Error <| function
-                    | Some _ -> actionButton "Finalize Character" "primary" false (fun _ -> dispatch FinalizeCharacter)
-                    | None -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
-                actionButton "Undo" "secondary" undoDisabled (fun _ -> if not undoDisabled then dispatch Undo)
+                cond model.Errors <| function
+                    | [] -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
+                    | _ -> empty()
+                cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                    | true -> empty()
+                    | false -> actionButton "Level Down" "primary" false (fun _ -> dispatch LevelDown)
+                cond model.UndoStack <| function
+                    | [] -> empty()
+                    | _ -> actionButton "Undo" "secondary" undoDisabled (fun _ -> if not undoDisabled then dispatch Undo)
             })
         .BuilderContent(
             concat {
-                cond model.Error <| function
-                    | Some _ -> creationSection model dispatch
-                    | None -> advancementSection model dispatch
+                cond model.Errors <| function
+                    | [] -> advancementSection model dispatch
+                    | _ -> creationSection model dispatch
             })
         .SummaryContent(summarySection model)
         // .LevelUp(levelUpModal model dispatch)
         .Error(
-            cond model.Error <| function
-                | None -> empty()
-                | Some error ->
+            cond model.SystemErrors <| function
+                | [] -> empty()
+                | errs ->
                     Main.ErrorNotification()
-                        .Text(error)
-                        .Hide(fun _ -> dispatch ClearError)
+                        .Text(String.concat "\n" errs)
+                        .Hide(fun _ -> dispatch ClearSystemError)
                         .Elt())
         .Elt()
