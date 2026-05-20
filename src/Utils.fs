@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Client.Utils
+module Bg3HomebrewCCreator.Utils
 
 open System.Text.Json
 open System.Text.Json.Serialization

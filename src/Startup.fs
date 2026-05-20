@@ -1,4 +1,4 @@
-namespace Bg3HomebrewCCreator.Client
+namespace Bg3HomebrewCCreator
 
 open Microsoft.AspNetCore.Components.WebAssembly.Hosting
 open Microsoft.Extensions.DependencyInjection

@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Client.View
+module Bg3HomebrewCCreator.View
 
 open System
 open Bolero

@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Client.Main
+module Bg3HomebrewCCreator.Main
 
 open System
 open System.Text.Json
@@ -12,7 +12,7 @@ open Utils
 open Model
 open Update
 open View
-open Bg3HomebrewCCreator.Client.Domain.Types
+open Bg3HomebrewCCreator.Domain.Types
 
 
 let router = Router.infer SetPage (fun model -> model.Page)

@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Client.Model
+module Bg3HomebrewCCreator.Model
 
 open System
 

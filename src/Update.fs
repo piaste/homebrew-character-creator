@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Client.Update
+module Bg3HomebrewCCreator.Update
 
 open System
 open Elmish
