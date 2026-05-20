@@ -20,6 +20,21 @@ let classBySubclassId =
 let choiceById (choices: ChoiceDef list) (choiceId: string) =
     choices |> List.find (fun choice -> choice.Id = choiceId)
 
+
+let getClassLevels (character : Character) =
+    character.LevelHistory
+    |> List.groupBy _.SubclassId
+    |> List.map (fun (scid, lr) -> scid, (lr |> List.map _.ClassLevel) |> List.max)
+    |> Map.ofList
+
+let getAllPassives (character : Character) = 
+    [ for KeyValue(scid, lvl) in getClassLevels character do
+        let clDef = classBySubclassId scid
+        yield! clDef.ScalingAbilities lvl
+        for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
+            if lvl >= lvlReq then yield! ab
+    ]
+    
 let levelUpDefault character =     
     { character with 
         PreviousLevelHistory = character.LevelHistory

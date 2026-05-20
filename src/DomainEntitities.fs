@@ -27,14 +27,31 @@ let allRaces = Map [
 
 let fighter = {
         Name = "Fighter"
-        Description = "Front-line martial expert with durable defenses and weapon mastery."        
+        Description = "Jock"
+
+        ScalingAbilities = (fun cl -> [ 
+            $"{cl} x {cl/2 + 1}d6 Superiority Dice"
+            $"{cl/2 + 1} Manoeuvres"
+            $"{cl/2 + 1}d12 HP Second Wind"
+        ])
+
+        FixedAbilities = Map[
+         5, ["Extra Attack"; "Action Surge"]
+         9, ["Improved Extra Attack"; "Indomitable"]
+        ]
+
     }
 
-let wizard =
-        {
-            Name = "Wizard"
-            Description = "Arcane scholar with fragile defenses and flexible spell access."            
-        }
+let wizard = {
+        Name = "Wizard"
+        Description = "NEEEEERD"      
+
+        ScalingAbilities = (fun cl -> [ 
+            $"{cl} Arcane Recovery Charges"
+        ])
+
+        FixedAbilities = Map [1, ["Scroll Scribing"; "Scholary Acumen"]]
+    }
 let allClasses = Map [
     Fighter, fighter
     Wizard, wizard
@@ -194,3 +211,13 @@ let numSpellPicksPerLevel =
     // todo
     | FullCaster _ -> 2
     | HalfCaster _ -> 1
+
+let passivePicks char = 
+    match char.NextLevelUp.ClassLevel with
+    | 2 | 6 | 10 -> 2
+    | _ -> 0
+
+let featPicks char = 
+    match char.NextLevelUp.ClassLevel with
+    | 4 | 8 | 12 -> 2
+    | _ -> 0

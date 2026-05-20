@@ -106,6 +106,7 @@ let update load save message model =
                         character.NextLevelUp with
                             ClassLevel = 1
                             SubclassId = subclassId
+                            SpellIds = Set.empty
                     }
             }
 
@@ -158,9 +159,14 @@ let update load save message model =
     | ToggleSpell spellId ->
         apply <| fun character ->
             let updatedSpells =
-                character.SelectedSpellIds.Toggle spellId
+                character.NextLevelUp.SpellIds.Toggle spellId
 
-            { character with SelectedSpellIds = withDebug updatedSpells }
+            { character with 
+                NextLevelUp = 
+                    { character.NextLevelUp with 
+                        SpellIds = withDebug updatedSpells 
+                    }
+            }
 
     | LevelUp ->
         if model.Errors.IsEmpty then

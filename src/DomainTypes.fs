@@ -39,6 +39,8 @@ type ClassDef =
     {
         Name: string
         Description: string
+        ScalingAbilities: int -> string list
+        FixedAbilities: Map<int, string list>
     }
 
 type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
@@ -67,6 +69,8 @@ type LevelRecord =
     {
         ClassLevel: int
         SubclassId: SubclassId
+        SpellIds: Set<string>
+
     }
 
 type [<Measure>] pbuy
@@ -117,7 +121,6 @@ type Character =
         SkillIds: Set<string>
 
         PreviousLevelHistory: LevelRecord list
-        SelectedSpellIds: Set<string>
         ChosenFeatIds: Set<string>
 
         NextLevelUp: LevelRecord
@@ -139,6 +142,10 @@ type Character =
             this.AbilityModifier DEX 
             + this.AbilityModifier WIS
             + this.StatModifiers.Initiative        
+
+        member this.AllSpellIds = 
+            this.LevelHistory |> List.map _.SpellIds 
+            |> Set.unionMany
 
 type PersistedState =
     {

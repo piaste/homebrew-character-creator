@@ -164,12 +164,12 @@ let levelUpSection (model: Model) dispatch = concat {
                 $"Choose {numSpellPicksPerLevel caster} starting spells. Later wizard levels add more."
                 (concat {
                     Main.SelectionMeter()
-                        .Selected(string character.SelectedSpellIds.Count)
+                        .Selected(string character.NextLevelUp.SpellIds.Count)
                         .Maximum(string <| numSpellPicksPerLevel caster)
                         .Label("spells")
                         .Elt()
                     forEach spells (fun spell ->
-                        let active = character.SelectedSpellIds.Contains spell.Id
+                        let active = character.NextLevelUp.SpellIds.Contains spell.Id
                         choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
                 })
     }
@@ -264,7 +264,7 @@ let summarySection (model: Model) =
         |> String.concat ", "
 
     let spellNames =
-        character.SelectedSpellIds
+        character.AllSpellIds
         |> Seq.map (choiceById spells >> fun spell -> spell.Name)
         |> Seq.sort
         |> String.concat ", "
@@ -291,7 +291,9 @@ let summarySection (model: Model) =
                 summaryRow "Proficiency bonus" (proficiencyBonus (max level 1) |> sprintf "%+i")
                 summaryRow "Initiative" (modifierText character.Initiative)
                 summaryRow "Hit points" (string (hitPoints character))
-                summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
+                cond (character.CharacterLevel = 1) <| function
+                    | true -> summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
+                    | false -> empty()
             })
 
         fieldCard
@@ -311,6 +313,8 @@ let summarySection (model: Model) =
                 summaryRow "Skills" (character.SkillIds |> Seq.map (choiceById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
                 summaryRow "Spells" (if String.IsNullOrWhiteSpace spellNames then "None" else spellNames)
                 summaryRow "Feats" (if String.IsNullOrWhiteSpace featNames then "None" else featNames)
+                forEach (getAllPassives character) <| fun txt ->
+                    summaryRow "Class" txt
             })
 
         fieldCard

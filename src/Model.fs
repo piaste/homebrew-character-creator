@@ -27,12 +27,12 @@ let defaultCharacter =
         }
         StatModifiers = StatModifiers.None
         SkillIds = Set.empty
-        SelectedSpellIds = Set.empty
         ChosenFeatIds = Set.empty
         PreviousLevelHistory = []
         NextLevelUp = {
             ClassLevel = 1
             SubclassId = Champion
+            SpellIds = Set.empty
         }
     }
 
@@ -62,8 +62,9 @@ let checkErrors (character: Character) =
         //     "+3 and +1 bonuses must target different abilities."
         if character.SkillIds.Count <> NUM_SKILL_PROFICIENCIES then
              $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
-        let numSpellPicks =  numSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
-        if character.SelectedSpellIds.Count <> numSpellPicks then
+        let numSpellPicks = 
+            numSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
+        if character.NextLevelUp.SpellIds.Count <> numSpellPicks then
              $"Choose exactly {numSpellPicks} starting spells."
     ]
 
@@ -90,9 +91,11 @@ let statusText (model: Model) =
     match model.Errors with    
     | [] -> 
         let race = raceById character.RaceId
+        let clLevels = getClassLevels character
         let classNames = 
             character.LevelHistory
             |> List.map (_.SubclassId >> subclassById >> _.Name)            
+            |> List.distinct
             |> String.concat "/"
         $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."
     | errs -> String.concat "\n" errs

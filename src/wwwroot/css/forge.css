@@ -452,6 +452,7 @@ body {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  margin-right: 0.75em;
 }
 
 .summary-row strong {
