@@ -46,6 +46,24 @@ type Passive = {
     Effect : StatModifiers
 } with static member Simple description = { Description = description; Effect = StatModifiers.Zero }
 
+
+type [<Measure>] archetypeId
+type [<Measure>] traitId
+type [<Measure>] featId
+
+type GrantsPassives<[<Measure>] 'm> = {
+    Id : string<'m>
+    Name : string
+    Effect: Passive list
+}
+
+type ArchetypeDef = GrantsPassives<archetypeId>
+type Trait = GrantsPassives<traitId>
+type Feat = GrantsPassives<featId>
+
+
+
+
 // Races
 type [<Measure>] subraceId
 type [<Measure>] baseRaceId
@@ -55,7 +73,7 @@ type SubraceDef =
         Id: string<subraceId>
         BaseRaceId: string<baseRaceId>
         Name: string
-        Traits: Passive list        
+        Effect: Passive list        
     }
 
 

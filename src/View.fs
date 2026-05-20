@@ -1,5 +1,6 @@
 module Bg3HomebrewCCreator.View
 
+open FSharp.UMX
 open System
 open Bolero
 open Bolero.Html
@@ -11,6 +12,17 @@ open Domain.Fetchers
 open Model
 open Update
 open Utils
+
+// for test
+// let OLDspells = 
+//     Domain.Entities.Spells.allSpells
+//     |> Seq.map (fun (KeyValue(k, v)) -> 
+//         {
+//             Id = UMX.untag v.Id
+//             Name = v.Name
+//             Description = v.Description
+//         })
+//     |> Seq.toList
 
 let pointBuyOptions = [ 0;1;2;3;4;5;7;9 ] |> List.map ((*) 1<pbuy>)
 

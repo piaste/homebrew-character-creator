@@ -29,7 +29,7 @@ let getClassLevels (character : Character) =
     |> Map.ofList
 
 let getRacialPassives (character : Character) = 
-    [ for t in allRaces[character.RaceId].Traits do
+    [ for t in allRaces[character.RaceId].Effect do
         yield t.Description
     ]
 let getClassPassives (character : Character) = 

@@ -117,7 +117,7 @@ type Character =
             |> Set.unionMany
 
         member this.StatModifiers = 
-            allRaces[this.RaceId].Traits
+            allRaces[this.RaceId].Effect
             |> List.map _.Effect
             |> List.sum
 
