@@ -27,6 +27,7 @@
     <PackageReference Include="Bolero" Version="0.24.39" />
     <PackageReference Include="Bolero.Build" Version="0.24.39" />
     <PackageReference Include="Bolero.HotReload" Version="0.24.5" />
+    <PackageReference Include="FSharp.UMX" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.*" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.*" />
   </ItemGroup>

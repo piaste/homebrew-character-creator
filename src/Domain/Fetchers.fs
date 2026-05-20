@@ -1,6 +1,6 @@
 module Bg3HomebrewCCreator.Domain.Fetchers
 
-open Entities
+open Things
 open Types
 
 

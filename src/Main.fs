@@ -17,7 +17,6 @@ open Bg3HomebrewCCreator.Domain.Types
 
 let router = Router.infer SetPage (fun model -> model.Page)
 
-
 let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     let storageKey = "forge-of-heroes-state"

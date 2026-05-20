@@ -5,7 +5,7 @@ open Elmish
 
 open Utils
 open Domain.Types
-open Domain.Entities
+open Domain.Things
 open Domain.Fetchers
 open Model
 

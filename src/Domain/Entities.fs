@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Domain.Entities
+module Bg3HomebrewCCreator.Domain.Things
 
 open Types
 
