@@ -1,5 +1,6 @@
 module Bg3HomebrewCCreator.Utils
 
+open FSharp.UMX
 open System.Text.Json
 open System.Text.Json.Serialization
 open Microsoft.FSharp.Reflection
@@ -25,16 +26,18 @@ let inline clamp a b value =
 let parseCase<'T> (input: string) : 'T =
     let t = typeof<'T>
 
-    if not (FSharpType.IsUnion t) then
-        failwith "Type must be a discriminated union"
+    if t = typeof<string> then (box input) :?> 'T else
 
-    let cases = FSharpType.GetUnionCases t
+    if FSharpType.IsUnion t then
+        let cases = FSharpType.GetUnionCases t
 
-    match cases |> Array.tryFind (fun c -> c.Name = input) with
-    | Some case ->
-        FSharpValue.MakeUnion(case, [||]) :?> 'T
-    | None ->
-        failwith $"Unknown DU case: {input}"
+        match cases |> Array.tryFind (fun c -> c.Name = input) with
+        | Some case ->
+            FSharpValue.MakeUnion(case, [||]) :?> 'T
+        | None ->
+            failwith $"Unknown DU case: {input}"   
+    
+    else failwithf "Type '%s' must be a string or plain DU" t.Name
 
 
 type Collections.Map<'K, 'V when 'K : comparison > with

@@ -1922,9 +1922,9 @@ let zephyrMovement = {
 
 type private Placeholder = class end
 let allSpells = 
-    [ for p in typeof<Placeholder>.DeclaringType.GetProperties() do        
+    Map [ 
+      for p in typeof<Placeholder>.DeclaringType.GetProperties() do        
         if p.PropertyType = typeof<SpellDef> then
-            yield p.GetValue null :?> SpellDef
+            let spell = p.GetValue null :?> SpellDef
+            yield spell.Id, spell
     ]
-
-let allSpellIds = allSpells |> List.map _.Id

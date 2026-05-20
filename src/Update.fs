@@ -1,6 +1,6 @@
 module Bg3HomebrewCCreator.Update
 
-open System
+open FSharp.UMX
 open Elmish
 
 open Utils
@@ -16,7 +16,7 @@ type Message =
     | LoadedState of PersistedState option
 
     | SetName of string
-    | SetRace of RaceId
+    | SetRace of string<subraceId>
     | SetSubclass of SubclassId
     | SetAbilityScore of Ability * int
     | SetBonusPlusThree of Ability

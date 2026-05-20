@@ -1,6 +1,7 @@
 module Bg3HomebrewCCreator.Model
 
 open System
+open FSharp.UMX
 
 open Domain.Types
 open Domain.Character
@@ -12,7 +13,7 @@ type Page =
 let defaultCharacter =
     {
         CharName = "John Baldur"
-        RaceId = Human
+        RaceId = % "human" 
         AbilityBuy = {
             PointBuy = 
                 Map [
@@ -26,7 +27,6 @@ let defaultCharacter =
             BonusPlusThree = STR
             BonusPlusOne = CON
         }
-        StatModifiers = StatModifiers.None
         SkillIds = Set.empty
         ChosenFeatIds = Set.empty
         PreviousLevelHistory = []

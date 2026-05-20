@@ -4,9 +4,6 @@ open Types
 open Character
 open Entities.Spells
 
-let allAbilities =
-    [ STR;DEX;CON;INT;WIS;CHA ]
-
 let fighter = {
         Name = "Fighter"
         Description = "Jock"

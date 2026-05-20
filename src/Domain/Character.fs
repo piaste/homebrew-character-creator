@@ -1,7 +1,9 @@
 module Bg3HomebrewCCreator.Domain.Character
 
+open FSharp.UMX
 open Types
 open Bg3HomebrewCCreator.Utils
+open Bg3HomebrewCCreator.Domain.Entities.Races
 
 type CasterType = 
     | FullCaster of SpellList
@@ -85,7 +87,7 @@ type Character =
     {
         CharName: string
 
-        RaceId: RaceId
+        RaceId: string<subraceId>
         AbilityBuy: AbilityBuy
         SkillIds: Set<string>
 
@@ -93,8 +95,6 @@ type Character =
         ChosenFeatIds: Set<string>
 
         NextLevelUp: LevelRecord
-
-        StatModifiers : StatModifiers
     } with
 
         member this.LevelHistory = 
@@ -115,6 +115,11 @@ type Character =
         member this.AllSpellIds = 
             this.LevelHistory |> List.map _.SpellIds 
             |> Set.unionMany
+
+        member this.StatModifiers = 
+            allRaces[this.RaceId].Traits
+            |> List.map _.Effect
+            |> List.sum
 
 type PersistedState =
     {

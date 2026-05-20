@@ -1,5 +1,6 @@
 module Bg3HomebrewCCreator.Domain.Types
 open FSharp.UMX
+open Bg3HomebrewCCreator.Utils
 
 // Basics
 
@@ -11,18 +12,29 @@ type Ability =
     | WIS
     | CHA
 
+let allAbilities =
+    [ STR;DEX;CON;INT;WIS;CHA ]
+
 type StatModifiers = {
     Abilities: Map<Ability, int>
     AttackRolls: int
+    Speed: float
     CriticalRangeBonus: int
+    AC: int
+    DR: int
     Initiative: int
     HPPerLevel : int
     HPFlat : int
 } with 
-    static member None = { Abilities = Map []; AttackRolls = 0; CriticalRangeBonus = 0; Initiative = 0; HPPerLevel = 0; HPFlat = 0 }
+    static member Zero = { Abilities = Map []; AttackRolls = 0; Speed = 0.; CriticalRangeBonus = 0; AC = 0; DR = 0; Initiative = 0; HPPerLevel = 0; HPFlat = 0 }
     static member (+) (s1, s2) = {
-        Abilities = Map[]
         AttackRolls = s1.AttackRolls + s2.AttackRolls
+        Speed = s1.Speed + s2.Speed
+        Abilities = 
+            Map[ for ab in allAbilities -> ab, s1.Abilities.GetOrDefault ab + s2.Abilities.GetOrDefault ab ] 
+            |> Map.filter (fun _ v -> v <> 0)
+        AC = s1.AC + s2.AC
+        DR = s1.DR + s2.DR
         CriticalRangeBonus = s1.CriticalRangeBonus + s2.CriticalRangeBonus
         Initiative = s1.Initiative + s2.Initiative
         HPPerLevel = s1.HPPerLevel + s2.HPPerLevel
@@ -32,18 +44,18 @@ type StatModifiers = {
 type Passive = {
     Description : string
     Effect : StatModifiers
-}
+} with static member Simple description = { Description = description; Effect = StatModifiers.Zero }
 
 // Races
+type [<Measure>] subraceId
+type [<Measure>] baseRaceId
 
-
-type RaceId = Human | Elf
-
-type RaceDef =
+type SubraceDef =
     {
+        Id: string<subraceId>
+        BaseRaceId: string<baseRaceId>
         Name: string
-        Description: string
-        Trait: Passive list        
+        Traits: Passive list        
     }
 
 
