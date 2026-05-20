@@ -28,7 +28,11 @@ let getClassLevels (character : Character) =
     |> List.map (fun (scid, lr) -> scid, (lr |> List.map _.ClassLevel) |> List.max)
     |> Map.ofList
 
-let getAllPassives (character : Character) = 
+let getRacialPassives (character : Character) = 
+    [ for t in allRaces[character.RaceId].Traits do
+        yield t.Description
+    ]
+let getClassPassives (character : Character) = 
     [ for KeyValue(scid, lvl) in getClassLevels character do
         let clDef = classBySubclassId scid
         yield! clDef.ScalingAbilities lvl

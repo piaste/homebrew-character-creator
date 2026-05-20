@@ -188,7 +188,7 @@ let creationSection (model: Model) dispatch =
                     "Race"
                     "Two placeholder ancestries are wired for testing."
                     character.RaceId
-                    (forEach Domain.Entities.Races.allRaces (fun race -> fieldOption race.Key race.Value.Name))
+                    (forEach (Domain.Entities.Races.allRaces |> Seq.sortBy (fun x -> x.Value.BaseRaceId))(fun race -> fieldOption race.Key race.Value.Name))
                     (fun value -> dispatch (SetRace value))
             })
 
@@ -299,9 +299,9 @@ let summarySection (model: Model) =
 
         fieldCard
             "Ability Scores"
-            "Final scores after the two bonuses are applied."
+            "Final scores after the two bonuses and any racial or other passives are applied."
             (forEach allAbilities (fun ability ->
-                let score = character.AbilityBuy.BoughtAbility ability
+                let score = character.Ability ability
                 summaryRow (abilityAbbreviation ability) $"{score} ({modifierText <| character.AbilityModifier ability})"))
 
         fieldCard
@@ -314,8 +314,8 @@ let summarySection (model: Model) =
                 summaryRow "Skills" (character.SkillIds |> Seq.map (choiceById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
                 summaryRow "Spells" (if String.IsNullOrWhiteSpace spellNames then "None" else spellNames)
                 summaryRow "Feats" (if String.IsNullOrWhiteSpace featNames then "None" else featNames)
-                forEach (getAllPassives character) <| fun txt ->
-                    summaryRow "Class" txt
+                forEach (getRacialPassives character) <| fun txt -> summaryRow "Race" txt
+                forEach (getClassPassives character) <| fun txt -> summaryRow "Class" txt
             })
 
         fieldCard
