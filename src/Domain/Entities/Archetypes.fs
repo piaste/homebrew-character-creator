@@ -1,0 +1,3 @@
+module Bg3HomebrewCCreator.Domain.Entities.Archetypes
+
+open Bg3HomebrewCCreator.Domain.Types

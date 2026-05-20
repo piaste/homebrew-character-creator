@@ -1,0 +1,3 @@
+module Bg3HomebrewCCreator.Domain.Entities.Passives
+
+open Bg3HomebrewCCreator.Domain.Types

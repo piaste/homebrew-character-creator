@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Client.Domain.Fetchers
+module Bg3HomebrewCCreator.Domain.Fetchers
 
 open Entities
 open Types

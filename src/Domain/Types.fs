@@ -1,10 +1,7 @@
-module Bg3HomebrewCCreator.Client.Domain.Types
+module Bg3HomebrewCCreator.Domain.Types
 
-open Bolero
-open Utils
+open Bg3HomebrewCCreator.Utils
 
-type Page =
-    | [<EndPoint "/">] Forge
 
 type Ability =
     | STR
@@ -20,6 +17,8 @@ type Passive =
         Description : string
         Effect: string
     }
+
+type RaceId = Human | Elf
 
 type RaceDef =
     {
@@ -40,9 +39,11 @@ type ClassDef =
     {
         Name: string
         Description: string
+        ScalingAbilities: int -> string list
+        FixedAbilities: Map<int, string list>
     }
 
-type SubclassId = Champion | BattleMaster | Evoker | Illusionist
+type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
 
 let defaultSubclassId = function
     | Fighter -> Champion
@@ -52,7 +53,7 @@ type Subclass =
     {
         Name: string
         Description: string
-        BaseClass: ClassDef
+        BaseClass: ClassId
         CasterType: CasterType
     }
 
@@ -66,34 +67,41 @@ type ChoiceDef =
 
 type LevelRecord =
     {
-        Level: int
-        Subclass: SubclassId
-        FeatId: string option
-        SpellId: string option
+        ClassLevel: int
+        SubclassId: SubclassId
+        SpellIds: Set<string>
+
     }
 
-type [<Measure>] pointbuy
-type Race = Human | Elf
+type [<Measure>] pbuy
+
+let [<Literal>] POINT_BUDGET = 27<pbuy>
+
+let getAbilityFromPoints (x: int<pbuy>) = 
+    if x <= 5<pbuy> then 8 + x/1<pbuy>
+    else 13 + (x - 5<pbuy>) / 2<pbuy>
+
+let nextFreeIf selected older = 
+    if selected <> older then older else
+    match selected with
+    | STR -> DEX | DEX -> CON | CON -> INT
+    | INT -> WIS | WIS -> CHA | CHA -> STR
 
 type AbilityBuy = 
     {
-        PointBuy: Map<Ability, int<pointbuy>>
+        PointBuy: Map<Ability, int<pbuy>>
         BonusPlusThree: Ability
-        SelectedBonusPlusOne: Ability
+        BonusPlusOne: Ability
     } with
-        member this.BonusPlusOne = 
-            match this.BonusPlusThree with
-            | t when t <> this.SelectedBonusPlusOne
-                -> this.SelectedBonusPlusOne
-            | STR -> DEX
-            | _ -> STR
-        member this.BoughtAbility ab = 
-            match this.PointBuy.TryGetValue ab with
-            | false, _ -> 8
-            | true, x -> 
-               if x <= 5<pointbuy> then 8 + x/1<pointbuy>
-               else 13 + (x - 5<pointbuy>) / 2<pointbuy>
 
+        member this.SpentPoints = 
+            this.PointBuy |> Map.toArray |> Array.sumBy snd
+        member this.UnspentPoints = 
+            POINT_BUDGET - this.SpentPoints
+        member this.BoughtAbilityBeforeBonuses ab = 
+            this.PointBuy[ab] |> getAbilityFromPoints
+        member this.BoughtAbility ab = 
+            this.BoughtAbilityBeforeBonuses ab
             + if this.BonusPlusOne = ab then 1
               elif this.BonusPlusThree = ab then 3
               else 0
@@ -107,17 +115,23 @@ type StatModifiers = {
 type Character =
     {
         CharName: string
-        Race: Race
-        Subclass: SubclassId
+
+        RaceId: RaceId
         AbilityBuy: AbilityBuy
-        SelectedSkillIds: Set<string>
-        SelectedSpellIds: Set<string>
+        SkillIds: Set<string>
+
+        PreviousLevelHistory: LevelRecord list
         ChosenFeatIds: Set<string>
-        LevelHistory: LevelRecord list
+
+        NextLevelUp: LevelRecord
+
         StatModifiers : StatModifiers
     } with
 
-        member this.CharacterLevel = List.length this.LevelHistory
+        member this.LevelHistory = 
+            this.NextLevelUp :: this.PreviousLevelHistory
+        member this.CharacterLevel = 
+            List.length this.LevelHistory
         member this.Ability ab = 
             this.AbilityBuy.BoughtAbility ab + 
             this.StatModifiers.Abilities.GetOrDefault ab
@@ -126,42 +140,16 @@ type Character =
             (this.Ability ab - 10) / 2
         member this.Initiative = 
             this.AbilityModifier DEX 
-            + this.AbilityModifier INT
-            + this.StatModifiers.Initiative
+            + this.AbilityModifier WIS
+            + this.StatModifiers.Initiative        
 
-
-type LevelUpDraft =
-    {
-        SubclassId: SubclassId
-        FeatId: string option
-        SpellId: string option
-    }
+        member this.AllSpellIds = 
+            this.LevelHistory |> List.map _.SpellIds 
+            |> Set.unionMany
 
 type PersistedState =
     {
         Character: Character
         UndoStack: Character list
     }
-
-
-
-
-let allAbilities =
-    [ STR;DEX;CON;INT;WIS;CHA ]
-
-let abilityName = function
-    | STR -> "Strength"
-    | DEX -> "Dexterity"
-    | CON -> "Constitution"
-    | INT -> "Intelligence"
-    | WIS -> "Wisdom"
-    | CHA -> "Charisma"
-
-let abilityAbbreviation = function
-    | STR -> "STR"
-    | DEX -> "DEX"
-    | CON -> "CON"
-    | INT -> "INT"
-    | WIS -> "WIS"
-    | CHA -> "CHA"
 

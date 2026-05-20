@@ -5,7 +5,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />
-    <Compile Include="DomainTypes.fs" /><Compile Include="DomainEntitities.fs" /><Compile Include="DomainFetchers.fs" />
+    <Compile Include="Domain\Types.fs" />
+    <Compile Include="Domain\Entities\Races.fs" />
+    <Compile Include="Domain\Entities\Archetypes.fs" />
+    <Compile Include="Domain\Entities\Traits.fs" />
+    <Compile Include="Domain\Entities\Feats.fs" />
+    <Compile Include="Domain\Entities\Spells.fs" />
+    <Compile Include="Domain\Entities\Subclasses.fs" />
+    <Compile Include="Domain\Entities\Passives.fs" />
+    <Compile Include="Domain\Entities.fs" />
+    <Compile Include="Domain\Fetchers.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Update.fs" /><Compile Include="View.fs" />
     
