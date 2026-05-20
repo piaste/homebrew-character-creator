@@ -76,6 +76,7 @@ type Model =
         UndoStack: Character list
         Loaded: bool
         SystemErrors : string list
+        UseLoreNames : bool
     } with 
         member this.Errors = checkErrors this.Character
         static member Initial = 
@@ -85,6 +86,7 @@ type Model =
                 UndoStack = []
                 Loaded = false
                 SystemErrors = []
+                UseLoreNames = true
             }
 
 let statusText (model: Model) =

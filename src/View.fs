@@ -132,7 +132,7 @@ let pointBuyRow (character: Character) ability dispatch =
             })
         .Elt()
 
-let characterSummaryChips (character: Character) =
+let characterSummaryChips (character: Character) useLoreNames =
     let race = raceById character.RaceId
     let subclassIds =
         character.LevelHistory
@@ -140,7 +140,7 @@ let characterSummaryChips (character: Character) =
         |> List.distinct
         
     let classTags = subclassIds |> List.map (classBySubclassId >> _.Name)
-    let subclassTags = subclassIds |> List.map (subclassById >> _.Name)
+    let subclassTags = subclassIds |> List.map (subclassById >> (fun sc -> sc.DisplayName useLoreNames) )
     
     concat {
         chip $"Level {character.CharacterLevel}" "success"
@@ -165,16 +165,49 @@ let levelUpSection (model: Model) dispatch = concat {
         "Subclass"
         "This is chosen up front for the placeholder build flow."
         character.NextLevelUp.SubclassId
-        (forEach allSubclassesByClass[classId] (fun subclass -> fieldOption subclass.Key subclass.Value.Name))
+        (forEach allSubclassesByClass[classId] (fun subclass -> fieldOption subclass.Key (subclass.Value.DisplayName model.UseLoreNames)))
         (fun value -> dispatch (SetSubclass value))
 
+    cond (passivePicks character > 0) <| function
+        | false -> empty()
+        | true -> 
+            fieldCard
+                "Class Passives"
+                $"Choose {passivePicks character} class passives."
+                (concat {
+                    Main.SelectionMeter()
+                        .Selected(string character.NextLevelUp.SpellIds.Count)
+                        .Maximum(string <| passivePicks character)
+                        .Label("passives")
+                        .Elt()
+                    // forEach OLDspells (fun spell ->
+                    //     let active = character.NextLevelUp.SpellIds.Contains spell.Id
+                    //     choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
+                })
     
+    // cond (featPicks character > 0) <| function
+    //     | false -> empty()
+    //     | true -> 
+    //         fieldCard
+    //             "Feat"
+    //             $"Choose a feat"
+    //             (concat {
+    //                 Main.SelectionMeter()
+    //                     .Selected(string character.NextLevelUp.FeatId..Count)
+    //                     .Maximum(string <| featPicks character)
+    //                     .Label("passives")
+    //                     .Elt()
+    //                 forEach OLDspells (fun spell ->
+    //                     let active = character.NextLevelUp.SpellIds.Contains spell.Id
+    //                     choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
+    //             })
+
     cond subclass.CasterType <| function
         | Martial -> empty()
         | caster ->
             fieldCard
                 "Spellbook"
-                $"Choose {numSpellPicksPerLevel caster} starting spells. Later wizard levels add more."
+                $"Choose {numSpellPicksPerLevel caster} new spells."
                 (concat {
                     Main.SelectionMeter()
                         .Selected(string character.NextLevelUp.SpellIds.Count)
@@ -255,7 +288,10 @@ let advancementSection (model: Model) dispatch =
                 .Name(character.CharName)
                 .Race((raceById character.RaceId).Name)
                 .Class((classBySubclassId character.NextLevelUp.SubclassId).Name)
-                .Subclass((subclassById character.NextLevelUp.SubclassId).Name)
+                .Subclass(
+                    let sc = subclassById character.NextLevelUp.SubclassId in 
+                    sc.DisplayName model.UseLoreNames
+                )
                 .Elt()
             summaryRow "Next level" (string nextLevelText)
             summaryRow "Prompt" nextFeatText
@@ -268,7 +304,7 @@ let summarySection (model: Model) =
     let level = character.CharacterLevel
     let classBreakdown =
         classLevels character
-        |> List.map (fun (classId, count) -> summaryRow (subclassById classId).Name (string count))
+        |> List.map (fun (classId, count) -> summaryRow ((subclassById classId).DisplayName model.UseLoreNames) (string count))
 
     let featNames =
         character.ChosenFeatIds
@@ -298,7 +334,7 @@ let summarySection (model: Model) =
             (concat {
                 Main.Nameplate()
                     .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
-                    .Details(characterSummaryChips character)
+                    .Details(characterSummaryChips character model.UseLoreNames)
                     .Elt()
                 summaryRow "Status" (if model.Errors.IsEmpty then "Levelled character" else "Draft level 1 build")
                 summaryRow "Proficiency bonus" (proficiencyBonus (max level 1) |> sprintf "%+i")
@@ -404,6 +440,11 @@ let view (model: Model) dispatch =
         .StatusText(statusText model)
         .PrimaryActions(
             concat {
+                input {
+                    attr.``type`` "checkbox"
+                    bind.``checked`` model.UseLoreNames (dispatch << ToggleLoreNames)
+                }
+
                 cond model.Errors <| function
                     | [] -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
                     | _ -> empty()

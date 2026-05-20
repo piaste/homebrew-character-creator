@@ -14,6 +14,7 @@ type Message =
     | SetPage of Page
     | LoadState
     | LoadedState of PersistedState option
+    | ToggleLoreNames of bool
 
     | SetName of string
     | SetRace of string<subraceId>
@@ -89,6 +90,9 @@ let update load save message model =
                 UndoStack = state.UndoStack
                 Loaded = true
         }, Cmd.none
+
+    | ToggleLoreNames value ->
+        { model with UseLoreNames = value }, Cmd.none
 
     | SetName name ->
         apply <| fun character -> { character with CharName = name }

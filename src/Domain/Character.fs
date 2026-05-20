@@ -29,10 +29,15 @@ let defaultSubclassId = function
 type Subclass =
     {
         Name: string
+        LoreName : string option
         Description: string
         BaseClass: ClassId
-        CasterType: CasterType
+        CasterType: CasterType        
     }
+    with member this.DisplayName useLoreNames = 
+            match useLoreNames, this.LoreName with
+            | true, Some ln -> ln
+            | _ -> this.Name
 
 
 type ChoiceDef =

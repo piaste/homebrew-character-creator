@@ -39,13 +39,15 @@ let allClasses = Map [
 let champion =
         {
             Name = "Champion"
+            LoreName = None
             Description = "Direct, dependable martial skill with no wasted motion."
             BaseClass = Fighter
             CasterType = Martial
         }
 let battlemaster =
         {
-            Name = "Battle Master"
+            Name = "Frontier Knight"
+            LoreName = Some "Weapon Master"
             Description = "A tactical duelist who wins by precision and positioning."
             BaseClass = Fighter
             CasterType = Martial
@@ -54,7 +56,8 @@ let battlemaster =
 let evoker =
 
         {
-            Name = "Cormyr War Wizard Tradition"
+            Name = "Evoker"
+            LoreName = Some "Cormyr War Wizard Tradition"
             Description = "Specializes in raw elemental force and precise battlefield shaping."
             BaseClass = Wizard
             CasterType = FullCaster Arcane
@@ -62,7 +65,8 @@ let evoker =
         }
 let luminalConfluence =
         {
-            Name = "Netherese Variator Tradition"
+            Name = "Luminal Confluence"
+            LoreName = Some "Netherese Variator Tradition"
             Description = "Controls the room with misdirection, trickery, and layered magic."
             BaseClass = Wizard
             CasterType = FullCaster Arcane
@@ -198,5 +202,5 @@ let passivePicks char =
 
 let featPicks char = 
     match char.NextLevelUp.ClassLevel with
-    | 4 | 8 | 12 -> 2
+    | 4 | 8 | 12 -> 1
     | _ -> 0
