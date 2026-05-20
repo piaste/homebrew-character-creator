@@ -3,6 +3,7 @@ module Bg3HomebrewCCreator.Model
 open System
 
 open Domain.Types
+open Domain.Character
 open Domain.Things
 open Domain.Fetchers
 

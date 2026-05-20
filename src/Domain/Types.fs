@@ -1,7 +1,7 @@
 module Bg3HomebrewCCreator.Domain.Types
+open FSharp.UMX
 
-open Bg3HomebrewCCreator.Utils
-
+// Basics
 
 type Ability =
     | STR
@@ -11,12 +11,31 @@ type Ability =
     | WIS
     | CHA
 
-type Passive = 
-    {
-        Name : string
-        Description : string
-        Effect: string
+type StatModifiers = {
+    Abilities: Map<Ability, int>
+    AttackRolls: int
+    CriticalRangeBonus: int
+    Initiative: int
+    HPPerLevel : int
+    HPFlat : int
+} with 
+    static member None = { Abilities = Map []; AttackRolls = 0; CriticalRangeBonus = 0; Initiative = 0; HPPerLevel = 0; HPFlat = 0 }
+    static member (+) (s1, s2) = {
+        Abilities = Map[]
+        AttackRolls = s1.AttackRolls + s2.AttackRolls
+        CriticalRangeBonus = s1.CriticalRangeBonus + s2.CriticalRangeBonus
+        Initiative = s1.Initiative + s2.Initiative
+        HPPerLevel = s1.HPPerLevel + s2.HPPerLevel
+        HPFlat = s1.HPFlat + s2.HPFlat
     }
+
+type Passive = {
+    Description : string
+    Effect : StatModifiers
+}
+
+// Races
+
 
 type RaceId = Human | Elf
 
@@ -24,132 +43,29 @@ type RaceDef =
     {
         Name: string
         Description: string
-        Trait: string
+        Trait: Passive list        
     }
+
+
+// Spells
 
 type SpellList = Versatile | Divine | Primal | Arcane | Innate | Bargained
-type CasterType = 
-    | FullCaster of SpellList
-    | HalfCaster of SpellList
-    | Martial
 
-type ClassId = Fighter | Wizard
+type ActionCost =
+    | Action
+    | BonusAction
+    | Reaction
+    | FreeAction
 
-type ClassDef =
-    {
-        Name: string
-        Description: string
-        ScalingAbilities: int -> string list
-        FixedAbilities: Map<int, string list>
-    }
+type [<Measure>] spellId
 
-type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
+type SpellDef =
+    { Id: string<spellId>
+      Name: string
+      Description: string
 
-let defaultSubclassId = function
-    | Fighter -> Champion
-    | Wizard -> Evoker
+      SpellList: SpellList list
 
-type Subclass =
-    {
-        Name: string
-        Description: string
-        BaseClass: ClassId
-        CasterType: CasterType
-    }
-
-
-type ChoiceDef =
-    {
-        Id: string
-        Name: string
-        Description: string
-    }
-
-type LevelRecord =
-    {
-        ClassLevel: int
-        SubclassId: SubclassId
-        SpellIds: Set<string>
-
-    }
-
-type [<Measure>] pbuy
-
-let [<Literal>] POINT_BUDGET = 27<pbuy>
-
-let getAbilityFromPoints (x: int<pbuy>) = 
-    if x <= 5<pbuy> then 8 + x/1<pbuy>
-    else 13 + (x - 5<pbuy>) / 2<pbuy>
-
-let nextFreeIf selected older = 
-    if selected <> older then older else
-    match selected with
-    | STR -> DEX | DEX -> CON | CON -> INT
-    | INT -> WIS | WIS -> CHA | CHA -> STR
-
-type AbilityBuy = 
-    {
-        PointBuy: Map<Ability, int<pbuy>>
-        BonusPlusThree: Ability
-        BonusPlusOne: Ability
-    } with
-
-        member this.SpentPoints = 
-            this.PointBuy |> Map.toArray |> Array.sumBy snd
-        member this.UnspentPoints = 
-            POINT_BUDGET - this.SpentPoints
-        member this.BoughtAbilityBeforeBonuses ab = 
-            this.PointBuy[ab] |> getAbilityFromPoints
-        member this.BoughtAbility ab = 
-            this.BoughtAbilityBeforeBonuses ab
-            + if this.BonusPlusOne = ab then 1
-              elif this.BonusPlusThree = ab then 3
-              else 0
-
-type StatModifiers = {
-    Abilities: Map<Ability, int>
-    Initiative: int
-    HP : int
-} with static member None = { Abilities = Map []; Initiative = 0; HP = 0 }
-
-type Character =
-    {
-        CharName: string
-
-        RaceId: RaceId
-        AbilityBuy: AbilityBuy
-        SkillIds: Set<string>
-
-        PreviousLevelHistory: LevelRecord list
-        ChosenFeatIds: Set<string>
-
-        NextLevelUp: LevelRecord
-
-        StatModifiers : StatModifiers
-    } with
-
-        member this.LevelHistory = 
-            this.NextLevelUp :: this.PreviousLevelHistory
-        member this.CharacterLevel = 
-            List.length this.LevelHistory
-        member this.Ability ab = 
-            this.AbilityBuy.BoughtAbility ab + 
-            this.StatModifiers.Abilities.GetOrDefault ab
-
-        member this.AbilityModifier ab = 
-            (this.Ability ab - 10) / 2
-        member this.Initiative = 
-            this.AbilityModifier DEX 
-            + this.AbilityModifier WIS
-            + this.StatModifiers.Initiative        
-
-        member this.AllSpellIds = 
-            this.LevelHistory |> List.map _.SpellIds 
-            |> Set.unionMany
-
-type PersistedState =
-    {
-        Character: Character
-        UndoStack: Character list
-    }
-
+      Concentration: bool
+      Upcastable: bool
+      ActionCost: ActionCost }

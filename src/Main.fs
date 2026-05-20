@@ -12,7 +12,7 @@ open Utils
 open Model
 open Update
 open View
-open Bg3HomebrewCCreator.Domain.Types
+open Bg3HomebrewCCreator.Domain.Character
 
 
 let router = Router.infer SetPage (fun model -> model.Page)

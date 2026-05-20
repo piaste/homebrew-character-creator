@@ -5,6 +5,7 @@ open Bolero
 open Bolero.Html
 
 open Domain.Types
+open Domain.Character
 open Domain.Things
 open Domain.Fetchers
 open Model
@@ -168,7 +169,7 @@ let levelUpSection (model: Model) dispatch = concat {
                         .Maximum(string <| numSpellPicksPerLevel caster)
                         .Label("spells")
                         .Elt()
-                    forEach spells (fun spell ->
+                    forEach OLDspells (fun spell ->
                         let active = character.NextLevelUp.SpellIds.Contains spell.Id
                         choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
                 })
@@ -187,7 +188,7 @@ let creationSection (model: Model) dispatch =
                     "Race"
                     "Two placeholder ancestries are wired for testing."
                     character.RaceId
-                    (forEach allRaces (fun race -> fieldOption race.Key race.Value.Name))
+                    (forEach Domain.Entities.Races.allRaces (fun race -> fieldOption race.Key race.Value.Name))
                     (fun value -> dispatch (SetRace value))
             })
 
@@ -265,7 +266,7 @@ let summarySection (model: Model) =
 
     let spellNames =
         character.AllSpellIds
-        |> Seq.map (choiceById spells >> fun spell -> spell.Name)
+        |> Seq.map (choiceById OLDspells >> fun spell -> spell.Name)
         |> Seq.sort
         |> String.concat ", "
 

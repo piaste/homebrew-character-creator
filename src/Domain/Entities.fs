@@ -1,29 +1,11 @@
 module Bg3HomebrewCCreator.Domain.Things
 
 open Types
-
+open Character
+open Entities.Spells
 
 let allAbilities =
     [ STR;DEX;CON;INT;WIS;CHA ]
-
-
-let human =
-        {
-            Name = "Human"
-            Description = "Adaptable and relentless, ready to fill any gap in the party."
-            Trait = "Init bonus"
-        }
-let elf =
-        {
-            Name = "Elf"
-            Description = "Keen senses and measured patience make every decision feel deliberate."
-            Trait = "Fey perception"
-        }
-
-let allRaces = Map [
-    Human, human
-    Elf, elf
-]
 
 let fighter = {
         Name = "Fighter"
@@ -157,7 +139,7 @@ let skills =
 let NUM_SKILL_PROFICIENCIES = 4
 let NUM_SKILL_EXPERTISES = 2
 
-let spells =
+let OLDspells =
     [
         {
             Id = "magic-missile"

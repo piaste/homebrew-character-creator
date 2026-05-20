@@ -1,26 +1,8 @@
 module Bg3HomebrewCCreator.Domain.Entities.Spells
 
-open Bg3HomebrewCCreator.Domain.Types
 open FSharp.UMX
+open Bg3HomebrewCCreator.Domain.Types
 
-type ActionCost =
-    | Action
-    | BonusAction
-    | Reaction
-    | FreeAction
-
-type [<Measure>] spellId
-
-type SpellDef =
-    { Id: string<spellId>
-      Name: string
-      Description: string
-
-      SpellList: SpellList list
-
-      Concentration: bool
-      Upcastable: bool
-      ActionCost: ActionCost }
 
 let acidCloudRef =
     { Id = % "acid-cloud"
@@ -1938,8 +1920,9 @@ let zephyrMovement = {
     ActionCost = BonusAction
 }
 
+type private Placeholder = class end
 let allSpells = 
-    [ for p in typeof<SpellDef>.DeclaringType.GetProperties() do        
+    [ for p in typeof<Placeholder>.DeclaringType.GetProperties() do        
         if p.PropertyType = typeof<SpellDef> then
             yield p.GetValue null :?> SpellDef
     ]

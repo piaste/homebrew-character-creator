@@ -4,8 +4,8 @@ open System
 open Elmish
 
 open Utils
+open Domain.Character
 open Domain.Types
-open Domain.Things
 open Domain.Fetchers
 open Model
 

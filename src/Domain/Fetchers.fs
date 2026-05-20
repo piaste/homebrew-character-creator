@@ -1,7 +1,8 @@
 module Bg3HomebrewCCreator.Domain.Fetchers
 
 open Things
-open Types
+open Character
+open Entities.Races
 
 
 let classById x = allClasses[x]
