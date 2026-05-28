@@ -77,8 +77,10 @@ type [<Measure>] featId
 type GrantsPassives<[<Measure>] 'm> = {
     Id : string<'m>
     Name : string
-    Effect: Passive list
-}
+    Grants: Passive list
+} with
+    member this.Description = 
+        this.Grants |> List.map _.Description |> String.concat "\n"
 
 type ArchetypeDef = GrantsPassives<archetypeId>
 type TraitDef = GrantsPassives<traitId>

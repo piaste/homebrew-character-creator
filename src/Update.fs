@@ -23,13 +23,12 @@ type Message =
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | ToggleSkill of string
+    | ToggleFeat of string<featId>
     | ToggleSpell of string<spellId>
 
     | LevelUp
     | LevelDown
     | SetLevelUpSubclass of string
-    | SetLevelUpFeat of string
-    | SetLevelUpSpell of string
     
     | Undo
     | SavedState

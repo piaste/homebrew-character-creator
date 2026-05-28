@@ -8,19 +8,19 @@ open Bg3HomebrewCCreator.Utils
 let arcanePrecision : ArchetypeDef = {
     Id = % "arcane-precision"
     Name = "Arcane Precision"
-    Effect = [ Passive.Buff { StatModifiers.Zero with ``Magic Critical Range`` = 2 } ]
+    Grants = [ Passive.Buff { StatModifiers.Zero with ``Magic Critical Range`` = 2 } ]
 }
 
 let combatMastery : ArchetypeDef = {
     Id = % "combat-mastery"
     Name = "Combat Mastery"
-    Effect = [ Passive.Buff { StatModifiers.Zero with ``Attack rolls`` = 4 } ]
+    Grants = [ Passive.Buff { StatModifiers.Zero with ``Attack rolls`` = 4 } ]
 }
 
 let ironBreaker : ArchetypeDef = {
     Id = % "iron-breaker"
     Name = "Iron Breaker"
-    Effect = [ Passive.Simple "Ignore all physical resistances" ]
+    Grants = [ Passive.Simple "Ignore all physical resistances" ]
 }
 
 

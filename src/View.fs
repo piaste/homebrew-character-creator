@@ -157,16 +157,17 @@ let levelUpSection (model: Model) dispatch = concat {
             fieldOption subclass.Key (subclass.Value.DisplayName model.UseLoreNames)))
         (fun value -> dispatch (SetSubclass value))
 
-    cond (passivePicks character > 0) <| function
+    let nPassivePicks = nPassivePicks character.NextLevelUp in 
+    cond (nPassivePicks > 0) <| function
         | false -> empty()
         | true -> 
             fieldCard
                 "Class Passives"
-                $"Choose {passivePicks character} class passives."
+                $"Choose {nPassivePicks} class passives."
                 (concat {
                     Main.SelectionMeter()
                         .Selected(string character.NextLevelUp.SpellIds.Count)
-                        .Maximum(string <| passivePicks character)
+                        .Maximum(string <| nPassivePicks)
                         .Label("passives")
                         .Elt()
                     // forEach OLDspells (fun spell ->
@@ -174,24 +175,24 @@ let levelUpSection (model: Model) dispatch = concat {
                     //     choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
                 })
     
-    // cond (featPicks character > 0) <| function
-    //     | false -> empty()
-    //     | true -> 
-    //         fieldCard
-    //             "Feat"
-    //             $"Choose a feat"
-    //             (concat {
-    //                 Main.SelectionMeter()
-    //                     .Selected(string character.NextLevelUp.FeatId..Count)
-    //                     .Maximum(string <| featPicks character)
-    //                     .Label("passives")
-    //                     .Elt()
-    //                 forEach OLDspells (fun spell ->
-    //                     let active = character.NextLevelUp.SpellIds.Contains spell.Id
-    //                     choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
-    //             })
+    cond (nFeatPicks character.NextLevelUp > 0) <| function
+        | false -> empty()
+        | true -> 
+            fieldCard
+                "Feat"
+                $"Choose a feat"
+                (concat {
+                    Main.SelectionMeter()
+                        .Selected(string (Option.toList character.NextLevelUp.FeatId).Length)
+                        .Maximum(string <| nFeatPicks character.NextLevelUp)
+                        .Label("passives")
+                        .Elt()
+                    forEach Feats.allFeats.Values (fun feat ->
+                        let active = character.NextLevelUp.FeatId = Some feat.Id
+                        choiceCard active "Spell" feat.Name feat.Description (fun _ -> dispatch (ToggleFeat feat.Id)))
+                })
 
-    let numSpellPicks = numSpellPicksPerLevel subclass.CasterType in 
+    let numSpellPicks = nSpellPicksPerLevel subclass.CasterType in 
     cond subclass.CasterType <| function
         | Martial -> empty()
         | FullCaster spellList | HalfCaster spellList ->
@@ -204,8 +205,11 @@ let levelUpSection (model: Model) dispatch = concat {
                         .Maximum(string numSpellPicks)
                         .Label("spells")
                         .Elt()
-                    forEach (Spells.allSpellsInList spellList) (fun (KeyValue(spellId, spell)) ->
-                        let active = character.NextLevelUp.SpellIds.Contains spellId
+
+                    let pickFrom = if flexibleSpellPicks character.NextLevelUp then Versatile else spellList
+
+                    forEach (Spells.allSpellsInList pickFrom).Values (fun spell ->
+                        let active = character.NextLevelUp.SpellIds.Contains spell.Id
                         choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
                 })
     }

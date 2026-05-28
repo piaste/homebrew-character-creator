@@ -1930,4 +1930,5 @@ let allSpells =
     ]
 
 let allSpellsInList spellList = 
+  if spellList = Versatile then allSpells else
   allSpells |> Map.filter (fun _ spell -> List.contains spellList spell.SpellLists)

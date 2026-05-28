@@ -7,7 +7,7 @@ open Bg3HomebrewCCreator.Utils
 let adrenalineSurge : TraitDef = {
     Id = % "adrenaline-surge"
     Name = "Adrenaline Surge"
-    Effect = [ 
+    Grants = [ 
         Passive.Simple "+2 to all damage if under 75% HP"
         Passive.Simple "-2 to all damage if above 75% HP"
     ]
@@ -16,7 +16,7 @@ let adrenalineSurge : TraitDef = {
 let blindEmotions : ArchetypeDef = {
     Id = % "blind-emotions"
     Name = "Blind Emotions"
-    Effect = [ 
+    Grants = [ 
         Passive.Simple "Permanently Calmed"
         Passive.Simple "Targeting range limited to 3m"
     ]

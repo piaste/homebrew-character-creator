@@ -54,7 +54,7 @@ let checkErrors (character: Character) =
         if character.SkillIds.Count <> NUM_SKILL_PROFICIENCIES then
              $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
         let numSpellPicks = 
-            numSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
+            nSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
         if character.NextLevelUp.SpellIds.Count <> numSpellPicks then
              $"Choose exactly {numSpellPicks} starting spells."
     ]
