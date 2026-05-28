@@ -3,6 +3,8 @@ module Bg3HomebrewCCreator.Domain.Fetchers
 open Things
 open Character
 open Entities.Races
+open Entities.Classes
+open Entities.Subclasses
 
 
 let classById x = allClasses[x]

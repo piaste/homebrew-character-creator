@@ -5,39 +5,7 @@ open Types
 open Bg3HomebrewCCreator.Utils
 open Bg3HomebrewCCreator.Domain.Entities.Races
 
-type CasterType = 
-    | FullCaster of SpellList
-    | HalfCaster of SpellList
-    | Martial
 
-type ClassId = Fighter | Wizard
-
-type ClassDef =
-    {
-        Name: string
-        Description: string
-        ScalingAbilities: int -> string list
-        FixedAbilities: Map<int, string list>
-    }
-
-type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
-
-let defaultSubclassId = function
-    | Fighter -> Champion
-    | Wizard -> Evoker
-
-type Subclass =
-    {
-        Name: string
-        LoreName : string option
-        Description: string
-        BaseClass: ClassId
-        CasterType: CasterType        
-    }
-    with member this.DisplayName useLoreNames = 
-            match useLoreNames, this.LoreName with
-            | true, Some ln -> ln
-            | _ -> this.Name
 
 
 type ChoiceDef =

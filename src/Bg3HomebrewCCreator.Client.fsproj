@@ -10,7 +10,9 @@
     <Compile Include="Domain\Entities\Archetypes.fs" />
     <Compile Include="Domain\Entities\Traits.fs" />
     <Compile Include="Domain\Entities\Feats.fs" />
+    <Compile Include="Domain\Entities\Cantrips.fs" />
     <Compile Include="Domain\Entities\Spells.fs" />
+    <Compile Include="Domain\Entities\Classes.fs" />
     <Compile Include="Domain\Entities\Subclasses.fs" />
     <Compile Include="Domain\Entities\Passives.fs" />
     <Compile Include="Domain\Character.fs" />

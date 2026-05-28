@@ -5,6 +5,7 @@ open System
 open Bolero
 open Bolero.Html
 
+open Bg3HomebrewCCreator.Domain.Entities
 open Domain.Types
 open Domain.Character
 open Domain.Things
@@ -159,13 +160,14 @@ let levelUpSection (model: Model) dispatch = concat {
         "Class"
         "Fighter and wizard are enough to test martial and spellcasting flows."
         classId
-        (forEach allClasses (fun classDef -> fieldOption classDef.Key classDef.Value.Name))
-        (fun value -> dispatch (SetSubclass (allSubclassesByClass[value].Keys |> Seq.head)))
+        (forEach Classes.allClasses (fun classDef -> fieldOption classDef.Key classDef.Value.Name))
+        (fun value -> dispatch (SetSubclass (Subclasses.allSubclassesByClass[value].Keys |> Seq.head)))
     selectCase
         "Subclass"
         "This is chosen up front for the placeholder build flow."
         character.NextLevelUp.SubclassId
-        (forEach allSubclassesByClass[classId] (fun subclass -> fieldOption subclass.Key (subclass.Value.DisplayName model.UseLoreNames)))
+        (forEach Subclasses.allSubclassesByClass[classId] (fun subclass -> 
+            fieldOption subclass.Key (subclass.Value.DisplayName model.UseLoreNames)))
         (fun value -> dispatch (SetSubclass value))
 
     cond (passivePicks character > 0) <| function

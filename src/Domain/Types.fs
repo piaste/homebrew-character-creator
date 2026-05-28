@@ -77,7 +77,7 @@ type SubraceDef =
     }
 
 
-// Spells
+// Cantrips and spells
 
 type SpellList = Versatile | Divine | Primal | Arcane | Innate | Bargained
 
@@ -87,6 +87,17 @@ type ActionCost =
     | Reaction
     | FreeAction
 
+
+type [<Measure>] cantripId
+
+type CantripDef =
+    { Id: string<cantripId>
+      Name: string
+      Description: string
+
+      Concentration: bool
+      ActionCost: ActionCost }
+
 type [<Measure>] spellId
 
 type SpellDef =
@@ -94,8 +105,47 @@ type SpellDef =
       Name: string
       Description: string
 
-      SpellList: SpellList list
+      SpellLists: SpellList list
 
       Concentration: bool
       Upcastable: bool
       ActionCost: ActionCost }
+
+// Classes and subclasses
+
+
+type CasterType = 
+    | FullCaster of SpellList
+    | HalfCaster of SpellList
+    | Martial
+
+
+type ClassId = Fighter | Wizard
+
+type ClassDef =
+    {
+        Name: string
+        Description: string
+        SpellcastingAbility: Ability
+        ScalingAbilities: int -> string list
+        FixedAbilities: Map<int, string list>
+    }
+
+type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
+
+let defaultSubclassId = function
+    | Fighter -> Champion
+    | Wizard -> Evoker
+
+type Subclass =
+    {
+        Name: string
+        LoreName : string option
+        Description: string
+        BaseClass: ClassId
+        CasterType: CasterType        
+    }
+    with member this.DisplayName useLoreNames = 
+            match useLoreNames, this.LoreName with
+            | true, Some ln -> ln
+            | _ -> this.Name
