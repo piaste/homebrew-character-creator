@@ -28,12 +28,12 @@ let defaultCharacter =
             BonusPlusOne = CON
         }
         SkillIds = Set.empty
-        ChosenFeatIds = Set.empty
         PreviousLevelHistory = []
         NextLevelUp = {
             ClassLevel = 1
             SubclassId = Champion
             SpellIds = Set.empty
+            FeatId = None
         }
     }
 

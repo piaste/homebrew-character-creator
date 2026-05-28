@@ -62,31 +62,6 @@ let skills =
 let NUM_SKILL_PROFICIENCIES = 4
 let NUM_SKILL_EXPERTISES = 2
 
-let OLDspells =
-    [
-        {
-            Id = "magic-missile"
-            Name = "Magic Missile"
-            Description = "Reliable force bolts that always find a target."
-        }
-        {
-            Id = "shield"
-            Name = "Shield"
-            Description = "A split-second ward that turns a lethal strike aside."
-        }
-        {
-            Id = "mage-armor"
-            Name = "Mage Armor"
-            Description = "Hours of magical protection for an unarmored caster."
-        }
-        {
-            Id = "sleep"
-            Name = "Sleep"
-            Description = "Drops weakened enemies before they can regroup."
-        }
-    ]
-
-
 let numSpellPicksPerLevel = 
     function
     | Martial -> 0

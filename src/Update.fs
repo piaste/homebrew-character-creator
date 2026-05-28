@@ -23,7 +23,7 @@ type Message =
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | ToggleSkill of string
-    | ToggleSpell of string
+    | ToggleSpell of string<spellId>
 
     | LevelUp
     | LevelDown

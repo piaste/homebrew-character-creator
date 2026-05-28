@@ -14,17 +14,6 @@ open Model
 open Update
 open Utils
 
-// for test
-// let OLDspells = 
-//     Domain.Entities.Spells.allSpells
-//     |> Seq.map (fun (KeyValue(k, v)) -> 
-//         {
-//             Id = UMX.untag v.Id
-//             Name = v.Name
-//             Description = v.Description
-//         })
-//     |> Seq.toList
-
 let pointBuyOptions = [ 0;1;2;3;4;5;7;9 ] |> List.map ((*) 1<pbuy>)
 
 let abilityName = function
@@ -202,20 +191,21 @@ let levelUpSection (model: Model) dispatch = concat {
     //                     choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
     //             })
 
+    let numSpellPicks = numSpellPicksPerLevel subclass.CasterType in 
     cond subclass.CasterType <| function
         | Martial -> empty()
-        | caster ->
+        | FullCaster spellList | HalfCaster spellList ->
             fieldCard
                 "Spellbook"
-                $"Choose {numSpellPicksPerLevel caster} new spells."
+                $"Choose {numSpellPicks} new spells."
                 (concat {
                     Main.SelectionMeter()
                         .Selected(string character.NextLevelUp.SpellIds.Count)
-                        .Maximum(string <| numSpellPicksPerLevel caster)
+                        .Maximum(string numSpellPicks)
                         .Label("spells")
                         .Elt()
-                    forEach OLDspells (fun spell ->
-                        let active = character.NextLevelUp.SpellIds.Contains spell.Id
+                    forEach (Spells.allSpellsInList spellList) (fun (KeyValue(spellId, spell)) ->
+                        let active = character.NextLevelUp.SpellIds.Contains spellId
                         choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
                 })
     }
@@ -307,14 +297,14 @@ let summarySection (model: Model) =
         |> List.map (fun (classId, count) -> summaryRow ((subclassById classId).DisplayName model.UseLoreNames) (string count))
 
     let featNames =
-        character.ChosenFeatIds
-        |> Seq.map (choiceById Domain.Entities.Feats.allFeats >> fun feat -> feat.Name)
+        character.AllFeatIds
+        |> Seq.map (fun fid -> Map.find fid Feats.allFeats |> _.Name)
         |> Seq.sort
         |> String.concat ", "
 
     let spellNames =
-        character.AllSpellIds
-        |> Seq.map (choiceById OLDspells >> fun spell -> spell.Name)
+        character.AllSpellIds        
+        |> Seq.map (fun sid -> Map.find sid Spells.allSpells |> _.Name)
         |> Seq.sort
         |> String.concat ", "
 
@@ -359,7 +349,7 @@ let summarySection (model: Model) =
                 cond classBreakdown.IsEmpty <| function
                     | true -> summaryRow "Class levels" "No levels assigned yet"
                     | false -> concat { for row in classBreakdown do row }
-                summaryRow "Skills" (character.SkillIds |> Seq.map (choiceById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
+                summaryRow "Skills" (character.SkillIds |> Seq.map (skillById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
                 summaryRow "Spells" (if String.IsNullOrWhiteSpace spellNames then "None" else spellNames)
                 summaryRow "Feats" (if String.IsNullOrWhiteSpace featNames then "None" else featNames)
                 forEach (getRacialPassives character) <| fun txt -> summaryRow "Race" txt

@@ -8,7 +8,7 @@ open Bg3HomebrewCCreator.Domain.Entities.Races
 
 
 
-type ChoiceDef =
+type SkillDef =
     {
         Id: string
         Name: string
@@ -19,8 +19,8 @@ type LevelRecord =
     {
         ClassLevel: int
         SubclassId: SubclassId
-        SpellIds: Set<string>
-
+        SpellIds: Set<string<spellId>>
+        FeatId: string<featId> option
     }
 
 type [<Measure>] pbuy
@@ -65,8 +65,7 @@ type Character =
         SkillIds: Set<string>
 
         PreviousLevelHistory: LevelRecord list
-        ChosenFeatIds: Set<string>
-
+        
         NextLevelUp: LevelRecord
     } with
 
@@ -103,8 +102,14 @@ type Character =
             + this.CharacterLevel * (8 + this.AbilityModifier CON + this.StatModifiers.``HP per level``)
 
         member this.AllSpellIds = 
-            this.LevelHistory |> List.map _.SpellIds 
+            this.LevelHistory
+            |> List.map _.SpellIds 
             |> Set.unionMany
+
+        member this.AllFeatIds = 
+            this.LevelHistory
+            |> List.collect (_.FeatId >> Option.toList)
+            
 
         member this.StatModifiers = 
             allRaces[this.RaceId].Effect

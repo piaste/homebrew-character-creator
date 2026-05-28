@@ -1,6 +1,6 @@
 module Bg3HomebrewCCreator.Domain.Fetchers
 
-open Things
+open FSharp.UMX
 open Character
 open Entities.Races
 open Entities.Classes
@@ -20,7 +20,7 @@ let classIdBySubclassId =
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
-let choiceById (choices: ChoiceDef list) (choiceId: string) =
+let skillById (choices: SkillDef list) (choiceId: string) =
     choices |> List.find (fun choice -> choice.Id = choiceId)
 
 
