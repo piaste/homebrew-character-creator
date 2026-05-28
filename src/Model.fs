@@ -40,16 +40,6 @@ let defaultCharacter =
 let trimSet limit values =
     values |> Set.toList |> List.sort |> List.truncate limit |> Set.ofList
 
-let proficiencyBonus level =
-    if level = 0 then 2 else 2 + ((level - 1) / 4)
-
-let classLevels (character: Character) =
-    character.LevelHistory
-    |> List.countBy (fun level -> level.SubclassId)
-    |> List.sortByDescending snd
-
-let hitPoints (character: Character) =
-    12 + character.CharacterLevel * (8 + character.AbilityModifier CON )
 
 let checkErrors (character: Character) =
     [

@@ -255,7 +255,7 @@ let githyanki =
             Effect = [
                 {
                     Description = "+2 to all Attack Rolls"
-                    Effect = { StatModifiers.Zero with AttackRolls = 2 }
+                    Effect = { StatModifiers.Zero with ``Attack rolls`` = 2 }
                 }
                 Passive.Simple "Resistant to Psychic damage"
                 Passive.Simple "Basic Darkvision"

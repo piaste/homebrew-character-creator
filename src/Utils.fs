@@ -11,6 +11,15 @@ let debug x =
 #endif
     ()
 
+
+let inline getAll<'P, 't, [<Measure>]'m when 't : (member Id : string<'m>) > () = 
+    Map [ 
+      for p in typeof<'P>.DeclaringType.GetProperties() do        
+        if p.PropertyType = typeof<'t> then
+            let value : 't = p.GetValue null :?> 't
+            yield value.Id, value
+    ]
+
 let withDebug x = debug x; x
 
 let serializerOptions =
@@ -23,6 +32,7 @@ let inline clamp a b value =
     if a >= b then value |> min a |> max b
               else value |> min b |> max a
 
+let inline modifierText i = if i >= LanguagePrimitives.GenericZero then $"+{i}" else i.ToString()
 let parseCase<'T> (input: string) : 'T =
     let t = typeof<'T>
 

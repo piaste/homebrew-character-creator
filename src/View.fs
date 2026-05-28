@@ -45,8 +45,6 @@ let abilityAbbreviation = function
 
 type Main = Template<"wwwroot/main.html">
 
-let modifierText i = if i >= 0 then $"+{i}" else i.ToString()
-
 let actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) =
     Main.ActionButton()
         .Text(text)
@@ -305,12 +303,12 @@ let summarySection (model: Model) =
     let validationIssues = checkErrors character
     let level = character.CharacterLevel
     let classBreakdown =
-        classLevels character
+        character.LevelsBySubclass
         |> List.map (fun (classId, count) -> summaryRow ((subclassById classId).DisplayName model.UseLoreNames) (string count))
 
     let featNames =
         character.ChosenFeatIds
-        |> Seq.map (choiceById feats >> fun feat -> feat.Name)
+        |> Seq.map (choiceById Domain.Entities.Feats.allFeats >> fun feat -> feat.Name)
         |> Seq.sort
         |> String.concat ", "
 
@@ -339,9 +337,9 @@ let summarySection (model: Model) =
                     .Details(characterSummaryChips character model.UseLoreNames)
                     .Elt()
                 summaryRow "Status" (if model.Errors.IsEmpty then "Levelled character" else "Draft level 1 build")
-                summaryRow "Proficiency bonus" (proficiencyBonus (max level 1) |> sprintf "%+i")
+                summaryRow "Proficiency bonus" (character.ProficiencyBonus |> sprintf "%+i")
                 summaryRow "Initiative" (modifierText character.Initiative)
-                summaryRow "Hit points" (string (hitPoints character))
+                summaryRow "Hit points" (string character.HitPoints)
                 cond (character.CharacterLevel = 1) <| function
                     | true -> summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
                     | false -> empty()

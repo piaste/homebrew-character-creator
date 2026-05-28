@@ -86,29 +86,6 @@ let OLDspells =
         }
     ]
 
-let feats =
-    [
-        {
-            Id = "alert"
-            Name = "Alert"
-            Description = "Quick reactions and iron focus make ambushes far less likely."
-        }
-        {
-            Id = "tough"
-            Name = "Tough"
-            Description = "A reserve of grit that keeps you upright when others drop."
-        }
-        {
-            Id = "war-caster"
-            Name = "War Caster"
-            Description = "Keeps spells stable in the chaos of close combat."
-        }
-        {
-            Id = "sharpshooter"
-            Name = "Sharpshooter"
-            Description = "A daring attacker who trades safety for damage."
-        }
-    ]
 
 let numSpellPicksPerLevel = 
     function

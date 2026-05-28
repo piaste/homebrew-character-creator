@@ -17,34 +17,57 @@ let allAbilities =
 
 type StatModifiers = {
     Abilities: Map<Ability, int>
-    AttackRolls: int
+    ``Attack rolls``: int
     Speed: float
-    CriticalRangeBonus: int
+    ``Critical Range``: int
+    ``Magic Critical Range``: int
     AC: int
     DR: int
     Initiative: int
-    HPPerLevel : int
-    HPFlat : int
+    ``HP per level`` : int
+    ``Base HP`` : int
 } with 
-    static member Zero = { Abilities = Map []; AttackRolls = 0; Speed = 0.; CriticalRangeBonus = 0; AC = 0; DR = 0; Initiative = 0; HPPerLevel = 0; HPFlat = 0 }
+    static member Zero = { Abilities = Map []; ``Attack rolls`` = 0; Speed = 0.; 
+    ``Critical Range`` = 0; ``Magic Critical Range`` = 0; 
+    AC = 0; DR = 0; Initiative = 0; ``HP per level`` = 0; ``Base HP`` = 0 }
     static member (+) (s1, s2) = {
-        AttackRolls = s1.AttackRolls + s2.AttackRolls
+        ``Attack rolls`` = s1.``Attack rolls`` + s2.``Attack rolls``
         Speed = s1.Speed + s2.Speed
         Abilities = 
             Map[ for ab in allAbilities -> ab, s1.Abilities.GetOrDefault ab + s2.Abilities.GetOrDefault ab ] 
             |> Map.filter (fun _ v -> v <> 0)
         AC = s1.AC + s2.AC
         DR = s1.DR + s2.DR
-        CriticalRangeBonus = s1.CriticalRangeBonus + s2.CriticalRangeBonus
+        ``Critical Range`` = s1.``Critical Range`` + s2.``Critical Range``
+        ``Magic Critical Range`` = s1.``Magic Critical Range`` + s2.``Magic Critical Range``
         Initiative = s1.Initiative + s2.Initiative
-        HPPerLevel = s1.HPPerLevel + s2.HPPerLevel
-        HPFlat = s1.HPFlat + s2.HPFlat
+        ``HP per level`` = s1.``HP per level`` + s2.``HP per level``
+        ``Base HP`` = s1.``Base HP`` + s2.``Base HP``
     }
+
+    override this.ToString() = 
+        [
+            for KeyValue(ab, modif) in this.Abilities do
+                yield sprintf "%s %A" (modifierText modif) ab
+
+            for p in this.GetType().GetProperties() do
+                if p.PropertyType = typeof<int> then
+                   yield sprintf "%s to %s" 
+                            (modifierText <| (p.GetValue this :?> int))
+                            p.Name
+        ]
+        |> String.concat "\n"
+
 
 type Passive = {
     Description : string
     Effect : StatModifiers
-} with static member Simple description = { Description = description; Effect = StatModifiers.Zero }
+} with 
+    static member Simple description = { Description = description; Effect = StatModifiers.Zero }
+    static member Buff modif = { 
+        Effect = modif
+        Description = modif.ToString()
+    }
 
 
 type [<Measure>] archetypeId
@@ -58,8 +81,8 @@ type GrantsPassives<[<Measure>] 'm> = {
 }
 
 type ArchetypeDef = GrantsPassives<archetypeId>
-type Trait = GrantsPassives<traitId>
-type Feat = GrantsPassives<featId>
+type TraitDef = GrantsPassives<traitId>
+type FeatDef = GrantsPassives<featId>
 
 
 

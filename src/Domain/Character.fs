@@ -72,6 +72,15 @@ type Character =
 
         member this.LevelHistory = 
             this.NextLevelUp :: this.PreviousLevelHistory
+                    
+        member this.ProficiencyBonus =
+            if this.CharacterLevel <= 0 then 2 
+            else 2 + (this.CharacterLevel - 1) / 4
+
+        member this.LevelsBySubclass =
+            this.LevelHistory
+            |> List.countBy (fun level -> level.SubclassId)
+            |> List.sortByDescending snd
         member this.CharacterLevel = 
             List.length this.LevelHistory
         member this.Ability ab = 
@@ -83,7 +92,15 @@ type Character =
         member this.Initiative = 
             this.AbilityModifier DEX 
             + this.AbilityModifier WIS
-            + this.StatModifiers.Initiative        
+            + this.StatModifiers.Initiative
+
+        member this.BaseAC = 
+            this.AbilityModifier DEX
+            + this.StatModifiers.AC
+
+        member this.HitPoints = 
+            12 + this.StatModifiers.``Base HP`` 
+            + this.CharacterLevel * (8 + this.AbilityModifier CON + this.StatModifiers.``HP per level``)
 
         member this.AllSpellIds = 
             this.LevelHistory |> List.map _.SpellIds 
