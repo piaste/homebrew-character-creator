@@ -171,6 +171,17 @@ let update load save message model =
                     }
             }
 
+    | ToggleFeat featId ->
+        apply <| fun character ->
+            { character with 
+                NextLevelUp = 
+                    { character.NextLevelUp with 
+                        FeatId = 
+                            if character.NextLevelUp.FeatId = Some featId then None
+                            else Some featId
+                    }
+            }
+
     | LevelUp ->
         if model.Errors.IsEmpty then
             apply <| levelUpDefault

@@ -137,6 +137,31 @@ let characterSummaryChips (character: Character) useLoreNames =
         forEach subclassTags (fun ct -> chip ct "neutral")
     }
 
+let inline selector 
+        (itemList: 't seq when 't: (member Name : string) and 't : (member Description : string))   
+        title subtitle label itemTitle
+        numPicks getNumPicked 
+        isPicked
+        toggleEvent 
+        character= 
+    cond (numPicks > 0) <| function
+        | false -> empty()
+        | true ->
+            fieldCard title subtitle
+                (concat {
+                    Main.SelectionMeter()
+                        .Selected(string <| getNumPicked character.NextLevelUp)
+                        .Maximum(string numPicks)
+                        .Label(label : string)
+                        .Elt()
+
+                    forEach itemList (fun item ->
+                        let active = isPicked item
+                        choiceCard active itemTitle item.Name item.Description (fun _ -> toggleEvent item))
+                })
+    }
+
+
 let levelUpSection (model: Model) dispatch = concat {
     let character = model.Character
 
