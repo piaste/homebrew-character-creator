@@ -1,9 +1,7 @@
 TODOLIST:
 
  - Cantrip selection
- - Feats selection
  - Passive selection
-
 
 NICETOHAVE:
 

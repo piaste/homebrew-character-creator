@@ -1,4 +1,5 @@
-module Bg3HomebrewCCreator.Utils
+[<AutoOpen>]
+module internal Utils 
 
 open FSharp.UMX
 open System.Text.Json
@@ -55,6 +56,9 @@ type Collections.Map<'K, 'V when 'K : comparison > with
         match this.TryGetValue k with
         | false, _ -> Unchecked.defaultof<'V>
         | true, v -> v        
+
+    static member fromProp prop values = 
+        Map [ for v in values -> prop v, v ]
     
 type Set<'T when 'T : comparison> with
     member this.Toggle value = 

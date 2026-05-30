@@ -1,6 +1,5 @@
 module Bg3HomebrewCCreator.Domain.Types
 open FSharp.UMX
-open Bg3HomebrewCCreator.Utils
 
 // Basics
 
@@ -98,8 +97,9 @@ type SubraceDef =
         Id: string<subraceId>
         BaseRaceId: string<baseRaceId>
         Name: string
-        Effect: Passive list        
+        RacialPassives: Passive list        
     }
+    with member this.Description = this.Name
 
 
 // Cantrips and spells
@@ -144,11 +144,11 @@ type CasterType =
     | HalfCaster of SpellList
     | Martial
 
-
-type ClassId = Fighter | Wizard
+type [<Measure>] classId
 
 type ClassDef =
     {
+        Id: string<classId>
         Name: string
         Description: string
         SpellcastingAbility: Ability
@@ -156,21 +156,24 @@ type ClassDef =
         FixedAbilities: Map<int, string list>
     }
 
-type SubclassId = Champion | BattleMaster | Evoker | LuminalConfluence
+type [<Measure>] subclassId
 
-let defaultSubclassId = function
-    | Fighter -> Champion
-    | Wizard -> Evoker
-
-type Subclass =
+type SubclassDef =
     {
+        Id : string<subclassId>
         Name: string
         LoreName : string option
         Description: string
-        BaseClass: ClassId
+        BaseClassId: string<classId>
         CasterType: CasterType        
     }
-    with member this.DisplayName useLoreNames = 
+    with 
+        member this.DisplayName useLoreNames = 
             match useLoreNames, this.LoreName with
             | true, Some ln -> ln
             | _ -> this.Name
+        
+        member this.SpellList = 
+            match this.CasterType with
+            | Martial -> None
+            | FullCaster sl | HalfCaster sl -> Some sl

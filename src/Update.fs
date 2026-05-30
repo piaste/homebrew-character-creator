@@ -18,7 +18,9 @@ type Message =
 
     | SetName of string
     | SetRace of string<subraceId>
-    | SetSubclass of SubclassId
+    | SetSubclass of string<subclassId>
+    | SetArchetype of string<archetypeId>
+    | SetTrait of string<traitId>
     | SetAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
@@ -28,7 +30,6 @@ type Message =
 
     | LevelUp
     | LevelDown
-    | SetLevelUpSubclass of string
     
     | Undo
     | SavedState
@@ -98,6 +99,12 @@ let update load save message model =
 
     | SetRace race ->
         apply <| fun character -> { character with RaceId = race }
+
+    | SetArchetype atId -> 
+        apply <| fun character -> { character with ArchetypeId = atId }
+
+    | SetTrait trId -> 
+        apply <| fun character -> { character with TraitId = trId }
 
     | SetSubclass subclassId ->
         apply <| fun character -> 

@@ -1,11 +1,10 @@
 module Bg3HomebrewCCreator.Domain.Entities.Classes
 
-
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
 
-
-let fighter = {
+let rec fighter = {
+        Id = % nameof fighter
         Name = "Fighter"
         Description = "Jock"
 
@@ -24,7 +23,8 @@ let fighter = {
 
     }
 
-let wizard = {
+let rec wizard = {
+        Id = % nameof wizard
         Name = "Wizard"
         Description = "NEEEEERD"      
 
@@ -37,7 +37,5 @@ let wizard = {
         FixedAbilities = Map [1, ["Scroll Scribing"; "Scholary Acumen"]]
     }
 
-let allClasses = Map [
-    Fighter, fighter
-    Wizard, wizard
-]
+type Placeholder = class end
+let allClasses = getAll<Placeholder, ClassDef, classId>()

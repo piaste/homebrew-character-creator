@@ -2,8 +2,6 @@ module Bg3HomebrewCCreator.Domain.Entities.Feats
 
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
-open Bg3HomebrewCCreator.Utils
-
 
 let rec abilityImprovement : FeatDef = {
     Id = % nameof abilityImprovement

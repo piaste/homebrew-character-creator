@@ -3,7 +3,6 @@ module Bg3HomebrewCCreator.Domain.Entities.Archetypes
 open FSharp.UMX
 
 open Bg3HomebrewCCreator.Domain.Types
-open Bg3HomebrewCCreator.Utils
 
 let arcanePrecision : ArchetypeDef = {
     Id = % "arcane-precision"

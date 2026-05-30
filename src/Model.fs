@@ -6,6 +6,7 @@ open FSharp.UMX
 open Domain.Types
 open Domain.Character
 open Domain.Things
+open Bg3HomebrewCCreator.Domain.Entities
 open Domain.Fetchers
 
 type Page =
@@ -28,10 +29,14 @@ let defaultCharacter =
             BonusPlusOne = CON
         }
         SkillIds = Set.empty
+        ArchetypeId = Archetypes.arcanePrecision.Id
+        TraitId = Traits.none.Id
+
+
         PreviousLevelHistory = []
         NextLevelUp = {
             ClassLevel = 1
-            SubclassId = Champion
+            SubclassId = Subclasses.champion.Id
             SpellIds = Set.empty
             FeatId = None
         }

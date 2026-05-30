@@ -2,11 +2,7 @@ module Bg3HomebrewCCreator.Domain.Character
 
 open FSharp.UMX
 open Types
-open Bg3HomebrewCCreator.Utils
-open Bg3HomebrewCCreator.Domain.Entities.Races
-
-
-
+open Bg3HomebrewCCreator.Domain.Entities
 
 type SkillDef =
     {
@@ -18,7 +14,7 @@ type SkillDef =
 type LevelRecord =
     {
         ClassLevel: int
-        SubclassId: SubclassId
+        SubclassId: string<subclassId>
         SpellIds: Set<string<spellId>>
         FeatId: string<featId> option
     }
@@ -63,6 +59,9 @@ type Character =
         RaceId: string<subraceId>
         AbilityBuy: AbilityBuy
         SkillIds: Set<string>
+        
+        ArchetypeId: string<archetypeId>
+        TraitId: string<traitId>
 
         PreviousLevelHistory: LevelRecord list
         
@@ -110,9 +109,11 @@ type Character =
             this.LevelHistory
             |> List.collect (_.FeatId >> Option.toList)
             
-
         member this.StatModifiers = 
-            allRaces[this.RaceId].Effect
+            [ yield! Races.allRaces[this.RaceId].RacialPassives
+              yield! Archetypes.allArchetypes[this.ArchetypeId].Grants
+              yield! Traits.allTraits[this.TraitId].Grants
+            ]
             |> List.map _.Effect
             |> List.sum
 

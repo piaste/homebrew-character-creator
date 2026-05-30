@@ -12,26 +12,31 @@ let classById x = allClasses[x]
 let raceById x = allRaces[x]
 
 let subclassById x = 
-    allSubclassesByClass.Values |> Seq.collect id |> Seq.find (fun kv -> kv.Key = x) |> _.Value
+    allSubclasses.Item x
 
 let classIdBySubclassId = 
-    subclassById >> _.BaseClass
+    subclassById >> _.BaseClassId
 
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
+let getDefaultSubclassId classId = 
+    allSubclassesByClass[classId].Keys |> Seq.head
+
 let skillById (choices: SkillDef list) (choiceId: string) =
     choices |> List.find (fun choice -> choice.Id = choiceId)
 
-
-let getClassLevels (character : Character) =
-    character.LevelHistory
+let private groupLevelsByClass (lr : LevelRecord list) =
+    lr
     |> List.groupBy _.SubclassId
     |> List.map (fun (scid, lr) -> scid, (lr |> List.map _.ClassLevel) |> List.max)
     |> Map.ofList
 
+let getClassLevels (character : Character) = groupLevelsByClass character.LevelHistory
+let getPreviousClassLevels (character : Character) = groupLevelsByClass character.PreviousLevelHistory
+
 let getRacialPassives (character : Character) = 
-    [ for t in allRaces[character.RaceId].Effect do
+    [ for t in allRaces[character.RaceId].RacialPassives do
         yield t.Description
     ]
 let getClassPassives (character : Character) = 

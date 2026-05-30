@@ -137,20 +137,20 @@ let characterSummaryChips (character: Character) useLoreNames =
         forEach subclassTags (fun ct -> chip ct "neutral")
     }
 
-let inline selector 
+let inline selector
         (itemList: 't seq when 't: (member Name : string) and 't : (member Description : string))   
         title subtitle label itemTitle
-        numPicks getNumPicked 
+        numPicks numPicked 
         isPicked
         toggleEvent 
-        character= 
+        = 
     cond (numPicks > 0) <| function
         | false -> empty()
         | true ->
             fieldCard title subtitle
                 (concat {
                     Main.SelectionMeter()
-                        .Selected(string <| getNumPicked character.NextLevelUp)
+                        .Selected(string numPicked)
                         .Maximum(string numPicks)
                         .Label(label : string)
                         .Elt()
@@ -159,84 +159,53 @@ let inline selector
                         let active = isPicked item
                         choiceCard active itemTitle item.Name item.Description (fun _ -> toggleEvent item))
                 })
-    }
 
+
+let inline requiredSelector itemList title subtitle label itemTitle mustPick isPicked toggleEvent = 
+    selector itemList title subtitle label itemTitle
+        (if mustPick then 1 else 0)
+        1 isPicked (fun item -> if isPicked item then () else toggleEvent item)
 
 let levelUpSection (model: Model) dispatch = concat {
     let character = model.Character
 
-    let classId = classIdBySubclassId character.NextLevelUp.SubclassId
-    let subclass = subclassById character.NextLevelUp.SubclassId
-    
-    selectCase
-        "Class"
-        "Fighter and wizard are enough to test martial and spellcasting flows."
-        classId
-        (forEach Classes.allClasses (fun classDef -> fieldOption classDef.Key classDef.Value.Name))
-        (fun value -> dispatch (SetSubclass (Subclasses.allSubclassesByClass[value].Keys |> Seq.head)))
-    selectCase
-        "Subclass"
-        "This is chosen up front for the placeholder build flow."
-        character.NextLevelUp.SubclassId
-        (forEach Subclasses.allSubclassesByClass[classId] (fun subclass -> 
-            fieldOption subclass.Key (subclass.Value.DisplayName model.UseLoreNames)))
-        (fun value -> dispatch (SetSubclass value))
+    let subclassId = character.NextLevelUp.SubclassId
+    let classId = classIdBySubclassId subclassId
+    let subclass = subclassById subclassId
 
-    let nPassivePicks = nPassivePicks character.NextLevelUp in 
-    cond (nPassivePicks > 0) <| function
-        | false -> empty()
-        | true -> 
-            fieldCard
-                "Class Passives"
-                $"Choose {nPassivePicks} class passives."
-                (concat {
-                    Main.SelectionMeter()
-                        .Selected(string character.NextLevelUp.SpellIds.Count)
-                        .Maximum(string <| nPassivePicks)
-                        .Label("passives")
-                        .Elt()
-                    // forEach OLDspells (fun spell ->
-                    //     let active = character.NextLevelUp.SpellIds.Contains spell.Id
-                    //     choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
-                })
-    
-    cond (nFeatPicks character.NextLevelUp > 0) <| function
-        | false -> empty()
-        | true -> 
-            fieldCard
-                "Feat"
-                $"Choose a feat"
-                (concat {
-                    Main.SelectionMeter()
-                        .Selected(string (Option.toList character.NextLevelUp.FeatId).Length)
-                        .Maximum(string <| nFeatPicks character.NextLevelUp)
-                        .Label("passives")
-                        .Elt()
-                    forEach Feats.allFeats.Values (fun feat ->
-                        let active = character.NextLevelUp.FeatId = Some feat.Id
-                        choiceCard active "Spell" feat.Name feat.Description (fun _ -> dispatch (ToggleFeat feat.Id)))
-                })
+    requiredSelector Classes.allClasses.Values
+        "Class" "Choose the class for your next level" "classes" "class"
+        true
+        (fun cl -> classIdBySubclassId character.NextLevelUp.SubclassId = cl.Id)
+        (fun cl -> dispatch <| SetSubclass (getDefaultSubclassId cl.Id))
+
+    let validSubclasses : seq<SubclassDef> =
+        if (getPreviousClassLevels character).Keys 
+            |> Seq.map classIdBySubclassId
+            |> Seq.contains classId
+        then [ subclassById subclassId ]
+        else Subclasses.allSubclassesByClass[classId].Values
+    requiredSelector validSubclasses
+        "Subclass" "Choose a subclass for your next level" "subclasses" "subclass"
+        true
+        (fun subclass -> character.NextLevelUp.SubclassId = subclass.Id)
+        (fun subclass -> dispatch <| SetSubclass subclass.Id)
+
+    selector Feats.allFeats.Values
+        "Feat" "Choose a feat" "feats" "Feat"
+        (nFeatPicks character.NextLevelUp)
+        (character.NextLevelUp.FeatId |> Option.count)
+        (fun feat -> character.NextLevelUp.FeatId = Some feat.Id)
+        (fun feat -> dispatch <| ToggleFeat feat.Id)
 
     let numSpellPicks = nSpellPicksPerLevel subclass.CasterType in 
-    cond subclass.CasterType <| function
-        | Martial -> empty()
-        | FullCaster spellList | HalfCaster spellList ->
-            fieldCard
-                "Spellbook"
-                $"Choose {numSpellPicks} new spells."
-                (concat {
-                    Main.SelectionMeter()
-                        .Selected(string character.NextLevelUp.SpellIds.Count)
-                        .Maximum(string numSpellPicks)
-                        .Label("spells")
-                        .Elt()
-
-                    let pickFrom = if flexibleSpellPicks character.NextLevelUp then Versatile else spellList
-
-                    forEach (Spells.allSpellsInList pickFrom).Values (fun spell ->
-                        let active = character.NextLevelUp.SpellIds.Contains spell.Id
-                        choiceCard active "Spell" spell.Name spell.Description (fun _ -> dispatch (ToggleSpell spell.Id)))
-                })
+    let spellList = if flexibleSpellPicks character.NextLevelUp then Some Versatile else subclass.SpellList
+    selector (spellList |> Option.map Spells.allSpellsInList |> Option.defaultValue (Map []) |> _.Values)
+        "Spells" $"Choose {numSpellPicks} spells" "spells" "Spell"
+        numSpellPicks
+        character.NextLevelUp.SpellIds.Count
+        (_.Id >> character.NextLevelUp.SpellIds.Contains)
+        (fun spell -> dispatch <| ToggleSpell spell.Id)
     }
 
 let creationSection (model: Model) dispatch =
@@ -248,13 +217,25 @@ let creationSection (model: Model) dispatch =
             "Lock in the hero concept before level-up opens."
             (concat {
                 textField "Character name" "Used everywhere in the live summary." character.CharName (fun value -> dispatch (SetName value))
-                selectCase
-                    "Race"
-                    "Two placeholder ancestries are wired for testing."
-                    character.RaceId
-                    (forEach (Domain.Entities.Races.allRaces |> Seq.sortBy (fun x -> x.Value.BaseRaceId))(fun race -> fieldOption race.Key race.Value.Name))
-                    (fun value -> dispatch (SetRace value))
-            })
+                        
+                requiredSelector Races.allRaces.Values
+                    "Race" "Choose a race" "races" "race"
+                    (character.CharacterLevel = 0)
+                    (fun race -> character.RaceId = race.Id)
+                    (fun race -> dispatch <| SetRace race.Id)
+
+                requiredSelector Archetypes.allArchetypes.Values
+                    "Archetype" "Choose an archetype" "archetypes" "archetype"
+                    (character.CharacterLevel = 0)
+                    (fun archetype -> character.ArchetypeId = archetype.Id)
+                    (fun archetype -> dispatch <| SetArchetype archetype.Id)
+
+                requiredSelector Traits.allTraits.Values
+                    "Trait" "Choose a trait (or leave it as None)" "traits" "trait"
+                    (character.CharacterLevel = 0)
+                    (fun tr -> character.TraitId = tr.Id)
+                    (fun tr -> dispatch <| SetTrait tr.Id)
+        })
 
         fieldCard
             "Point Buy"

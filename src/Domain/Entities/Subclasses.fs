@@ -2,50 +2,52 @@ module Bg3HomebrewCCreator.Domain.Entities.Subclasses
 
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
+open Bg3HomebrewCCreator.Domain.Entities.Classes
 
-let champion =
+let rec champion =
         {
+            Id = % nameof champion
             Name = "Champion"
             LoreName = None
             Description = "Direct, dependable martial skill with no wasted motion."
-            BaseClass = Fighter
+            BaseClassId = fighter.Id
             CasterType = Martial
         }
-let battlemaster =
+let rec battlemaster =
         {
+            Id = % nameof battlemaster
             Name = "Frontier Knight"
             LoreName = Some "Weapon Master"
             Description = "A tactical duelist who wins by precision and positioning."
-            BaseClass = Fighter
+            BaseClassId = fighter.Id
             CasterType = Martial
 
         }
-let evoker =
-
+let rec evoker =
         {
+            Id = % nameof evoker
             Name = "Evoker"
             LoreName = Some "Cormyr War Wizard Tradition"
             Description = "Specializes in raw elemental force and precise battlefield shaping."
-            BaseClass = Wizard
+            BaseClassId = wizard.Id
             CasterType = FullCaster Arcane
 
         }
-let luminalConfluence =
+let rec luminalConfluence =
         {
+            Id = % nameof luminalConfluence
             Name = "Luminal Confluence"
             LoreName = Some "Netherese Variator Tradition"
             Description = "Controls the room with misdirection, trickery, and layered magic."
-            BaseClass = Wizard
+            BaseClassId = wizard.Id
             CasterType = FullCaster Arcane
         }
 
-let allSubclassesByClass = Map [
-    Fighter, Map [Champion, champion; BattleMaster, battlemaster ]
-    Wizard, Map [Evoker, evoker; LuminalConfluence, luminalConfluence]
-]
+type Placeholder = class end
+let allSubclasses = getAll<Placeholder, SubclassDef, subclassId>()
 
-let allSubclasses = 
-    allSubclassesByClass.Values
-    |> Seq.concat
-    |> Seq.map (fun kv -> kv.Key, kv.Value)
+let allSubclassesByClass = 
+    allSubclasses.Values
+    |> Seq.groupBy _.BaseClassId
     |> Map.ofSeq
+    |> Map.map (fun _ v -> Map.fromProp _.Id v)

@@ -2,7 +2,12 @@ module Bg3HomebrewCCreator.Domain.Entities.Traits
 
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
-open Bg3HomebrewCCreator.Utils
+
+let none : TraitDef = {
+    Id = % "none"
+    Name = "None"
+    Grants = []
+}
 
 let adrenalineSurge : TraitDef = {
     Id = % "adrenaline-surge"
@@ -26,4 +31,4 @@ let blindEmotions : ArchetypeDef = {
 
 
 type private Placeholder = class end
-let allArchetypes = getAll<Placeholder, TraitDef, traitId>()
+let allTraits = getAll<Placeholder, TraitDef, traitId>()
