@@ -34,12 +34,19 @@ let getAllPassiveDescriptions (character : Character) =
       for t in Traits.allTraits[character.TraitId].Grants do
         yield "Trait", t.Description
     
-      for KeyValue(scid, lvl) in character.CurrentHistory.LevelsBySubclass do
+      for KeyValue(scid, lvl) in character.CurrentHistory.LevelsBySubclass do        
         let clDef = classBySubclassId scid
         for scAb in clDef.ScalingAbilities lvl do
             yield "Class", scAb
         for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
             if lvl >= lvlReq then for fAb in ab do yield "Class", fAb
+
+        let scDef = allSubclasses[scid]
+        for scAb in scDef.ScalingAbilities lvl do
+            yield "Subclass", scAb
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            if lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb
+            
     ]
     
 let levelUpDefault character =     

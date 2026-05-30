@@ -93,6 +93,10 @@ body {
   color: var(--gold-pale);
   opacity: 0.85;
   max-width: 56ch;
+
+  & .opposite {
+    align-content: end;
+  }
 }
 
 .hero-actions {
@@ -165,6 +169,10 @@ body {
   padding: 1rem 1.25rem 0.75rem;
   border-bottom: 1px solid var(--border);
   background: var(--parchment-2);
+
+  & .section-body {
+    padding: 0 0;
+  }
 }
 
 .section-head h2 {
@@ -431,6 +439,7 @@ body {
   background: var(--parchment-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  width: max-content;
 }
 
 .meter-label {

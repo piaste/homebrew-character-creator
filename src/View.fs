@@ -59,9 +59,17 @@ let fieldCard (title: string) (helper: string) (body: Node) =
     Main.SectionCard()
         .Title(title)
         .Helper(helper)
+        .HeadContent(empty())
         .Body(body)
         .Elt()
 
+let fieldCardRich (title: string) (helper: string) (headContent: Node) (body: Node) =
+    Main.SectionCard()
+        .Title(title)
+        .Helper(helper)
+        .HeadContent(headContent)
+        .Body(body)
+        .Elt()
 let grouping (body: Node) =
     Main.Grouping()
         .Body(body)
@@ -149,16 +157,16 @@ let inline selector
     cond (numPicks > 0) <| function
         | false -> empty()
         | true ->
-            fieldCard title subtitle
-                (concat {
-                    cond (numPicks > 1) <| function
+            fieldCardRich title subtitle
+                (cond (numPicks > 1) <| function
                     | false -> empty()
-                    | true -> Main.SelectionMeter()
-                                    .Selected(string numPicked)
-                                    .Maximum(string numPicks)
-                                    .Label($"{title} picked")
-                                    .Elt()
-
+                    | true -> 
+                        Main.SelectionMeter()
+                            .Selected(string numPicked)
+                            .Maximum(string numPicks)
+                            .Elt()
+                )
+                (concat {
                     forEach itemList (fun item ->
                         let active = isPicked item
                         choiceCard active itemTitle item.Name item.Description (fun _ -> toggleEvent item))
@@ -177,12 +185,13 @@ let levelUpSection (model: Model) dispatch = concat {
     let classId = classIdBySubclassId subclassId
     let subclass = subclassById subclassId
 
-    let validSubclassesFor clId : seq<SubclassDef> =
+    let validSubclassesFor clId =
         character.PreviousHistory.LevelsBySubclass
         |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0)
         |> function
-           | None ->  Subclasses.allSubclassesByClass[clId].Values
-           | Some sclId -> [ subclassById sclId ]
+           | None ->  Subclasses.allSubclassesByClass[clId].Values :> seq<_>
+           | Some sclId -> seq { subclassById sclId }
+        |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames |})
 
     let defaultSubclassFor = 
         validSubclassesFor >> Seq.head >> _.Id
@@ -250,7 +259,7 @@ let creationSection (model: Model) dispatch =
                     (fun race -> dispatch <| SetSubrace (Seq.head <| Races.allSubracesByBaseRace[race.Id].Keys))
 
                 requiredSelector Races.allSubracesByBaseRace[baseRaceIdBySubraceId character.RaceId].Values
-                    "Subrce" "Choose a subrace" "subrace"
+                    "Subrace" "Choose a subrace" "subrace"
                     (character.CharacterLevel = 1)
                     (fun race -> character.RaceId = race.Id)
                     (fun race -> dispatch <| SetSubrace race.Id)
@@ -347,17 +356,15 @@ let summarySection (model: Model) dispatch =
                 summaryRow "Highest Spell DC" (modifierText character.HighestSpellDC)
                 summaryRow "Initiative" (modifierText character.Initiative)
                 summaryRow "Hit points" (string character.HitPoints)
+
+                forEach allAbilities (fun ability ->
+                    let score = character.Ability ability
+                    summaryRow (abilityAbbreviation ability) $"{score} ({modifierText <| character.AbilityModifier ability})")
                 cond (character.CharacterLevel = 1) <| function
                     | true -> summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
                     | false -> empty()
             })
 
-        fieldCard
-            "Ability Scores"
-            "Final scores after the two bonuses and any racial or other passives are applied."
-            (forEach allAbilities (fun ability ->
-                let score = character.Ability ability
-                summaryRow (abilityAbbreviation ability) $"{score} ({modifierText <| character.AbilityModifier ability})"))
 
         fieldCard
             "Talents"

@@ -220,6 +220,8 @@ type SubclassDef =
         Description: string
         BaseClassId: string<classId>
         CasterType: CasterType        
+        ScalingAbilities: int -> string list
+        FixedAbilities: Map<int, string list>
     }
     with 
         member this.DisplayName useLoreNames = 
