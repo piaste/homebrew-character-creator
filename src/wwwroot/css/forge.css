@@ -139,16 +139,23 @@ body {
   gap: 1.25rem;
   position: sticky;
   top: 1.5rem;
+
+  & .section-card {
+    flex-direction: column;
+  }
 }
 
 /* ── Section Card ────────────────────────────────────────────────────────── */
 .section-card {
+  display: flex;
+  flex-direction: row;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
 }
+
 
 .section-head {
   display: flex;
@@ -293,7 +300,7 @@ body {
 /* ── Ability Row ─────────────────────────────────────────────────────────── */
 .ability-row {
   display: grid;
-  grid-template-columns: 7rem 1fr;
+  grid-template-columns: 5rem 1fr;
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 0.75rem;
@@ -389,6 +396,7 @@ body {
 }
 
 .choice-meta {
+  display: none;
   font-family: var(--font-ui);
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -412,6 +420,7 @@ body {
 /* ── Meters (PointBudget / SelectionMeter) ───────────────────────────────── */
 .meter-row {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-ui);

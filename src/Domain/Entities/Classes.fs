@@ -23,6 +23,23 @@ let rec fighter = {
 
     }
 
+let rec cleric = {
+        Id = % nameof cleric
+        Name = "Cleric"
+        Description = "Church boy"      
+
+        SpellcastingAbility = WIS
+
+        ScalingAbilities = (fun cl -> [ 
+        ])
+
+        FixedAbilities = Map [
+            1, ["3 Channel Divinity charges"; "Pacify Undead"; "Divine Intervention"]
+            5, ["Extra Attac"]
+            9, ["Steel Cast"]
+        ]
+    }
+
 let rec wizard = {
         Id = % nameof wizard
         Name = "Wizard"

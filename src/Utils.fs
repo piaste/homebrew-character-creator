@@ -50,13 +50,16 @@ let parseCase<'T> (input: string) : 'T =
     
     else failwithf "Type '%s' must be a string or plain DU" t.Name
 
-
 type Collections.Map<'K, 'V when 'K : comparison > with
     member this.GetOrDefault k = 
         match this.TryGetValue k with
         | false, _ -> Unchecked.defaultof<'V>
-        | true, v -> v        
+        | true, v -> v      
 
+    member this.GetOrElse(k, vd) = 
+        match this.TryGetValue k with
+        | false, _ -> vd
+        | true, v -> v   
     static member fromProp prop values = 
         Map [ for v in values -> prop v, v ]
     

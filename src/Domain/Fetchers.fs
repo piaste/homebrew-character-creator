@@ -21,9 +21,6 @@ let classIdBySubclassId =
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
-let getDefaultSubclassId classId = 
-    allSubclassesByClass[classId].Keys |> Seq.head
-
 let skillById (choices: SkillDef list) (choiceId: string) =
     choices |> List.find (fun choice -> choice.Id = choiceId)
 

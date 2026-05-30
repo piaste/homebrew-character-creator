@@ -23,6 +23,27 @@ let rec battlemaster =
             CasterType = Martial
 
         }
+
+let rec ``Death Domain`` = 
+    {
+        Id = % nameof ``Death Domain``
+        Name = nameof ``Death Domain``
+        LoreName = None
+        Description = "Spread your god's plagues and undeath curses"
+        BaseClassId = cleric.Id
+        CasterType = FullCaster Divine
+    }
+
+let rec ``Life Domain`` = 
+    {
+        Id = % nameof ``Life Domain``
+        Name = nameof ``Life Domain``
+        LoreName = None
+        Description = "Spread your god's blessings and heal wounds"
+        BaseClassId = cleric.Id
+        CasterType = FullCaster Divine
+    }
+
 let rec evoker =
         {
             Id = % nameof evoker

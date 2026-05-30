@@ -62,6 +62,11 @@ let fieldCard (title: string) (helper: string) (body: Node) =
         .Body(body)
         .Elt()
 
+let grouping (body: Node) =
+    Main.Grouping()
+        .Body(body)
+        .Elt()
+
 let summaryRow (label: string) (value: string) =
     Main.SummaryRow()
         .Label(label)
@@ -139,7 +144,7 @@ let characterSummaryChips (character: Character) useLoreNames =
 
 let inline selector
         (itemList: 't seq when 't: (member Name : string) and 't : (member Description : string))   
-        title subtitle label itemTitle
+        title subtitle itemTitle
         numPicks numPicked 
         isPicked
         toggleEvent 
@@ -149,11 +154,13 @@ let inline selector
         | true ->
             fieldCard title subtitle
                 (concat {
-                    Main.SelectionMeter()
-                        .Selected(string numPicked)
-                        .Maximum(string numPicks)
-                        .Label(label : string)
-                        .Elt()
+                    cond (numPicks > 1) <| function
+                    | false -> empty()
+                    | true -> Main.SelectionMeter()
+                                    .Selected(string numPicked)
+                                    .Maximum(string numPicks)
+                                    .Label($"{title} picked")
+                                    .Elt()
 
                     forEach itemList (fun item ->
                         let active = isPicked item
@@ -161,8 +168,8 @@ let inline selector
                 })
 
 
-let inline requiredSelector itemList title subtitle label itemTitle mustPick isPicked toggleEvent = 
-    selector itemList title subtitle label itemTitle
+let inline requiredSelector itemList title subtitle itemTitle mustPick isPicked toggleEvent = 
+    selector itemList title subtitle itemTitle
         (if mustPick then 1 else 0)
         1 isPicked (fun item -> if isPicked item then () else toggleEvent item)
 
@@ -185,71 +192,70 @@ let levelUpSection (model: Model) dispatch = concat {
         validSubclassesFor >> Seq.head >> _.Id
 
     requiredSelector Classes.allClasses.Values
-        "Class" "Choose the class for your next level" "classes" "class"
+        "Class" "Choose the class for your next level" "class"
         true
         (fun cl -> classIdBySubclassId character.NextLevelUp.SubclassId = cl.Id)
         (fun cl -> dispatch <| SetSubclass (defaultSubclassFor cl.Id))
 
     requiredSelector (validSubclassesFor classId)
-        "Subclass" "Choose a subclass for your next level" "subclasses" "subclass"
+        "Subclass" "Choose a subclass for your next level" "subclass"
         true
         (fun subclass -> character.NextLevelUp.SubclassId = subclass.Id)
         (fun subclass -> dispatch <| SetSubclass subclass.Id)
 
     selector ClassPassives.allPassivesByClass[classId].Values
-        "Passives" "Choose two class-specific passives" "classPassives" "Passive"
+        "Passives" "Choose two class-specific passives" "Passive"
         (nPassivePicks character.NextLevelUp)
         character.NextLevelUp.ClassPassiveIds.Count
-        (fun cp -> character.NextLevelUp.ClassPassiveIds.Contains cp.Id)
+        (fun cp -> character.AllClassPassiveIdsByClass.GetOrElse(classId, []) |> Seq.contains cp.Id)
         (fun cp -> dispatch <| ToggleClassPassive cp.Id)
 
     selector Feats.allFeats.Values
-        "Feat" "Choose a feat" "feats" "Feat"
+        "Feat" "Choose a feat" "Feat"
         (nFeatPicks character.NextLevelUp)
         (character.NextLevelUp.FeatId |> Option.count)
-        (fun feat -> character.NextLevelUp.FeatId = Some feat.Id)
+        (fun feat -> character.AllFeatIds |> List.contains feat.Id)
         (fun feat -> dispatch <| ToggleFeat feat.Id)
 
     let numSpellPicks = nSpellPicksPerLevel subclass.CasterType in 
     let spellList = if flexibleSpellPicks character.NextLevelUp then Some Versatile else subclass.SpellList
     selector (spellList |> Option.map Spells.allSpellsInList |> Option.defaultValue (Map []) |> _.Values)
-        "Spells" $"Choose {numSpellPicks} spells" "spells" "Spell"
+        "Spells" $"Choose {numSpellPicks} spells" "Spell"
         numSpellPicks
         character.NextLevelUp.SpellIds.Count
-        (_.Id >> character.NextLevelUp.SpellIds.Contains)
+        (_.Id >> character.AllSpellIds.Contains)
         (fun spell -> dispatch <| ToggleSpell spell.Id)
     }
 
 let creationSection (model: Model) dispatch =
     let character = model.Character
-    let validationIssues = checkErrors character
     concat {
         fieldCard
-            "Identity"
-            "Lock in the hero concept before level-up opens."
+            "Character Creation"
+            "Choose your name and initial characteristics."
             (concat {
                 textField "Character name" "Used everywhere in the live summary." character.CharName (fun value -> dispatch (SetName value))
                         
                 requiredSelector BaseRaces.allBaseRaces.Values
-                    "Race" "Choose a race" "races" "race"
+                    "Race" "Choose a race" "race"
                     (character.CharacterLevel = 1)
                     (fun race -> baseRaceIdBySubraceId character.RaceId = race.Id)
                     (fun race -> dispatch <| SetSubrace (Seq.head <| Races.allSubracesByBaseRace[race.Id].Keys))
 
                 requiredSelector Races.allSubracesByBaseRace[baseRaceIdBySubraceId character.RaceId].Values
-                    "Subrce" "Choose a subrace" "subraces" "subrace"
+                    "Subrce" "Choose a subrace" "subrace"
                     (character.CharacterLevel = 1)
                     (fun race -> character.RaceId = race.Id)
                     (fun race -> dispatch <| SetSubrace race.Id)
 
                 requiredSelector Archetypes.allArchetypes.Values
-                    "Archetype" "Choose an archetype" "archetypes" "archetype"
+                    "Archetype" "Choose an archetype" "archetype"
                     (character.CharacterLevel = 1)
                     (fun archetype -> character.ArchetypeId = archetype.Id)
                     (fun archetype -> dispatch <| SetArchetype archetype.Id)
 
-                requiredSelector Traits.allTraits.Values
-                    "Trait" "Choose a trait (or leave it as None)" "traits" "trait"
+                requiredSelector (Traits.allTraits.Values |> Seq.sortBy (fun tr -> if tr.Name = "None" then "" else tr.Name))
+                    "Trait" "Choose a trait (or leave it as None)" "trait"
                     (character.CharacterLevel = 1)
                     (fun tr -> character.TraitId = tr.Id)
                     (fun tr -> dispatch <| SetTrait tr.Id)
@@ -263,19 +269,21 @@ let creationSection (model: Model) dispatch =
                     .Used(string character.AbilityBuy.SpentPoints)
                     .Remaining(string character.AbilityBuy.UnspentPoints)
                     .Elt()
-                forEach allAbilities (fun ability -> pointBuyRow character ability dispatch)
-                selectField
-                    "+3 bonus"
-                    "Must target a different ability than the +1 bonus."
-                    (string character.AbilityBuy.BonusPlusThree)
-                    (forEach allAbilities abilityOption)
-                    (fun value -> dispatch (SetBonusPlusThree(parseCase<Ability> value)))
-                selectField
-                    "+1 bonus"
-                    "Bolero will normalize duplicate choices, but the validation panel also calls it out."
-                    (string character.AbilityBuy.BonusPlusOne)
-                    (forEach allAbilities abilityOption)
-                    (fun value -> dispatch (SetBonusPlusOne(parseCase<Ability> value)))
+                grouping <| forEach allAbilities (fun ability -> pointBuyRow character ability dispatch)
+                grouping <| concat {
+                    selectField
+                        "+3 bonus"
+                        "Must target a different ability than the +1 bonus."
+                        (string character.AbilityBuy.BonusPlusThree)
+                        (forEach allAbilities abilityOption)
+                        (fun value -> dispatch (SetBonusPlusThree(parseCase<Ability> value)))
+                    selectField
+                        "+1 bonus"
+                        "Bolero will normalize duplicate choices, but the validation panel also calls it out."
+                        (string character.AbilityBuy.BonusPlusOne)
+                        (forEach allAbilities abilityOption)
+                        (fun value -> dispatch (SetBonusPlusOne(parseCase<Ability> value)))
+                }
             })
 
         fieldCard
@@ -315,13 +323,18 @@ let summarySection (model: Model) =
 
     concat {
         
-        cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
-            | true -> empty()
-            | false ->
-                fieldCard
-                    "Issues"
-                    "These must be resolved before level 1 can be locked."
-                    (forEach validationIssues validationChip)
+        // cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
+        //     | true -> empty()
+        //     | false ->                
+        //         Main.ErrorNotification()
+        //             .Text(String.concat "\n" validationIssues)
+        //             // .Hide(fun _ -> dispatch ClearSystemError)
+        //             .Elt()
+
+                // fieldCard
+                //     "Issues"
+                //     "These must be resolved before level 1 can be locked."
+                //     (forEach validationIssues validationChip)
 
         fieldCard
             "Live Sheet"
@@ -331,7 +344,6 @@ let summarySection (model: Model) =
                     .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
                     .Details(characterSummaryChips character model.UseLoreNames)
                     .Elt()
-                summaryRow "Status" (if model.Errors.IsEmpty then "Levelled character" else "Draft level 1 build")
                 summaryRow "Proficiency bonus" (character.ProficiencyBonus |> sprintf "%+i")
                 summaryRow "Initiative" (modifierText character.Initiative)
                 summaryRow "Hit points" (string character.HitPoints)
@@ -384,9 +396,10 @@ let summarySection (model: Model) =
 
     }
 let view (model: Model) dispatch =
+    let validationIssues = checkErrors model.Character
     let undoDisabled = List.isEmpty model.UndoStack
     Main()
-        .StatusText(statusText model)
+        // .StatusText(statusText model)
         .PrimaryActions(
             concat {
                 div {
@@ -420,11 +433,22 @@ let view (model: Model) dispatch =
         .SummaryContent(summarySection model)
         // .LevelUp(levelUpModal model dispatch)
         .Error(
+            
             cond model.SystemErrors <| function
-                | [] -> empty()
+                | [] -> 
+                    cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
+                    | true -> empty()
+                    | false ->                
+                        Main.ErrorNotification()
+                            .Text(String.concat "\n" validationIssues)
+                            .VisibleClass("display:none")
+                            // .Hide(fun _ -> dispatch ClearSystemError)
+                            .Elt()
                 | errs ->
                     Main.ErrorNotification()
                         .Text(String.concat "\n" errs)
                         .Hide(fun _ -> dispatch ClearSystemError)
-                        .Elt())
+                        .Elt()   
+            
+        )
         .Elt()

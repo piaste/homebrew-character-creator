@@ -3,6 +3,7 @@ module Bg3HomebrewCCreator.Domain.Character
 open FSharp.UMX
 open Types
 open Bg3HomebrewCCreator.Domain.Entities
+open Bg3HomebrewCCreator.Domain.Entities.Subclasses
 
 type SkillDef =
     {
@@ -109,6 +110,12 @@ type Character =
         member this.AllFeatIds = 
             this.LevelHistory
             |> List.collect (_.FeatId >> Option.toList)
+            
+        member this.AllClassPassiveIdsByClass = 
+            this.LevelHistory
+            |> List.groupBy (fun lr -> allSubclasses[lr.SubclassId].BaseClassId)
+            |> Map.ofSeq
+            |> Map.map (fun _ v -> Seq.collect _.ClassPassiveIds v)
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives

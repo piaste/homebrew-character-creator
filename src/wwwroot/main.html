@@ -1,14 +1,14 @@
 <div class="app-shell">
   <header class="hero-panel">
     <div>
-      <p class="eyebrow">D&amp;D 5E SPA Prototype</p>
-      <h1 class="hero-title">Forge of Heroes</h1>
+      <p class="eyebrow">A Baldur's Gate 3 overhaul mod by Havenii7</p>
+      <h1 class="hero-title">HomeBrew Character Creator</h1>
       <p class="hero-copy">
-        Build a level 1 character, persist it to localStorage, then drive the rest of the campaign with reversible level-ups.
+        Create your character for the most massive BG3 mod overhaul.
       </p>
     </div>
     <div class="hero-actions">${PrimaryActions}</div>
-    <p class="hero-status">${StatusText}</p>    
+    <!-- <p class="hero-status">${StatusText}</p>     -->
   </header>
 
   <div class="workspace">
@@ -19,6 +19,12 @@
   ${LevelUp}
 
   <div id="notification-area">${Error}</div>
+
+  <template id="Grouping">
+    <section class="section-card">
+      <div class="section-body">${Body}</div>
+    </section>
+  </template>
 
   <template id="SectionCard">
     <section class="section-card">
@@ -64,6 +70,7 @@
       </div>
       <div class="ability-controls">
         <select class="field-select compact" bind="${Score}">${Options}</select>
+      <div class="ability-controls">
         <div class="ability-bonuses">${BonusInfo}</div>
       </div>
     </div>
@@ -75,7 +82,7 @@
 
   <template id="ChoiceCard">
     <button class="choice-card ${ActiveClass}" onclick="${Action}">
-      <span class="choice-meta">${Meta}</span>
+      <span class="choice-meta display:none">${Meta}</span>
       <strong>${Title}</strong>
       <span>${Description}</span>
     </button>
@@ -133,28 +140,10 @@
     <div class="empty-state">${Text}</div>
   </template>
 
-  <template id="LevelUpModal">
-    <div class="modal-scrim">
-      <div class="modal-card">
-        <div class="section-head">
-          <div>
-            <h2>Level Up</h2>
-            <p>Choose the class for the new level, then add any spell or feat the prototype requires.</p>
-          </div>
-        </div>
-        <div class="section-body">${Body}</div>
-        <div class="modal-actions">
-          <button class="action-button secondary" onclick="${Cancel}">Cancel</button>
-          <button class="action-button primary" onclick="${Confirm}">Apply Level</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
   <template id="ErrorNotification">
     <div class="error-banner">
       <span>${Text}</span>
-      <button class="dismiss-button" onclick="${Hide}">Dismiss</button>
+      <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
     </div>
   </template>
 </div>

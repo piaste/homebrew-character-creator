@@ -176,6 +176,7 @@ let update load save message model =
 
     | ToggleSpell spellId ->
         apply <| fun character ->
+        // ignore if already picked
             { character with 
                 NextLevelUp.SpellIds = 
                     character.NextLevelUp.SpellIds.Toggle spellId

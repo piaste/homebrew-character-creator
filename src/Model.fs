@@ -57,12 +57,19 @@ let checkErrors (character: Character) =
             sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
         if character.SkillIds.Count <> NUM_SKILL_PROFICIENCIES then
              $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
+             
         let numSpellPicks = 
             nSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
         if character.NextLevelUp.SpellIds.Count <> numSpellPicks then
              $"Choose exactly {numSpellPicks} starting spells."
-        if character.NextLevelUp.ClassPassiveIds.Count <> 2 then
-             $"Choose exactly 2 class passives."
+
+        let featPicks = nFeatPicks character.NextLevelUp
+        if Option.count character.NextLevelUp.FeatId  <> featPicks then
+             $"Choose exactly {featPicks} class passives."
+
+        let cpicks = nPassivePicks character.NextLevelUp
+        if character.NextLevelUp.ClassPassiveIds.Count <> cpicks then
+             $"Choose exactly {cpicks} class passives."
     ]
 
 type Model =
