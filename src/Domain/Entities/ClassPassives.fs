@@ -29,6 +29,32 @@ let rec Duelist = {
     Grants = [ Passive.Buff <| StatModifiers.Create(attackRolls = 4)]
 }
 
+// CLERIC
+
+let rec Aegis = {
+    ClassId = cleric.Id
+    Id = % nameof Aegis
+    Grants = [ Simple "Advantage on CON saving throws" ]
+}
+
+let rec ``Blessed Resolve``  = {
+    ClassId = cleric.Id
+    Id = % nameof ``Blessed Resolve``
+    Grants = [ Simple "On kill or crit, gain a 9m Bless aura for 3 turns"]
+}
+
+let rec ``Blood for Blood``  = {
+    ClassId = cleric.Id
+    Id = % nameof ``Blood for Blood``
+    Grants = [ Simple "The first time you heal a creature every turn, gain stacking +1 crit range until your next crit" ]
+}
+
+let rec ``Consecrative Sacrifice``  = {
+    ClassId = cleric.Id
+    Id = % nameof ``Consecrative Sacrifice``
+    Grants = [ Simple $"{OncePerTurn} On kill or crit, heal 1d6xproficiency bonus in 9m AOE"]
+}
+
 
 // WIZARD
 

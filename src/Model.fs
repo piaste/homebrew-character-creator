@@ -35,9 +35,12 @@ let defaultCharacter =
 
         PreviousLevelHistory = []
         NextLevelUp = {
-            ClassLevel = 1
             SubclassId = Subclasses.champion.Id
+            ClassLevel = 1
+            
             SpellIds = Set.empty
+            CantripIds = Set.empty
+
             FeatId = None
             ClassPassiveIds = Set.empty
         }
@@ -59,17 +62,21 @@ let checkErrors (character: Character) =
              $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
              
         let numSpellPicks = 
-            nSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
+            nSpellPicks (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
         if character.NextLevelUp.SpellIds.Count <> numSpellPicks then
-             $"Choose exactly {numSpellPicks} starting spells."
+             $"Choose exactly {numSpellPicks} spells."
 
-        let featPicks = nFeatPicks character.NextLevelUp
-        if Option.count character.NextLevelUp.FeatId  <> featPicks then
-             $"Choose exactly {featPicks} class passives."
+        let numCantripPicks = nCantripPicks character.NextLevelUp
+        if character.NextLevelUp.CantripIds.Count <> numCantripPicks then
+             $"Choose exactly {numCantripPicks} cantrips."
 
-        let cpicks = nPassivePicks character.NextLevelUp
-        if character.NextLevelUp.ClassPassiveIds.Count <> cpicks then
-             $"Choose exactly {cpicks} class passives."
+        let numFeatPicks = nFeatPicks character.NextLevelUp
+        if Option.count character.NextLevelUp.FeatId  <> numFeatPicks then
+             $"Choose a feat."
+
+        let numCPassivePicks = nPassivePicks character.NextLevelUp
+        if character.NextLevelUp.ClassPassiveIds.Count <> numCPassivePicks then
+             $"Choose exactly {numCPassivePicks} class passives."
     ]
 
 type Model =
@@ -97,9 +104,9 @@ let statusText (model: Model) =
     match model.Errors with    
     | [] -> 
         let race = raceById character.RaceId
-        let clLevels = getClassLevels character
+        let clLevels = character.CurrentHistory.LevelsBySubclass
         let classNames = 
-            character.LevelHistory
+            character.CurrentHistory.Levels
             |> List.map (_.SubclassId >> subclassById >> _.Name)            
             |> List.distinct
             |> String.concat "/"

@@ -6,8 +6,7 @@
       <p class="hero-copy">
         Create your character for the most massive BG3 mod overhaul.
       </p>
-    </div>
-    <div class="hero-actions">${PrimaryActions}</div>
+    </div>    
     <!-- <p class="hero-status">${StatusText}</p>     -->
   </header>
 
@@ -36,10 +35,6 @@
       </div>
       <div class="section-body">${Body}</div>
     </section>
-  </template>
-
-  <template id="ActionButton">
-    <button class="action-button ${ToneClass} ${DisabledClass}" onclick="${Action}">${Text}</button>
   </template>
 
   <template id="TextField">
@@ -139,6 +134,14 @@
   <template id="EmptyState">
     <div class="empty-state">${Text}</div>
   </template>
+
+
+  <template id="ActionButton">
+    <div class="action-banner">
+      <button class="action-button ${ToneClass} ${DisabledClass}" onclick="${Action}">${Text}</button>
+    </div>
+  </template>
+
 
   <template id="ErrorNotification">
     <div class="error-banner">

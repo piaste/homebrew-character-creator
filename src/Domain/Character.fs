@@ -3,22 +3,20 @@ module Bg3HomebrewCCreator.Domain.Character
 open FSharp.UMX
 open Types
 open Bg3HomebrewCCreator.Domain.Entities
+open Bg3HomebrewCCreator.Domain.Entities.Classes
 open Bg3HomebrewCCreator.Domain.Entities.Subclasses
 
-type SkillDef =
-    {
-        Id: string
-        Name: string
-        Description: string
-    }
 
 type LevelRecord =
     {
-        ClassLevel: int
         SubclassId: string<subclassId>
+        ClassLevel: int
+
         ClassPassiveIds: Set<string<classPassiveId>>
-        SpellIds: Set<string<spellId>>
         FeatId: string<featId> option
+        
+        CantripIds: Set<string<cantripId>>
+        SpellIds: Set<string<spellId>>
     }
 
 type [<Measure>] pbuy
@@ -70,19 +68,61 @@ type Character =
         NextLevelUp: LevelRecord
     } with
 
-        member this.LevelHistory = 
-            this.NextLevelUp :: this.PreviousLevelHistory
+        member private this.History includeCurrentLevel = 
+            let levelHistory =
+                if includeCurrentLevel then 
+                    this.NextLevelUp :: this.PreviousLevelHistory
+                else
+                    this.PreviousLevelHistory
+            {|              
+                Levels = levelHistory
+
+                AllCantripIds = 
+                    levelHistory
+                    |> List.map _.CantripIds
+                    |> Set.unionMany
+
+                AllSpellIds = 
+                    levelHistory
+                    |> List.map _.SpellIds 
+                    |> Set.unionMany
+
+                AllFeatIds = 
+                    levelHistory
+                    |> List.collect (_.FeatId >> Option.toList)
                     
+                AllClassPassiveIdsByClass = 
+                    levelHistory
+                    |> List.groupBy (fun lr -> allSubclasses[lr.SubclassId].BaseClassId)
+                    |> Map.ofSeq
+                    |> Map.map (fun _ v -> Seq.collect _.ClassPassiveIds v)
+
+                LevelsBySubclass =
+                    levelHistory
+                    |> List.countBy (fun level -> level.SubclassId)
+                    |> List.sortByDescending snd
+                    |> Map.ofSeq
+
+            |}
+
+        member this.CurrentHistory = this.History true
+        member this.PreviousHistory = this.History false
+
         member this.ProficiencyBonus =
             if this.CharacterLevel <= 0 then 2 
             else 2 + (this.CharacterLevel - 1) / 4
 
-        member this.LevelsBySubclass =
-            this.LevelHistory
-            |> List.countBy (fun level -> level.SubclassId)
-            |> List.sortByDescending snd
+        member this.HighestSpellDC = 
+            this.CurrentHistory.LevelsBySubclass.Keys
+            |> Seq.map (fun scId -> allClasses[allSubclasses[scId].BaseClassId].SpellcastingAbility)
+            |> Seq.map this.AbilityModifier
+            |> Seq.max
+            |> (+) this.ProficiencyBonus
+            
+
         member this.CharacterLevel = 
-            List.length this.LevelHistory
+            List.length (this.CurrentHistory |> _.Levels)
+
         member this.Ability ab = 
             this.AbilityBuy.BoughtAbility ab + 
             this.StatModifiers.Abilities.GetOrDefault ab
@@ -101,21 +141,6 @@ type Character =
         member this.HitPoints = 
             12 + this.StatModifiers.``Base HP`` 
             + this.CharacterLevel * (8 + this.AbilityModifier CON + this.StatModifiers.``HP per level``)
-
-        member this.AllSpellIds = 
-            this.LevelHistory
-            |> List.map _.SpellIds 
-            |> Set.unionMany
-
-        member this.AllFeatIds = 
-            this.LevelHistory
-            |> List.collect (_.FeatId >> Option.toList)
-            
-        member this.AllClassPassiveIdsByClass = 
-            this.LevelHistory
-            |> List.groupBy (fun lr -> allSubclasses[lr.SubclassId].BaseClassId)
-            |> Map.ofSeq
-            |> Map.map (fun _ v -> Seq.collect _.ClassPassiveIds v)
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives

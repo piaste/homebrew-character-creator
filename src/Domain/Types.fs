@@ -116,18 +116,13 @@ type Passive =
             | Buff sm -> sm
             | _ -> StatModifiers.Zero
 
-// type Passive = {
-//     Description : string
-//     Effect : StatModifiers
-// } with 
-//     static member Simple description = { 
-//         Description = description; 
-//         Effect = StatModifiers.Zero 
-//     }
-//     static member Buff modif = { 
-//         Effect = modif
-//         Description = modif.ToString()
-//     }
+
+type SkillDef =
+    {
+        Id: string
+        Name: string
+        Description: string
+    }
 
 
 type [<Measure>] archetypeId
@@ -176,11 +171,11 @@ type [<Measure>] cantripId
 
 type CantripDef =
     { Id: string<cantripId>
-      Name: string
       Description: string
 
       Concentration: bool
       ActionCost: ActionCost }
+    member this.Name = UMX.untag this.Id
 
 type [<Measure>] spellId
 

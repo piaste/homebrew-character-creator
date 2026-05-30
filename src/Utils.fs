@@ -63,6 +63,9 @@ type Collections.Map<'K, 'V when 'K : comparison > with
     static member fromProp prop values = 
         Map [ for v in values -> prop v, v ]
     
+module Map =
+    let getOrDefault k (m : Map<_, _>) = m.GetOrDefault k
+
 type Set<'T when 'T : comparison> with
     member this.Toggle value = 
         if this.Contains value then this.Remove value else this.Add value

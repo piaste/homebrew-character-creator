@@ -11,6 +11,7 @@
     <Compile Include="Domain\Entities\Subraces.fs" />
     <Compile Include="Domain\Entities\Archetypes.fs" />
     <Compile Include="Domain\Entities\Traits.fs" />
+    <Compile Include="Domain\Entities\Skills.fs" />
     <Compile Include="Domain\Entities\Feats.fs" />
     <Compile Include="Domain\Entities\Cantrips.fs" />
     <Compile Include="Domain\Entities\Spells.fs" />

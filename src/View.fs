@@ -127,18 +127,15 @@ let pointBuyRow (character: Character) ability dispatch =
 
 let characterSummaryChips (character: Character) useLoreNames =
     let race = raceById character.RaceId
-    let subclassIds =
-        character.LevelHistory
-        |> List.map _.SubclassId
-        |> List.distinct
-        
-    let classTags = subclassIds |> List.map (classBySubclassId >> _.Name)
-    let subclassTags = subclassIds |> List.map (subclassById >> (fun sc -> sc.DisplayName useLoreNames) )
+    
+    let subclassTags = 
+        [ for KeyValue(sc, lvl) in character.CurrentHistory.LevelsBySubclass ->        
+            $"{Subclasses.allSubclasses[sc].DisplayName useLoreNames} {lvl}"
+        ]
     
     concat {
         chip $"Level {character.CharacterLevel}" "success"
         chip race.Name "accent"
-        forEach classTags (fun ct -> chip ct "neutral")
         forEach subclassTags (fun ct -> chip ct "neutral")
     }
 
@@ -181,12 +178,11 @@ let levelUpSection (model: Model) dispatch = concat {
     let subclass = subclassById subclassId
 
     let validSubclassesFor clId : seq<SubclassDef> =
-        getPreviousClassLevels character
-        |> Map.toSeq 
-        |> Seq.tryFind (fst >> classIdBySubclassId >> (=) clId)
+        character.PreviousHistory.LevelsBySubclass
+        |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0)
         |> function
-           | None | Some (_, 0) ->  Subclasses.allSubclassesByClass[clId].Values
-           | Some (sclId, _) -> [ subclassById sclId ]
+           | None ->  Subclasses.allSubclassesByClass[clId].Values
+           | Some sclId -> [ subclassById sclId ]
 
     let defaultSubclassFor = 
         validSubclassesFor >> Seq.head >> _.Id
@@ -207,25 +203,36 @@ let levelUpSection (model: Model) dispatch = concat {
         "Passives" "Choose two class-specific passives" "Passive"
         (nPassivePicks character.NextLevelUp)
         character.NextLevelUp.ClassPassiveIds.Count
-        (fun cp -> character.AllClassPassiveIdsByClass.GetOrElse(classId, []) |> Seq.contains cp.Id)
-        (fun cp -> dispatch <| ToggleClassPassive cp.Id)
+        (fun cp -> character.CurrentHistory.AllClassPassiveIdsByClass.GetOrElse(classId, []) |> Seq.contains cp.Id)
+        (fun cp -> dispatch <| ToggleClassPassive (classId, cp.Id))
 
     selector Feats.allFeats.Values
         "Feat" "Choose a feat" "Feat"
         (nFeatPicks character.NextLevelUp)
         (character.NextLevelUp.FeatId |> Option.count)
-        (fun feat -> character.AllFeatIds |> List.contains feat.Id)
+        (fun feat -> character.CurrentHistory.AllFeatIds |> List.contains feat.Id)
         (fun feat -> dispatch <| ToggleFeat feat.Id)
 
-    let numSpellPicks = nSpellPicksPerLevel subclass.CasterType in 
+    let numCantripPicks = nCantripPicks character.NextLevelUp in 
+    selector Cantrips.allCantrips.Values
+        "Cantrips" $"Choose {numCantripPicks} cantrips" "Cantrip"
+        numCantripPicks
+        character.NextLevelUp.CantripIds.Count
+        (_.Id >> character.CurrentHistory.AllCantripIds.Contains)
+        (fun cantrip -> dispatch <| ToggleCantrip cantrip.Id)
+
+    let numSpellPicks = nSpellPicks subclass.CasterType in 
     let spellList = if flexibleSpellPicks character.NextLevelUp then Some Versatile else subclass.SpellList
-    selector (spellList |> Option.map Spells.allSpellsInList |> Option.defaultValue (Map []) |> _.Values)
+    selector (spellList 
+              |> Option.map Spells.allSpellsInList
+              |> Option.defaultValue (Map []) 
+              |> _.Values)
         "Spells" $"Choose {numSpellPicks} spells" "Spell"
         numSpellPicks
         character.NextLevelUp.SpellIds.Count
-        (_.Id >> character.AllSpellIds.Contains)
+        (_.Id >> character.CurrentHistory.AllSpellIds.Contains)
         (fun spell -> dispatch <| ToggleSpell spell.Id)
-    }
+}
 
 let creationSection (model: Model) dispatch =
     let character = model.Character
@@ -295,56 +302,49 @@ let creationSection (model: Model) dispatch =
                     .Maximum(string 4)
                     .Label("skills")
                     .Elt()
-                forEach skills (fun skill ->
+                forEach Skills.skills (fun skill ->
                     let active = character.SkillIds.Contains skill.Id
                     choiceCard active "Skill" skill.Name skill.Description (fun _ -> dispatch (ToggleSkill skill.Id)))
             })
     }
 
-let summarySection (model: Model) =
+let summarySection (model: Model) dispatch =
     let character = model.Character
-    let validationIssues = checkErrors character
-    let level = character.CharacterLevel
-    let classBreakdown =
-        character.LevelsBySubclass
-        |> List.map (fun (classId, count) -> summaryRow ((subclassById classId).DisplayName model.UseLoreNames) (string count))
-
+    
     let featNames =
-        character.AllFeatIds
+        character.CurrentHistory.AllFeatIds
         |> Seq.map (fun fid -> Map.find fid Feats.allFeats |> _.Name)
         |> Seq.sort
         |> String.concat ", "
 
     let spellNames =
-        character.AllSpellIds        
+        character.CurrentHistory.AllSpellIds        
         |> Seq.map (fun sid -> Map.find sid Spells.allSpells |> _.Name)
         |> Seq.sort
         |> String.concat ", "
 
     concat {
         
-        // cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
-        //     | true -> empty()
-        //     | false ->                
-        //         Main.ErrorNotification()
-        //             .Text(String.concat "\n" validationIssues)
-        //             // .Hide(fun _ -> dispatch ClearSystemError)
-        //             .Elt()
-
-                // fieldCard
-                //     "Issues"
-                //     "These must be resolved before level 1 can be locked."
-                //     (forEach validationIssues validationChip)
-
         fieldCard
             "Live Sheet"
-            "The right rail updates from the current local state."
+            ""
             (concat {
+
+                label {
+                    attr.``class`` "checkbox"
+                    input {
+                        attr.``type`` "checkbox"
+                        attr.``id`` "lorenames-toggle"
+                        bind.``checked`` model.UseLoreNames (dispatch << ToggleLoreNames)
+                    }
+                    "Use lore-based subclass names"
+                }
                 Main.Nameplate()
                     .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
                     .Details(characterSummaryChips character model.UseLoreNames)
                     .Elt()
                 summaryRow "Proficiency bonus" (character.ProficiencyBonus |> sprintf "%+i")
+                summaryRow "Highest Spell DC" (modifierText character.HighestSpellDC)
                 summaryRow "Initiative" (modifierText character.Initiative)
                 summaryRow "Hit points" (string character.HitPoints)
                 cond (character.CharacterLevel = 1) <| function
@@ -360,28 +360,26 @@ let summarySection (model: Model) =
                 summaryRow (abilityAbbreviation ability) $"{score} ({modifierText <| character.AbilityModifier ability})"))
 
         fieldCard
-            "Progression"
-            "Class levels, skills, spells, and feats all come from the same persisted draft."
+            "Talents"
+            "All skills, spells, and assorted benefits gained."
             (concat {
-                cond classBreakdown.IsEmpty <| function
-                    | true -> summaryRow "Class levels" "No levels assigned yet"
-                    | false -> concat { for row in classBreakdown do row }
-                summaryRow "Skills" (character.SkillIds |> Seq.map (skillById skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
+                summaryRow "Skills" (character.SkillIds |> Seq.map (skillById Skills.skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
                 summaryRow "Spells" (if String.IsNullOrWhiteSpace spellNames then "None" else spellNames)
                 summaryRow "Feats" (if String.IsNullOrWhiteSpace featNames then "None" else featNames)
-                forEach (getRacialPassives character) <| fun txt -> summaryRow "Race" txt
-                forEach (getClassPassives character) <| fun txt -> summaryRow "Class" txt
+                forEach (getAllPassiveDescriptions character) <| fun (source, desc) -> summaryRow source desc
             })
 
         fieldCard
             "Timeline"
             "Every confirmed level is recorded below."
-            (forEach character.LevelHistory (fun levelRecord ->
+            (forEach character.PreviousHistory.Levels (fun levelRecord ->
                 let classDef = classBySubclassId levelRecord.SubclassId
                 let detail =
                     [
-                        // levelRecord.FeatId |> Option.map (choiceById feats >> fun feat -> $"Feat: {feat.Name}")
-                        // levelRecord.SpellId |> Option.map (choiceById spells >> fun spell -> $"Spell: {spell.Name}")
+                        levelRecord.FeatId |> Option.bind Feats.allFeats.TryFind |> Option.map _.Name
+                        yield! levelRecord.ClassPassiveIds |> Seq.map (ClassPassives.allClassPassives.TryFind >> Option.map _.Name)
+                        yield! levelRecord.CantripIds |> Seq.map (Cantrips.allCantrips.TryFind >> Option.map _.Name)
+                        yield! levelRecord.SpellIds |> Seq.map (Spells.allSpells.TryFind >> Option.map _.Name)
                     ]
                     |> List.choose id
                     |> function
@@ -397,22 +395,19 @@ let summarySection (model: Model) =
     }
 let view (model: Model) dispatch =
     let validationIssues = checkErrors model.Character
-    let undoDisabled = List.isEmpty model.UndoStack
-    Main()
-        // .StatusText(statusText model)
-        .PrimaryActions(
+    Main()       
+        .BuilderContent(
             concat {
-                div {
-                    input {
-                        attr.``type`` "checkbox"
-                        attr.``id`` "lorenames-toggle"
-                        bind.``checked`` model.UseLoreNames (dispatch << ToggleLoreNames)
-                    }
-                    label {
-                        attr.``for`` "lorenames-toggle"
-                        "Use lore-based subclass names"
-                    }
-                }
+                cond (model.Character.CharacterLevel > 1) <| function
+                    | true -> empty()
+                    | _ -> creationSection model dispatch
+                levelUpSection model dispatch
+            })
+        .SummaryContent(summarySection model dispatch)
+        // .LevelUp(levelUpModal model dispatch)
+        .Error(
+
+            concat {
                 cond model.Errors <| function
                     | [] -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
                     | _ -> empty()
@@ -421,34 +416,26 @@ let view (model: Model) dispatch =
                     | false -> actionButton "Level Down" "primary" false (fun _ -> dispatch LevelDown)
                 cond model.UndoStack <| function
                     | [] -> empty()
-                    | _ -> actionButton "Undo" "secondary" undoDisabled (fun _ -> if not undoDisabled then dispatch Undo)
-            })
-        .BuilderContent(
-            concat {
-                cond (model.Character.CharacterLevel > 1) <| function
-                    | true -> empty()
-                    | _ -> creationSection model dispatch
-                levelUpSection model dispatch
-            })
-        .SummaryContent(summarySection model)
-        // .LevelUp(levelUpModal model dispatch)
-        .Error(
-            
-            cond model.SystemErrors <| function
-                | [] -> 
-                    cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
-                    | true -> empty()
-                    | false ->                
+                    | _ -> 
+                        concat {
+                            actionButton "Undo" "secondary" true (fun _ -> dispatch Undo)
+                            actionButton "Reset" "secondary" true (fun _ -> dispatch ResetCharacter)
+                        }
+                cond model.SystemErrors <| function
+                    | [] -> 
+                        cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
+                        | true -> empty()
+                        | false ->                
+                            Main.ErrorNotification()
+                                .Text(String.concat "\n" validationIssues)
+                                .VisibleClass("display:none")
+                                // .Hide(fun _ -> dispatch ClearSystemError)
+                                .Elt()
+                    | errs ->
                         Main.ErrorNotification()
-                            .Text(String.concat "\n" validationIssues)
-                            .VisibleClass("display:none")
-                            // .Hide(fun _ -> dispatch ClearSystemError)
-                            .Elt()
-                | errs ->
-                    Main.ErrorNotification()
-                        .Text(String.concat "\n" errs)
-                        .Hide(fun _ -> dispatch ClearSystemError)
-                        .Elt()   
-            
+                            .Text(String.concat "\n" errs)
+                            .Hide(fun _ -> dispatch ClearSystemError)
+                            .Elt()   
+            }
         )
         .Elt()

@@ -1921,13 +1921,7 @@ let zephyrMovement = {
 }
 
 type private Placeholder = class end
-let allSpells = 
-    Map [ 
-      for p in typeof<Placeholder>.DeclaringType.GetProperties() do        
-        if p.PropertyType = typeof<SpellDef> then
-            let spell = p.GetValue null :?> SpellDef
-            yield spell.Id, spell
-    ]
+let allSpells = getAll<Placeholder, SpellDef, spellId>()
 
 let allSpellsInList spellList = 
   if spellList = Versatile then allSpells else

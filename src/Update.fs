@@ -26,14 +26,16 @@ type Message =
     | ToggleSkill of string
 
     | SetSubclass of string<subclassId>
-    | ToggleClassPassive of string<classPassiveId>
+    | ToggleClassPassive of string<classId> * string<classPassiveId>
     | ToggleFeat of string<featId>
+    | ToggleCantrip of string<cantripId>
     | ToggleSpell of string<spellId>
 
     | LevelUp
     | LevelDown
     
     | Undo
+    | ResetCharacter
     | SavedState
     | PersistFailed of string
     | ClearSystemError
@@ -114,17 +116,19 @@ let update load save message model =
         apply <| fun character -> 
 
             let previousMaxLevelInSubclass =    
-                getPreviousClassLevels character
-                |> Map.tryFind subclassId
-                |> Option.defaultValue 0
+                character.PreviousHistory.LevelsBySubclass
+                |> Map.getOrDefault subclassId
             {
                 character with
                     NextLevelUp = { 
                         SubclassId = subclassId
                         ClassLevel = previousMaxLevelInSubclass + 1
+                        
                         FeatId = None
-                        SpellIds = Set.empty
                         ClassPassiveIds = Set.empty
+
+                        CantripIds = Set.empty
+                        SpellIds = Set.empty
                     }
             }
 
@@ -174,22 +178,39 @@ let update load save message model =
                     character.SkillIds.Toggle skillId
             } 
 
+    | ToggleCantrip cantripId ->
+        apply <| fun character ->
+            // ignore if already picked
+            if character.PreviousHistory.AllCantripIds.Contains cantripId then character else
+
+            { character with 
+                NextLevelUp.CantripIds = 
+                    character.NextLevelUp.CantripIds.Toggle cantripId
+            }
+
     | ToggleSpell spellId ->
         apply <| fun character ->
-        // ignore if already picked
+            // ignore if already picked
+            if character.PreviousHistory.AllSpellIds.Contains spellId then character else
+
             { character with 
                 NextLevelUp.SpellIds = 
                     character.NextLevelUp.SpellIds.Toggle spellId
             }
 
-    | ToggleClassPassive cpId ->
+    | ToggleClassPassive (clId, cpId) ->
         apply <| fun character ->
+
+            if character.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(clId, []) |> Seq.contains cpId then character else
+
             { character with 
                 NextLevelUp.ClassPassiveIds = 
                     character.NextLevelUp.ClassPassiveIds.Toggle cpId
             }
     | ToggleFeat featId ->
         apply <| fun character ->
+            if character.PreviousHistory.AllFeatIds |> List.contains featId then character else
+
             { character with 
                 NextLevelUp.FeatId = 
                             if character.NextLevelUp.FeatId = Some featId then None
@@ -219,6 +240,9 @@ let update load save message model =
             nextModel, saveCmd save nextModel
         | [] ->
             model, Cmd.none
+
+    | ResetCharacter -> 
+        apply <| fun _ -> Model.Initial.Character
 
     | SavedState ->
         model, Cmd.none
