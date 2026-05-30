@@ -17,14 +17,16 @@ type Message =
     | ToggleLoreNames of bool
 
     | SetName of string
-    | SetRace of string<subraceId>
-    | SetSubclass of string<subclassId>
+    | SetSubrace of string<subraceId>
     | SetArchetype of string<archetypeId>
     | SetTrait of string<traitId>
     | SetAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | ToggleSkill of string
+
+    | SetSubclass of string<subclassId>
+    | ToggleClassPassive of string<classPassiveId>
     | ToggleFeat of string<featId>
     | ToggleSpell of string<spellId>
 
@@ -78,7 +80,9 @@ let update load save message model =
         { model with Page = page }, Cmd.none
 
     | LoadState ->
-        model, Cmd.OfAsync.either load () LoadedState (fun ex -> PersistFailed $"Unable to restore local data: {ex.Message}")
+        model, Cmd.OfAsync.either load () 
+                    LoadedState 
+                    (PersistFailed << sprintf "Unable to restore local data: %s" << _.Message)
 
     | LoadedState None ->
         { model with Loaded = true }, Cmd.none
@@ -97,7 +101,7 @@ let update load save message model =
     | SetName name ->
         apply <| fun character -> { character with CharName = name }
 
-    | SetRace race ->
+    | SetSubrace race ->
         apply <| fun character -> { character with RaceId = race }
 
     | SetArchetype atId -> 
@@ -108,15 +112,19 @@ let update load save message model =
 
     | SetSubclass subclassId ->
         apply <| fun character -> 
-            // TODO: enforce one subclass per class, support level up
 
+            let previousMaxLevelInSubclass =    
+                getPreviousClassLevels character
+                |> Map.tryFind subclassId
+                |> Option.defaultValue 0
             {
                 character with
                     NextLevelUp = { 
-                        character.NextLevelUp with
-                            ClassLevel = 1
-                            SubclassId = subclassId
-                            SpellIds = Set.empty
+                        SubclassId = subclassId
+                        ClassLevel = previousMaxLevelInSubclass + 1
+                        FeatId = None
+                        SpellIds = Set.empty
+                        ClassPassiveIds = Set.empty
                     }
             }
 
@@ -161,32 +169,30 @@ let update load save message model =
 
     | ToggleSkill skillId ->
         apply <| fun character ->
-            let updatedSkills =
-                character.SkillIds.Toggle skillId
-
-            { character with SkillIds = withDebug updatedSkills }            
+            { character with 
+                SkillIds = 
+                    character.SkillIds.Toggle skillId
+            } 
 
     | ToggleSpell spellId ->
         apply <| fun character ->
-            let updatedSpells =
-                character.NextLevelUp.SpellIds.Toggle spellId
-
             { character with 
-                NextLevelUp = 
-                    { character.NextLevelUp with 
-                        SpellIds = withDebug updatedSpells 
-                    }
+                NextLevelUp.SpellIds = 
+                    character.NextLevelUp.SpellIds.Toggle spellId
             }
 
+    | ToggleClassPassive cpId ->
+        apply <| fun character ->
+            { character with 
+                NextLevelUp.ClassPassiveIds = 
+                    character.NextLevelUp.ClassPassiveIds.Toggle cpId
+            }
     | ToggleFeat featId ->
         apply <| fun character ->
             { character with 
-                NextLevelUp = 
-                    { character.NextLevelUp with 
-                        FeatId = 
+                NextLevelUp.FeatId = 
                             if character.NextLevelUp.FeatId = Some featId then None
                             else Some featId
-                    }
             }
 
     | LevelUp ->
@@ -217,7 +223,7 @@ let update load save message model =
         model, Cmd.none
 
     | PersistFailed message ->
-        { model with SystemErrors = [ message ] }, Cmd.none
+        { model with Loaded = true; SystemErrors = [ message ] }, Cmd.none
 
     
     | ClearSystemError -> 

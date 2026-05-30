@@ -15,6 +15,7 @@ type LevelRecord =
     {
         ClassLevel: int
         SubclassId: string<subclassId>
+        ClassPassiveIds: Set<string<classPassiveId>>
         SpellIds: Set<string<spellId>>
         FeatId: string<featId> option
     }
@@ -110,7 +111,7 @@ type Character =
             |> List.collect (_.FeatId >> Option.toList)
             
         member this.StatModifiers = 
-            [ yield! Races.allRaces[this.RaceId].RacialPassives
+            [ yield! Races.allSubraces[this.RaceId].RacialPassives
               yield! Archetypes.allArchetypes[this.ArchetypeId].Grants
               yield! Traits.allTraits[this.TraitId].Grants
             ]

@@ -63,3 +63,7 @@ type Collections.Map<'K, 'V when 'K : comparison > with
 type Set<'T when 'T : comparison> with
     member this.Toggle value = 
         if this.Contains value then this.Remove value else this.Add value
+
+let [<Literal>] ACTION = "🟢" 
+let [<Literal>] BONUS_ACTION = "🔺" 
+let [<Literal>] REACTION = "♦️" 

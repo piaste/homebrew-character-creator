@@ -23,7 +23,5 @@ let ironBreaker : ArchetypeDef = {
 }
 
 
-
-
 type private Placeholder = class end
 let allArchetypes = getAll<Placeholder, ArchetypeDef, archetypeId>()

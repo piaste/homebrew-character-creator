@@ -3,6 +3,32 @@ open FSharp.UMX
 
 // Basics
 
+type ActionCost =
+    | Action
+    | BonusAction
+    | Reaction
+    | FreeAction
+    override this.ToString() = 
+        match this with
+        | Action -> ACTION
+        | BonusAction -> BONUS_ACTION
+        | Reaction -> REACTION
+        | FreeAction -> "♾️"
+
+type Frequency = 
+    | AtWill
+    | OncePerTurn
+    | OncePerCombat
+    | OncePerShortRest
+    | OncePerLongRest
+    override this.ToString() =
+        match this with
+        | AtWill -> ""
+        | OncePerTurn -> " [1/turn]"
+        | OncePerCombat -> " [1/combat]"
+        | OncePerShortRest -> " [1/short rest]"
+        | OncePerLongRest -> " [1/long rest]"
+
 type Ability =
     | STR
     | DEX
@@ -10,7 +36,6 @@ type Ability =
     | INT
     | WIS
     | CHA
-
 let allAbilities =
     [ STR;DEX;CON;INT;WIS;CHA ]
 
@@ -29,6 +54,21 @@ type StatModifiers = {
     static member Zero = { Abilities = Map []; ``Attack rolls`` = 0; Speed = 0.; 
     ``Critical Range`` = 0; ``Magic Critical Range`` = 0; 
     AC = 0; DR = 0; Initiative = 0; ``HP per level`` = 0; ``Base HP`` = 0 }
+    
+    static member Create(?abilities, ?attackRolls, ?speed, ?criticalRange, ?magicCriticalRange, ?ac, ?dr, ?initiative, ?hpPerLvl, ?baseHp) = 
+        let inline (?|) v f = v |> Option.defaultValue (f StatModifiers.Zero)
+        {
+            Abilities = abilities ?| _.Abilities
+            ``Attack rolls`` = attackRolls ?| _.``Attack rolls``
+            Speed = speed ?| _.Speed
+            ``Critical Range`` = criticalRange ?| _.``Critical Range``
+            ``Magic Critical Range`` = magicCriticalRange ?| _.``Magic Critical Range``
+            AC = ac ?| _.AC
+            DR = dr ?| _.DR
+            Initiative = initiative ?| _.Initiative
+            ``HP per level``  = hpPerLvl ?| _.``HP per level`` 
+            ``Base HP``  = baseHp ?| _.``Base HP`` 
+        }
     static member (+) (s1, s2) = {
         ``Attack rolls`` = s1.``Attack rolls`` + s2.``Attack rolls``
         Speed = s1.Speed + s2.Speed
@@ -47,26 +87,47 @@ type StatModifiers = {
     override this.ToString() = 
         [
             for KeyValue(ab, modif) in this.Abilities do
-                yield sprintf "%s %A" (modifierText modif) ab
+                if modif <> 0 then 
+                    yield sprintf "%s %A" (modifierText modif) ab
 
             for p in this.GetType().GetProperties() do
                 if p.PropertyType = typeof<int> then
-                   yield sprintf "%s to %s" 
+                    let score = p.GetValue this :?> int
+                    if score <> 0 then 
+                        yield sprintf "%s to %s" 
                             (modifierText <| (p.GetValue this :?> int))
                             p.Name
         ]
         |> String.concat "\n"
 
+type Passive = 
+    | Simple of string
+    | Buff of StatModifiers
+    | Power of ActionCost * Frequency * string
+    with 
+        member this.Description = 
+            match this with
+            | Simple txt -> txt
+            | Buff sm -> sm.ToString()
+            | Power (cost, freq, txt) -> $"{cost}{freq}: {txt}"
 
-type Passive = {
-    Description : string
-    Effect : StatModifiers
-} with 
-    static member Simple description = { Description = description; Effect = StatModifiers.Zero }
-    static member Buff modif = { 
-        Effect = modif
-        Description = modif.ToString()
-    }
+        member this.Effect = 
+            match this with
+            | Buff sm -> sm
+            | _ -> StatModifiers.Zero
+
+// type Passive = {
+//     Description : string
+//     Effect : StatModifiers
+// } with 
+//     static member Simple description = { 
+//         Description = description; 
+//         Effect = StatModifiers.Zero 
+//     }
+//     static member Buff modif = { 
+//         Effect = modif
+//         Description = modif.ToString()
+//     }
 
 
 type [<Measure>] archetypeId
@@ -86,11 +147,16 @@ type TraitDef = GrantsPassives<traitId>
 type FeatDef = GrantsPassives<featId>
 
 
-
-
 // Races
-type [<Measure>] subraceId
 type [<Measure>] baseRaceId
+type [<Measure>] subraceId
+
+type BaseRaceDef = 
+    {
+        Id : string<baseRaceId>
+    }
+    member this.Name = UMX.untag this.Id
+    member this.Description = UMX.untag this.Id
 
 type SubraceDef =
     {
@@ -105,13 +171,6 @@ type SubraceDef =
 // Cantrips and spells
 
 type SpellList = Versatile | Divine | Primal | Arcane | Innate | Bargained
-
-type ActionCost =
-    | Action
-    | BonusAction
-    | Reaction
-    | FreeAction
-
 
 type [<Measure>] cantripId
 
@@ -177,3 +236,17 @@ type SubclassDef =
             match this.CasterType with
             | Martial -> None
             | FullCaster sl | HalfCaster sl -> Some sl
+
+
+type [<Measure>] classPassiveId
+
+type ClassPassiveDef = {
+    ClassId : string<classId>
+    Id : string<classPassiveId>
+    Grants: Passive list
+} with
+    member this.Name = UMX.untag this.Id
+    member this.Description = 
+        this.Grants |> List.map _.Description |> String.concat "\n"
+
+

@@ -1,1 +1,0 @@
-module Bg3HomebrewCCreator.Domain.Entities.Passives

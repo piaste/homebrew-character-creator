@@ -39,6 +39,7 @@ let defaultCharacter =
             SubclassId = Subclasses.champion.Id
             SpellIds = Set.empty
             FeatId = None
+            ClassPassiveIds = Set.empty
         }
     }
 
@@ -54,14 +55,14 @@ let checkErrors (character: Character) =
             sprintf "Point buy exceeds 27 points. (%i excess points)" (-1 * character.AbilityBuy.UnspentPoints)
         if character.AbilityBuy.UnspentPoints > 0<pbuy> then
             sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
-        // if character.BonusPlusThree = character.BonusPlusOne then
-        //     "+3 and +1 bonuses must target different abilities."
         if character.SkillIds.Count <> NUM_SKILL_PROFICIENCIES then
              $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
         let numSpellPicks = 
             nSpellPicksPerLevel (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
         if character.NextLevelUp.SpellIds.Count <> numSpellPicks then
              $"Choose exactly {numSpellPicks} starting spells."
+        if character.NextLevelUp.ClassPassiveIds.Count <> 2 then
+             $"Choose exactly 2 class passives."
     ]
 
 type Model =

@@ -7,7 +7,8 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="Domain\Types.fs" />
-    <Compile Include="Domain\Entities\Races.fs" />
+    <Compile Include="Domain\Entities\BaseRaces.fs" />
+    <Compile Include="Domain\Entities\Subraces.fs" />
     <Compile Include="Domain\Entities\Archetypes.fs" />
     <Compile Include="Domain\Entities\Traits.fs" />
     <Compile Include="Domain\Entities\Feats.fs" />
@@ -15,7 +16,7 @@
     <Compile Include="Domain\Entities\Spells.fs" />
     <Compile Include="Domain\Entities\Classes.fs" />
     <Compile Include="Domain\Entities\Subclasses.fs" />
-    <Compile Include="Domain\Entities\Passives.fs" />
+    <Compile Include="Domain\Entities\ClassPassives.fs" />
     <Compile Include="Domain\Character.fs" />
     <Compile Include="Domain\Entities.fs" />
     <Compile Include="Domain\Fetchers.fs" />

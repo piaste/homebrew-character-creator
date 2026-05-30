@@ -19,7 +19,7 @@ let router = Router.infer SetPage (fun model -> model.Page)
 
 let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
-    let storageKey = "forge-of-heroes-state"
+    let storageKey = "homebrew-character-creator-state"
 
     let load () = async {
         let jsRuntime = getJsRuntime ()

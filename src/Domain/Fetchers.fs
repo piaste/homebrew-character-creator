@@ -9,8 +9,9 @@ open Entities.Subclasses
 
 let classById x = allClasses[x]
 
-let raceById x = allRaces[x]
+let raceById x = allSubraces[x]
 
+let baseRaceIdBySubraceId = raceById >> _.BaseRaceId
 let subclassById x = 
     allSubclasses.Item x
 
@@ -36,7 +37,7 @@ let getClassLevels (character : Character) = groupLevelsByClass character.LevelH
 let getPreviousClassLevels (character : Character) = groupLevelsByClass character.PreviousLevelHistory
 
 let getRacialPassives (character : Character) = 
-    [ for t in allRaces[character.RaceId].RacialPassives do
+    [ for t in allSubraces[character.RaceId].RacialPassives do
         yield t.Description
     ]
 let getClassPassives (character : Character) = 
@@ -51,8 +52,11 @@ let levelUpDefault character =
     { character with 
         PreviousLevelHistory = character.LevelHistory
         NextLevelUp = { 
-            character.NextLevelUp with 
-                ClassLevel = character.NextLevelUp.ClassLevel + 1
+            SubclassId = character.NextLevelUp.SubclassId
+            ClassLevel = character.NextLevelUp.ClassLevel + 1
+            SpellIds = Set.empty
+            FeatId = None
+            ClassPassiveIds = Set.empty
         }
     }
 

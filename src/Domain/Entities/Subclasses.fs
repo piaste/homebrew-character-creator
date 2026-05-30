@@ -50,4 +50,4 @@ let allSubclassesByClass =
     allSubclasses.Values
     |> Seq.groupBy _.BaseClassId
     |> Map.ofSeq
-    |> Map.map (fun _ v -> Map.fromProp _.Id v)
+    |> Map.map (fun _ v -> Map.fromProp (_.Id : SubclassDef -> string<subclassId>) v)

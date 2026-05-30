@@ -81,7 +81,7 @@ let choiceCard isActive (meta: string) (title: string) (description: string) (ac
         .ActiveClass(if isActive then "active" else "")
         .Meta(meta)
         .Title(title)
-        .Description(description)
+        .Description(if description = title then "" else description)
         .Action(action)
         .Elt()
 
@@ -173,23 +173,35 @@ let levelUpSection (model: Model) dispatch = concat {
     let classId = classIdBySubclassId subclassId
     let subclass = subclassById subclassId
 
+    let validSubclassesFor clId : seq<SubclassDef> =
+        getPreviousClassLevels character
+        |> Map.toSeq 
+        |> Seq.tryFind (fst >> classIdBySubclassId >> (=) clId)
+        |> function
+           | None | Some (_, 0) ->  Subclasses.allSubclassesByClass[clId].Values
+           | Some (sclId, _) -> [ subclassById sclId ]
+
+    let defaultSubclassFor = 
+        validSubclassesFor >> Seq.head >> _.Id
+
     requiredSelector Classes.allClasses.Values
         "Class" "Choose the class for your next level" "classes" "class"
         true
         (fun cl -> classIdBySubclassId character.NextLevelUp.SubclassId = cl.Id)
-        (fun cl -> dispatch <| SetSubclass (getDefaultSubclassId cl.Id))
+        (fun cl -> dispatch <| SetSubclass (defaultSubclassFor cl.Id))
 
-    let validSubclasses : seq<SubclassDef> =
-        if (getPreviousClassLevels character).Keys 
-            |> Seq.map classIdBySubclassId
-            |> Seq.contains classId
-        then [ subclassById subclassId ]
-        else Subclasses.allSubclassesByClass[classId].Values
-    requiredSelector validSubclasses
+    requiredSelector (validSubclassesFor classId)
         "Subclass" "Choose a subclass for your next level" "subclasses" "subclass"
         true
         (fun subclass -> character.NextLevelUp.SubclassId = subclass.Id)
         (fun subclass -> dispatch <| SetSubclass subclass.Id)
+
+    selector ClassPassives.allPassivesByClass[classId].Values
+        "Passives" "Choose two class-specific passives" "classPassives" "Passive"
+        (nPassivePicks character.NextLevelUp)
+        character.NextLevelUp.ClassPassiveIds.Count
+        (fun cp -> character.NextLevelUp.ClassPassiveIds.Contains cp.Id)
+        (fun cp -> dispatch <| ToggleClassPassive cp.Id)
 
     selector Feats.allFeats.Values
         "Feat" "Choose a feat" "feats" "Feat"
@@ -218,21 +230,27 @@ let creationSection (model: Model) dispatch =
             (concat {
                 textField "Character name" "Used everywhere in the live summary." character.CharName (fun value -> dispatch (SetName value))
                         
-                requiredSelector Races.allRaces.Values
+                requiredSelector BaseRaces.allBaseRaces.Values
                     "Race" "Choose a race" "races" "race"
-                    (character.CharacterLevel = 0)
+                    (character.CharacterLevel = 1)
+                    (fun race -> baseRaceIdBySubraceId character.RaceId = race.Id)
+                    (fun race -> dispatch <| SetSubrace (Seq.head <| Races.allSubracesByBaseRace[race.Id].Keys))
+
+                requiredSelector Races.allSubracesByBaseRace[baseRaceIdBySubraceId character.RaceId].Values
+                    "Subrce" "Choose a subrace" "subraces" "subrace"
+                    (character.CharacterLevel = 1)
                     (fun race -> character.RaceId = race.Id)
-                    (fun race -> dispatch <| SetRace race.Id)
+                    (fun race -> dispatch <| SetSubrace race.Id)
 
                 requiredSelector Archetypes.allArchetypes.Values
                     "Archetype" "Choose an archetype" "archetypes" "archetype"
-                    (character.CharacterLevel = 0)
+                    (character.CharacterLevel = 1)
                     (fun archetype -> character.ArchetypeId = archetype.Id)
                     (fun archetype -> dispatch <| SetArchetype archetype.Id)
 
                 requiredSelector Traits.allTraits.Values
                     "Trait" "Choose a trait (or leave it as None)" "traits" "trait"
-                    (character.CharacterLevel = 0)
+                    (character.CharacterLevel = 1)
                     (fun tr -> character.TraitId = tr.Id)
                     (fun tr -> dispatch <| SetTrait tr.Id)
         })
@@ -274,29 +292,6 @@ let creationSection (model: Model) dispatch =
                     choiceCard active "Skill" skill.Name skill.Description (fun _ -> dispatch (ToggleSkill skill.Id)))
             })
     }
-
-let advancementSection (model: Model) dispatch =
-    let character = model.Character
-    // TODO: handle multiclass
-    let nextLevelText = sprintf "Level %i" (character.CharacterLevel + 1)
-    let nextFeatText = if character.CharacterLevel % 4 = 3 then "Feat at next level" else "No feat on next level"
-    fieldCard
-        "Advancement"
-        "The base sheet is now locked. Use level up for future choices, or undo to roll back."
-        (concat {
-            Main.LockedSummary()
-                .Name(character.CharName)
-                .Race((raceById character.RaceId).Name)
-                .Class((classBySubclassId character.NextLevelUp.SubclassId).Name)
-                .Subclass(
-                    let sc = subclassById character.NextLevelUp.SubclassId in 
-                    sc.DisplayName model.UseLoreNames
-                )
-                .Elt()
-            summaryRow "Next level" (string nextLevelText)
-            summaryRow "Prompt" nextFeatText
-            actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
-        })
 
 let summarySection (model: Model) =
     let character = model.Character
@@ -388,63 +383,23 @@ let summarySection (model: Model) =
                     .Elt()))
 
     }
-
-// let levelUpModal (model: Model) dispatch =
-//     cond model.LevelUp <| function
-//         | None -> empty()
-//         | Some draft ->
-//             let character = model.Character
-//             let classDef = classById draft.ClassId
-//             let featRequired = levelUpNeedsFeat character
-//             Main.LevelUpModal()
-//                 .Body(
-//                     concat {
-//                         selectField
-//                             "Class for the new level"
-//                             "Choose fighter or wizard for the multiclass test path."
-//                             draft.ClassId
-//                             (forEach classes (fun classOption -> fieldOption classOption.Id classOption.Name))
-//                             (fun value -> dispatch (SetLevelUpClass value))
-//                         cond classDef.IsSpellcaster <| function
-//                             | false -> empty()
-//                             | true ->
-//                                 selectField
-//                                     "Spell learned"
-//                                     "Spellcasting levels add one placeholder spell."
-//                                     (draft.SpellId |> Option.defaultValue "")
-//                                     (concat {
-//                                         fieldOption "" "Choose a spell"
-//                                         forEach spells (fun spell -> fieldOption spell.Id spell.Name)
-//                                     })
-//                                     (fun value -> dispatch (SetLevelUpSpell value))
-//                         cond featRequired <| function
-//                             | false -> empty()
-//                             | true ->
-//                                 selectField
-//                                     "Feat gained"
-//                                     "Every fourth character level grants a feat in this prototype."
-//                                     (draft.FeatId |> Option.defaultValue "")
-//                                     (concat {
-//                                         fieldOption "" "Choose a feat"
-//                                         forEach feats (fun feat -> fieldOption feat.Id feat.Name)
-//                                     })
-//                                     (fun value -> dispatch (SetLevelUpFeat value))
-//                     })
-//                 .Cancel(fun _ -> dispatch CancelLevelUp)
-//                 .Confirm(fun _ -> dispatch ApplyLevelUp)
-//                 .Elt()
-
 let view (model: Model) dispatch =
     let undoDisabled = List.isEmpty model.UndoStack
     Main()
         .StatusText(statusText model)
         .PrimaryActions(
             concat {
-                input {
-                    attr.``type`` "checkbox"
-                    bind.``checked`` model.UseLoreNames (dispatch << ToggleLoreNames)
+                div {
+                    input {
+                        attr.``type`` "checkbox"
+                        attr.``id`` "lorenames-toggle"
+                        bind.``checked`` model.UseLoreNames (dispatch << ToggleLoreNames)
+                    }
+                    label {
+                        attr.``for`` "lorenames-toggle"
+                        "Use lore-based subclass names"
+                    }
                 }
-
                 cond model.Errors <| function
                     | [] -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
                     | _ -> empty()
