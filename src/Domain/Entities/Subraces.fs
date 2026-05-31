@@ -11,7 +11,7 @@ let blackDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Acid damage"
-                Simple $"Acid Breath Cantrip: Action, 6m Cone Attack, 1d12 Acid damage and inflicts Acid"
+                Power(Action, OncePerTurn,  $"Acid Breath Cantrip")
             ]
         }
 
@@ -22,7 +22,7 @@ let blueDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Lightning damage"
-                Simple $"Lightning Breath Cantrip: Action, 6m Cone Attack, 1d12 Lightning damage and inflicts Shocked"
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip")
             ]
         }
 
@@ -33,7 +33,7 @@ let brassDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Simple $"Fire Breath Cantrip: Action, 6m Cone Attack, 1d12 Fire damage and inflicts Burning"
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
             ]
         }
 
@@ -44,7 +44,7 @@ let bronzeDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Lightning damage"
-                Simple $"Lightning Breath Cantrip: Action, 6m Cone Attack, 1d12 Lightning damage and inflicts Shocked"
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip")
             ]
         }
 
@@ -55,7 +55,7 @@ let copperDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Acid damage"
-                Simple $"Acid Breath Cantrip: Action, 6m Cone Attack, 1d12 Acid dmg and Acid"
+                Power(Action, OncePerTurn, $"Acid Breath Cantrip")
             ]
         }
 
@@ -66,7 +66,7 @@ let goldDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Simple $"Fire Breath Cantrip: Action, 6m Cone Attack, 1d12 Fire damage and inflicts Burning"
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
             ]
         }
 
@@ -77,7 +77,7 @@ let greenDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Poison damage"
-                Simple $"Poison Breath Cantrip: Action, 6m Cone Attack, 1d12 Poison damage and inflicts Poisoned"
+                Power(Action, OncePerTurn,  $"Poison Breath Cantrip")
             ]
         }
 
@@ -88,7 +88,7 @@ let redDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Simple $"Fire Breath Cantrip: Action, 6m Cone Attack, 1d12 Fire damage and inflicts Burning"
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
             ]
         }
 
@@ -99,7 +99,7 @@ let silverDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Cold damage"
-                Simple $"Cold Breath Cantrip: Action, 6m Cone Attack, 1d12 Cold damage and inflicts Frostbite"
+                Power(Action, OncePerTurn,  $"Cold Breath Cantrip")
             ]
         }
 
@@ -110,7 +110,7 @@ let whiteDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Cold damage"
-                Simple $"Cold Breath Cantrip: Action, 6m Cone Attack, 1d12 Cold damage and inflicts Frostbite"
+                Power(Action, OncePerTurn,  $"Cold Breath Cantrip")
             ]
         }
 
@@ -121,7 +121,7 @@ let amethystDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Force damage"
-                Simple $"Force Breath Cantrip: Action, 6m Cone Attack, 1d12 Force damage and inflicts Dazed"
+                Power(Action, OncePerTurn,  $"Force Breath Cantrip")
             ]
         }
 
@@ -132,7 +132,7 @@ let crystalDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Radiant damage"
-                Simple $"Radiant Breath Cantrip: Action, 6m Cone Attack, 1d12 Radiant damage and inflicts Blind"
+                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip")
             ]
         }
 
@@ -143,7 +143,7 @@ let emeraldDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Psychic damage"
-                Simple $"Psychic Breath Cantrip: Action, 6m Cone Attack, 1d12 Psychic damage and inflicts Mental Fatigue"
+                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip")
             ]
         }
 
@@ -154,7 +154,7 @@ let sapphireDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Thunder damage"
-                Simple $"Thunder Breath Cantrip: Action, 6m Cone Attack, 1d12 Thunder damage and inflicts Reverberation"
+                Power(Action, OncePerTurn, $"Thunder Breath Cantrip")
             ]
         }
 
@@ -165,7 +165,7 @@ let topazDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Necrotic damage"
-                Simple $"Radiant Breath Cantrip: Action, 6m Cone Attack, 1d12 Radiant damage and inflicts Bone Chilled"
+                Power(Action, OncePerTurn, $"Radiant Breath Cantrip")
             ]
         }
 
@@ -175,8 +175,8 @@ let lolthSwornDrow =
             Name = "Lolth-Sworn Drow"
             BaseRaceId = Drow.Id
             RacialPassives = [
-                Simple $"Superior Darkvision: see in magical darkness"
-                Simple $"Advantage on Attack Rolls while shrouded in total darkness"
+                Simple $"Superior Darkvision"
+                Simple $"Advantage on Attack Rolls in total darkness"
                 Simple $"Cast Silence as an Action once per combat"
             ]
         }
@@ -187,8 +187,8 @@ let seldarineDrow =
             Name = "Seldarine Drow"
             BaseRaceId = Drow.Id
             RacialPassives = [
-                Simple $"Superior Darkvision: see in magical darkness"
-                Simple $"Advantage on Attack Rolls while shrouded in total darkness"
+                Simple $"Superior Darkvision"
+                Simple $"Advantage on Attack Rolls in total darkness"
                 Simple $"Cast Misty Step as a Bonus Action once per combat"
             ]
         }
@@ -199,7 +199,7 @@ let goldDwarf =
             Name = "Gold Dwarf"
             BaseRaceId = Dwarf.Id
             RacialPassives = [
-                Simple $"+2 to all damage dealt with weapons (excludes unarmed)"
+                Simple $"+2 to all damage dealt with weapons"
             ]
         }
 
@@ -209,7 +209,7 @@ let shieldDwarf =
             Name = "Shield Dwarf"
             BaseRaceId = Dwarf.Id
             RacialPassives = [
-                Simple $"Reduce all damage taken by 2 (stacks with resistances and other reduction)"
+                Buff <| StatModifiers.Create(dr = 2)
             ]
         }
 
@@ -220,8 +220,8 @@ let duergar =
             BaseRaceId = Dwarf.Id
             RacialPassives = [
                 Simple $"Cast Enlarge on self as a Bonus Action once per combat"
-                Simple $"Superior Darkvision: see in magical darkness"
-                Simple $"Advantage on Attack Rolls while shrouded in total darkness"
+                Simple $"Superior Darkvision"
+                Simple $"Advantage on Attack Rolls in total darkness"
             ]
         }
 
@@ -231,7 +231,7 @@ let highElf =
             Name = "High Elf"
             BaseRaceId = Elf.Id
             RacialPassives = [
-                Simple $"Advantage on all Wisdom based Ability Checks and Saving Throws"
+                Simple $"Advantage on Wisdom based Ability Checks and Saving Throws"
             ]
         }
 
@@ -263,7 +263,7 @@ let rockGnome =
             Name = "Rock Gnome"
             BaseRaceId = Gnome.Id
             RacialPassives = [
-                Simple $"Armour Class is increased by 2"
+                Buff <| StatModifiers.Create(ac = 2)
             ]
         }
 
@@ -273,8 +273,8 @@ let forestGnome =
             Name = "Forest Gnome"
             BaseRaceId = Gnome.Id
             RacialPassives = [
-                Simple $"Cast Dominate Beast as an Action once per round"
-                Simple $"Speak With Animals at all times"
+                Power (Action, OncePerTurn, "Dominate Beast")
+                Simple $"Speak With Animals"
                 Simple $"Immune to effects that would Restrain them"
             ]
         }
@@ -285,9 +285,9 @@ let deepGnome =
             Name = "Deep Gnome"
             BaseRaceId = Gnome.Id
             RacialPassives = [
-                Simple $"Cast Invisibility on self as a Bonus Action once per combat"
-                Simple $"Superior Darkvision: see in magical darkness"
-                Simple $"Advantage on Attack Rolls while shrouded in total darkness"
+                Power(BonusAction, OncePerCombat, "Invisibility on self")
+                Simple $"Superior Darkvision"
+                Simple $"Advantage on Attack Rolls in total darkness"
             ]
         }
 
@@ -298,7 +298,7 @@ let highHalfElf =
             BaseRaceId = ``Half-Elf``.Id
             RacialPassives = [
                 Buff(StatModifiers.Create(initiative = +2))
-                Simple $"Advantage on all Wisdom based Saving Throws"
+                Simple $"Advantage on Wisdom based Saving Throws"
             ]
         }
 
@@ -321,8 +321,8 @@ let drowHalfElf =
             BaseRaceId = ``Half-Elf``.Id
             RacialPassives = [                
                 Buff(StatModifiers.Create(initiative = +2))
-                Simple $"Superior Darkvision: see in magical darkness"
-                Simple $"Advantage on Attack Rolls while shrouded in total darkness"
+                Simple $"Superior Darkvision"
+                Simple $"Advantage on Attack Rolls in total darkness"
             ]
         }
 
@@ -344,7 +344,7 @@ let lightfootHalfling =
             Name = "Lightfoot Halfling"
             BaseRaceId = Halfling.Id
             RacialPassives = [
-                Simple $"Advantage on all Dexterity based Ability Checks and Saving Throws"
+                Simple $"Advantage on Dexterity based Ability Checks and Saving Throws"
             ]
         }
 
@@ -354,7 +354,7 @@ let strongheartHalfling =
             Name = "Strongheart Halfling"
             BaseRaceId = Halfling.Id
             RacialPassives = [
-                Simple $"Advantage on all Constitution based Ability Checks and Saving Throws"
+                Simple $"Advantage on Constitution based Ability Checks and Saving Throws"
             ]
         }
 
@@ -376,7 +376,7 @@ let asmodeusTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Simple $"Cast Fireball once per combat (scales with level)"
+                Power(Action, OncePerCombat, "Fireball")
             ]
         }
 
@@ -388,7 +388,7 @@ let mephistophelesTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Simple $"Cast Burning Hands as an Action once per combat (scales with level)"
+                Power(Action, OncePerCombat, "Burning Hands")
             ]
         }
 
@@ -400,12 +400,12 @@ let zarielTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Simple $"Cast Fire Shield once per combat (scales with level)"
+                Power (Action, OncePerCombat, "Fire Shield")
             ]
         }
 
 type private Placeholder = class end
-let allSubraces = getAll<Placeholder, SubraceDef, subraceId>()
+let allSubraces = getAll<Placeholder, SubraceDef, _>()
 let allSubracesByBaseRace = 
     allSubraces
     |> Map.toSeq

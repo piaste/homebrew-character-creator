@@ -8,8 +8,8 @@ open Bolero.Html
 open Bg3HomebrewCCreator.Domain.Entities
 open Domain.Types
 open Domain.Character
-open Domain.Things
-open Domain.Fetchers
+open Domain.PickRules
+open Domain.Helpers
 open Model
 open Update
 open Utils
@@ -24,13 +24,6 @@ let abilityName = function
     | WIS -> "Wisdom"
     | CHA -> "Charisma"
 
-let abilityAbbreviation = function
-    | STR -> "STR"
-    | DEX -> "DEX"
-    | CON -> "CON"
-    | INT -> "INT"
-    | WIS -> "WIS"
-    | CHA -> "CHA"
 
 type Main = Template<"wwwroot/main.html">
 
@@ -87,8 +80,6 @@ let chip (text: string) (tone: string) =
         .ToneClass(tone)
         .Elt()
 
-let validationChip text = chip text "warning"
-
 let choiceCard isActive (meta: string) (title: string) (description: string) (action: obj -> unit) =
     Main.ChoiceCard()
         .ActiveClass(if isActive then "active" else "")
@@ -113,14 +104,11 @@ let selectField (label: string) (helper: string) (currentValue: string) (options
         .Options(options)
         .Elt()
 
-let selectCase<'T> label helper (currentValue: 'T) options action = 
-    selectField label helper (currentValue.ToString()) options (parseCase<'T> >> action)
-
 let pointBuyRow (character: Character) ability dispatch =
     let finalScore = character.Ability ability
     Main.AbilityRow()
         .Ability(abilityName ability)
-        .Abbreviation(abilityAbbreviation ability)
+        .Abbreviation(ability.ToString())
         .Score(string (character.AbilityBuy.PointBuy[ability]), 
                fun value -> dispatch (SetAbilityScore(ability, Int32.Parse value)))
         .Options(forEach pointBuyOptions scoreOption)
@@ -231,7 +219,7 @@ let levelUpSection (model: Model) dispatch = concat {
         (fun cantrip -> dispatch <| ToggleCantrip cantrip.Id)
 
     let numSpellPicks = nSpellPicks subclass.CasterType in 
-    let spellList = if flexibleSpellPicks character.NextLevelUp then Some Versatile else subclass.SpellList
+    let spellList = if hasFlexibleSpellPicks character.NextLevelUp then Some Versatile else subclass.SpellList
     selector (spellList 
               |> Option.map Spells.allSpellsInList
               |> Option.defaultValue (Map []) 
@@ -250,7 +238,7 @@ let creationSection (model: Model) dispatch =
             "Character Creation"
             "Choose your name and initial characteristics."
             (concat {
-                textField "Character name" "Used everywhere in the live summary." character.CharName (fun value -> dispatch (SetName value))
+                textField "Character name" "" character.CharName (fun value -> dispatch (SetName value))
                         
                 requiredSelector BaseRaces.allBaseRaces.Values
                     "Race" "Choose a race" "race"
@@ -302,19 +290,17 @@ let creationSection (model: Model) dispatch =
                 }
             })
 
-        fieldCard
-            "Skills"
-            $"Choose 4 trained skills."
-            (concat {
-                Main.SelectionMeter()
-                    .Selected(string character.SkillIds.Count)
-                    .Maximum(string 4)
-                    .Label("skills")
-                    .Elt()
-                forEach Skills.skills (fun skill ->
-                    let active = character.SkillIds.Contains skill.Id
-                    choiceCard active "Skill" skill.Name skill.Description (fun _ -> dispatch (ToggleSkill skill.Id)))
-            })
+        selector Skills.skills
+            "Skills" "Choose 4 proficiencies" "Skill"
+            nSkillProfPicks character.SkillIds.Count
+            (_.Id >> character.SkillIds.Contains)
+            (_.Id >> ToggleSkill >> dispatch)
+
+        selector (Skills.skills |> List.where (_.Id >> character.SkillIds.Contains))
+            "Skills" "Choose 2 expertises" "Skill"
+            nSkillExpPicks character.SkillExpIds.Count
+            (_.Id >> character.SkillExpIds.Contains)
+            (_.Id >> ToggleSkillExp >> dispatch)
     }
 
 let summarySection (model: Model) dispatch =
@@ -323,14 +309,20 @@ let summarySection (model: Model) dispatch =
     let featNames =
         character.CurrentHistory.AllFeatIds
         |> Seq.map (fun fid -> Map.find fid Feats.allFeats |> _.Name)
-        |> Seq.sort
-        |> String.concat ", "
+
+    let cantripNames =
+        character.CurrentHistory.AllCantripIds        
+        |> Seq.map (fun sid -> Map.find sid Cantrips.allCantrips |> _.Name)
 
     let spellNames =
         character.CurrentHistory.AllSpellIds        
         |> Seq.map (fun sid -> Map.find sid Spells.allSpells |> _.Name)
-        |> Seq.sort
-        |> String.concat ", "
+
+    let summaryList title names = 
+        cond (Seq.isEmpty names) <| function
+        | true -> empty()
+        | false -> summaryRow title (names |> Seq.sort |> String.concat ", ")
+
 
     concat {
         
@@ -359,7 +351,7 @@ let summarySection (model: Model) dispatch =
 
                 forEach allAbilities (fun ability ->
                     let score = character.Ability ability
-                    summaryRow (abilityAbbreviation ability) $"{score} ({modifierText <| character.AbilityModifier ability})")
+                    summaryRow (ability.ToString()) $"{score} ({modifierText <| character.AbilityModifier ability})")
                 cond (character.CharacterLevel = 1) <| function
                     | true -> summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
                     | false -> empty()
@@ -370,9 +362,17 @@ let summarySection (model: Model) dispatch =
             "Talents"
             "All skills, spells, and assorted benefits gained."
             (concat {
-                summaryRow "Skills" (character.SkillIds |> Seq.map (skillById Skills.skills >> fun skill -> skill.Name) |> Seq.sort |> String.concat ", ")
-                summaryRow "Spells" (if String.IsNullOrWhiteSpace spellNames then "None" else spellNames)
-                summaryRow "Feats" (if String.IsNullOrWhiteSpace featNames then "None" else featNames)
+                summaryRow "Skills" (
+                    character.SkillIds 
+                    |> Seq.map (skillById Skills.skills >> fun skill -> 
+                        $"""{skill.Name}{if character.SkillExpIds.Contains skill.Id then "++" else ""}"""
+                    )
+                    |> Seq.sort
+                    |> String.concat ", "
+                )
+                summaryList "Cantrips" cantripNames
+                summaryList "Spells" spellNames
+                summaryList "Feats" featNames
                 forEach (getAllPassiveDescriptions character) <| fun (source, desc) -> summaryRow source desc
             })
 
@@ -416,11 +416,11 @@ let view (model: Model) dispatch =
 
             concat {
                 cond model.Errors <| function
-                    | [] -> actionButton "Level Up" "primary" false (fun _ -> dispatch LevelUp)
+                    | [] -> actionButton $"⬆️ Level {model.Character.CharacterLevel + 1}" "primary" false (fun _ -> dispatch LevelUp)
                     | _ -> empty()
                 cond model.Character.PreviousLevelHistory.IsEmpty <| function
                     | true -> empty()
-                    | false -> actionButton "Level Down" "primary" false (fun _ -> dispatch LevelDown)
+                    | false -> actionButton $"⬇️ Level {model.Character.CharacterLevel - 1}" "primary" false (fun _ -> dispatch LevelDown)
                 cond model.UndoStack <| function
                     | [] -> empty()
                     | _ -> 
@@ -434,7 +434,7 @@ let view (model: Model) dispatch =
                         | true -> empty()
                         | false ->                
                             Main.ErrorNotification()
-                                .Text(String.concat "\n" validationIssues)
+                                .Text(forEach validationIssues (fun vi -> p { vi } ))
                                 .VisibleClass("display:none")
                                 // .Hide(fun _ -> dispatch ClearSystemError)
                                 .Elt()

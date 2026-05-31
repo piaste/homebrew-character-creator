@@ -160,7 +160,10 @@ type SubraceDef =
         Name: string
         RacialPassives: Passive list        
     }
-    with member this.Description = this.Name
+    member this.Description = 
+        this.RacialPassives
+        |> List.map _.Description
+        |> String.concat "\n"
 
 
 // Cantrips and spells

@@ -6,7 +6,7 @@ open Elmish
 open Utils
 open Domain.Character
 open Domain.Types
-open Domain.Fetchers
+open Domain.Helpers
 open Model
 
 
@@ -24,6 +24,7 @@ type Message =
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | ToggleSkill of string
+    | ToggleSkillExp of string
 
     | SetSubclass of string<subclassId>
     | ToggleClassPassive of string<classId> * string<classPassiveId>
@@ -176,8 +177,16 @@ let update load save message model =
             { character with 
                 SkillIds = 
                     character.SkillIds.Toggle skillId
+                SkillExpIds = 
+                    character.SkillExpIds.Remove skillId
             } 
 
+    | ToggleSkillExp skillId ->
+        apply <| fun character ->
+            { character with 
+                SkillExpIds = 
+                    character.SkillExpIds.Toggle skillId
+            } 
     | ToggleCantrip cantripId ->
         apply <| fun character ->
             // ignore if already picked

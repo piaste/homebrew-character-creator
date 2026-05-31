@@ -19,8 +19,8 @@
     <Compile Include="Domain\Entities\Subclasses.fs" />
     <Compile Include="Domain\Entities\ClassPassives.fs" />
     <Compile Include="Domain\Character.fs" />
-    <Compile Include="Domain\Entities.fs" />
-    <Compile Include="Domain\Fetchers.fs" />
+    <Compile Include="Domain\PickRules.fs" />
+    <Compile Include="Domain\Helpers.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Update.fs" /><Compile Include="View.fs" />
     

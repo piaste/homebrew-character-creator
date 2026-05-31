@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Domain.Fetchers
+module Bg3HomebrewCCreator.Domain.Helpers
 
 open FSharp.UMX
 open Character

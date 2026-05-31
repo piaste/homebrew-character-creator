@@ -1,13 +1,11 @@
-module Bg3HomebrewCCreator.Domain.Things
+module Bg3HomebrewCCreator.Domain.PickRules
 
 open Types
 open Character
-open Entities.Spells
 open Bg3HomebrewCCreator.Domain.Entities.Subclasses
 
-
-let NUM_SKILL_PROFICIENCIES = 4
-let NUM_SKILL_EXPERTISES = 2
+let nSkillProfPicks = 4
+let nSkillExpPicks = 2
 
 let nSpellPicks = 
     function
@@ -16,7 +14,7 @@ let nSpellPicks =
     | FullCaster _ -> 2
     | HalfCaster _ -> 1
 
-let flexibleSpellPicks lr = 
+let hasFlexibleSpellPicks lr = 
     match lr.ClassLevel with
     | 3 | 7 | 11 -> true
     | _ -> false

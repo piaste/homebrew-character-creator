@@ -5,9 +5,9 @@ open FSharp.UMX
 
 open Domain.Types
 open Domain.Character
-open Domain.Things
+open Domain.PickRules
 open Bg3HomebrewCCreator.Domain.Entities
-open Domain.Fetchers
+open Domain.Helpers
 
 type Page =
     | [<Bolero.EndPoint "/">] Forge
@@ -29,6 +29,7 @@ let defaultCharacter =
             BonusPlusOne = CON
         }
         SkillIds = Set.empty
+        SkillExpIds = Set.empty
         ArchetypeId = Archetypes.arcanePrecision.Id
         TraitId = Traits.none.Id
 
@@ -58,9 +59,13 @@ let checkErrors (character: Character) =
             sprintf "Point buy exceeds 27 points. (%i excess points)" (-1 * character.AbilityBuy.UnspentPoints)
         if character.AbilityBuy.UnspentPoints > 0<pbuy> then
             sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
-        if character.SkillIds.Count <> NUM_SKILL_PROFICIENCIES then
-             $"Choose exactly {NUM_SKILL_PROFICIENCIES} starting skills."
+
+        if character.SkillIds.Count <> nSkillProfPicks then
+             $"Choose exactly {nSkillProfPicks} starting skill proficiencies."
              
+        if character.SkillExpIds.Count <> nSkillExpPicks then
+             $"Choose exactly {nSkillExpPicks} starting skill expertises."
+
         let numSpellPicks = 
             nSpellPicks (character.NextLevelUp.SubclassId |> subclassById |> _.CasterType)
         if character.NextLevelUp.SpellIds.Count <> numSpellPicks then
