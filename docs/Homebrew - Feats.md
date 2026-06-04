@@ -1,0 +1,300 @@
+# **THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0+**
+
+# **FEATS**
+
+Feats are obtained at class levels 4, 8, and 12\. No feat may be selected more than one time, including Ability Improvement. You may select Class Specialist for your current class or any other class as a way to gain 2 additional class passives. Some items can grant you Feats.
+
+**ABILITY IMPROVEMENT**  
+Select two Abilities. These abilities increase by an amount equal to your Proficiency Bonus.
+
+---
+
+**ACCORD OF THE ARCANE**  
+Learn two Cantrips of your choice. 
+
+Additionally, Cantrips which cost an ⬤ Action may be cast as a ▲ Bonus Action instead. This may be toggled at any time.
+
+---
+
+**ALCHEMIST**  
+Healing potions you consume always restore the maximum amount of Hit Points possible. 
+
+Additionally, thrown grenades will trigger an additional explosion, dealing 1d12 damage per 2 character level to all creatures in a 3m radius around your original target. 
+
+Furthermore, upon applying a coating to your weapon, it will persist until your next Long Rest.	
+
+---
+
+**ALERT**  
+While starting your turn Threatened, you Dash and Disengage. 
+
+Gain a \+8 bonus to Initiative and you cannot be Surprised.
+
+---
+
+**ANCHORED FOCUS**  
+You can’t lose Concentration.
+
+---
+
+**ARCANE ECHOES**  
+At the start of your turn, gain 1d6 Arcane Echoes. You can use these echoes to recover a spell slot of a level equal to the number of Arcane Echoes you have.
+
+---
+
+**ATHLETICISM**  
+You gain an additional ▲ Bonus Action. Your jump distance is doubled.
+
+---
+
+**BLESSING OF THE MOON**  
+Gain 3 cantrips : 
+
+* Blessing of Moonfire (AOE Cantrip, ⬤ Action, deal 1d12 radiant damage to any nearby foe \+ inflicts Holy Flame : 1d12 radiant damage until removed)  
+* Lunar Flare (Ranged Cantrip, ⬤ Action, scaling 1d12 radiant damage in a 3m radius on impact \+ inflicts Holy Flame : 1d12 radiant damage until removed)  
+* Lunar Strike (Melee Weapon Cantrip, ⬤ Action, weapon damage \+ scaling 1d12 radiant damage \+ Inflicts Holy Flame: 1d12 radiant damage until removed). 
+
+In addition, dealing damage to an enemy restores 1d4 heal points to all nearby allies around your target.
+
+---
+
+**CHARGER**  
+Gain the ability to charge toward nearby enemies as a ▲ Bonus Action once per turn, Attacking or Shoving (Push 9m/30ft) them in the process.	
+
+---
+
+**CLASS SPECIALIST**  
+Select two passives from any class passives list. You can pick this feat once per class, including your current class.	
+
+---
+
+**COMBAT MEDIC**  
+Upon Helping another creature, they regain additional Hit Points equal to the amount you currently have. 
+
+---
+
+**COMPOSED**  
+You gain "Regain Composure" and "Targeted Composure". 
+
+Upon taking damage or dealing damage with an attack roll, you may expend your **✦** Reaction in order to restore 1d8\*your Proficiency Bonus Hit Points to anyone in a 3m radius around yourself if you were hit (“Regain Composure”), or anyone around your target if you were the one dealing damage (“Targeted Composure”). 
+
+---
+
+**DEFENSIVE** **DUELLIST**  
+When an enemy attacks you with a Melee or a Ranged attack, you can use a **▢** Free Reaction to gain AC equal to your proficiency bonus.
+
+In addition, you can counterattack with a Melee or a Ranged Attack as a **✦** Reaction. 
+
+You gain an additional **✦** Reaction.	 
+
+---
+
+**DUELLIST’S** **INSTINCT**  
+While dual-wielding, gain the ability to make an off-hand attack as a ▲ Bonus Action with either your Melee or Ranged weapon. In addition, you gain three Duellist Charges per Short Rest. These charges can be spent to gain Advantage on Attack Rolls, or to force enemies to attack you with Disadvantage. 
+
+Once per turn, landing a killing blow or Critical hit on an enemy will restore one Duellist Charge. 
+
+Additionally, your Opportunity Attacks hit with both weapons when dual-wielding. 
+
+Finally, you can choose to attack with disadvantage to add your Global STR bonus while dual wielding.	
+
+---
+
+**DUNESIS**  
+Your AOE Spells don’t affect your allies. 
+
+Spells you cast and Conditions you apply have their Difficulty Class increased by 1\. You may further increase this number by consuming Dunesis Charges. Upon casting a spell, you generate one additional Dunesis Charge, up to a maximum of three.	
+
+---
+
+**DURABLE**  
+You have Resistance to Physical damage.
+
+In addition, you have Lockdown Immunity (immune to most Crowd Control effects).
+
+♡ also available on a set of Heavy armor found in Act 1 ♡	
+
+---
+
+**ELEMENTAL** **ADEPT**  
+When dealing damage, you ignore Resistances and Immunities to two elemental damage types of your choice. 
+
+When you deal damage of your chosen types to an enemy, you deal an additional \+1d4 damage of that same type.	
+
+---
+
+**GALVANIZED STORMSOUL**  
+Gain Resistance to Lightning and Thunder damage. 
+
+Upon dealing or taking damage, you receive one stack of Lightning Charge. 
+
+Additionally, you gain Galvanized Storm Strike, a melee cantrip	which cast Witch Bolt at all enemies within 9m of you.	
+
+---
+
+**GREATER** **IMPACT**  
+Once per turn, when you kill a target with a Melee or a Ranged Weapon Attack, you can make another attack as a **▢** Free Action.	 
+
+---
+
+**INTRINSIC** **BULWARK**  
+You have Resistance to Elemental damage.
+
+In addition, you are immune to effects which deal damage over time (burning, shocked, bleeding, …)
+
+♡ also available on a set of Medium armor found in Act 1 ♡	
+
+---
+
+**LUCKY**  
+Any time that you roll a 7 or less on an Attack Roll, Saving Throw, Ability Check, or Skill Check, the result is immediately rerolled. 	
+
+---
+
+**MAGE SLAYER**  
+Enemies you damage immediately lose Concentration on any Spells they were maintaining. 
+
+Upon dealing damage, you silence the target for one turn. 
+
+---
+
+**MARTIAL ADEPT**  
+When making a Melee Weapon Attack, Unarmed Attack, or Ranged Weapon Attack, reduce the number needed to roll a Critical Hit by 2\. 	
+
+---
+
+**MASONRY OF CHAOS**  
+You have a 20% chance to experience a positive surge of Wild Magic at the beginning and end of your combat encounters, at the beginning of each of your turns, and when dealing or taking damage. 	
+
+---
+
+**MELEE EXPERTISE**  
+Adds your Proficiency Bonus multiplied by 2 when dealing damage with your main-hand melee weapon. 
+
+Additionally, you ignore all Physical Resistances and Immunities.
+
+---
+
+**MULTIFACETED**  
+Select a Character Trait, a personality type, and four additional skills to become proficient in.
+
+---
+
+**PERFORMER**  
+Gain Musical Instrument Proficiency, as well as the ability to enter into a state of Performative Presence in order to buff your party. *(Performative Presence costs an* ⬤ *Action to begin, does not require concentration, and lasts until long rest. This ability can be used to apply a \+1d4 bonus to either Attack Rolls, Ability Checks, or Saving Throws. It affects the performer and all allies with 9m/30ft. Performative Presence can be started out of combat and will persist when combat begins. It can also be used concurrently with the Bard’s Perform ability. A creature can only benefit from a single Performative Presence bonus, even if two performers are providing different bonuses.)* 	
+
+---
+
+**PSIONIC DOMINANCE**  
+When dealing damage, you deal an additional 1d4 psychic damage and inflict one stack of Mental Fatigue. 
+
+In addition, Illithid Powers no longer reduce your maximum hit points.
+
+---
+
+**REACTIVE ASSAULT**  
+Upon landing a Critical Hit, you can expend your **✦** Reaction in order to make a basic weapon-based Attack Roll.	
+
+---
+
+**RESILIENT**  
+Add your Proficiency Bonus to any Saving Throws that you make, and heal for the maximum amount when healed.	
+
+---
+
+**RESTRICTED TERRITORY**  
+Gain the ability to use your **✦** Reaction to make a Melee Weapon Attack against an enemy who enters your weapon’s range. 
+
+Additionally, when an enemy enters your weapon’s range, they will be knocked back if they take damage before ending their turn. 
+
+Furthermore, when you make an Opportunity Attack, it deals the maximum damage possible *(the damage part works for any opportunity attack, melee or ranged)*.
+
+♡ also available on Longsword found in Act 1 ♡	
+
+---
+
+**SAVAGE ASSAULT**  
+Roll all of your damage dice with Advantage. 
+
+Additionally, when you damage a target, you reduce its AC by 1 (stacking).
+
+♡ also available on a Mace found in Act 1 ♡	
+
+---
+
+**SENTINEL**  
+When an enemy makes an Attack Roll against an ally, you can use your **✦** Reaction in order to make a Melee or a Ranged Weapon Attack against that enemy. 
+
+You gain Advantage on Opportunity Attacks.
+
+When you hit a creature with a Melee Opportunity Attack, it can no longer move for the rest of its turn. 
+
+You gain an additional **✦** Reaction.	
+
+---
+
+**SHARPSHOOTER**  
+Your Ranged Weapon Attacks do not receive penalties from High Ground Rules.
+
+Additionally, Attack Rolls with ranged weapons do not benefit from your Proficiency Bonus. However, the bonus is added twice when rolling for damage. This secondary effect can be toggled at any time. 
+
+Finally, you ignore Physical Resistances and Immunities.
+
+*(Note: The toggled ability reduces your attack roll by your proficiency bonus, meaning that Githyanki still receive their proficiency bonus to attack instead of receiving it twice.)* 	
+
+---
+
+**SHIELDBEARER**  
+Gain Advantage on Dexterity based Saving Throws while wielding a shield. 
+
+Furthermore, gain three Shieldbearer Charges which can be used to negate an instance of incoming damage. *(Shieldbearer Charges recharge on a Short Rest, on a killing blow or on a critical hit.)* 
+
+Additionally, you can spend a Shieldbearer charge to reflect projectiles for 1 turn after performing a Shield Bash.  
+
+♡ also available on a Shield found in Act 1 ♡	
+
+---
+
+**SPELLBREAK**  
+When casting a Spell or Cantrip, reduce the number needed to roll a Critical hit by 2\. 	
+
+---
+
+**TAVERN BRAWLER**  
+When making an unarmed attack or Throw, your Strength Modifier is added to all damage rolls. 
+
+Additionally, your Dexterity Modifier is added to all Attack Rolls. 
+
+Melee weapons you equip in your Main-Hand gain the Thrown property. When thrown, they will return back to you.	 
+
+---
+
+**TOGETHER IN TORMENT**  
+Whenever you deal damage, you heal for 25% of that damage.
+
+---
+
+**TOUGH**  
+Your maximum Hit Points increases by 4 for each level you have gained. 
+
+Additionally, any damage dealt to you that totals 2 or less is nullified. 
+
+---
+
+**VISAGE OF REFLECTION**  
+Upon receiving physical damage, your aggressor takes half of the damage you received as Force damage. 	
+
+---
+
+**WAR CASTER**  
+Gain Advantage on Concentration based Saving Throws. 
+
+Additionally, you can cast Shocking Grasp against an enemy who enters into melee range as a **▢** Free Reaction, as well as Bind your Weapons. *(Binding your weapons is a* ▲ *Bonus Action that allows you to use your Spellcasting Ability for Attack Rolls and Damage. When multiclassing, your Spellcasting Ability is determined by the last class you added to your character. Once per turn, upon killing another creature or landing a Critical Hit with your Bound Weapon, you restore a level one Spell Slot.)*
+
+Furthermore, you may cast any ranged Spell or Cantrip as a melee Spell. This may be toggled at any time. ♡ also available on a Scimitar found in Act 1 ♡
+
+---
+
+**YOKEBREAKER**  
+Pick another subclass from one of your core classes. You gain all abilities from the first 3 levels of that subclass.
+
