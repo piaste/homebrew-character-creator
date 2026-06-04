@@ -8,15 +8,19 @@ open Domain.Character
 open Domain.Types
 open Domain.Helpers
 open Model
+open Bg3HomebrewCCreator.Domain.Entities
 
 
 type Message =
     | SetPage of Page
+    | NextMainStageSelection
+    | SetMainStageSelection of MainStageSelection
     | LoadState
     | LoadedState of PersistedState option
     | ToggleLoreNames of bool
 
     | SetName of string
+    | SetBaseRace of string<baseRaceId>
     | SetSubrace of string<subraceId>
     | SetArchetype of string<archetypeId>
     | SetTrait of string<traitId>
@@ -26,6 +30,7 @@ type Message =
     | ToggleSkill of string
     | ToggleSkillExp of string
 
+    | SetBaseClass of string<classId>
     | SetSubclass of string<subclassId>
     | ToggleClassPassive of string<classId> * string<classPassiveId>
     | ToggleFeat of string<featId>
@@ -58,10 +63,10 @@ let saveCmd save (model: Model) =
     else
         Cmd.none
 
-let applyCharacterChange save (change: Character -> Character) (model: Model) =
+let applyCharacterChangeAnd cmd save (change: Character -> Character) (model: Model) =
     let nextCharacter = change model.Character
     if nextCharacter = model.Character then
-        model, Cmd.none
+        model, cmd
     else    
         let nextModel =
             {
@@ -70,17 +75,30 @@ let applyCharacterChange save (change: Character -> Character) (model: Model) =
                     UndoStack = model.Character :: model.UndoStack
             }
 
-        nextModel, saveCmd save nextModel
+        nextModel, Cmd.batch [ saveCmd save nextModel; cmd ]
 
+let applyCharacterChange = applyCharacterChangeAnd Cmd.none
 
 let update load save message model =
 
     let apply f = 
         applyCharacterChange save f model
 
+    let applyAnd cmd f = 
+        applyCharacterChangeAnd cmd save f model
+
     match message with
     | SetPage page ->
         { model with Page = page }, Cmd.none
+    
+    | SetMainStageSelection mss ->
+        { model with MainStageSelection = mss }, Cmd.none
+
+    | NextMainStageSelection ->
+        { model with MainStageSelection = 
+                        match model.MainStageSelection with
+                        | Race -> Subrace | Subrace -> Class
+                        | Class -> Subclass | _ -> Race }, Cmd.none
 
     | LoadState ->
         model, Cmd.OfAsync.either load () 
@@ -104,8 +122,17 @@ let update load save message model =
     | SetName name ->
         apply <| fun character -> { character with CharName = name }
 
+    | SetBaseRace baseRaceId ->
+        let defaultSubrace = 
+            baseRaceId
+            |> Map.findIn Races.allSubracesByBaseRace
+            |> Seq.head
+            |> _.Key
+        
+        applyAnd (Cmd.ofMsg (SetMainStageSelection Subrace)) <| fun character -> { character with RaceId = defaultSubrace }
+
     | SetSubrace race ->
-        apply <| fun character -> { character with RaceId = race }
+        applyAnd (Cmd.ofMsg NextMainStageSelection) <| fun character -> { character with RaceId = race }
 
     | SetArchetype atId -> 
         apply <| fun character -> { character with ArchetypeId = atId }
@@ -113,24 +140,24 @@ let update load save message model =
     | SetTrait trId -> 
         apply <| fun character -> { character with TraitId = trId }
 
+    | SetBaseClass baseClassId ->
+        let defaultSubclassId = 
+            baseClassId
+            |> Map.findIn Subclasses.allSubclassesByClass
+            |> Seq.head
+            |> _.Key
+        
+        applyAnd (Cmd.ofMsg (SetMainStageSelection Subclass)) <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
+
     | SetSubclass subclassId ->
-        apply <| fun character -> 
+        applyAnd (Cmd.ofMsg NextMainStageSelection) <| fun character -> 
 
             let previousMaxLevelInSubclass =    
                 character.PreviousHistory.LevelsBySubclass
                 |> Map.getOrDefault subclassId
             {
                 character with
-                    NextLevelUp = { 
-                        SubclassId = subclassId
-                        ClassLevel = previousMaxLevelInSubclass + 1
-                        
-                        FeatId = None
-                        ClassPassiveIds = Set.empty
-
-                        CantripIds = Set.empty
-                        SpellIds = Set.empty
-                    }
+                    NextLevelUp = LevelRecord.Blank subclassId (previousMaxLevelInSubclass + 1)
             }
 
     | SetAbilityScore (ability, score) ->

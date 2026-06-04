@@ -1,155 +1,172 @@
-<div class="app-shell">
-  <header class="hero-panel">
-    <div>
-      <p class="eyebrow">A Baldur's Gate 3 overhaul mod by Havenii7</p>
-      <h1 class="hero-title" onclick="${ClickLogo}">HomeBrew Character Creator</h1>
-      <p class="hero-copy">
-        by <a href="mail:hbcc@piaste.com">@brogue8006</a>
-      </p>
-      <p class="hero-copy opposite">
-      </p>
-    </div>    
-    <!-- <p class="hero-status">${StatusText}</p>     -->
-  </header>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="workspace">
-    <main class="builder-column">${BuilderContent}</main>
-    <aside class="summary-column">${SummaryContent}</aside>
-  </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  ${LevelUp}
+  <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
+  <link rel="stylesheet" href="./css/forge.css" />
+</head>
 
-  <div id="notification-area">${Error}</div>
+<body>
+  <div class="app-shell">
+    <header class="hero-panel">
+      <div>
+        <p class="eyebrow">A Baldur's Gate 3 overhaul mod by Havenii7</p>
+        <h1 class="hero-title" onclick="${ClickLogo}">HomeBrew Character Creator</h1>
+        <p class="hero-copy">
+          by <a href="mail:hbcc@piaste.com">@brogue8006</a>
+        </p>
+        <p class="hero-copy opposite">
+        </p>
+      </div>
+      <!-- <p class="hero-status">${StatusText}</p>     -->
+    </header>
 
-  <template id="Grouping">
-    <section class="section-card">
-      <div class="section-body">${Body}</div>
-    </section>
-  </template>
+    <div class="workspace">
+      <main class="builder-column">${BuilderContent}</main>
+      <aside class="summary-column">${SummaryContent}</aside>
+    </div>
 
-  <template id="SectionCard">
-    <section class="section-card">
-      <div class="section-head">
-        <div>
-          <h2>${Title}</h2>
-          <p>${Helper}</p>
-          <div class="section-body">${HeadContent}</div>
+    ${LevelUp}
+
+    <div id="notification-area">${Error}</div>
+
+    <template id="Grouping">
+      <section class="section-card">
+        <div class="section-body">${Body}</div>
+      </section>
+    </template>
+
+    <template id="SectionCard">
+      <section class="section-card">
+        <div class="section-head">
+          <div>
+            <h2>${Title}</h2>
+            <p>${Helper}</p>
+            <div class="section-body">${HeadContent}</div>
+          </div>
         </div>
+        <div class="section-body">${Body}</div>
+      </section>
+    </template>
+
+    <template id="TextField">
+      <label class="field-card">
+        <span class="field-label">${Label}</span>
+        <span class="field-helper">${Helper}</span>
+        <input class="field-input" bind="${Value}" />
+      </label>
+    </template>
+
+    <template id="SelectField">
+      <label class="field-card">
+        <span class="field-label">${Label}</span>
+        <span class="field-helper">${Helper}</span>
+        <select class="field-select" bind="${Value}">${Options}</select>
+      </label>
+    </template>
+
+    <template id="FieldOption">
+      <option value="${Value}">${Label}</option>
+    </template>
+
+    <template id="AbilityRow">
+      <div class="ability-row">
+        <div>
+          <p class="ability-name">${Ability}</p>
+          <p class="ability-abbrev">${Abbreviation}</p>
+        </div>
+        <div class="ability-controls">
+          <select class="field-select compact" bind="${Score}">${Options}</select>
+          <div class="ability-controls">
+            <div class="ability-bonuses">${BonusInfo}</div>
+          </div>
+        </div>
+    </template>
+
+    <template id="Chip">
+      <span class="chip ${ToneClass}">${Text}</span>
+    </template>
+
+    <template id="ChoiceCard">
+      <button class="choice-card ${ActiveClass}" onclick="${Action}">
+        <span class="choice-meta display:none">${Meta}</span>
+        <strong>${Title}</strong>
+        <span>${Description}</span>
+      </button>
+    </template>
+
+    <template id="PointBudget">
+      <div class="meter-row">
+        <span class="meter-label">Point buy</span>
+        <span class="meter-value">${Used} used / ${Remaining} remaining</span>
       </div>
-      <div class="section-body">${Body}</div>
-    </section>
-  </template>
+    </template>
 
-  <template id="TextField">
-    <label class="field-card">
-      <span class="field-label">${Label}</span>
-      <span class="field-helper">${Helper}</span>
-      <input class="field-input" bind="${Value}" />
-    </label>
-  </template>
-
-  <template id="SelectField">
-    <label class="field-card">
-      <span class="field-label">${Label}</span>
-      <span class="field-helper">${Helper}</span>
-      <select class="field-select" bind="${Value}">${Options}</select>
-    </label>
-  </template>
-
-  <template id="FieldOption">
-    <option value="${Value}">${Label}</option>
-  </template>
-
-  <template id="AbilityRow">
-    <div class="ability-row">
-      <div>
-        <p class="ability-name">${Ability}</p>
-        <p class="ability-abbrev">${Abbreviation}</p>
+    <template id="SelectionMeter">
+      <div class="meter-row">
+        <span class="meter-label">${Label}</span>
+        <span class="meter-value">${Selected} / ${Maximum}</span>
       </div>
-      <div class="ability-controls">
-        <select class="field-select compact" bind="${Score}">${Options}</select>
-      <div class="ability-controls">
-        <div class="ability-bonuses">${BonusInfo}</div>
+    </template>
+
+    <template id="SummaryRow">
+      <div class="summary-row">
+        <span>${Label}</span>
+        <strong>${Value}</strong>
       </div>
-    </div>
-  </template>
+    </template>
 
-  <template id="Chip">
-    <span class="chip ${ToneClass}">${Text}</span>
-  </template>
-
-  <template id="ChoiceCard">
-    <button class="choice-card ${ActiveClass}" onclick="${Action}">
-      <span class="choice-meta display:none">${Meta}</span>
-      <strong>${Title}</strong>
-      <span>${Description}</span>
-    </button>
-  </template>
-
-  <template id="PointBudget">
-    <div class="meter-row">
-      <span class="meter-label">Point buy</span>
-      <span class="meter-value">${Used} used / ${Remaining} remaining</span>
-    </div>
-  </template>
-
-  <template id="SelectionMeter">
-    <div class="meter-row">
-      <span class="meter-label">${Label}</span>
-      <span class="meter-value">${Selected} / ${Maximum}</span>
-    </div>
-  </template>
-
-  <template id="SummaryRow">
-    <div class="summary-row">
-      <span>${Label}</span>
-      <strong>${Value}</strong>
-    </div>
-  </template>
-
-  <template id="Nameplate">
-    <div class="nameplate">
-      <div>
-        <p class="eyebrow">Current character</p>
-        <h3>${Name}</h3>
+    <template id="Nameplate">
+      <div class="nameplate">
+        <div>
+          <p class="eyebrow">Current character</p>
+          <h3>${Name}</h3>
+        </div>
+        <div class="chip-row">${Details}</div>
       </div>
-      <div class="chip-row">${Details}</div>
-    </div>
-  </template>
+    </template>
 
-  <template id="LockedSummary">
-    <div class="locked-summary">
-      <div><span>Name</span><strong>${Name}</strong></div>
-      <div><span>Race</span><strong>${Race}</strong></div>
-      <div><span>Class</span><strong>${Class}</strong></div>
-      <div><span>Subclass</span><strong>${Subclass}</strong></div>
-    </div>
-  </template>
+    <template id="LockedSummary">
+      <div class="locked-summary">
+        <div><span>Name</span><strong>${Name}</strong></div>
+        <div><span>Race</span><strong>${Race}</strong></div>
+        <div><span>Class</span><strong>${Class}</strong></div>
+        <div><span>Subclass</span><strong>${Subclass}</strong></div>
+      </div>
+    </template>
 
-  <template id="TimelineRow">
-    <div class="timeline-row">
-      <strong>${Level}</strong>
-      <span>${ClassName}</span>
-      <small>${Detail}</small>
-    </div>
-  </template>
+    <template id="TimelineRow">
+      <div class="timeline-row">
+        <strong>${Level}</strong>
+        <span>${ClassName}</span>
+        <small>${Detail}</small>
+      </div>
+    </template>
 
-  <template id="EmptyState">
-    <div class="empty-state">${Text}</div>
-  </template>
+    <template id="EmptyState">
+      <div class="empty-state">${Text}</div>
+    </template>
 
 
-  <template id="ActionButton">
-    <div class="action-banner">
-      <button class="action-button ${ToneClass} ${DisabledClass}" onclick="${Action}">${Text}</button>
-    </div>
-  </template>
+    <template id="ActionButton">
+      <div class="action-banner">
+        <button class="action-button ${ToneClass} ${DisabledClass}" onclick="${Action}">${Text}</button>
+      </div>
+    </template>
 
 
-  <template id="ErrorNotification">
-    <div class="error-banner">
-      <span>${Text}</span>
-      <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
-    </div>
-  </template>
-</div>
+    <template id="ErrorNotification">
+      <div class="error-banner">
+        <span>${Text}</span>
+        <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
+      </div>
+    </template>
+
+
+  </div>
+</body>
+
+</html>

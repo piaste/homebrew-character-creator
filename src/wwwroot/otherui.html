@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class=" idc0_343 lsrjphdsg">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HBCR Character Builder</title>
 
     <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
     <link rel="stylesheet" href="./css/otherui.css">
@@ -17,8 +16,7 @@
             <div class="topbar">
                 <div class="brand-row">
                     <img class="hbcr-logo" src="./assets/ui/hbcr-logo-cutout.png"
-                        alt="Home Brew - Comprehensive Reworks"
-                        onclick="${ClickLogo}">
+                        alt="Home Brew - Comprehensive Reworks" onclick="${ClickLogo}">
                     <div class="brand-text">
                     </div>
                 </div>
@@ -66,7 +64,7 @@
                          width:48px;height:48px;border-radius:999px;
                          border:1px solid rgba(255,215,128,0.25);
                          background:rgba(255,215,128,0.04);
-                       "></div>
+                       ">${RaceIcon}</div>
                                     </div>
                                 </button>
 
@@ -97,7 +95,7 @@
                          width:48px;height:48px;border-radius:999px;
                          border:1px solid rgba(255,215,128,0.25);
                          background:rgba(255,215,128,0.04);
-                       "></div>
+                       ">${SubraceIcon}</div>
                                     </div>
                                 </button>
 
@@ -127,7 +125,7 @@
                          width:48px;height:48px;border-radius:999px;
                          border:1px solid rgba(255,215,128,0.25);
                          background:rgba(255,215,128,0.04);
-                       "></div>
+                       ">${ClassIcon}</div>
                                     </div>
                                 </button>
 
@@ -158,7 +156,7 @@
                          width:48px;height:48px;border-radius:999px;
                          border:1px solid rgba(255,215,128,0.25);
                          background:rgba(255,215,128,0.04);
-                       "></div>
+                       ">${SubclassIcon}</div>
                                     </div>
                                 </button>
 
@@ -166,97 +164,7 @@
                             <div class="picks-dock"></div>
                         </div>
 
-
-                        <div class="radial-stage" data-stage="race" data-race="" style="position:relative;z-index:1;">
-                            <div class="radial-center"
-                                style="left: 361.4px; top: 260px; transform: translate(-50%, -50%);">
-                                <div class="radial-center-title">Race</div>
-
-                            </div>
-
-                            <div class="radial-orbit">
-
-                                <button class="radial-node" data-idx="0" data-action="select-race" data-id="dragonborn"
-                                    style="--scale: 0.92; --x: 361.40025835466986px; --y: 112.4px;">
-                                    <div class="radial-node-button"><img
-                                            src="./assets/icons/races/dragonborn/dragonborn.png" alt=""></div>
-                                    <div class="radial-node-label">Dragonborn</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="1" data-action="select-race" data-id="drow"
-                                    style="--scale: 0.92; --x: 441.1988430111161px; --y: 135.83097855411768px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/drow/drow.png"
-                                            alt=""></div>
-                                    <div class="radial-node-label">Drow</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="2" data-action="select-race" data-id="dwarf"
-                                    style="--scale: 0.92; --x: 495.6619408689968px; --y: 198.68474408092158px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/dwarf/dwarf.png"
-                                            alt=""></div>
-                                    <div class="radial-node-label">Dwarf</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="3" data-action="select-race" data-id="elf"
-                                    style="--scale: 0.92; --x: 507.4979031762955px; --y: 281.0056701291369px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/elf/elf.png" alt="">
-                                    </div>
-                                    <div class="radial-node-label">Elf</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="4" data-action="select-race" data-id="githyanki"
-                                    style="--scale: 0.92; --x: 472.9488955293584px; --y: 356.65744433032404px;">
-                                    <div class="radial-node-button"><img
-                                            src="./assets/icons/races/githyanki/githyanki.png" alt=""></div>
-                                    <div class="radial-node-label">Githyanki</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="5" data-action="select-race" data-id="gnome"
-                                    style="--scale: 0.92; --x: 402.9839837444649px; --y: 401.6211629054998px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/gnome/gnome.png"
-                                            alt=""></div>
-                                    <div class="radial-node-label">Gnome</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="6" data-action="select-race" data-id="half_elf"
-                                    style="--scale: 0.92; --x: 319.81653296487485px; --y: 401.6211629054998px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/half-elf/halfelf.png"
-                                            alt=""></div>
-                                    <div class="radial-node-label">Half-Elf</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="7" data-action="select-race" data-id="half_orc"
-                                    style="--scale: 0.92; --x: 249.85162117998135px; --y: 356.6574443303241px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/half-orc/halforc.png"
-                                            alt=""></div>
-                                    <div class="radial-node-label">Half-Orc</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="8" data-action="select-race" data-id="halfling"
-                                    style="--scale: 0.92; --x: 215.3026135330442px; --y: 281.0056701291369px;">
-                                    <div class="radial-node-button"><img
-                                            src="./assets/icons/races/halfling/halfling.png" alt=""></div>
-                                    <div class="radial-node-label">Halfling</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="9" data-action="select-race" data-id="human"
-                                    style="--scale: 0.92; --x: 227.13857584034295px; --y: 198.68474408092155px;">
-                                    <div class="radial-node-button"><img src="./assets/icons/races/human/human.png"
-                                            alt=""></div>
-                                    <div class="radial-node-label">Human</div>
-                                </button>
-
-                                <button class="radial-node" data-idx="10" data-action="select-race" data-id="tiefling"
-                                    style="--scale: 0.92; --x: 281.6016736982236px; --y: 135.83097855411773px;">
-                                    <div class="radial-node-button"><img
-                                            src="./assets/icons/races/tiefling/tiefling.png" alt=""></div>
-                                    <div class="radial-node-label">Tiefling</div>
-                                </button>
-
-                            </div>
-
-                        </div>
-
+                        ${RadialStage}
                     </div>
                     <div class="radial-summary">
 

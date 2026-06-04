@@ -18,6 +18,17 @@ type LevelRecord =
         CantripIds: Set<string<cantripId>>
         SpellIds: Set<string<spellId>>
     }
+    static member Blank subclassId classLevel = 
+        {
+            SubclassId = subclassId
+            ClassLevel = classLevel
+                            
+            FeatId = None
+            ClassPassiveIds = Set.empty
+
+            CantripIds = Set.empty
+            SpellIds = Set.empty
+        }
 
 type [<Measure>] pbuy
 

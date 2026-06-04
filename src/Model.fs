@@ -12,6 +12,10 @@ open Domain.Helpers
 type Page =
     | [<Bolero.EndPoint "/">] Forge
     | [<Bolero.EndPoint "/other">] ForgeOtherUi
+
+type MainStageSelection = 
+    | Race | Subrace | Class | Subclass
+    | Cantrip | Spells | Passives | Feats    
 let defaultCharacter =
     {
         CharName = "John Baldur"
@@ -88,6 +92,7 @@ let checkErrors (character: Character) =
 type Model =
     {
         Page: Page
+        MainStageSelection: MainStageSelection
         Character: Character
         UndoStack: Character list
         Loaded: bool
@@ -98,6 +103,7 @@ type Model =
         static member Initial = 
             {
                 Page = Forge
+                MainStageSelection = Race
                 Character = defaultCharacter
                 UndoStack = []
                 Loaded = false

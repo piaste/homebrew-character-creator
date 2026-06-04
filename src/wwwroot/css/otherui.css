@@ -740,17 +740,12 @@ html,body{
   color: rgba(215,207,178,0.85);
 }
 
-.radial-orbit{
-  position: absolute;
-  inset: 0;
-}
-
 .radial-node{
   position: absolute;
   /* Positioned by JS to keep the center stable across stages/screen sizes */
-  left: var(--x, 50%);
-  top: var(--y, 50%);
-  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(var(--scale, 1));
   width: 120px;
   height: 140px;
   border-radius: 18px;

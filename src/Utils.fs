@@ -76,6 +76,11 @@ let [<Literal>] ACTION = "🟢"
 let [<Literal>] BONUS_ACTION = "🔺" 
 let [<Literal>] REACTION = "♦️" 
 
+type KeyedMap<[<Measure>] 'm, 'v 
+        when 'v : (member Id: string<'m>) 
+         and 'v : (member Name : string)
+         and 'v : (member Description : string)
+         > = Map<string<'m>, 'v>
 
 let getIconName (entityName : string) = 
     entityName.ToLower().Replace(' ', '-') + ".png"
