@@ -8,25 +8,25 @@ open Bg3HomebrewCCreator.Domain.Entities.Classes
 let rec ``Aspect of Defiance`` = {
     ClassId = fighter.Id
     Id = % nameof ``Aspect of Defiance``
-    Grants = [ Passive.Simple "Gain Physical Resistance while under 75% HP" ]
+    Grants = [ Simple "Gain Physical Resistance while under 75% HP" ]
 }
 
 let rec ``Challenger's Call`` = {
     ClassId = fighter.Id
     Id = % nameof ``Challenger's Call``
-    Grants = [ Passive.Simple $"{REACTION}: When an ally is damaged to below 75%% HP within 9m, challenge its attacker and its allies within 9m of him" ]
+    Grants = [ Simple $"{REACTION}: When an ally is damaged to below 75%% HP within 9m, challenge its attacker and its allies within 9m of him" ]
 }
 
 let rec ``Charge of the Collective`` = {
     ClassId = fighter.Id
     Id = % nameof ``Charge of the Collective``
-    Grants = [ Passive.Simple "When you Dash, all allies within 18m also Dash" ]
+    Grants = [ Simple "When you Dash, all allies within 18m also Dash" ]
 }
 
 let rec Duelist = {
     ClassId = fighter.Id
     Id = % nameof Duelist
-    Grants = [ Passive.Buff <| StatModifiers.Create(attackRolls = 4)]
+    Grants = [ Buff <| StatModifiers.Create(attackRolls = 4)]
 }
 
 // CLERIC
@@ -61,13 +61,13 @@ let rec ``Consecrative Sacrifice``  = {
 let rec ``Arcane Interruption`` = {
     ClassId = wizard.Id
     Id = % nameof ``Arcane Interruption``
-    Grants = [ Passive.Simple $"{REACTION}, Arcane Recovery charge: Counter spell cast by a basic enemy."]
+    Grants = [ Power(Reaction, AtWill, $"Spend an Arcane Recovery charge to counter a spell cast by a basic enemy.") ]
 }
 
 let rec ``Arcane Reverb`` = {
     ClassId = wizard.Id
     Id = %nameof ``Arcane Reverb``
-    Grants = [Passive.Simple "When damaged by a melee attack, push back nearby enemies by 9m (STR save)."]
+    Grants = [Simple "When damaged by a melee attack, push back nearby enemies by 9m (STR save)."]
 }
 
 

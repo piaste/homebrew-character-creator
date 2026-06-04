@@ -64,7 +64,9 @@ type Collections.Map<'K, 'V when 'K : comparison > with
         Map [ for v in values -> prop v, v ]
     
 module Map =
-    let getOrDefault k (m : Map<_, _>) = m.GetOrDefault k
+    let inline getOrDefault k (m : Map<_, _>) = m.GetOrDefault k
+
+    let inline findIn m k = Map.find k m
 
 type Set<'T when 'T : comparison> with
     member this.Toggle value = 
@@ -73,3 +75,7 @@ type Set<'T when 'T : comparison> with
 let [<Literal>] ACTION = "🟢" 
 let [<Literal>] BONUS_ACTION = "🔺" 
 let [<Literal>] REACTION = "♦️" 
+
+
+let getIconName (entityName : string) = 
+    entityName.ToLower().Replace(' ', '-') + ".png"

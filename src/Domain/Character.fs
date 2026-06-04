@@ -115,12 +115,14 @@ type Character =
 
         member this.HighestSpellDC = 
             this.CurrentHistory.LevelsBySubclass.Keys
-            |> Seq.map (fun scId -> allClasses[allSubclasses[scId].BaseClassId].SpellcastingAbility)
+            |> Seq.map (Map.findIn allSubclasses 
+                        >> _.BaseClassId 
+                        >> Map.findIn allClasses
+                        >> _.SpellcastingAbility)
             |> Seq.map this.AbilityModifier
             |> Seq.max
             |> (+) this.ProficiencyBonus
             
-
         member this.CharacterLevel = 
             List.length (this.CurrentHistory |> _.Levels)
 
