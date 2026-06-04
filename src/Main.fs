@@ -54,5 +54,10 @@ type MyApp() =
             update load save msg model
 #endif 
         let load, save = buildStorage (fun () -> this.JSRuntime)
-        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) view
+
+        let dynamicView = function
+            | x as { Page = Forge } -> view x
+            | x as { Page = ForgeOtherUi } -> OtherView.otherView x
+        
+        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) dynamicView
         |> Program.withRouter router

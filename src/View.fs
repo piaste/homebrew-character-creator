@@ -403,6 +403,7 @@ let summarySection (model: Model) dispatch =
 let view (model: Model) dispatch =
     let validationIssues = checkErrors model.Character
     Main()       
+        .ClickLogo(fun _ -> dispatch (SetPage ForgeOtherUi))
         .BuilderContent(
             concat {
                 cond (model.Character.CharacterLevel > 1) <| function

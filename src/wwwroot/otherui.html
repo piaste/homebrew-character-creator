@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class=" idc0_343 lsrjphdsg">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HBCR Character Builder</title>
+
+    <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
+    <link rel="stylesheet" href="./css/otherui.css">
+</head>
+
+<body>
+    <div id="app" class="app-root" aria-label="HBCR Character Builder" data-screen="radial">
+        <div class="frame">
+
+            <div class="topbar">
+                <div class="brand-row">
+                    <img class="hbcr-logo" src="./assets/ui/hbcr-logo-cutout.png"
+                        alt="Home Brew - Comprehensive Reworks"
+                        onclick="${ClickLogo}">
+                    <div class="brand-text">
+                    </div>
+                </div>
+                <div class="version-pill">
+                    <span>Mod v0.0.0</span>
+                    <span style="opacity:.55">•</span>
+                    <span>Builder v0.3.0-radial</span>
+                </div>
+            </div>
+            <div class="divider"></div>
+
+            <div class="content">
+
+
+                <div class="radial-shell">
+                    <div class="radial-pane" style="position:relative;z-index:2;pointer-events:auto;">
+
+                        <div class="stage-and-picks" aria-label="Stage navigation">
+                            <div class="stage-tabs">
+
+                                <button class="stage-tab active" data-action="radial-nav" data-id="race" type="button"
+                                    style="position:relative;z-index:5001;pointer-events:auto;
+                  width:110px;
+                  padding:10px 10px 12px;
+                  border-radius:14px;
+                  border:1px solid rgba(209,170,85,0.35);
+                  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
+                  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
+                  color:rgba(233,215,184,0.95);
+                  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+                  cursor:pointer;
+                  border-color:rgba(255,215,128,0.65);
+                ">
+                                    <div style="
+                  font-size:12px;
+                  letter-spacing:0.10em;
+                  text-transform:uppercase;
+                  text-align:center;
+                  margin-bottom:8px;
+                  font-weight:650;
+                ">Race</div>
+
+                                    <div style="height:52px;display:grid;place-items:center;">
+                                        <div style="
+                         width:48px;height:48px;border-radius:999px;
+                         border:1px solid rgba(255,215,128,0.25);
+                         background:rgba(255,215,128,0.04);
+                       "></div>
+                                    </div>
+                                </button>
+
+                                <button class="stage-tab " data-action="radial-nav" data-id="subrace" type="button"
+                                    style="position:relative;z-index:5001;pointer-events:auto;
+                  width:110px;
+                  padding:10px 10px 12px;
+                  border-radius:14px;
+                  border:1px solid rgba(209,170,85,0.35);
+                  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
+                  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
+                  color:rgba(233,215,184,0.95);
+                  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+                  cursor:pointer;
+                  
+                ">
+                                    <div style="
+                  font-size:12px;
+                  letter-spacing:0.10em;
+                  text-transform:uppercase;
+                  text-align:center;
+                  margin-bottom:8px;
+                  font-weight:650;
+                ">Subrace</div>
+
+                                    <div style="height:52px;display:grid;place-items:center;">
+                                        <div style="
+                         width:48px;height:48px;border-radius:999px;
+                         border:1px solid rgba(255,215,128,0.25);
+                         background:rgba(255,215,128,0.04);
+                       "></div>
+                                    </div>
+                                </button>
+
+                                <button class="stage-tab " data-action="radial-nav" data-id="class" type="button" style="position:relative;z-index:5001;pointer-events:auto;
+                  width:110px;
+                  padding:10px 10px 12px;
+                  border-radius:14px;
+                  border:1px solid rgba(209,170,85,0.35);
+                  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
+                  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
+                  color:rgba(233,215,184,0.95);
+                  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+                  cursor:pointer;
+                  
+                ">
+                                    <div style="
+                  font-size:12px;
+                  letter-spacing:0.10em;
+                  text-transform:uppercase;
+                  text-align:center;
+                  margin-bottom:8px;
+                  font-weight:650;
+                ">Class</div>
+
+                                    <div style="height:52px;display:grid;place-items:center;">
+                                        <div style="
+                         width:48px;height:48px;border-radius:999px;
+                         border:1px solid rgba(255,215,128,0.25);
+                         background:rgba(255,215,128,0.04);
+                       "></div>
+                                    </div>
+                                </button>
+
+                                <button class="stage-tab " data-action="radial-nav" data-id="subclass" type="button"
+                                    style="position:relative;z-index:5001;pointer-events:auto;
+                  width:110px;
+                  padding:10px 10px 12px;
+                  border-radius:14px;
+                  border:1px solid rgba(209,170,85,0.35);
+                  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
+                  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
+                  color:rgba(233,215,184,0.95);
+                  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+                  cursor:pointer;
+                  
+                ">
+                                    <div style="
+                  font-size:12px;
+                  letter-spacing:0.10em;
+                  text-transform:uppercase;
+                  text-align:center;
+                  margin-bottom:8px;
+                  font-weight:650;
+                ">Subclass</div>
+
+                                    <div style="height:52px;display:grid;place-items:center;">
+                                        <div style="
+                         width:48px;height:48px;border-radius:999px;
+                         border:1px solid rgba(255,215,128,0.25);
+                         background:rgba(255,215,128,0.04);
+                       "></div>
+                                    </div>
+                                </button>
+
+                            </div>
+                            <div class="picks-dock"></div>
+                        </div>
+
+
+                        <div class="radial-stage" data-stage="race" data-race="" style="position:relative;z-index:1;">
+                            <div class="radial-center"
+                                style="left: 361.4px; top: 260px; transform: translate(-50%, -50%);">
+                                <div class="radial-center-title">Race</div>
+
+                            </div>
+
+                            <div class="radial-orbit">
+
+                                <button class="radial-node" data-idx="0" data-action="select-race" data-id="dragonborn"
+                                    style="--scale: 0.92; --x: 361.40025835466986px; --y: 112.4px;">
+                                    <div class="radial-node-button"><img
+                                            src="./assets/icons/races/dragonborn/dragonborn.png" alt=""></div>
+                                    <div class="radial-node-label">Dragonborn</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="1" data-action="select-race" data-id="drow"
+                                    style="--scale: 0.92; --x: 441.1988430111161px; --y: 135.83097855411768px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/drow/drow.png"
+                                            alt=""></div>
+                                    <div class="radial-node-label">Drow</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="2" data-action="select-race" data-id="dwarf"
+                                    style="--scale: 0.92; --x: 495.6619408689968px; --y: 198.68474408092158px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/dwarf/dwarf.png"
+                                            alt=""></div>
+                                    <div class="radial-node-label">Dwarf</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="3" data-action="select-race" data-id="elf"
+                                    style="--scale: 0.92; --x: 507.4979031762955px; --y: 281.0056701291369px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/elf/elf.png" alt="">
+                                    </div>
+                                    <div class="radial-node-label">Elf</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="4" data-action="select-race" data-id="githyanki"
+                                    style="--scale: 0.92; --x: 472.9488955293584px; --y: 356.65744433032404px;">
+                                    <div class="radial-node-button"><img
+                                            src="./assets/icons/races/githyanki/githyanki.png" alt=""></div>
+                                    <div class="radial-node-label">Githyanki</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="5" data-action="select-race" data-id="gnome"
+                                    style="--scale: 0.92; --x: 402.9839837444649px; --y: 401.6211629054998px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/gnome/gnome.png"
+                                            alt=""></div>
+                                    <div class="radial-node-label">Gnome</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="6" data-action="select-race" data-id="half_elf"
+                                    style="--scale: 0.92; --x: 319.81653296487485px; --y: 401.6211629054998px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/half-elf/halfelf.png"
+                                            alt=""></div>
+                                    <div class="radial-node-label">Half-Elf</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="7" data-action="select-race" data-id="half_orc"
+                                    style="--scale: 0.92; --x: 249.85162117998135px; --y: 356.6574443303241px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/half-orc/halforc.png"
+                                            alt=""></div>
+                                    <div class="radial-node-label">Half-Orc</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="8" data-action="select-race" data-id="halfling"
+                                    style="--scale: 0.92; --x: 215.3026135330442px; --y: 281.0056701291369px;">
+                                    <div class="radial-node-button"><img
+                                            src="./assets/icons/races/halfling/halfling.png" alt=""></div>
+                                    <div class="radial-node-label">Halfling</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="9" data-action="select-race" data-id="human"
+                                    style="--scale: 0.92; --x: 227.13857584034295px; --y: 198.68474408092155px;">
+                                    <div class="radial-node-button"><img src="./assets/icons/races/human/human.png"
+                                            alt=""></div>
+                                    <div class="radial-node-label">Human</div>
+                                </button>
+
+                                <button class="radial-node" data-idx="10" data-action="select-race" data-id="tiefling"
+                                    style="--scale: 0.92; --x: 281.6016736982236px; --y: 135.83097855411773px;">
+                                    <div class="radial-node-button"><img
+                                            src="./assets/icons/races/tiefling/tiefling.png" alt=""></div>
+                                    <div class="radial-node-label">Tiefling</div>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="radial-summary">
+
+                        <div class="sheet-title">CHARACTER SUMMARY</div>
+
+                        <div class="summary-grid">
+                            <div class="summary-left">
+                                <div class="sheet-controls summary-top">
+                                    <div class="sheet-pill" title="Subrace">—</div>
+
+                                    <div class="sheet-pill trait-pill" title="Trait" style="margin-left:12px">
+                                        <span class="trait-label">TRAIT</span>
+                                        <select class="trait-select" data-action="set-trait" style="width:180px">
+                                            ${TraitOptions}
+                                        </select>
+                                    </div>
+
+
+
+                                    <button class="btn" type="button" data-action="copy-build-json"
+                                        style="margin-left:auto;padding:6px 10px;font-size:11px;border-radius:8px">
+                                        COPY BUILD JSON
+                                    </button>
+                                </div>
+
+                                <div class="sheet-muted trait-desc">
+                                    No trait selected.
+
+                                </div>
+
+                                <div class="summary-ability-points" title="Point Buy">
+                                    Ability Points: 27 / 27
+                                </div>
+
+
+                                <div class="summary-abilities-compact" aria-label="Ability scores">
+                                    <div class="ability-row ability-row--head" aria-hidden="true">
+                                        <div class="ability-k"></div>
+                                        <div></div>
+                                        <div class="ability-v"></div>
+                                        <div class="ability-m"></div>
+                                        <div></div>
+                                        <div class="ability-bonus-h">+3</div>
+                                        <div class="ability-bonus-h">+1</div>
+                                    </div>
+
+
+                                    <div class="ability-row">
+                                        <div class="ability-k">STR</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="str:-1" aria-label="Decrease STR">
+                                            <img src="./assets/ui/shadowheartminus.png" alt="">
+                                        </button>
+
+                                        <div class="ability-v">8</div>
+                                        <div class="ability-m">-1</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="str:1" aria-label="Increase STR">
+                                            <img src="./assets/ui/karlachplus.png" alt="">
+                                        </button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus3:str"
+                                            aria-label="Assign +3 to STR" aria-pressed="false"></button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus1:str"
+                                            aria-label="Assign +1 to STR" aria-pressed="false"></button>
+                                    </div>
+
+                                    <div class="ability-row">
+                                        <div class="ability-k">DEX</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="dex:-1" aria-label="Decrease DEX">
+                                            <img src="./assets/ui/shadowheartminus.png" alt="">
+                                        </button>
+
+                                        <div class="ability-v">8</div>
+                                        <div class="ability-m">-1</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="dex:1" aria-label="Increase DEX">
+                                            <img src="./assets/ui/karlachplus.png" alt="">
+                                        </button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus3:dex"
+                                            aria-label="Assign +3 to DEX" aria-pressed="false"></button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus1:dex"
+                                            aria-label="Assign +1 to DEX" aria-pressed="false"></button>
+                                    </div>
+
+                                    <div class="ability-row">
+                                        <div class="ability-k">CON</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="con:-1" aria-label="Decrease CON">
+                                            <img src="./assets/ui/shadowheartminus.png" alt="">
+                                        </button>
+
+                                        <div class="ability-v">8</div>
+                                        <div class="ability-m">-1</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="con:1" aria-label="Increase CON">
+                                            <img src="./assets/ui/karlachplus.png" alt="">
+                                        </button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus3:con"
+                                            aria-label="Assign +3 to CON" aria-pressed="false"></button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus1:con"
+                                            aria-label="Assign +1 to CON" aria-pressed="false"></button>
+                                    </div>
+
+                                    <div class="ability-row">
+                                        <div class="ability-k">INT</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="int:-1" aria-label="Decrease INT">
+                                            <img src="./assets/ui/shadowheartminus.png" alt="">
+                                        </button>
+
+                                        <div class="ability-v">8</div>
+                                        <div class="ability-m">-1</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="int:1" aria-label="Increase INT">
+                                            <img src="./assets/ui/karlachplus.png" alt="">
+                                        </button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus3:int"
+                                            aria-label="Assign +3 to INT" aria-pressed="false"></button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus1:int"
+                                            aria-label="Assign +1 to INT" aria-pressed="false"></button>
+                                    </div>
+
+                                    <div class="ability-row">
+                                        <div class="ability-k">WIS</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="wis:-1" aria-label="Decrease WIS">
+                                            <img src="./assets/ui/shadowheartminus.png" alt="">
+                                        </button>
+
+                                        <div class="ability-v">8</div>
+                                        <div class="ability-m">-1</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="wis:1" aria-label="Increase WIS">
+                                            <img src="./assets/ui/karlachplus.png" alt="">
+                                        </button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus3:wis"
+                                            aria-label="Assign +3 to WIS" aria-pressed="false"></button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus1:wis"
+                                            aria-label="Assign +1 to WIS" aria-pressed="false"></button>
+                                    </div>
+
+                                    <div class="ability-row">
+                                        <div class="ability-k">CHA</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="cha:-1" aria-label="Decrease CHA">
+                                            <img src="./assets/ui/shadowheartminus.png" alt="">
+                                        </button>
+
+                                        <div class="ability-v">8</div>
+                                        <div class="ability-m">-1</div>
+
+                                        <button class="ability-face-btn" type="button" data-action="adj-ability"
+                                            data-id="cha:1" aria-label="Increase CHA">
+                                            <img src="./assets/ui/karlachplus.png" alt="">
+                                        </button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus3:cha"
+                                            aria-label="Assign +3 to CHA" aria-pressed="false"></button>
+
+                                        <button class="ability-bonus-box " type="button"
+                                            data-action="toggle-ability-bonus" data-id="plus1:cha"
+                                            aria-label="Assign +1 to CHA" aria-pressed="false"></button>
+                                    </div>
+
+                                </div>
+
+                                <div class="summary-under-abilities">
+                                    <div class="sheet-section-title">ATTRIBUTES</div>
+                                    <div class="sheet-attrs">
+                                        <div class="sheet-attr"><span>Hit Points</span><b>7</b></div>
+                                        <div class="sheet-attr"><span>Armour Class</span><b>9</b></div>
+                                        <div class="sheet-attr"><span>Initiative</span><b>-1</b></div>
+                                        <div class="sheet-attr"><span>Movement</span><b>9m</b></div>
+
+
+
+
+
+
+
+
+
+                                    </div>
+
+                                    <div class="sheet-section-title" style="margin-top:10px">PROFICIENCIES</div>
+                                    <div class="sheet-muted">—</div>
+                                </div>
+                            </div>
+
+                            <div class="summary-right">
+                                <div class="level-boxes">
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 1</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 2</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 3</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 4</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 5</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 6</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 7</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 8</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 9</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 10</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 11</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="lvlbox empty">
+                                        <div class="lvlbox-h">
+                                            <div class="lvlbox-lvl">Level 12</div>
+                                            <div class="lvlbox-class">—</div>
+                                        </div>
+                                        <div class="lvlbox-body">
+                                            <div class="lvlbox-muted">No selections.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./src/app.js"></script>
+
+
+</body>
+
+</html>

@@ -11,6 +11,7 @@ open Domain.Helpers
 
 type Page =
     | [<Bolero.EndPoint "/">] Forge
+    | [<Bolero.EndPoint "/other">] ForgeOtherUi
 let defaultCharacter =
     {
         CharName = "John Baldur"
