@@ -142,7 +142,6 @@ html,body{
   align-items:flex-start;
   justify-content:stretch;
   padding: 18px;
-  overflow:hidden;
 }
 
 /* “Screen” container inside the frame */
@@ -604,14 +603,13 @@ html,body{
   position: relative;
 }
 
-.radial-pane{ position: relative; overflow: hidden; display:flex; flex-direction:column; width: 100%; justify-self: start; }
+.radial-pane{ position: relative; display:flex; flex-direction:column; width: 100%; justify-self: start; }
 
 /* The stage is the coordinate-space for the orbit math.
    It MUST be the same element we measure and the parent of the orbit nodes. */
 .radial-stage{ position: relative; flex: 1 1 auto; min-height: 520px; }
 .radial-summary{
-  position: relative;
-  overflow: auto;
+  position: relative;  
   padding-right: 18px; /* no reserved column; summary uses grid */
   display: flex;
   flex-direction: column;
@@ -1976,6 +1974,37 @@ select.trait-select:focus,
   grid-template-columns: repeat(4, 104px);
   gap: 10px;
   align-items: start;
+}
+
+.stage-tab{
+  width:110px;
+  padding:10px 10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(209,170,85,0.35);
+  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
+  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
+  color:rgba(233,215,184,0.95);
+  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+  cursor:pointer;
+  border-color:rgba(255,215,128,0.65);
+  place-content: center;
+  display: grid;
+
+  & .stage-tab-title {
+    font-size:12px;
+    letter-spacing:0.10em;
+    text-transform:uppercase;
+    text-align:center;
+    margin-bottom:8px;
+    font-weight:650;
+  }
+
+  & .stage-tab-icon {
+    height:48px;
+    width:48px;border-radius:999px;
+    border:1px solid rgba(255,215,128,0.25);
+    background:rgba(255,215,128,0.04);
+  }
 }
 
 .picks-dock{

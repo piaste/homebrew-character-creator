@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module internal Utils 
+module Utils 
 
 open FSharp.UMX
 open System.Text.Json
@@ -82,5 +82,5 @@ type KeyedMap<[<Measure>] 'm, 'v
          and 'v : (member Description : string)
          > = Map<string<'m>, 'v>
 
-let getIconName (entityName : string) = 
-    entityName.ToLower().Replace(' ', '-') + ".png"
+let toFileName (entityName : string) = 
+    entityName.ToLower().Replace(' ', '-')

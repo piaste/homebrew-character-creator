@@ -18,113 +18,151 @@ open Utils
 type OtherUi = Template<"wwwroot/otherui.html">
 
 let inline cl s = attr.``class`` s
+let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
+let icon subpath = img { attr.src $"/assets/icons/{toFileName subpath}.png"}
 
-
-let icon subpath = img { attr.src $"/assets/icons/{Utils.getIconName subpath}"}
-
-let baseraceIconPath (race: BaseRaceDef) = 
+let baseraceIconPath race = 
+    let race = BaseRaces.allBaseRaces[race]
     $"races/{race.Name}/{race.Name}"
 
-let subraceIconPath (race: SubraceDef) =     
-    $"races/{BaseRaces.allBaseRaces[race.BaseRaceId].Name}/{race.Name}"
+let subraceIconPath race =   
+    let race = Races.allSubraces[race]
+    let baseRaceName = toFileName <| BaseRaces.allBaseRaces[race.BaseRaceId].Name
+    let subraceTag = 
+        ("-" + toFileName race.Name).Replace($"-{baseRaceName}", "")
+    $"races/{baseRaceName}/{baseRaceName}{subraceTag}"
 
-let baseclassIconPath (baseclass: ClassDef) = 
+let baseclassIconPath baseclass = 
+    let baseclass = Classes.allClasses[baseclass]
     $"classes/{baseclass.Name}/{baseclass.Name}"
 
-let subclassIconPath (subclass: SubclassDef) =     
+let subclassIconPath subclass = 
+    let subclass = Subclasses.allSubclasses[subclass]
     $"classes/{Classes.allClasses[subclass.BaseClassId].Name}/{subclass.Name}"
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection
     let indexed = Seq.indexed collection
     forEach indexed (fun (i, x) -> nodeGen (i, count, x))
 
-let radialStage (centreText : string) (radialButtons : Node) = 
+
+let stageTabButton dispatch model stage iconPath = 
+    let isActive = model.MainStageSelection = stage
+    button {
+        clActive isActive "stage-tab"
+        on.click (fun _ -> dispatch <| SetMainStageSelection stage)
+        div { cl "stage-tab-title"; stage.ToString() }
+        div { cl "stage-tab-icon"; icon iconPath }
+    }
+(*
+                                <button class="stage-tab active" data-action="radial-nav" data-id="race" type="button"
+                                    style="position:relative;z-index:5001;pointer-events:auto;
+                  width:110px;
+                  padding:10px 10px 12px;
+                  border-radius:14px;
+                  border:1px solid rgba(209,170,85,0.35);
+                  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
+                  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
+                  color:rgba(233,215,184,0.95);
+                  text-shadow:0 1px 0 rgba(0,0,0,0.85);
+                  cursor:pointer;
+                  border-color:rgba(255,215,128,0.65);
+                ">
+                                    <div style="
+                  font-size:12px;
+                  letter-spacing:0.10em;
+                  text-transform:uppercase;
+                  text-align:center;
+                  margin-bottom:8px;
+                  font-weight:650;
+                ">Race</div>
+
+                                    <div style="height:52px;display:grid;place-items:center;">
+                                        <div style="
+                         width:48px;height:48px;border-radius:999px;
+                         border:1px solid rgba(255,215,128,0.25);
+                         background:rgba(255,215,128,0.04);
+                       ">${RaceIcon}</div>
+                                    </div>
+                                </button>*)
+
+
+let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
+
+    let radius = 200.0
+
+    let radialButton index total (text: string) iconSubpath action = 
+        let angle = 1.5 * Math.PI + index * 2. * Math.PI / total
+        let posX = radius * Math.Cos angle
+        let posY = radius * Math.Sin angle
+
+        button { 
+            cl "radial-node"
+            on.click action
+            attr.style $"--scale: 0.92; --x: {posX}px; --y: {posY}px;"
+            div {
+                cl "radial-node-button"
+                icon iconSubpath
+            }
+            div { cl "radial-node-label"; text}
+        }
+
     div {
         cl "radial-stage"; attr.style "position:relative;z-index:1"
         div { cl "radial-center"
-              div { cl "radial-center-title"; centreText }
-              radialButtons
+              div { cl "radial-center-title"; options[currKey].Name }
+              forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
+                    radialButton i count v.Name (getIcon k) (fun _ -> 
+                    dispatch (msg k)))
         }
     }
-
-let radialButton radius index total (text: string) iconSubpath action = 
-    let angle = index * 2. * Math.PI / total
-    let posX = radius * Math.Cos angle
-    let posY = radius * Math.Sin angle
-    //let posX, posY = 0, 0 // 227.13857584034295, 198.68474408092155
-
-    button {
-        cl "radial-node"
-        on.click action
-        attr.style $"--scale: 0.92; --x: {posX}px; --y: {posY}px;"
-        div {
-            cl "radial-node-button"
-            icon iconSubpath
-        }
-        div { cl "radial-node-label"; text}
-    }
-
 
 let otherView (model: Model) (dispatch : Message -> unit) = 
     let raceTag = 
         BaseRaces.allBaseRaces[Races.allSubraces[model.Character.RaceId].BaseRaceId].Name
 
-    let inline setRadialStage currKey (options : KeyedMap<_, _>) getIcon msg = 
-        radialStage 
-            options[currKey].Name
-            (forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
-                radialButton 200 i count v.Name (getIcon v) (fun _ -> 
-                dispatch (msg k))))
+    let c = model.Character
+    let l = c.NextLevelUp
+
     OtherUi()
-        .RaceIcon(
-            icon $"races/{raceTag}/{raceTag}"
-        )
-        .SubraceIcon(
-            let subRaceTag = 
-                Races.allSubraces[model.Character.RaceId].Name
-            icon $"races/{raceTag}/{subRaceTag}"            
-        )
         .RadialStage(
             match model.MainStageSelection with
             | Race -> 
-                setRadialStage
-                    (baseRaceIdBySubraceId model.Character.RaceId)
+                radialStage dispatch
+                    (baseRaceIdBySubraceId c.RaceId)
                     BaseRaces.allBaseRaces
                     baseraceIconPath
                     SetBaseRace
                     
             | Subrace -> 
-                setRadialStage
-                    model.Character.RaceId
-                    Races.allSubracesByBaseRace[baseRaceIdBySubraceId model.Character.RaceId]
+                radialStage dispatch
+                    c.RaceId
+                    Races.allSubracesByBaseRace[baseRaceIdBySubraceId c.RaceId]
                     subraceIconPath
                     SetSubrace
                     
             | Class -> 
-                setRadialStage
-                    (classIdBySubclassId model.Character.NextLevelUp.SubclassId)
+                radialStage dispatch
+                    (classIdBySubclassId l.SubclassId)
                     Classes.allClasses
                     baseclassIconPath
                     SetBaseClass
 
             | Subclass -> 
-                setRadialStage
-                    model.Character.NextLevelUp.SubclassId
-                    Subclasses.allSubclassesByClass[classIdBySubclassId model.Character.NextLevelUp.SubclassId]
+                radialStage dispatch
+                    l.SubclassId
+                    Subclasses.allSubclassesByClass[classIdBySubclassId l.SubclassId]
                     subclassIconPath
                     SetSubclass
-                // radialStage 
-                //     (Races.allSubraces[model.Character.RaceId].Name)
-                //     (forEachIndexed BaseRaces.allBaseRaces (fun (i, count, KeyValue(raceId, race)) -> 
-                //         radialButton 200 i count race.Name (baseraceIconPath race) (fun _ -> 
-                //         dispatch (SetSubrace (Races.allSubracesByBaseRace[raceId].Keys |> Seq.head)))))
         )
-        // .RadialCenter(Races.allSubraces[model.Character.RaceId].Name)
-        // .RadialNodes(
-        //     forEachIndexed BaseRaces.allBaseRaces (fun (i, count, KeyValue(raceId, race)) -> 
-        //         radialButton 200 i count race.Name (baseraceIconPath race) (fun _ -> dispatch (SetSubrace (Races.allSubracesByBaseRace[raceId].Keys |> Seq.head)))
-        //     )
-        // )
+        .StageTabs(
+            concat {
+                let stb = stageTabButton dispatch model in 
+                stb Race (baseraceIconPath (baseRaceIdBySubraceId c.RaceId))
+                stb Subrace (subraceIconPath c.RaceId)
+                stb Class (baseclassIconPath (classIdBySubclassId l.SubclassId))
+                stb Subclass (subclassIconPath l.SubclassId)
+            }
+        )
         .TraitOptions(concat {
             forEach Traits.allTraits (fun a -> 
                 option { 
