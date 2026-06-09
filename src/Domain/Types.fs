@@ -83,20 +83,22 @@ type StatModifiers = {
         ``HP per level`` = s1.``HP per level`` + s2.``HP per level``
         ``Base HP`` = s1.``Base HP`` + s2.``Base HP``
     }
-
-    override this.ToString() = 
-        [
+    member this.ToMap() =
+        Map [
             for KeyValue(ab, modif) in this.Abilities do
                 if modif <> 0 then 
-                    yield sprintf "%s %A" (modifierText modif) ab
+                    yield (modifierText modif), string ab
 
             for p in this.GetType().GetProperties() do
                 if p.PropertyType = typeof<int> then
                     let score = p.GetValue this :?> int
                     if score <> 0 then 
-                        yield sprintf "%s to %s" 
-                            (modifierText <| (p.GetValue this :?> int))
-                            p.Name
+                        let key = (modifierText <| (p.GetValue this :?> int))
+                        yield key, p.Name
+        ]
+
+    override this.ToString() = 
+        [ for kv in this.ToMap() -> sprintf "%s to %s" kv.Key kv.Value
         ]
         |> String.concat "\n"
 

@@ -63,6 +63,9 @@ type AbilityBuy =
               elif this.BonusPlusThree = ab then 3
               else 0
 
+        member this.BoughtAbilityModifier ab = 
+            (this.BoughtAbility ab - 10) / 2
+
 type Character =
     {
         CharName: string

@@ -18,6 +18,7 @@ open Utils
 type OtherUi = Template<"wwwroot/otherui.html">
 
 let inline cl s = attr.``class`` s
+
 let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
 let icon subpath = img { attr.src $"/assets/icons/{toFileName subpath}.png"}
 
@@ -53,38 +54,6 @@ let stageTabButton dispatch model stage iconPath =
         div { cl "stage-tab-title"; stage.ToString() }
         div { cl "stage-tab-icon"; icon iconPath }
     }
-(*
-                                <button class="stage-tab active" data-action="radial-nav" data-id="race" type="button"
-                                    style="position:relative;z-index:5001;pointer-events:auto;
-                  width:110px;
-                  padding:10px 10px 12px;
-                  border-radius:14px;
-                  border:1px solid rgba(209,170,85,0.35);
-                  background:linear-gradient(180deg, rgba(40,28,18,0.68), rgba(10,8,6,0.58));
-                  box-shadow:0 10px 28px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,215,128,0.06);
-                  color:rgba(233,215,184,0.95);
-                  text-shadow:0 1px 0 rgba(0,0,0,0.85);
-                  cursor:pointer;
-                  border-color:rgba(255,215,128,0.65);
-                ">
-                                    <div style="
-                  font-size:12px;
-                  letter-spacing:0.10em;
-                  text-transform:uppercase;
-                  text-align:center;
-                  margin-bottom:8px;
-                  font-weight:650;
-                ">Race</div>
-
-                                    <div style="height:52px;display:grid;place-items:center;">
-                                        <div style="
-                         width:48px;height:48px;border-radius:999px;
-                         border:1px solid rgba(255,215,128,0.25);
-                         background:rgba(255,215,128,0.04);
-                       ">${RaceIcon}</div>
-                                    </div>
-                                </button>*)
-
 
 let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
 
@@ -116,6 +85,71 @@ let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg =
         }
     }
 
+let summaryAbilities (chr: Character) dispatch = 
+    let abB = chr.AbilityBuy
+    concat {
+        div { 
+            cl "summary-ability-points"; attr.title "Point Buy"
+            $"Ability points: {abB.SpentPoints} / {abB.SpentPoints + abB.UnspentPoints}"
+        }
+        div { 
+            cl "summary-abilities-compat"; attr.aria "label" "Ability scores"
+            div {
+                cl "ability-row ability-row--head"; attr.aria "hidden" "true"
+                div { cl "ability-k" }
+                div {}
+                div { cl "ability-v" }
+                div { cl "ability-m" }
+                div {}
+                div { cl "ability-bonus-h"; "+3" }
+                div { cl "ability-bonus-h"; "+1" }
+
+            }
+        
+            forEach allAbilities (fun ab -> 
+                div { 
+                    cl "ability-row"
+                    div { cl "ability-k"; string ab }
+                    button {
+                        cl "ability-face-btn"
+                        on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
+                        img { attr.src "/assets/ui/ability-minus.png"}
+                    }
+                    div { cl "ability-v"; string <| abB.BoughtAbility ab}
+                    div { cl "ability-m"; string <| abB.BoughtAbilityModifier ab}
+                    button {
+                        cl "ability-face-btn"
+                        on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
+                        img { attr.src "/assets/ui/ability-plus.png"}
+                    }
+                    button {
+                        cl "ability-bonus-box"
+                        on.click (fun _ -> dispatch (SetBonusPlusThree ab))
+                    }
+                    button {
+                        cl "ability-bonus-box"
+                        on.click (fun _ -> dispatch (SetBonusPlusOne ab))
+                    }
+                }
+            )
+            div {
+                cl "summary-under-abilities"
+                div { cl "sheet-section-title"; "ATTRIBUTES" }
+                div { 
+                    cl "sheet-attrs"
+                    forEach (chr.StatModifiers.ToMap()) (fun kv ->
+                        div { 
+                            cl "sheet-attr"
+                            span { kv.Key }
+                            b { kv.Value }
+                         } 
+                    )
+                }
+            }
+
+        }
+
+    }
 let otherView (model: Model) (dispatch : Message -> unit) = 
     let raceTag = 
         BaseRaces.allBaseRaces[Races.allSubraces[model.Character.RaceId].BaseRaceId].Name
@@ -170,6 +204,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     a.Value.Name
                 }
             )
-        })        
+        })
+        .CharacterSummary(summaryAbilities model.Character dispatch)    
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Elt()

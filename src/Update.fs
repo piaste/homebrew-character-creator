@@ -24,7 +24,8 @@ type Message =
     | SetSubrace of string<subraceId>
     | SetArchetype of string<archetypeId>
     | SetTrait of string<traitId>
-    | SetAbilityScore of Ability * int
+    | SetAbilityPointBuy of Ability * int
+    | ModifyAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | ToggleSkill of string
@@ -160,7 +161,7 @@ let update load save message model =
                     NextLevelUp = LevelRecord.Blank subclassId (previousMaxLevelInSubclass + 1)
             }
 
-    | SetAbilityScore (ability, score) ->
+    | SetAbilityPointBuy (ability, score) ->
         apply <| fun character ->
             {
                 character with
@@ -171,6 +172,17 @@ let update load save message model =
                                 |> Map.add ability (clamp 0<pbuy>9<pbuy> (score * 1<pbuy>)) 
                     } 
             }
+
+    | ModifyAbilityScore (ability, scoreChange) -> 
+        let currentScore = model.Character.AbilityBuy.BoughtAbility ability
+        let newScore = clamp 8 15 (currentScore + scoreChange)
+        let newSpent = 
+            [ 0 .. 9 ]
+            |> Seq.find (fun pb ->
+                getAbilityFromPoints (UMX.tag<pbuy> pb) = newScore        
+            )
+
+        model, Cmd.ofMsg <| SetAbilityPointBuy (ability, newSpent)
 
     | SetBonusPlusThree ability ->
         apply <| fun character ->

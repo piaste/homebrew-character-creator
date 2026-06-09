@@ -110,7 +110,7 @@ let pointBuyRow (character: Character) ability dispatch =
         .Ability(abilityName ability)
         .Abbreviation(ability.ToString())
         .Score(string (character.AbilityBuy.PointBuy[ability]), 
-               fun value -> dispatch (SetAbilityScore(ability, Int32.Parse value)))
+               fun value -> dispatch (SetAbilityPointBuy(ability, Int32.Parse value)))
         .Options(forEach pointBuyOptions scoreOption)
         .BonusInfo(
             concat {
