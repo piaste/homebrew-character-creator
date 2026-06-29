@@ -54,5 +54,22 @@ let rec wizard = {
         FixedAbilities = Map [1<classLvl>, [Simple "Scroll Scribing"; Simple "Scholary Acumen"]]
     }
 
+let rec barbarian = {
+        Id = % nameof barbarian
+        Name = "Barbarian"
+        Description = "For some, there is only rage. In the violence of combat, there is only the roar and the red mist of fury."
+
+        SpellcastingAbility = CHA
+
+        ScalingAbilities = (fun _ _ -> [
+        ])
+
+        FixedAbilities = Map [
+            1<classLvl>, [Simple $"{TOGGLEABLE} Reckless Attack"; Simple "3 Rage Charges"]
+            5<classLvl>, [Simple "Extra Attack"; Simple $"{TOGGLEABLE} Reckless Assault"]
+            9<classLvl>, [Simple "Improved Extra Attack"; Simple $"{TOGGLEABLE} Reckless Rampage"]
+        ]
+    }
+
 type Placeholder = class end
 let allClasses = getAll<Placeholder, ClassDef, classId>()
