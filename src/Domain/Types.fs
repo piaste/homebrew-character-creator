@@ -121,10 +121,11 @@ type Passive =
             | Buff sm -> sm
             | _ -> StatModifiers.Zero
 
+type [<Measure>] skillId
 
 type SkillDef =
     {
-        Id: string
+        Id: string<skillId>
         Name: string
         Description: string
     }

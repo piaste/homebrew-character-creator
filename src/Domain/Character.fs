@@ -72,8 +72,8 @@ type Character =
 
         RaceId: string<subraceId>
         AbilityBuy: AbilityBuy
-        SkillIds: Set<string>
-        SkillExpIds: Set<string>
+        SkillIds: Set<string<skillId>>
+        SkillExpIds: Set<string<skillId>>
         
         ArchetypeId: string<archetypeId>
         TraitId: string<traitId>

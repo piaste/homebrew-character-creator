@@ -1,57 +1,58 @@
 module Bg3HomebrewCCreator.Domain.Entities.Skills
 
 open Bg3HomebrewCCreator.Domain.Types
-
-let skills : SkillDef list =
+open FSharp.UMX
+let allSkills : Map<string<skillId>, SkillDef> =
     [
         {
-            Id = "athletics"
+            Id = % "athletics"
             Name = "Athletics"
             Description = "Push people. Carry stuff."
         }
         {
-            Id = "arcana"
+            Id = % "arcana"
             Name = "Arcana"
             Description = "Understand magic."
         }
         {
-            Id = "intimidate"
+            Id = % "intimidate"
             Name = "Intimidate"
             Description = "Bully people."
         }
         {
-            Id = "nature"
+            Id = % "nature"
             Name = "Nature"
             Description = "Hug trees."
         }
         {
-            Id = "history"
+            Id = % "history"
             Name = "History"
             Description = "Remember old stuff."
         }
         {
-            Id = "religion"
+            Id = % "religion"
             Name = "Religion"
             Description = "Understand gods."
         }
         {
-            Id = "perception"
+            Id = % "perception"
             Name = "Perception"
             Description = "Spot hidden things and creatures."
         }
         {
-            Id = "persuasion"
+            Id = % "persuasion"
             Name = "Persuasion"
             Description = "Skip fights. Haggle with merchants."
         }
         {
-            Id = "deceit"
+            Id = % "deceit"
             Name = "Deceit"
             Description = "Lie your ass off."
         }
         {
-            Id = "insight"
+            Id = % "insight"
             Name = "Insight"
             Description = "Call bullshit."
         }
     ]
+    |> Map.fromProp _.Id

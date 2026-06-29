@@ -30,8 +30,8 @@ type Message =
     | ModifyAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
-    | ToggleSkill of string
-    | ToggleSkillExp of string
+    | ToggleSkill of string<skillId>
+    | ToggleSkillExp of string<skillId>
 
     | SetBaseClass of string<classId>
     | SetSubclass of string<subclassId>
@@ -103,7 +103,7 @@ let update load save message model =
     | NextMainStageSelection ->
         { model with 
             MainStageSelection = 
-                let picks = Seq.toList model.Character.NextLevelUp.Picks.Keys in
+                let picks = Seq.toList model.Character.Picks.Keys in
                 match model.MainStageSelection with
                 | Race -> Subrace | Subrace -> Class | Class -> Subclass 
                 | Subclass -> 
@@ -283,11 +283,14 @@ let update load save message model =
     | TogglePick (pick, id) ->
         let msg = 
             match pick with
+            | Archetypes -> SetArchetype (UMX.tag id)
+            | Traits -> SetTrait (UMX.tag id)
+            | Skills -> ToggleSkill (UMX.tag id)
+            | SkillExps -> ToggleSkillExp (UMX.tag id)
             | Cantrips -> ToggleCantrip (UMX.tag id)
             | Spells -> ToggleSpell (UMX.tag id)
             | Feats -> ToggleFeat (UMX.tag id)
             | ClassPassives -> ToggleClassPassive (UMX.tag id)
-            | Skills -> ToggleCantrip (UMX.tag id)
         model, Cmd.ofMsg msg
 
     | SetSearchQuery (pick, q) ->

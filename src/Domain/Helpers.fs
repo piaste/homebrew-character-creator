@@ -22,8 +22,6 @@ let classIdBySubclassId =
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
-let skillById (choices: Types.SkillDef list) (choiceId: string) =
-    choices |> List.find (fun choice -> choice.Id = choiceId)
 let getAllPassiveDescriptions (character : Character) = 
     [ for t in allSubraces[character.RaceId].RacialPassives do
         yield "Race", t.Description

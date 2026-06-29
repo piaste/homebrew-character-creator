@@ -7,7 +7,7 @@ open FSharp.UMX
 open Helpers
 
 type LevelUpPick = 
-    | Skills | Feats | ClassPassives | Cantrips | Spells
+    | Archetypes | Traits | Skills | SkillExps | Feats | ClassPassives | Cantrips | Spells
     
 let nSkillProfPicks = 4
 let nSkillExpPicks = 2
@@ -43,12 +43,19 @@ let nFeatPicks lr =
     | 4 | 8 | 12 -> 1
     | _ -> 0
 
-type Bg3HomebrewCCreator.Domain.Character.LevelRecord with
-    member l.Picks = 
-        Map [        
-             Cantrips, nCantripPicks l 
-             Spells, nSpellPicks (subclassById l.SubclassId).CasterType
-             ClassPassives, nPassivePicks l 
-             Feats, nFeatPicks l 
+type Bg3HomebrewCCreator.Domain.Character.Character with
+    member c.Picks = 
+        let l = c.NextLevelUp
+        Map [
+            if c.CharacterLevel = 1<charLvl> then
+                Archetypes, 1
+                Traits, 1
+                Skills, 4
+                SkillExps, 2
+                
+            Cantrips, nCantripPicks l 
+            Spells, nSpellPicks (subclassById l.SubclassId).CasterType
+            ClassPassives, nPassivePicks l 
+            Feats, nFeatPicks l 
         ]
         |> Map.filter (fun _ n -> n > 0)

@@ -4,6 +4,7 @@ open FSharp.UMX
 open System
 open Bolero.Html
 open Update
+open Model
 
 type Thing<[<Measure>] 'm> =
     { Id: string<'m>
@@ -11,7 +12,9 @@ type Thing<[<Measure>] 'm> =
       Description: string
       Icon: string }
 
-let view (title: string) sourceList (sq : string) (thingsPicked: Set<string<'m>>) pick dispatch =
+let view (title: string) sourceList (thingsPicked: Set<string<'m>>) pick (model : Model) dispatch =
+
+    let sq = model.SearchQueries.GetOrDefault pick
 
     let filtered =
         sourceList
@@ -70,7 +73,7 @@ let view (title: string) sourceList (sq : string) (thingsPicked: Set<string<'m>>
                                     "card compact-row"
                             )
 
-                            on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag c.Id))
+                            on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag<'m> c.Id))
 
                             div {
                                 attr.``class`` "card-top compact-row-top"

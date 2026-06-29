@@ -290,13 +290,13 @@ let creationSection (model: Model) dispatch =
                 }
             })
 
-        selector Skills.skills
+        selector Skills.allSkills.Values
             "Skills" "Choose 4 proficiencies" "Skill"
             nSkillProfPicks character.SkillIds.Count
             (_.Id >> character.SkillIds.Contains)
             (_.Id >> ToggleSkill >> dispatch)
 
-        selector (Skills.skills |> List.where (_.Id >> character.SkillIds.Contains))
+        selector (Skills.allSkills.Values |> Seq.where (_.Id >> character.SkillIds.Contains))
             "Skills" "Choose 2 expertises" "Skill"
             nSkillExpPicks character.SkillExpIds.Count
             (_.Id >> character.SkillExpIds.Contains)
@@ -364,7 +364,8 @@ let summarySection (model: Model) dispatch =
             (concat {
                 summaryRow "Skills" (
                     character.SkillIds 
-                    |> Seq.map (skillById Skills.skills >> fun skill -> 
+                    |> Seq.map (fun s -> 
+                        let skill = Skills.allSkills[s] in
                         $"""{skill.Name}{if character.SkillExpIds.Contains skill.Id then "++" else ""}"""
                     )
                     |> Seq.sort
