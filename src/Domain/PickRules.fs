@@ -4,7 +4,11 @@ open Types
 open Character
 open Bg3HomebrewCCreator.Domain.Entities.Subclasses
 open FSharp.UMX
+open Helpers
 
+type LevelUpPick = 
+    | Skills | Feats | ClassPassives | Cantrips | Spells
+    
 let nSkillProfPicks = 4
 let nSkillExpPicks = 2
 
@@ -38,3 +42,13 @@ let nFeatPicks lr =
     match UMX.untag lr.ClassLevel with
     | 4 | 8 | 12 -> 1
     | _ -> 0
+
+type Bg3HomebrewCCreator.Domain.Character.LevelRecord with
+    member l.Picks = 
+        Map [        
+             Cantrips, nCantripPicks l 
+             Spells, nSpellPicks (subclassById l.SubclassId).CasterType
+             ClassPassives, nPassivePicks l 
+             Feats, nFeatPicks l 
+        ]
+        |> Map.filter (fun _ n -> n > 0)

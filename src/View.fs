@@ -201,7 +201,7 @@ let levelUpSection (model: Model) dispatch = concat {
         (nPassivePicks character.NextLevelUp)
         character.NextLevelUp.ClassPassiveIds.Count
         (fun cp -> character.CurrentHistory.AllClassPassiveIdsByClass.GetOrElse(classId, []) |> Seq.contains cp.Id)
-        (fun cp -> dispatch <| ToggleClassPassive (classId, cp.Id))
+        (fun cp -> dispatch <| ToggleClassPassive cp.Id)
 
     selector Feats.allFeats.Values
         "Feat" "Choose a feat" "Feat"

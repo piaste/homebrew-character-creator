@@ -13,13 +13,11 @@ type Page =
     | [<Bolero.EndPoint "/">] Forge
     | [<Bolero.EndPoint "/other">] ForgeOtherUi
 
+
 type MainStageSelection = 
     | Race | Subrace | Class | Subclass
-    | Cantrip | Spells | Passives | Feats 
-    | LevelUp
-    static member Sequence = 
-        Reflection.FSharpType.GetUnionCases typeof<MainStageSelection>
-        |> Array.map (fun c -> Reflection.FSharpValue.MakeUnion(c, null))
+    | Pick of LevelUpPick
+    | Proceed
 
 let defaultCharacter =
     {
@@ -98,7 +96,7 @@ type Model =
     {
         Page: Page
         MainStageSelection: MainStageSelection
-        CantripPickerModel: ThingPickerComponent.Model<cantripId>
+        SearchQueries : Map<LevelUpPick, string>
 
         Character: Character
         UndoStack: Character list
@@ -111,7 +109,7 @@ type Model =
             {
                 Page = Forge
                 MainStageSelection = Race
-                CantripPickerModel = ThingPickerComponent.Model<cantripId>.Init()
+                SearchQueries = Map []
 
                 Character = defaultCharacter
                 UndoStack = []

@@ -66,21 +66,24 @@ let stageTabButton dispatch model stage iconPath =
     }
 
 let picksDockButton (title : string) (count: int) (max: int) dispatch stage = 
-    button {
-        attr.``class`` "pick-card pick-card--dock"
-        attr.``type`` "button"
-        on.click (fun _ -> dispatch <| SetMainStageSelection stage)
+    cond (max > 0) <| function
+    | false -> empty()
+    | true ->
+        button {
+            attr.``class`` "pick-card pick-card--dock"
+            attr.``type`` "button"
+            on.click (fun _ -> dispatch <| SetMainStageSelection (Pick stage))
 
-        div {
-            attr.``class`` "pick-name"
-            title
-        }
+            div {
+                attr.``class`` "pick-name"
+                title
+            }
 
-        div {
-            attr.``class`` "pick-count"
-            $"{count}/{max}"
+            div {
+                attr.``class`` "pick-count"
+                $"{count}/{max}"
+            }
         }
-    }
 
 let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
 
@@ -212,15 +215,17 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     Subclasses.allSubclassesByClass[classIdBySubclassId l.SubclassId]
                     subclassIconPath
                     SetSubclass
-            | Cantrip ->
+            | Pick Cantrips ->
                 ThingPickerComponent.view "Cantrips"
                     (Domain.Entities.Cantrips.allCantrips.Values
-                     |> Seq.map<CantripDef, ThingPickerComponent.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                     |> Seq.map<_, ThingPickerComponent.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
                      |> Seq.toList
                     )
-                    model.CantripPickerModel
-                    (dispatch << CantripPickerMsg)
-            | Spells ->
+                    (model.SearchQueries.GetOrDefault Cantrips)
+                    l.CantripIds
+                    Cantrips
+                    dispatch
+            | Pick Spells ->
                 match (subclassById l.SubclassId).SpellList with
                 | None -> empty()
                 | Some sl -> 
@@ -230,16 +235,30 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         |> Seq.map<_, ThingPickerComponent.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
                         |> Seq.toList
                         )
-                        model.CantripPickerModel
-                        (dispatch << CantripPickerMsg)
-            | Passives ->
+                        (model.SearchQueries.GetOrDefault Spells)
+                        l.SpellIds
+                        Spells
+                        dispatch
+            | Pick ClassPassives ->
                 ThingPickerComponent.view "Passives"
                     (Domain.Entities.ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                     |> Seq.map<_, ThingPickerComponent.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
                      |> Seq.toList
                     )
-                    model.CantripPickerModel
-                    (dispatch << CantripPickerMsg)
+                    (model.SearchQueries.GetOrDefault ClassPassives)
+                    l.ClassPassiveIds
+                    ClassPassives
+                    dispatch
+            | Pick Feats ->
+                ThingPickerComponent.view "Feat"
+                    (Domain.Entities.Feats.allFeats.Values
+                     |> Seq.map<_, ThingPickerComponent.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                     |> Seq.toList
+                    )
+                    (model.SearchQueries.GetOrDefault Feats)
+                    (l.FeatId |> Option.toList |> Set.ofList)
+                    Feats
+                    dispatch
         )
         .StageTabs(
             concat {
@@ -251,24 +270,21 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             }
         )
         .PicksDocks(
-            concat {
-                let cantripPicks = nCantripPicks l
-                if cantripPicks > 0 then
-                    picksDockButton "Cantrips" l.CantripIds.Count cantripPicks dispatch Cantrip
+            forEach l.Picks (fun p ->
+                let f = 
+                    match p.Key with
+                    | Cantrips -> 
+                        picksDockButton "Cantrips" l.CantripIds.Count
+                    | Spells -> 
+                        picksDockButton "Spells" l.SpellIds.Count
+                    | ClassPassives -> 
+                        picksDockButton "Passives" l.ClassPassiveIds.Count
+                    | Feats -> 
+                        picksDockButton "Feats" (Option.count l.FeatId)
+                
+                in f p.Value dispatch p.Key
 
-                let spellPicks = nSpellPicks (subclassById l.SubclassId).CasterType in
-                if spellPicks > 0 then
-                    picksDockButton "Spells" l.SpellIds.Count spellPicks dispatch Spells
-
-                let passivePicks = nPassivePicks l in
-                if passivePicks > 0 then
-                    picksDockButton "Passives" l.ClassPassiveIds.Count passivePicks dispatch Passives
-
-                let featPicks = nFeatPicks l in
-                if featPicks > 0 then
-                    picksDockButton "Feats" (Option.count l.FeatId) featPicks dispatch Feats
-
-            }
+            )
 
         )
         .TraitOptions(concat {

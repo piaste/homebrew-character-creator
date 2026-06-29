@@ -3,6 +3,7 @@ module Bg3HomebrewCCreator.ThingPickerComponent
 open FSharp.UMX
 open System
 open Bolero.Html
+open Update
 
 type Thing<[<Measure>] 'm> =
     { Id: string<'m>
@@ -10,21 +11,7 @@ type Thing<[<Measure>] 'm> =
       Description: string
       Icon: string }
 
-type Model<[<Measure>] 'm> =
-    { SearchQuery: string
-      ThingsPicked: Set<string<'m>> }
-
-    static member Init() =
-        { SearchQuery = ""
-          ThingsPicked = Set.empty }
-
-// Messages the picker can send upward
-type Msg<[<Measure>] 'm> =
-    | SetSearchQuery of string
-    | ToggleThing of string<'m>
-
-let view (title: string) sourceList (this: Model<'m>) dispatch =
-    let sq = this.SearchQuery
+let view (title: string) sourceList (sq : string) (thingsPicked: Set<string<'m>>) pick dispatch =
 
     let filtered =
         sourceList
@@ -50,7 +37,7 @@ let view (title: string) sourceList (this: Model<'m>) dispatch =
 
                 div {
                     attr.``class`` "h2"
-                    $"Pick 2 ({this.ThingsPicked.Count}/2)"
+                    $"Pick 2 ({thingsPicked.Count}/2)"
                 }
 
                 div {
@@ -61,7 +48,7 @@ let view (title: string) sourceList (this: Model<'m>) dispatch =
                         attr.placeholder "Search…"
                         attr.value sq
 
-                        on.input (fun e -> dispatch (SetSearchQuery(unbox e.Value)))
+                        on.input (fun e -> dispatch (SetSearchQuery(pick, unbox e.Value)))
                     }
                 }
 
@@ -77,13 +64,13 @@ let view (title: string) sourceList (this: Model<'m>) dispatch =
 
                         button {
                             attr.``class`` (
-                                if this.ThingsPicked.Contains c.Id then
+                                if thingsPicked.Contains c.Id then
                                     "card compact-row selected"
                                 else
                                     "card compact-row"
                             )
 
-                            on.click (fun _ -> dispatch <| ToggleThing c.Id)
+                            on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag c.Id))
 
                             div {
                                 attr.``class`` "card-top compact-row-top"

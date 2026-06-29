@@ -9,12 +9,14 @@ open Domain.Types
 open Domain.Helpers
 open Model
 open Bg3HomebrewCCreator.Domain.Entities
+open Bg3HomebrewCCreator.Domain.PickRules
 
 
 type Message =
     | SetPage of Page
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
+
     | LoadState
     | LoadedState of PersistedState option
     | ToggleLoreNames of bool
@@ -33,12 +35,13 @@ type Message =
 
     | SetBaseClass of string<classId>
     | SetSubclass of string<subclassId>
-    | ToggleClassPassive of string<classId> * string<classPassiveId>
+    | ToggleClassPassive of string<classPassiveId>
     | ToggleFeat of string<featId>
     | ToggleCantrip of string<cantripId>
     | ToggleSpell of string<spellId>
 
-    | CantripPickerMsg of ThingPickerComponent.Msg<cantripId>
+    | TogglePick of LevelUpPick * string
+    | SetSearchQuery of LevelUpPick * string
 
     | LevelUp
     | LevelDown
@@ -100,9 +103,19 @@ let update load save message model =
     | NextMainStageSelection ->
         { model with 
             MainStageSelection = 
+                let picks = Seq.toList model.Character.NextLevelUp.Picks.Keys in
                 match model.MainStageSelection with
-                | Race -> Subrace | Subrace -> Class
-                | Class -> Subclass | Subclass -> Cantrip | _ -> Race }, Cmd.none
+                | Race -> Subrace | Subrace -> Class | Class -> Subclass 
+                | Subclass -> 
+                    match picks with 
+                    | x :: _ -> Pick x
+                    | [] -> Proceed
+                | Pick p ->
+                    match picks |> List.tryFindIndex ((=) p) with
+                    | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
+                    | _ -> Proceed
+                | Proceed -> Proceed
+        }, Cmd.none
 
     | LoadState ->
         model, Cmd.OfAsync.either load () 
@@ -249,10 +262,10 @@ let update load save message model =
                     character.NextLevelUp.SpellIds.Toggle spellId
             }
 
-    | ToggleClassPassive (clId, cpId) ->
+    | ToggleClassPassive cpId ->
         apply <| fun character ->
 
-            if character.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(clId, []) |> Seq.contains cpId then character else
+            if character.PreviousHistory.AllClassPassiveIdsByClass.Values |> Seq.exists (Seq.contains cpId) then character else
 
             { character with 
                 NextLevelUp.ClassPassiveIds = 
@@ -267,17 +280,18 @@ let update load save message model =
                             if character.NextLevelUp.FeatId = Some featId then None
                             else Some featId
             }
+    | TogglePick (pick, id) ->
+        let msg = 
+            match pick with
+            | Cantrips -> ToggleCantrip (UMX.tag id)
+            | Spells -> ToggleSpell (UMX.tag id)
+            | Feats -> ToggleFeat (UMX.tag id)
+            | ClassPassives -> ToggleClassPassive (UMX.tag id)
+            | Skills -> ToggleCantrip (UMX.tag id)
+        model, Cmd.ofMsg msg
 
-    | CantripPickerMsg msg ->
-        match msg with    
-        | ThingPickerComponent.SetSearchQuery q ->
-            { model with CantripPickerModel.SearchQuery = q }, Cmd.none
-        | ThingPickerComponent.ToggleThing cantripId ->
-            { model with 
-                CantripPickerModel.ThingsPicked = 
-                    model.CantripPickerModel.ThingsPicked.Toggle cantripId },
-            Cmd.ofMsg (ToggleCantrip cantripId)
-
+    | SetSearchQuery (pick, q) ->
+        { model with SearchQueries = Map.add pick q model.SearchQueries }, Cmd.none
 
     | LevelUp ->
         if model.Errors.IsEmpty then
