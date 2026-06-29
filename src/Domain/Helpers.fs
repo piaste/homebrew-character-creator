@@ -36,16 +36,16 @@ let getAllPassiveDescriptions (character : Character) =
     
       for KeyValue(scid, lvl) in character.CurrentHistory.LevelsBySubclass do        
         let clDef = classBySubclassId scid
-        for scAb in clDef.ScalingAbilities lvl do
-            yield "Class", scAb
+        for scAb in clDef.ScalingAbilities character.CharacterLevel lvl do
+            yield "Class", scAb.Description
         for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield "Class", fAb
+            if lvl >= lvlReq then for fAb in ab do yield "Class", fAb.Description
 
         let scDef = allSubclasses[scid]
-        for scAb in scDef.ScalingAbilities lvl do
-            yield "Subclass", scAb
+        for scAb in scDef.ScalingAbilities (UMX.untag lvl) do
+            yield "Subclass", scAb.Description
         for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb
+            if UMX.untag lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb.Description
             
     ]
     
@@ -54,7 +54,7 @@ let levelUpDefault character =
         PreviousLevelHistory = character.NextLevelUp :: character.PreviousLevelHistory
         NextLevelUp = { 
             SubclassId = character.NextLevelUp.SubclassId
-            ClassLevel = character.NextLevelUp.ClassLevel + 1
+            ClassLevel = character.NextLevelUp.ClassLevel + 1<Types.classLvl>
 
             FeatId = None
             ClassPassiveIds = Set.empty

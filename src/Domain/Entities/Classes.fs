@@ -10,15 +10,15 @@ let rec fighter = {
 
         SpellcastingAbility = CHA
 
-        ScalingAbilities = (fun cl -> [ 
-            $"{cl} x {cl/2 + 1}d6 Superiority Dice"
-            $"{cl/2 + 1} Manoeuvres"
-            $"{cl/2 + 1}d12 HP Second Wind"
+        ScalingAbilities = (fun _ cl -> [ 
+            Simple $"{cl} x {cl/2 + 1<classLvl>}d6 Superiority Dice"
+            Simple $"{cl/2 + 1<classLvl>} Manoeuvres"
+            Simple $"{cl/2 + 1<classLvl>}d12 HP Second Wind"
         ])
 
         FixedAbilities = Map[
-         5, ["Extra Attack"; "Action Surge"]
-         9, ["Improved Extra Attack"; "Indomitable"]
+         5<classLvl>, [Simple "Extra Attack"; Simple "Action Surge"]
+         9<classLvl>, [Simple "Improved Extra Attack"; Simple "Indomitable"]
         ]
 
     }
@@ -30,13 +30,13 @@ let rec cleric = {
 
         SpellcastingAbility = WIS
 
-        ScalingAbilities = (fun cl -> [ 
+        ScalingAbilities = (fun _ _ -> [ 
         ])
 
         FixedAbilities = Map [
-            1, ["3 Channel Divinity charges"; "Pacify Undead"; "Divine Intervention"]
-            5, ["Extra Attac"]
-            9, ["Steel Cast"]
+            1<classLvl>, [Simple "3 Channel Divinity charges"; Simple "Pacify Undead"; Simple "Divine Intervention"]
+            5<classLvl>, [Simple "Extra Attack"]
+            9<classLvl>, [Simple "Steel Cast"]
         ]
     }
 
@@ -47,11 +47,11 @@ let rec wizard = {
 
         SpellcastingAbility = INT
 
-        ScalingAbilities = (fun cl -> [ 
-            $"{cl} Arcane Recovery Charges"
+        ScalingAbilities = (fun _ cl -> [ 
+            Simple $"{cl} Arcane Recovery Charges"
         ])
 
-        FixedAbilities = Map [1, ["Scroll Scribing"; "Scholary Acumen"]]
+        FixedAbilities = Map [1<classLvl>, [Simple "Scroll Scribing"; Simple "Scholary Acumen"]]
     }
 
 type Placeholder = class end

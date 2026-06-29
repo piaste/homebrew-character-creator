@@ -158,7 +158,7 @@ let update load save message model =
                 |> Map.getOrDefault subclassId
             {
                 character with
-                    NextLevelUp = LevelRecord.Blank subclassId (previousMaxLevelInSubclass + 1)
+                    NextLevelUp = LevelRecord.Blank subclassId (previousMaxLevelInSubclass + 1<classLvl>)
             }
 
     | SetAbilityPointBuy (ability, score) ->
@@ -272,7 +272,7 @@ let update load save message model =
             model, Cmd.none
 
     | LevelDown ->
-        if model.Character.CharacterLevel > 1 then
+        if model.Character.CharacterLevel > 1<charLvl> then
             apply (levelDown >> Option.get)
         else
             model, Cmd.none

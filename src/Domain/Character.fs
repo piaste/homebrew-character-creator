@@ -10,7 +10,7 @@ open Bg3HomebrewCCreator.Domain.Entities.Subclasses
 type LevelRecord =
     {
         SubclassId: string<subclassId>
-        ClassLevel: int
+        ClassLevel: int<classLvl>
 
         ClassPassiveIds: Set<string<classPassiveId>>
         FeatId: string<featId> option
@@ -117,6 +117,7 @@ type Character =
                     |> List.countBy (fun level -> level.SubclassId)
                     |> List.sortByDescending snd
                     |> Map.ofSeq
+                    |> Map.map (fun _ lvl -> lvl * 1<classLvl>)
 
             |}
 
@@ -124,8 +125,8 @@ type Character =
         member this.PreviousHistory = this.History false
 
         member this.ProficiencyBonus =
-            if this.CharacterLevel <= 0 then 2 
-            else 2 + (this.CharacterLevel - 1) / 4
+            if this.CharacterLevel <= 0<charLvl> then 2 
+            else 2 + (this.CharacterLevel - 1<charLvl>) / 4<charLvl>
 
         member this.HighestSpellDC = 
             this.CurrentHistory.LevelsBySubclass.Keys
@@ -139,6 +140,7 @@ type Character =
             
         member this.CharacterLevel = 
             List.length (this.CurrentHistory |> _.Levels)
+            * 1<charLvl>
 
         member this.Ability ab = 
             this.AbilityBuy.BoughtAbility ab + 
@@ -157,7 +159,7 @@ type Character =
 
         member this.HitPoints = 
             12 + this.StatModifiers.``Base HP`` 
-            + this.CharacterLevel * (8 + this.AbilityModifier CON + this.StatModifiers.``HP per level``)
+            + this.CharacterLevel / 1<charLvl> * (8 + this.AbilityModifier CON + this.StatModifiers.``HP per level``)
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives

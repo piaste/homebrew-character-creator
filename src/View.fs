@@ -175,7 +175,7 @@ let levelUpSection (model: Model) dispatch = concat {
 
     let validSubclassesFor clId =
         character.PreviousHistory.LevelsBySubclass
-        |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0)
+        |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0<classLvl>)
         |> function
            | None ->  Subclasses.allSubclassesByClass[clId].Values :> seq<_>
            | Some sclId -> seq { subclassById sclId }
@@ -242,25 +242,25 @@ let creationSection (model: Model) dispatch =
                         
                 requiredSelector BaseRaces.allBaseRaces.Values
                     "Race" "Choose a race" "race"
-                    (character.CharacterLevel = 1)
+                    (character.CharacterLevel = 1<charLvl>)
                     (fun race -> baseRaceIdBySubraceId character.RaceId = race.Id)
                     (fun race -> dispatch <| SetSubrace (Seq.head <| Races.allSubracesByBaseRace[race.Id].Keys))
 
                 requiredSelector Races.allSubracesByBaseRace[baseRaceIdBySubraceId character.RaceId].Values
                     "Subrace" "Choose a subrace" "subrace"
-                    (character.CharacterLevel = 1)
+                    (character.CharacterLevel = 1<charLvl>)
                     (fun race -> character.RaceId = race.Id)
                     (fun race -> dispatch <| SetSubrace race.Id)
 
                 requiredSelector Archetypes.allArchetypes.Values
                     "Archetype" "Choose an archetype" "archetype"
-                    (character.CharacterLevel = 1)
+                    (character.CharacterLevel = 1<charLvl>)
                     (fun archetype -> character.ArchetypeId = archetype.Id)
                     (fun archetype -> dispatch <| SetArchetype archetype.Id)
 
                 requiredSelector (Traits.allTraits.Values |> Seq.sortBy (fun tr -> if tr.Name = "None" then "" else tr.Name))
                     "Trait" "Choose a trait (or leave it as None)" "trait"
-                    (character.CharacterLevel = 1)
+                    (character.CharacterLevel = 1<charLvl>)
                     (fun tr -> character.TraitId = tr.Id)
                     (fun tr -> dispatch <| SetTrait tr.Id)
         })
@@ -352,7 +352,7 @@ let summarySection (model: Model) dispatch =
                 forEach allAbilities (fun ability ->
                     let score = character.Ability ability
                     summaryRow (ability.ToString()) $"{score} ({modifierText <| character.AbilityModifier ability})")
-                cond (character.CharacterLevel = 1) <| function
+                cond (character.CharacterLevel = 1<charLvl>) <| function
                     | true -> summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
                     | false -> empty()
             })
@@ -406,7 +406,7 @@ let view (model: Model) dispatch =
         .ClickLogo(fun _ -> dispatch (SetPage ForgeOtherUi))
         .BuilderContent(
             concat {
-                cond (model.Character.CharacterLevel > 1) <| function
+                cond (model.Character.CharacterLevel > 1<charLvl>) <| function
                     | true -> empty()
                     | _ -> creationSection model dispatch
                 levelUpSection model dispatch
@@ -417,11 +417,11 @@ let view (model: Model) dispatch =
 
             concat {
                 cond model.Errors <| function
-                    | [] -> actionButton $"⬆️ Level {model.Character.CharacterLevel + 1}" "primary" false (fun _ -> dispatch LevelUp)
+                    | [] -> actionButton $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" false (fun _ -> dispatch LevelUp)
                     | _ -> empty()
                 cond model.Character.PreviousLevelHistory.IsEmpty <| function
                     | true -> empty()
-                    | false -> actionButton $"⬇️ Level {model.Character.CharacterLevel - 1}" "primary" false (fun _ -> dispatch LevelDown)
+                    | false -> actionButton $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary" false (fun _ -> dispatch LevelDown)
                 cond model.UndoStack <| function
                     | [] -> empty()
                     | _ -> 

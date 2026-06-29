@@ -1,3 +1,5 @@
+#nowarn 3391 // Warn for string -> Simple ab upcasting. Remove this once the abilities are expanded to Complex.
+
 module Bg3HomebrewCCreator.Domain.Entities.Subclasses
 
 open FSharp.UMX
@@ -43,45 +45,67 @@ let rec battlemaster =
 
         }
 
-let rec ``Death Domain`` = 
-    {
-        Id = % nameof ``Death Domain``
-        Name = nameof ``Death Domain``
-        LoreName = None
-        Description = "Spread your god's plagues and undeath curses"
-        BaseClassId = cleric.Id
-        CasterType = FullCaster Divine
-        FixedAbilities = Map [
-            1, [ "Deific Necrosis"; "Bursting Sinew"; "Plague of Rot" ]
-            3, [ "Curse of Undeath"]
-            5, [ "Insurmountable Suffering"]
-            7, [ "Harvest"]
-            9, [ "True Pestilence"]
-            11, [ "Death of the Firstborns"]
-        ]
-        ScalingAbilities = fun _ -> []
-    }
+let rec arcaneArcher =
+        {
+            Id = % nameof arcaneArcher
+            Name = "Arcane Archer"
+            LoreName = Some "Arcane Archer"
+            Description = "A master of ranged combat, combining archery with arcane magic."
+            BaseClassId = fighter.Id
+            CasterType = Martial
+            FixedAbilities = Map [
+                1, ["Focused Weave"]
+                3, ["Elemental Fletchings"]
+                5, ["Arcane Finesse"]
+                7, ["Improved Fletchings"]
+                9, ["Greater Focus"]
+                11, ["Eye of the Arcana"]
+            ]
+            ScalingAbilities = fun cl -> [
+                $"Elemental Infusions: {cl} (3 at 3rd level, 3 more at 5th level, 3 more at 9th level)"
+                $"Superiority Dice: 1d6 at 1st level, 2d6 at 3rd level, +1d6 every 2 levels thereafter"
+            ]
+        }
 
-let rec ``Life Domain`` = 
-    {
-        Id = % nameof ``Life Domain``
-        Name = nameof ``Life Domain``
-        LoreName = None
-        Description = "Spread your god's blessings and heal wounds"
-        BaseClassId = cleric.Id
-        CasterType = FullCaster Divine
-        FixedAbilities = Map [
-            1, [ "Deific Recovery" ]
-            3, [ "Preserve Life"]
-            5, [ "Sanctity"]
-            7, [ "Dampen Elements"]
-            9, [ "Benevolent Grace"]
-            11, [ "Divine Presence"]
-        ]
-        ScalingAbilities = fun cl -> [
-            "+{cl} HP to the first heal you apply to a creature each turn"
-        ]
-    }
+let rec deathDomain =
+        {
+            Id = % nameof deathDomain
+            Name = "Death Domain"
+            LoreName = None
+            Description = "Spread your god's plagues and undeath curses"
+            BaseClassId = cleric.Id
+            CasterType = FullCaster Divine
+            FixedAbilities = Map [
+                1, [ "Deific Necrosis"; "Bursting Sinew"; "Plague of Rot" ]
+                3, [ "Curse of Undeath"]
+                5, [ "Insurmountable Suffering"]
+                7, [ "Harvest"]
+                9, [ "True Pestilence"]
+                11, [ "Death of the Firstborns"]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
+let rec lifeDomain =
+        {
+            Id = % nameof lifeDomain
+            Name = "Life Domain"
+            LoreName = None
+            Description = "Spread your god's blessings and heal wounds"
+            BaseClassId = cleric.Id
+            CasterType = FullCaster Divine
+            FixedAbilities = Map [
+                1, [ "Deific Recovery" ]
+                3, [ "Preserve Life"]
+                5, [ "Sanctity"]
+                7, [ "Dampen Elements"]
+                9, [ "Benevolent Grace"]
+                11, [ "Divine Presence"]
+            ]
+            ScalingAbilities = fun cl -> [
+                "+{cl} HP to the first heal you apply to a creature each turn"
+            ]
+        }
 
 let rec evoker =
         {
@@ -103,25 +127,44 @@ let rec evoker =
             ScalingAbilities = fun _ -> []
 
         }
-let rec luminalConfluence =
-        {
-            Id = % nameof luminalConfluence
-            Name = "Luminal Confluence"
-            LoreName = Some "Netherese Variator Tradition"
-            Description = "Distill elemental stains from your spells and use them to boost your magic"
-            BaseClassId = wizard.Id
-            CasterType = FullCaster Arcane
+let rec eldritchKnight =
+    {
+        Id = % nameof eldritchKnight
+        Name = "Eldritch Knight"
+        LoreName = None
+        Description = "A warrior of spell and sword, weaving incantations that supplement extensive martial expertise."
+        BaseClassId = fighter.Id
+        CasterType = HalfCaster Bargained
+        FixedAbilities = Map [
+            1, [Complex("Call of the Old One", "When making a melee based Attack Roll, deal additional damage equal to your Charisma Modifier.")]
+            3, [Complex("Ex Oblivione", "Whenever you use a Manoeuvre, you restore a Warlock Spell Slot.")]
+            5, [ Complex ("From Beyond", "After using a manoeuvre, for three turns, gain Advantage on Concentration Saving Throws and double the reach of melee-based Attack Rolls.")]
+            7, [Complex("Mountainous Madness", "After casting a Spell, you may make a Melee Weapon Attack as a Bonus Action.")]
+            9, [Complex("Lurking Fear", "When damaging a target, you have a chance to Frighten them.")]
+            11, [Complex("Shadowed Over", "Killing a Frightened creature restores all your warlock Spell Slots.")]
+        ]
+        ScalingAbilities = fun _ -> [ ]
+    }
 
-            FixedAbilities = Map [
-                1, [ "Elemental Concierge" ]
-                3, [ "Luminal Conversion"]
-                5, [ "Stained Imprint"]
-                7, [ "Luminal Mayhem"]
-                9, [ "Weavewalker's Expedition"]
-                11, [ "Luminal Genesis"]
-            ]
-            ScalingAbilities = fun _ -> []
-        }
+let rec luminalConfluence =
+    {
+        Id = % nameof luminalConfluence
+        Name = "Luminal Confluence"
+        LoreName = Some "Netherese Variator Tradition"
+        Description = "Distill elemental stains from your spells and use them to boost your magic"
+        BaseClassId = wizard.Id
+        CasterType = FullCaster Arcane
+
+        FixedAbilities = Map [
+            1, [ "Elemental Concierge" ]
+            3, [ "Luminal Conversion"]
+            5, [ "Stained Imprint"]
+            7, [ "Luminal Mayhem"]
+            9, [ "Weavewalker's Expedition"]
+            11, [ "Luminal Genesis"]
+        ]
+        ScalingAbilities = fun _ -> []
+    }
 
 type Placeholder = class end
 let allSubclasses = getAll<Placeholder, SubclassDef, subclassId>()

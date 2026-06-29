@@ -42,7 +42,7 @@ let defaultCharacter =
         PreviousLevelHistory = []
         NextLevelUp = {
             SubclassId = Subclasses.champion.Id
-            ClassLevel = 1
+            ClassLevel = 1<classLvl>
             
             SpellIds = Set.empty
             CantripIds = Set.empty
