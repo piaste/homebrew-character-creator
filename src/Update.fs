@@ -38,6 +38,8 @@ type Message =
     | ToggleCantrip of string<cantripId>
     | ToggleSpell of string<spellId>
 
+    | CantripPickerMsg of ThingPickerComponent.Msg<cantripId>
+
     | LevelUp
     | LevelDown
     
@@ -99,7 +101,7 @@ let update load save message model =
         { model with MainStageSelection = 
                         match model.MainStageSelection with
                         | Race -> Subrace | Subrace -> Class
-                        | Class -> Subclass | _ -> Race }, Cmd.none
+                        | Class -> Subclass | Subclass -> Cantrip | _ -> Race }, Cmd.none
 
     | LoadState ->
         model, Cmd.OfAsync.either load () 
@@ -264,6 +266,19 @@ let update load save message model =
                             if character.NextLevelUp.FeatId = Some featId then None
                             else Some featId
             }
+
+    | CantripPickerMsg msg ->
+        match msg with    
+        | ThingPickerComponent.SetSearchQuery q ->
+            { model with CantripPickerModel.SearchQuery = q }, Cmd.none
+        | ThingPickerComponent.ToggleThing cantripId ->
+            { model with 
+                CantripPickerModel.ThingsPicked = 
+                    model.CantripPickerModel.ThingsPicked.Toggle cantripId },
+            Cmd.ofMsg (ToggleCantrip cantripId)
+        | ThingPickerComponent.ClosePicker ->
+            { model with CantripPickerModel.Open = false }, Cmd.none
+
 
     | LevelUp ->
         if model.Errors.IsEmpty then

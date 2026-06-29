@@ -93,6 +93,8 @@ type Model =
     {
         Page: Page
         MainStageSelection: MainStageSelection
+        CantripPickerModel: ThingPickerComponent.Model<cantripId>
+
         Character: Character
         UndoStack: Character list
         Loaded: bool
@@ -104,6 +106,8 @@ type Model =
             {
                 Page = Forge
                 MainStageSelection = Race
+                CantripPickerModel = ThingPickerComponent.Model<cantripId>.Init()
+
                 Character = defaultCharacter
                 UndoStack = []
                 Loaded = false

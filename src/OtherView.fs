@@ -195,6 +195,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     Subclasses.allSubclassesByClass[classIdBySubclassId l.SubclassId]
                     subclassIconPath
                     SetSubclass
+            | Cantrip ->
+                ThingPickerComponent.view 
+                    (Domain.Entities.Cantrips.allCantrips.Values
+                     |> Seq.map<CantripDef, ThingPickerComponent.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                     |> Seq.toList
+                    )
+                    model.CantripPickerModel
+                    (dispatch << CantripPickerMsg)
         )
         .StageTabs(
             concat {
