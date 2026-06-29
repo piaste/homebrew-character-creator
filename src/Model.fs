@@ -21,6 +21,8 @@ type MainStageSelection =
 
 let defaultCharacter =
     {
+        Version = Version(0, 1)
+
         CharName = "John Baldur"
         RaceId = % "human" 
         AbilityBuy = {

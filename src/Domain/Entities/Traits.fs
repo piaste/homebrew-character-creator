@@ -4,7 +4,7 @@ open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
 
 let none : TraitDef = {
-    Id = % "none"
+    Id = % "_none" // so it is sorted first
     Name = "None"
     Grants = []
 }

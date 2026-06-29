@@ -77,6 +77,17 @@ let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg =
         }
     }
 
+let sheetPill (title : string) (text : string) = 
+    div { cl "sheet-pill"; attr.title text; text }
+
+let actionButton (text: string) dispatch msg = 
+    button {
+        cl "btn"
+        attr.style "margin-left:auto;padding:6px 10px;font-size:11px;border-radius:8px"
+        on.click (fun _ -> dispatch msg)
+        text        
+    }
+
 let summaryAbilities (chr: Character) dispatch = 
     let abB = chr.AbilityBuy
     concat {
@@ -151,6 +162,40 @@ let summaryAbilities (chr: Character) dispatch =
         }
 
     }
+
+let levelBoxes (model: Model) = 
+    let lvlTo12 = 
+        List.init 12 (fun _ -> None)
+        |> List.append (model.Character.NextLevelUp :: model.Character.PreviousLevelHistory |> List.map Some)
+        |> List.take 12
+        |> List.indexed
+
+    div {
+        cl "level-boxes"
+        forEach lvlTo12 <| fun (lvl0, lr') ->
+            div { 
+                cl ("lvlbox" + if Option.isNone lr' then " empty" else "")
+                div { 
+                    cl "lvlbox-h"
+                    div { cl "lvlbox-lvl"; $"Level {lvl0 + 1}"}
+                    div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> (classBySubclassId lr.SubclassId).Name }
+                }
+                div { 
+                    cl "lvbox-body"
+                    div { 
+                        cl "lvlbox-muted"
+                        match lr' with 
+                        | None -> empty()
+                        | Some lr ->
+                            forEach lr.CantripIds <| fun s ->
+                                p { Cantrips.allCantrips[s].Name }
+                            forEach lr.SpellIds <| fun s ->
+                                p { Spells.allSpells[s].Name }
+                    }
+                }
+            }
+    }
+
 let otherView (model: Model) (dispatch : Message -> unit) = 
     let raceTag = 
         BaseRaces.allBaseRaces[Races.allSubraces[model.Character.RaceId].BaseRaceId].Name
@@ -197,9 +242,17 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     SetBaseClass
 
             | Subclass -> 
+                let validSubclassesFor clId =
+                    c.PreviousHistory.LevelsBySubclass
+                    |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0<classLvl>)
+                    |> function
+                    | None ->  Subclasses.allSubclassesByClass[clId]
+                    | Some sclId -> Map [sclId, subclassById sclId ]
+                    // |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames |})
+
                 radialStage dispatch
                     l.SubclassId
-                    Subclasses.allSubclassesByClass[classIdBySubclassId l.SubclassId]
+                    (validSubclassesFor (classIdBySubclassId l.SubclassId))
                     subclassIconPath
                     SetSubclass
 
@@ -307,6 +360,21 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             )
 
         )
-        .CharacterSummary(summaryAbilities model.Character dispatch)    
+        .SheetPills(
+            concat {
+                sheetPill "Name" (model.Character.CharName)
+                sheetPill "Subrace" (Races.allSubraces[model.Character.RaceId].Name)
+            }
+        )
+        .ActionButtons(
+            concat {
+                actionButton "UNDO" dispatch Undo
+                actionButton "RESET" dispatch ResetCharacter
+                actionButton "LEVEL DOWN" dispatch LevelDown
+                actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+            }
+        )
+        .CharacterSummary(summaryAbilities model.Character dispatch)
+        .LevelBoxes(levelBoxes model)
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Elt()

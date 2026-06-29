@@ -54,7 +54,7 @@
                         <div class="summary-grid">
                             <div class="summary-left">
                                 <div class="sheet-controls summary-top">
-                                    <div class="sheet-pill" title="Subrace">—</div>
+                                    ${SheetPills}
 <!-- 
                                     <div class="sheet-pill trait-pill" title="Trait" style="margin-left:12px">
                                         <span class="trait-label">TRAIT</span>
@@ -62,11 +62,7 @@
                                             ${TraitOptions}
                                         </select>
                                     </div> -->
-
-                                    <button class="btn" type="button" data-action="copy-build-json"
-                                        style="margin-left:auto;padding:6px 10px;font-size:11px;border-radius:8px">
-                                        COPY BUILD JSON
-                                    </button>
+                                    ${ActionButtons}
                                 </div>
 
                                 <div class="sheet-muted trait-desc">
@@ -77,127 +73,7 @@
                             </div>
 
                             <div class="summary-right">
-                                <div class="level-boxes">
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 1</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 2</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 3</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 4</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 5</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 6</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 7</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 8</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 9</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 10</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 11</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="lvlbox empty">
-                                        <div class="lvlbox-h">
-                                            <div class="lvlbox-lvl">Level 12</div>
-                                            <div class="lvlbox-class">—</div>
-                                        </div>
-                                        <div class="lvlbox-body">
-                                            <div class="lvlbox-muted">No selections.</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                ${LevelBoxes}
                             </div>
                         </div>
 

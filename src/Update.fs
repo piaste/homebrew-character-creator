@@ -44,12 +44,13 @@ type Message =
     | SetSearchQuery of LevelUpPick * string
 
     | LevelUp
-    | LevelDown
+    | LevelDown    
     
+    | CopyBuildJson
     | Undo
     | ResetCharacter
-    | SavedState
-    | PersistFailed of string
+    | NoOp
+    | ShowSystemError of string
     | ClearSystemError
 
 
@@ -64,8 +65,8 @@ let saveCmd save (model: Model) =
     if model.Loaded then
         Cmd.OfAsync.either 
             save (toPersistedState model)
-            (fun () -> SavedState)
-            (fun ex -> PersistFailed ex.Message)
+            (fun () -> NoOp)
+            (fun ex -> ShowSystemError ex.Message)
     else
         Cmd.none
 
@@ -85,7 +86,7 @@ let applyCharacterChangeAnd cmd save (change: Character -> Character) (model: Mo
 
 let applyCharacterChange = applyCharacterChangeAnd Cmd.none
 
-let update load save message model =
+let update load save copyCharacter message model =
 
     let apply f = 
         applyCharacterChange save f model
@@ -120,7 +121,7 @@ let update load save message model =
     | LoadState ->
         model, Cmd.OfAsync.either load () 
                     LoadedState 
-                    (PersistFailed << sprintf "Unable to restore local data: %s" << _.Message)
+                    (ShowSystemError << sprintf "Unable to restore local data: %s" << _.Message)
 
     | LoadedState None ->
         { model with Loaded = true }, Cmd.none
@@ -291,8 +292,8 @@ let update load save message model =
             | Spells -> ToggleSpell (UMX.tag id)
             | Feats -> ToggleFeat (UMX.tag id)
             | ClassPassives -> ToggleClassPassive (UMX.tag id)
-        model, Cmd.ofMsg msg
-
+        model, Cmd.ofMsg msg // maybe use Cmd.batch to autoforward?
+ 
     | SetSearchQuery (pick, q) ->
         { model with SearchQueries = Map.add pick q model.SearchQueries }, Cmd.none
 
@@ -320,13 +321,20 @@ let update load save message model =
         | [] ->
             model, Cmd.none
 
+    | CopyBuildJson ->
+        model, 
+        Cmd.OfAsync.either 
+            copyCharacter model.Character
+            (fun () -> NoOp)
+            (fun ex -> ShowSystemError ex.Message)
+
     | ResetCharacter -> 
         apply <| fun _ -> Model.Initial.Character
 
-    | SavedState ->
+    | NoOp ->
         model, Cmd.none
 
-    | PersistFailed message ->
+    | ShowSystemError message ->
         { model with Loaded = true; SystemErrors = [ message ] }, Cmd.none
 
     

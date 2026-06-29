@@ -36,7 +36,13 @@ let buildStorage (getJsRuntime: unit -> IJSRuntime) =
         do! jsRuntime.InvokeVoidAsync("characterStorage.save", [| box storageKey; box json |]).AsTask() |> Async.AwaitTask
     }
 
-    load, save
+    let copyCharacter (char: Character) = async {
+        let jsRuntime = getJsRuntime ()
+        let json = JsonSerializer.Serialize(char, serializerOptions)        
+        do! jsRuntime.InvokeVoidAsync("characterStorage.copyToClipboard", [| box json |]).AsTask() |> Async.AwaitTask
+    }
+
+    load, save, copyCharacter
 
 
 type MyApp() =
@@ -49,15 +55,15 @@ type MyApp() =
 
     override this.Program =
 #if DEBUG
-        let update load save msg model = 
+        let update load save copyCharacter msg model = 
             System.Console.WriteLine((sprintf "Update: %A" msg).PadRight(200).Substring(0, 200))
-            update load save msg model
+            update load save copyCharacter msg model
 #endif 
-        let load, save = buildStorage (fun () -> this.JSRuntime)
+        let load, save, copyCharacter = buildStorage (fun () -> this.JSRuntime)
 
         let dynamicView = function
             | x as { Page = Forge } -> view x
             | x as { Page = ForgeOtherUi } -> OtherView.View.otherView x
         
-        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) dynamicView
+        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save copyCharacter) dynamicView
         |> Program.withRouter router

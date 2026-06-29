@@ -7,5 +7,8 @@ window.characterStorage = {
   },
   clear: function (key) {
     window.localStorage.removeItem(key);
+  },
+  copyToClipboard: async function (text) {
+    await navigator.clipboard.writeText(text);
   }
 };

@@ -68,6 +68,7 @@ type AbilityBuy =
 
 type Character =
     {
+        Version: System.Version
         CharName: string
 
         RaceId: string<subraceId>
