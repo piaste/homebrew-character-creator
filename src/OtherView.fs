@@ -47,11 +47,11 @@ let picksDockButton (title : string) (count: int) (max: int) dispatch stage =
             }
         }
 
-let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
+let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
 
     let radius = 200.0
 
-    let radialButton index total (text: string) iconSubpath action = 
+    let radialButton index total (text: string) iconSubpath action hoverAction = 
         let angle = 1.5 * Math.PI + index * 2. * Math.PI / total
         let posX = radius * Math.Cos angle
         let posY = radius * Math.Sin angle
@@ -59,6 +59,7 @@ let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg =
         button { 
             cl "radial-node"
             on.click action
+            on.mouseover hoverAction
             attr.style $"--scale: 0.92; --x: {posX}px; --y: {posY}px;"
             div {
                 cl "radial-node-button"
@@ -67,13 +68,19 @@ let inline radialStage dispatch currKey (options : KeyedMap<_, _>) getIcon msg =
             div { cl "radial-node-label"; text}
         }
 
+    let centerText = 
+        concat {
+            forEach (rct.Split '\n') <| fun l -> p { l }
+        }
+
     div {
         cl "radial-stage"; attr.style "position:relative;z-index:1"
         div { cl "radial-center"
-              div { cl "radial-center-title"; options[currKey].Name }
+              div { cl "radial-center-title"; centerText }
               forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
-                    radialButton i count v.Name (getIcon k) (fun _ -> 
-                    dispatch (msg k)))
+                radialButton i count v.Name (getIcon k) 
+                    (fun _ -> dispatch (msg k)) 
+                    (fun _ -> dispatch (SetRadialCenterText options[k].Description)))
         }
     }
 
@@ -203,6 +210,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
     let c = model.Character
     let l = c.NextLevelUp
 
+    let rct = model.RadialCenterText
+
     let ph pick f = 
         f c.Picks[pick] pick model dispatch
 
@@ -221,21 +230,21 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     }
                 }
             | Race -> 
-                radialStage dispatch
+                radialStage rct dispatch
                     (baseRaceIdBySubraceId c.RaceId)
                     BaseRaces.allBaseRaces
                     baseraceIconPath
                     SetBaseRace
                     
             | Subrace -> 
-                radialStage dispatch
+                radialStage rct dispatch
                     c.RaceId
                     Races.allSubracesByBaseRace[baseRaceIdBySubraceId c.RaceId]
                     subraceIconPath
                     SetSubrace
                     
             | Class -> 
-                radialStage dispatch
+                radialStage rct dispatch
                     (classIdBySubclassId l.SubclassId)
                     Classes.allClasses
                     baseclassIconPath
@@ -250,7 +259,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     | Some sclId -> Map [sclId, subclassById sclId ]
                     // |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames |})
 
-                radialStage dispatch
+                radialStage rct dispatch
                     l.SubclassId
                     (validSubclassesFor (classIdBySubclassId l.SubclassId))
                     subclassIconPath

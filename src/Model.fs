@@ -98,6 +98,7 @@ type Model =
     {
         Page: Page
         MainStageSelection: MainStageSelection
+        RadialCenterText: string
         SearchQueries : Map<LevelUpPick, string>
 
         Character: Character
@@ -111,6 +112,7 @@ type Model =
             {
                 Page = Forge
                 MainStageSelection = Race
+                RadialCenterText = ""
                 SearchQueries = Map []
 
                 Character = defaultCharacter

@@ -16,6 +16,7 @@ type Message =
     | SetPage of Page
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
+    | SetRadialCenterText of string
 
     | LoadState
     | LoadedState of PersistedState option
@@ -100,6 +101,9 @@ let update load save copyCharacter message model =
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss }, Cmd.none
+
+    | SetRadialCenterText txt ->
+        { model with RadialCenterText = txt }, Cmd.none
 
     | NextMainStageSelection ->
         { model with 

@@ -723,7 +723,7 @@ html,body{
 }
 
 .radial-center-title{
-  font-size: 22px;
+  /* font-size: 22px; */
   letter-spacing: .08em;
   text-transform: none;
   color: var(--muted);

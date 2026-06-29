@@ -95,6 +95,11 @@ type StatModifiers = {
                     if score <> 0 then 
                         let key = (modifierText <| (p.GetValue this :?> int))
                         yield key, p.Name
+                else if p.PropertyType = typeof<float> then
+                    let score = p.GetValue this :?> float
+                    if score <> 0 then 
+                        let key = (modifierText <| (p.GetValue this :?> float))
+                        yield key, p.Name
         ]
 
     override this.ToString() = 
