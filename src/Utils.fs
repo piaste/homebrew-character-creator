@@ -75,6 +75,7 @@ type Set<'T when 'T : comparison> with
 let [<Literal>] ACTION = "🟢" 
 let [<Literal>] BONUS_ACTION = "🔺" 
 let [<Literal>] REACTION = "♦️" 
+let [<Literal>] TOGGLEABLE = "🔄"
 
 type KeyedMap<[<Measure>] 'm, 'v 
         when 'v : (member Id: string<'m>) 

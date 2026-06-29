@@ -166,6 +166,120 @@ let rec luminalConfluence =
         ScalingAbilities = fun _ -> []
     }
 
+let rec beastheart =
+        {
+            Id = % nameof beastheart
+            Name = "Beastheart"
+            LoreName = None
+            Description = "Your attunement with nature and its beasts inspires your rage, empowering you with supernatural might."
+            BaseClassId = barbarian.Id
+            CasterType = Martial
+            FixedAbilities = Map [
+                1, [ Simple $"{BONUS_ACTION} Rage: Bestial Heart" ]
+                3, [ Simple "Bestial Dominance" ]
+                5, [ Simple "Call of the Wild" ]
+                7, [ Simple "Howl of the Wild" ]
+                9, [ Simple "Bestial Growth" ]
+                11, [ Simple "Totemic Beast" ]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
+let rec berserker =
+        {
+            Id = % nameof berserker
+            Name = "Berserker"
+            LoreName = None
+            Description = "Violence is both a means and an end. You follow a path of untrammelled fury, slick with blood, as you thrill in the chaos of battle, heedless of your own well-being."
+            BaseClassId = barbarian.Id
+            CasterType = Martial
+            FixedAbilities = Map [
+                1, [ Simple $"{BONUS_ACTION} Rage: Frenzy"; Simple $"{BONUS_ACTION} Frenzied Throw" ]
+                3, [ Simple $"{BONUS_ACTION} Frenzied Strike" ]
+                5, [ Simple "Steelbreaker" ]
+                7, [ Simple "Feral Instinct" ]
+                9, [ Simple "Thrill of the Kill" ]
+                11, [ Simple "Let It Rip" ]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
+let rec frostbreaker =
+        {
+            Id = % nameof frostbreaker
+            Name = "Frostbreaker"
+            LoreName = None
+            Description = "Amidst frigid hilltops and glacial peaks, you have honed your rage, now controlled and enduring."
+            BaseClassId = barbarian.Id
+            CasterType = Martial
+            FixedAbilities = Map [
+                1, [ Simple $"{BONUS_ACTION} Rage: Frostwoven"; Simple "Bifrost" ]
+                3, [ Simple "Frigid Omen" ]
+                5, [ Simple "Frostfields" ]
+                7, [ Simple "Glacial Bellow" ]
+                9, [ Simple "Tundral Strike" ]
+                11, [ Simple "Frozen Hellscape" ]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
+let rec giantsBlood =
+        {
+            Id = % nameof giantsBlood
+            Name = "Giant's Blood"
+            LoreName = None
+            Description = "You carry the blood of Giants, invoking their might and staggering size alike by drawing strength from the same primordial forces that fuel them."
+            BaseClassId = barbarian.Id
+            CasterType = Martial
+            FixedAbilities = Map [
+                1, [ Simple $"{BONUS_ACTION} Rage: Giant's Blood"; Simple $"{BONUS_ACTION} Stormheel" ]
+                3, [ Simple $"{ACTION} Mighty Impel" ]
+                5, [ Simple $"{TOGGLEABLE} Poisebreaker" ]
+                7, [ Simple "Frontline Backbreaker" ]
+                9, [ Simple "Towering Blows" ]
+                11, [ Simple "Titanic Strength" ]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
+let rec rosemourn =
+        {
+            Id = % nameof rosemourn
+            Name = "Rosemourn"
+            LoreName = None
+            Description = "Your fury runs unconscionably deep, resting soundly in scars of the past. The briars of that past help you to forge both strength and resilience."
+            BaseClassId = barbarian.Id
+            CasterType = Martial
+            FixedAbilities = Map [
+                1, [ Simple $"{BONUS_ACTION} Rage: Briar Blood" ]
+                3, [ Simple $"{BONUS_ACTION} Bloodvine Grasp" ]
+                5, [ Simple $"{REACTION} Barbed Protection" ]
+                7, [ Simple "Thornfall" ]
+                9, [ Simple "Bloodvine Thicket" ]
+                11, [ Simple "Heart of Thorns" ]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
+let rec wildSoul =
+        {
+            Id = % nameof wildSoul
+            Name = "Wild Soul"
+            LoreName = None
+            Description = "The wild influence of magic has transformed you, suffusing you with an arcane power that churns within you, waiting to be released."
+            BaseClassId = barbarian.Id
+            CasterType = HalfCaster Innate
+            FixedAbilities = Map [
+                1, [ Simple $"{BONUS_ACTION} Rage: Wild Magic"; Simple "Cantrips"; Simple "Spellcasting" ]
+                3, [ Simple "Chaotic Roar" ]
+                5, [ Simple "Unstable Backlash" ]
+                7, [ Simple "Chance Surge" ]
+                9, [ Simple "Wild Bloodlust" ]
+                11, [ Simple "Tenacious Chaos" ]
+            ]
+            ScalingAbilities = fun _ -> []
+        }
+
 type Placeholder = class end
 let allSubclasses = getAll<Placeholder, SubclassDef, subclassId>()
 
