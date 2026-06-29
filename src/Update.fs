@@ -174,7 +174,7 @@ let update load save message model =
             }
 
     | ModifyAbilityScore (ability, scoreChange) -> 
-        let currentScore = model.Character.AbilityBuy.BoughtAbility ability
+        let currentScore = model.Character.AbilityBuy.BoughtAbilityBeforeBonuses ability
         let newScore = clamp 8 15 (currentScore + scoreChange)
         let newSpent = 
             [ 0 .. 9 ]

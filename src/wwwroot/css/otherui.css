@@ -1054,6 +1054,10 @@ select.trait-select:focus{
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  & .disabled {
+    display:none;
+  }
 }
 
 .ability-face-btn img {
@@ -1254,7 +1258,7 @@ select.trait-select:focus{
   opacity: .85;
 }
 
-.ability-bonus-box{
+.square-checkbox{
   width: 16px;
   height: 16px;
   padding: 0;
@@ -1266,12 +1270,12 @@ select.trait-select:focus{
   place-items: center;
 }
 
-.ability-bonus-box.is-on{
+.square-checkbox.is-on{
   background: rgba(212,175,55,0.18);
   border-color: rgba(212,175,55,0.65);
 }
 
-.ability-bonus-box.is-on::after{
+.square-checkbox.is-on::after{
   content: "";
   width: 8px;
   height: 8px;
@@ -1987,7 +1991,7 @@ select.trait-select:focus,
   text-shadow:0 1px 0 rgba(0,0,0,0.85);
   cursor:pointer;
   border-color:rgba(255,215,128,0.65);
-  place-content: center;
+  place-items: center;
   display: grid;
 
   & .stage-tab-title {

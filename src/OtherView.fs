@@ -20,7 +20,11 @@ type OtherUi = Template<"wwwroot/otherui.html">
 let inline cl s = attr.``class`` s
 
 let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
-let icon subpath = img { attr.src $"/assets/icons/{toFileName subpath}.png"}
+let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
+let icon subpath = img { 
+    attr.style "width:100%; height:100%; object-fit:contain;"
+    attr.src $"/assets/icons/{toFileName subpath}.png"
+}
 
 let baseraceIconPath race = 
     let race = BaseRaces.allBaseRaces[race]
@@ -44,6 +48,12 @@ let inline forEachIndexed collection nodeGen =
     let count = Seq.length collection
     let indexed = Seq.indexed collection
     forEach indexed (fun (i, x) -> nodeGen (i, count, x))
+
+let checkbox isActive dispatch msg = 
+    button {
+        cl ("square-checkbox" + if isActive then " is-on" else "")
+        on.click (fun _ -> dispatch msg)
+    }
 
 
 let stageTabButton dispatch model stage iconPath = 
@@ -93,7 +103,7 @@ let summaryAbilities (chr: Character) dispatch =
             $"Ability points: {abB.SpentPoints} / {abB.SpentPoints + abB.UnspentPoints}"
         }
         div { 
-            cl "summary-abilities-compat"; attr.aria "label" "Ability scores"
+            cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
             div {
                 cl "ability-row ability-row--head"; attr.aria "hidden" "true"
                 div { cl "ability-k" }
@@ -111,25 +121,23 @@ let summaryAbilities (chr: Character) dispatch =
                     cl "ability-row"
                     div { cl "ability-k"; string ab }
                     button {
-                        cl "ability-face-btn"
+                        clEnabled (abB.BoughtAbilityBeforeBonuses ab > 8) "ability-face-btn"
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
                         img { attr.src "/assets/ui/ability-minus.png"}
                     }
                     div { cl "ability-v"; string <| abB.BoughtAbility ab}
                     div { cl "ability-m"; string <| abB.BoughtAbilityModifier ab}
                     button {
-                        cl "ability-face-btn"
+                        clEnabled (abB.BoughtAbilityBeforeBonuses ab < 15) "ability-face-btn"
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
                         img { attr.src "/assets/ui/ability-plus.png"}
                     }
-                    button {
-                        cl "ability-bonus-box"
-                        on.click (fun _ -> dispatch (SetBonusPlusThree ab))
-                    }
-                    button {
-                        cl "ability-bonus-box"
-                        on.click (fun _ -> dispatch (SetBonusPlusOne ab))
-                    }
+                    checkbox 
+                        (chr.AbilityBuy.BonusPlusThree = ab) 
+                        dispatch (SetBonusPlusThree ab)
+                    checkbox 
+                        (chr.AbilityBuy.BonusPlusOne = ab) 
+                        dispatch (SetBonusPlusOne ab)
                 }
             )
             div {
