@@ -26,8 +26,9 @@
 
 4.  **Strict Constraints**:
     *   **Do NOT** change the structure of the code, the file organization, or the underlying F# types (defined in `src/Domain/Types.fs`).
-    *   Only modify the values and instances of the objects.
+    *   Only modify the values and instances of the objects. Only touch files under `src/Domain/Entities`.
     *   Use existing constants and patterns (e.g., `Simple "Ability"`, `ACTION`, `BONUS_ACTION`) as seen in the current files.
+    *   Prefer using `Power`and `Buff` types if possible, then `Complex` whenever there is a valid name. Only use `Simple` as a last resort.
 
 5.  **Verification**:
     *   After making changes to a file, run `dotnet build src/Bg3HomebrewCCreator.Client.fsproj` to ensure that the strict typing is respected and there are no compile-time errors.
