@@ -1417,14 +1417,10 @@ select.trait-select:focus{
   z-index: 9000;
 }
 
-.picker-drawer{
-  position: fixed;
-  top: 70px; /* below topbar */
-  right: 0;
-  bottom: 0;
-  width: min(980px, 58vw);
+.picker-drawer {   
   background: rgba(14,10,10,0.92);
-  border-left: 1px solid rgba(255,215,128,0.14);
+  border: 1px solid rgba(255,215,128,0.14);
+  border-radius: 16px;
   box-shadow: -20px 0 50px rgba(0,0,0,0.55);
   z-index: 9001;
   backdrop-filter: blur(8px);

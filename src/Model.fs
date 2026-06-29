@@ -15,7 +15,12 @@ type Page =
 
 type MainStageSelection = 
     | Race | Subrace | Class | Subclass
-    | Cantrip | Spells | Passives | Feats    
+    | Cantrip | Spells | Passives | Feats 
+    | LevelUp
+    static member Sequence = 
+        Reflection.FSharpType.GetUnionCases typeof<MainStageSelection>
+        |> Array.map (fun c -> Reflection.FSharpValue.MakeUnion(c, null))
+
 let defaultCharacter =
     {
         CharName = "John Baldur"

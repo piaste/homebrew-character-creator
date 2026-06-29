@@ -173,7 +173,10 @@ type SubraceDef =
 
 // Cantrips and spells
 
-type SpellList = Versatile | Divine | Primal | Arcane | Innate | Bargained
+type SpellList = 
+    | Versatile
+    | DoubleVersatile // special for lore bard and arcanist who get 2x any spell
+    | Divine | Primal | Arcane | Innate | Bargained
 
 type [<Measure>] cantripId
 

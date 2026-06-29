@@ -11,7 +11,7 @@ let nSkillExpPicks = 2
 let nSpellPicks = 
     function
     | Martial -> 0
-    // todo
+    | FullCaster Versatile -> 1
     | FullCaster _ -> 2
     | HalfCaster _ -> 1
 

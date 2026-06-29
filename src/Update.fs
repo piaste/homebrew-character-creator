@@ -98,10 +98,11 @@ let update load save message model =
         { model with MainStageSelection = mss }, Cmd.none
 
     | NextMainStageSelection ->
-        { model with MainStageSelection = 
-                        match model.MainStageSelection with
-                        | Race -> Subrace | Subrace -> Class
-                        | Class -> Subclass | Subclass -> Cantrip | _ -> Race }, Cmd.none
+        { model with 
+            MainStageSelection = 
+                match model.MainStageSelection with
+                | Race -> Subrace | Subrace -> Class
+                | Class -> Subclass | Subclass -> Cantrip | _ -> Race }, Cmd.none
 
     | LoadState ->
         model, Cmd.OfAsync.either load () 
@@ -276,8 +277,6 @@ let update load save message model =
                 CantripPickerModel.ThingsPicked = 
                     model.CantripPickerModel.ThingsPicked.Toggle cantripId },
             Cmd.ofMsg (ToggleCantrip cantripId)
-        | ThingPickerComponent.ClosePicker ->
-            { model with CantripPickerModel.Open = false }, Cmd.none
 
 
     | LevelUp ->
