@@ -234,8 +234,8 @@ type SubclassDef =
         Description: string
         BaseClassId: string<classId>
         CasterType: CasterType        
-        ScalingAbilities: int -> Passive list
-        FixedAbilities: Map<int, Passive list>
+        ScalingAbilities: int<charLvl> -> int<classLvl> -> Passive list
+        FixedAbilities: Map<int<classLvl>, Passive list>
     }
     with 
         member this.DisplayName useLoreNames = 

@@ -146,9 +146,11 @@ html,body{
 
 /* “Screen” container inside the frame */
 .screen{
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+  max-height: 50em;
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
   position: relative;
   padding: 0;
   background: transparent;
@@ -704,7 +706,7 @@ html,body{
 .radial-center{
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 17em;
   transform: translate(-50%, -50%);
   width: 220px;
   height: 220px;
@@ -1537,8 +1539,7 @@ select.trait-select:focus{
   position: sticky;
   top: 10px;
   float: right;
-  margin: 10px 10px 0 0;
-  width: 38px;
+  margin: 10px 10px 0 0;  
   height: 38px;
   border-radius: 12px;
   border: 1px solid rgba(255,215,128,0.18);
@@ -1632,6 +1633,11 @@ select.trait-select:focus{
   font-size: 13px;
   color: rgba(243, 230, 200, 0.85);
   line-height: 1.45;
+}
+
+.picker-done {
+  align-self: center;
+  width: fit-content;
 }
 
 .filter-panel.compact{

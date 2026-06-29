@@ -1,18 +1,20 @@
-module Bg3HomebrewCCreator.ThingPickerComponent
+module Bg3HomebrewCCreator.OtherView.Picker
 
 open FSharp.UMX
 open System
 open Bolero.Html
-open Update
-open Model
+
+open Helpers
+open Bg3HomebrewCCreator.Model
+open Bg3HomebrewCCreator.Update
 
 type Thing<[<Measure>] 'm> =
     { Id: string<'m>
       Name: string
       Description: string
-      Icon: string }
+      Icon: string option }
 
-let view (title: string) sourceList (thingsPicked: Set<string<'m>>) pick (model : Model) dispatch =
+let view (title: string) sourceList (thingsPicked: Set<string<'m>>) maxPicks pick (model : Model) dispatch =
 
     let sq = model.SearchQueries.GetOrDefault pick
 
@@ -24,30 +26,39 @@ let view (title: string) sourceList (thingsPicked: Set<string<'m>>) pick (model 
             || c.Description.Contains(sq, StringComparison.CurrentCultureIgnoreCase))
 
     div {
-        attr.``class`` "picker-drawer"
+        cl "picker-drawer"
         attr.aria "label" "Picker"
 
         div {
-            attr.``class`` "picker-inner"
+            cl "picker-inner"
 
             div {
-                attr.``class`` "screen picker-screen"
+                cl "screen picker-screen"
 
                 div {
-                    attr.``class`` "h1"
+                    cl "h1"
                     title
                 }
 
-                div {
-                    attr.``class`` "h2"
-                    $"Pick 2 ({thingsPicked.Count}/2)"
-                }
+                
+                cond (thingsPicked.Count = maxPicks) <| function
+                | false -> 
+                    div {
+                        cl "h2"
+                        $"Pick {maxPicks} ({thingsPicked.Count}/{maxPicks})"
+                    }
+                | true -> 
+                    button {
+                        cl "btn primary picker-done"
+                        on.click (fun _ -> dispatch NextMainStageSelection)
+                        "Done"
+                    }
 
                 div {
-                    attr.``class`` "filter-panel compact"
+                    cl "filter-panel compact"
 
                     input {
-                        attr.``class`` "search"
+                        cl "search"
                         attr.placeholder "Search…"
                         attr.value sq
 
@@ -56,17 +67,17 @@ let view (title: string) sourceList (thingsPicked: Set<string<'m>>) pick (model 
                 }
 
                 div {
-                    attr.``class`` "mini-muted"
+                    cl "mini-muted"
                     $"Showing {filtered.Length}/{sourceList.Length}"
                 }
 
                 div {
-                    attr.``class`` "grid grid-rows"
+                    cl "grid grid-rows"
 
                     for c in filtered do
 
                         button {
-                            attr.``class`` (
+                            cl (
                                 if thingsPicked.Contains c.Id then
                                     "card compact-row selected"
                                 else
@@ -76,28 +87,31 @@ let view (title: string) sourceList (thingsPicked: Set<string<'m>>) pick (model 
                             on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag<'m> c.Id))
 
                             div {
-                                attr.``class`` "card-top compact-row-top"
+                                cl "card-top compact-row-top"
 
-                                div {
-                                    attr.``class`` "icon sm"
+                                cond c.Icon <| function
+                                | None -> empty()
+                                | Some iconPath -> 
+                                    div {
+                                        cl "icon sm"
 
-                                    img {
-                                        attr.``class`` "icon-img"
-                                        attr.src c.Icon
-                                        attr.alt ""
+                                        img {
+                                            cl "icon-img"
+                                            attr.src iconPath
+                                            attr.alt ""
+                                        }
                                     }
-                                }
 
                                 div {
-                                    attr.``class`` "card-copy"
+                                    cl "card-copy"
 
                                     div {
-                                        attr.``class`` "label"
+                                        cl "label"
                                         c.Name
                                     }
 
                                     div {
-                                        attr.``class`` "desc"
+                                        cl "desc"
                                         c.Description
                                     }
                                 }

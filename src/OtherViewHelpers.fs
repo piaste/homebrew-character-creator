@@ -1,0 +1,48 @@
+module Bg3HomebrewCCreator.OtherView.Helpers
+
+open Bolero
+open Bolero.Html
+
+
+open Bg3HomebrewCCreator.Domain.Entities
+open Utils
+
+type OtherUi = Template<"wwwroot/otherui.html">
+
+let inline cl s = attr.``class`` s
+
+let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
+let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
+let icon subpath = img { 
+    attr.style "width:100%; height:100%; object-fit:contain;"
+    attr.src $"/assets/icons/{toFileName subpath}.png"
+}
+
+let baseraceIconPath race = 
+    let race = BaseRaces.allBaseRaces[race]
+    $"races/{race.Name}/{race.Name}"
+
+let subraceIconPath race =   
+    let race = Races.allSubraces[race]
+    let baseRaceName = toFileName <| BaseRaces.allBaseRaces[race.BaseRaceId].Name
+    let subraceTag = 
+        ("-" + toFileName race.Name).Replace($"-{baseRaceName}", "")
+    $"races/{baseRaceName}/{baseRaceName}{subraceTag}"
+
+let baseclassIconPath baseclass = 
+    let baseclass = Classes.allClasses[baseclass]
+    $"classes/{baseclass.Name}/{baseclass.Name}"
+
+let subclassIconPath subclass = 
+    let subclass = Subclasses.allSubclasses[subclass]
+    $"classes/{Classes.allClasses[subclass.BaseClassId].Name}/{subclass.Name}"
+let inline forEachIndexed collection nodeGen = 
+    let count = Seq.length collection
+    let indexed = Seq.indexed collection
+    forEach indexed (fun (i, x) -> nodeGen (i, count, x))
+
+let checkbox isActive dispatch msg = 
+    button {
+        cl ("square-checkbox" + if isActive then " is-on" else "")
+        on.click (fun _ -> dispatch msg)
+    }

@@ -40,10 +40,10 @@ let getAllPassiveDescriptions (character : Character) =
             if lvl >= lvlReq then for fAb in ab do yield "Class", fAb.Description
 
         let scDef = allSubclasses[scid]
-        for scAb in scDef.ScalingAbilities (UMX.untag lvl) do
+        for scAb in scDef.ScalingAbilities character.CharacterLevel lvl do
             yield "Subclass", scAb.Description
         for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            if UMX.untag lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb.Description
+            if lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb.Description
             
     ]
     

@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.OtherView
+module Bg3HomebrewCCreator.OtherView.View
 
 open FSharp.UMX
 open System
@@ -7,54 +7,16 @@ open Bolero.Html
 
 
 open Bg3HomebrewCCreator.Domain.Entities
-open Domain.Types
-open Domain.Character
-open Domain.PickRules
-open Domain.Helpers
-open Model
-open Update
+open Bg3HomebrewCCreator.Domain.Types
+open Bg3HomebrewCCreator.Domain.Character
+open Bg3HomebrewCCreator.Domain.PickRules
+open Bg3HomebrewCCreator.Domain.Helpers
+open Bg3HomebrewCCreator.Model
+open Bg3HomebrewCCreator.Update
 open Utils
+open Helpers
 
 type OtherUi = Template<"wwwroot/otherui.html">
-
-let inline cl s = attr.``class`` s
-
-let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
-let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
-let icon subpath = img { 
-    attr.style "width:100%; height:100%; object-fit:contain;"
-    attr.src $"/assets/icons/{toFileName subpath}.png"
-}
-
-let baseraceIconPath race = 
-    let race = BaseRaces.allBaseRaces[race]
-    $"races/{race.Name}/{race.Name}"
-
-let subraceIconPath race =   
-    let race = Races.allSubraces[race]
-    let baseRaceName = toFileName <| BaseRaces.allBaseRaces[race.BaseRaceId].Name
-    let subraceTag = 
-        ("-" + toFileName race.Name).Replace($"-{baseRaceName}", "")
-    $"races/{baseRaceName}/{baseRaceName}{subraceTag}"
-
-let baseclassIconPath baseclass = 
-    let baseclass = Classes.allClasses[baseclass]
-    $"classes/{baseclass.Name}/{baseclass.Name}"
-
-let subclassIconPath subclass = 
-    let subclass = Subclasses.allSubclasses[subclass]
-    $"classes/{Classes.allClasses[subclass.BaseClassId].Name}/{subclass.Name}"
-let inline forEachIndexed collection nodeGen = 
-    let count = Seq.length collection
-    let indexed = Seq.indexed collection
-    forEach indexed (fun (i, x) -> nodeGen (i, count, x))
-
-let checkbox isActive dispatch msg = 
-    button {
-        cl ("square-checkbox" + if isActive then " is-on" else "")
-        on.click (fun _ -> dispatch msg)
-    }
-
 
 let stageTabButton dispatch model stage iconPath = 
     let isActive = model.MainStageSelection = stage
@@ -162,7 +124,7 @@ let summaryAbilities (chr: Character) dispatch =
             )
             div {
                 cl "summary-under-abilities"
-                div { cl "sheet-section-title"; "ATTRIBUTES" }
+                div { cl "sheet-section-title"; "STATS BONUSES" }
                 div { 
                     cl "sheet-attrs"
                     forEach (chr.StatModifiers.ToMap()) (fun kv ->
@@ -170,6 +132,17 @@ let summaryAbilities (chr: Character) dispatch =
                             cl "sheet-attr"
                             span { kv.Key }
                             b { kv.Value }
+                         } 
+                    )
+                }
+                div { cl "sheet-section-title"; "PASSIVES" }
+                div { 
+                    cl "sheet-attrs"
+                    forEach (getAllPassiveDescriptions chr) (fun (name, desc) ->
+                        div { 
+                            cl "sheet-attr"
+                            span { name }
+                            b { desc }
                          } 
                     )
                 }
@@ -184,6 +157,9 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
     let c = model.Character
     let l = c.NextLevelUp
+
+    let ph pick f = 
+        f c.Picks[pick] pick model dispatch
 
     OtherUi()
         .RadialStage(
@@ -228,86 +204,73 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     SetSubclass
 
             | Pick Archetypes ->
-                ThingPickerComponent.view "Archetype"
-                    (Domain.Entities.Archetypes.allArchetypes.Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                ph Archetypes <| Picker.view "Archetype"
+                    (Archetypes.allArchetypes.Values
+                     |> Seq.map<_, Picker.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     (Set.singleton c.ArchetypeId)
-                    Archetypes
-                    model dispatch
 
             | Pick Traits ->
-                ThingPickerComponent.view "Trait"
-                    (Domain.Entities.Traits.allTraits.Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                ph Traits <| Picker.view "Trait"
+                    (Traits.allTraits.Values
+                     |> Seq.map<_, Picker.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     (Set.singleton c.TraitId)
-                    Traits
-                    model dispatch
 
             | Pick Skills ->
-                ThingPickerComponent.view "Skills"
-                    (Domain.Entities.Skills.allSkills.Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                ph Skills <| Picker.view "Skill Proficiences"
+                    (Skills.allSkills.Values
+                     |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     c.SkillIds
-                    Skills
-                    model dispatch
                     
             | Pick SkillExps ->
-                ThingPickerComponent.view "Skills"
-                    (Domain.Entities.Skills.allSkills.Values
+                ph SkillExps <| Picker.view "Skill Expertises"
+                    (Skills.allSkills.Values
                      |> Seq.filter (fun s -> c.SkillIds.Contains s.Id)
-                     |> Seq.map<_, ThingPickerComponent.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                     |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     c.SkillExpIds
-                    SkillExps
-                    model dispatch
 
             | Pick Cantrips ->
-                ThingPickerComponent.view "Cantrips"
-                    (Domain.Entities.Cantrips.allCantrips.Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                ph Cantrips <| Picker.view "Cantrips"
+                    (Cantrips.allCantrips.Values
+                     |> Seq.map<_, Picker.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     l.CantripIds
-                    Cantrips
-                    model dispatch
+
             | Pick Spells ->
                 match (subclassById l.SubclassId).SpellList with
                 | None -> empty()
                 | Some sl -> 
 
-                    ThingPickerComponent.view "Spells"
-                        ((Domain.Entities.Spells.allSpellsInList sl).Values
-                        |> Seq.map<_, ThingPickerComponent.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                    ph Spells <| Picker.view "Spells"
+                        ((Spells.allSpellsInList sl).Values
+                        |> Seq.map<_, Picker.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                         |> Seq.toList
                         )
                         l.SpellIds
-                        Spells
-                        model dispatch
+
             | Pick ClassPassives ->
-                ThingPickerComponent.view "Passives"
-                    (Domain.Entities.ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                ph ClassPassives <| Picker.view "Passives"
+                    (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
+                     |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     l.ClassPassiveIds
-                    ClassPassives
-                    model dispatch
+
             | Pick Feats ->
-                ThingPickerComponent.view "Feat"
-                    (Domain.Entities.Feats.allFeats.Values
-                     |> Seq.map<_, ThingPickerComponent.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = "placeholder"})
+                ph Feats <| Picker.view "Feat"
+                    (Feats.allFeats.Values
+                     |> Seq.map<_, Picker.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     (l.FeatId |> Option.toList |> Set.ofList)
-                    Feats
-                    model dispatch
         )
         .StageTabs(
             concat {
@@ -327,9 +290,9 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     | Traits -> 
                         picksDockButton "Trait" 1
                     | Skills ->
-                        picksDockButton "Skill Proficiencies" c.SkillIds.Count
+                        picksDockButton "Proficiencies" c.SkillIds.Count
                     | SkillExps ->
-                        picksDockButton "Skill Expertises" c.SkillExpIds.Count
+                        picksDockButton "Expertises" c.SkillExpIds.Count
                     | Cantrips -> 
                         picksDockButton "Cantrips" l.CantripIds.Count
                     | Spells -> 
@@ -344,14 +307,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             )
 
         )
-        .TraitOptions(concat {
-            forEach Traits.allTraits (fun a -> 
-                option { 
-                    attr.value a.Key
-                    a.Value.Name
-                }
-            )
-        })
         .CharacterSummary(summaryAbilities model.Character dispatch)    
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Elt()

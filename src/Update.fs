@@ -90,8 +90,8 @@ let update load save message model =
     let apply f = 
         applyCharacterChange save f model
 
-    let applyAnd cmd f = 
-        applyCharacterChangeAnd cmd save f model
+    let applyAnd msg f = 
+        applyCharacterChangeAnd (Cmd.ofMsg msg) save f model
 
     match message with
     | SetPage page ->
@@ -146,10 +146,10 @@ let update load save message model =
             |> Seq.head
             |> _.Key
         
-        applyAnd (Cmd.ofMsg (SetMainStageSelection Subrace)) <| fun character -> { character with RaceId = defaultSubrace }
+        applyAnd (SetMainStageSelection Subrace) <| fun character -> { character with RaceId = defaultSubrace }
 
     | SetSubrace race ->
-        applyAnd (Cmd.ofMsg NextMainStageSelection) <| fun character -> { character with RaceId = race }
+        applyAnd NextMainStageSelection <| fun character -> { character with RaceId = race }
 
     | SetArchetype atId -> 
         apply <| fun character -> { character with ArchetypeId = atId }
@@ -164,10 +164,10 @@ let update load save message model =
             |> Seq.head
             |> _.Key
         
-        applyAnd (Cmd.ofMsg (SetMainStageSelection Subclass)) <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
+        applyAnd (SetMainStageSelection Subclass) <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
 
     | SetSubclass subclassId ->
-        applyAnd (Cmd.ofMsg NextMainStageSelection) <| fun character -> 
+        applyAnd NextMainStageSelection <| fun character -> 
 
             let previousMaxLevelInSubclass =    
                 character.PreviousHistory.LevelsBySubclass

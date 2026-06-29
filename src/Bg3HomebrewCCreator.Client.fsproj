@@ -24,8 +24,9 @@
     <Compile Include="Domain\PickRules.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Update.fs" />    
-    <Compile Include="PickerComponent.fs" />
     <Compile Include="View.fs" />    
+    <Compile Include="OtherViewHelpers.fs" />
+    <Compile Include="OtherViewPicker.fs" />
     <Compile Include="OtherView.fs" />
     <Compile Include="Main.fs" />
     <Compile Include="Startup.fs" />

@@ -57,7 +57,7 @@ type MyApp() =
 
         let dynamicView = function
             | x as { Page = Forge } -> view x
-            | x as { Page = ForgeOtherUi } -> OtherView.otherView x
+            | x as { Page = ForgeOtherUi } -> OtherView.View.otherView x
         
         Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update load save) dynamicView
         |> Program.withRouter router
