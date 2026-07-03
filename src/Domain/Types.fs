@@ -132,7 +132,9 @@ type SkillDef =
     {
         Id: string<skillId>
         Name: string
+        KeyAbility  : Ability
         Description: string
+        Grants: Passive
     }
 
 

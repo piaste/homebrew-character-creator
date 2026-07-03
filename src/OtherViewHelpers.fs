@@ -3,7 +3,6 @@ module Bg3HomebrewCCreator.OtherView.Helpers
 open Bolero
 open Bolero.Html
 
-
 open Bg3HomebrewCCreator.Domain.Entities
 open Utils
 
@@ -36,6 +35,23 @@ let baseclassIconPath baseclass =
 let subclassIconPath subclass = 
     let subclass = Subclasses.allSubclasses[subclass]
     $"classes/{Classes.allClasses[subclass.BaseClassId].Name}/{subclass.Name}"
+
+let cantripIcon cantripId = 
+    Cantrips.allCantrips.Values 
+    |> Seq.tryFindIndex (_.Id >> (=) cantripId)
+    |> Option.map (fun i -> $"""abilities_sheet/cantrips/cantrip_{i.ToString "000"}""")
+
+let spellIcon spellId = 
+    Spells.allSpells.Values
+    |> Seq.tryFindIndex (_.Id >> (=) spellId)
+    |> Option.map (fun i -> 
+        if i <= 143 then 
+            $"""abilities_sheet/spells/spell_{i.ToString "000"}"""
+        else
+            $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
+    )
+
+
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection
     let indexed = Seq.indexed collection

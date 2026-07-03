@@ -27,7 +27,7 @@ type Message =
     | SetSubrace of string<subraceId>
     | SetArchetype of string<archetypeId>
     | SetTrait of string<traitId>
-    | SetAbilityPointBuy of Ability * int
+    | SetAbilityPointBuy of Ability * int<pbuy>
     | ModifyAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
@@ -49,6 +49,7 @@ type Message =
     
     | CopyBuildJson
     | Undo
+    | Redo
     | ResetCharacter
     | NoOp
     | ShowSystemError of string
@@ -71,7 +72,7 @@ let saveCmd save (model: Model) =
     else
         Cmd.none
 
-let applyCharacterChangeAnd cmd save (change: Character -> Character) (model: Model) =
+let applyCharacterChangeAnd cmd saveCmd' (change: Character -> Character) (model: Model) =
     let nextCharacter = change model.Character
     if nextCharacter = model.Character then
         model, cmd
@@ -81,19 +82,22 @@ let applyCharacterChangeAnd cmd save (change: Character -> Character) (model: Mo
                 model with
                     Character = nextCharacter
                     UndoStack = model.Character :: model.UndoStack
+                    RedoStack = []
             }
 
-        nextModel, Cmd.batch [ saveCmd save nextModel; cmd ]
+        nextModel, Cmd.batch [ saveCmd' nextModel; cmd ]
 
 let applyCharacterChange = applyCharacterChangeAnd Cmd.none
 
 let update load save copyCharacter message model =
 
+    let saveCmd' = saveCmd save
+
     let apply f = 
-        applyCharacterChange save f model
+        applyCharacterChange saveCmd' f model
 
     let applyAnd msg f = 
-        applyCharacterChangeAnd (Cmd.ofMsg msg) save f model
+        applyCharacterChangeAnd (Cmd.ofMsg msg) saveCmd' f model
 
     match message with
     | SetPage page ->
@@ -112,9 +116,7 @@ let update load save copyCharacter message model =
                 match model.MainStageSelection with
                 | Race -> Subrace | Subrace -> Class | Class -> Subclass 
                 | Subclass -> 
-                    match picks with 
-                    | x :: _ -> Pick x
-                    | [] -> Proceed
+                    List.tryHead picks |> function | Some p -> Pick p | None -> Proceed
                 | Pick p ->
                     match picks |> List.tryFindIndex ((=) p) with
                     | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
@@ -183,24 +185,21 @@ let update load save copyCharacter message model =
             }
 
     | SetAbilityPointBuy (ability, score) ->
-        apply <| fun character ->
+        apply <| fun character ->            
             {
-                character with
-                    AbilityBuy = { 
-                        character.AbilityBuy with 
-                            PointBuy = 
-                                character.AbilityBuy.PointBuy
-                                |> Map.add ability (clamp 0<pbuy>9<pbuy> (score * 1<pbuy>)) 
-                    } 
+                character with 
+                    AbBuy.PointBuy = 
+                        character.AbBuy.PointBuy |> Map.add ability (clamp 0<pbuy>9<pbuy> score)
             }
 
     | ModifyAbilityScore (ability, scoreChange) -> 
-        let currentScore = model.Character.AbilityBuy.BoughtAbilityBeforeBonuses ability
+        let currentScore = model.Character.AbBuy.BoughtAbilityBeforeBonuses ability
         let newScore = clamp 8 15 (currentScore + scoreChange)
         let newSpent = 
             [ 0 .. 9 ]
+            |> Seq.map UMX.tag<pbuy>
             |> Seq.find (fun pb ->
-                getAbilityFromPoints (UMX.tag<pbuy> pb) = newScore        
+                getAbilityFromPoints pb = newScore        
             )
 
         model, Cmd.ofMsg <| SetAbilityPointBuy (ability, newSpent)
@@ -209,11 +208,11 @@ let update load save copyCharacter message model =
         apply <| fun character ->
             {
                 character with
-                    AbilityBuy = {
-                        character.AbilityBuy with 
+                    AbBuy = {
+                        character.AbBuy with 
                             BonusPlusThree = ability
                             BonusPlusOne = 
-                                character.AbilityBuy.BonusPlusOne
+                                character.AbBuy.BonusPlusOne
                                 |> nextFreeIf ability
                     }
             }
@@ -222,11 +221,11 @@ let update load save copyCharacter message model =
         apply <| fun character ->
             {
                 character with
-                    AbilityBuy = {
-                        character.AbilityBuy with 
+                    AbBuy = {
+                        character.AbBuy with 
                             BonusPlusOne = ability
                             BonusPlusThree = 
-                                character.AbilityBuy.BonusPlusThree
+                                character.AbBuy.BonusPlusThree
                                 |> nextFreeIf ability
                     }
             }
@@ -314,16 +313,30 @@ let update load save copyCharacter message model =
             model, Cmd.none
     | Undo ->
         match model.UndoStack with
+        | [] ->
+            model, Cmd.none
         | previous :: remaining ->
             let nextModel =
                 {
                     model with
                         Character = previous
                         UndoStack = remaining
+                        RedoStack = model.Character :: model.RedoStack
                 }
-            nextModel, saveCmd save nextModel
+            nextModel, saveCmd' nextModel
+    | Redo ->
+        match model.RedoStack with
         | [] ->
             model, Cmd.none
+        | next :: remaining ->
+            let nextModel =
+                {
+                    model with
+                        Character = next
+                        UndoStack = model.Character :: model.UndoStack
+                        RedoStack = remaining
+                }
+            nextModel, saveCmd' nextModel
 
     | CopyBuildJson ->
         model, 

@@ -72,7 +72,7 @@ type Character =
         CharName: string
 
         RaceId: string<subraceId>
-        AbilityBuy: AbilityBuy
+        AbBuy: AbilityBuy
         SkillIds: Set<string<skillId>>
         SkillExpIds: Set<string<skillId>>
         
@@ -144,7 +144,7 @@ type Character =
             * 1<charLvl>
 
         member this.Ability ab = 
-            this.AbilityBuy.BoughtAbility ab + 
+            this.AbBuy.BoughtAbility ab + 
             this.StatModifiers.Abilities.GetOrDefault ab
 
         member this.AbilityModifier ab = 
@@ -159,13 +159,18 @@ type Character =
             + this.StatModifiers.AC
 
         member this.HitPoints = 
-            12 + this.StatModifiers.``Base HP`` 
-            + this.CharacterLevel / 1<charLvl> * (8 + this.AbilityModifier CON + this.StatModifiers.``HP per level``)
+            let hpPerLvl = 8 + this.AbilityModifier CON 
+                             + this.StatModifiers.``HP per level``
+            in 
+                12 + this.StatModifiers.``Base HP`` 
+                   + hpPerLvl * this.CharacterLevel / 1<charLvl>
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives
               yield! Archetypes.allArchetypes[this.ArchetypeId].Grants
               yield! Traits.allTraits[this.TraitId].Grants
+              for s in this.SkillIds do
+                yield Skills.allSkills[s].Grants
             ]
             |> List.map _.Effect
             |> List.sum

@@ -96,7 +96,7 @@ let actionButton (text: string) dispatch msg =
     }
 
 let summaryAbilities (chr: Character) dispatch = 
-    let abB = chr.AbilityBuy
+    let abB = chr.AbBuy
     concat {
         div { 
             cl "summary-ability-points"; attr.title "Point Buy"
@@ -121,22 +121,26 @@ let summaryAbilities (chr: Character) dispatch =
                     cl "ability-row"
                     div { cl "ability-k"; string ab }
                     button {
-                        clEnabled (abB.BoughtAbilityBeforeBonuses ab > 8) "ability-face-btn"
+                        let enabled = abB.BoughtAbilityBeforeBonuses ab > 8 in 
+                        attr.disabled (not enabled)
+                        clEnabled enabled "ability-face-btn ability-minus-btn"
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
-                        img { attr.src "/assets/ui/ability-minus.png"}
+                        //img { attr.src "/assets/ui/ability-minus.png"}
                     }
                     div { cl "ability-v"; string <| abB.BoughtAbility ab}
-                    div { cl "ability-m"; string <| abB.BoughtAbilityModifier ab}
+                    div { cl "ability-m"; modifierText <| abB.BoughtAbilityModifier ab}
                     button {
-                        clEnabled (abB.BoughtAbilityBeforeBonuses ab < 15) "ability-face-btn"
+                        let enabled = abB.BoughtAbilityBeforeBonuses ab < 15 in 
+                        attr.disabled (not enabled)
+                        clEnabled enabled "ability-face-btn ability-plus-btn"
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
-                        img { attr.src "/assets/ui/ability-plus.png"}
+                        //img { attr.src "/assets/ui/ability-plus.png"}
                     }
                     checkbox 
-                        (chr.AbilityBuy.BonusPlusThree = ab) 
+                        (chr.AbBuy.BonusPlusThree = ab) 
                         dispatch (SetBonusPlusThree ab)
                     checkbox 
-                        (chr.AbilityBuy.BonusPlusOne = ab) 
+                        (chr.AbBuy.BonusPlusOne = ab) 
                         dispatch (SetBonusPlusOne ab)
                 }
             )
@@ -194,10 +198,21 @@ let levelBoxes (model: Model) =
                         match lr' with 
                         | None -> empty()
                         | Some lr ->
-                            forEach lr.CantripIds <| fun s ->
-                                p { Cantrips.allCantrips[s].Name }
-                            forEach lr.SpellIds <| fun s ->
-                                p { Spells.allSpells[s].Name }
+                            div { 
+                                cl "sheet-attrs"
+                                forEach lr.CantripIds <| fun s ->
+                                    div { 
+                                        cl "sheet-attr"
+                                        span { "Cantrip" }
+                                        b { Cantrips.allCantrips[s].Name }
+                                    } 
+                                forEach lr.SpellIds <| fun s ->
+                                    div { 
+                                        cl "sheet-attr"
+                                        span { "Spell" }
+                                        b { Spells.allSpells[s].Name }
+                                    }                                 
+                            }
                     }
                 }
             }
@@ -219,16 +234,44 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         .RadialStage(
             match model.MainStageSelection with
             | Proceed ->
-                div {
-                    button {
-                        on.click (fun _ -> dispatch Message.LevelDown)
-                        "Level Down"
-                    }
-                    button {
-                        on.click (fun _ -> dispatch Message.LevelUp)
-                        "Level Up"
-                    }
+                concat {
+                    cond model.UndoStack.IsEmpty <| function 
+                        | false -> actionButton "UNDO" dispatch Undo
+                        | true -> empty()
+                    
+                    cond model.RedoStack.IsEmpty <| function 
+                        | false -> actionButton "REDO" dispatch Redo
+                        | true -> empty()
+                    
+                    cond (model.Character = defaultCharacter) <| function
+                        | false -> 
+                            concat { 
+                                actionButton "RESET" dispatch ResetCharacter
+                                actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+                            }
+                        | true -> empty()
+                    
+                    cond model.Errors <| function
+                        | [] -> actionButton "LEVEL UP" dispatch LevelUp
+                        | _ -> empty()
+                    
+                    cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                        | false -> actionButton "LEVEL DOWN" dispatch LevelDown
+                        | true -> empty()
+
                 }
+                // div {
+                //     button {
+                //         cl "btn primary"
+                //         on.click (fun _ -> dispatch Message.LevelDown)
+                //         "Level Down"
+                //     }
+                //     button {
+                //         cl "btn primary"
+                //         on.click (fun _ -> dispatch Message.LevelUp)
+                //         "Level Up"
+                //     }
+                // }
             | Race -> 
                 radialStage rct dispatch
                     (baseRaceIdBySubraceId c.RaceId)
@@ -301,7 +344,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Cantrips ->
                 ph Cantrips <| Picker.view "Cantrips"
                     (Cantrips.allCantrips.Values
-                     |> Seq.map<_, Picker.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Picker.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = cantripIcon c.Id})
                      |> Seq.toList
                     )
                     l.CantripIds
@@ -313,7 +356,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
                     ph Spells <| Picker.view "Spells"
                         ((Spells.allSpellsInList sl).Values
-                        |> Seq.map<_, Picker.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                        |> Seq.map<_, Picker.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = spellIcon c.Id})
                         |> Seq.toList
                         )
                         l.SpellIds
@@ -352,7 +395,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     | Traits -> 
                         picksDockButton "Trait" 1
                     | Skills ->
-                        picksDockButton "Proficiencies" c.SkillIds.Count
+                        picksDockButton "Skills" c.SkillIds.Count
                     | SkillExps ->
                         picksDockButton "Expertises" c.SkillExpIds.Count
                     | Cantrips -> 
@@ -377,10 +420,30 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         )
         .ActionButtons(
             concat {
-                actionButton "UNDO" dispatch Undo
-                actionButton "RESET" dispatch ResetCharacter
-                actionButton "LEVEL DOWN" dispatch LevelDown
-                actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+                cond model.UndoStack.IsEmpty <| function 
+                    | false -> actionButton "UNDO" dispatch Undo
+                    | true -> empty()
+                
+                cond model.RedoStack.IsEmpty <| function 
+                    | false -> actionButton "REDO" dispatch Redo
+                    | true -> empty()
+                
+                cond (model.Character = defaultCharacter) <| function
+                    | false -> 
+                        concat { 
+                            actionButton "RESET" dispatch ResetCharacter
+                            actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+                        }
+                    | true -> empty()
+                
+                cond model.Errors <| function
+                    | [] -> actionButton "LEVEL UP" dispatch LevelUp
+                    | _ -> empty()
+                
+                cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                    | false -> actionButton "LEVEL DOWN" dispatch LevelDown
+                    | true -> empty()
+
             }
         )
         .CharacterSummary(summaryAbilities model.Character dispatch)

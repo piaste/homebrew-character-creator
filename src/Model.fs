@@ -25,7 +25,7 @@ let defaultCharacter =
 
         CharName = "John Baldur"
         RaceId = % "human" 
-        AbilityBuy = {
+        AbBuy = {
             PointBuy = 
                 Map [
                     STR, 9<pbuy>
@@ -65,10 +65,10 @@ let checkErrors (character: Character) =
     [
         if String.IsNullOrWhiteSpace character.CharName then
             "Give the character a name before locking the sheet."
-        if character.AbilityBuy.UnspentPoints < 0<pbuy> then
-            sprintf "Point buy exceeds 27 points. (%i excess points)" (-1 * character.AbilityBuy.UnspentPoints)
-        if character.AbilityBuy.UnspentPoints > 0<pbuy> then
-            sprintf "%i unspent ability points" character.AbilityBuy.UnspentPoints
+        if character.AbBuy.UnspentPoints < 0<pbuy> then
+            sprintf "Point buy exceeds %i points. (%i excess points)" POINT_BUDGET (-1 * character.AbBuy.UnspentPoints)
+        if character.AbBuy.UnspentPoints > 0<pbuy> then
+            sprintf "%i unspent ability points" character.AbBuy.UnspentPoints
 
         if character.SkillIds.Count <> nSkillProfPicks then
              $"Choose exactly {nSkillProfPicks} starting skill proficiencies."
@@ -103,6 +103,7 @@ type Model =
 
         Character: Character
         UndoStack: Character list
+        RedoStack: Character list
         Loaded: bool
         SystemErrors : string list
         UseLoreNames : bool
@@ -117,6 +118,7 @@ type Model =
 
                 Character = defaultCharacter
                 UndoStack = []
+                RedoStack = []
                 Loaded = false
                 SystemErrors = []
                 UseLoreNames = true

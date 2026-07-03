@@ -97,7 +97,7 @@ let view (title: string) sourceList (thingsPicked: Set<string<'m>>) maxPicks pic
 
                                         img {
                                             cl "icon-img"
-                                            attr.src iconPath
+                                            attr.src $"/assets/icons/{iconPath}.png"
                                             attr.alt ""
                                         }
                                     }

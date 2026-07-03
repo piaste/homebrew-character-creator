@@ -68,6 +68,10 @@ module Map =
 
     let inline findIn m k = Map.find k m
 
+module Option = 
+    let inline either fSome fNone option = 
+        match option with | Some v -> fSome v | None -> fNone ()
+
 type Set<'T when 'T : comparison> with
     member this.Toggle value = 
         if this.Contains value then this.Remove value else this.Add value

@@ -109,14 +109,14 @@ let pointBuyRow (character: Character) ability dispatch =
     Main.AbilityRow()
         .Ability(abilityName ability)
         .Abbreviation(ability.ToString())
-        .Score(string (character.AbilityBuy.PointBuy[ability]), 
-               fun value -> dispatch (SetAbilityPointBuy(ability, Int32.Parse value)))
+        .Score(string (character.AbBuy.PointBuy[ability]), 
+               fun value -> dispatch (SetAbilityPointBuy(ability, value |> Int32.Parse |> UMX.tag<pbuy>)))
         .Options(forEach pointBuyOptions scoreOption)
         .BonusInfo(
             concat {
-                if character.AbilityBuy.BonusPlusThree = ability then
+                if character.AbBuy.BonusPlusThree = ability then
                     chip "+3 bonus" "accent"
-                if character.AbilityBuy.BonusPlusOne = ability then
+                if character.AbBuy.BonusPlusOne = ability then
                     chip "+1 bonus" "neutral"
             })
         .Elt()
@@ -267,24 +267,24 @@ let creationSection (model: Model) dispatch =
 
         fieldCard
             "Point Buy"
-            "Base scores use the standard 27-point buy before a +3 and +1 bonus land on different abilities."
+            $"Base scores use the standard {POINT_BUDGET}-point buy before a +3 and +1 bonus land on different abilities."
             (concat {
                 Main.PointBudget()
-                    .Used(string character.AbilityBuy.SpentPoints)
-                    .Remaining(string character.AbilityBuy.UnspentPoints)
+                    .Used(string character.AbBuy.SpentPoints)
+                    .Remaining(string character.AbBuy.UnspentPoints)
                     .Elt()
                 grouping <| forEach allAbilities (fun ability -> pointBuyRow character ability dispatch)
                 grouping <| concat {
                     selectField
                         "+3 bonus"
                         "Must target a different ability than the +1 bonus."
-                        (string character.AbilityBuy.BonusPlusThree)
+                        (string character.AbBuy.BonusPlusThree)
                         (forEach allAbilities abilityOption)
                         (fun value -> dispatch (SetBonusPlusThree(parseCase<Ability> value)))
                     selectField
                         "+1 bonus"
                         "Bolero will normalize duplicate choices, but the validation panel also calls it out."
-                        (string character.AbilityBuy.BonusPlusOne)
+                        (string character.AbBuy.BonusPlusOne)
                         (forEach allAbilities abilityOption)
                         (fun value -> dispatch (SetBonusPlusOne(parseCase<Ability> value)))
                 }
@@ -353,7 +353,7 @@ let summarySection (model: Model) dispatch =
                     let score = character.Ability ability
                     summaryRow (ability.ToString()) $"{score} ({modifierText <| character.AbilityModifier ability})")
                 cond (character.CharacterLevel = 1<charLvl>) <| function
-                    | true -> summaryRow "Point buy spent" (string character.AbilityBuy.SpentPoints)
+                    | true -> summaryRow "Point buy spent" (string character.AbBuy.SpentPoints)
                     | false -> empty()
             })
 

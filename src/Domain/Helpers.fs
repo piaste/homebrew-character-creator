@@ -22,31 +22,34 @@ let classIdBySubclassId =
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
-let getAllPassiveDescriptions (character : Character) = 
+let getAllPassives (character : Character) = 
     [ for t in allSubraces[character.RaceId].RacialPassives do
-        yield "Race", t.Description
+        yield "Race", t
     
       for t in Archetypes.allArchetypes[character.ArchetypeId].Grants do
-        yield "Archetype", t.Description
+        yield "Archetype", t
     
       for t in Traits.allTraits[character.TraitId].Grants do
-        yield "Trait", t.Description
+        yield "Trait", t
     
       for KeyValue(scid, lvl) in character.CurrentHistory.LevelsBySubclass do        
         let clDef = classBySubclassId scid
         for scAb in clDef.ScalingAbilities character.CharacterLevel lvl do
-            yield "Class", scAb.Description
+            yield "Class", scAb
         for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield "Class", fAb.Description
+            if lvl >= lvlReq then for fAb in ab do yield "Class", fAb
 
         let scDef = allSubclasses[scid]
         for scAb in scDef.ScalingAbilities character.CharacterLevel lvl do
-            yield "Subclass", scAb.Description
+            yield "Subclass", scAb
         for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb.Description
-            
+            if lvl >= lvlReq then for fAb in ab do yield "Subclass", fAb            
     ]
     
+let getAllPassiveDescriptions (character : Character) = 
+    getAllPassives character
+    |> List.map (fun (source, p) -> (source, p.Description))
+
 let levelUpDefault character =     
     { character with 
         PreviousLevelHistory = character.NextLevelUp :: character.PreviousLevelHistory
