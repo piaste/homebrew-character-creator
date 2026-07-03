@@ -87,23 +87,23 @@ type StatModifiers = {
         Map [
             for KeyValue(ab, modif) in this.Abilities do
                 if modif <> 0 then 
-                    yield (modifierText modif), string ab
+                    yield string ab, modifierText modif
 
             for p in this.GetType().GetProperties() do
                 if p.PropertyType = typeof<int> then
                     let score = p.GetValue this :?> int
                     if score <> 0 then 
-                        let key = (modifierText <| (p.GetValue this :?> int))
-                        yield key, p.Name
+                        let value = modifierText <| (p.GetValue this :?> int)
+                        yield p.Name, value
                 else if p.PropertyType = typeof<float> then
                     let score = p.GetValue this :?> float
                     if score <> 0 then 
-                        let key = (modifierText <| (p.GetValue this :?> float))
-                        yield key, p.Name
+                        let value = modifierText <| (p.GetValue this :?> float)
+                        yield p.Name, value
         ]
 
     override this.ToString() = 
-        [ for kv in this.ToMap() -> sprintf "%s to %s" kv.Key kv.Value
+        [ for kv in this.ToMap() -> sprintf "%s to %s" kv.Value kv.Key
         ]
         |> String.concat "\n"
 

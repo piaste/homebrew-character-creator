@@ -152,8 +152,8 @@ let summaryAbilities (chr: Character) dispatch =
                     forEach (chr.StatModifiers.ToMap()) (fun kv ->
                         div { 
                             cl "sheet-attr"
-                            span { kv.Key }
-                            b { kv.Value }
+                            span { kv.Value }
+                            b { kv.Key }
                          } 
                     )
                 }
@@ -177,7 +177,9 @@ let summaryAbilities (chr: Character) dispatch =
 let levelBoxes (model: Model) = 
     let lvlTo12 = 
         List.init 12 (fun _ -> None)
-        |> List.append (model.Character.NextLevelUp :: model.Character.PreviousLevelHistory |> List.map Some)
+        |> List.append (model.Character.NextLevelUp :: model.Character.PreviousLevelHistory 
+                        |> List.map Some 
+                        |> List.rev)
         |> List.take 12
         |> List.indexed
 
@@ -188,8 +190,16 @@ let levelBoxes (model: Model) =
                 cl ("lvlbox" + if Option.isNone lr' then " empty" else "")
                 div { 
                     cl "lvlbox-h"
-                    div { cl "lvlbox-lvl"; $"Level {lvl0 + 1}"}
-                    div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> (classBySubclassId lr.SubclassId).Name }
+                    div { 
+                        cl "col left"
+                        div { cl "lvlbox-lvl"; $"Level {lvl0 + 1}"}
+                        div { cl "lvlbox-clLvl"; match lr' with None -> "—" | Some lr -> $"Class level {lr.ClassLevel}"}
+                    }
+                    div { 
+                        cl "col right"
+                        div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> (classBySubclassId lr.SubclassId).Name }
+                        div { cl "lvlbox-subclass"; match lr' with None -> "—" | Some lr -> (subclassById lr.SubclassId).DisplayName model.UseLoreNames }
+                    }
                 }
                 div { 
                     cl "lvbox-body"
@@ -211,7 +221,13 @@ let levelBoxes (model: Model) =
                                         cl "sheet-attr"
                                         span { "Spell" }
                                         b { Spells.allSpells[s].Name }
-                                    }                                 
+                                    }  
+                                forEach lr.ClassPassiveIds <| fun s ->
+                                    div { 
+                                        cl "sheet-attr"
+                                        span { "Passive" }
+                                        b { ClassPassives.allClassPassives[s].Name }
+                                    }                               
                             }
                     }
                 }
@@ -309,11 +325,12 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     SetSubclass
 
             | Pick Archetypes ->
-                ph Archetypes <| Picker.view "Archetype"
+                ph Archetypes <| Picker.view "Archetype"                    
                     (Archetypes.allArchetypes.Values
                      |> Seq.map<_, Picker.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
+                    Set.empty
                     (Set.singleton c.ArchetypeId)
 
             | Pick Traits ->
@@ -322,6 +339,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                      |> Seq.map<_, Picker.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
+                    Set.empty
                     (Set.singleton c.TraitId)
 
             | Pick Skills ->
@@ -330,6 +348,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                      |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
+                    Set.empty
                     c.SkillIds
                     
             | Pick SkillExps ->
@@ -339,6 +358,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                      |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
+                    Set.empty
                     c.SkillExpIds
 
             | Pick Cantrips ->
@@ -347,6 +367,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                      |> Seq.map<_, Picker.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = cantripIcon c.Id})
                      |> Seq.toList
                     )
+                    c.PreviousHistory.AllCantripIds
                     l.CantripIds
 
             | Pick Spells ->
@@ -359,6 +380,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         |> Seq.map<_, Picker.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = spellIcon c.Id})
                         |> Seq.toList
                         )
+                        c.PreviousHistory.AllSpellIds
                         l.SpellIds
 
             | Pick ClassPassives ->
@@ -367,6 +389,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                      |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
+                    c.PreviousHistory.AllClassPassiveIdsByClass[classIdBySubclassId l.SubclassId]
                     l.ClassPassiveIds
 
             | Pick Feats ->
@@ -375,6 +398,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                      |> Seq.map<_, Picker.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
+                    c.PreviousHistory.AllFeatIds
                     (l.FeatId |> Option.toList |> Set.ofList)
         )
         .StageTabs(

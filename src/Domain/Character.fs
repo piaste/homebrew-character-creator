@@ -106,12 +106,13 @@ type Character =
                 AllFeatIds = 
                     levelHistory
                     |> List.collect (_.FeatId >> Option.toList)
+                    |> Set.ofList
                     
                 AllClassPassiveIdsByClass = 
                     levelHistory
                     |> List.groupBy (fun lr -> allSubclasses[lr.SubclassId].BaseClassId)
                     |> Map.ofSeq
-                    |> Map.map (fun _ v -> Seq.collect _.ClassPassiveIds v)
+                    |> Map.map (fun _ v -> Seq.collect _.ClassPassiveIds v |> Set.ofSeq)
 
                 LevelsBySubclass =
                     levelHistory

@@ -14,7 +14,15 @@ type Thing<[<Measure>] 'm> =
       Description: string
       Icon: string option }
 
-let view (title: string) sourceList (thingsPicked: Set<string<'m>>) maxPicks pick (model : Model) dispatch =
+let view 
+        (title: string) 
+        sourceList 
+        (thingsUnpickable: Set<string<'m>>) 
+        (thingsPicked: Set<string<'m>>) 
+        maxPicks 
+        pick 
+        (model : Model) 
+        dispatch =
 
     let sq = model.SearchQueries.GetOrDefault pick
 
@@ -77,6 +85,7 @@ let view (title: string) sourceList (thingsPicked: Set<string<'m>>) maxPicks pic
                     for c in filtered do
 
                         button {
+                            attr.disabled (thingsUnpickable.Contains c.Id)
                             cl (
                                 if thingsPicked.Contains c.Id then
                                     "card compact-row selected"

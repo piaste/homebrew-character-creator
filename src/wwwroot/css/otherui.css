@@ -20,9 +20,13 @@ html, body, .sheet{
 :root{
   /* Higher opacity = darker UI panels (NOT the mural background) */
   --menuOpacity: 0.92;
-
+  --smallText: 16px;
+  
+  --bright: rgba(242,230,196,0.97);
+  --lessbright: rgba(242,230,196,0.7);
   --gold: rgba(212,175,55,0.75);
   --gold2: rgba(212,175,55,0.35);
+  --gold3: rgba(212,175,55,0.14);
   --ink: rgba(18,8,9,0.78);
   --panel: rgba(20,14,12,var(--menuOpacity));
   --panel2: rgba(18,12,11,0.60);
@@ -124,7 +128,7 @@ html,body{
   border-radius: 999px;
   border: 1px solid rgba(212,175,55,0.22);
   background: rgba(0,0,0,0.30);
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: 0.08em;
   color: var(--muted);
 }
@@ -187,7 +191,7 @@ html,body{
 .mini-muted{
   margin-top: 10px;
   text-align: center;
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: 0.10em;
   color: rgba(242,230,196,0.68);
 }
@@ -220,12 +224,12 @@ html,body{
 
 .filter-title{
   text-align:center;
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(242,230,196,0.78);
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(212,175,55,0.14);
+  border-bottom: 1px solid var(--gold3);
 }
 .filter-row.wrap{
   flex-wrap: wrap;
@@ -260,7 +264,7 @@ html,body{
   color: var(--text);
   padding: 8px 10px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: 0.06em;
   cursor:pointer;
   transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
@@ -268,7 +272,7 @@ html,body{
 .chip:hover{
   transform: translateY(-1px);
   border-color: rgba(212,175,55,0.42);
-  box-shadow: 0 0 14px rgba(212,175,55,0.14);
+  box-shadow: 0 0 14px var(--gold3);
   background: rgba(22,14,13,0.78);
 }
 .chip.active{
@@ -329,9 +333,15 @@ html,body{
   gap: 10px;
   min-height: 150px;
 }
+.card:disabled {
+    cursor: default;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.6;
+}
 
 /* Choice screens (Race/Subrace/Class/etc.) share the standard .screen styles */
-.card:hover{
+.card:not(:disabled):hover{
   transform: translateY(-2px);
   border-color: rgba(212,175,55,0.44);
   box-shadow: 0 0 18px rgba(212,175,55,0.18);
@@ -368,7 +378,7 @@ html,body{
   color: var(--text);
 }
 .card .desc{
-  font-size: 12px;
+  font-size: var(--small-text);
   color: var(--muted2);
   text-align:center;
   line-height: 1.4;
@@ -393,7 +403,7 @@ html,body{
   letter-spacing: 0.10em;
   text-transform: uppercase;
   font-family: inherit;
-  font-size: 12px;
+  font-size: var(--small-text);
   cursor:pointer;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
 }
@@ -409,14 +419,14 @@ html,body{
   transform:none;
 }
 .btn.primary{
-  background: linear-gradient(to bottom, rgba(212,175,55,0.14), rgba(0,0,0,0.30));
+  background: linear-gradient(to bottom, var(--gold3), rgba(0,0,0,0.30));
 }
 
 /* Footer hint */
 .hint{
   margin-top: 14px;
   text-align:center;
-  font-size: 12px;
+  font-size: var(--small-text);
   color: rgba(230,225,216,0.72);
   letter-spacing: 0.04em;
 }
@@ -559,7 +569,7 @@ html,body{
 }
 
 .origin-card .desc{
-  font-size: 12px;
+  font-size: var(--small-text);
   color: rgba(230,225,216,0.82);
   text-align:center;
   line-height: 1.35;
@@ -731,7 +741,7 @@ html,body{
 
 .radial-center-sub{
   margin-top: 6px;
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: .10em;
   text-transform: uppercase;
   color: rgba(215,207,178,0.85);
@@ -776,7 +786,7 @@ html,body{
   display: block; opacity: .95; }
 
 .radial-node-label{
-  font-size: 13px;
+  font-size: 18px;
   letter-spacing: .06em;
   color: var(--text);
   text-align: center;
@@ -805,7 +815,7 @@ html,body{
   border: 1px solid rgba(212,175,55,0.18);
   background: rgba(0,0,0,0.25);
   color: rgba(230,225,216,0.92);
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: .08em;
 }
 
@@ -826,15 +836,15 @@ html,body{
 
 .sheet-ability .k{ font-size: 11px; letter-spacing: .14em; color: rgba(215,207,178,0.85); }
 .sheet-ability .v{ font-size: 18px; margin-top: 4px; }
-.sheet-ability .m{ font-size: 12px; opacity: .9; margin-top: 2px; }
+.sheet-ability .m{ font-size: var(--small-text); opacity: .9; margin-top: 2px; }
 
 .sheet-section{ margin-top: 12px; }
-.sheet-section-title{ font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgba(215,207,178,0.90); margin-bottom: 6px; }
-.sheet-text{ font-size: 12px; line-height: 1.4; opacity: .92; }
+.sheet-section-title{ font-size: var(--small-text); letter-spacing: .14em; text-transform: uppercase; color: rgba(215,207,178,0.90); margin-bottom: 6px; }
+.sheet-text{ font-size: var(--small-text); line-height: 1.4; opacity: .92; }
 .sheet-controls{ display:flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
 .sheet-kv{ display:grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
 .sheet-kv .k{ font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(215,207,178,0.85); }
-.sheet-kv .v{ font-size: 12px; opacity: .92; text-align: right; }
+.sheet-kv .v{ font-size: var(--small-text); opacity: .92; text-align: right; }
 .sheet-list{ margin: 0; padding-left: 16px; }
 .sheet-list li{ margin: 2px 0; }
 
@@ -977,7 +987,7 @@ select.trait-select:focus{
 .sheet-controls.summary-top .sheet-pill{
   padding:4px 10px;
   border-radius:999px;
-  font-size:12px;
+  font-size:16px;
 }
 .trait-pill{
   display:flex;
@@ -1056,8 +1066,19 @@ select.trait-select:focus{
 
 }
 
+/* Face buttons (prevent giant portraits) */
+.ability-minus-btn {
+  background: center / contain no-repeat
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='rgb(212%2C175%2C55)' fill-opacity='0.65' d='M8 13.5A2.5 2.5 0 0 0 5.5 16A2.5 2.5 0 0 0 8 18.5H24A2.5 2.5 0 0 0 26.5 16A2.5 2.5 0 0 0 24 13.5Z'/%3E%3C/svg%3E");
+}
+.ability-plus-btn {
+  background: center / contain no-repeat
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='rgb(212%2C175%2C55)' fill-opacity='0.65' d='M13.5 8 A2.5 2.5 0 0 1 16 5.5 A2.5 2.5 0 0 1 18.5 8 V13.5 H24 A2.5 2.5 0 0 1 26.5 16 A2.5 2.5 0 0 1 24 18.5 H18.5 V24 A2.5 2.5 0 0 1 16 26.5 A2.5 2.5 0 0 1 13.5 24 V18.5 H8 A2.5 2.5 0 0 1 5.5 16 A2.5 2.5 0 0 1 8 13.5 H13.5 Z'/%3E%3C/svg%3E");
+
+}
 .ability-face-btn.disabled {
   background:none;
+  cursor:not-allowed;
 }
 
 .ability-face-btn img {
@@ -1093,7 +1114,7 @@ select.trait-select:focus{
 
 .sheet-section-title{
   margin: 0 0 6px;
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: .14em;
   text-transform: uppercase;
   color: rgba(215,207,178,0.90);
@@ -1173,7 +1194,7 @@ select.trait-select:focus{
   display: flex;
   justify-content: flex-start;   /* ← move numbers left */
   gap: 18px;                     /* space between label and value */
-  font-size: 12px;
+  font-size: var(--small-text);
   opacity: .95;
 }
 
@@ -1186,7 +1207,7 @@ select.trait-select:focus{
 }
 
 .sheet-muted{
-  font-size: 12px;
+  font-size: var(--small-text);
   line-height: 1.35;
   opacity: .90;
 }
@@ -1205,7 +1226,7 @@ select.trait-select:focus{
   text-align: right;
   font-weight: 700;
   letter-spacing: .08em;
-  font-size: 12px;
+  font-size: var(--small-text);
 }
 
 /* Score + mod */
@@ -1218,21 +1239,11 @@ select.trait-select:focus{
 
 .summary-abilities-compact .ability-m{
   text-align: center;
-  font-size: 12px;
+  font-size: var(--small-text);
   opacity: .9;
   line-height: 1;
 }
 
-/* Face buttons (prevent giant portraits) */
-.ability-minus-btn {
-  background: center / contain no-repeat
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='rgb(212%2C175%2C55)' fill-opacity='0.65' d='M8 13.5A2.5 2.5 0 0 0 5.5 16A2.5 2.5 0 0 0 8 18.5H24A2.5 2.5 0 0 0 26.5 16A2.5 2.5 0 0 0 24 13.5Z'/%3E%3C/svg%3E");
-}
-.ability-plus-btn {
-  background: center / contain no-repeat
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='rgb(212%2C175%2C55)' fill-opacity='0.65' d='M13.5 8 A2.5 2.5 0 0 1 16 5.5 A2.5 2.5 0 0 1 18.5 8 V13.5 H24 A2.5 2.5 0 0 1 26.5 16 A2.5 2.5 0 0 1 24 18.5 H18.5 V24 A2.5 2.5 0 0 1 16 26.5 A2.5 2.5 0 0 1 13.5 24 V18.5 H8 A2.5 2.5 0 0 1 5.5 16 A2.5 2.5 0 0 1 8 13.5 H13.5 Z'/%3E%3C/svg%3E");
-
-}
 
 
 
@@ -1321,21 +1332,55 @@ select.trait-select:focus{
   gap: 12px;
   margin-bottom: 10px;
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(212,175,55,0.14);
+  border-bottom: 1px solid var(--gold3);
+
+  & .col {
+    display:flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    & .left {
+      text-align: left;
+    }
+    
+    & .right {
+      text-align: right;
+    }
+  }
 }
 
-.lvlbox-lvl{
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: rgba(215,207,178,0.94);
+.lvlbox-h-l{
+  display:flex;
+  flex-direction: column;
+  text-align: left;
+  min-width: 0;
+  overflow:hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.lvlbox-class{
-  font-size: 14px;
-  letter-spacing: .06em;
-  color: rgba(242,230,196,0.97);
+.lvlbox-lvl{
+  font-size: var(--small-text);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  white-space: nowrap;
+}
+
+.lvlbox-clLvl{
+  font-size: var(--small-text);
+  letter-spacing: .16em;
+  text-transform: uppercase;  
+  color: var(--gold3);
+  white-space: nowrap;
+}
+
+.lvlbox-h-r{
+  display:flex;
+  flex-direction: column;
   text-align: right;
   min-width: 0;
   overflow:hidden;
@@ -1343,16 +1388,28 @@ select.trait-select:focus{
   white-space: nowrap;
 }
 
+.lvlbox-class{
+  font-size: 14px;
+  letter-spacing: .06em;
+  color: var(--bright);
+
+.lvlbox-subclass{
+  font-size: 13px;
+  letter-spacing: .06em;
+  color: var(--lessbright);
+}
+
+
 .lvlbox-clvl{
   opacity: .8;
   margin-left: 8px;
-  font-size: 12px;
+  font-size: var(--small-text);
 }
 
 .lvlbox-sub{
   opacity: .92;
   margin-left: 8px;
-  font-size: 12px;
+  font-size: var(--small-text);
 }
 
 .lvlbox-body{
@@ -1371,7 +1428,7 @@ select.trait-select:focus{
 }
 
 .lvlk{
-  font-size: 12px;
+  font-size: var(--small-text);
   letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(215,207,178,0.78);
@@ -1483,7 +1540,7 @@ select.trait-select:focus{
   border-radius: 6px;
   border: 1px solid rgba(255,215,128,0.22);
   background: rgba(0,0,0,0.25);
-  font-size: 12px;
+  font-size: var(--small-text);
 }
 .picker-name{
   white-space: nowrap;
@@ -1494,7 +1551,7 @@ select.trait-select:focus{
 .picker-snippet{
   margin-top: 6px;
   opacity: .78;
-  font-size: 12px;
+  font-size: var(--small-text);
   line-height: 1.35;
   overflow: hidden;
   display: -webkit-box;
@@ -1811,7 +1868,7 @@ select.trait-select:focus{
 .pick-card-desc{
   display: block;
   margin-top: 2px;
-  font-size: 12px;
+  font-size: var(--small-text);
   color: var(--muted);
   opacity: 1;
   text-shadow: 0 1px 0 rgba(0,0,0,0.45);

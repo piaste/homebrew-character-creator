@@ -200,14 +200,14 @@ let levelUpSection (model: Model) dispatch = concat {
         "Passives" "Choose two class-specific passives" "Passive"
         (nPassivePicks character.NextLevelUp)
         character.NextLevelUp.ClassPassiveIds.Count
-        (fun cp -> character.CurrentHistory.AllClassPassiveIdsByClass.GetOrElse(classId, []) |> Seq.contains cp.Id)
+        (fun cp -> character.CurrentHistory.AllClassPassiveIdsByClass.GetOrElse(classId, Set.empty) |> Seq.contains cp.Id)
         (fun cp -> dispatch <| ToggleClassPassive cp.Id)
 
     selector Feats.allFeats.Values
         "Feat" "Choose a feat" "Feat"
         (nFeatPicks character.NextLevelUp)
         (character.NextLevelUp.FeatId |> Option.count)
-        (fun feat -> character.CurrentHistory.AllFeatIds |> List.contains feat.Id)
+        (fun feat -> character.CurrentHistory.AllFeatIds |> Set.contains feat.Id)
         (fun feat -> dispatch <| ToggleFeat feat.Id)
 
     let numCantripPicks = nCantripPicks character.NextLevelUp in 

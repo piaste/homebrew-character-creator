@@ -277,7 +277,7 @@ let update load save copyCharacter message model =
             }
     | ToggleFeat featId ->
         apply <| fun character ->
-            if character.PreviousHistory.AllFeatIds |> List.contains featId then character else
+            if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
 
             { character with 
                 NextLevelUp.FeatId = 

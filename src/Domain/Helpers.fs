@@ -48,7 +48,7 @@ let getAllPassives (character : Character) =
     
 let getAllPassiveDescriptions (character : Character) = 
     getAllPassives character
-    |> List.map (fun (source, p) -> (source, p.Description))
+    |> List.map (fun (source, p) -> source, p.Description)
 
 let levelUpDefault character =     
     { character with 
