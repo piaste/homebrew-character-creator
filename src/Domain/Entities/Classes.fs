@@ -26,7 +26,21 @@ let rec fighter = {
 let rec cleric = {
         Id = % nameof cleric
         Name = "Cleric"
-        Description = "Church boy"      
+        Description = "Divine representatives who wield the power of their gods to heal, protect, or destroy."
+
+        SpellcastingAbility = WIS
+
+        ScalingAbilities = (fun _ _ -> [
+        ])
+
+        FixedAbilities = Map [
+        ]
+    }
+
+let rec druid = {
+        Id = % nameof druid
+        Name = "Druid"
+        Description = "Wielders of the primal forces of nature, Druids can assume the forms of beasts and command the elements to protect the natural balance."
 
         SpellcastingAbility = WIS
 
@@ -34,9 +48,6 @@ let rec cleric = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Simple "3 Channel Divinity charges"; Simple "Pacify Undead"; Simple "Divine Intervention"]
-            5<classLvl>, [Simple "Extra Attack"]
-            9<classLvl>, [Simple "Steel Cast"]
         ]
     }
 
