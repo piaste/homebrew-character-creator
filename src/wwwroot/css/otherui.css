@@ -786,7 +786,7 @@ html,body{
   display: block; opacity: .95; }
 
 .radial-node-label{
-  font-size: 18px;
+  font-size: var(--small-text);
   letter-spacing: .06em;
   color: var(--text);
   text-align: center;
@@ -987,7 +987,7 @@ select.trait-select:focus{
 .sheet-controls.summary-top .sheet-pill{
   padding:4px 10px;
   border-radius:999px;
-  font-size:16px;
+  font-size: var(--small-text);
 }
 .trait-pill{
   display:flex;
@@ -1392,6 +1392,7 @@ select.trait-select:focus{
   font-size: 14px;
   letter-spacing: .06em;
   color: var(--bright);
+}
 
 .lvlbox-subclass{
   font-size: 13px;
