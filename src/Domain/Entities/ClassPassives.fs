@@ -31,251 +31,251 @@ let rec Duelist = {
 
 // CLERIC
 
-let rec aegis = {
+let rec Aegis = {
     ClassId = cleric.Id
-    Id = % nameof aegis
+    Id = % nameof Aegis
     Grants = [ Simple "Gain Advantage on all Constitution based Saving Throws." ]
 }
 
-let rec blessedResolve = {
+let rec ``Blessed Resolve`` = {
     ClassId = cleric.Id
-    Id = % nameof blessedResolve
+    Id = % nameof ``Blessed Resolve``
     Grants = [ Simple "Upon landing a killing blow or Critical Hit, on a non-allied creature, emit an aura which Blesses all allies within 9m/30ft of you for three turns." ]
 }
 
-let rec bloodForBlood = {
+let rec ``Blood for Blood`` = {
     ClassId = cleric.Id
-    Id = % nameof bloodForBlood
+    Id = % nameof ``Blood for Blood``
     Grants = [ Simple "The first time you heal a creature each turn, the number you need in order to roll a Critical Hit is reduced by 1. This effect will reset upon landing a Critical Hit." ]
 }
 
-let rec consecrativeSacrifice = {
+let rec ``Consecrative Sacrifice`` = {
     ClassId = cleric.Id
-    Id = % nameof consecrativeSacrifice
+    Id = % nameof ``Consecrative Sacrifice``
     Grants = [ Simple "Upon landing a killing blow or Critical Hit on a non-allied creature, emit a healing aura across 9m/30ft which restores +1d6 Hit Points multiplied by your Proficiency Bonus to yourself and all allies. This effect can trigger once per turn." ]
 }
 
-let rec divineCommune = {
+let rec ``Divine Commune`` = {
     ClassId = cleric.Id
-    Id = % nameof divineCommune
+    Id = % nameof ``Divine Commune``
     Grants = [ Simple "Increase your odds of experiencing instances of Divine Intervention from 33% to 50%." ]
 }
 
-let rec divineRestoration = {
+let rec ``Divine Restoration`` = {
     ClassId = cleric.Id
-    Id = % nameof divineRestoration
+    Id = % nameof ``Divine Restoration``
     Grants = [ Simple "At the end of any combat encounter, emit a healing aura across 45m/150ft which restores +1d6 Hit Points multiplied by your proficiency bonus to yourself and all allies." ]
 }
 
-let rec etherealIntuition = {
+let rec ``Ethereal Intuition`` = {
     ClassId = cleric.Id
-    Id = % nameof etherealIntuition
+    Id = % nameof ``Ethereal Intuition``
     Grants = [ Simple "Permanently gain the effects of Guidance and Resistance." ]
 }
 
-let rec fellRepentance = {
+let rec ``Fell Repentance`` = {
     ClassId = cleric.Id
-    Id = % nameof fellRepentance
+    Id = % nameof ``Fell Repentance``
     Grants = [ Power(Reaction, AtWill, "When an enemy makes an Attack Roll against an ally within 9m/30ft, you may use your Reaction in order to retaliate with Sacred Flame, Bone Chill or Spark Surge.") ]
 }
 
-let rec holyFortitude = {
+let rec ``Holy Fortitude`` = {
     ClassId = cleric.Id
-    Id = % nameof holyFortitude
+    Id = % nameof ``Holy Fortitude``
     Grants = [ Simple "While below half your total Hit Points, you regain the maximum amount of Hit Points possible when healed." ]
 }
 
-let rec guidedStrikes = {
+let rec ``Guided Strikes`` = {
     ClassId = cleric.Id
-    Id = % nameof guidedStrikes
+    Id = % nameof ``Guided Strikes``
     Grants = [ Simple "Upon healing a creature with a Spell, you gain Advantage on your next Attack Roll." ]
 }
 
-let rec immaculateRetribution = {
+let rec ``Immaculate Retribution`` = {
     ClassId = cleric.Id
-    Id = % nameof immaculateRetribution
+    Id = % nameof ``Immaculate Retribution``
     Grants = [ Simple "When an enemy damages you with a melee based Attack roll, deal Radiant/Lightning/Necrotic damage to them equal to your Wisdom Modifier multiplied by 2 (the damage type depends on your subclass)." ]
 }
 
-let rec immaculateWard = {
+let rec ``Immaculate Ward`` = {
     ClassId = cleric.Id
-    Id = % nameof immaculateWard
+    Id = % nameof ``Immaculate Ward``
     Grants = [ Power(Reaction, AtWill, "When an enemy makes an Attack Roll against you, you may use your Reaction and one of your Channel Divinity charges in order to receive Immaculate Blade Ward for one turn (immunity to the next instance of damage).") ]
 }
 
-let rec martyrdom = {
+let rec Martyrdom = {
     ClassId = cleric.Id
-    Id = % nameof martyrdom
+    Id = % nameof Martyrdom
     Grants = [ Simple "Upon being Downed or killed, erupt as a raging inferno, uncontrollably scorching everything around you." ]
 }
 
-let rec paradisiacalGift = {
+let rec ``Paradisiacal Gift`` = {
     ClassId = cleric.Id
-    Id = % nameof paradisiacalGift
+    Id = % nameof ``Paradisiacal Gift``
     Grants = [ Simple "Once per turn, upon casting a Miracle, immediately recover one of your Channel Divinity charges." ]
 }
 
-let rec sacralTouch = {
+let rec ``Sacral Touch`` = {
     ClassId = cleric.Id
-    Id = % nameof sacralTouch
+    Id = % nameof ``Sacral Touch``
     Grants = [ Simple "Upon healing a creature, potentially experience an instance of Divine Intervention. This may only occur once per turn." ]
 }
 
-let rec sanctifiedPresence = {
+let rec ``Sanctified Presence`` = {
     ClassId = cleric.Id
-    Id = % nameof sanctifiedPresence
+    Id = % nameof ``Sanctified Presence``
     Grants = [ Simple "At the beginning of each of your turns in combat, regain Hit Points equal to your Proficiency Bonus multiplied by two." ]
 }
 
-let rec sanctifyingAura = {
+let rec ``Sanctifying Aura`` = {
     ClassId = cleric.Id
-    Id = % nameof sanctifyingAura
+    Id = % nameof ``Sanctifying Aura``
     Grants = [ Simple "Emit an Aura across 9m/30ft which provides Sanctuary to allies who are Downed." ]
 }
 
-let rec stalwart = {
+let rec Stalwart = {
     ClassId = cleric.Id
-    Id = % nameof stalwart
+    Id = % nameof Stalwart
     Grants = [ Simple "Permanently gain the effects of Dispel Evil and Good." ]
 }
 
-let rec stoutBeliever = {
+let rec ``Stout Believer`` = {
     ClassId = cleric.Id
-    Id = % nameof stoutBeliever
+    Id = % nameof ``Stout Believer``
     Grants = [
         Simple "Gain status immunity to all forms of fear."
         Simple "Upon healing a creature with a Spell, they receive Death Ward for three turns."
     ]
 }
 
-let rec venerationalStrikes = {
+let rec ``Venerational Strikes`` = {
     ClassId = cleric.Id
-    Id = % nameof venerationalStrikes
+    Id = % nameof ``Venerational Strikes``
     Grants = [ Simple "Upon casting a Miracle, receive Veneration for three turns (weapons deal additional Radiant/lightning/necrotic damage equal to your Wisdom modifier)." ]
 }
 
 // DRUID
 
-let rec armourOfThorns = {
+let rec ``Armour of Thorns`` = {
     ClassId = druid.Id
-    Id = % nameof armourOfThorns
+    Id = % nameof ``Armour of Thorns``
     Grants = [ Simple "When a creature damages you with a melee based Attack Roll, deal Piercing damage to them equal to your Wisdom Modifier." ]
 }
 
-let rec combatsHarvest = {
+let rec ``Combat’s Harvest`` = {
     ClassId = druid.Id
-    Id = % nameof combatsHarvest
+    Id = % nameof ``Combat’s Harvest``
     Grants = [ Simple "On your first turn of any combat encounter, cast Goodberry. Your goodberries from all sources restore significantly more heal points." ]
 }
 
-let rec earthenSentinel = {
+let rec ``Earthen Sentinel`` = {
     ClassId = druid.Id
-    Id = % nameof earthenSentinel
+    Id = % nameof ``Earthen Sentinel``
     Grants = [ Simple "When you roll a Critical hit with a Spell, Petrify your target for one turn." ]
 }
 
-let rec feralPrecision = {
+let rec ``Feral Precision`` = {
     ClassId = druid.Id
-    Id = % nameof feralPrecision
+    Id = % nameof ``Feral Precision``
     Grants = [ Simple "Gain a +2 bonus to all Attack Rolls. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active." ]
 }
 
-let rec feralResilience = {
+let rec ``Feral Resilience`` = {
     ClassId = druid.Id
-    Id = % nameof feralResilience
+    Id = % nameof ``Feral Resilience``
     Grants = [ Simple "Upon assuming the form of a Wild Shape, gain Temporary Hit Points equal to your Druid level multiplied by four." ]
 }
 
-let rec ferociousStand = {
+let rec ``Ferocious Stand`` = {
     ClassId = druid.Id
-    Id = % nameof ferociousStand
+    Id = % nameof ``Ferocious Stand``
     Grants = [ Simple "Gain a +1 bonus to your Armour Class. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active." ]
 }
 
-let rec instinctiveDefense = {
+let rec ``Instinctive Defense`` = {
     ClassId = druid.Id
-    Id = % nameof instinctiveDefense
+    Id = % nameof ``Instinctive Defense``
     Grants = [ Simple "While assuming a form of a Wild Shape, you gain Resistance to all Physical damage." ]
 }
 
-let rec killerInstinct = {
+let rec ``Killer Instinct`` = {
     ClassId = druid.Id
-    Id = % nameof killerInstinct
+    Id = % nameof ``Killer Instinct``
     Grants = [ Simple "Gain advantage on all damage rolls while assuming the form of a Wild Shape." ]
 }
 
-let rec mantraOfRestoration = {
+let rec ``Mantra of Restoration`` = {
     ClassId = druid.Id
-    Id = % nameof mantraOfRestoration
+    Id = % nameof ``Mantra of Restoration``
     Grants = [
         Power(FreeAction, AtWill, "Solar Mend: Expend Wild Shape charges to restore Spell Slots while not Wild Shaped.")
         Simple "Lunar Mend: Heal yourself while in the form of a Wild Shape."
     ]
 }
 
-let rec naturalBounty = {
+let rec ``Natural Bounty`` = {
     ClassId = druid.Id
-    Id = % nameof naturalBounty
+    Id = % nameof ``Natural Bounty``
     Grants = [ Simple "Once per turn, upon landing a killing blow or rolling a Critical Hit on an enemy, restore one of your Wild Shape charges." ]
 }
 
-let rec naturalResurgence = {
+let rec ``Natural Resurgence`` = {
     ClassId = druid.Id
-    Id = % nameof naturalResurgence
+    Id = % nameof ``Natural Resurgence``
     Grants = [ Simple "While in combat, regenerate Hit Points each turn equal to your Wisdom Modifier. This passive has no effect while Downed." ]
 }
 
-let rec naturesMercy = {
+let rec ``Nature’s Mercy`` = {
     ClassId = druid.Id
-    Id = % nameof naturesMercy
+    Id = % nameof ``Nature’s Mercy``
     Grants = [ Simple "Gain Resistance to Cold, Lightning and Poison damage." ]
 }
 
-let rec naturesWrath = {
+let rec ``Nature’s Wrath`` = {
     ClassId = druid.Id
-    Id = % nameof naturesWrath
+    Id = % nameof ``Nature’s Wrath``
     Grants = [ Simple "Use your Wild Shape charges to deal an additional +1d12 Cold, Lightning, or Poison damage on any successful Attack Roll made with a weapon." ]
 }
 
-let rec packLeader = {
+let rec ``Pack Leader`` = {
     ClassId = druid.Id
-    Id = % nameof packLeader
+    Id = % nameof ``Pack Leader``
     Grants = [ Simple "Damaging other creatures potentially Goads them into attacking you." ]
 }
 
-let rec primalBloodletter = {
+let rec ``Primal Bloodletter`` = {
     ClassId = druid.Id
-    Id = % nameof primalBloodletter
+    Id = % nameof ``Primal Bloodletter``
     Grants = [ Simple "While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to inflict Gaping Wounds on your target when you make a successful Attack Roll." ]
 }
 
-let rec primalSurge = {
+let rec ``Primal Surge`` = {
     ClassId = druid.Id
-    Id = % nameof primalSurge
+    Id = % nameof ``Primal Surge``
     Grants = [ Simple "Deal additional damage while Wild Shaped equal to your Wisdom Modifier." ]
 }
 
-let rec primalTakedown = {
+let rec ``Primal Takedown`` = {
     ClassId = druid.Id
-    Id = % nameof primalTakedown
+    Id = % nameof ``Primal Takedown``
     Grants = [ Simple "While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to knock your target Prone when you make a successful Attack Roll." ]
 }
 
-let rec shapechangersVersatility = {
+let rec ``Shapechanger’s Versatility`` = {
     ClassId = druid.Id
-    Id = % nameof shapechangersVersatility
+    Id = % nameof ``Shapechanger’s Versatility``
     Grants = [ Power(FreeAction, AtWill, "Wild Shape: Outside of combat, you may Wild Shape as a Free Action without consuming charges.") ]
 }
 
-let rec territorialDominance = {
+let rec ``Territorial Dominance`` = {
     ClassId = druid.Id
-    Id = % nameof territorialDominance
+    Id = % nameof ``Territorial Dominance``
     Grants = [ Simple "Gain Advantage when making an Attack Roll against a target in Difficult Terrain." ]
 }
 
-let rec wildStride = {
+let rec ``Wild Stride`` = {
     ClassId = druid.Id
-    Id = % nameof wildStride
+    Id = % nameof ``Wild Stride``
     Grants = [ Simple "While in combat, regenerate one Wild Shape charge every three turns." ]
 }
 
