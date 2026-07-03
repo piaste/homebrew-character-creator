@@ -5,6 +5,7 @@ open Bolero.Html
 
 open Bg3HomebrewCCreator.Domain.Entities
 open Utils
+open Bg3HomebrewCCreator.Domain.Types
 
 type OtherUi = Template<"wwwroot/otherui.html">
 
@@ -41,6 +42,10 @@ let cantripIcon cantripId =
     |> Seq.tryFindIndex (_.Id >> (=) cantripId)
     |> Option.map (fun i -> $"""abilities_sheet/cantrips/cantrip_{i.ToString "000"}""")
 
+let withCantripIcons (cantrips: CantripDef seq) = 
+    cantrips
+    |> Seq.indexed
+    |> Seq.map (fun (i, c) -> c, $"""abilities_sheet/cantrips/cantrip_{i.ToString "000"}""")
 let spellIcon spellId = 
     Spells.allSpells.Values
     |> Seq.tryFindIndex (_.Id >> (=) spellId)
@@ -50,7 +55,15 @@ let spellIcon spellId =
         else
             $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
-
+let withSpellIcons (spells: SpellDef seq) = 
+    spells
+    |> Seq.indexed
+    |> Seq.map (fun (i, c) -> 
+        c, if i <= 143 then 
+                $"""abilities_sheet/spells/spell_{i.ToString "000"}"""
+           else
+                $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
+    )
 
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection

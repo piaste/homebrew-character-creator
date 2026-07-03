@@ -89,8 +89,7 @@ let sheetPill (title : string) (text : string) =
 
 let actionButton (text: string) dispatch msg = 
     button {
-        cl "btn"
-        attr.style "margin-left:auto;padding:6px 10px;font-size:11px;border-radius:8px"
+        cl "btn action-btn"
         on.click (fun _ -> dispatch msg)
         text        
     }
@@ -99,8 +98,9 @@ let summaryAbilities (chr: Character) dispatch =
     let abB = chr.AbBuy
     concat {
         div { 
-            cl "summary-ability-points"; attr.title "Point Buy"
-            $"Ability points: {abB.SpentPoints} / {abB.SpentPoints + abB.UnspentPoints}"
+            cl ("summary-ability-points" + if abB.SpentPoints <> POINT_BUDGET then " error" else "")
+            attr.title "Point Buy"
+            $"Ability points: {abB.SpentPoints} / {POINT_BUDGET}"
         }
         div { 
             cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
@@ -193,7 +193,13 @@ let levelBoxes (model: Model) =
                     div { 
                         cl "col left"
                         div { cl "lvlbox-lvl"; $"Level {lvl0 + 1}"}
-                        div { cl "lvlbox-clLvl"; match lr' with None -> "—" | Some lr -> $"Class level {lr.ClassLevel}"}
+                        cond lr' <| function
+                        | None -> empty()
+                        | Some lr -> 
+                            cond (UMX.untag lr.ClassLevel <> lvl0 + 1) <| function
+                            | false -> empty()
+                            | true -> 
+                                div { cl "lvlbox-clLvl"; $"Class level {lr.ClassLevel}"}
                     }
                     div { 
                         cl "col right"
@@ -364,7 +370,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Cantrips ->
                 ph Cantrips <| Picker.view "Cantrips"
                     (Cantrips.allCantrips.Values
-                     |> Seq.map<_, Picker.Thing<cantripId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = cantripIcon c.Id})
+                     |> withCantripIcons
+                     |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                      |> Seq.toList
                     )
                     c.PreviousHistory.AllCantripIds
@@ -377,7 +384,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
                     ph Spells <| Picker.view "Spells"
                         ((Spells.allSpellsInList sl).Values
-                        |> Seq.map<_, Picker.Thing<spellId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = spellIcon c.Id})
+                        |> withSpellIcons
+                        |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
                         c.PreviousHistory.AllSpellIds
