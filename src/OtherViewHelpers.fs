@@ -72,6 +72,24 @@ let inline forEachIndexed collection nodeGen =
 
 let checkbox isActive dispatch msg = 
     button {
-        cl ("square-checkbox" + if isActive then " is-on" else "")
+        cl("square-checkbox" + if isActive then " is-on" else "")
         on.click (fun _ -> dispatch msg)
+    }
+
+let fakeCheckbox isActive = 
+    button {
+        attr.disabled true
+        cl("square-checkbox" + if isActive then " is-on" else "")
+    }
+
+let toRoman = function
+    | 1 -> "I" | 2 -> "II" | 3 -> "III"
+    | 4 -> "IV" | 5 -> "V" | 6 -> "VI"
+    | _ -> failwith "Roman numbers up to 6 only"
+
+let sheetAttr (key : string) (value : string) = 
+    div { 
+        cl "sheet-attr"
+        span { key }
+        b { value }
     }

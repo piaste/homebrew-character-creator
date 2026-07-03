@@ -65,6 +65,7 @@ type Collections.Map<'K, 'V when 'K : comparison > with
     
 module Map =
     let inline getOrDefault k (m : Map<_, _>) = m.GetOrDefault k
+    let inline getOrElse d k (m : Map<_, _>) = m.GetOrElse(k, d) 
 
     let inline findIn m k = Map.find k m
 

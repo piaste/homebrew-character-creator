@@ -94,7 +94,7 @@ let actionButton (text: string) dispatch msg =
         text        
     }
 
-let summaryAbilities (chr: Character) dispatch = 
+let summaryAbilities useLoreNames (chr: Character) dispatch = 
     let abB = chr.AbBuy
     concat {
         div { 
@@ -150,22 +150,33 @@ let summaryAbilities (chr: Character) dispatch =
                 div { 
                     cl "sheet-attrs"
                     forEach (chr.StatModifiers.ToMap()) (fun kv ->
-                        div { 
-                            cl "sheet-attr"
-                            span { kv.Value }
-                            b { kv.Key }
-                         } 
+                        sheetAttr kv.Value kv.Key 
                     )
                 }
+                let spellSlots = getRegularSpellSlots chr
+                cond spellSlots <| function
+                | [] -> empty()
+                | slots -> 
+                    concat {
+                        div { cl "sheet-section-title"; "SPELL SLOTS" }
+                        div { 
+                            cl "sheet-attrs"
+                            forEach (List.indexed slots) (fun (i, n) ->
+                                div { 
+                                    cl "sheet-attr"
+                                    span { toRoman (i + 1)}
+                                    forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                        fakeCheckbox true
+                                    )
+                                } 
+                            )
+                        }
+                    }
                 div { cl "sheet-section-title"; "PASSIVES" }
                 div { 
                     cl "sheet-attrs"
-                    forEach (getAllPassiveDescriptions chr) (fun (name, desc) ->
-                        div { 
-                            cl "sheet-attr"
-                            span { name }
-                            b { desc }
-                         } 
+                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (name, desc) ->
+                        sheetAttr name desc
                     )
                 }
             }
@@ -217,23 +228,15 @@ let levelBoxes (model: Model) =
                             div { 
                                 cl "sheet-attrs"
                                 forEach lr.CantripIds <| fun s ->
-                                    div { 
-                                        cl "sheet-attr"
-                                        span { "Cantrip" }
-                                        b { Cantrips.allCantrips[s].Name }
-                                    } 
+                                    sheetAttr "Cantrip" Cantrips.allCantrips[s].Name
                                 forEach lr.SpellIds <| fun s ->
-                                    div { 
-                                        cl "sheet-attr"
-                                        span { "Spell" }
-                                        b { Spells.allSpells[s].Name }
-                                    }  
+                                    sheetAttr "Spell" Spells.allSpells[s].Name
                                 forEach lr.ClassPassiveIds <| fun s ->
-                                    div { 
-                                        cl "sheet-attr"
-                                        span { "Passive" }
-                                        b { ClassPassives.allClassPassives[s].Name }
-                                    }                               
+                                    sheetAttr "Passive" ClassPassives.allClassPassives[s].Name 
+                                cond lr.FeatId <| function
+                                | None -> empty()
+                                | Some fId -> 
+                                    sheetAttr "Feat" Feats.allFeats[fId].Name
                             }
                     }
                 }
@@ -250,7 +253,10 @@ let otherView (model: Model) (dispatch : Message -> unit) =
     let rct = model.RadialCenterText
 
     let ph pick f = 
-        f c.Picks[pick] pick model dispatch
+        cond (Map.tryFind pick c.Picks) <| function
+        | None -> empty()
+        | Some pickCount -> 
+            f pickCount pick model dispatch
 
     OtherUi()
         .RadialStage(
@@ -322,6 +328,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     |> function
                     | None ->  Subclasses.allSubclassesByClass[clId]
                     | Some sclId -> Map [sclId, subclassById sclId ]
+                    |> Map.map (fun _ v -> {| v with Name = v.DisplayName model.UseLoreNames |})
                     // |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames |})
 
                 radialStage rct dispatch
@@ -452,6 +459,9 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         )
         .ActionButtons(
             concat {
+                actionButton $"""{if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
+                    dispatch (ToggleLoreNames (not model.UseLoreNames))
+
                 cond model.UndoStack.IsEmpty <| function 
                     | false -> actionButton "UNDO" dispatch Undo
                     | true -> empty()
@@ -478,7 +488,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
             }
         )
-        .CharacterSummary(summaryAbilities model.Character dispatch)
+        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character dispatch)
         .LevelBoxes(levelBoxes model)
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Elt()

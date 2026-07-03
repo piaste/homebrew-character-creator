@@ -12,7 +12,7 @@ let rec beastheart =
     {
         Id = % nameof beastheart
         Name = "Beastheart"
-        LoreName = None
+        LoreName = Some "Uthgardt Telhut"
         Description = "Attunement with nature and its beasts inspires your rage."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -31,7 +31,7 @@ let rec berserker =
     {
         Id = % nameof berserker
         Name = "Berserker"
-        LoreName = None
+        LoreName = Some "Berserker Trance"
         Description = "Follow a path of untrammelled fury, slick with blood."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -53,7 +53,7 @@ let rec frostbreaker =
     {
         Id = % nameof frostbreaker
         Name = "Frostbreaker"
-        LoreName = None
+        LoreName = Some "Frostmaiden's Kiss"
         Description = "Honed rage, controlled and enduring amidst frigid peaks."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -75,7 +75,7 @@ let rec giantsBlood =
     {
         Id = % nameof giantsBlood
         Name = "Giant's Blood"
-        LoreName = None
+        LoreName = Some "Kostchtchie's Aura"
         Description = "Invoking the might and staggering size of Giants."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -100,7 +100,7 @@ let rec rosemourn =
     {
         Id = % nameof rosemourn
         Name = "Rosemourn"
-        LoreName = None
+        LoreName = Some "Black-Barbed Curse"
         Description = "Fury resting in scars of the past, forged into thorns."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -122,7 +122,7 @@ let rec wildSoulBarb =
     {
         Id = % nameof wildSoulBarb
         Name = "Wild Soul"
-        LoreName = None
+        LoreName = Some "Wild Weave's Thread"
         Description = "Arcane power churns within, waiting to be released."
         BaseClassId = barbarian.Id
         CasterType = HalfCaster Innate
@@ -745,7 +745,7 @@ let rec wayOfTheArcane =
     {
         Id = % nameof wayOfTheArcane
         Name = "Way of the Arcane"
-        LoreName = None
+        LoreName = Some "Shining Hand Training"
         Description = "Focus ki to bend the elements to your will as an extension of your body."
         BaseClassId = monk.Id
         CasterType = HalfCaster Versatile
@@ -769,7 +769,7 @@ let rec wayOfTheGentleFist =
     {
         Id = % nameof wayOfTheGentleFist
         Name = "Way of the Gentle Fist"
-        LoreName = None
+        LoreName = Some "Broken Ones Training"
         Description = "Harmony and practiced inner peace providing relief to those around you."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -788,7 +788,7 @@ let rec wayOfTheDrunkenMaster =
     {
         Id = % nameof wayOfTheDrunkenMaster
         Name = "Way of the Drunken Master"
-        LoreName = None
+        LoreName = Some "St. Dionysus Training"
         Description = "Lurch through battle with deceptive movements and unpredictable sways."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -811,7 +811,7 @@ let rec wayOfTheOpenHand =
     {
         Id = % nameof wayOfTheOpenHand
         Name = "Way of the Open Hand"
-        LoreName = None
+        LoreName = Some "White Rod Training"
         Description = "Control ki to heal or inflict grievous hurt with specialized strikes."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -833,7 +833,7 @@ let rec wayOfTheShadowArts =
     {
         Id = % nameof wayOfTheShadowArts
         Name = "Way of the Shadow Arts"
-        LoreName = None
+        LoreName = Some "Dark Moon Training"
         Description = "Stealth and subterfuge, bending shadows to strike without warning."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -856,7 +856,7 @@ let rec wayOfTheTemperedSteel =
     {
         Id = % nameof wayOfTheTemperedSteel
         Name = "Way of the Tempered Steel"
-        LoreName = None
+        LoreName = Some "Soaring Way Training"
         Description = "Rest your hand on the hilt of a summoned Katana in subtle anticipation."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -881,7 +881,7 @@ let rec ancientWarden =
     {
         Id = % nameof ancientWarden
         Name = "Ancient Warden"
-        LoreName = Some "Oath of the Ancients"
+        LoreName = Some "Sibling of the Ruby Rose"
         Description = "Preserve the sanctity of life and the beauty of nature."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -904,7 +904,7 @@ let rec crownedPhoenix =
     {
         Id = % nameof crownedPhoenix
         Name = "Crowned Phoenix"
-        LoreName = Some "Oath of the Crown"
+        LoreName = Some "Mystic Fire Knight"
         Description = "Ensuring civilization is reborn from the ashes of mistakes."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -927,7 +927,7 @@ let rec devoutParagon =
     {
         Id = % nameof devoutParagon
         Name = "Devout Paragon"
-        LoreName = Some "Oath of Devotion"
+        LoreName = Some "Radiant Heart Auxiliary"
         Description = "Act with honour and virtue to protect the weak."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -950,7 +950,7 @@ let rec oathboundCrusader =
     {
         Id = % nameof oathboundCrusader
         Name = "Oathbound Crusader"
-        LoreName = Some "Oath of Vengeance"
+        LoreName = Some "Gilded Eye Inquisitor"
         Description = "Righting wrongs and delivering justice to grievous sinners."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -996,7 +996,7 @@ let rec tyrant =
     {
         Id = % nameof tyrant
         Name = "Tyrant"
-        LoreName = Some "Oath of Conquest"
+        LoreName = Some "Black Gauntlet Crusader"
         Description = "Secure obedience through fear and absolute authority."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -1021,7 +1021,7 @@ let rec beastMaster =
     {
         Id = % nameof beastMaster
         Name = "Beast Master"
-        LoreName = None
+        LoreName = Some "High Forest Trail"
         Description = "Cultivate the bond with a bestial companion that grows with you."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1040,7 +1040,7 @@ let rec gloomStalker =
     {
         Id = % nameof gloomStalker
         Name = "Gloom Stalker"
-        LoreName = None
+        LoreName = Some "Underdark Trail"
         Description = "Ambush and put down foes from the envelope of darkness."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1059,7 +1059,7 @@ let rec hunter =
     {
         Id = % nameof hunter
         Name = "Hunter"
-        LoreName = None
+        LoreName = Some "Greypeaks Trails"
         Description = "Excel at slaying Faerun’s most dangerous prey."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1081,7 +1081,7 @@ let rec mireMist =
     {
         Id = % nameof mireMist
         Name = "Mire Mist"
-        LoreName = None
+        LoreName = Some "Merdelain Trail"
         Description = "Through stagnant waters and drifting vapors, decay takes root."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1100,7 +1100,7 @@ let rec swarmkeeper =
     {
         Id = % nameof swarmkeeper
         Name = "Swarmkeeper"
-        LoreName = None
+        LoreName = Some "Neverwinter Woods Trail"
         Description = "Forged deep connections with swarms of nature spirits."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1119,7 +1119,7 @@ let rec twinfang =
     {
         Id = % nameof twinfang
         Name = "Twinfang"
-        LoreName = None
+        LoreName = Some "Evermoors Trail"
         Description = "A second shadow moves at your side; together you descend upon quarry."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1288,7 +1288,7 @@ let rec radiantBloom =
     {
         Id = % nameof radiantBloom
         Name = "Radiant Bloom"
-        LoreName = None
+        LoreName = Some "Spellfire Wielder"
         Description = "Illuminated brilliance healing allies and frightening foes."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1349,7 +1349,7 @@ let rec volcanist =
     {
         Id = % nameof volcanist
         Name = "Volcanist"
-        LoreName = None
+        LoreName = Some "Volcanic Heart"
         Description = "Ancient flame as uncontrollable as it is uncontrollable."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1516,7 +1516,7 @@ let rec arcblade =
     {
         Id = % nameof arcblade
         Name = "Arcblade"
-        LoreName = None
+        LoreName = Some "Anarchs of Shyr Tradition"
         Description = "A mobile spellsword storming with steel and magic."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1539,7 +1539,7 @@ let rec arcaneWarden =
     {
         Id = % nameof arcaneWarden
         Name = "Arcane Warden"
-        LoreName = None
+        LoreName = Some "Coronal Guards Tradition"
         Description = "Blend martial skill with hardening the Weave into Arcane Wards."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1596,7 +1596,7 @@ let rec necromancer =
     {
         Id = % nameof necromancer
         Name = "Necromancer"
-        LoreName = None
+        LoreName = Some "Thayan Necromancer Tradition"
         Description = "Wounds inflict the curse of undeath, raising zombie minions."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1615,7 +1615,7 @@ let rec elementalist =
     {
         Id = % nameof elementalist
         Name = "Elementalist"
-        LoreName = None
+        LoreName = Some "Zakharan Sha'ir Tradition"
         Description = "Elements answer your call as loyal companions."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
