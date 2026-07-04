@@ -10,8 +10,8 @@ let blackDragonborn =
             Name = "Black Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn,  $"Acid Breath Cantrip")
+                Simple $"Resistance to Acid damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Acid Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -21,8 +21,8 @@ let blueDragonborn =
             Name = "Blue Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip")
+                Simple $"Resistance to Lightning damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Lightning Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -32,8 +32,8 @@ let brassDragonborn =
             Name = "Brass Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
+                Simple $"Resistance to Fire damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Fire Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -43,8 +43,8 @@ let bronzeDragonborn =
             Name = "Bronze Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip")
+                Simple $"Resistance to Lightning damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Lightning Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -54,8 +54,8 @@ let copperDragonborn =
             Name = "Copper Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn, $"Acid Breath Cantrip")
+                Simple $"Resistance to Acid damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Acid Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -65,8 +65,8 @@ let goldDragonborn =
             Name = "Gold Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
+                Simple $"Resistance to Fire damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Fire Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -76,8 +76,8 @@ let greenDragonborn =
             Name = "Green Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Poison damage"
-                Power(Action, OncePerTurn,  $"Poison Breath Cantrip")
+                Simple $"Resistance to Poison damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Poison Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -87,8 +87,8 @@ let redDragonborn =
             Name = "Red Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
+                Simple $"Resistance to Fire damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Fire Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -98,8 +98,8 @@ let silverDragonborn =
             Name = "Silver Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Cold damage"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip")
+                Simple $"Resistance to Cold damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Cold Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -109,8 +109,8 @@ let whiteDragonborn =
             Name = "White Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Cold damage"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip")
+                Simple $"Resistance to Cold damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Cold Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -120,8 +120,8 @@ let amethystDragonborn =
             Name = "Amethyst Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Force damage"
-                Power(Action, OncePerTurn,  $"Force Breath Cantrip")
+                Simple $"Resistance to Force damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Force Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -131,8 +131,8 @@ let crystalDragonborn =
             Name = "Crystal Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Radiant damage"
-                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip")
+                Simple $"Resistance to Radiant damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Radiant Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -142,8 +142,8 @@ let emeraldDragonborn =
             Name = "Emerald Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Psychic damage"
-                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip")
+                Simple $"Resistance to Psychic damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Psychic Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -153,8 +153,8 @@ let sapphireDragonborn =
             Name = "Sapphire Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Thunder damage"
-                Power(Action, OncePerTurn, $"Thunder Breath Cantrip")
+                Simple $"Resistance to Thunder damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Thunder Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -164,8 +164,8 @@ let topazDragonborn =
             Name = "Topaz Dragonborn"
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Necrotic damage"
-                Power(Action, OncePerTurn, $"Radiant Breath Cantrip")
+                Simple $"Resistance to Necrotic damage (Immunity at level 9)"
+                Power(Action, OncePerTurn, $"Radiant Breath Cantrip (Scales with level)")
             ]
         }
 
@@ -199,7 +199,7 @@ let goldDwarf =
             Name = "Gold Dwarf"
             BaseRaceId = Dwarf.Id
             RacialPassives = [
-                Simple $"+2 to all damage dealt with weapons"
+                Simple $"+2 to all damage dealt with weapons (Does not include unarmed attacks.)"
             ]
         }
 
@@ -210,6 +210,7 @@ let shieldDwarf =
             BaseRaceId = Dwarf.Id
             RacialPassives = [
                 Buff <| StatModifiers.Create(dr = 2)
+                Simple "Reduces all damage taken by 2. (Calculated after Resistances and stacks with all other sources of Damage Reduction.)"
             ]
         }
 
@@ -275,7 +276,7 @@ let forestGnome =
             RacialPassives = [
                 Power (Action, OncePerTurn, "Dominate Beast")
                 Simple $"Speak With Animals"
-                Simple $"Immune to effects that would Restrain them"
+                Simple "Immune to effects that would Restrain them"
             ]
         }
 
@@ -333,7 +334,7 @@ let halfOrc =
             BaseRaceId = ``Half-Orc``.Id
             RacialPassives = [
                 Buff(StatModifiers.Create(initiative = +2))
-                Buff(StatModifiers.Create(abilities = Map[STR, 2]))
+                Simple "+2 to STR"
                 Simple $"Darkvision"
             ]
         }
@@ -376,7 +377,7 @@ let asmodeusTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power(Action, OncePerCombat, "Fireball")
+                Power(Action, OncePerCombat, "Fireball (Scales with level)")
             ]
         }
 
@@ -388,7 +389,7 @@ let mephistophelesTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power(Action, OncePerCombat, "Burning Hands")
+                Power(Action, OncePerCombat, "Burning Hands (Action, Scales with level)")
             ]
         }
 
@@ -400,7 +401,7 @@ let zarielTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power (Action, OncePerCombat, "Fire Shield")
+                Power (Action, OncePerCombat, "Fire Shield (Scales with level)")
             ]
         }
 
@@ -412,5 +413,3 @@ let allSubracesByBaseRace =
     |> Seq.groupBy (snd >> _.BaseRaceId)
     |> Map.ofSeq
     |> Map.map (fun _ v -> Map.ofSeq v)
-
-
