@@ -121,7 +121,10 @@ let update load save copyCharacter message model =
                     match picks |> List.tryFindIndex ((=) p) with
                     | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
                     | _ -> Proceed
-                | Proceed -> Proceed
+                | Proceed -> 
+                    match picks with
+                    | [] -> Proceed
+                    | p :: _ -> Pick p
         }, Cmd.none
 
     | LoadState ->
@@ -302,7 +305,7 @@ let update load save copyCharacter message model =
 
     | LevelUp ->
         if model.Errors.IsEmpty then
-            apply <| levelUpDefault
+            applyAnd NextMainStageSelection  <| levelUpDefault
         else
             model, Cmd.none
 
