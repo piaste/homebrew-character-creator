@@ -12,6 +12,10 @@ let debug x =
 #endif
     ()
 
+type System.Boolean with
+    member this.IfThen v = 
+        if this then v else Unchecked.defaultof<_>
+
 
 let inline getAll<'P, 't, [<Measure>]'m when 't : (member Id : string<'m>) > () = 
     Map [ 

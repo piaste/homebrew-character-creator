@@ -190,24 +190,28 @@ type [<Measure>] cantripId
 
 type CantripDef =
     { Id: string<cantripId>
-      Description: string
+      CantripDescription: string
 
       Concentration: bool
       ActionCost: ActionCost }
     member this.Name = UMX.untag this.Id
+    member this.Description = 
+        $"""{this.ActionCost}{this.Concentration.IfThen" (C)"}: {this.CantripDescription}"""
 
 type [<Measure>] spellId
 
 type SpellDef =
     { Id: string<spellId>
       Name: string
-      Description: string
+      SpellDescription: string
 
       SpellLists: SpellList list
 
       Concentration: bool
       Upcastable: bool
       ActionCost: ActionCost }
+    member this.Description = 
+        $"""{this.ActionCost}{this.Concentration.IfThen" (C)"}{this.Upcastable.IfThen "↑"}: {this.SpellDescription}"""
 
 // Classes and subclasses
 

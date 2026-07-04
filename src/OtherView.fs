@@ -228,9 +228,11 @@ let levelBoxes (model: Model) =
                             div { 
                                 cl "sheet-attrs"
                                 forEach lr.CantripIds <| fun s ->
-                                    sheetAttr "Cantrip" Cantrips.allCantrips[s].Name
+                                    let c = Cantrips.allCantrips[s] in
+                                    sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}"
                                 forEach lr.SpellIds <| fun s ->
-                                    sheetAttr "Spell" Spells.allSpells[s].Name
+                                    let sp = Spells.allSpells[s] in 
+                                    sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}"
                                 forEach lr.ClassPassiveIds <| fun s ->
                                     sheetAttr "Passive" ClassPassives.allClassPassives[s].Name 
                                 cond lr.FeatId <| function
