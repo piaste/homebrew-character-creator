@@ -18,9 +18,10 @@ open Helpers
 
 type OtherUi = Template<"wwwroot/otherui.html">
 
-let stageTabButton dispatch model stage iconPath = 
+let stageTabButton enabled dispatch model stage iconPath = 
     let isActive = model.MainStageSelection = stage
     button {
+        attr.disabled (not enabled)
         clActive isActive "stage-tab"
         on.click (fun _ -> dispatch <| SetMainStageSelection stage)
         div { cl "stage-tab-title"; stage.ToString() }
@@ -260,6 +261,9 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         | Some pickCount -> 
             f pickCount pick model dispatch
 
+    let validSubclasses =
+        getValidSubclassesFor c   
+                
     OtherUi()
         .RadialStage(
             match model.MainStageSelection with
@@ -323,19 +327,12 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     baseclassIconPath
                     SetBaseClass
 
-            | Subclass -> 
-                let validSubclassesFor clId =
-                    c.PreviousHistory.LevelsBySubclass
-                    |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0<classLvl>)
-                    |> function
-                    | None ->  Subclasses.allSubclassesByClass[clId]
-                    | Some sclId -> Map [sclId, subclassById sclId ]
-                    |> Map.map (fun _ v -> {| v with Name = v.DisplayName model.UseLoreNames |})
-                    // |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames |})
+            | Subclass ->                    
 
                 radialStage rct dispatch
                     l.SubclassId
-                    (validSubclassesFor (classIdBySubclassId l.SubclassId))
+                    (validSubclasses
+                     |> Map.map (fun _ v -> {| v with Name = v.DisplayName model.UseLoreNames |}))
                     subclassIconPath
                     SetSubclass
 
@@ -420,11 +417,11 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         )
         .StageTabs(
             concat {
-                let stb = stageTabButton dispatch model in 
-                stb Race (baseraceIconPath (baseRaceIdBySubraceId c.RaceId))
-                stb Subrace (subraceIconPath c.RaceId)
-                stb Class (baseclassIconPath (classIdBySubclassId l.SubclassId))
-                stb Subclass (subclassIconPath l.SubclassId)
+                let stb enabled = stageTabButton enabled dispatch model in 
+                stb true Race (baseraceIconPath (baseRaceIdBySubraceId c.RaceId))
+                stb true Subrace (subraceIconPath c.RaceId)
+                stb true Class (baseclassIconPath (classIdBySubclassId l.SubclassId))
+                stb (validSubclasses.Count > 1) Subclass (subclassIconPath l.SubclassId)
             }
         )
         .PicksDocks(

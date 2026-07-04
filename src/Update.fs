@@ -113,8 +113,15 @@ let update load save copyCharacter message model =
         { model with 
             MainStageSelection = 
                 let picks = Seq.toList model.Character.Picks.Keys in
+                let firstPick = match picks with | [] -> Proceed | p :: _ -> Pick p
                 match model.MainStageSelection with
-                | Race -> Subrace | Subrace -> Class | Class -> Subclass 
+                | Race -> Subrace 
+                | Subrace -> Class 
+                | Class -> 
+                    if (getValidSubclassesFor model.Character).Count > 1 then
+                        Subclass
+                    else
+                        firstPick
                 | Subclass -> 
                     List.tryHead picks |> function | Some p -> Pick p | None -> Proceed
                 | Pick p ->
@@ -122,9 +129,7 @@ let update load save copyCharacter message model =
                     | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
                     | _ -> Proceed
                 | Proceed -> 
-                    match picks with
-                    | [] -> Proceed
-                    | p :: _ -> Pick p
+                    firstPick
         }, Cmd.none
 
     | LoadState ->
@@ -156,7 +161,7 @@ let update load save copyCharacter message model =
             |> Seq.head
             |> _.Key
         
-        applyAnd (SetMainStageSelection Subrace) <| fun character -> { character with RaceId = defaultSubrace }
+        applyAnd NextMainStageSelection <| fun character -> { character with RaceId = defaultSubrace }
 
     | SetSubrace race ->
         applyAnd NextMainStageSelection <| fun character -> { character with RaceId = race }
@@ -169,12 +174,11 @@ let update load save copyCharacter message model =
 
     | SetBaseClass baseClassId ->
         let defaultSubclassId = 
-            baseClassId
-            |> Map.findIn Subclasses.allSubclassesByClass
+            getValidSubclassesForClass baseClassId model.Character            
             |> Seq.head
             |> _.Key
         
-        applyAnd (SetMainStageSelection Subclass) <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
+        applyAnd NextMainStageSelection <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
 
     | SetSubclass subclassId ->
         applyAnd NextMainStageSelection <| fun character -> 
