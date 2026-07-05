@@ -16,12 +16,14 @@
 
 **Mapping Reference**:
 *   `Classes.fs` & `Subclasses.fs` -> Individual Class links (Artificer, Barbarian, etc.)
+*   `SpecialPicks.fs` -> Individual special abilities inside each Class doc
 *   `Spells.fs` & `Cantrips.fs` -> "Spells & Cantrips" Sheet link
 *   `Feats.fs` -> "Feats" Doc link
 *   `BaseRaces.fs` & `Subraces.fs` -> "Races" Doc link
 *   `Archetypes.fs` -> "Archetypes" Doc link
 *   `Traits.fs` -> "Traits" Doc link
 *   `Skills.fs` -> "Skills" section in the Main Doc or linked page
+
 
 2.  **Compare and Synchronize**:
     *   Analyze each documentation page and compare the entities described there with the F# objects defined in the corresponding file in `src/Domain/Entities/`.
