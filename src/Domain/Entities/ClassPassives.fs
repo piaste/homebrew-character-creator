@@ -19,117 +19,135 @@ let rec challengersCallHoned = {
     Grants = [ Power(FreeAction, AtWill, "Challenger's Call Honed", "When an ally within 9m/30ft of you is damaged while below 75% of their total Hit Points, immediately Challenge that enemy, as well as any additional enemies within 9m/30ft of the aggressor.") ]
 }
 
-let rec ``Charge of the Collective`` = {
+let rec chargeOfTheCollective = {
     ClassId = fighter.Id
-    Id = % nameof ``Charge of the Collective``
+    Id = % nameof chargeOfTheCollective
+    Name = "Charge of the Collective"
     Grants = [ Complex("Charge of the Collective", "When you are affected by a Dash effect, all allies in a 18m radius also Dash.") ]
 }
 
-let rec Duelist = {
+let rec duelist = {
     ClassId = fighter.Id
-    Id = % nameof Duelist
+    Id = % nameof duelist
+    Name = "Duelist"
     Grants = [ Buff <| StatModifiers.Create(attackRolls = 4)]
 }
 
-let rec ``Full Arsenal`` = {
+let rec fullArsenal = {
     ClassId = fighter.Id
-    Id = % nameof ``Full Arsenal``
+    Id = % nameof fullArsenal
+    Name = "Full Arsenal"
     Grants = [ Complex("Full Arsenal", "Upon landing a killing blow or Critical Hit on an enemy, restore one of your Superiority Dice. This effect can trigger once per turn.") ]
 }
 
-let rec ``Heavy Assault`` = {
+let rec heavyAssault = {
     ClassId = fighter.Id
-    Id = % nameof ``Heavy Assault``
+    Id = % nameof heavyAssault
+    Name = "Heavy Assault"
     Grants = [ Complex("Heavy Assault", "While wielding a Two-Handed Weapon (melee or ranged), your damage dice are rolled with Advantage.") ]
 }
 
-let rec ``Intuitive Warning`` = {
+let rec intuitiveWarning = {
     ClassId = fighter.Id
-    Id = % nameof ``Intuitive Warning``
-    Grants = [ Power(Reaction, AtWill, "When an enemy makes an Attack Roll against an ally within 9m/30ft of you, impose Disadvantage on the attack. You must be able to see the attacker.") ]
+    Id = % nameof intuitiveWarning
+    Name = "Intuitive Warning"
+    Grants = [ Power(Reaction, AtWill, "Intuitive Warning", "When an enemy makes an Attack Roll against an ally within 9m/30ft of you, impose Disadvantage on the attack. You must be able to see the attacker.") ]
 }
 
-let rec Ironclad = {
+let rec ironclad = {
     ClassId = fighter.Id
-    Id = % nameof Ironclad
+    Id = % nameof ironclad
+    Name = "Ironclad"
     Grants = [
         Buff <| StatModifiers.Create(abilities = Map [CON, 2])
         Simple "You are unable to be forcibly moved."
     ]
 }
 
-let rec ``Iron Will`` = {
+let rec ironWill = {
     ClassId = fighter.Id
-    Id = % nameof ``Iron Will``
+    Id = % nameof ironWill
+    Name = "Iron Will"
     Grants = [ Complex("Iron Will", "On your first turn of any combat encounter, and upon recovering from a Lockdown Condition, gain status immunity to all Lockdown Conditions for three turns.") ]
 }
 
-let rec ``Leader's Momentum`` = {
+let rec leadersMomentum = {
     ClassId = fighter.Id
-    Id = % nameof ``Leader's Momentum``
+    Id = % nameof leadersMomentum
+    Name = "Leader's Momentum"
     Grants = [
         Buff <| StatModifiers.Create(initiative = 2)
         Complex("Leader's Momentum", "Upon Rallying another creature, their Initiative is also increased by 2 until their next Long Rest.")
     ]
 }
 
-let rec ``Martial Fortress`` = {
+let rec martialFortress = {
     ClassId = fighter.Id
-    Id = % nameof ``Martial Fortress``
+    Id = % nameof martialFortress
+    Name = "Martial Fortress"
     Grants = [ Complex("Martial Fortress", "Once per turn, upon using a Manoeuvre or shooting a Focused Fletching, you receive Temporary Hit Points equal to your character level multiplied by two.") ]
 }
 
-let rec ``Martial Prowess`` = {
+let rec martialProwess = {
     ClassId = fighter.Id
-    Id = % nameof ``Martial Prowess``
+    Id = % nameof martialProwess
+    Name = "Martial Prowess"
     Grants = [ Complex("Martial Prowess", "When dealing damage, you ignore Slashing Resistance. Additionally, your Focused Fletching ignores Elemental Resistance.") ]
 }
 
-let rec Merciless = {
+let rec merciless = {
     ClassId = fighter.Id
-    Id = % nameof Merciless
+    Id = % nameof merciless
+    Name = "Merciless"
     Grants = [ Complex("Merciless", "When making a weapon based Attack Roll against an enemy with less than 25% of their total Hit Points remaining, deal additional damage equal to your levels in Fighter multiplied by two.") ]
 }
 
-let rec ``Natural Born Leader`` = {
+let rec naturalBornLeader = {
     ClassId = fighter.Id
-    Id = % nameof ``Natural Born Leader``
+    Id = % nameof naturalBornLeader
+    Name = "Natural Born Leader"
     Grants = [ Complex("Natural Born Leader", "Once per turn, upon rolling a critical hit, immediately Rally (12 temporary hp) all allies within 9m/30ft.") ]
 }
 
-let rec Opportunist = {
+let rec opportunist = {
     ClassId = fighter.Id
-    Id = % nameof Opportunist
+    Id = % nameof opportunist
+    Name = "Opportunist"
     Grants = [ Complex("Opportunist", "When you make a successful Opportunity Attack, reduce the targeted enemy’s Movement Speed to zero.") ]
 }
 
-let rec ``Proper Form`` = {
+let rec properForm = {
     ClassId = fighter.Id
-    Id = % nameof ``Proper Form``
-    Grants = [ Power(Reaction, AtWill, "When an enemy damages you, reduce the damage by -1d4 multiplied by your Proficiency Bonus. You must be able to see the attacker.") ]
+    Id = % nameof properForm
+    Name = "Proper Form"
+    Grants = [ Power(Reaction, AtWill, "Proper Form", "When an enemy damages you, reduce the damage by -1d4 multiplied by your Proficiency Bonus. You must be able to see the attacker.") ]
 }
 
-let rec ``Reckless Abandon`` = {
+let rec recklessAbandon = {
     ClassId = fighter.Id
-    Id = % nameof ``Reckless Abandon``
+    Id = % nameof recklessAbandon
+    Name = "Reckless Abandon"
     Grants = [ Complex("Reckless Abandon", "You have a 25% chance to recover a Superiority Dice when you are attacked.") ]
 }
 
-let rec ``Sentinels Protection`` = {
+let rec sentinelsProtection = {
     ClassId = fighter.Id
-    Id = % nameof ``Sentinels Protection``
-    Grants = [ Power(Reaction, AtWill, "When an enemy damages an ally within 3m/10ft of you, reduce the damage by -1d4 multiplied by your Proficiency Bonus. You must be able to see the attacker.") ]
+    Id = % nameof sentinelsProtection
+    Name = "Sentinels Protection"
+    Grants = [ Power(Reaction, AtWill, "Sentinels Protection", "When an enemy damages an ally within 3m/10ft of you, reduce the damage by -1d4 multiplied by your Proficiency Bonus. You must be able to see the attacker.") ]
 }
 
-let rec ``Tactical Advantage`` = {
+let rec tacticalAdvantage = {
     ClassId = fighter.Id
-    Id = % nameof ``Tactical Advantage``
+    Id = % nameof tacticalAdvantage
+    Name = "Tactical Advantage"
     Grants = [ Complex("Tactical Advantage", "Increase the reach of your basic Melee Attacks, Unarmed Strikes, and Dual-Wield Melee Attacks by 50%.") ]
 }
 
-let rec ``Tenacious Fighter`` = {
+let rec tenaciousFighter = {
     ClassId = fighter.Id
-    Id = % nameof ``Tenacious Fighter``
+    Id = % nameof tenaciousFighter
+    Name = "Tenacious Fighter"
     Grants = [
         Simple "Gain an additional Reaction."
         Simple "Gain Advantage on your Opportunity Attacks."
@@ -137,1490 +155,1730 @@ let rec ``Tenacious Fighter`` = {
 }
 
 // ARTIFICER
-let rec ``Adaptive Plating`` = {
+let rec adaptivePlating = {
     ClassId = artificer.Id
-    Id = % nameof ``Adaptive Plating``
+    Id = % nameof adaptivePlating
+    Name = "Adaptive Plating"
     Grants = [ Complex("Adaptive Plating", "When you are damaged, gain Temporary HP equal to your proficiency bonus*2.") ]
 }
 
-let rec ``Arcane Calibration Matrix`` = {
+let rec arcaneCalibrationMatrix = {
     ClassId = artificer.Id
-    Id = % nameof ``Arcane Calibration Matrix``
+    Id = % nameof arcaneCalibrationMatrix
+    Name = "Arcane Calibration Matrix"
     Grants = [ Simple "Your firearms are incapable of misfiring." ]
 }
 
-let rec ``Automated Arcane Suppression`` = {
+let rec automatedArcaneSuppression = {
     ClassId = artificer.Id
-    Id = % nameof ``Automated Arcane Suppression``
-    Grants = [ Power(Reaction, AtWill, "When an enemy casts a Spell, you may expend one round of Ammunition in order to make a Ranged Weapon Attack against them with your firearm.") ]
+    Id = % nameof automatedArcaneSuppression
+    Name = "Automated Arcane Suppression"
+    Grants = [ Power(Reaction, AtWill, "Automated Arcane Suppression", "When an enemy casts a Spell, you may expend one round of Ammunition in order to make a Ranged Weapon Attack against them with your firearm.") ]
 }
 
-let rec ``Castle Defense`` = {
+let rec castleDefense = {
     ClassId = artificer.Id
-    Id = % nameof ``Castle Defense``
-    Grants = [ Power(BonusAction, AtWill, "Deploy a Turret in battle. (1d8 ranged damage at level 1/2d8 at level 5/ 3d8 at level 9). You can only have two turrets active at all times.") ]
+    Id = % nameof castleDefense
+    Name = "Castle Defense"
+    Grants = [ Power(BonusAction, AtWill, "Castle Defense", "Deploy a Turret in battle. (1d8 ranged damage at level 1/2d8 at level 5/ 3d8 at level 9). You can only have two turrets active at all times.") ]
 }
 
-let rec ``Dead-Zone Calibration`` = {
+let rec deadZoneCalibration = {
     ClassId = artificer.Id
-    Id = % nameof ``Dead-Zone Calibration``
+    Id = % nameof deadZoneCalibration
+    Name = "Dead-Zone Calibration"
     Grants = [ Buff <| StatModifiers.Create(criticalRange = 1) ]
 }
 
-let rec ``Elemental Payload`` = {
+let rec elementalPayload = {
     ClassId = artificer.Id
-    Id = % nameof ``Elemental Payload``
-    Grants = [ Power(BonusAction, AtWill, "When you deal damage with a weapon, you deal 1d4 additional damage of an element of your choice. You can change the element as a Bonus Action.") ]
+    Id = % nameof elementalPayload
+    Name = "Elemental Payload"
+    Grants = [ Power(BonusAction, AtWill, "Elemental Payload", "When you deal damage with a weapon, you deal 1d4 additional damage of an element of your choice. You can change the element as a Bonus Action.") ]
 }
 
-let rec ``Emergency Power Cell`` = {
+let rec emergencyPowerCell = {
     ClassId = artificer.Id
-    Id = % nameof ``Emergency Power Cell``
+    Id = % nameof emergencyPowerCell
+    Name = "Emergency Power Cell"
     Grants = [ Complex("Emergency Power Cell", "Once per turn, missing an Attack Roll will refund your Action.") ]
 }
 
-let rec ``Failsafe Injection`` = {
+let rec failsafeInjection = {
     ClassId = artificer.Id
-    Id = % nameof ``Failsafe Injection``
-    Grants = [ Power(FreeAction, OncePerCombat, "Once per combat, when you start your turn below 75% HP, you consume a synthetic potion.") ]
+    Id = % nameof failsafeInjection
+    Name = "Failsafe Injection"
+    Grants = [ Power(FreeAction, OncePerCombat, "Failsafe Injection", "Once per combat, when you start your turn below 75% HP, you consume a synthetic potion.") ]
 }
 
-let rec ``Incendiary Rounds`` = {
+let rec incendiaryRounds = {
     ClassId = artificer.Id
-    Id = % nameof ``Incendiary Rounds``
+    Id = % nameof incendiaryRounds
+    Name = "Incendiary Rounds"
     Grants = [ Complex("Incendiary Rounds", "Dealing damage with your firearm causes your target to burn.") ]
 }
 
-let rec ``Kinetic Feedback Loop`` = {
+let rec kineticFeedbackLoop = {
     ClassId = artificer.Id
-    Id = % nameof ``Kinetic Feedback Loop``
-    Grants = [ Power(Reaction, AtWill, "When an ally is damaged, you may expend 1 ammunition in order to make a Ranged Weapon Attack with one of your firearms against their aggressor.") ]
+    Id = % nameof kineticFeedbackLoop
+    Name = "Kinetic Feedback Loop"
+    Grants = [ Power(Reaction, AtWill, "Kinetic Feedback Loop", "When an ally is damaged, you may expend 1 ammunition in order to make a Ranged Weapon Attack with one of your firearms against their aggressor.") ]
 }
 
-let rec ``Like Clockwork`` = {
+let rec likeClockwork = {
     ClassId = artificer.Id
-    Id = % nameof ``Like Clockwork``
+    Id = % nameof likeClockwork
+    Name = "Like Clockwork"
     Grants = [ Buff <| StatModifiers.Create(initiative = 4) ]
 }
 
-let rec ``Modular Augmentation`` = {
+let rec modularAugmentation = {
     ClassId = artificer.Id
-    Id = % nameof ``Modular Augmentation``
-    Grants = [ Power(BonusAction, AtWill, "Grant an ally a +2 bonus to their AC, Attack Rolls, Damage Rolls, or their DC. Each effect may only be applied to one ally at a time.") ]
+    Id = % nameof modularAugmentation
+    Name = "Modular Augmentation"
+    Grants = [ Power(BonusAction, AtWill, "Modular Augmentation", "Grant an ally a +2 bonus to their AC, Attack Rolls, Damage Rolls, or their DC. Each effect may only be applied to one ally at a time.") ]
 }
 
-let rec ``Nanite Dispersion Field`` = {
+let rec naniteDispersionField = {
     ClassId = artificer.Id
-    Id = % nameof ``Nanite Dispersion Field``
+    Id = % nameof naniteDispersionField
+    Name = "Nanite Dispersion Field"
     Grants = [ Complex("Nanite Dispersion Field", "Dealing damage with your firearm causes your target to be thrown backward 9m.") ]
 }
 
-let rec Overclocked = {
+let rec overclocked = {
     ClassId = artificer.Id
-    Id = % nameof Overclocked
+    Id = % nameof overclocked
+    Name = "Overclocked"
     Grants = [ Complex("Overclocked", "When dealing damage, the minimum value you can roll is 4.") ]
 }
 
-let rec ``Precision Rifling`` = {
+let rec precisionRifling = {
     ClassId = artificer.Id
-    Id = % nameof ``Precision Rifling``
+    Id = % nameof precisionRifling
+    Name = "Precision Rifling"
     Grants = [ Complex("Precision Rifling", "Once per turn, upon landing a Killing Blow or a Critical Hit with a Ranged Weapon Attack, you restore one round of Ammunition.") ]
 }
 
-let rec ``Recoil Compensation`` = {
+let rec recoilCompensation = {
     ClassId = artificer.Id
-    Id = % nameof ``Recoil Compensation``
-    Grants = [ Power(FreeAction, OncePerTurn, "Once per turn, landing a Critical Hit with one of your firearms allows you to expend one round of your Ammunition in order to fire at your target again.") ]
+    Id = % nameof recoilCompensation
+    Name = "Recoil Compensation"
+    Grants = [ Power(FreeAction, OncePerTurn, "Recoil Compensation", "Once per turn, landing a Critical Hit with one of your firearms allows you to expend one round of your Ammunition in order to fire at your target again.") ]
 }
 
-let rec Safeguard = {
+let rec safeguard = {
     ClassId = artificer.Id
-    Id = % nameof Safeguard
+    Id = % nameof safeguard
+    Name = "Safeguard"
     Grants = [ Complex("Safeguard", "Ending your turn grants you Blade Ward until the start of your next turn.") ]
 }
 
-let rec ``Speed Loader`` = {
+let rec speedLoader = {
     ClassId = artificer.Id
-    Id = % nameof ``Speed Loader``
+    Id = % nameof speedLoader
+    Name = "Speed Loader"
     Grants = [ Complex("Speed Loader", "After landing a Killing Blow, you may Reload your firearms as a Free Action.") ]
 }
 
-let rec ``Synthetic Action Economy`` = {
+let rec syntheticActionEconomy = {
     ClassId = artificer.Id
-    Id = % nameof ``Synthetic Action Economy``
-    Grants = [ Power(BonusAction, OncePerCombat, "Once per combat, you may expend your Bonus Action in order to regain a single Action.") ]
+    Id = % nameof syntheticActionEconomy
+    Name = "Synthetic Action Economy"
+    Grants = [ Power(BonusAction, OncePerCombat, "Synthetic Action Economy", "Once per combat, you may expend your Bonus Action in order to regain a single Action.") ]
 }
 
-let rec ``Vital Aim`` = {
+let rec vitalAim = {
     ClassId = artificer.Id
-    Id = % nameof ``Vital Aim``
+    Id = % nameof vitalAim
+    Name = "Vital Aim"
     Grants = [ Complex("Vital Aim", "Landing a Critical Hit with a Ranged Weapon Attack inflicts Gaping Wounds on your target.") ]
 }
 
 // BARD
-let rec ``Aggressive Rhythm`` = {
+let rec aggressiveRhythm = {
     ClassId = bard.Id
-    Id = % nameof ``Aggressive Rhythm``
+    Id = % nameof aggressiveRhythm
+    Name = "Aggressive Rhythm"
     Grants = [ Complex("Aggressive Rhythm", "While Performing in combat, provide affected allies a +2 bonus to damage rolls. While projecting your Performative Verse or Performative Chorus, this bonus increases to +4 and +6, respectively.") ]
 }
 
-let rec ``Discerning Insult`` = {
+let rec discerningInsult = {
     ClassId = bard.Id
-    Id = % nameof ``Discerning Insult``
-    Grants = [ Power(FreeAction, AtWill, "Reduce the confidence of your target, applying a -1d4 penalty to Attack Rolls, Ability Checks, and Saving Throws.") ]
+    Id = % nameof discerningInsult
+    Name = "Discerning Insult"
+    Grants = [ Power(FreeAction, AtWill, "Discerning Insult", "Reduce the confidence of your target, applying a -1d4 penalty to Attack Rolls, Ability Checks, and Saving Throws.") ]
 }
 
-let rec ``Distracting Dissonance`` = {
+let rec distractingDissonance = {
     ClassId = bard.Id
-    Id = % nameof ``Distracting Dissonance``
+    Id = % nameof distractingDissonance
+    Name = "Distracting Dissonance"
     Grants = [ Complex("Distracting Dissonance", "While Performing in combat, affected enemies have their Armour Class reduced by 2. While projecting your Performative Verse or Performative Chorus, this penalty increases to 4 and 6, respectively.") ]
 }
 
-let rec ``Dueling Ditties`` = {
+let rec duelingDitties = {
     ClassId = bard.Id
-    Id = % nameof ``Dueling Ditties``
+    Id = % nameof duelingDitties
+    Name = "Dueling Ditties"
     Grants = [ Complex("Dueling Ditties", "Passively improve your own Attack Rolls by up to an amount equal to that of your Bardic Inspiration die.") ]
 }
 
-let rec ``Echoes Of Fortitude`` = {
+let rec echoesOfFortitude = {
     ClassId = bard.Id
-    Id = % nameof ``Echoes Of Fortitude``
+    Id = % nameof echoesOfFortitude
+    Name = "Echoes Of Fortitude"
     Grants = [ Complex("Echoes Of Fortitude", "Upon granting another creature Bardic Inspiration, both you and your target recover +1d6 Hit Points multiplied by your Proficiency Bonus.") ]
 }
 
-let rec ``Encouraging Momentum`` = {
+let rec encouragingMomentum = {
     ClassId = bard.Id
-    Id = % nameof ``Encouraging Momentum``
+    Id = % nameof encouragingMomentum
+    Name = "Encouraging Momentum"
     Grants = [ Complex("Encouraging Momentum", "Upon granting another creature Bardic Inspiration, both you and your target(s) Dash and Disengage for one turn.") ]
 }
 
-let rec ``Engaging Composition`` = {
+let rec engagingComposition = {
     ClassId = bard.Id
-    Id = % nameof ``Engaging Composition``
+    Id = % nameof engagingComposition
+    Name = "Engaging Composition"
     Grants = [ Complex("Engaging Composition", "Targets of your Bardic Inspiration may make one additional weapon attack using their Reaction. In addition, you are capable of doing so at the cost of one charge of your Bardic Inspiration.") ]
 }
 
-let rec ``Guided Inspiration`` = {
+let rec guidedInspiration = {
     ClassId = bard.Id
-    Id = % nameof ``Guided Inspiration``
+    Id = % nameof guidedInspiration
+    Name = "Guided Inspiration"
     Grants = [ Complex("Guided Inspiration", "Dealing damage to an enemy has a 25% chance to apply your Bardic Inspiration to allies within 9m/30ft of you.") ]
 }
 
-let rec ``Harmonious Aura`` = {
+let rec harmoniousAura = {
     ClassId = bard.Id
-    Id = % nameof ``Harmonious Aura``
+    Id = % nameof harmoniousAura
+    Name = "Harmonious Aura"
     Grants = [ Complex("Harmonious Aura", "While Performing in combat, provide affected allies a +2 bonus to Saving Throws. While projecting your Performative Verse or Performative Chorus, this bonus increases to +4 and +6, respectively.") ]
 }
 
-let rec ``Infuriating Amplification`` = {
+let rec infuriatingAmplification = {
     ClassId = bard.Id
-    Id = % nameof ``Infuriating Amplification``
+    Id = % nameof infuriatingAmplification
+    Name = "Infuriating Amplification"
     Grants = [ Complex("Infuriating Amplification", "While Performing in combat, affected enemies have their Saving Throws reduced by 2. While projecting your Performative Verse or Performative Chorus, this penalty increases to 4 and 6, respectively.") ]
 }
 
-let rec ``Inspirational Resonance`` = {
+let rec inspirationalResonance = {
     ClassId = bard.Id
-    Id = % nameof ``Inspirational Resonance``
+    Id = % nameof inspirationalResonance
+    Name = "Inspirational Resonance"
     Grants = [ Complex("Inspirational Resonance", "Targets of your Bardic Inspiration emit a shockwave forcing enemies back by 9m/30ft.") ]
 }
 
-let rec ``Inspiring Crescendo`` = {
+let rec inspiringCrescendo = {
     ClassId = bard.Id
-    Id = % nameof ``Inspiring Crescendo``
+    Id = % nameof inspiringCrescendo
+    Name = "Inspiring Crescendo"
     Grants = [ Complex("Inspiring Crescendo", "Improve your own Saving Throws by up to an amount equal to that of your Bardic Inspiration die.") ]
 }
 
-let rec ``Insufferable Curse`` = {
+let rec insufferableCurse = {
     ClassId = bard.Id
-    Id = % nameof ``Insufferable Curse``
+    Id = % nameof insufferableCurse
+    Name = "Insufferable Curse"
     Grants = [ Complex("Insufferable Curse", "You dominate the first target you damage per combat encounter with no save.") ]
 }
 
-let rec ``Melodic Precision`` = {
+let rec melodicPrecision = {
     ClassId = bard.Id
-    Id = % nameof ``Melodic Precision``
+    Id = % nameof melodicPrecision
+    Name = "Melodic Precision"
     Grants = [ Complex("Melodic Precision", "Once per turn, upon landing a Critical Hit, restore one charge of your Bardic Inspiration.") ]
 }
 
-let rec ``Mobile Maestro`` = {
+let rec mobileMaestro = {
     ClassId = bard.Id
-    Id = % nameof ``Mobile Maestro``
+    Id = % nameof mobileMaestro
+    Name = "Mobile Maestro"
     Grants = [ Complex("Mobile Maestro", $"{TOGGLEABLE}: Swap places with targets when they gain the effects of your Bardic Inspiration.") ]
 }
 
-let rec Mocksmith = {
+let rec mocksmith = {
     ClassId = bard.Id
-    Id = % nameof Mocksmith
+    Id = % nameof mocksmith
+    Name = "Mocksmith"
     Grants = [ Complex("Mocksmith", "When damaging another creature, you may potentially afflict them with Vicious Mockery.") ]
 }
 
-let rec ``Silver Tongued Savant`` = {
+let rec silverTonguedSavant = {
     ClassId = bard.Id
-    Id = % nameof ``Silver Tongued Savant``
+    Id = % nameof silverTonguedSavant
+    Name = "Silver Tongued Savant"
     Grants = [ Complex("Silver Tongued Savant", "Gain Advantage on all Charisma based Ability Checks.") ]
 }
 
-let rec ``Soothing Words`` = {
+let rec soothingWords = {
     ClassId = bard.Id
-    Id = % nameof ``Soothing Words``
+    Id = % nameof soothingWords
+    Name = "Soothing Words"
     Grants = [ Complex("Soothing Words", "Targets under the effects of your Bardic Inspiration regain the maximum amount of Hit Points possible when healed while they are below half of their total Hit Points.") ]
 }
 
-let rec ``Unprecedented Encore`` = {
+let rec unprecedentedEncore = {
     ClassId = bard.Id
-    Id = % nameof ``Unprecedented Encore``
+    Id = % nameof unprecedentedEncore
+    Name = "Unprecedented Encore"
     Grants = [ Complex("Unprecedented Encore", "Targets of your Bardic Inspiration will potentially experience a positive surge of Wild Magic.") ]
 }
 
-let rec ``Vigorously Tuned`` = {
+let rec vigorouslyTuned = {
     ClassId = bard.Id
-    Id = % nameof ``Vigorously Tuned``
+    Id = % nameof vigorouslyTuned
+    Name = "Vigorously Tuned"
     Grants = [ Complex("Vigorously Tuned", "On your first turn of any combat encounter, gain Temporary Hit Points equal to your character level multiplied by four.") ]
 }
 
 // CLERIC
-let rec Aegis = {
+let rec aegis = {
     ClassId = cleric.Id
-    Id = % nameof Aegis
+    Id = % nameof aegis
+    Name = "Aegis"
     Grants = [ Simple "Gain Advantage on all Constitution based Saving Throws." ]
 }
 
-let rec ``Blessed Resolve`` = {
+let rec blessedResolve = {
     ClassId = cleric.Id
-    Id = % nameof ``Blessed Resolve``
+    Id = % nameof blessedResolve
+    Name = "Blessed Resolve"
     Grants = [ Simple "Upon landing a killing blow or Critical Hit, on a non-allied creature, emit an aura which Blesses all allies within 9m/30ft of you for three turns." ]
 }
 
-let rec ``Blood for Blood`` = {
+let rec bloodForBlood = {
     ClassId = cleric.Id
-    Id = % nameof ``Blood for Blood``
+    Id = % nameof bloodForBlood
+    Name = "Blood for Blood"
     Grants = [ Simple "The first time you heal a creature each turn, the number you need in order to roll a Critical Hit is reduced by 1. This effect will reset upon landing a Critical Hit." ]
 }
 
-let rec ``Consecrative Sacrifice`` = {
+let rec consecrativeSacrifice = {
     ClassId = cleric.Id
-    Id = % nameof ``Consecrative Sacrifice``
+    Id = % nameof consecrativeSacrifice
+    Name = "Consecrative Sacrifice"
     Grants = [ Simple "Upon landing a killing blow or Critical Hit on a non-allied creature, emit a healing aura across 9m/30ft which restores +1d6 Hit Points multiplied by your Proficiency Bonus to yourself and all allies. This effect can trigger once per turn." ]
 }
 
-let rec ``Divine Commune`` = {
+let rec divineCommune = {
     ClassId = cleric.Id
-    Id = % nameof ``Divine Commune``
+    Id = % nameof divineCommune
+    Name = "Divine Commune"
     Grants = [ Simple "Increase your odds of experiencing instances of Divine Intervention from 33% to 50%." ]
 }
 
-let rec ``Divine Restoration`` = {
+let rec divineRestoration = {
     ClassId = cleric.Id
-    Id = % nameof ``Divine Restoration``
+    Id = % nameof divineRestoration
+    Name = "Divine Restoration"
     Grants = [ Simple "At the end of any combat encounter, emit a healing aura across 45m/150ft which restores +1d6 Hit Points multiplied by your proficiency bonus to yourself and all allies." ]
 }
 
-let rec ``Ethereal Intuition`` = {
+let rec etherealIntuition = {
     ClassId = cleric.Id
-    Id = % nameof ``Ethereal Intuition``
+    Id = % nameof etherealIntuition
+    Name = "Ethereal Intuition"
     Grants = [ Simple "Permanently gain the effects of Guidance and Resistance." ]
 }
 
-let rec ``Fell Repentance`` = {
+let rec fellRepentance = {
     ClassId = cleric.Id
-    Id = % nameof ``Fell Repentance``
-    Grants = [ Power(Reaction, AtWill, "When an enemy makes an Attack Roll against an ally within 9m/30ft, you may use your Reaction in order to retaliate with Sacred Flame, Bone Chill or Spark Surge.") ]
+    Id = % nameof fellRepentance
+    Name = "Fell Repentance"
+    Grants = [ Power(Reaction, AtWill, "Fell Repentance", "When an enemy makes an Attack Roll against an ally within 9m/30ft, you may use your Reaction in order to retaliate with Sacred Flame, Bone Chill or Spark Surge.") ]
 }
 
-let rec ``Holy Fortitude`` = {
+let rec holyFortitude = {
     ClassId = cleric.Id
-    Id = % nameof ``Holy Fortitude``
+    Id = % nameof holyFortitude
+    Name = "Holy Fortitude"
     Grants = [ Simple "While below half your total Hit Points, you regain the maximum amount of Hit Points possible when healed." ]
 }
 
-let rec ``Guided Strikes`` = {
+let rec guidedStrikes = {
     ClassId = cleric.Id
-    Id = % nameof ``Guided Strikes``
+    Id = % nameof guidedStrikes
+    Name = "Guided Strikes"
     Grants = [ Simple "Upon healing a creature with a Spell, you gain Advantage on your next Attack Roll." ]
 }
 
-let rec ``Immaculate Retribution`` = {
+let rec immaculateRetribution = {
     ClassId = cleric.Id
-    Id = % nameof ``Immaculate Retribution``
+    Id = % nameof immaculateRetribution
+    Name = "Immaculate Retribution"
     Grants = [ Simple "When an enemy damages you with a melee based Attack roll, deal Radiant/Lightning/Necrotic damage to them equal to your Wisdom Modifier multiplied by 2 (the damage type depends on your subclass)." ]
 }
 
-let rec ``Immaculate Ward`` = {
+let rec immaculateWard = {
     ClassId = cleric.Id
-    Id = % nameof ``Immaculate Ward``
-    Grants = [ Power(Reaction, AtWill, "When an enemy makes an Attack Roll against you, you may use your Reaction and one of your Channel Divinity charges in order to receive Immaculate Blade Ward for one turn (immunity to the next instance of damage).") ]
+    Id = % nameof immaculateWard
+    Name = "Immaculate Ward"
+    Grants = [ Power(Reaction, AtWill, "Immaculate Ward", "When an enemy makes an Attack Roll against you, you may use your Reaction and one of your Channel Divinity charges in order to receive Immaculate Blade Ward for one turn (immunity to the next instance of damage).") ]
 }
 
-let rec Martyrdom = {
+let rec martyrdom = {
     ClassId = cleric.Id
-    Id = % nameof Martyrdom
+    Id = % nameof martyrdom
+    Name = "Martyrdom"
     Grants = [ Simple "Upon being Downed or killed, erupt as a raging inferno, uncontrollably scorching everything around you." ]
 }
 
-let rec ``Paradisiacal Gift`` = {
+let rec paradisiacalGift = {
     ClassId = cleric.Id
-    Id = % nameof ``Paradisiacal Gift``
+    Id = % nameof paradisiacalGift
+    Name = "Paradisiacal Gift"
     Grants = [ Simple "Once per turn, upon casting a Miracle, immediately recover one of your Channel Divinity charges." ]
 }
 
-let rec ``Sacral Touch`` = {
+let rec sacralTouch = {
     ClassId = cleric.Id
-    Id = % nameof ``Sacral Touch``
+    Id = % nameof sacralTouch
+    Name = "Sacral Touch"
     Grants = [ Simple "Upon healing a creature, potentially experience an instance of Divine Intervention. This may only occur once per turn." ]
 }
 
-let rec ``Sanctified Presence`` = {
+let rec sanctifiedPresence = {
     ClassId = cleric.Id
-    Id = % nameof ``Sanctified Presence``
+    Id = % nameof sanctifiedPresence
+    Name = "Sanctified Presence"
     Grants = [ Simple "At the beginning of each of your turns in combat, regain Hit Points equal to your Proficiency Bonus multiplied by two." ]
 }
 
-let rec ``Sanctifying Aura`` = {
+let rec sanctifyingAura = {
     ClassId = cleric.Id
-    Id = % nameof ``Sanctifying Aura``
+    Id = % nameof sanctifyingAura
+    Name = "Sanctifying Aura"
     Grants = [ Simple "Emit an Aura across 9m/30ft which provides Sanctuary to allies who are Downed." ]
 }
 
-let rec Stalwart = {
+let rec stalwart = {
     ClassId = cleric.Id
-    Id = % nameof Stalwart
+    Id = % nameof stalwart
+    Name = "Stalwart"
     Grants = [ Simple "Permanently gain the effects of Dispel Evil and Good." ]
 }
 
-let rec ``Stout Believer`` = {
+let rec stoutBeliever = {
     ClassId = cleric.Id
-    Id = % nameof ``Stout Believer``
+    Id = % nameof stoutBeliever
+    Name = "Stout Believer"
     Grants = [
         Simple "Gain status immunity to all forms of fear."
         Simple "Upon healing a creature with a Spell, they receive Death Ward for three turns."
     ]
 }
 
-let rec ``Venerational Strikes`` = {
+let rec venerationalStrikes = {
     ClassId = cleric.Id
-    Id = % nameof ``Venerational Strikes``
+    Id = % nameof venerationalStrikes
+    Name = "Venerational Strikes"
     Grants = [ Simple "Upon casting a Miracle, receive Veneration for three turns (weapons deal additional Radiant/lightning/necrotic damage equal to your Wisdom modifier)." ]
 }
 
 // DRUID
-let rec ``Armour of Thorns`` = {
+let rec armourOfThorns = {
     ClassId = druid.Id
-    Id = % nameof ``Armour of Thorns``
+    Id = % nameof armourOfThorns
+    Name = "Armour of Thorns"
     Grants = [ Simple "When a creature damages you with a melee based Attack Roll, deal Piercing damage to them equal to your Wisdom Modifier." ]
 }
 
-let rec ``Combat’s Harvest`` = {
+let rec combatsHarvest = {
     ClassId = druid.Id
-    Id = % nameof ``Combat’s Harvest``
+    Id = % nameof combatsHarvest
+    Name = "Combat’s Harvest"
     Grants = [ Simple "On your first turn of any combat encounter, cast Goodberry. Your goodberries from all sources restore significantly more heal points." ]
 }
 
-let rec ``Earthen Sentinel`` = {
+let rec earthenSentinel = {
     ClassId = druid.Id
-    Id = % nameof ``Earthen Sentinel``
+    Id = % nameof earthenSentinel
+    Name = "Earthen Sentinel"
     Grants = [ Simple "When you roll a Critical hit with a Spell, Petrify your target for one turn." ]
 }
 
-let rec ``Feral Precision`` = {
+let rec feralPrecision = {
     ClassId = druid.Id
-    Id = % nameof ``Feral Precision``
+    Id = % nameof feralPrecision
+    Name = "Feral Precision"
     Grants = [ Simple "Gain a +2 bonus to all Attack Rolls. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active." ]
 }
 
-let rec ``Feral Resilience`` = {
+let rec feralResilience = {
     ClassId = druid.Id
-    Id = % nameof ``Feral Resilience``
+    Id = % nameof feralResilience
+    Name = "Feral Resilience"
     Grants = [ Simple "Upon assuming the form of a Wild Shape, gain Temporary Hit Points equal to your Druid level multiplied by four." ]
 }
 
-let rec ``Ferocious Stand`` = {
+let rec ferociousStand = {
     ClassId = druid.Id
-    Id = % nameof ``Ferocious Stand``
+    Id = % nameof ferociousStand
+    Name = "Ferocious Stand"
     Grants = [ Simple "Gain a +1 bonus to your Armour Class. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active." ]
 }
 
-let rec ``Instinctive Defense`` = {
+let rec instinctiveDefense = {
     ClassId = druid.Id
-    Id = % nameof ``Instinctive Defense``
+    Id = % nameof instinctiveDefense
+    Name = "Instinctive Defense"
     Grants = [ Simple "While assuming a form of a Wild Shape, you gain Resistance to all Physical damage." ]
 }
 
-let rec ``Killer Instinct`` = {
+let rec killerInstinct = {
     ClassId = druid.Id
-    Id = % nameof ``Killer Instinct``
+    Id = % nameof killerInstinct
+    Name = "Killer Instinct"
     Grants = [ Simple "Gain advantage on all damage rolls while assuming the form of a Wild Shape." ]
 }
 
-let rec ``Mantra of Restoration`` = {
+let rec mantraOfRestoration = {
     ClassId = druid.Id
-    Id = % nameof ``Mantra of Restoration``
+    Id = % nameof mantraOfRestoration
+    Name = "Mantra of Restoration"
     Grants = [
         Power(FreeAction, AtWill, "Solar Mend", "Expend Wild Shape charges to restore Spell Slots while not Wild Shaped.")
         Simple "Lunar Mend: Heal yourself while in the form of a Wild Shape."
     ]
 }
 
-let rec ``Natural Bounty`` = {
+let rec naturalBounty = {
     ClassId = druid.Id
-    Id = % nameof ``Natural Bounty``
+    Id = % nameof naturalBounty
+    Name = "Natural Bounty"
     Grants = [ Simple "Once per turn, upon landing a killing blow or rolling a Critical Hit on an enemy, restore one of your Wild Shape charges." ]
 }
 
-let rec ``Natural Resurgence`` = {
+let rec naturalResurgence = {
     ClassId = druid.Id
-    Id = % nameof ``Natural Resurgence``
+    Id = % nameof naturalResurgence
+    Name = "Natural Resurgence"
     Grants = [ Simple "While in combat, regenerate Hit Points each turn equal to your Wisdom Modifier. This passive has no effect while Downed." ]
 }
 
-let rec ``Nature’s Mercy`` = {
+let rec naturesMercy = {
     ClassId = druid.Id
-    Id = % nameof ``Nature’s Mercy``
+    Id = % nameof naturesMercy
+    Name = "Nature’s Mercy"
     Grants = [ Simple "Gain Resistance to Cold, Lightning and Poison damage." ]
 }
 
-let rec ``Nature’s Wrath`` = {
+let rec naturesWrath = {
     ClassId = druid.Id
-    Id = % nameof ``Nature’s Wrath``
+    Id = % nameof naturesWrath
+    Name = "Nature’s Wrath"
     Grants = [ Simple "Use your Wild Shape charges to deal an additional +1d12 Cold, Lightning, or Poison damage on any successful Attack Roll made with a weapon." ]
 }
 
-let rec ``Pack Leader`` = {
+let rec packLeader = {
     ClassId = druid.Id
-    Id = % nameof ``Pack Leader``
+    Id = % nameof packLeader
+    Name = "Pack Leader"
     Grants = [ Simple "Damaging other creatures potentially Goads them into attacking you." ]
 }
 
-let rec ``Primal Bloodletter`` = {
+let rec primalBloodletter = {
     ClassId = druid.Id
-    Id = % nameof ``Primal Bloodletter``
+    Id = % nameof primalBloodletter
+    Name = "Primal Bloodletter"
     Grants = [ Simple "While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to inflict Gaping Wounds on your target when you make a successful Attack Roll." ]
 }
 
-let rec ``Primal Surge`` = {
+let rec primalSurge = {
     ClassId = druid.Id
-    Id = % nameof ``Primal Surge``
+    Id = % nameof primalSurge
+    Name = "Primal Surge"
     Grants = [ Simple "Deal additional damage while Wild Shaped equal to your Wisdom Modifier." ]
 }
 
-let rec ``Primal Takedown`` = {
+let rec primalTakedown = {
     ClassId = druid.Id
-    Id = % nameof ``Primal Takedown``
+    Id = % nameof primalTakedown
+    Name = "Primal Takedown"
     Grants = [ Simple "While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to knock your target Prone when you make a successful Attack Roll." ]
 }
 
-let rec ``Shapechanger’s Versatility`` = {
+let rec shapechangersVersatility = {
     ClassId = druid.Id
-    Id = % nameof ``Shapechanger’s Versatility``
-    Grants = [ Power(FreeAction, AtWill, "Wild Shape", "Outside of combat, you may Wild Shape as a Free Action without consuming charges.") ]
+    Id = % nameof shapechangersVersatility
+    Name = "Shapechanger’s Versatility"
+    Grants = [ Power(FreeAction, AtWill, "Shapechanger’s Versatility", "Outside of combat, you may Wild Shape as a Free Action without consuming charges.") ]
 }
 
-let rec ``Territorial Dominance`` = {
+let rec territorialDominance = {
     ClassId = druid.Id
-    Id = % nameof ``Territorial Dominance``
+    Id = % nameof territorialDominance
+    Name = "Territorial Dominance"
     Grants = [ Simple "Gain Advantage when making an Attack Roll against a target in Difficult Terrain." ]
 }
 
-let rec ``Wild Stride`` = {
+let rec wildStride = {
     ClassId = druid.Id
-    Id = % nameof ``Wild Stride``
+    Id = % nameof wildStride
+    Name = "Wild Stride"
     Grants = [ Simple "While in combat, regenerate one Wild Shape charge every three turns." ]
 }
 
 // MONK
-let rec Counterflow = {
+let rec counterflow = {
     ClassId = monk.Id
-    Id = % nameof Counterflow
-    Grants = [ Power(Reaction, AtWill, "When an enemy fails to damage you with a Melee Weapon Attack, use a Ki Point in order to retaliate with Flurry of Blows.") ]
+    Id = % nameof counterflow
+    Name = "Counterflow"
+    Grants = [ Power(Reaction, AtWill, "Counterflow", "When an enemy fails to damage you with a Melee Weapon Attack, use a Ki Point in order to retaliate with Flurry of Blows.") ]
 }
 
-let rec ``Critical Flow`` = {
+let rec criticalFlow = {
     ClassId = monk.Id
-    Id = % nameof ``Critical Flow``
+    Id = % nameof criticalFlow
+    Name = "Critical Flow"
     Grants = [ Complex("Critical Flow", "When you successfully roll a Critical Hit against an enemy, restore one of your Ki Points. This effect can trigger once per turn.") ]
 }
 
-let rec ``Dance Of Flowing Water`` = {
+let rec danceOfFlowingWater = {
     ClassId = monk.Id
-    Id = % nameof ``Dance Of Flowing Water``
+    Id = % nameof danceOfFlowingWater
+    Name = "Dance Of Flowing Water"
     Grants = [ Complex("Dance Of Flowing Water", "On any successful Attack Roll, gain a +1 bonus to your Armour Class until you successfully avoid an attack. This effect can stack and will reset at the beginning of each of your turns.") ]
 }
 
-let rec ``Deflective Missiles`` = {
+let rec deflectiveMissiles = {
     ClassId = monk.Id
-    Id = % nameof ``Deflective Missiles``
-    Grants = [ Power(FreeAction, AtWill, "When a Ranged Weapon Attack is made against you, reduce the damage by -1d12 plus your Dexterity Modifier and your character level. If reduced to zero, you may use a Ki Point in order to throw the projectile back at your aggressor.") ]
+    Id = % nameof deflectiveMissiles
+    Name = "Deflective Missiles"
+    Grants = [ Power(FreeAction, AtWill, "Deflective Missiles", "When a Ranged Weapon Attack is made against you, reduce the damage by -1d12 plus your Dexterity Modifier and your character level. If reduced to zero, you may use a Ki Point in order to throw the projectile back at your aggressor.") ]
 }
 
-let rec ``Dexterous Ward`` = {
+let rec dexterousWard = {
     ClassId = monk.Id
-    Id = % nameof ``Dexterous Ward``
+    Id = % nameof dexterousWard
+    Name = "Dexterous Ward"
     Grants = [ Complex("Dexterous Ward", "When a spell or effect would deal half damage on a successful Dexterity based Saving Throw, it deals no damage if you succeed, and only half damage if you fail.") ]
 }
 
-let rec ``Fist Of Crushing Rock`` = {
+let rec fistOfCrushingRock = {
     ClassId = monk.Id
-    Id = % nameof ``Fist Of Crushing Rock``
+    Id = % nameof fistOfCrushingRock
+    Name = "Fist Of Crushing Rock"
     Grants = [ Complex("Fist Of Crushing Rock", "When a creature fails an Attack Roll against you, gain a +1 bonus to Attack Rolls during your next turn. This effect can stack and will reset at the end of each of your turns.") ]
 }
 
-let rec ``Focused Stream`` = {
+let rec focusedStream = {
     ClassId = monk.Id
-    Id = % nameof ``Focused Stream``
+    Id = % nameof focusedStream
+    Name = "Focused Stream"
     Grants = [ Complex("Focused Stream", "When you succeed in an Attack Roll, the number you need to roll a Critical Hit is reduced by 1. This effect can stack and will reset at the end of each of your turns.") ]
 }
 
-let rec ``Fortified Body And Mind`` = {
+let rec fortifiedBodyAndMind = {
     ClassId = monk.Id
-    Id = % nameof ``Fortified Body And Mind``
+    Id = % nameof fortifiedBodyAndMind
+    Name = "Fortified Body And Mind"
     Grants = [ Complex("Fortified Body And Mind", "Gain status immunity to being Charmed, Frightened, or restrained in any way.") ]
 }
 
-let rec ``Harmonious Barrage`` = {
+let rec harmoniousBarrage = {
     ClassId = monk.Id
-    Id = % nameof ``Harmonious Barrage``
+    Id = % nameof harmoniousBarrage
+    Name = "Harmonious Barrage"
     Grants = [ Complex("Harmonious Barrage", "Flurry of Blows deals additional damage equal to your Wisdom Modifier.") ]
 }
 
-let rec ``Harmonious Footwork`` = {
+let rec harmoniousFootwork = {
     ClassId = monk.Id
-    Id = % nameof ``Harmonious Footwork``
+    Id = % nameof harmoniousFootwork
+    Name = "Harmonious Footwork"
     Grants = [ Buff <| StatModifiers.Create(speed = 9.0) ]
 }
 
-let rec ``Martial Empowerment`` = {
+let rec martialEmpowerment = {
     ClassId = monk.Id
-    Id = % nameof ``Martial Empowerment``
+    Id = % nameof martialEmpowerment
+    Name = "Martial Empowerment"
     Grants = [ Complex("Martial Empowerment", "Upon a successful killing blow against an enemy, restore one of your Ki Points. This effect can trigger once per turn.") ]
 }
 
-let rec ``Mystic Strikes`` = {
+let rec mysticStrikes = {
     ClassId = monk.Id
-    Id = % nameof ``Mystic Strikes``
+    Id = % nameof mysticStrikes
+    Name = "Mystic Strikes"
     Grants = [ Complex("Mystic Strikes", "When dealing damage, you ignore Bludgeoning Resistance.") ]
 }
 
-let rec ``Opportune Reversal`` = {
+let rec opportuneReversal = {
     ClassId = monk.Id
-    Id = % nameof ``Opportune Reversal``
-    Grants = [ Power(Reaction, AtWill, "When an enemy fails to damage you with a Melee Weapon Attack, retaliate with a swift Unarmed Strike.") ]
+    Id = % nameof opportuneReversal
+    Name = "Opportune Reversal"
+    Grants = [ Power(Reaction, AtWill, "Opportune Reversal", "When an enemy fails to damage you with a Melee Weapon Attack, retaliate with a swift Unarmed Strike.") ]
 }
 
-let rec ``Resonance Of Body`` = {
+let rec resonanceOfBody = {
     ClassId = monk.Id
-    Id = % nameof ``Resonance Of Body``
+    Id = % nameof resonanceOfBody
+    Name = "Resonance Of Body"
     Grants = [ Complex("Resonance Of Body", "While in combat, regenerate one Ki Point every three turns.") ]
 }
 
-let rec ``Sagacious Resilience`` = {
+let rec sagaciousResilience = {
     ClassId = monk.Id
-    Id = % nameof ``Sagacious Resilience``
+    Id = % nameof sagaciousResilience
+    Name = "Sagacious Resilience"
     Grants = [ Complex("Sagacious Resilience", "Gain Advantage on all Wisdom based Saving Throws.") ]
 }
 
-let rec ``Soused Rempart`` = {
+let rec sousedRempart = {
     ClassId = monk.Id
-    Id = % nameof ``Soused Rempart``
+    Id = % nameof sousedRempart
+    Name = "Soused Rempart"
     Grants = [ Complex("Soused Rempart", "While Inebriated or Tipsy, gain a +2 bonus to your Armour Class.") ]
 }
 
-let rec ``Tempestuous Reprise`` = {
+let rec tempestuousReprise = {
     ClassId = monk.Id
-    Id = % nameof ``Tempestuous Reprise``
-    Grants = [ Power(Reaction, AtWill, "When an enemy makes an Attack Roll against an ally within 9m/30ft, retaliate with a swift burst of air pressure, dealing damage equal to an Unarmed Strike and potentially sending them flying 4.5m/15ft.") ]
+    Id = % nameof tempestuousReprise
+    Name = "Tempestuous Reprise"
+    Grants = [ Power(Reaction, AtWill, "Tempestuous Reprise", "When an enemy makes an Attack Roll against an ally within 9m/30ft, retaliate with a swift burst of air pressure, dealing damage equal to an Unarmed Strike and potentially sending them flying 4.5m/15ft.") ]
 }
 
-let rec ``Tranquil Fortitude`` = {
+let rec tranquilFortitude = {
     ClassId = monk.Id
-    Id = % nameof ``Tranquil Fortitude``
+    Id = % nameof tranquilFortitude
+    Name = "Tranquil Fortitude"
     Grants = [
         Simple "Gain an additional Reaction."
         Power(BonusAction, AtWill, "Patient Defense", "All Attack Rolls against you have disadvantage and you have Advantage on Dexterity Saving Throws for 1 turn.")
     ]
 }
 
-let rec Windwaker = {
+let rec windwaker = {
     ClassId = monk.Id
-    Id = % nameof Windwaker
+    Id = % nameof windwaker
+    Name = "Windwaker"
     Grants = [ Power(FreeAction, OncePerTurn, "Step of the Wind", "Dash and Disengage at the cost of a Ki point.") ]
 }
 
-let rec ``Zen Recovery`` = {
+let rec zenRecovery = {
     ClassId = monk.Id
-    Id = % nameof ``Zen Recovery``
-    Grants = [ Power(Reaction, AtWill, "Upon landing a killing blow, restore your Bonus Action. Only triggers if you don’t already have a Bonus Action.") ]
+    Id = % nameof zenRecovery
+    Name = "Zen Recovery"
+    Grants = [ Power(Reaction, AtWill, "Zen Recovery", "Upon landing a killing blow, restore your Bonus Action. Only triggers if you don’t already have a Bonus Action.") ]
 }
 
 // PALADIN
-let rec Atonement = {
+let rec atonement = {
     ClassId = paladin.Id
-    Id = % nameof Atonement
+    Id = % nameof atonement
+    Name = "Atonement"
     Grants = [ Complex("Atonement", "Upon expending a Channel Oath charge, 33% chance to recover a Crusader’s Smite charge, and vice versa.") ]
 }
 
-let rec ``Critical Oath`` = {
+let rec criticalOath = {
     ClassId = paladin.Id
-    Id = % nameof ``Critical Oath``
+    Id = % nameof criticalOath
+    Name = "Critical Oath"
     Grants = [ Complex("Critical Oath", "Once per turn, upon landing a Critical Hit, restore one Channel Oath charge.") ]
 }
 
-let rec ``Death Sentence`` = {
+let rec deathSentence = {
     ClassId = paladin.Id
-    Id = % nameof ``Death Sentence``
+    Id = % nameof deathSentence
+    Name = "Death Sentence"
     Grants = [ Complex("Death Sentence", "Each turn, you have a 33% chance to recover a Crusader's Smite charge.") ]
 }
 
-let rec ``Divine Health`` = {
+let rec divineHealth = {
     ClassId = paladin.Id
-    Id = % nameof ``Divine Health``
+    Id = % nameof divineHealth
+    Name = "Divine Health"
     Grants = [
         Simple "Gain Resistance to Poison and Necrotic damage."
         Complex("Divine Health", "Heal for 1d6 x proficiency bonus when you kill an enemy.")
     ]
 }
 
-let rec ``Divine Resurgence`` = {
+let rec divineResurgence = {
     ClassId = paladin.Id
-    Id = % nameof ``Divine Resurgence``
+    Id = % nameof divineResurgence
+    Name = "Divine Resurgence"
     Grants = [ Complex("Divine Resurgence", "While in combat, restore one Crusader Smite charge every three turns.") ]
 }
 
-let rec ``Divine Sense`` = {
+let rec divineSense = {
     ClassId = paladin.Id
-    Id = % nameof ``Divine Sense``
+    Id = % nameof divineSense
+    Name = "Divine Sense"
     Grants = [ Complex("Divine Sense", "Gain Advantage on Attack Rolls against Fey, Fiends, Undeads and Aberrations.") ]
 }
 
-let rec ``Divine Shielding`` = {
+let rec divineShielding = {
     ClassId = paladin.Id
-    Id = % nameof ``Divine Shielding``
+    Id = % nameof divineShielding
+    Name = "Divine Shielding"
     Grants = [ Complex("Divine Shielding", "When taking any damage, gain Resistance to that type of damage for 3 rounds. This effect stacks.") ]
 }
 
-let rec ``Holy Smite`` = {
+let rec holySmite = {
     ClassId = paladin.Id
-    Id = % nameof ``Holy Smite``
+    Id = % nameof holySmite
+    Name = "Holy Smite"
     Grants = [ Complex("Holy Smite", "When you deal damage with Smite, you heal every ally in a 3m/10ft radius for the value of your Smite’s damage.") ]
 }
 
-let rec ``Holy Bulwark`` = {
+let rec holyBulwark = {
     ClassId = paladin.Id
-    Id = % nameof ``Holy Bulwark``
+    Id = % nameof holyBulwark
+    Name = "Holy Bulwark"
     Grants = [ Complex("Holy Bulwark", "When you deal damage with Smite, gain Divine Favor and Shield of Faith for three turns.") ]
 }
 
-let rec ``Infallible Beacon`` = {
+let rec infallibleBeacon = {
     ClassId = paladin.Id
-    Id = % nameof ``Infallible Beacon``
+    Id = % nameof infallibleBeacon
+    Name = "Infallible Beacon"
     Grants = [ Complex("Infallible Beacon", "At the start of your turn, you Challenge all enemies within 9m.") ]
 }
 
-let rec ``Lay on Hands`` = {
+let rec layOnHands = {
     ClassId = paladin.Id
-    Id = % nameof ``Lay on Hands``
-    Grants = [ Power(FreeAction, AtWill, "Use a Crusader Smite charge and a Channel Oath charge to heal yourself or allies (1d12 HP/2 lvl), or to cure poisons and most conditions.") ]
+    Id = % nameof layOnHands
+    Name = "Lay on Hands"
+    Grants = [ Power(FreeAction, AtWill, "Lay on Hands", "Use a Crusader Smite charge and a Channel Oath charge to heal yourself or allies (1d12 HP/2 lvl), or to cure poisons and most conditions.") ]
 }
 
-let rec ``Oathbound Renewal`` = {
+let rec oathboundRenewal = {
     ClassId = paladin.Id
-    Id = % nameof ``Oathbound Renewal``
+    Id = % nameof oathboundRenewal
+    Name = "Oathbound Renewal"
     Grants = [ Complex("Oathbound Renewal", "While in combat, restore one Channel Oath charge every three turns.") ]
 }
 
-let rec ``Oath Channeling`` = {
+let rec oathChanneling = {
     ClassId = paladin.Id
-    Id = % nameof ``Oath Channeling``
-    Grants = [ Power(FreeAction, OncePerTurn, "Spend one Channel Oath charge to restore a Spell Slot.") ]
+    Id = % nameof oathChanneling
+    Name = "Oath Channeling"
+    Grants = [ Power(FreeAction, OncePerTurn, "Oath Channeling", "Spend one Channel Oath charge to restore a Spell Slot.") ]
 }
 
-let rec ``Principle of Belief`` = {
+let rec principleOfBelief = {
     ClassId = paladin.Id
-    Id = % nameof ``Principle of Belief``
+    Id = % nameof principleOfBelief
+    Name = "Principle of Belief"
     Grants = [ Complex("Principle of Belief", "When dealing damage to Fey, Fiends, Undeads or Aberrations, you deal an additional 1d12 damage.") ]
 }
 
-let rec ``Repel the Damned`` = {
+let rec repelTheDamned = {
     ClassId = paladin.Id
-    Id = % nameof ``Repel the Damned``
+    Id = % nameof repelTheDamned
+    Name = "Repel the Damned"
     Grants = [ Complex("Repel the Damned", "All enemies within 9m/30ft take damage each turn equal to your Charisma Modifier. Damage type changes based on subclass.") ]
 }
 
-let rec ``Resplendent Reverb`` = {
+let rec resplendentReverb = {
     ClassId = paladin.Id
-    Id = % nameof ``Resplendent Reverb``
+    Id = % nameof resplendentReverb
+    Name = "Resplendent Reverb"
     Grants = [ Complex("Resplendent Reverb", "Healing an entity with a Spell immediately heals yourself for a value equal to your Charisma Modifier x your proficiency bonus.") ]
 }
 
-let rec ``Smite Makes Right`` = {
+let rec smiteMakesRight = {
     ClassId = paladin.Id
-    Id = % nameof ``Smite Makes Right``
+    Id = % nameof smiteMakesRight
+    Name = "Smite Makes Right"
     Grants = [ Complex("Smite Makes Right", "Once per turn, when killing an enemy with a Smite, restore one Channel Oath charge.") ]
 }
 
-let rec ``Stalwart Eruption`` = {
+let rec stalwartEruption = {
     ClassId = paladin.Id
-    Id = % nameof ``Stalwart Eruption``
+    Id = % nameof stalwartEruption
+    Name = "Stalwart Eruption"
     Grants = [ Complex("Stalwart Eruption", "When killing an enemy with a Smite, gain Heroism for three turns.") ]
 }
 
-let rec ``Stalwart Resolve`` = {
+let rec stalwartResolve = {
     ClassId = paladin.Id
-    Id = % nameof ``Stalwart Resolve``
+    Id = % nameof stalwartResolve
+    Name = "Stalwart Resolve"
     Grants = [ Complex("Stalwart Resolve", "Decrease elemental damage you take by your Charisma modifier.") ]
 }
 
-let rec ``Visage of Sanctity`` = {
+let rec visageOfSanctity = {
     ClassId = paladin.Id
-    Id = % nameof ``Visage of Sanctity``
+    Id = % nameof visageOfSanctity
+    Name = "Visage of Sanctity"
     Grants = [ Complex("Visage of Sanctity", "Gain a bonus to your Ability Checks equal to your Charisma Modifier.") ]
 }
 
 // RANGER
-let rec ``Ambush Breaker`` = {
+let rec ambushBreaker = {
     ClassId = ranger.Id
-    Id = % nameof ``Ambush Breaker``
+    Id = % nameof ambushBreaker
+    Name = "Ambush Breaker"
     Grants = [
         Buff <| StatModifiers.Create(initiative = 2)
         Simple "You can no longer be Surprised."
     ]
 }
 
-let rec ``Ballistic Infusion`` = {
+let rec ballisticInfusion = {
     ClassId = ranger.Id
-    Id = % nameof ``Ballistic Infusion``
+    Id = % nameof ballisticInfusion
+    Name = "Ballistic Infusion"
     Grants = [ Complex("Ballistic Infusion", "You are capable of upcasting your arrows using your Spell Slots, causing them to deal an additional 1d12 Force damage per level of Spell Slot spent.") ]
 }
 
-let rec ``Beastbond’s Precision`` = {
+let rec beastbondsPrecision = {
     ClassId = ranger.Id
-    Id = % nameof ``Beastbond’s Precision``
+    Id = % nameof beastbondsPrecision
+    Name = "Beastbond’s Precision"
     Grants = [
         Buff <| StatModifiers.Create(attackRolls = 4)
         Complex("Beastbond’s Precision", "Your Rangers Companions receive a +4 bonus to their own Attack Rolls.")
     ]
 }
 
-let rec ``Bestial Recovery`` = {
+let rec bestialRecovery = {
     ClassId = ranger.Id
-    Id = % nameof ``Bestial Recovery``
+    Id = % nameof bestialRecovery
+    Name = "Bestial Recovery"
     Grants = [ Complex("Bestial Recovery", "Once per turn, upon landing a Killing Blow or a Critical Strike, you recover a Spell Slot based on your levels in Ranger.") ]
 }
 
-let rec ``Blood Bond`` = {
+let rec bloodBond = {
     ClassId = ranger.Id
-    Id = % nameof ``Blood Bond``
+    Id = % nameof bloodBond
+    Name = "Blood Bond"
     Grants = [ Complex("Blood Bond", "Your Ranger Companion becomes Resistant to all forms of Physical damage.") ]
 }
 
-let rec ``Bounty Hunter`` = {
+let rec bountyHunter = {
     ClassId = ranger.Id
-    Id = % nameof ``Bounty Hunter``
+    Id = % nameof bountyHunter
+    Name = "Bounty Hunter"
     Grants = [ Complex("Bounty Hunter", "Marked bounty targets award gold on death. You have Advantage on Attack Rolls against them.") ]
 }
 
-let rec ``Close Quarters Shooter`` = {
+let rec closeQuartersShooter = {
     ClassId = ranger.Id
-    Id = % nameof ``Close Quarters Shooter``
+    Id = % nameof closeQuartersShooter
+    Name = "Close Quarters Shooter"
     Grants = [ Complex("Close Quarters Shooter", "While Threatened by one enemy, you do not receive Disadvantage on ranged attacks against them, and your Ranged Weapon Attacks roll damage with Advantage.") ]
 }
 
-let rec Escapist = {
+let rec escapist = {
     ClassId = ranger.Id
-    Id = % nameof Escapist
+    Id = % nameof escapist
+    Name = "Escapist"
     Grants = [ Simple "You no longer provoke Opportunity Attacks." ]
 }
 
-let rec ``Explosive Arrowheads`` = {
+let rec explosiveArrowheads = {
     ClassId = ranger.Id
-    Id = % nameof ``Explosive Arrowheads``
+    Id = % nameof explosiveArrowheads
+    Name = "Explosive Arrowheads"
     Grants = [ Complex("Explosive Arrowheads", $"{TOGGLEABLE}: When you deal damage with a ranged weapon, you deal Force damage equal to your Proficiency Bonus multiplied by 2 in a 3m/10ft area around the target (doesn’t affect the initial target).") ]
 }
 
-let rec ``Hidden Inventory`` = {
+let rec hiddenInventory = {
     ClassId = ranger.Id
-    Id = % nameof ``Hidden Inventory``
+    Id = % nameof hiddenInventory
+    Name = "Hidden Inventory"
     Grants = [ Complex("Hidden Inventory", "Once per turn, upon landing a killing blow or Critical Hit on an enemy, restore one charge of your Natural Focus.") ]
 }
 
-let rec ``Marksman’s Edge`` = {
+let rec marksmansEdge = {
     ClassId = ranger.Id
-    Id = % nameof ``Marksman’s Edge``
+    Id = % nameof marksmansEdge
+    Name = "Marksman’s Edge"
     Grants = [ Complex("Marksman’s Edge", "When you deal damage with a weapon, you have a chance to leave the target Bleeding.") ]
 }
 
-let rec ``Multi-Attack Defense`` = {
+let rec multiAttackDefense = {
     ClassId = ranger.Id
-    Id = % nameof ``Multi-Attack Defense``
+    Id = % nameof multiAttackDefense
+    Name = "Multi-Attack Defense"
     Grants = [ Complex("Multi-Attack Defense", "When an enemy attacks you, they have Disadvantage on any additional Attack Rolls against you until the start of their next turn.") ]
 }
 
-let rec ``Natural Huntsman`` = {
+let rec naturalHuntsman = {
     ClassId = ranger.Id
-    Id = % nameof ``Natural Huntsman``
+    Id = % nameof naturalHuntsman
+    Name = "Natural Huntsman"
     Grants = [ Complex("Natural Huntsman", "Making an Attack Roll gives you a +1 bonus to your Damage Rolls for the rest of your turn. This effect can stack.") ]
 }
 
-let rec ``Natural Opportunity`` = {
+let rec naturalOpportunity = {
     ClassId = ranger.Id
-    Id = % nameof ``Natural Opportunity``
+    Id = % nameof naturalOpportunity
+    Name = "Natural Opportunity"
     Grants = [
         Simple "Gain an additional Reaction."
         Simple "Your Opportunity Attacks hit with both weapons when dual-wielding."
     ]
 }
 
-let rec ``Protective Bond`` = {
+let rec protectiveBond = {
     ClassId = ranger.Id
-    Id = % nameof ``Protective Bond``
+    Id = % nameof protectiveBond
+    Name = "Protective Bond"
     Grants = [ Complex("Protective Bond", "Your Ranger Companions receive a +4 bonus to their Armour Class.") ]
 }
 
-let rec Sniper = {
+let rec sniper = {
     ClassId = ranger.Id
-    Id = % nameof Sniper
+    Id = % nameof sniper
+    Name = "Sniper"
     Grants = [ Complex("Sniper", "When dealing damage to another creature with a Ranged Weapon Attack, deal additional damage based on distance, up to a maximum of 6 Piercing damage.") ]
 }
 
-let rec ``Superior Technique`` = {
+let rec superiorTechnique = {
     ClassId = ranger.Id
-    Id = % nameof ``Superior Technique``
+    Id = % nameof superiorTechnique
+    Name = "Superior Technique"
     Grants = [ Complex("Superior Technique", "When dealing damage, you ignore Piercing Resistance.") ]
 }
 
-let rec ``Sure Shot`` = {
+let rec sureShot = {
     ClassId = ranger.Id
-    Id = % nameof ``Sure Shot``
+    Id = % nameof sureShot
+    Name = "Sure Shot"
     Grants = [ Buff <| StatModifiers.Create(criticalRange = 1) ]
 }
 
-let rec ``Two-Weapon Fighting`` = {
+let rec twoWeaponFighting = {
     ClassId = ranger.Id
-    Id = % nameof ``Two-Weapon Fighting``
+    Id = % nameof twoWeaponFighting
+    Name = "Two-Weapon Fighting"
     Grants = [ Complex("Two-Weapon Fighting", "Attack Rolls and damage rolls made with your off-hand weapon are rolled with Advantage.") ]
 }
 
-let rec ``Wanton Synergy`` = {
+let rec wantonSynergy = {
     ClassId = ranger.Id
-    Id = % nameof ``Wanton Synergy``
+    Id = % nameof wantonSynergy
+    Name = "Wanton Synergy"
     Grants = [ Complex("Wanton Synergy", "Once per turn, upon landing a Critical Hit, your Ranger Companion’s next instance of damage will also be a Critical hit.") ]
 }
 
 // ROGUE
-let rec ``Cunning Fangs`` = {
+let rec cunningFangs = {
     ClassId = rogue.Id
-    Id = % nameof ``Cunning Fangs``
-    Grants = [ Power(BonusAction, AtWill, "Throw a dagger that triggers Sneak Attack.") ]
+    Id = % nameof cunningFangs
+    Name = "Cunning Fangs"
+    Grants = [ Power(BonusAction, AtWill, "Cunning Fangs", "Throw a dagger that triggers Sneak Attack.") ]
 }
 
-let rec Cutthroat = {
+let rec cutthroat = {
     ClassId = rogue.Id
-    Id = % nameof Cutthroat
+    Id = % nameof cutthroat
+    Name = "Cutthroat"
     Grants = [ Complex("Cutthroat", "When you roll a Critical Hit, roll an additional damage die.") ]
 }
 
-let rec ``Elusive Retreat`` = {
+let rec elusiveRetreat = {
     ClassId = rogue.Id
-    Id = % nameof ``Elusive Retreat``
+    Id = % nameof elusiveRetreat
+    Name = "Elusive Retreat"
     Grants = [ Complex("Elusive Retreat", "Upon landing a killing blow or Critical Hit, you immediately Dash and Disengage.") ]
 }
 
-let rec ``Elusive Shadow`` = {
+let rec elusiveShadow = {
     ClassId = rogue.Id
-    Id = % nameof ``Elusive Shadow``
-    Grants = [ Power(FreeAction, OncePerTurn, "Once per round, you can Hide as a Free action.") ]
+    Id = % nameof elusiveShadow
+    Name = "Elusive Shadow"
+    Grants = [ Power(FreeAction, OncePerTurn, "Elusive Shadow", "Once per round, you can Hide as a Free action.") ]
 }
 
-let rec ``Fast Hands`` = {
+let rec fastHands = {
     ClassId = rogue.Id
-    Id = % nameof ``Fast Hands``
+    Id = % nameof fastHands
+    Name = "Fast Hands"
     Grants = [ Complex("Fast Hands", "Gain Advantage on Dexterity based Ability Checks.") ]
 }
 
-let rec ``Fatal Manoeuvre`` = {
+let rec fatalManoeuvre = {
     ClassId = rogue.Id
-    Id = % nameof ``Fatal Manoeuvre``
+    Id = % nameof fatalManoeuvre
+    Name = "Fatal Manoeuvre"
     Grants = [ Complex("Fatal Manoeuvre", "While Sneaking or Invisible, the number needed in order to roll a Critical Hit is reduced by one.") ]
 }
 
-let rec ``Grievous Wounds`` = {
+let rec grievousWounds = {
     ClassId = rogue.Id
-    Id = % nameof ``Grievous Wounds``
+    Id = % nameof grievousWounds
+    Name = "Grievous Wounds"
     Grants = [ Complex("Grievous Wounds", "Your Sneak Attacks halve your target’s Movement Speed and prevent them from using Reactions.") ]
 }
 
-let rec ``Illusory Advantage`` = {
+let rec illusoryAdvantage = {
     ClassId = rogue.Id
-    Id = % nameof ``Illusory Advantage``
+    Id = % nameof illusoryAdvantage
+    Name = "Illusory Advantage"
     Grants = [ Power(BonusAction, AtWill, "Enhanced Illusion", "Create an Illusory Decoy that blinds nearby enemies for 1 round upon vanishing.") ]
 }
 
-let rec ``Light Footwork`` = {
+let rec lightFootwork = {
     ClassId = rogue.Id
-    Id = % nameof ``Light Footwork``
+    Id = % nameof lightFootwork
+    Name = "Light Footwork"
     Grants = [ Simple "You benefit from the effects of Freedom of Movement." ]
 }
 
-let rec ``Low Visibility`` = {
+let rec lowVisibility = {
     ClassId = rogue.Id
-    Id = % nameof ``Low Visibility``
+    Id = % nameof lowVisibility
+    Name = "Low Visibility"
     Grants = [ Buff <| StatModifiers.Create(ac = 2) ]
 }
 
-let rec Manipulator = {
+let rec manipulator = {
     ClassId = rogue.Id
-    Id = % nameof Manipulator
+    Id = % nameof manipulator
+    Name = "Manipulator"
     Grants = [
         Simple "Gain Advantage on Deception and Persuasion based Ability Checks."
         Complex("Manipulator", "At the start of your turn, you have a 50% chance to gain a Luck Point.")
     ]
 }
 
-let rec ``Now You See Me`` = {
+let rec nowYouSeeMe = {
     ClassId = rogue.Id
-    Id = % nameof ``Now You See Me``
-    Grants = [ Power(Reaction, AtWill, "When an enemy fails a Melee Weapon Attack against you, deal your attack damage and Blind them for the rest of their turn.") ]
+    Id = % nameof nowYouSeeMe
+    Name = "Now You See Me"
+    Grants = [ Power(Reaction, AtWill, "Now You See Me", "When an enemy fails a Melee Weapon Attack against you, deal your attack damage and Blind them for the rest of their turn.") ]
 }
 
-let rec ``Quick Reflexes`` = {
+let rec quickReflexes = {
     ClassId = rogue.Id
-    Id = % nameof ``Quick Reflexes``
+    Id = % nameof quickReflexes
+    Name = "Quick Reflexes"
     Grants = [
         Simple "Gain an additional Reaction."
         Complex("Quick Reflexes", "Your Opportunity Attacks inflict Haemorrhaged for 3 turns.")
     ]
 }
 
-let rec ``Reactive Movement`` = {
+let rec reactiveMovement = {
     ClassId = rogue.Id
-    Id = % nameof ``Reactive Movement``
-    Grants = [ Power(Reaction, AtWill, $"{TOGGLEABLE}: Gain the ability to Dash, Disengage, and Hide as a Reaction.") ]
+    Id = % nameof reactiveMovement
+    Name = "Reactive Movement"
+    Grants = [ Power(Reaction, AtWill, "Reactive Movement", $"{TOGGLEABLE}: Gain the ability to Dash, Disengage, and Hide as a Reaction.") ]
 }
 
-let rec ``Sharp Eyes`` = {
+let rec sharpEyes = {
     ClassId = rogue.Id
-    Id = % nameof ``Sharp Eyes``
+    Id = % nameof sharpEyes
+    Name = "Sharp Eyes"
     Grants = [ Complex("Sharp Eyes", "When making a Perception or Insight based Ability Check, you add a bonus of 20 to the result.") ]
 }
 
-let rec Spectre = {
+let rec spectre = {
     ClassId = rogue.Id
-    Id = % nameof Spectre
-    Grants = [ Power(FreeAction, AtWill, "While Sneaking or Invisible, teleport up to 9m/30ft. Your ability to warp is not limited by line of sight.") ]
+    Id = % nameof spectre
+    Name = "Spectre"
+    Grants = [ Power(FreeAction, AtWill, "Spectre", "While Sneaking or Invisible, teleport up to 9m/30ft. Your ability to warp is not limited by line of sight.") ]
 }
 
-let rec ``Spectral Hunter`` = {
+let rec spectralHunter = {
     ClassId = rogue.Id
-    Id = % nameof ``Spectral Hunter``
+    Id = % nameof spectralHunter
+    Name = "Spectral Hunter"
     Grants = [ Complex("Spectral Hunter", "Upon dealing damage, you afflict your target with Hunter’s Mark.") ]
 }
 
-let rec ``Umbral Sight`` = {
+let rec umbralSight = {
     ClassId = rogue.Id
-    Id = % nameof ``Umbral Sight``
+    Id = % nameof umbralSight
+    Name = "Umbral Sight"
     Grants = [ Simple "Gain Superior Darkvision and the ability to see within Magical Darkness." ]
 }
 
-let rec ``Vanishing Act`` = {
+let rec vanishingAct = {
     ClassId = rogue.Id
-    Id = % nameof ``Vanishing Act``
-    Grants = [ Power(Reaction, AtWill, "When an enemy fails an Attack Roll against you, become Invisible until the end of your turn.") ]
+    Id = % nameof vanishingAct
+    Name = "Vanishing Act"
+    Grants = [ Power(Reaction, AtWill, "Vanishing Act", "When an enemy fails an Attack Roll against you, become Invisible until the end of your turn.") ]
 }
 
-let rec Venomous = {
+let rec venomous = {
     ClassId = rogue.Id
-    Id = % nameof Venomous
+    Id = % nameof venomous
+    Name = "Venomous"
     Grants = [ Complex("Venomous", "When you deal damage with a weapon, you have a chance to afflict your target with Wyvern Poison.") ]
 }
 
 // SORCERER
-let rec ``Arcane Overflow`` = {
+let rec arcaneOverflow = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Arcane Overflow``
+    Id = % nameof arcaneOverflow
+    Name = "Arcane Overflow"
     Grants = [ Complex("Arcane Overflow", "Upon landing a killing blow or Critical hit, you create one Sorcery Point. This effect can trigger once per turn.") ]
 }
 
-let rec ``Arcane Oppression`` = {
+let rec arcaneOppression = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Arcane Oppression``
+    Id = % nameof arcaneOppression
+    Name = "Arcane Oppression"
     Grants = [ Complex("Arcane Oppression", "After having used Sorcery Channeling or Spell Channeling, enemies within 9m/30ft of you roll with Disadvantage when attempting to resist your Spell effects.") ]
 }
 
-let rec ``Arcane Reservoir`` = {
+let rec arcaneReservoir = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Arcane Reservoir``
+    Id = % nameof arcaneReservoir
+    Name = "Arcane Reservoir"
     Grants = [ Complex("Arcane Reservoir", "Once per turn, casting a Spell creates one Sorcery Point.") ]
 }
 
-let rec ``Charismatic Infusion`` = {
+let rec charismaticInfusion = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Charismatic Infusion``
+    Id = % nameof charismaticInfusion
+    Name = "Charismatic Infusion"
     Grants = [ Complex("Charismatic Infusion", "After having used Sorcery Channeling or Spell Channeling, Spells you cast add your Charisma Modifier to their damage rolls.") ]
 }
 
-let rec ``Charismatic Shield`` = {
+let rec charismaticShield = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Charismatic Shield``
-    Grants = [ Power(FreeAction, AtWill, $"{TOGGLEABLE}: Gain Resistance to all damage for as long as you have Sorcery Points. Each time you are damaged, you lose one Sorcery Point.") ]
+    Id = % nameof charismaticShield
+    Name = "Charismatic Shield"
+    Grants = [ Power(FreeAction, AtWill, "Charismatic Shield", $"{TOGGLEABLE}: Gain Resistance to all damage for as long as you have Sorcery Points. Each time you are damaged, you lose one Sorcery Point.") ]
 }
 
-let rec ``Dormant Charge`` = {
+let rec dormantCharge = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Dormant Charge``
+    Id = % nameof dormantCharge
+    Name = "Dormant Charge"
     Grants = [ Complex("Dormant Charge", "While Threatened, increase the damage of all Cantrips and Spells you cast by your Proficiency Bonus.") ]
 }
 
-let rec ``Elemental Afterglow`` = {
+let rec elementalAfterglow = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Elemental Afterglow``
+    Id = % nameof elementalAfterglow
+    Name = "Elemental Afterglow"
     Grants = [ Complex("Elemental Afterglow", $"{TOGGLEABLE}: Using a Spell to deal elemental damage causes your target and enemies within 9m/30ft of them to suffer from a status effect dependant on the type of damage you dealt.") ]
 }
 
-let rec ``Enchanting Influence`` = {
+let rec enchantingInfluence = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Enchanting Influence``
+    Id = % nameof enchantingInfluence
+    Name = "Enchanting Influence"
     Grants = [ Complex("Enchanting Influence", "Increase the Difficulty Class of your Spells by 1.") ]
 }
 
-let rec ``Ephemeral Vacuum`` = {
+let rec ephemeralVacuum = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Ephemeral Vacuum``
-    Grants = [ Power(FreeAction, AtWill, "Pull all creatures to a singular point by expending two Sorcery Points.") ]
+    Id = % nameof ephemeralVacuum
+    Name = "Ephemeral Vacuum"
+    Grants = [ Power(FreeAction, AtWill, "Ephemeral Vacuum", "Pull all creatures to a singular point by expending two Sorcery Points.") ]
 }
 
-let rec ``Essential Epiphany`` = {
+let rec essentialEpiphany = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Essential Epiphany``
+    Id = % nameof essentialEpiphany
+    Name = "Essential Epiphany"
     Grants = [ Power(BonusAction, AtWill, "Astral Knowledge", "Gain proficiency in all skills of a single Ability Score until Long Rest.") ]
 }
 
-let rec ``Evasive Warp`` = {
+let rec evasiveWarp = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Evasive Warp``
-    Grants = [ Power(FreeAction, AtWill, "When you or an ally are attacked within 18m/60ft, force the target and the aggressor to swap places.") ]
+    Id = % nameof evasiveWarp
+    Name = "Evasive Warp"
+    Grants = [ Power(FreeAction, AtWill, "Evasive Warp", "When you or an ally are attacked within 18m/60ft, force the target and the aggressor to swap places.") ]
 }
 
-let rec ``Latent Acuity`` = {
+let rec latentAcuity = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Latent Acuity``
+    Id = % nameof latentAcuity
+    Name = "Latent Acuity"
     Grants = [ Complex("Latent Acuity", "Upon landing a killing blow, gain Arcane Acuity for three turns.") ]
 }
 
-let rec ``Misty Escape`` = {
+let rec mistyEscape = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Misty Escape``
-    Grants = [ Power(FreeAction, OncePerTurn, "When you start your turn while Threatened, you may cast Misty Step without expending a Spell Slot.") ]
+    Id = % nameof mistyEscape
+    Name = "Misty Escape"
+    Grants = [ Power(FreeAction, OncePerTurn, "Misty Escape", "When you start your turn while Threatened, you may cast Misty Step without expending a Spell Slot.") ]
 }
 
-let rec ``Mystic Empowerment`` = {
+let rec mysticEmpowerment = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Mystic Empowerment``
+    Id = % nameof mysticEmpowerment
+    Name = "Mystic Empowerment"
     Grants = [ Complex("Mystic Empowerment", "When rolling with Advantage on your Spell based Attack Rolls or Saving Throws, roll the damage of your Spells with Advantage as well.") ]
 }
 
-let rec ``Natural Vortex`` = {
+let rec naturalVortex = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Natural Vortex``
+    Id = % nameof naturalVortex
+    Name = "Natural Vortex"
     Grants = [ Complex("Natural Vortex", "When a creature within 18m/60ft of you casts a Spell, you generate two stacks of Sorcerous Overflow, rather than one.") ]
 }
 
-let rec ``Reactive Blood`` = {
+let rec reactiveBlood = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Reactive Blood``
+    Id = % nameof reactiveBlood
+    Name = "Reactive Blood"
     Grants = [ Complex("Reactive Blood", "When damaged by an enemy, you generate one stack of Sorcerous Overflow.") ]
 }
 
-let rec ``Shared Creation`` = {
+let rec sharedCreation = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Shared Creation``
+    Id = % nameof sharedCreation
+    Name = "Shared Creation"
     Grants = [ Complex("Shared Creation", "Creationary can now target allies.") ]
 }
 
-let rec ``Sorcerous Acumen`` = {
+let rec sorcerousAcumen = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Sorcerous Acumen``
-    Grants = [ Power(FreeAction, AtWill, "Expend one Sorcery Point to gain Advantage on any Ability Check.") ]
+    Id = % nameof sorcerousAcumen
+    Name = "Sorcerous Acumen"
+    Grants = [ Power(FreeAction, AtWill, "Sorcerous Acumen", "Expend one Sorcery Point to gain Advantage on any Ability Check.") ]
 }
 
-let rec ``Sorcerous Focus`` = {
+let rec sorcerousFocus = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Sorcerous Focus``
+    Id = % nameof sorcerousFocus
+    Name = "Sorcerous Focus"
     Grants = [ Complex("Sorcerous Focus", "After having used Spell Channeling or Sorcery Channeling, gain Advantage on all Spell Attack Rolls for the rest of your turn.") ]
 }
 
-let rec ``Veiled Synergy`` = {
+let rec veiledSynergy = {
     ClassId = sorcerer.Id
-    Id = % nameof ``Veiled Synergy``
-    Grants = [ Power(FreeAction, AtWill, $"{TOGGLEABLE}: Receive Arcane Synergy at the expense of one Sorcery Point per turn while in combat.") ]
+    Id = % nameof veiledSynergy
+    Name = "Veiled Synergy"
+    Grants = [ Power(FreeAction, AtWill, "Veiled Synergy", $"{TOGGLEABLE}: Receive Arcane Synergy at the expense of one Sorcery Point per turn while in combat.") ]
 }
 
 // BARBARIAN
-let rec ``Barbarous Assault`` = {
+let rec barbarousAssault = {
     ClassId = barbarian.Id
-    Id = % nameof ``Barbarous Assault``
+    Id = % nameof barbarousAssault
+    Name = "Barbarous Assault"
     Grants = [ Simple "While enraged, gain Advantage on all damage rolls." ]
 }
 
-let rec ``Brutal Critical`` = {
+let rec brutalCritical = {
     ClassId = barbarian.Id
-    Id = % nameof ``Brutal Critical``
+    Id = % nameof brutalCritical
+    Name = "Brutal Critical"
     Grants = [ Simple "When you land a Critical Hit, roll an additional damage die." ]
 }
 
-let rec ``Danger Sense`` = {
+let rec dangerSense = {
     ClassId = barbarian.Id
-    Id = % nameof ``Danger Sense``
-    Grants = [ Power(FreeAction, AtWill, "Gain the ability to forcibly succeed any Saving Throw at the cost of one of your Rage Charges.") ]
+    Id = % nameof dangerSense
+    Name = "Danger Sense"
+    Grants = [ Power(FreeAction, AtWill, "Danger Sense", "Gain the ability to forcibly succeed any Saving Throw at the cost of one of your Rage Charges.") ]
 }
 
-let rec ``Death Glare`` = {
+let rec deathGlare = {
     ClassId = barbarian.Id
-    Id = % nameof ``Death Glare``
-    Grants = [ Power(BonusAction, AtWill, "Potentially Intimidate a target.") ]
+    Id = % nameof deathGlare
+    Name = "Death Glare"
+    Grants = [ Power(BonusAction, AtWill, "Death Glare", "Potentially Intimidate a target.") ]
 }
 
-let rec ``Faceoff`` = {
+let rec faceoff = {
     ClassId = barbarian.Id
-    Id = % nameof ``Faceoff``
-    Grants = [ Power(FreeAction, AtWill, "If an enemy damages you, use a Rage Charge in order to potentially Intimidate them.") ]
+    Id = % nameof faceoff
+    Name = "Faceoff"
+    Grants = [ Power(FreeAction, AtWill, "Faceoff", "If an enemy damages you, use a Rage Charge in order to potentially Intimidate them.") ]
 }
 
-let rec ``Furious Criticals`` = {
+let rec furiousCriticals = {
     ClassId = barbarian.Id
-    Id = % nameof ``Furious Criticals``
+    Id = % nameof furiousCriticals
+    Name = "Furious Criticals"
     Grants = [ Simple "While enraged, the number required to roll a Critical Hit is reduced by one." ]
 }
 
-let rec ``Lands Stride`` = {
+let rec landsStride = {
     ClassId = barbarian.Id
-    Id = % nameof ``Lands Stride``
+    Id = % nameof landsStride
+    Name = "Lands Stride"
     Grants = [ Simple "Difficult Terrain no longer slows you down. While enraged, you benefit from the effects of Water Walk." ]
 }
 
-let rec ``Overwhelming Power`` = {
+let rec overwhelmingPower = {
     ClassId = barbarian.Id
-    Id = % nameof ``Overwhelming Power``
+    Id = % nameof overwhelmingPower
+    Name = "Overwhelming Power"
     Grants = [ Simple "When dealing damage while enraged, you ignore all physical Resistances and Immunities." ]
 }
 
-let rec ``Peak Physicality`` = {
+let rec peakPhysicality = {
     ClassId = barbarian.Id
-    Id = % nameof ``Peak Physicality``
+    Id = % nameof peakPhysicality
+    Name = "Peak Physicality"
     Grants = [
         Buff <| StatModifiers.Create(abilities = Map [STR, 2])
         Simple "Gain Advantage on Strength based Ability Checks and Saving Throws."
     ]
 }
 
-let rec ``Rage Of The Mountain`` = {
+let rec rageOfTheMountain = {
     ClassId = barbarian.Id
-    Id = % nameof ``Rage Of The Mountain``
+    Id = % nameof rageOfTheMountain
+    Name = "Rage Of The Mountain"
     Grants = [ Simple "While enraged, you also become Enlarged." ]
 }
 
-let rec ``Rage Of The Undefeated`` = {
+let rec rageOfTheUndefeated = {
     ClassId = barbarian.Id
-    Id = % nameof ``Rage Of The Undefeated``
-    Grants = [ Power(Reaction, AtWill, "While below 25% of your total Hit Points, you may make an additional Melee Weapon Attack.") ]
+    Id = % nameof rageOfTheUndefeated
+    Name = "Rage Of The Undefeated"
+    Grants = [ Power(Reaction, AtWill, "Rage Of The Undefeated", "While below 25% of your total Hit Points, you may make an additional Melee Weapon Attack.") ]
 }
 
-let rec ``Raging Vitality`` = {
+let rec ragingVitality = {
     ClassId = barbarian.Id
-    Id = % nameof ``Raging Vitality``
+    Id = % nameof ragingVitality
+    Name = "Raging Vitality"
     Grants = [ Simple "While enraged, recover +1d12 Hit Points per turn." ]
 }
 
-let rec ``Relentless Endurance`` = {
+let rec relentlessEndurance = {
     ClassId = barbarian.Id
-    Id = % nameof ``Relentless Endurance``
-    Grants = [ Power(FreeAction, OncePerCombat, "Upon starting your turn while below half of your total Hit Points you receive total damage Immunity until the beginning of your next turn.") ]
+    Id = % nameof relentlessEndurance
+    Name = "Relentless Endurance"
+    Grants = [ Power(FreeAction, OncePerCombat, "Relentless Endurance", "Upon starting your turn while below half of your total Hit Points you receive total damage Immunity until the beginning of your next turn.") ]
 }
 
-let rec ``Rip And Tear`` = {
+let rec ripAndTear = {
     ClassId = barbarian.Id
-    Id = % nameof ``Rip And Tear``
+    Id = % nameof ripAndTear
+    Name = "Rip And Tear"
     Grants = [ Simple $"{OncePerTurn} Landing a killing blow or Critical Hit causes enemies within 9m of your target to potentially become Intimidated." ]
 }
 
-let rec ``Rooted In Anger`` = {
+let rec rootedInAnger = {
     ClassId = barbarian.Id
-    Id = % nameof ``Rooted In Anger``
+    Id = % nameof rootedInAnger
+    Name = "Rooted In Anger"
     Grants = [
         Simple "At the beginning of any combat encounter, you enrage."
         Simple "At the end of any combat encounter, if still enraged, you regain one Rage Charge."
     ]
 }
 
-let rec ``Tempered Retaliation`` = {
+let rec temperedRetaliation = {
     ClassId = barbarian.Id
-    Id = % nameof ``Tempered Retaliation``
-    Grants = [ Power(Reaction, AtWill, "While enraged, gain the ability to immediately retaliate upon taking damage, making a Melee or Ranged Weapon Attack against your aggressor.") ]
+    Id = % nameof temperedRetaliation
+    Name = "Tempered Retaliation"
+    Grants = [ Power(Reaction, AtWill, "Tempered Retaliation", "While enraged, gain the ability to immediately retaliate upon taking damage, making a Melee or Ranged Weapon Attack against your aggressor.") ]
 }
 
-let rec ``Terrifying Bellow`` = {
+let rec terrifyingBellow = {
     ClassId = barbarian.Id
-    Id = % nameof ``Terrifying Bellow``
+    Id = % nameof terrifyingBellow
+    Name = "Terrifying Bellow"
     Grants = [ Simple "Upon becoming enraged, potentially Intimidate all enemies within 9m." ]
 }
 
-let rec ``Unrelenting Rampage`` = {
+let rec unrelentingRampage = {
     ClassId = barbarian.Id
-    Id = % nameof ``Unrelenting Rampage``
+    Id = % nameof unrelentingRampage
+    Name = "Unrelenting Rampage"
     Grants = [ Simple $"{OncePerTurn} You heal for half the damage you deal to an enemy." ]
 }
 
-let rec ``Unfettered Beast`` = {
+let rec unfetteredBeast = {
     ClassId = barbarian.Id
-    Id = % nameof ``Unfettered Beast``
+    Id = % nameof unfetteredBeast
+    Name = "Unfettered Beast"
     Grants = [ Buff <| StatModifiers.Create(hpPerLvl = 2) ]
 }
 
-let rec ``Unstoppable Force`` = {
+let rec unstoppableForce = {
     ClassId = barbarian.Id
-    Id = % nameof ``Unstoppable Force``
+    Id = % nameof unstoppableForce
+    Name = "Unstoppable Force"
     Grants = [ Simple "While enraged, all successful Melee and Throw based Attack Rolls have a chance to leave your target Prone." ]
 }
 
 // WARLOCK
-let rec ``Bane Of The Pact`` = {
+let rec baneOfThePact = {
     ClassId = warlock.Id
-    Id = % nameof ``Bane Of The Pact``
-    Grants = [ Power(FreeAction, AtWill, $"{TOGGLEABLE}: Dealing damage with your Eldritch Blast applies Bane to your target for three turns.") ]
+    Id = % nameof baneOfThePact
+    Name = "Bane Of The Pact"
+    Grants = [ Power(FreeAction, AtWill, "Bane Of The Pact", $"{TOGGLEABLE}: Dealing damage with your Eldritch Blast applies Bane to your target for three turns.") ]
 }
 
-let rec ``Binding Transposition`` = {
+let rec bindingTransposition = {
     ClassId = warlock.Id
-    Id = % nameof ``Binding Transposition``
-    Grants = [ Power(FreeAction, AtWill, $"{TOGGLEABLE}: When you make a successful Attack Roll against a creature that is Large or smaller with your Eldritch blast, immediately swap places with them.") ]
+    Id = % nameof bindingTransposition
+    Name = "Binding Transposition"
+    Grants = [ Power(FreeAction, AtWill, "Binding Transposition", $"{TOGGLEABLE}: When you make a successful Attack Roll against a creature that is Large or smaller with your Eldritch blast, immediately swap places with them.") ]
 }
 
-let rec ``Bound Elements`` = {
+let rec boundElements = {
     ClassId = warlock.Id
-    Id = % nameof ``Bound Elements``
-    Grants = [ Power(FreeAction, AtWill, "Gain the ability to use a Free Reaction after casting a Spell in order to become Resistant to all damage for one turn.") ]
+    Id = % nameof boundElements
+    Name = "Bound Elements"
+    Grants = [ Power(FreeAction, AtWill, "Bound Elements", "Gain the ability to use a Free Reaction after casting a Spell in order to become Resistant to all damage for one turn.") ]
 }
 
-let rec ``Bound Compulsion`` = {
+let rec boundCompulsion = {
     ClassId = warlock.Id
-    Id = % nameof ``Bound Compulsion``
+    Id = % nameof boundCompulsion
+    Name = "Bound Compulsion"
     Grants = [ Complex("Bound Compulsion", "Once per turn, upon landing a killing blow or Critical Hit, all enemies within 9m/30ft must succeed a Wisdom based Saving Throw or become Compelled to duel you.") ]
 }
 
-let rec ``Curse Of Hellfire`` = {
+let rec curseOfHellfire = {
     ClassId = warlock.Id
-    Id = % nameof ``Curse Of Hellfire``
+    Id = % nameof curseOfHellfire
+    Name = "Curse Of Hellfire"
     Grants = [ Complex("Curse Of Hellfire", "When you make a successful melee based Attack Roll, you apply one Curse of Hellfire stack to your target.") ]
 }
 
-let rec ``Dark Retaliation`` = {
+let rec darkRetaliation = {
     ClassId = warlock.Id
-    Id = % nameof ``Dark Retaliation``
-    Grants = [ Power(FreeAction, AtWill, "When an enemy fails an Attack Roll against you, use a Free Reaction in order to cast Darkness.") ]
+    Id = % nameof darkRetaliation
+    Name = "Dark Retaliation"
+    Grants = [ Power(FreeAction, AtWill, "Dark Retaliation", "When an enemy fails an Attack Roll against you, use a Free Reaction in order to cast Darkness.") ]
 }
 
-let rec ``Devil’s Sight Boon`` = {
+let rec devilsSightBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``Devil’s Sight Boon``
+    Id = % nameof devilsSightBoon
+    Name = "Devil’s Sight Boon"
     Grants = [ Simple "You can see normally in darkness, both magical and non-magical, to a distance of 18m/60ft." ]
 }
 
-let rec ``Eldritch Enervation`` = {
+let rec eldritchEnervation = {
     ClassId = warlock.Id
-    Id = % nameof ``Eldritch Enervation``
+    Id = % nameof eldritchEnervation
+    Name = "Eldritch Enervation"
     Grants = [ Complex("Eldritch Enervation", "Dealing damage with your Eldritch Blast heals you for a value equal to your Charisma Modifier.") ]
 }
 
-let rec ``Eldritch Lance Boon`` = {
+let rec eldritchLanceBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``Eldritch Lance Boon``
+    Id = % nameof eldritchLanceBoon
+    Name = "Eldritch Lance Boon"
     Grants = [ Complex("Eldritch Lance", "Concentrated variant of Eldritch Blast that pierces enemies and deals 1d12 Force damage/spell level at the cost of one Spell Slot.") ]
 }
 
-let rec ``Eldritch Strike Boon`` = {
+let rec eldritchStrikeBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``Eldritch Strike Boon``
+    Id = % nameof eldritchStrikeBoon
+    Name = "Eldritch Strike Boon"
     Grants = [ Complex("Eldritch Strike", "Channel your Eldritch Blast into your main-hand weapon at the cost of one Spell Slot.") ]
 }
 
-let rec ``Hellish Rebuttal Boon`` = {
+let rec hellishRebuttalBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``Hellish Rebuttal Boon``
-    Grants = [ Power(FreeAction, AtWill, "When an enemy fails an Attack Roll against you with a Melee Weapon Attack, gain True Strike.") ]
+    Id = % nameof hellishRebuttalBoon
+    Name = "Hellish Rebuttal Boon"
+    Grants = [ Power(FreeAction, AtWill, "Hellish Rebuttal Boon", "When an enemy fails an Attack Roll against you with a Melee Weapon Attack, gain True Strike.") ]
 }
 
-let rec ``Hellbound Vision`` = {
+let rec hellboundVision = {
     ClassId = warlock.Id
-    Id = % nameof ``Hellbound Vision``
-    Grants = [ Power(FreeAction, AtWill, $"{TOGGLEABLE}: When dealing damage with your Eldritch Blast, you Blind your target for one turn.") ]
+    Id = % nameof hellboundVision
+    Name = "Hellbound Vision"
+    Grants = [ Power(FreeAction, AtWill, "Hellbound Vision", $"{TOGGLEABLE}: When dealing damage with your Eldritch Blast, you Blind your target for one turn.") ]
 }
 
-let rec ``Luck Of The Devil`` = {
+let rec luckOfTheDevil = {
     ClassId = warlock.Id
-    Id = % nameof ``Luck Of The Devil``
+    Id = % nameof luckOfTheDevil
+    Name = "Luck Of The Devil"
     Grants = [ Complex("Luck Of The Devil", "Once per turn, upon rolling a Critical Hit on an enemy, restore one Warlock Spell Slot.") ]
 }
 
-let rec ``Master Of Chaos`` = {
+let rec masterOfChaos = {
     ClassId = warlock.Id
-    Id = % nameof ``Master Of Chaos``
+    Id = % nameof masterOfChaos
+    Name = "Master Of Chaos"
     Grants = [ Complex("Master Of Chaos", "When making a successful Attack Roll with your Eldritch Blast, your target may potentially experience a negative surge of Wild Magic.") ]
 }
 
-let rec ``One With Shadows Boon`` = {
+let rec oneWithShadowsBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``One With Shadows Boon``
+    Id = % nameof oneWithShadowsBoon
+    Name = "One With Shadows Boon"
     Grants = [ Complex("One With Shadows", "Upon killing a target, you and all Chained Companions visible within 18m/60ft of you become Invisible for three turns.") ]
 }
 
-let rec ``Onus Hematic`` = {
+let rec onusHematic = {
     ClassId = warlock.Id
-    Id = % nameof ``Onus Hematic``
+    Id = % nameof onusHematic
+    Name = "Onus Hematic"
     Grants = [ Complex("Onus Hematic", "When you cast Hematic Invocation, you now restore 2 spell slots instead of one.") ]
 }
 
-let rec ``Pact Stricken`` = {
+let rec pactStricken = {
     ClassId = warlock.Id
-    Id = % nameof ``Pact Stricken``
+    Id = % nameof pactStricken
+    Name = "Pact Stricken"
     Grants = [ Complex("Pact Stricken", "Upon a successful Melee Weapon Attack, you apply one stack of Eldtritch Inertia.") ]
 }
 
-let rec ``Repelling Blast Boon`` = {
+let rec repellingBlastBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``Repelling Blast Boon``
-    Grants = [ Power(FreeAction, AtWill, $"{TOGGLEABLE}: When you hit a creature with Eldritch Blast, you push the creature up to 9m/30ft away from you.") ]
+    Id = % nameof repellingBlastBoon
+    Name = "Repelling Blast Boon"
+    Grants = [ Power(FreeAction, AtWill, "Repelling Blast Boon", $"{TOGGLEABLE}: When you hit a creature with Eldritch Blast, you push the creature up to 9m/30ft away from you.") ]
 }
 
-let rec ``Resilient Servitude`` = {
+let rec resilientServitude = {
     ClassId = warlock.Id
-    Id = % nameof ``Resilient Servitude``
+    Id = % nameof resilientServitude
+    Name = "Resilient Servitude"
     Grants = [ Buff <| StatModifiers.Create(hpPerLvl = 2) ]
 }
 
-let rec ``Shade Walker Boon`` = {
+let rec shadeWalkerBoon = {
     ClassId = warlock.Id
-    Id = % nameof ``Shade Walker Boon``
-    Grants = [ Power(BonusAction, AtWill, "Teleport to 9m at will.") ]
+    Id = % nameof shadeWalkerBoon
+    Name = "Shade Walker Boon"
+    Grants = [ Power(BonusAction, AtWill, "Shade Walker Boon", "Teleport to 9m at will.") ]
 }
 
 // WIZARD
-let rec ``Arcane Interruption`` = {
+let rec arcaneInterruption = {
     ClassId = wizard.Id
-    Id = % nameof ``Arcane Interruption``
-    Grants = [ Power(Reaction, AtWill, "Gain the ability to interrupt any Spell by utilizing your Reaction and an Arcane Recovery Charge.") ]
+    Id = % nameof arcaneInterruption
+    Name = "Arcane Interruption"
+    Grants = [ Power(Reaction, AtWill, "Arcane Interruption", "Gain the ability to interrupt any Spell by utilizing your Reaction and an Arcane Recovery Charge.") ]
 }
 
-let rec ``Arcane Reverb`` = {
+let rec arcaneReverb = {
     ClassId = wizard.Id
-    Id = % nameof ``Arcane Reverb``
+    Id = % nameof arcaneReverb
+    Name = "Arcane Reverb"
     Grants = [ Complex("Arcane Reverb", "When damaged by a melee based Attack Roll, release a shockwave which forces nearby enemies back by 9m/30ft.") ]
 }
 
-let rec ``Arcane Shield`` = {
+let rec arcaneShield = {
     ClassId = wizard.Id
-    Id = % nameof ``Arcane Shield``
+    Id = % nameof arcaneShield
+    Name = "Arcane Shield"
     Grants = [ Complex("Arcane Shield", "While Concentrating, gain Resistance to Bludgeoning, Piercing, and Slashing damage.") ]
 }
 
-let rec ``Boon of Plumes`` = {
+let rec boonOfPlumes = {
     ClassId = wizard.Id
-    Id = % nameof ``Boon of Plumes``
+    Id = % nameof boonOfPlumes
+    Name = "Boon of Plumes"
     Grants = [ Simple "Emit an Aura across 9m/30ft granting both you and allies the effects of Featherfall." ]
 }
 
-let rec ``Edict of Divinity`` = {
+let rec edictOfDivinity = {
     ClassId = wizard.Id
-    Id = % nameof ``Edict of Divinity``
-    Grants = [ Power(Reaction, AtWill, "Spend an Arcane Recovery charge to change the die of any Attack Roll or Saving Throw to that of one of your random Portent Dice.") ]
+    Id = % nameof edictOfDivinity
+    Name = "Edict of Divinity"
+    Grants = [ Power(Reaction, AtWill, "Edict of Divinity", "Spend an Arcane Recovery charge to change the die of any Attack Roll or Saving Throw to that of one of your random Portent Dice.") ]
 }
 
-let rec ``Elemental Countercharge`` = {
+let rec elementalCountercharge = {
     ClassId = wizard.Id
-    Id = % nameof ``Elemental Countercharge``
-    Grants = [ Power(Reaction, AtWill, "When an enemy fails a Melee Weapon Attack against you, retaliate with Shocking Grasp.") ]
+    Id = % nameof elementalCountercharge
+    Name = "Elemental Countercharge"
+    Grants = [ Power(Reaction, AtWill, "Elemental Countercharge", "When an enemy fails a Melee Weapon Attack against you, retaliate with Shocking Grasp.") ]
 }
 
-let rec ``Enchanted Safeguard`` = {
+let rec enchantedSafeguard = {
     ClassId = wizard.Id
-    Id = % nameof ``Enchanted Safeguard``
-    Grants = [ Power(Reaction, AtWill, "Cast the Shield spell by expending a charge of your Arcane Recovery.") ]
+    Id = % nameof enchantedSafeguard
+    Name = "Enchanted Safeguard"
+    Grants = [ Power(Reaction, AtWill, "Enchanted Safeguard", "Cast the Shield spell by expending a charge of your Arcane Recovery.") ]
 }
 
-let rec ``Flames Riposte`` = {
+let rec flamesRiposte = {
     ClassId = wizard.Id
-    Id = % nameof ``Flames Riposte``
-    Grants = [ Power(Reaction, AtWill, "When an enemy fails an Attack Roll against you, retaliate with Firebolt.") ]
+    Id = % nameof flamesRiposte
+    Name = "Flames Riposte"
+    Grants = [ Power(Reaction, AtWill, "Flames Riposte", "When an enemy fails an Attack Roll against you, retaliate with Firebolt.") ]
 }
 
-let rec ``Illusory Phantasm`` = {
+let rec illusoryPhantasm = {
     ClassId = wizard.Id
-    Id = % nameof ``Illusory Phantasm``
+    Id = % nameof illusoryPhantasm
+    Name = "Illusory Phantasm"
     Grants = [ Complex("Illusory Phantasm", "On your first turn of any combat encounter, immediately receive the effects of Mirror Image.") ]
 }
 
-let rec ``Magical Insight`` = {
+let rec magicalInsight = {
     ClassId = wizard.Id
-    Id = % nameof ``Magical Insight``
+    Id = % nameof magicalInsight
+    Name = "Magical Insight"
     Grants = [
         Simple "Gain Advantage on Intelligence based Ability Checks and Saving Throws."
         Simple "Add your Intelligence Modifier to all Charisma based Skill Checks."
     ]
 }
 
-let rec ``Mystic Override`` = {
+let rec mysticOverride = {
     ClassId = wizard.Id
-    Id = % nameof ``Mystic Override``
+    Id = % nameof mysticOverride
+    Name = "Mystic Override"
     Grants = [ Complex("Mystic Override", "You ignore elemental Resistances when dealing damage.") ]
 }
 
-let rec ``Potent Cantrips`` = {
+let rec potentCantrips = {
     ClassId = wizard.Id
-    Id = % nameof ``Potent Cantrips``
+    Id = % nameof potentCantrips
+    Name = "Potent Cantrips"
     Grants = [ Complex("Potent Cantrips", "When dealing damage with a Cantrip, deal additional damage equal to your Proficiency Bonus multiplied by two.") ]
 }
 
-let rec ``Potent Spells`` = {
+let rec potentSpells = {
     ClassId = wizard.Id
-    Id = % nameof ``Potent Spells``
+    Id = % nameof potentSpells
+    Name = "Potent Spells"
     Grants = [ Complex("Potent Spells", "Spells you cast gain a damage bonus equal to 4 multiplied by the level of Spell Slot used.") ]
 }
 
-let rec Spellblade = {
+let rec spellblade = {
     ClassId = wizard.Id
-    Id = % nameof Spellblade
+    Id = % nameof spellblade
+    Name = "Spellblade"
     Grants = [ Complex("Spellblade", "Use your Spellcasting Ability Modifier for Attack Rolls and damage. Restore one Arcane Recovery charge on kill or Critical Hit.") ]
 }
 
-let rec ``Spellbound Rebirth`` = {
+let rec spellboundRebirth = {
     ClassId = wizard.Id
-    Id = % nameof ``Spellbound Rebirth``
+    Id = % nameof spellboundRebirth
+    Name = "Spellbound Rebirth"
     Grants = [ Complex("Spellbound Rebirth", "Upon landing a killing blow or Critical Hit on an enemy, restore one charge of Arcane Recovery. This effect can trigger once per turn.") ]
 }
 
-let rec ``Spell Surge`` = {
+let rec spellSurge = {
     ClassId = wizard.Id
-    Id = % nameof ``Spell Surge``
+    Id = % nameof spellSurge
+    Name = "Spell Surge"
     Grants = [ Complex("Spell Surge", "While in combat, regenerate one charge of Arcane Recovery every three turns.") ]
 }
 
-let rec ``Telekinetic Command`` = {
+let rec telekineticCommand = {
     ClassId = wizard.Id
-    Id = % nameof ``Telekinetic Command``
-    Grants = [ Power(FreeAction, OncePerTurn, "Telekinetic Push and Telekinetic Pull", "Move a target 9m/30ft.") ]
+    Id = % nameof telekineticCommand
+    Name = "Telekinetic Command"
+    Grants = [ Power(FreeAction, OncePerTurn, "Telekinetic Command", "Move a target 9m/30ft.") ]
 }
 
-let rec ``War Magic`` = {
+let rec warMagic = {
     ClassId = wizard.Id
-    Id = % nameof ``War Magic``
-    Grants = [ Power(BonusAction, AtWill, $"{TOGGLEABLE}: After making a melee based Attack Roll or casting a Spell, you may cast a single Cantrip as a Bonus Action.") ]
+    Id = % nameof warMagic
+    Name = "War Magic"
+    Grants = [ Power(BonusAction, AtWill, "War Magic", $"{TOGGLEABLE}: After making a melee based Attack Roll or casting a Spell, you may cast a single Cantrip as a Bonus Action.") ]
 }
 
-let rec ``Wizard’s Clarity`` = {
+let rec wizardsClarity = {
     ClassId = wizard.Id
-    Id = % nameof ``Wizard’s Clarity``
+    Id = % nameof wizardsClarity
+    Name = "Wizard’s Clarity"
     Grants = [ Complex("Wizard’s Clarity", "Upon spending Arcane Recovery charges to recover Spell Slots, you gain Advantage on all damage rolls with Spells and Cantrips.") ]
 }
 
-let rec ``Woven Precision`` = {
+let rec wovenPrecision = {
     ClassId = wizard.Id
-    Id = % nameof ``Woven Precision``
+    Id = % nameof wovenPrecision
+    Name = "Woven Precision"
     Grants = [ Buff <| StatModifiers.Create(magicCriticalRange = 1) ]
 }
 
