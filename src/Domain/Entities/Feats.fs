@@ -71,7 +71,10 @@ let rec blessingOfTheMoon : FeatDef = {
 let rec charger : FeatDef = {
     Id = % nameof charger
     Name = "Charger"
-    Grants = [ Passive.Power (BonusAction, OncePerTurn, "Charge toward nearby enemies, Attacking or Shoving (Push 9m/30ft) them in the process.") ]
+    Grants = [ 
+        Passive.Power (BonusAction, OncePerTurn, "Charge", "Rush and attack a nearby enemy") 
+        Passive.Power (BonusAction, OncePerTurn, "Charge", "Rush and shove (9m) a nearby enemy") 
+    ]
 }
 
 let rec classSpecialist : FeatDef = {
@@ -90,8 +93,8 @@ let rec composed : FeatDef = {
     Id = % nameof composed
     Name = "Composed"
     Grants = [
-        Passive.Power (Reaction, AtWill, "Regain Composure: Restore 1d8*Proficiency Bonus HP in 3m radius when hit.")
-        Passive.Power (Reaction, AtWill, "Targeted Composure: Restore 1d8*Proficiency Bonus HP in 3m radius around target when hitting.")
+        Passive.Power (Reaction, AtWill, "Regain Composure", "Restore 1d8*Proficiency Bonus HP in 3m radius when hit.")
+        Passive.Power (Reaction, AtWill, "Targeted Composure", "Restore 1d8*Proficiency Bonus HP in 3m radius around target when hitting.")
     ]
 }
 
@@ -99,8 +102,8 @@ let rec defensiveDuellist : FeatDef = {
     Id = % nameof defensiveDuellist
     Name = "Defensive Duellist"
     Grants = [
-        Passive.Power (FreeAction, AtWill, "Gain AC equal to your proficiency bonus when attacked.")
-        Passive.Power (Reaction, AtWill, "Counterattack with a Melee or a Ranged Attack.")
+        Passive.Power (FreeAction, AtWill, "Defensive Duelist", "Gain AC equal to your proficiency bonus when attacked.")
+        Passive.Power (Reaction, AtWill, "Defensive Duelist", "Counterattack with a Melee or a Ranged Attack.")
         Passive.Simple "You gain an additional Reaction."
     ]
 }
@@ -158,7 +161,7 @@ let rec galvanizedStormsoul : FeatDef = {
 let rec greaterImpact : FeatDef = {
     Id = % nameof greaterImpact
     Name = "Greater Impact"
-    Grants = [ Passive.Power (FreeAction, OncePerTurn, "Make another attack after killing a target with a Weapon Attack.") ]
+    Grants = [ Passive.Power (FreeAction, OncePerTurn, "Greater Impact", "Make another attack after killing a target with a Weapon Attack.") ]
 }
 
 let rec intrinsicBulwark : FeatDef = {
@@ -217,7 +220,7 @@ let rec performer : FeatDef = {
     Name = "Performer"
     Grants = [
         Passive.Simple "Gain Musical Instrument Proficiency."
-        Passive.Power (Action, OncePerLongRest, "Performative Presence: Buff party with +1d4 to Attack Rolls, Ability Checks, or Saving Throws. Lasts until long rest.")
+        Passive.Power (Action, OncePerLongRest, "Performative Presence", "Buff party with +1d4 to Attack Rolls, Ability Checks, or Saving Throws. Lasts until long rest.")
     ]
 }
 
@@ -233,7 +236,7 @@ let rec psionicDominance : FeatDef = {
 let rec reactiveAssault : FeatDef = {
     Id = % nameof reactiveAssault
     Name = "Reactive Assault"
-    Grants = [ Passive.Power (Reaction, AtWill, "Make a basic weapon-based Attack Roll upon landing a Critical Hit.") ]
+    Grants = [ Passive.Power (Reaction, AtWill, "Reactive Assault", "Make a basic weapon-based Attack Roll upon landing a Critical Hit.") ]
 }
 
 let rec resilient : FeatDef = {
@@ -249,7 +252,7 @@ let rec restrictedTerritory : FeatDef = {
     Id = % nameof restrictedTerritory
     Name = "Restricted Territory"
     Grants = [
-        Passive.Power (Reaction, AtWill, "Make a Melee Weapon Attack against an enemy who enters your weapon’s range.")
+        Passive.Power (Reaction, AtWill, "Restricted Territory", "Make a Melee Weapon Attack against an enemy who enters your weapon’s range.")
         Passive.Simple "Enemies entering your range are knocked back if they take damage before ending their turn."
         Passive.Simple "Opportunity Attacks deal the maximum damage possible."
     ]
@@ -268,9 +271,9 @@ let rec sentinel : FeatDef = {
     Id = % nameof sentinel
     Name = "Sentinel"
     Grants = [
-        Passive.Power (Reaction, AtWill, "Make a Weapon Attack against an enemy who attacks an ally.")
+        Passive.Power (Reaction, AtWill, "Sentinel", "Make a Weapon Attack against an enemy who attacks an ally.")
         Passive.Simple "Gain Advantage on Opportunity Attacks."
-        Passive.Simple "Hit with Melee Opportunity Attack stops creature movement."
+        Passive.Simple "Hits with Melee Opportunity Attacks stop creature movement."
         Passive.Simple "You gain an additional Reaction."
     ]
 }
@@ -291,7 +294,7 @@ let rec shieldbearer : FeatDef = {
     Grants = [
         Passive.Simple "Gain Advantage on Dexterity based Saving Throws while wielding a shield."
         Passive.Simple "Gain three Shieldbearer Charges to negate damage (recharge on Short Rest/Kill/Crit)."
-        Passive.Power (FreeAction, AtWill, "Spend a charge to reflect projectiles for 1 turn after a Shield Bash.")
+        Passive.Power (FreeAction, AtWill, "Shieldbearer", "Spend a charge to reflect projectiles for 1 turn after a Shield Bash.")
     ]
 }
 
@@ -337,8 +340,8 @@ let rec warCaster : FeatDef = {
     Name = "War Caster"
     Grants = [
         Passive.Simple "Gain Advantage on Concentration based Saving Throws."
-        Passive.Power (FreeAction, AtWill, "Cast Shocking Grasp against an enemy entering melee range.")
-        Passive.Power (BonusAction, AtWill, "Bind Weapons: Use Spellcasting Ability for Attack/Damage. Kill/Crit restores lvl 1 slot.")
+        Passive.Power (FreeAction, AtWill, "War Caster", "Cast Shocking Grasp against an enemy entering melee range.")
+        Passive.Power (BonusAction, AtWill, "Bind Weapons", "Use Spellcasting Ability for Attack/Damage. Kill/Crit restores lvl 1 slot.")
         Passive.Simple "Toggled: cast any ranged Spell or Cantrip as a melee Spell."
     ]
 }

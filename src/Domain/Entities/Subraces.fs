@@ -11,7 +11,7 @@ let blackDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn,  $"Acid Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts  1 turn")
             ]
         }
 
@@ -22,7 +22,7 @@ let blueDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
             ]
         }
 
@@ -33,7 +33,7 @@ let brassDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
             ]
         }
 
@@ -44,7 +44,7 @@ let bronzeDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Electric dmg in a cone, inflicts Shocked 1 turn")
             ]
         }
 
@@ -55,7 +55,7 @@ let copperDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn, $"Acid Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn, $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
             ]
         }
 
@@ -66,7 +66,7 @@ let goldDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
             ]
         }
 
@@ -77,7 +77,7 @@ let greenDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Poison damage"
-                Power(Action, OncePerTurn,  $"Poison Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Poison Breath Cantrip", "1d12 Poison dmg in a cone, inflicts Poisoned 1 turn")
             ]
         }
 
@@ -88,7 +88,7 @@ let redDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
             ]
         }
 
@@ -99,7 +99,7 @@ let silverDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Cold damage"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "1d12 Cold dmg in a cone, inflicts Frostbite 1 turn")
             ]
         }
 
@@ -110,7 +110,7 @@ let whiteDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Cold damage"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "1d12 Cold dmg in a cone, inflicts Frostbite 1 turn")
             ]
         }
 
@@ -121,7 +121,7 @@ let amethystDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Force damage"
-                Power(Action, OncePerTurn,  $"Force Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Force Breath Cantrip", "1d12 Force dmg in a cone, inflicts Dazed 1 turn")
             ]
         }
 
@@ -132,7 +132,7 @@ let crystalDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Radiant damage"
-                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip", "1d12 Radiant dmg in a cone, inflicts Blind 1 turn")
             ]
         }
 
@@ -143,7 +143,7 @@ let emeraldDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Psychic damage"
-                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip", "1d12 Psychic dmg in a cone, inflicts Mental Fatigue 1 turn")
             ]
         }
 
@@ -154,7 +154,7 @@ let sapphireDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Thunder damage"
-                Power(Action, OncePerTurn, $"Thunder Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn, $"Thunder Breath Cantrip", "1d12 Thunder dmg in a cone, inflicts Reverberation 1 turn")
             ]
         }
 
@@ -165,7 +165,7 @@ let topazDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Necrotic damage"
-                Power(Action, OncePerTurn, $"Radiant Breath Cantrip", "TODODESCRIPTION")
+                Power(Action, OncePerTurn, $"Necrotic Breath Cantrip", "1d12 Necrotic dmg in a cone, inflicts Bone Chilled 1 turn")
             ]
         }
 
@@ -177,7 +177,7 @@ let lolthSwornDrow =
             RacialPassives = [
                 Simple $"Superior Darkvision"
                 Simple $"Advantage on Attack Rolls in total darkness"
-                Simple $"Cast Silence as an Action once per combat"
+                Power(Action, OncePerCombat, "Silence", "Create a 9m sphere of silence")
             ]
         }
 
@@ -189,7 +189,7 @@ let seldarineDrow =
             RacialPassives = [
                 Simple $"Superior Darkvision"
                 Simple $"Advantage on Attack Rolls in total darkness"
-                Simple $"Cast Misty Step as a Bonus Action once per combat"
+                Power(BonusAction, OncePerCombat, "Misty Step", "Teleport within 18m")
             ]
         }
 
@@ -219,7 +219,7 @@ let duergar =
             Name = "Duergar"
             BaseRaceId = Dwarf.Id
             RacialPassives = [
-                Simple $"Cast Enlarge on self as a Bonus Action once per combat"
+                Power(BonusAction, OncePerCombat, "Enlarge (self)", "Increase by one size category")
                 Simple $"Superior Darkvision"
                 Simple $"Advantage on Attack Rolls in total darkness"
             ]
@@ -273,7 +273,7 @@ let forestGnome =
             Name = "Forest Gnome"
             BaseRaceId = Gnome.Id
             RacialPassives = [
-                Power (Action, OncePerTurn, "Dominate Beast")
+                Power (Action, OncePerTurn, "Dominate Beast", "Dominate a Beast. Creature breaks free the first time it takes dmg from you or your allies.")
                 Simple $"Speak With Animals"
                 Simple $"Immune to effects that would Restrain them"
             ]
@@ -285,7 +285,7 @@ let deepGnome =
             Name = "Deep Gnome"
             BaseRaceId = Gnome.Id
             RacialPassives = [
-                Power(BonusAction, OncePerCombat, "Invisibility on self")
+                Power(BonusAction, OncePerCombat, "Invisibility (self)", "Become invisible until you attack or cast a spell")
                 Simple $"Superior Darkvision"
                 Simple $"Advantage on Attack Rolls in total darkness"
             ]
@@ -376,7 +376,7 @@ let asmodeusTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power(Action, OncePerCombat, "Fireball")
+                Power(Action, OncePerCombat, "Fireball", "As the spell, upcast to the maximum for a spellcaster of your character level")
             ]
         }
 
@@ -388,7 +388,7 @@ let mephistophelesTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power(Action, OncePerCombat, "Burning Hands")
+                Power(Action, OncePerCombat, "Burning Hands", "As the spell, upcast to the maximum for a spellcaster of your character level")
             ]
         }
 
@@ -400,7 +400,7 @@ let zarielTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power (Action, OncePerCombat, "Fire Shield")
+                Power (Action, OncePerCombat, "Fire Shield", "As the spell, upcast to the maximum for a spellcaster of your character level")
             ]
         }
 
