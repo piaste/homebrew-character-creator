@@ -24,6 +24,7 @@ let rec beastheart =
             11<classLvl>, [ Complex("Totemic Beast", "Nearby allies benefit from active Bestial Heart passives.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec berserker =
@@ -47,6 +48,7 @@ let rec berserker =
             11<classLvl>, [ Complex("Let It Rip", "Frenzied Strike deals maximum damage once per turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec frostbreaker =
@@ -70,6 +72,7 @@ let rec frostbreaker =
             11<classLvl>, [ Complex("Frozen Hellscape", "Critical Hits immediately Freeze targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec giantsBlood =
@@ -96,6 +99,7 @@ let rec giantsBlood =
             ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec rosemourn =
@@ -119,6 +123,7 @@ let rec rosemourn =
             11<classLvl>, [ Complex("Heart of Thorns", "Deal Piercing damage to all nearby enemies at turn end.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wildSoul =
@@ -139,6 +144,7 @@ let rec wildSoul =
             11<classLvl>, [ Complex("Tenacious Chaos", "Enraging triggers positive surges for all allies.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- CLERIC ---
@@ -159,6 +165,7 @@ let rec deathDomain =
             11<classLvl>, [ Complex("Death of the Firstborns", "First Necrotic damage in battle causes total Vulnerability.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec forgeDomain =
@@ -177,6 +184,7 @@ let rec forgeDomain =
             11<classLvl>, [ Complex("Smeltsong", "Striking Iron now causes targets to Melt.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec illusoryDomain =
@@ -195,6 +203,7 @@ let rec illusoryDomain =
             11<classLvl>, [ Complex("Fractured Reality", "Psychic damage strips Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec lifeDomain =
@@ -213,6 +222,7 @@ let rec lifeDomain =
             11<classLvl>, [ Complex("Divine Presence", "Preserve Life can resurrect fallen allies with full HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec tempestDomain =
@@ -234,6 +244,7 @@ let rec tempestDomain =
             11<classLvl>, [ Complex("Static Shock", "Elemental damage can Stun targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec warDomain =
@@ -252,6 +263,7 @@ let rec warDomain =
             11<classLvl>, [ Complex("Deific", "Next attack after a Miracle is always a Critical Hit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- DRUID ---
@@ -272,6 +284,7 @@ let rec circleOfTheElements =
             11<classLvl>, [ Complex("Avatar of Gaia", "Recover all Wild Shape charges every turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec circleOfTheLand =
@@ -293,6 +306,7 @@ let rec circleOfTheLand =
             11<classLvl>, [ Complex("Blessing of the Oak Father", "Entangled creatures emit a Blessing aura.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec circleOfTheMoon =
@@ -311,6 +325,7 @@ let rec circleOfTheMoon =
             11<classLvl>, [ Power(FreeAction, AtWill, "Lunar Shift", "Wild Shape after spell, or free spell after Wild Shape kill.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec circleOfTheShadows =
@@ -329,6 +344,7 @@ let rec circleOfTheShadows =
             11<classLvl>, [ Complex("Hallucinatory Horror", "Maddened enemies are Vulnerable to Psychic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec circleOfTheSpores =
@@ -350,6 +366,7 @@ let rec circleOfTheSpores =
             11<classLvl>, [ Power(BonusAction, AtWill, "Sovereign Spores", "Reanimate Dangerous/Fatal foes.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec circleOfTheStars =
@@ -371,6 +388,7 @@ let rec circleOfTheStars =
             11<classLvl>, [ Complex("Eyes of the Cosmos", "All three constellation forms active at all times.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- FIGHTER ---
@@ -395,6 +413,7 @@ let rec champion =
             11<classLvl>, [ Complex("Champion's Indomitability", "Adds Proficiency Bonus to all Saving Throws. (Replaces Indomitable)") ]
         ]
         ScalingAbilities = fun _  _ -> []
+        CustomPicks = Map []
     }
 
 let rec frontierKnight =
@@ -416,6 +435,7 @@ let rec frontierKnight =
             Simple $"{cl} Combat Techniques Known"
             Simple $"Technique Cooldown: {if cl >= 9<classLvl> then 1 elif cl >= 5<classLvl> then 2 else 3} turns"
         ]
+        CustomPicks = Map []
     }
 
 let rec arcaneArcher =
@@ -435,6 +455,7 @@ let rec arcaneArcher =
         ScalingAbilities = fun _  cl -> [
             Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}"
         ]
+        CustomPicks = Map []
     }
 
 let rec dragoon =
@@ -455,6 +476,7 @@ let rec dragoon =
             11<classLvl>, [ Complex("Wyrmcall Breakpoint", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec eldritchKnight =
@@ -473,6 +495,7 @@ let rec eldritchKnight =
             11<classLvl>, [ Complex("Shadowed Over", "Killing a Frightened creature restores all Warlock Spell Slots.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec palisade =
@@ -491,6 +514,7 @@ let rec palisade =
             11<classLvl>, [ Complex("Superior Impact", "Expend a Superiority Die on shield hit to deal maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- ARTIFICER ---
@@ -510,6 +534,7 @@ let rec arcanist =
             11<classLvl>, [ Complex("Arcane Aim", "Critical Hits with Ranged attacks allow casting a spell without a slot.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec artillerist =
@@ -528,6 +553,7 @@ let rec artillerist =
             11<classLvl>, [ Complex("Double Tap", "Single-target Ranged attacks now target two creatures.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec battleSynthetic =
@@ -550,6 +576,7 @@ let rec battleSynthetic =
             11<classLvl>, [ Complex("Bigby Grym", "Lil' G grows to enormous size and power.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec grenadier =
@@ -568,6 +595,7 @@ let rec grenadier =
             11<classLvl>, [ Complex("Grand Detonation", "Gain a Runepowder Vial upon Short Rest.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec infusedArcsmith =
@@ -586,6 +614,10 @@ let rec infusedArcsmith =
             11<classLvl>, [ Complex("Experimental Augmentation", "Infusing triggers Wild Magic surges (Positive for allies, Negative for enemies).") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = 
+            [ 1 .. +2 .. 11 ]
+            |> List.map (fun i -> UMX.tag<classLvl> i, [ArtificerOptimizationMatrix, 1; ArtificerSabotageMatrix, 1])
+            |> Map.ofList
     }
 
 let rec striker =
@@ -604,6 +636,7 @@ let rec striker =
             11<classLvl>, [ Complex("Kill Window", "While Alpha Strike is active, all Attack Rolls are Critical Hits.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- BARD ---
@@ -627,6 +660,7 @@ let rec collegeOfCaptivation =
             11<classLvl>, [ Complex("Countenance of Stoicism", "Concentration cannot be broken while Performing.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec collegeOfLore =
@@ -644,6 +678,7 @@ let rec collegeOfLore =
             11<classLvl>, [ Complex("Vow of Secrecy", "Recover level 6 spell slot when an enemy fails a save.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec collegeOfMoriendi =
@@ -662,6 +697,7 @@ let rec collegeOfMoriendi =
             11<classLvl>, [ Complex("Ars Moriendi", "Necromancy spells target an additional creature.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec collegeOfNostalgia =
@@ -680,6 +716,7 @@ let rec collegeOfNostalgia =
             11<classLvl>, [ Complex("The Black Parade", "Thunder damage potentially Lures targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec collegeOfSteel =
@@ -699,6 +736,7 @@ let rec collegeOfSteel =
             11<classLvl>, [ Complex("Climactic Strikes", "Weapon killing blow while Performing puts you in Performative Chorus.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec collegeOfValour =
@@ -717,6 +755,7 @@ let rec collegeOfValour =
             11<classLvl>, [ Complex("Reliable Valor", "Cannot fail Ability Checks with Proficient Skills. (Replaces Reliable Talent)") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- MONK ---
@@ -743,6 +782,7 @@ let rec wayOfTheArcane =
             11<classLvl>, [ Complex("Protective Casting", "Casting Ki damage spells grants Immunity to that type for one turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wayOfTheGentleFist =
@@ -762,6 +802,7 @@ let rec wayOfTheGentleFist =
             11<classLvl>, [ Complex("Flow of Compassion", "Dodging an attack heals you and all allies within 9m.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wayOfTheDrunkenMaster =
@@ -785,6 +826,7 @@ let rec wayOfTheDrunkenMaster =
             11<classLvl>, [ Complex("Eighth Gate of Sake", "Taking melee damage while Inebriated forces you Prone (disadvantage for enemies); standing up is free and grants Critical Hits.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wayOfTheOpenHand =
@@ -807,6 +849,7 @@ let rec wayOfTheOpenHand =
             11<classLvl>, [ Complex("Danse Macabre", "Killing an enemy restores an Action and Bonus Action once per turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wayOfTheShadowArts =
@@ -830,6 +873,7 @@ let rec wayOfTheShadowArts =
             11<classLvl>, [ Complex("See No Evil", "Damaging enemies Blinds them.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wayOfTheTemperedSteel =
@@ -853,6 +897,7 @@ let rec wayOfTheTemperedSteel =
             11<classLvl>, [ Complex("Strike of the Yamato", "Special techniques always Critical Strike targets with full HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- PALADIN ---
@@ -878,6 +923,7 @@ let rec ancientWarden =
             11<classLvl>, [ Complex("Oathbound Defender", "Healing Radiance grants Resistance; Advantage against Bound targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec crownedPhoenix =
@@ -901,6 +947,7 @@ let rec crownedPhoenix =
             11<classLvl>, [ Complex("Rebirth", "Downing for the first time restores all HP and erupts in an explosion.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec devoutParagon =
@@ -924,6 +971,7 @@ let rec devoutParagon =
             11<classLvl>, [ Complex("Pure Radiance", "Advantage and bonus Radiant damage against Orbed targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec oathboundCrusader =
@@ -947,6 +995,7 @@ let rec oathboundCrusader =
             11<classLvl>, [ Complex("I Am Vengeance", "Erupt in radiant fury: bonus Radiant damage and Advantage for 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec oathbreaker =
@@ -969,6 +1018,7 @@ let rec oathbreaker =
             11<classLvl>, [ Complex("Oathbreaker Supreme", "Turn the Living also Terrifies living creatures.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec tyrant =
@@ -992,6 +1042,7 @@ let rec tyrant =
             11<classLvl>, [ Complex("Fist of the Tyrant", "Tyrannical Smite conjures a fall-out Fist dealing 12d12 AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- RANGER ---
@@ -1013,6 +1064,7 @@ let rec beastMaster =
             11<classLvl>, [ Complex("Leader of the Pack", "You can have two animal companions active simultaneously.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec gloomStalker =
@@ -1032,6 +1084,7 @@ let rec gloomStalker =
             11<classLvl>, [ Complex("Dread Ambusher", "Every successful Attack Roll on the first turn is a Critical Hit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec hunter =
@@ -1054,6 +1107,7 @@ let rec hunter =
             11<classLvl>, [ Complex("Twinned Strikes", "Target two creatures with any weapon attack.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec mireMist =
@@ -1073,6 +1127,7 @@ let rec mireMist =
             11<classLvl>, [ Complex("Fatal Decay", "Attacks against Corroded enemies always Crit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec swarmkeeper =
@@ -1092,6 +1147,7 @@ let rec swarmkeeper =
             11<classLvl>, [ Complex("A Storm of Swarms", "Potency of all swarms is doubled.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec twinfang =
@@ -1111,6 +1167,7 @@ let rec twinfang =
             11<classLvl>, [ Complex("Apex Coordination", "Dealing damage to creature the other hit adds +1d8 damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- ROGUE ---
@@ -1134,6 +1191,7 @@ let rec arcaneTrickster =
             11<classLvl>, [ Complex("Elusive Casting", "Turn Invisible at the start of each turn if visible.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec assassin =
@@ -1152,6 +1210,7 @@ let rec assassin =
             11<classLvl>, [ Complex("Execute", "Hits against targets < 10% HP kill instantly.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec hiddenToxicant =
@@ -1170,6 +1229,7 @@ let rec hiddenToxicant =
             11<classLvl>, [ Complex("Toxic Eruption", "Detonating a toxin strips Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec mercenary =
@@ -1194,6 +1254,7 @@ let rec mercenary =
             11<classLvl>, [ Power(Action, AtWill, "Cannon Fire", "Blanket 9m area with 16 explosions.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec thief =
@@ -1214,6 +1275,7 @@ let rec thief =
             11<classLvl>, [ Complex("No Honor Among Us", "Gain three additional Reactions.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec virulence =
@@ -1232,6 +1294,7 @@ let rec virulence =
             11<classLvl>, [ Complex("Terminal Exposure", "Extra damage = Sneak Attack against Corroded targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- SORCERER ---
@@ -1255,6 +1318,7 @@ let rec draconicBloodline =
             11<classLvl>, [ Complex("Dragontongue", "Elemental Breath always deals maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec radiantBloom =
@@ -1274,6 +1338,7 @@ let rec radiantBloom =
             11<classLvl>, [ Power(Action, AtWill, "Radiance Unhinged", "9m area heal/damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec shadeWalker =
@@ -1296,6 +1361,7 @@ let rec shadeWalker =
             11<classLvl>, [ Complex("Pitch Black", "Advantage on hits while Heavily Obscured.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec frenziedTundra =
@@ -1314,6 +1380,7 @@ let rec frenziedTundra =
             11<classLvl>, [ Complex("Frozen Soul", "Maddened enemies are high priority targets for their allies.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec volcanist =
@@ -1333,6 +1400,7 @@ let rec volcanist =
             11<classLvl>, [ Power(Action, AtWill, "Pyrebound", "Expend 10 Heat for Meteoric Burst (30d6).") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec wildMagic =
@@ -1353,6 +1421,7 @@ let rec wildMagic =
             11<classLvl>, [ Power(Reaction, AtWill, "Controlled Chaos", "Enemy spell triggers positive surge in you.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- WARLOCK ---
@@ -1376,6 +1445,7 @@ let rec pactOfTheBlade =
             11<classLvl>, [ Complex("Eldritch Inferno", "Erupt for 6d12 Fire damage every 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec pactOfTheChain =
@@ -1394,6 +1464,7 @@ let rec pactOfTheChain =
             11<classLvl>, [ Complex("Fiendish Growth III", "Companions reach ultimate power with third spell.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec pactOfPenumbra =
@@ -1415,6 +1486,7 @@ let rec pactOfPenumbra =
             11<classLvl>, [ Complex("Forward Unto Dawn", "Infuse EB with slots to create Eldritch Bombs.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec pactOfSeverance =
@@ -1436,6 +1508,7 @@ let rec pactOfSeverance =
             11<classLvl>, [ Complex("Spectral Rebirth", "Survive lethal damage once with 1 HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec pactOfTheTome =
@@ -1454,6 +1527,7 @@ let rec pactOfTheTome =
             11<classLvl>, [ Complex("Abyssal Desolation", "EB Critical Hits roll two additional damage dice.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec pactOfThePrimordial =
@@ -1472,6 +1546,7 @@ let rec pactOfThePrimordial =
             11<classLvl>, [ Complex("Demonic Apotheosis", "Shape into a Primordial Demon using 7 Souls.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 // --- WIZARD ---
@@ -1497,6 +1572,7 @@ let rec arcblade =
             11<classLvl>, [ Complex("A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec arcaneWarden =
@@ -1516,6 +1592,7 @@ let rec arcaneWarden =
             11<classLvl>, [ Complex("Retaliatory Ward", "Melee damage against you reflects Force damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec evoker =
@@ -1535,6 +1612,7 @@ let rec evoker =
             11<classLvl>, [ Complex("Scholar’s Focus", "First spell each turn costs no Action/Bonus Action.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec luminalConfluence =
@@ -1554,6 +1632,7 @@ let rec luminalConfluence =
             11<classLvl>, [ Power(Action, AtWill, "Luminal Genesis", "Consume all stains for high AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec necromancer =
@@ -1573,6 +1652,7 @@ let rec necromancer =
             11<classLvl>, [ Complex("Raise Hell", "Start combat by raising all suitable nearby corpses.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 let rec elementalist =
@@ -1592,6 +1672,7 @@ let rec elementalist =
             11<classLvl>, [ Complex("Primal Convergence", "Can summon all four Elementals at once.") ]
         ]
         ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
     }
 
 type Placeholder = class end

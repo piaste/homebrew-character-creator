@@ -17,6 +17,8 @@ type LevelRecord =
         
         CantripIds: Set<string<cantripId>>
         SpellIds: Set<string<spellId>>
+
+        SpecialPickIds: Set<string<specialPickId>>
     }
     static member Blank subclassId classLevel = 
         {
@@ -28,6 +30,8 @@ type LevelRecord =
 
             CantripIds = Set.empty
             SpellIds = Set.empty
+
+            SpecialPickIds = Set.empty
         }
 
 type [<Measure>] pbuy
@@ -95,18 +99,23 @@ type Character =
 
                 AllCantripIds = 
                     levelHistory
-                    |> List.map _.CantripIds
-                    |> Set.unionMany
+                    |> Seq.collect _.CantripIds
+                    |> Set.ofSeq
 
                 AllSpellIds = 
                     levelHistory
-                    |> List.map _.SpellIds 
-                    |> Set.unionMany
+                    |> Seq.collect _.SpellIds 
+                    |> Set.ofSeq
 
                 AllFeatIds = 
                     levelHistory
-                    |> List.collect (_.FeatId >> Option.toList)
-                    |> Set.ofList
+                    |> Seq.collect (_.FeatId >> Option.toList)
+                    |> Set.ofSeq
+
+                AllSpecialPicks = 
+                    levelHistory
+                    |> Seq.collect _.SpecialPickIds
+                    |> Set.ofSeq
                     
                 AllClassPassiveIdsByClass = 
                     levelHistory

@@ -8,6 +8,7 @@ open Helpers
 
 type LevelUpPick = 
     | Archetypes | Traits | Skills | SkillExps | Feats | ClassPassives | Cantrips | Spells
+    | ClassSpecific of ClassLevelUpPickType
     
 let nSkillProfPicks = 4
 let nSkillExpPicks = 2
@@ -46,6 +47,8 @@ let nFeatPicks lr =
 type Bg3HomebrewCCreator.Domain.Character.Character with
     member c.Picks = 
         let l = c.NextLevelUp
+        let subCl = Entities.Subclasses.allSubclasses[l.SubclassId]
+        let cl = Entities.Classes.allClasses[subCl.BaseClassId]
         Map [
             if c.CharacterLevel = 1<charLvl> then
                 Archetypes, 1
@@ -57,5 +60,11 @@ type Bg3HomebrewCCreator.Domain.Character.Character with
             Spells, nSpellPicks (subclassById l.SubclassId).CasterType
             ClassPassives, nPassivePicks l 
             Feats, nFeatPicks l 
+
+            for pick, q in cl.CustomPicks.GetOrElse(l.ClassLevel, []) do
+               ClassSpecific pick, q 
+            
+            for pick, q in subCl.CustomPicks.GetOrElse(l.ClassLevel, []) do
+               ClassSpecific pick, q
         ]
         |> Map.filter (fun _ n -> n > 0)

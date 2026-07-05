@@ -37,6 +37,7 @@ type Message =
     | SetBaseClass of string<classId>
     | SetSubclass of string<subclassId>
     | ToggleClassPassive of string<classPassiveId>
+    | ToggleSpecialPick of string<specialPickId>
     | ToggleFeat of string<featId>
     | ToggleCantrip of string<cantripId>
     | ToggleSpell of string<spellId>
@@ -291,6 +292,18 @@ let update load save copyCharacter message model =
                             if character.NextLevelUp.FeatId = Some featId then None
                             else Some featId
             }
+
+    | ToggleSpecialPick spId ->
+        apply <| fun character ->
+            if character.PreviousHistory.AllSpecialPicks
+               |> Set.contains spId then character else
+
+            { character with 
+                NextLevelUp.SpecialPickIds = 
+                    character.NextLevelUp.SpecialPickIds.Toggle spId
+            }
+
+
     | TogglePick (pick, id) ->
         let msg = 
             match pick with
@@ -302,6 +315,7 @@ let update load save copyCharacter message model =
             | Spells -> ToggleSpell (UMX.tag id)
             | Feats -> ToggleFeat (UMX.tag id)
             | ClassPassives -> ToggleClassPassive (UMX.tag id)
+            | ClassSpecific cs -> ToggleSpecialPick (UMX.tag id)
         model, Cmd.ofMsg msg // maybe use Cmd.batch to autoforward?
  
     | SetSearchQuery (pick, q) ->

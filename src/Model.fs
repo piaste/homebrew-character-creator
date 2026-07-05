@@ -54,6 +54,8 @@ let defaultCharacter =
 
             FeatId = None
             ClassPassiveIds = Set.empty
+
+            SpecialPickIds = Set.empty
         }
     }
 

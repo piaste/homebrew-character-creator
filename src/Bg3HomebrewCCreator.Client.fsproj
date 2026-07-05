@@ -26,6 +26,7 @@
     <Compile Include="Domain\Entities\Classes.fs" />
     <Compile Include="Domain\Entities\Subclasses.fs" />
     <Compile Include="Domain\Entities\ClassPassives.fs" />
+    <Compile Include="Domain\Entities\SpecialPicks.fs" />
     <Compile Include="Domain\Character.fs" />
     <Compile Include="Domain\Helpers.fs" />
     <Compile Include="Domain\PickRules.fs" />

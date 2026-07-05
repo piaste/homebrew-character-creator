@@ -75,6 +75,8 @@ let levelUpDefault character =
             
             CantripIds = Set.empty
             SpellIds = Set.empty
+
+            SpecialPickIds = Set.empty
         }
     }
 

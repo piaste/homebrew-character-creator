@@ -223,6 +223,45 @@ type CasterType =
     | HalfCaster of SpellList
     | Martial
 
+type ClassLevelUpPickType = 
+    | ArtificerOptimizationMatrix
+    | ArtificerSabotageMatrix
+    | DruidWildshape
+    | FighterManoeuvres
+    | FighterCombatTechniques
+    | PaladinOath
+    | PaladinSmite
+    | RangerArrow
+    | SorcererMetamagic
+    | WarlockPatron
+    member this.DisplayString = 
+        match this with
+        | ArtificerOptimizationMatrix -> "Optimization Matrix"
+        | ArtificerSabotageMatrix -> "Sabotage Matrix"
+        | DruidWildshape -> "Wild Shape"
+        | FighterManoeuvres -> "Manoeuvre"
+        | FighterCombatTechniques -> "Combat Techniques"
+        | PaladinOath -> "Oath"
+        | PaladinSmite -> "Smites"
+        | RangerArrow -> "Frontier Ballistics"
+        | SorcererMetamagic -> "Metamagic"
+        | WarlockPatron -> "Patron"
+
+type [<Measure>] specialPickId
+type ClassLevelUpPick = 
+    {
+        Type: ClassLevelUpPickType
+        TypeId : string
+        Name : string
+        Grants: Passive list
+    }
+    member this.Id = 
+        UMX.tag<specialPickId> (this.Type.ToString() + "-" + this.TypeId)
+    member this.Description = 
+        this.Grants
+        |> Seq.map _.Description
+        |> String.concat "\n" 
+
 type [<Measure>] classId
 
 type ClassDef =
@@ -233,6 +272,7 @@ type ClassDef =
         SpellcastingAbility: Ability
         ScalingAbilities: int<charLvl> -> int<classLvl> -> Passive list
         FixedAbilities: Map<int<classLvl>, Passive list>
+        CustomPicks: Map<int<classLvl>, (ClassLevelUpPickType * int) list>
     }
 
 type [<Measure>] subclassId
@@ -246,6 +286,7 @@ type SubclassDef =
         CasterType: CasterType        
         ScalingAbilities: int<charLvl> -> int<classLvl> -> Passive list
         FixedAbilities: Map<int<classLvl>, Passive list>
+        CustomPicks: Map<int<classLvl>, (ClassLevelUpPickType * int) list>
     }
     with 
         member this.DisplayName useLoreNames = 

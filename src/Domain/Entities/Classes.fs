@@ -17,6 +17,7 @@ let rec artificer = {
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Improved Extra Attack"]
         ]
+        CustomPicks = Map []
     }
 
 let rec barbarian = {
@@ -33,6 +34,7 @@ let rec barbarian = {
             5<classLvl>, [Simple "Extra Attack"; Simple $"{TOGGLEABLE} Reckless Assault"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple $"{TOGGLEABLE} Reckless Rampage"]
         ]
+        CustomPicks = Map []
     }
 
 let rec bard = {
@@ -51,6 +53,7 @@ let rec bard = {
             5<classLvl>, [Simple "Font of Inspiration"]
             9<classLvl>, [Simple "Reliable Talent"]
         ]
+        CustomPicks = Map []
     }
 
 let rec cleric = {
@@ -67,6 +70,7 @@ let rec cleric = {
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Steel Cast"]
         ]
+        CustomPicks = Map []
     }
 
 let rec druid = {
@@ -83,6 +87,7 @@ let rec druid = {
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Steel Cast"]
         ]
+        CustomPicks = Map []
     }
 
 let rec fighter = {
@@ -103,6 +108,7 @@ let rec fighter = {
             5<classLvl>, [Simple "Extra Attack"; Simple "Action Surge"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Indomitable"]
         ]
+        CustomPicks = Map []
     }
 
 let rec monk = {
@@ -122,6 +128,7 @@ let rec monk = {
             5<classLvl>, [Simple "Martial Flux"]
             9<classLvl>, [Simple "Martial Mastery"]
         ]
+        CustomPicks = Map []
     }
 
 let rec paladin = {
@@ -140,6 +147,7 @@ let rec paladin = {
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Smitten"]
         ]
+        CustomPicks = Map []
     }
 
 let rec ranger = {
@@ -156,6 +164,7 @@ let rec ranger = {
             5<classLvl>, [Simple "Extra Attack"; Simple "Horde Breaker"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Eagle Eyed"]
         ]
+        CustomPicks = Map []
     }
 
 let rec rogue = {
@@ -174,6 +183,7 @@ let rec rogue = {
             5<classLvl>, [Simple "Extra Attack"; Simple "Lucky Toss"; Simple "Greater Sneak Attack"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Uncanny Dodge"; Simple "Superior Sneak Attack"]
         ]
+        CustomPicks = Map []
     }
 
 let rec sorcerer = {
@@ -193,6 +203,7 @@ let rec sorcerer = {
             5<classLvl>, [Simple "Morbid Creation"]
             9<classLvl>, [Simple "Philosopher’s Stone"]
         ]
+        CustomPicks = Map []
     }
 
 let rec warlock = {
@@ -209,6 +220,7 @@ let rec warlock = {
             5<classLvl>, [Simple "Mystic Arcanum"]
             9<classLvl>, [Simple "Deepened Arcanum"]
         ]
+        CustomPicks = Map []
     }
 
 let rec wizard = {
@@ -225,6 +237,7 @@ let rec wizard = {
         FixedAbilities = Map [
             1<classLvl>, [Simple "Scroll Scribing"; Simple "Scholarly Acumen"; Simple "Arcane Channeling"]
         ]
+        CustomPicks = Map []
     }
 
 type Placeholder = class end

@@ -294,18 +294,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | true -> empty()
 
                 }
-                // div {
-                //     button {
-                //         cl "btn primary"
-                //         on.click (fun _ -> dispatch Message.LevelDown)
-                //         "Level Down"
-                //     }
-                //     button {
-                //         cl "btn primary"
-                //         on.click (fun _ -> dispatch Message.LevelUp)
-                //         "Level Up"
-                //     }
-                // }
             | Race -> 
                 radialStage rct dispatch
                     (baseRaceIdBySubraceId c.RaceId)
@@ -418,6 +406,15 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     )
                     c.PreviousHistory.AllFeatIds
                     (l.FeatId |> Option.toList |> Set.ofList)
+
+            | Pick (ClassSpecific sp) ->
+                ph Feats <| Picker.view sp.DisplayString
+                    ((SpecialPicks.allSpecialPicksOfType sp).Values
+                     |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.toList
+                    )
+                    c.PreviousHistory.AllSpecialPicks
+                    l.SpecialPickIds
         )
         .StageTabs(
             concat {
@@ -448,6 +445,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         picksDockButton "Passives" l.ClassPassiveIds.Count
                     | Feats -> 
                         picksDockButton "Feats" (Option.count l.FeatId)
+                    | ClassSpecific sp -> 
+                        picksDockButton sp.DisplayString l.SpecialPickIds.Count
                 
                 in f p.Value dispatch p.Key
 
