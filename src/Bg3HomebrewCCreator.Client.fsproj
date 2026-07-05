@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <NoWarn>FS1240</NoWarn>
+    <NoWarn>FS3391</NoWarn>
     <!-- type tests ignore UoMs -->
   </PropertyGroup>
   <ItemGroup>
