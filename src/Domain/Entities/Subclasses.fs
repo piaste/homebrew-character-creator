@@ -121,9 +121,9 @@ let rec rosemourn =
         ScalingAbilities = fun _ _ -> []
     }
 
-let rec wildSoulBarb =
+let rec wildSoul =
     {
-        Id = % nameof wildSoulBarb
+        Id = % nameof wildSoul
         Name = "Wild Soul"
                <?> "Wild Weave's Thread"
         Description = "Arcane power churns within, waiting to be released."

@@ -1,8 +1,9 @@
 module Bg3HomebrewCCreator.OtherView.Helpers
 
+open System
 open Bolero
 open Bolero.Html
-
+open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Entities
 open Utils
 open Bg3HomebrewCCreator.Domain.Types
@@ -15,27 +16,29 @@ let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"
 let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
 let icon subpath = img { 
     attr.style "width:100%; height:100%; object-fit:contain;"
-    attr.src $"/assets/icons/{toFileName subpath}.png"
+    attr.src $"/assets/icons/{subpath}.png"
 }
 
-let baseraceIconPath race = 
-    let race = BaseRaces.allBaseRaces[race]
-    $"races/{race.Name}/{race.Name}"
+let baseraceIconPath (baseRaceId : string<baseRaceId>) = 
+    $"races/{baseRaceId}/{baseRaceId}"
 
-let subraceIconPath race =   
-    let race = Races.allSubraces[race]
-    let baseRaceName = toFileName <| BaseRaces.allBaseRaces[race.BaseRaceId].Name
+let subraceIconPath subraceId =   
+    let subrace = Races.allSubraces[subraceId]
+    let baseRaceId = subrace.BaseRaceId
     let subraceTag = 
-        ("-" + toFileName race.Name).Replace($"-{baseRaceName}", "")
-    $"races/{baseRaceName}/{baseRaceName}{subraceTag}"
+        $"-{UMX.untag subrace.Id}"
+            .ToLower()
+            .Replace($"-{baseRaceId}", "", StringComparison.InvariantCultureIgnoreCase)
+            .Replace($"{baseRaceId}", "", StringComparison.InvariantCultureIgnoreCase)
+    $"races/{baseRaceId}/{baseRaceId}{subraceTag}"
 
 let baseclassIconPath baseclass = 
     let baseclass = Classes.allClasses[baseclass]
-    $"classes/{baseclass.Name}/{baseclass.Name}"
+    $"classes/{baseclass.Id}/{baseclass.Id}"
 
 let subclassIconPath subclass = 
     let subclass = Subclasses.allSubclasses[subclass]
-    $"classes/{Classes.allClasses[subclass.BaseClassId].Name}/{subclass.Name}"
+    $"classes/{Classes.allClasses[subclass.BaseClassId].Id}/{subclass.Id}"
 
 let cantripIcon cantripId = 
     Cantrips.allCantrips.Values 

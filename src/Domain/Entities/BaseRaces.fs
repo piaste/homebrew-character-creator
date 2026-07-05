@@ -3,17 +3,17 @@ module Bg3HomebrewCCreator.Domain.Entities.BaseRaces
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
 
-let rec Human = { Id = % nameof Human }
-let rec ``Half-Elf`` = { Id = % nameof ``Half-Elf`` }
-let rec Elf = { Id = % nameof Elf }
-let rec Drow = { Id = % nameof Drow }
-let rec Dwarf = { Id = % nameof Dwarf }
-let rec Halfling = { Id = % nameof Halfling }
-let rec Gnome = { Id = % nameof Gnome }
-let rec ``Half-Orc`` = { Id = % nameof ``Half-Orc`` }
-let rec Tiefling = { Id = % nameof Tiefling }
-let rec Dragonborn = { Id = % nameof Dragonborn }
-let rec Githyanki = { Id = % nameof Githyanki }
+let rec human = { Id = % nameof human; Name = "Human" }
+let rec halfElf = { Id = % nameof halfElf; Name = "Half-Elf" }
+let rec elf = { Id = % nameof elf; Name = "Elf" }
+let rec drow = { Id = % nameof drow; Name = "Drow"  }
+let rec dwarf = { Id = % nameof dwarf; Name = "Dwarf"  }
+let rec halfling = { Id = % nameof halfling; Name = "Halfling"  }
+let rec gnome = { Id = % nameof gnome; Name = "Gnome"  }
+let rec halfOrc = { Id = % nameof halfOrc; Name = "Half-Orc"  }
+let rec tiefling = { Id = % nameof tiefling; Name = "Tiefling"  }
+let rec dragonborn = { Id = % nameof dragonborn; Name = "Dragonborn" }
+let rec githyanki = { Id = % nameof githyanki; Name = "Githyanki" }
 
 type private Placeholder = class end
 let allBaseRaces = getAll<Placeholder, BaseRaceDef, baseRaceId>()

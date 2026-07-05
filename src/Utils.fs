@@ -92,19 +92,19 @@ type KeyedMap<[<Measure>] 'm, 'v
          and 'v : (member Description : string)
          > = Map<string<'m>, 'v>
 
-let toFileName (entityName : string) = 
+let camelCaseToKebabCase (entityName : string) = 
     entityName.ToLower().Replace(' ', '-')
 
 type LoreableString(defaultText: string, ?loreText : string) =
-    member private this.DefaultText = defaultText
-    member private this.LoreText = loreText
-    member this.Display useLoreNames = 
+    member private _.DefaultText = defaultText
+    member private _.LoreText = loreText
+    member _.Display useLoreNames = 
         match useLoreNames, loreText with
         | true, Some lt -> lt
         | _ -> defaultText
     static member op_Implicit(text: string) = LoreableString(defaultText = text)
 
-    static member inline (+) (ls: LoreableString, s: string) =
+    static member (+) (ls: LoreableString, s: string) =
         match ls.LoreText with
         | None -> LoreableString(ls.DefaultText + s)
         | Some lt -> LoreableString(ls.DefaultText + s, lt + s)

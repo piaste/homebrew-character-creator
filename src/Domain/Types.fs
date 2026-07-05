@@ -162,8 +162,8 @@ type [<Measure>] subraceId
 type BaseRaceDef = 
     {
         Id : string<baseRaceId>
-    }
-    member this.Name = UMX.untag this.Id
+        Name : string
+    }    
     member this.Description = UMX.untag this.Id
 
 type SubraceDef =

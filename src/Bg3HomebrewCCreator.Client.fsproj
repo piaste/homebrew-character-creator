@@ -3,8 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <NoWarn>FS1240</NoWarn>
-    <NoWarn>FS3391</NoWarn>
     <!-- type tests ignore UoMs -->
+    <NoWarn>FS3391</NoWarn>
+    <!-- don't warn for automatic implicit conversions -->
+<!-- 
+    <RunAOTCompilation>true</RunAOTCompilation>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>full</TrimMode>
+-->
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />

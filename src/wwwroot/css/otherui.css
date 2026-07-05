@@ -616,7 +616,11 @@ html,body{
 
 /* The stage is the coordinate-space for the orbit math.
    It MUST be the same element we measure and the parent of the orbit nodes. */
-.radial-stage{ position: relative; flex: 1 1 auto; min-height: 520px; }
+.radial-stage{ 
+  position: relative; 
+  flex: 1 1 auto; 
+  min-height: 34em; 
+}
 .radial-summary{
   position: relative;  
   padding-right: 18px; /* no reserved column; summary uses grid */
@@ -712,14 +716,14 @@ html,body{
 
 .radial-crumb-icon img{ width: 30px; height: 30px; object-fit: cover;
   display: block; opacity: .95; }
-
+   
 .radial-center{
   position: absolute;
   left: 50%;
-  top: 17em;
+  top: 18em;
   transform: translate(-50%, -50%);
-  width: 220px;
-  height: 220px;
+  width: 300px;
+  height: 300px;
   border-radius: 999px;
   border: 1px solid rgba(212,175,55,0.35);
   background:

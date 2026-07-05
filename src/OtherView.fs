@@ -50,7 +50,7 @@ let picksDockButton (title : string) (count: int) (max: int) dispatch stage =
 
 let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
 
-    let radius = 200.0
+    let radius = 220.0
 
     let radialButton index total (text: string) iconSubpath action hoverAction = 
         let angle = 1.5 * Math.PI + index * 2. * Math.PI / total

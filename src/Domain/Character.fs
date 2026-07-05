@@ -176,6 +176,7 @@ type Character =
             |> List.map _.Effect
             |> List.sum
 
+
 type PersistedState =
     {
         Character: Character
