@@ -5,16 +5,18 @@ open Bg3HomebrewCCreator.Domain.Types
 open Bg3HomebrewCCreator.Domain.Entities.Classes
 
 // FIGHTER
-let rec ``Aspect of Defiance`` = {
+let rec aspectOfDefiance = {
     ClassId = fighter.Id
-    Id = % nameof ``Aspect of Defiance``
+    Id = % nameof aspectOfDefiance
+    Name = "Aspect of Defiance"
     Grants = [ Complex("Aspect of Defiance", "When damaged below 75% of your Hit Points, gain Resistance to all forms of physical damage.") ]
 }
 
-let rec ``Challenger's Call Honed`` = {
+let rec challengersCallHoned = {
     ClassId = fighter.Id
-    Id = % nameof ``Challenger's Call Honed``
-    Grants = [ Power(FreeAction, AtWill, "When an ally within 9m/30ft of you is damaged while below 75% of their total Hit Points, immediately Challenge that enemy, as well as any additional enemies within 9m/30ft of the aggressor.") ]
+    Id = % nameof challengersCallHoned
+    Name = "Challenger's Call Honed"
+    Grants = [ Power(FreeAction, AtWill, "Challenger's Call Honed", "When an ally within 9m/30ft of you is damaged while below 75% of their total Hit Points, immediately Challenge that enemy, as well as any additional enemies within 9m/30ft of the aggressor.") ]
 }
 
 let rec ``Charge of the Collective`` = {

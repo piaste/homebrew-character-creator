@@ -265,9 +265,9 @@ type [<Measure>] classPassiveId
 type ClassPassiveDef = {
     ClassId : string<classId>
     Id : string<classPassiveId>
+    Name : string
     Grants: Passive list
-} with
-    member this.Name = UMX.untag this.Id
+} with    
     member this.Description = 
         this.Grants |> List.map _.Description |> String.concat "\n"
 
