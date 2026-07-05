@@ -93,3 +93,8 @@ let sheetAttr (key : string) (value : string) =
         span { key }
         b { value }
     }
+
+let printRichText (text: string) = 
+    forEach (text.Split '\n') <| fun l -> 
+        let withReplacedEm = l.Replace("&lt;i&gt;", "<em>").Replace("&lt;/i&gt;", "</em>")        
+        p { rawHtml withReplacedEm }

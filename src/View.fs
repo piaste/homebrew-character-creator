@@ -179,7 +179,7 @@ let levelUpSection (model: Model) dispatch = concat {
         |> function
            | None ->  Subclasses.allSubclassesByClass[clId].Values :> seq<_>
            | Some sclId -> seq { subclassById sclId }
-        |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames |})
+        |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames; Description = sc.DisplayDescription model.UseLoreNames |})
 
     let defaultSubclassFor = 
         validSubclassesFor >> Seq.head >> _.Id

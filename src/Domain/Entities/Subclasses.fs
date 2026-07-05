@@ -1,5 +1,3 @@
-#nowarn 3391 // Warn for string -> Simple ab upcasting. Remove this once the abilities are expanded to Complex.
-
 module Bg3HomebrewCCreator.Domain.Entities.Subclasses
 
 open FSharp.UMX
@@ -12,12 +10,13 @@ let rec beastheart =
     {
         Id = % nameof beastheart
         Name = "Beastheart"
-        LoreName = Some "Uthgardt Telhut"
+               <?> "Uthgardt Telhut"
         Description = "Attunement with nature and its beasts inspires your rage."
+                      <?> "You completed a Runehunt and were initiated into one of the barbarian tribes of the North. Totemic spirits now answer your rage and grant you their bestial strength."
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Rage: Bestial Heart: Gain resistance and unique heart benefits.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Rage", "Bestial Heart: Gain resistance and unique heart benefits.") ]
             3<classLvl>, [ Complex("Call of the Wild", "Bestial Hearts grant unique actions while enraged.") ]
             5<classLvl>, [ Complex("Bestial Dominance", "Dominate Beasts and Monstrosities on Rage.") ]
             7<classLvl>, [ Complex("Howl of the Wild", "Bestial Heart actions available to every rage.") ]
@@ -31,16 +30,17 @@ let rec berserker =
     {
         Id = % nameof berserker
         Name = "Berserker"
-        LoreName = Some "Berserker Trance"
+               <?> "Berserker Trance"
         Description = "Follow a path of untrammelled fury, slick with blood."
+                       <?> "You are capable of entering a mindless state of pure battle fury. Whether you learnt the technique in a Rashemi lodge or deep within your soul, it makes you no less terrifying."
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage: Frenzy: Gain resistance and damage bonuses.")
-                Power(BonusAction, AtWill, "Frenzied Throw: Throw characters or items.")
+                Power(BonusAction, AtWill, "Rage", "Frenzy: Gain resistance and damage bonuses.")
+                Power(BonusAction, AtWill, "Frenzied Throw", "Throw characters or items.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Frenzied Strike: Main-hand melee attack as Bonus Action.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Frenzied Strike", "Main-hand melee attack as Bonus Action.") ]
             5<classLvl>, [ Complex("Steelbreaker", "Ignore physical resistances.") ]
             7<classLvl>, [ Complex("Feral Instinct", "Double movement speed while Enraged.") ]
             9<classLvl>, [ Complex("Thrill of the Kill", "Killing blow restores Bonus Action while Enraged.") ]
@@ -53,19 +53,20 @@ let rec frostbreaker =
     {
         Id = % nameof frostbreaker
         Name = "Frostbreaker"
-        LoreName = Some "Frostmaiden's Kiss"
+               <?> "Frostmaiden's Kiss"
         Description = "Honed rage, controlled and enduring amidst frigid peaks."
+                      <?> "You wandered the icy glaciers beyond the Spine of the World and were touched by Auril's capricious influence. A shard of the Cold Goddess's fury now manifests with your rage."
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage: Frostwoven: Resistance to physical and Cold immunity.")
+                Power(BonusAction, AtWill, "Rage", "Frostwoven: Resistance to physical and Cold immunity.")
                 Complex("Bifrost", "Cannot slip on ice; hits afflict Frigidity.")
             ]
             3<classLvl>, [ Complex("Frigid Omen", "Melee hits while enraged fire a Ray of Frost at another enemy.") ]
             5<classLvl>, [ Complex("Frostfields", "Apply Encrusted with Frost on hit.") ]
             7<classLvl>, [ Complex("Glacial Bellow", "Aura dealing Cold damage = Charisma Modifier.") ]
-            9<classLvl>, [ Power(Reaction, AtWill, "Tundral Strike: Retaliate with a line of Cold damage.") ]
+            9<classLvl>, [ Power(Reaction, AtWill, "Tundral Strike", "Retaliate with a line of Cold damage.") ]
             11<classLvl>, [ Complex("Frozen Hellscape", "Critical Hits immediately Freeze targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -75,16 +76,17 @@ let rec giantsBlood =
     {
         Id = % nameof giantsBlood
         Name = "Giant's Blood"
-        LoreName = Some "Kostchtchie's Aura"
+               <?> "Kostchtchie's Aura"
         Description = "Invoking the might and staggering size of Giants."
+                      <?> "You have been in the presence of one of the brutish giant lord's &lt;i&gt;hortha&lt;/i&gt;. An unnatural rage now swells in you, channeling the Prince of Wrath's size and fury."
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage: Giant’s Blood: Drastic size increase, reach, and damage.")
-                Power(BonusAction, AtWill, "Stormheel: Kick creatures away for Strength modifier damage.")
+                Power(BonusAction, AtWill, "Rage", "Giant’s Blood: Drastic size increase, reach, and damage.")
+                Power(BonusAction, AtWill, "Stormheel", "Kick creatures away for Strength modifier damage.")
             ]
-            3<classLvl>, [ Power(Action, AtWill, "Mighty Impel: Pick up and throw heavy creatures or objects.") ]
+            3<classLvl>, [ Power(Action, AtWill, "Mighty Impel", "Pick up and throw heavy creatures or objects.") ]
             5<classLvl>, [ Complex("Poisebreaker", $"{TOGGLEABLE}: Melee attacks deal Strength modifier damage in 3m area.") ]
             7<classLvl>, [ Complex("Frontline Backbreaker", "Displacing enemies Staggers them; allows immediate diving follow-up.") ]
             9<classLvl>, [ Complex("Towering Blows", "Advantage on damage rolls against Large or smaller creatures.") ]
@@ -100,17 +102,18 @@ let rec rosemourn =
     {
         Id = % nameof rosemourn
         Name = "Rosemourn"
-        LoreName = Some "Black-Barbed Curse"
+               <?> "Black-Barbed Curse"
         Description = "Fury resting in scars of the past, forged into thorns."
+                      <?> "&lt;i&gt;You who a-scaped my maze and carried my thorns into the wide world, did the black-briar madness twine kindly in your blood? Or does it yet a-bite, like a jealous lover in the dark?&lt;/i&gt;"
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage: Briar Blood: Thorns deal damage to attackers and leave Spike Growth.")
+                Power(BonusAction, AtWill, "Rage", "Briar Blood: Thorns deal damage to attackers and leave Spike Growth.")
                 Simple "Allies within 18m immune to your Spike Growth."
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Bloodvine Grasp: Pull target 18m closer; potential Bleed.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Barbed Protection: Use Bloodvine Grasp on ally's aggressor.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Bloodvine Grasp", "Pull target 18m closer; potential Bleed.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Barbed Protection", "Use Bloodvine Grasp on ally's aggressor.") ]
             7<classLvl>, [ Complex("Thornfall", "Enemies taking fall damage also take Piercing damage in area.") ]
             9<classLvl>, [ Complex("Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.") ]
             11<classLvl>, [ Complex("Heart of Thorns", "Deal Piercing damage to all nearby enemies at turn end.") ]
@@ -122,12 +125,13 @@ let rec wildSoulBarb =
     {
         Id = % nameof wildSoulBarb
         Name = "Wild Soul"
-        LoreName = Some "Wild Weave's Thread"
+               <?> "Wild Weave's Thread"
         Description = "Arcane power churns within, waiting to be released."
+                      <?> "You walked through an ancient scar of the Time of Troubles, a &lt;i&gt;wild magic&lt;/i&gt; zone. The raw Weave bound itself to your essence and now echoes in your rage."
         BaseClassId = barbarian.Id
         CasterType = HalfCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Rage: Wild Magic: Spells cast during rage trigger surges.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Rage", "Wild Magic: Spells cast during rage trigger surges.") ]
             3<classLvl>, [ Complex("Chaotic Roar", "Enraging immediately triggers a positive Wild Magic surge.") ]
             5<classLvl>, [ Complex("Unstable Backlash", "Attackers may experience negative Wild Magic surges.") ]
             7<classLvl>, [ Complex("Chance Surge", "Critical Hits trigger negative surges on targets.") ]
@@ -143,13 +147,12 @@ let rec deathDomain =
     {
         Id = % nameof deathDomain
         Name = "Death Domain"
-        LoreName = None
         Description = "Nourish faith on forces that make dealings in death."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Power(Action, AtWill, "Bursting Sinew: Detonate corpses/undead to apply Plague of Rot.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Curse of Undeath: Afflict target to be considered Undead.") ]
+            1<classLvl>, [ Power(Action, AtWill, "Bursting Sinew", "Detonate corpses/undead to apply Plague of Rot.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Curse of Undeath", "Afflict target to be considered Undead.") ]
             5<classLvl>, [ Complex("Insurmountable Suffering", "Ignore all forms of Resistance and Immunity to Necrotic.") ]
             7<classLvl>, [ Complex("Harvest", $"{TOGGLEABLE}: Corpses deal Necrotic damage and apply Rot to nearby enemies.") ]
             9<classLvl>, [ Complex("True Pestilence", "Plague of Rot spreads to nearby allies of the target.") ]
@@ -162,13 +165,12 @@ let rec forgeDomain =
     {
         Id = % nameof forgeDomain
         Name = "Forge Domain"
-        LoreName = None
         Description = "Faith sparks divine fire smelted in holy ambition."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Divine Embers: Summon scaling forge hammer; hits grant Heat.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Striking Iron: Weapon strike dealing AOE Fire damage.") ]
+            1<classLvl>, [ Power(FreeAction, AtWill, "Divine Embers", "Summon scaling forge hammer; hits grant Heat.") ]
+            3<classLvl>, [ Power(Action, AtWill, "Striking Iron", "Weapon strike dealing AOE Fire damage.") ]
             5<classLvl>, [ Complex("Furnace Core", "Unique bonuses based on armor type (Ignore Fire Res, Divine Intervention, or Heat on hit).") ]
             7<classLvl>, [ Complex("Brazen Embers", "Striking Iron grants Advantage against affected enemies.") ]
             9<classLvl>, [ Complex("Forged in Flame", "Reaching 10 Heat grants Divine Intervention charge.") ]
@@ -181,16 +183,15 @@ let rec illusoryDomain =
     {
         Id = % nameof illusoryDomain
         Name = "Illusory Domain"
-        LoreName = None
         Description = "Faith of occlusion and obscurity, forged in shadow."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Veilcasting", "Targeting ally makes them Invisible and deals AOE Psychic damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Mirror Force: When ally damaged, retaliate with Psychic damage and heal.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Mirror Force", "When ally damaged, retaliate with Psychic damage and heal.") ]
             5<classLvl>, [ Complex("Phantom Communion", "Targeting ally with spell also makes you Invisible.") ]
             7<classLvl>, [ Complex("Dreamfracture", "Psychic damage potentially Surprises targets.") ]
-            9<classLvl>, [ Power(FreeAction, AtWill, "Phantom Exchange: Swap places with an Invisible ally.") ]
+            9<classLvl>, [ Power(FreeAction, AtWill, "Phantom Exchange", "Swap places with an Invisible ally.") ]
             11<classLvl>, [ Complex("Fractured Reality", "Psychic damage strips Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -200,15 +201,14 @@ let rec lifeDomain =
     {
         Id = % nameof lifeDomain
         Name = "Life Domain"
-        LoreName = None
         Description = "Preserving body, mind, and soul with plethora of healing."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Virtuous Touch", "First heal each round regains extra HP = character level.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Preserve Life: Heal target for 4x character level.") ]
+            3<classLvl>, [ Power(Action, AtWill, "Preserve Life", "Heal target for 4x character level.") ]
             5<classLvl>, [ Complex("Sanctity", "Healing applies Resistance for 3 turns.") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Dampen Elements: Halve incoming elemental damage for self/ally.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "Dampen Elements", "Halve incoming elemental damage for self/ally.") ]
             9<classLvl>, [ Complex("Benevolent Grace", "Healing applies Shield of Faith for 3 turns.") ]
             11<classLvl>, [ Complex("Divine Presence", "Preserve Life can resurrect fallen allies with full HP.") ]
         ]
@@ -219,18 +219,17 @@ let rec tempestDomain =
     {
         Id = % nameof tempestDomain
         Name = "Tempest Domain"
-        LoreName = None
         Description = "Faith made of thunder and lightning of a terrible storm."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Discharge", $"{TOGGLEABLE}: Hits create elemental discharges targeting multiple enemies.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Destructive Wrath: Maximize elemental damage for an action.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Destructive Wrath", "Maximize elemental damage for an action.") ]
             5<classLvl>, [
-                Power(FreeAction, AtWill, "Downpour: Create Water as a free action.")
+                Power(FreeAction, AtWill, "Downpour", "Create Water as a free action.")
                 Complex("Improved Discharge", "Discharge affects all enemies in range.")
             ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Wrath of the Storm: Retaliate with elemental damage.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "Wrath of the Storm", "Retaliate with elemental damage.") ]
             9<classLvl>, [ Complex("Storm Strike", $"{TOGGLEABLE}: Push targets 9m when dealing elemental damage.") ]
             11<classLvl>, [ Complex("Static Shock", "Elemental damage can Stun targets.") ]
         ]
@@ -241,15 +240,14 @@ let rec warDomain =
     {
         Id = % nameof warDomain
         Name = "War Domain"
-        LoreName = None
         Description = "Arsenal of sacramental savagery against the unrighteous."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Radiant Strikes", "Successful Attack Rolls deal additional Radiant damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "War God's Blessing: +10 bonus to a missed Attack Roll.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "War God's Blessing", "+10 bonus to a missed Attack Roll.") ]
             5<classLvl>, [ Complex("Divine Faith", "Gain Advantage on next turn after a Miracle.") ]
-            7<classLvl>, [ Power(BonusAction, AtWill, "War Priest: Extra attack as a Bonus Action.") ]
+            7<classLvl>, [ Power(BonusAction, AtWill, "War Priest", "Extra attack as a Bonus Action.") ]
             9<classLvl>, [ Complex("War Gods Vessel", "War God's Blessing bonus remains active for 3 turns.") ]
             11<classLvl>, [ Complex("Deific", "Next attack after a Miracle is always a Critical Hit.") ]
         ]
@@ -262,14 +260,13 @@ let rec circleOfTheElements =
     {
         Id = % nameof circleOfTheElements
         Name = "Circle of the Elements"
-        LoreName = None
         Description = "Channel natural arcana through the earth and creatures."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Cycle of Balance", "Cycle through seasons each turn, gaining resistances and myrmidon forms.") ]
             3<classLvl>, [ Complex("Terrasoul", "Gain Seasonal Reprieve to cast seasonal spells for free.") ]
-            5<classLvl>, [ Power(FreeAction, AtWill, "Tempestuous Seasons: Advance seasons by expending Wild Shape for AOE damage.") ]
+            5<classLvl>, [ Power(FreeAction, AtWill, "Tempestuous Seasons", "Advance seasons by expending Wild Shape for AOE damage.") ]
             7<classLvl>, [ Complex("Natural Desolation", "Ignore seasonal damage Resistances and Immunities.") ]
             9<classLvl>, [ Complex("Maelstrom", "Kills/Crits trigger AOE seasonal damage without advancing.") ]
             11<classLvl>, [ Complex("Avatar of Gaia", "Recover all Wild Shape charges every turn.") ]
@@ -281,17 +278,16 @@ let rec circleOfTheLand =
     {
         Id = % nameof circleOfTheLand
         Name = "Circle of the Land"
-        LoreName = None
         Description = "Druidic magic through earth and its creatures."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Conjure Dryad: Summon a scaling woodland companion.")
+                Power(Action, AtWill, "Conjure Dryad", "Summon a scaling woodland companion.")
                 Complex("Ensnaring Presence", "Damaging enemies potentially Entangles them.")
             ]
             3<classLvl>, [ Complex("Nature's Grasp", "Entangled enemies have Disadvantage on saves against your spells.") ]
-            5<classLvl>, [ Power(FreeAction, OncePerCombat, "Vineburst: Entangle: Cast Entangle at 3rd level.") ]
+            5<classLvl>, [ Power(FreeAction, OncePerCombat, "Vineburst", "Entangle: Cast Entangle at 3rd level.") ]
             7<classLvl>, [ Complex("Untamed Freedom", "Self and nearby allies ignore Difficult Terrain.") ]
             9<classLvl>, [ Complex("Verdant Aftermath", $"{TOGGLEABLE}: Kills create Entangling Vines.") ]
             11<classLvl>, [ Complex("Blessing of the Oak Father", "Entangled creatures emit a Blessing aura.") ]
@@ -303,17 +299,16 @@ let rec circleOfTheMoon =
     {
         Id = % nameof circleOfTheMoon
         Name = "Circle of the Moon"
-        LoreName = None
         Description = "Form is mutable as the mercurial moon."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Moonbreak: Swap Wild Shape forms freely.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Wild Infusion: Spend slot for extra elemental damage on hit.") ]
+            1<classLvl>, [ Power(FreeAction, AtWill, "Moonbreak", "Swap Wild Shape forms freely.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Wild Infusion", "Spend slot for extra elemental damage on hit.") ]
             5<classLvl>, [ Complex("Primal Strike", "Ignore physical resistances in Wild Shape.") ]
             7<classLvl>, [ Complex("Primal Speed", "Double movement speed in Wild Shape.") ]
             9<classLvl>, [ Complex("Wild Strike", "Improved Extra Attack while in Wild Shape.") ]
-            11<classLvl>, [ Power(FreeAction, AtWill, "Lunar Shift: Wild Shape after spell, or free spell after Wild Shape kill.") ]
+            11<classLvl>, [ Power(FreeAction, AtWill, "Lunar Shift", "Wild Shape after spell, or free spell after Wild Shape kill.") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -322,14 +317,13 @@ let rec circleOfTheShadows =
     {
         Id = % nameof circleOfTheShadows
         Name = "Circle of Shadows"
-        LoreName = None
         Description = "Death is the most natural occurrence within nature."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness.") ]
             3<classLvl>, [ Complex("Veilstalker", "While obscured, recover HP and deal extra Psychic damage.") ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "Predatory Communion: Morph allies into Displacer Beasts.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "Predatory Communion", "Morph allies into Displacer Beasts.") ]
             7<classLvl>, [ Complex("Distorted Visage", "Permanently Heavily Obscured beyond 3m.") ]
             9<classLvl>, [ Complex("Nightspill", $"{TOGGLEABLE}: Leave magical darkness behind when moving.") ]
             11<classLvl>, [ Complex("Hallucinatory Horror", "Maddened enemies are Vulnerable to Psychic damage.") ]
@@ -341,20 +335,19 @@ let rec circleOfTheSpores =
     {
         Id = % nameof circleOfTheSpores
         Name = "Circle of the Spores"
-        LoreName = None
         Description = "Manipulation of spores to augment self and harm foes."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Reaction, AtWill, "Halo of Spores: Deal Necrotic damage as a reaction.")
-                Power(Action, AtWill, "Symbiotic Entity: Gain Temp HP and extra Necrotic damage.")
+                Power(Reaction, AtWill, "Halo of Spores", "Deal Necrotic damage as a reaction.")
+                Power(Action, AtWill, "Symbiotic Entity", "Gain Temp HP and extra Necrotic damage.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Animating Spores: Reanimate corpses as fungal servants.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Spreading Spores: Create area of DOT spores while Symbiotic.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Animating Spores", "Reanimate corpses as fungal servants.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Spreading Spores", "Create area of DOT spores while Symbiotic.") ]
             7<classLvl>, [ Complex("Necromantic Spores", "Spreading Spores trigger on killing blow.") ]
             9<classLvl>, [ Complex("Symbiotic Spores", "Gain Symbiotic Entity on killing blow.") ]
-            11<classLvl>, [ Power(BonusAction, AtWill, "Sovereign Spores: Reanimate Dangerous/Fatal foes.") ]
+            11<classLvl>, [ Power(BonusAction, AtWill, "Sovereign Spores", "Reanimate Dangerous/Fatal foes.") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -363,18 +356,17 @@ let rec circleOfTheStars =
     {
         Id = % nameof circleOfTheStars
         Name = "Circle of the Stars"
-        LoreName = None
         Description = "Guided by the infinite mysteries of the cosmos."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(FreeAction, OncePerTurn, "Resurgence of the Cosmos: Restore Star Map charge.")
-                Power(BonusAction, AtWill, "Shape of the Cosmos: Take constellation form (Archer, Chalice, Dragon).")
+                Power(FreeAction, OncePerTurn, "Resurgence of the Cosmos", "Restore Star Map charge.")
+                Power(BonusAction, AtWill, "Shape of the Cosmos", "Take constellation form (Archer, Chalice, Dragon).")
             ]
             3<classLvl>, [ Complex("Singularity", "Restore Star Map every 3 turns in combat.") ]
             5<classLvl>, [ Complex("Guidance of the Stars", "Cosmos cantrips upgraded to stronger versions.") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Cosmic Omens: Weal/Woe to buff allies or debuff enemies.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "Cosmic Omens", "Weal/Woe to buff allies or debuff enemies.") ]
             9<classLvl>, [ Complex("Twinkling Constellations", "Shapes grant passive bonuses; cantrips max out.") ]
             11<classLvl>, [ Complex("Eyes of the Cosmos", "All three constellation forms active at all times.") ]
         ]
@@ -387,18 +379,17 @@ let rec champion =
     {
         Id = % nameof champion
         Name = "Champion"
-        LoreName = None
         Description = "The ultimate tank and taunter."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Challenger", $"{TOGGLEABLE}: Gain Physical Resistance, but enemies have Advantage on Attack Rolls against you. Chance to Challenge on hit.") ]
             3<classLvl>, [
-                Power(BonusAction, AtWill, "Champion's Windstorm: Restore 1d12 HP * Proficiency Bonus.")
-                Power(BonusAction, AtWill, "Rallying Cry: Grant 12 Temporary HP to all allies within 9m.")
-                Power(BonusAction, AtWill, "Battalion's March: Allies within 9m have Advantage on Saving Throws for 3 turns.")
+                Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 HP * Proficiency Bonus.")
+                Power(BonusAction, AtWill, "Rallying Cry", "Grant 12 Temporary HP to all allies within 9m.")
+                Power(BonusAction, AtWill, "Battalion's March", "Allies within 9m have Advantage on Saving Throws for 3 turns.")
             ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "Challenger's Call: Attempt to Challenge all enemies in a 9m area.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "Challenger's Call", "Attempt to Challenge all enemies in a 9m area.") ]
             7<classLvl>, [ Complex("Champion's Surge", "Gain Advantage on Attack and Damage Rolls against Challenged targets.") ]
             9<classLvl>, [ Complex("Challenger's Presence", "Killing a Challenged enemy resets Short Rest cooldowns.") ]
             11<classLvl>, [ Complex("Champion's Indomitability", "Adds Proficiency Bonus to all Saving Throws. (Replaces Indomitable)") ]
@@ -410,15 +401,16 @@ let rec frontierKnight =
     {
         Id = % nameof frontierKnight
         Name = "Frontier Knight"
-        LoreName = Some "Weapon Master"
+               <?> "Weapon Master"
         Description = "Paragon of tactical superiority, employing a wide array of combat techniques."
+                      <?> "You have mastered a wide array of combat techniques, every fight an opportunity to display your skills or to unleash the powers of legendary weapons."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Hunger for Knowledge", "Consume magical weapons to learn their unique weapon actions.") ]
             3<classLvl>, [ Complex("Steadfast Onslaught", "Spend a Superiority Die to increase damage when using a Combat Technique.") ]
             7<classLvl>, [ Complex("Critical Breakthrough", "Landing a Killing Blow or Critical Hit refreshes all Combat Techniques.") ]
-            11<classLvl>, [ Complex("Frontier Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
+            11<classLvl>, [ Complex("Frontier Mastery" <?> "Weapon Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
         ]
         ScalingAbilities = fun _  cl -> [
             Simple $"{cl} Combat Techniques Known"
@@ -430,13 +422,12 @@ let rec arcaneArcher =
     {
         Id = % nameof arcaneArcher
         Name = "Arcane Archer"
-        LoreName = None
         Description = "Infuse the Weave into your arrows for supernatural quality and devastating effects."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Focused Weave", $"{TOGGLEABLE}: Ranged attacks become cantrips dealing 1d12 Force damage (scaling), cannot miss or crit, but enable Focused Fletchings.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Arcane Finesse: Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
             5<classLvl>, [ Complex("Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
             7<classLvl>, [ Complex("Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
             11<classLvl>, [ Complex("Eye of the Arcana", "Action cantrips can be cast as a Bonus Action. Learn 3 more infusions.") ]
@@ -450,16 +441,17 @@ let rec dragoon =
     {
         Id = % nameof dragoon
         Name = "Dragoon"
-        LoreName = None
+               <?> "Blazing Cavalier"
         Description = "Wield the power of wizened beasts to leap and charge through the battlefield."
+                      <?> "You charge valiantly into the heart of danger, imbuing your weapon strikes with devastating power."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Power(Action, AtWill, "Draconic Dive: Leap from afar dealing Weapon + Fire damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Wyrmcall Eruption: Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Draconic Blitz: Charge through enemies dealing Weapon + Fire damage.") ]
+            1<classLvl>, [ Power(Action, AtWill, "Draconic Dive", "Leap from afar dealing Weapon + Fire damage.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Wyrmcall Eruption", "Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Draconic Blitz", "Charge through enemies dealing Weapon + Fire damage.") ]
             7<classLvl>, [ Complex("Wyrmcall Resonance", "Killing blows allow Draconic abilities as Bonus Actions and double melee reach.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Draconic Maul: Single target strike dealing Weapon + 3d12 Fire damage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Draconic Maul", "Single target strike dealing Weapon + 3d12 Fire damage.") ]
             11<classLvl>, [ Complex("Wyrmcall Breakpoint", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -469,7 +461,6 @@ let rec eldritchKnight =
     {
         Id = % nameof eldritchKnight
         Name = "Eldritch Knight"
-        LoreName = None
         Description = "A warrior of spell and sword, weaving Warlock incantations into martial expertise."
         BaseClassId = fighter.Id
         CasterType = HalfCaster Bargained
@@ -477,7 +468,7 @@ let rec eldritchKnight =
             1<classLvl>, [ Complex("Call of the Old One", "Add Charisma Modifier to melee Attack Roll damage.") ]
             3<classLvl>, [ Complex("Ex Oblivione", "Using a Manoeuvre restores a Warlock Spell Slot.") ]
             5<classLvl>, [ Complex("From Beyond", "After a Manoeuvre, gain Advantage on Concentration and double melee reach for 3 turns.") ]
-            7<classLvl>, [ Power(BonusAction, AtWill, "Mountainous Madness: After casting a Spell, make a Melee Weapon Attack.") ]
+            7<classLvl>, [ Power(BonusAction, AtWill, "Mountainous Madness", "After casting a Spell, make a Melee Weapon Attack.") ]
             9<classLvl>, [ Complex("Lurking Fear", "Damaging targets has a chance to Frighten them.") ]
             11<classLvl>, [ Complex("Shadowed Over", "Killing a Frightened creature restores all Warlock Spell Slots.") ]
         ]
@@ -488,14 +479,13 @@ let rec palisade =
     {
         Id = % nameof palisade
         Name = "Palisade"
-        LoreName = None
         Description = "A shield-bearing juggernaut who bashes enemies into fine mist."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Reinforced Strikes", "Shield damage (Shield Bash/Dazing Bash) deals additional damage equal to Superiority Dice.") ]
             3<classLvl>, [ Complex("Projected Bulwark", "Dazing Bash can target creatures within 9m.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Sentinel’s Rebuke: Use Dazing Bash as a Reaction when an ally within 9m is damaged.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Sentinel’s Rebuke", "Use Dazing Bash as a Reaction when an ally within 9m is damaged.") ]
             7<classLvl>, [ Complex("Iron Avalanche", "Shield kills cause an eruption of Force damage.") ]
             9<classLvl>, [ Complex("Cascading Iron", "Shield damage ricochets to another enemy within 9m.") ]
             11<classLvl>, [ Complex("Superior Impact", "Expend a Superiority Die on shield hit to deal maximum damage.") ]
@@ -509,13 +499,12 @@ let rec arcanist =
     {
         Id = % nameof arcanist
         Name = "Arcanist"
-        LoreName = None
         Description = "Experts at combining Arcane and Technology."
         BaseClassId = artificer.Id
         CasterType = FullCaster DoubleVersatile
         FixedAbilities = Map [
             3<classLvl>, [ Complex("Mystic Reload", "Killing blows with Ranged Weapon Attacks restore a Spell Slot (level = Artificer Lvl / 2).") ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "Arcane Ballistics: Casting a spell allows a Ranged Weapon Attack.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "Arcane Ballistics", "Casting a spell allows a Ranged Weapon Attack.") ]
             7<classLvl>, [ Complex("Ballistic Ricochet", "Ranged damage creates an Arcane Missile targeting another enemy.") ]
             9<classLvl>, [ Complex("Runic Reload Module", "Reloading grants Advantage on next Spell Attack and Damage Rolls.") ]
             11<classLvl>, [ Complex("Arcane Aim", "Critical Hits with Ranged attacks allow casting a spell without a slot.") ]
@@ -527,13 +516,12 @@ let rec artillerist =
     {
         Id = % nameof artillerist
         Name = "Artillerist"
-        LoreName = None
         Description = "Specialists in hurled projectiles and devastating explosions."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Armour-Piercing Rounds", "Ranged attacks ignore Piercing Resistance.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Anti-Material Ammunition: Make a Ranged Weapon Attack after a killing blow.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Anti-Material Ammunition", "Make a Ranged Weapon Attack after a killing blow.") ]
             5<classLvl>, [ Complex("Marked Suppression", "Ranged damage Marks enemies, granting Advantage to all allies.") ]
             7<classLvl>, [ Complex("Focus Fire", "Consecutive Ranged hits on the same target deal stacking additional damage.") ]
             9<classLvl>, [ Complex("Covering Fire", "Ranged killing blow restores an Action.") ]
@@ -546,14 +534,14 @@ let rec battleSynthetic =
     {
         Id = % nameof battleSynthetic
         Name = "Battle Synthetic"
-        LoreName = Some "Battlesmith"
+               <?> "Battlesmith"
         Description = "Experts at defending others and field repairs, accompanied by an Automaton."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Stabilizing Rounds", "Ranged attacks heal allies within 3m of the target for 1d4.")
-                Power(BonusAction, AtWill, "Summon Lil’G: Summon a personal Automaton that grows with you.")
+                Power(BonusAction, AtWill, "Summon Lil’G", "Summon a personal Automaton that grows with you.")
             ]
             3<classLvl>, [ Complex("Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 HP.") ]
             5<classLvl>, [ Complex("Take Your Medicine", "Firearms can heal allies when targeting them directly.") ]
@@ -568,7 +556,6 @@ let rec grenadier =
     {
         Id = % nameof grenadier
         Name = "Grenadier"
-        LoreName = None
         Description = "Expert at blowing things up with guns and random explosives."
         BaseClassId = artificer.Id
         CasterType = Martial
@@ -576,7 +563,7 @@ let rec grenadier =
             1<classLvl>, [ Complex("The Anarchist’s Cookbook", "Generate a random grenade every turn in combat.") ]
             3<classLvl>, [ Complex("Shockwave Theory", "Grenade damage forces targets Prone.") ]
             5<classLvl>, [ Complex("Explosive Ammunition", "Killing blows or Critical Hits with Ranged attacks trigger 3m explosions.") ]
-            7<classLvl>, [ Power(BonusAction, AtWill, "Mortar Multiplicity: Throw objects and creatures as a Bonus Action.") ]
+            7<classLvl>, [ Power(BonusAction, AtWill, "Mortar Multiplicity", "Throw objects and creatures as a Bonus Action.") ]
             9<classLvl>, [ Complex("Collateral Damage", "Grenade damage cannot be reduced by successful Saving Throws.") ]
             11<classLvl>, [ Complex("Grand Detonation", "Gain a Runepowder Vial upon Short Rest.") ]
         ]
@@ -587,13 +574,12 @@ let rec infusedArcsmith =
     {
         Id = % nameof infusedArcsmith
         Name = "Infused Arcsmith"
-        LoreName = None
         Description = "Hone bodies through magic and bonding to unleash potent infusions."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Adaptive Intervention: Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "Adaptive Intervention", "Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
             5<classLvl>, [ Complex("Distributed Subroutine", "Infuse two creatures at once (or one for 2 rounds) per charge.") ]
             7<classLvl>, [ Complex("Wanton Processing", "Killing blow or Critical Hit restores a Matrix Charge.") ]
             9<classLvl>, [ Complex("Overclocked Subroutine", "Infuse three creatures at once per charge.") ]
@@ -606,13 +592,12 @@ let rec striker =
     {
         Id = % nameof striker
         Name = "Striker"
-        LoreName = None
         Description = "Manipulate victory through lead-based tactical snowballing."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("First Strike", "Cannot be Surprised. Gain Alpha Strike (double projectiles) on first turn.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Controlled Tempo: Expedite (+20 initiative) or Delay (-20 initiative) a creature.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Controlled Tempo", "Expedite (+20 initiative) or Delay (-20 initiative) a creature.") ]
             5<classLvl>, [ Complex("Lethal Company", "Killing blows extend Alpha Strike duration.") ]
             7<classLvl>, [ Complex("Delayed Reaction", "Advantage on Attack Rolls against Delayed targets.") ]
             9<classLvl>, [ Complex("Coordinated Strike", "Expedited allies gain Advantage on Damage Rolls.") ]
@@ -627,7 +612,6 @@ let rec collegeOfCaptivation =
     {
         Id = % nameof collegeOfCaptivation
         Name = "College of Captivation"
-        LoreName = None
         Description = "Music that draws enemies' attention and gives respite to allies."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
@@ -637,7 +621,7 @@ let rec collegeOfCaptivation =
                 Complex("Chorus Healing", "Allies in performance regain HP = Proficiency Bonus.")
             ]
             3<classLvl>, [ Complex("Parade March", "Performance forces enemies to have Disadvantage unless attacking you.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Cover of Captivation: Spend Inspiration to negate incoming damage.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Cover of Captivation", "Spend Inspiration to negate incoming damage.") ]
             7<classLvl>, [ Complex("Captivating Reclaim", "Regain Inspiration when a creature becomes Charmed.") ]
             9<classLvl>, [ Complex("Performative Shielding", "Gain Resistance to all damage while Performing.") ]
             11<classLvl>, [ Complex("Countenance of Stoicism", "Concentration cannot be broken while Performing.") ]
@@ -649,7 +633,6 @@ let rec collegeOfLore =
     {
         Id = % nameof collegeOfLore
         Name = "College of Lore"
-        LoreName = None
         Description = "A natural segue to bardic performance where spells are harder to resist."
         BaseClassId = bard.Id
         CasterType = FullCaster DoubleVersatile
@@ -667,7 +650,6 @@ let rec collegeOfMoriendi =
     {
         Id = % nameof collegeOfMoriendi
         Name = "College of Moriendi"
-        LoreName = None
         Description = "Death Knells drum your approach; your song is one of savage necromancy."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
@@ -686,7 +668,6 @@ let rec collegeOfNostalgia =
     {
         Id = % nameof collegeOfNostalgia
         Name = "College of Nostalgia"
-        LoreName = None
         Description = "Displays of raw intensity that only music can convey."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
@@ -705,12 +686,12 @@ let rec collegeOfSteel =
     {
         Id = % nameof collegeOfSteel
         Name = "College of Steel"
-        LoreName = Some "College of Swords"
+               <?> "College of Swords"
         Description = "Strike a crescendo of attacks and leave enemies off-beat."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
-            1<classLvl>, [ Power(Action, AtWill, "Steelforged Flourish: Defensive, Mobile, or Slashing weapon techniques.") ]
+            1<classLvl>, [ Power(Action, AtWill, "Steelforged Flourish", "Defensive, Mobile, or Slashing weapon techniques.") ]
             3<classLvl>, [ Complex("Melodic Steel", "Killing blow or Critical Hit restores Inspiration.") ]
             5<classLvl>, [ Simple "Extra Attack" ]
             7<classLvl>, [ Complex("Performative Edge", "Advantage on weapon Attack and Damage Rolls while Performing.") ]
@@ -724,13 +705,12 @@ let rec collegeOfValour =
     {
         Id = % nameof collegeOfValour
         Name = "College of Valour"
-        LoreName = None
         Description = "Inspire allies to greater feats and energize them for quests."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Refined Bardic Inspiration", "Inspiration can now add to Damage Rolls or Armour Class.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Song of Valor: Revitalize as a Long Rest once per day. (Replaces Song of Rest)") ]
+            3<classLvl>, [ Power(Action, AtWill, "Song of Valor", "Revitalize as a Long Rest once per day. (Replaces Song of Rest)") ]
             5<classLvl>, [ Complex("Valorous Camaraderie", "Inspiration hits two additional targets and deals Thunder damage to nearby enemies.") ]
             7<classLvl>, [ Complex("Font of Valor", "Recover Inspiration every 3 turns in combat. (Replaces Font of Inspiration)") ]
             9<classLvl>, [ Complex("Valiance Supreme", "Inspiration targets deal maximum damage on their next attack.") ]
@@ -745,17 +725,17 @@ let rec wayOfTheArcane =
     {
         Id = % nameof wayOfTheArcane
         Name = "Way of the Arcane"
-        LoreName = Some "Shining Hand Training"
+               <?> "Shining Hand Training"
         Description = "Focus ki to bend the elements to your will as an extension of your body."
         BaseClassId = monk.Id
         CasterType = HalfCaster Versatile
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Flow State", $"{TOGGLEABLE}: Spend Ki Points (1 per spell level) to cast spells. Add Wisdom to unarmed/cantrip hits.") ]
             3<classLvl>, [
-                Power(Action, AtWill, "Fangs of the Fire Snake: Ranged Fire damage and bonus fire to melee.")
-                Power(Action, AtWill, "Fist of Unbroken Air: Ranged Bludgeoning damage + knockback.")
-                Power(BonusAction, AtWill, "Ice Block: Summon climbable ice that slows/chills enemies.")
-                Power(Action, AtWill, "Water Whip: Ranged Bludgeoning damage + pull.")
+                Power(Action, AtWill, "Fangs of the Fire Snake", "Ranged Fire damage and bonus fire to melee.")
+                Power(Action, AtWill, "Fist of Unbroken Air", "Ranged Bludgeoning damage + knockback.")
+                Power(BonusAction, AtWill, "Ice Block", "Summon climbable ice that slows/chills enemies.")
+                Power(Action, AtWill, "Water Whip", "Ranged Bludgeoning damage + pull.")
             ]
             5<classLvl>, [ Complex("Martial Elements", "Spells/Cantrips infuse spirit with element, dealing extra Wisdom damage on next hit.") ]
             7<classLvl>, [ Complex("Elemental Overdrive", "Advantage on Attack and Damage Rolls for Ki spells and Cantrips.") ]
@@ -769,7 +749,7 @@ let rec wayOfTheGentleFist =
     {
         Id = % nameof wayOfTheGentleFist
         Name = "Way of the Gentle Fist"
-        LoreName = Some "Broken Ones Training"
+               <?> "Broken Ones Training"
         Description = "Harmony and practiced inner peace providing relief to those around you."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -777,7 +757,7 @@ let rec wayOfTheGentleFist =
             1<classLvl>, [ Complex("Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
             3<classLvl>, [ Complex("Mending Blows", "Damaging enemies heals allies within 9m.") ]
             5<classLvl>, [ Complex("Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter: Heal an ally within 9m when they are damaged.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter", "Heal an ally within 9m when they are damaged.") ]
             9<classLvl>, [ Complex("Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
             11<classLvl>, [ Complex("Flow of Compassion", "Dodging an attack heals you and all allies within 9m.") ]
         ]
@@ -788,15 +768,15 @@ let rec wayOfTheDrunkenMaster =
     {
         Id = % nameof wayOfTheDrunkenMaster
         Name = "Way of the Drunken Master"
-        LoreName = Some "St. Dionysus Training"
+               <?> "St. Dionysus Training"
         Description = "Lurch through battle with deceptive movements and unpredictable sways."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Flurry: Intoxicating: While inebriated, may knock targets Unconscious.")
-                Power(FreeAction, AtWill, "Slosh Toss: Throw alcohol to inebriate targets.")
-                Power(Action, AtWill, "Breath of the Brewery: Belch a cone of Acid damage and potential Madness.")
+                Power(BonusAction, AtWill, "Flurry", "Intoxicating: While inebriated, may knock targets Unconscious.")
+                Power(FreeAction, AtWill, "Slosh Toss", "Throw alcohol to inebriate targets.")
+                Power(Action, AtWill, "Breath of the Brewery", "Belch a cone of Acid damage and potential Madness.")
             ]
             3<classLvl>, [ Complex("Leaf Hurricane", "Drinking alcohol grants Dash. Inebriation grants Advantage on Damage Rolls.") ]
             5<classLvl>, [ Complex("Contact Buzz", "Damaging enemies inebriates them.") ]
@@ -811,18 +791,18 @@ let rec wayOfTheOpenHand =
     {
         Id = % nameof wayOfTheOpenHand
         Name = "Way of the Open Hand"
-        LoreName = Some "White Rod Training"
+               <?> "White Rod Training"
         Description = "Control ki to heal or inflict grievous hurt with specialized strikes."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Simple "Flurry of Blows: Topple/Stagger/Push" ]
-            3<classLvl>, [ Power(Action, AtWill, "Weaponized Fists: Unarmed punch twice in rapid succession.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Stunning Strike: Strike to potentially Stun target.") ]
+            3<classLvl>, [ Power(Action, AtWill, "Weaponized Fists", "Unarmed punch twice in rapid succession.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Stunning Strike", "Strike to potentially Stun target.") ]
             7<classLvl>, [ Complex("Manifestation of Self", $"{TOGGLEABLE}: Unarmed attacks deal additional Wisdom damage (Necrotic, Psychic, or Radiant).") ]
             9<classLvl>, [
-                Power(Action, AtWill, "Ki Resonation: Punch: Inflict Resonate for 3 turns.")
-                Power(FreeAction, AtWill, "Ki Resonation: Erupt: Detonate Resonate targets for Force damage.")
+                Power(Action, AtWill, "Ki Resonation", "Punch: Inflict Resonate for 3 turns.")
+                Power(FreeAction, AtWill, "Ki Resonation", "Erupt: Detonate Resonate targets for Force damage.")
             ]
             11<classLvl>, [ Complex("Danse Macabre", "Killing an enemy restores an Action and Bonus Action once per turn.") ]
         ]
@@ -833,15 +813,15 @@ let rec wayOfTheShadowArts =
     {
         Id = % nameof wayOfTheShadowArts
         Name = "Way of the Shadow Arts"
-        LoreName = Some "Dark Moon Training"
+               <?> "Dark Moon Training"
         Description = "Stealth and subterfuge, bending shadows to strike without warning."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Shadow Step: Teleport to shadow for Advantage.")
-                Power(BonusAction, AtWill, "Cloak of Shadows: Grant Invisibility to self and nearby allies.")
-                Power(Action, AtWill, "Shadow Strike: Warp to enemy while Hidden/Invisible for bonus Psychic damage.")
+                Power(BonusAction, AtWill, "Shadow Step", "Teleport to shadow for Advantage.")
+                Power(BonusAction, AtWill, "Cloak of Shadows", "Grant Invisibility to self and nearby allies.")
+                Power(Action, AtWill, "Shadow Strike", "Warp to enemy while Hidden/Invisible for bonus Psychic damage.")
             ]
             3<classLvl>, [ Complex("Void Stalker", "Hide as a Free Action in shadow; Superior Darkvision.") ]
             5<classLvl>, [ Complex("Auspicious Shadows", "Shadow Strike kills ensure Critical Hits for the rest of the turn.") ]
@@ -856,15 +836,15 @@ let rec wayOfTheTemperedSteel =
     {
         Id = % nameof wayOfTheTemperedSteel
         Name = "Way of the Tempered Steel"
-        LoreName = Some "Soaring Way Training"
+               <?> "Soaring Way Training"
         Description = "Rest your hand on the hilt of a summoned Katana in subtle anticipation."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Tempered Strike: Deliver a blow dealing double damage.")
-                Power(BonusAction, AtWill, "Judgement Cut / Mirage Blade: Long-range weapon strikes and warps.")
-                Power(FreeAction, AtWill, "Summon Tempered Blade: Summon a Versatile blade that scales with levels.")
+                Power(Action, AtWill, "Tempered Strike", "Deliver a blow dealing double damage.")
+                Power(BonusAction, AtWill, "Judgement Cut / Mirage Blade", "Long-range weapon strikes and warps.")
+                Power(FreeAction, AtWill, "Summon Tempered Blade", "Summon a Versatile blade that scales with levels.")
             ]
             3<classLvl>, [ Complex("Focused Serenity", "Add base unarmed damage to weapon attacks.") ]
             5<classLvl>, [ Complex("Macabre Patience", "Judgement Cut/Mirage Blade target additional enemies; Tempered Strike rolls with Advantage.") ]
@@ -881,20 +861,20 @@ let rec ancientWarden =
     {
         Id = % nameof ancientWarden
         Name = "Ancient Warden"
-        LoreName = Some "Sibling of the Ruby Rose"
+               <?> "Sibling of the Ruby Rose"
         Description = "Preserve the sanctity of life and the beauty of nature."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Healing Radiance: AOE heal that repeats after 3 turns.")
-                Power(BonusAction, AtWill, "Binding Radiance: Restrain an enemy for 3 turns.")
+                Power(Action, AtWill, "Healing Radiance", "AOE heal that repeats after 3 turns.")
+                Power(BonusAction, AtWill, "Binding Radiance", "Restrain an enemy for 3 turns.")
                 Complex("Ancient Judgement", "Advantage against Fey; killing Fey restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Soothing Radiance", "Healing Radiance cures conditions; Binding Radiance is harder to save against.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Faithless: Terrify and damage creatures in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Faithless", "Terrify and damage creatures in a 9m radius.") ]
             7<classLvl>, [ Complex("Extended Oath", "Double range of Healing Radiance; Binding Radiance targets 3 targets.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Protection: Allies in 9m have Advantage on Saving Throws.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Protection", "Allies in 9m have Advantage on Saving Throws.") ]
             11<classLvl>, [ Complex("Oathbound Defender", "Healing Radiance grants Resistance; Advantage against Bound targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -904,20 +884,20 @@ let rec crownedPhoenix =
     {
         Id = % nameof crownedPhoenix
         Name = "Crowned Phoenix"
-        LoreName = Some "Mystic Fire Knight"
+               <?> "Mystic Fire Knight"
         Description = "Ensuring civilization is reborn from the ashes of mistakes."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Phoenix Landing: Teleport dealing Fire damage in an area.")
-                Power(Reaction, AtWill, "Searing Protection: Swap places and heal ally by taking damage.")
+                Power(BonusAction, AtWill, "Phoenix Landing", "Teleport dealing Fire damage in an area.")
+                Power(Reaction, AtWill, "Searing Protection", "Swap places and heal ally by taking damage.")
                 Complex("Crowned Judgement", "Advantage against Aberrations; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("To the Sun", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Aberrant: Terrify and damage Aberrations in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Aberrant", "Terrify and damage Aberrations in a 9m radius.") ]
             7<classLvl>, [ Complex("Scorched Earth", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Cinder: Allies gain Warding Bond; enemies take Fire damage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Cinder", "Allies gain Warding Bond; enemies take Fire damage.") ]
             11<classLvl>, [ Complex("Rebirth", "Downing for the first time restores all HP and erupts in an explosion.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -927,20 +907,20 @@ let rec devoutParagon =
     {
         Id = % nameof devoutParagon
         Name = "Devout Paragon"
-        LoreName = Some "Radiant Heart Auxiliary"
+               <?> "Radiant Heart Auxiliary"
         Description = "Act with honour and virtue to protect the weak."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Holy Rebuke: Grant aura that inflicts Radiating Orb to melee attackers.")
-                Power(BonusAction, AtWill, "Sacred Weapon: Add Charisma to Attack Rolls for 3 turns.")
+                Power(Action, AtWill, "Holy Rebuke", "Grant aura that inflicts Radiating Orb to melee attackers.")
+                Power(BonusAction, AtWill, "Sacred Weapon", "Add Charisma to Attack Rolls for 3 turns.")
                 Complex("Divine Judgement", "Advantage against Fiends; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Sacred Oath", "Holy Rebuke hits additional targets; Sacred Weapon damage heals you.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Unholy: Terrify and damage Fiends in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Unholy", "Terrify and damage Fiends in a 9m radius.") ]
             7<classLvl>, [ Complex("Radiant Reflection", "Holy Rebuke deals damage; Sacred Weapon inflicts Radiating Orb.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Courage: Grant allies Heroism and Fear Immunity.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Courage", "Grant allies Heroism and Fear Immunity.") ]
             11<classLvl>, [ Complex("Pure Radiance", "Advantage and bonus Radiant damage against Orbed targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -950,20 +930,20 @@ let rec oathboundCrusader =
     {
         Id = % nameof oathboundCrusader
         Name = "Oathbound Crusader"
-        LoreName = Some "Gilded Eye Inquisitor"
+               <?> "Gilded Eye Inquisitor"
         Description = "Righting wrongs and delivering justice to grievous sinners."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Abjure Enemy: Frighten or Slow an enemy.")
-                Power(BonusAction, AtWill, "Inquisitor’s Might: Bonus Radiant damage and potential Daze.")
+                Power(Action, AtWill, "Abjure Enemy", "Frighten or Slow an enemy.")
+                Power(BonusAction, AtWill, "Inquisitor’s Might", "Bonus Radiant damage and potential Daze.")
                 Complex("Righteous Judgement", "Advantage against Undead; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Sanctified Commands", "Abjure Enemy/Inquisitor's Might can be cast as Free Action once per combat.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Damned: Terrify and damage Undead in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Damned", "Terrify and damage Undead in a 9m radius.") ]
             7<classLvl>, [ Complex("Abjure the Weak", "Advantage against Abjured targets; Inquisitor's Might grants Advantage.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Warding: Allies gain Resistance to spell damage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Warding", "Allies gain Resistance to spell damage.") ]
             11<classLvl>, [ Complex("I Am Vengeance", "Erupt in radiant fury: bonus Radiant damage and Advantage for 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -973,20 +953,19 @@ let rec oathbreaker =
     {
         Id = % nameof oathbreaker
         Name = "Oathbreaker"
-        LoreName = None
         Description = "In pursuit of power and ambition, only darkness remains."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Subjugate Creature: Claimed creature attacks its allies.")
-                Power(BonusAction, AtWill, "Spiteful Suffering: Target fills with dread (Advantage for all); spawns Shadow on death.")
+                Power(Action, AtWill, "Subjugate Creature", "Claimed creature attacks its allies.")
+                Power(BonusAction, AtWill, "Spiteful Suffering", "Target fills with dread (Advantage for all); spawns Shadow on death.")
                 Complex("Righteous Judgement", "Advantage against Undead; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Vicious Condemnation", "Killing targets traps soul fragments in weapon for bonus Psychic damage.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Living: Raise corpses as Shadow Servants until end of combat.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Living", "Raise corpses as Shadow Servants until end of combat.") ]
             7<classLvl>, [ Complex("Vicious Subjugation", "Subjugated creatures deal maximum damage.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Hate: Allies/Undead deal bonus Charisma-based Necrotic damage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Hate", "Allies/Undead deal bonus Charisma-based Necrotic damage.") ]
             11<classLvl>, [ Complex("Oathbreaker Supreme", "Turn the Living also Terrifies living creatures.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -996,20 +975,20 @@ let rec tyrant =
     {
         Id = % nameof tyrant
         Name = "Tyrant"
-        LoreName = Some "Black Gauntlet Crusader"
+               <?> "Black Gauntlet Crusader"
         Description = "Secure obedience through fear and absolute authority."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Commanding Grasp: WIS save or Command enemy.")
-                Power(BonusAction, AtWill, "Reign of Fear: Frighten all enemies in 18m.")
+                Power(Action, AtWill, "Commanding Grasp", "WIS save or Command enemy.")
+                Power(BonusAction, AtWill, "Reign of Fear", "Frighten all enemies in 18m.")
                 Complex("Tyrant’s Judgement", "Advantage against targets with Lockdown Immunity; killing them restores Smite.")
             ]
             3<classLvl>, [ Complex("Grovel Beneath Me", "Tyrannical Smite causes Frightened enemies within 9m to potentially Grovel.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Defiant: Terrify/damage targets; double to Lockdown Immune.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Defiant", "Terrify/damage targets; double to Lockdown Immune.") ]
             7<classLvl>, [ Complex("Escalation of Fear", "Damaging Frightened targets can Terrify them.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of the Conquerer: Always Frighten enemies within 3m.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of the Conquerer", "Always Frighten enemies within 3m.") ]
             11<classLvl>, [ Complex("Fist of the Tyrant", "Tyrannical Smite conjures a fall-out Fist dealing 12d12 AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1021,7 +1000,7 @@ let rec beastMaster =
     {
         Id = % nameof beastMaster
         Name = "Beast Master"
-        LoreName = Some "High Forest Trail"
+               <?> "High Forest Trail"
         Description = "Cultivate the bond with a bestial companion that grows with you."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1040,14 +1019,14 @@ let rec gloomStalker =
     {
         Id = % nameof gloomStalker
         Name = "Gloom Stalker"
-        LoreName = Some "Underdark Trail"
+               <?> "Underdark Trail"
         Description = "Ambush and put down foes from the envelope of darkness."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Gloom Stalker’s Initiative", "Gain +4 to Initiative and 18m Darkvision.") ]
             3<classLvl>, [ Complex("Dread Shot", "Once per combat, guarantee a Critical Hit.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Gloom Stalker’s Deceit: Turn a failed Attack Roll into a success.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Gloom Stalker’s Deceit", "Turn a failed Attack Roll into a success.") ]
             7<classLvl>, [ Complex("Dread Fletched", "Critical Hits potentially cause Terror.") ]
             9<classLvl>, [ Complex("Gloom Stalker’s Cruelty", "Attacks against Terrified targets are always Critical Hits.") ]
             11<classLvl>, [ Complex("Dread Ambusher", "Every successful Attack Roll on the first turn is a Critical Hit.") ]
@@ -1059,16 +1038,16 @@ let rec hunter =
     {
         Id = % nameof hunter
         Name = "Hunter"
-        LoreName = Some "Greypeaks Trails"
+               <?> "Greypeaks Trails"
         Description = "Excel at slaying Faerun’s most dangerous prey."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Natural Hunter", "Weapon hits apply Hunted stacks, reducing enemy speed.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Opportune Strike: Attack enemy who attacks an ally within 9m.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Opportune Strike", "Attack enemy who attacks an ally within 9m.") ]
             5<classLvl>, [
-                Power(Action, AtWill, "Volley: Attack all enemies in 3m area (Ranged).")
-                Power(Action, AtWill, "Whirlwind: Attack all enemies in 3m area (Melee).")
+                Power(Action, AtWill, "Volley", "Attack all enemies in 3m area (Ranged).")
+                Power(Action, AtWill, "Whirlwind", "Attack all enemies in 3m area (Melee).")
             ]
             7<classLvl>, [ Complex("Marksman’s Eye", "Bonus to Attack Rolls against Hunted targets.") ]
             9<classLvl>, [ Complex("On the Hunt", "Damage against Hunted targets is rolled with Advantage.") ]
@@ -1081,7 +1060,7 @@ let rec mireMist =
     {
         Id = % nameof mireMist
         Name = "Mire Mist"
-        LoreName = Some "Merdelain Trail"
+               <?> "Merdelain Trail"
         Description = "Through stagnant waters and drifting vapors, decay takes root."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1100,7 +1079,7 @@ let rec swarmkeeper =
     {
         Id = % nameof swarmkeeper
         Name = "Swarmkeeper"
-        LoreName = Some "Neverwinter Woods Trail"
+               <?> "Neverwinter Woods Trail"
         Description = "Forged deep connections with swarms of nature spirits."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1119,7 +1098,7 @@ let rec twinfang =
     {
         Id = % nameof twinfang
         Name = "Twinfang"
-        LoreName = Some "Evermoors Trail"
+               <?> "Evermoors Trail"
         Description = "A second shadow moves at your side; together you descend upon quarry."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1140,7 +1119,6 @@ let rec arcaneTrickster =
     {
         Id = % nameof arcaneTrickster
         Name = "Arcane Trickster"
-        LoreName = None
         Description = "Illusions and enchantments keep opponents on the back foot."
         BaseClassId = rogue.Id
         CasterType = HalfCaster Arcane
@@ -1149,10 +1127,10 @@ let rec arcaneTrickster =
                 Complex("Arcane Sneak Attack", "Once per turn bonus damage; Spells/Cantrips deal Force damage.")
                 Complex("Arcane Trickery", "Spells/Cantrips from Stealth do not break it.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Blessing of the Trickster: Grant Invisibility and DEX Advantage.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Blessing of the Trickster", "Grant Invisibility and DEX Advantage.") ]
             5<classLvl>, [ Complex("Trick of the Light", "Attacks against you have Disadvantage (until damaged).") ]
             7<classLvl>, [ Complex("Ethereal Caster", "Casting a spell while Invisible doesn't consume a slot (once per turn).") ]
-            9<classLvl>, [ Power(FreeAction, OncePerTurn, "Magical Ambush: Teleport up to 18m.") ]
+            9<classLvl>, [ Power(FreeAction, OncePerTurn, "Magical Ambush", "Teleport up to 18m.") ]
             11<classLvl>, [ Complex("Elusive Casting", "Turn Invisible at the start of each turn if visible.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1162,7 +1140,6 @@ let rec assassin =
     {
         Id = % nameof assassin
         Name = "Assassin"
-        LoreName = None
         Description = "Sublime punishment to a single foe at a time."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1181,16 +1158,15 @@ let rec hiddenToxicant =
     {
         Id = % nameof hiddenToxicant
         Name = "Hidden Toxicant"
-        LoreName = None
         Description = "Measured tinctures and precise brews turn flesh into a vessel for ruin."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Imbue Toxicity", "Poison damage applies Toxicity stacks; bypass DR if target has stacks.") ]
             3<classLvl>, [ Complex("Poisonous Foothold", "Main-hand hits deal bonus Poison damage = Rogue level.") ]
-            5<classLvl>, [ Power(FreeAction, AtWill, "Deepened Toxicity: Detonate 5 stacks for Confusion, Mute, or Bufotoxin.") ]
+            5<classLvl>, [ Power(FreeAction, AtWill, "Deepened Toxicity", "Detonate 5 stacks for Confusion, Mute, or Bufotoxin.") ]
             7<classLvl>, [ Complex("Venomous Coatings", "Weapon coatings persist until next Long Rest.") ]
-            9<classLvl>, [ Power(FreeAction, AtWill, "Perfected Toxicity: Detonate 7 stacks for Paralysis, Nausea, or Terminal Bloom.") ]
+            9<classLvl>, [ Power(FreeAction, AtWill, "Perfected Toxicity", "Detonate 7 stacks for Paralysis, Nausea, or Terminal Bloom.") ]
             11<classLvl>, [ Complex("Toxic Eruption", "Detonating a toxin strips Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1200,22 +1176,22 @@ let rec mercenary =
     {
         Id = % nameof mercenary
         Name = "Mercenary"
-        LoreName = Some "Swashbuckler"
+               <?> "Swashbuckler"
         Description = "Talk your way through anything, and let the blades speak when that fails."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Taking the Initiative", "Add Proficiency Bonus to Initiative.") ]
             3<classLvl>, [
-                Power(Action, AtWill, "Disarming Feint: Deal damage and potentially disarm.")
-                Power(BonusAction, AtWill, "Blinding Powder: Sneak Attack damage and potential Blind.")
-                Power(Reaction, AtWill, "Mocking Tone: Inflict Vicious Mockery.")
-                Power(BonusAction, AtWill, "Provocative Challenge: Persuasion contest to Beguile/Provoke.")
+                Power(Action, AtWill, "Disarming Feint", "Deal damage and potentially disarm.")
+                Power(BonusAction, AtWill, "Blinding Powder", "Sneak Attack damage and potential Blind.")
+                Power(Reaction, AtWill, "Mocking Tone", "Inflict Vicious Mockery.")
+                Power(BonusAction, AtWill, "Provocative Challenge", "Persuasion contest to Beguile/Provoke.")
             ]
             5<classLvl>, [ Complex("Steady Footwork", "Immunity to Prone; always succeed DEX saving throws.") ]
-            7<classLvl>, [ Power(Action, AtWill, "Improvised Explosives: Grenade dealing Force and Fire damage.") ]
+            7<classLvl>, [ Power(Action, AtWill, "Improvised Explosives", "Grenade dealing Force and Fire damage.") ]
             9<classLvl>, [ Complex("Specialist", "Abilities target additional creatures; Challenge radius increased.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Cannon Fire: Blanket 9m area with 16 explosions.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Cannon Fire", "Blanket 9m area with 16 explosions.") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -1224,7 +1200,6 @@ let rec thief =
     {
         Id = % nameof thief
         Name = "Thief"
-        LoreName = None
         Description = "Larcenous arts and quick hands for third floor windows or forgotten ruins."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1245,7 +1220,6 @@ let rec virulence =
     {
         Id = % nameof virulence
         Name = "Virulence"
-        LoreName = None
         Description = "A scratch soon festers into ruin through virulent corruption."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1266,14 +1240,13 @@ let rec draconicBloodline =
     {
         Id = % nameof draconicBloodline
         Name = "Draconic Bloodline"
-        LoreName = None
         Description = "Blade and breath empowered by draconic ancestors."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Dragon Ancestor", "Gain Elemental Breath and bonus elemental damage = Sorcerer level.")
-                Power(Action, AtWill, "Elemental Breath: Cone attack inflicting element and condition.")
+                Power(Action, AtWill, "Elemental Breath", "Cone attack inflicting element and condition.")
             ]
             3<classLvl>, [ Complex("Draconic Form", "Gain +2 AC and Fly.") ]
             5<classLvl>, [ Simple "Extra Attack" ]
@@ -1288,17 +1261,17 @@ let rec radiantBloom =
     {
         Id = % nameof radiantBloom
         Name = "Radiant Bloom"
-        LoreName = Some "Spellfire Wielder"
+               <?> "Spellfire Wielder"
         Description = "Illuminated brilliance healing allies and frightening foes."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Soulfire Spark", "Casting spells emits aura healing allies/damaging enemies for 1d6.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Radiance in Bloom: 3m AOE heal/radiant damage.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Radiance in Bloom", "3m AOE heal/radiant damage.") ]
             5<classLvl>, [ Complex("Soulfire Ignition", "Soulfire aura damage/heal increased to 1d12.") ]
             7<classLvl>, [ Complex("Immeasurable Light", "Aura grants Divine Favour; Radiant damage inflicts Radiating Orb.") ]
             9<classLvl>, [ Complex("Soulfire Inferno", "Aura triggers at both start and end of turns.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Radiance Unhinged: 9m area heal/damage.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Radiance Unhinged", "9m area heal/damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -1307,19 +1280,18 @@ let rec shadeWalker =
     {
         Id = % nameof shadeWalker
         Name = "Shade Walker"
-        LoreName = None
         Description = "Siphon power from the Shadowfell and its unsettling darkness."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Darkness: Cast 3-turn Darkness without slot.")
+                Power(BonusAction, AtWill, "Darkness", "Cast 3-turn Darkness without slot.")
                 Simple "Devil’s Sight"
-                Power(BonusAction, AtWill, "Hound of Ill Omen: Summon scaling companion.")
+                Power(BonusAction, AtWill, "Hound of Ill Omen", "Summon scaling companion.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Soul Siphon: Kill summon to deal AOE Necrotic damage and heal.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Soul Siphon", "Kill summon to deal AOE Necrotic damage and heal.") ]
             5<classLvl>, [ Complex("Dogs of War", "Can summon two Hounds at once.") ]
-            7<classLvl>, [ Power(FreeAction, AtWill, "Umbral Warp: Warp to Heavily Obscured space.") ]
+            7<classLvl>, [ Power(FreeAction, AtWill, "Umbral Warp", "Warp to Heavily Obscured space.") ]
             9<classLvl>, [ Complex("Dogs of Conquest", "Can summon three Hounds at once.") ]
             11<classLvl>, [ Complex("Pitch Black", "Advantage on hits while Heavily Obscured.") ]
         ]
@@ -1330,7 +1302,6 @@ let rec frenziedTundra =
     {
         Id = % nameof frenziedTundra
         Name = "Frenzied Tundra"
-        LoreName = None
         Description = "Frozen power driving foes into a maddened frenzy."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1349,17 +1320,17 @@ let rec volcanist =
     {
         Id = % nameof volcanist
         Name = "Volcanist"
-        LoreName = Some "Volcanic Heart"
+               <?> "Volcanic Heart"
         Description = "Ancient flame as uncontrollable as it is uncontrollable."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Magmatic", "Ignore Fire Resistance; generate Heat stacks on hit/turn.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Pyrrhic Retort: Counter with Pyrrhic Flare at cost of Heat.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Pyrrhic Retort", "Counter with Pyrrhic Flare at cost of Heat.") ]
             5<classLvl>, [ Complex("Singe Song", $"{TOGGLEABLE}: Fire Immunity; Fire damage shoots additional flares.") ]
-            7<classLvl>, [ Power(Action, OncePerCombat, "Volcanic Eruption: Create lava pools inflicting Melting.") ]
+            7<classLvl>, [ Power(Action, OncePerCombat, "Volcanic Eruption", "Create lava pools inflicting Melting.") ]
             9<classLvl>, [ Complex("Melting Pot", "Pyrrhic Flares now inflict Melting.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Pyrebound: Expend 10 Heat for Meteoric Burst (30d6).") ]
+            11<classLvl>, [ Power(Action, AtWill, "Pyrebound", "Expend 10 Heat for Meteoric Burst (30d6).") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -1368,7 +1339,6 @@ let rec wildMagic =
     {
         Id = % nameof wildMagic
         Name = "Wild Magic"
-        LoreName = None
         Description = "Forces of chaos churning within you, waiting to burst."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1376,11 +1346,11 @@ let rec wildMagic =
             1<classLvl>, [ Complex("Wild Magic", "Potential positive surge on Spell cast.") ]
             3<classLvl>, [ Complex("Tides of Chaos", $"{TOGGLEABLE}: Replace personal surges with enemy negative surges.") ]
             5<classLvl>, [
-                Power(Reaction, AtWill, "Bend Luck: Bonus (+1d4) to ally or Malus (-1d4) to enemy.")
+                Power(Reaction, AtWill, "Bend Luck", "Bonus (+1d4) to ally or Malus (-1d4) to enemy.")
             ]
             7<classLvl>, [ Complex("Wild Creation", "Targeting others with Sorcery/Spell Channeling triggers Wild Magic.") ]
             9<classLvl>, [ Complex("Wild Instinct", "Killing blows increase surge chance.") ]
-            11<classLvl>, [ Power(Reaction, AtWill, "Controlled Chaos: Enemy spell triggers positive surge in you.") ]
+            11<classLvl>, [ Power(Reaction, AtWill, "Controlled Chaos", "Enemy spell triggers positive surge in you.") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -1391,13 +1361,12 @@ let rec pactOfTheBlade =
     {
         Id = % nameof pactOfTheBlade
         Name = "Pact of the Blade"
-        LoreName = None
         Description = "Bind your soul to a weapon and cut through enemies in flames."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Pact Weapon: Weapon uses Charisma.")
+                Power(BonusAction, AtWill, "Pact Weapon", "Weapon uses Charisma.")
                 Complex("Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
             ]
             3<classLvl>, [ Complex("Dark One’s Blessing", "Kills grant Temporary HP = Charisma + Level.") ]
@@ -1413,12 +1382,11 @@ let rec pactOfTheChain =
     {
         Id = % nameof pactOfTheChain
         Name = "Pact of the Chain"
-        LoreName = None
         Description = "Fiendish companions grow in power as you gain levels."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Chained Companion: Summon scaling fiendish familiar.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Chained Companion", "Summon scaling fiendish familiar.") ]
             3<classLvl>, [ Complex("Fiendish Growth I", "Companions gain an at-will spell.") ]
             5<classLvl>, [ Complex("Broken Chains", "Companions gain Extra Attack and Inertia.") ]
             7<classLvl>, [ Complex("Fiendish Growth II", "Companions gain second at-will spell.") ]
@@ -1432,7 +1400,6 @@ let rec pactOfPenumbra =
     {
         Id = % nameof pactOfPenumbra
         Name = "Pact of Penumbra"
-        LoreName = None
         Description = "Penumbral blend of light and dark working in tandem."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
@@ -1454,7 +1421,6 @@ let rec pactOfSeverance =
     {
         Id = % nameof pactOfSeverance
         Name = "Pact of Severance"
-        LoreName = None
         Description = "Walk the boundary between life and death."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
@@ -1476,7 +1442,6 @@ let rec pactOfTheTome =
     {
         Id = % nameof pactOfTheTome
         Name = "Pact of the Tome"
-        LoreName = None
         Description = "Peerless master of Eldritch Blast, reshaping it as you desire."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
@@ -1495,13 +1460,12 @@ let rec pactOfThePrimordial =
     {
         Id = % nameof pactOfThePrimordial
         Name = "Pact of the Primordial"
-        LoreName = None
         Description = "Adopt the form of a primordial demon."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Pact of the Primordial", "33% chance to shift to Demonic Visage (Advantage, free spells) each turn.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Advocatus Diaboli: Absorb corpses to remove Hematic Invocation stacks.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "Advocatus Diaboli", "Absorb corpses to remove Hematic Invocation stacks.") ]
             5<classLvl>, [ Complex("Profane Metamorphosis", $"{TOGGLEABLE}: Use Collected Souls in place of health for invocations.") ]
             7<classLvl>, [ Complex("Hematic Ascent", "Target enemies with Invocations (6d6 Necrotic); kills grant Souls.") ]
             9<classLvl>, [ Complex("Sacrificial Surrogate", "Killing while Demonic extends it and grants physical buffs.") ]
@@ -1516,16 +1480,16 @@ let rec arcblade =
     {
         Id = % nameof arcblade
         Name = "Arcblade"
-        LoreName = Some "Anarchs of Shyr Tradition"
+               <?> "Anarchs of Shyr Tradition"
         Description = "A mobile spellsword storming with steel and magic."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Siphon Arcana: Destroy corpses for Recovery Charges and bonus weapon damage.") ]
+            1<classLvl>, [ Power(FreeAction, AtWill, "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage.") ]
             3<classLvl>, [
-                Power(BonusAction, AtWill, "Steel-Wind Storm: Bonus AC and melee Advantage.")
-                Power(Action, AtWill, "Steel-Wind Burst: Weapon-based Ranged Cantrip.")
-                Power(Action, AtWill, "Steel-Wind Strike: Teleport-strike spell targeting multiple foes.")
+                Power(BonusAction, AtWill, "Steel-Wind Storm", "Bonus AC and melee Advantage.")
+                Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip.")
+                Power(Action, AtWill, "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
             ]
             5<classLvl>, [ Simple "Extra Attack" ]
             7<classLvl>, [ Complex("Winds of the Arcblade", "Killing blows grant a free Steel-Wind Strike.") ]
@@ -1539,13 +1503,13 @@ let rec arcaneWarden =
     {
         Id = % nameof arcaneWarden
         Name = "Arcane Warden"
-        LoreName = Some "Coronal Guards Tradition"
+               <?> "Coronal Guards Tradition"
         Description = "Blend martial skill with hardening the Weave into Arcane Wards."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Arcane Ward", "Maintain damage-absorbing ward; first spell cast adds charges.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Projected Ward: Protect allies with your active Ward.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Projected Ward", "Protect allies with your active Ward.") ]
             5<classLvl>, [ Simple "Extra Attack" ]
             7<classLvl>, [ Complex("Aggressive Warding", "Dealing damage adds a Ward stack once per turn.") ]
             9<classLvl>, [ Simple "Steel Cast" ]
@@ -1558,7 +1522,7 @@ let rec evoker =
     {
         Id = % nameof evoker
         Name = "Evoker"
-        LoreName = Some "Cormyr War Wizard Tradition"
+               <?> "Cormyr War Wizard Tradition"
         Description = "Master of offensive magic with precision and control."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1577,17 +1541,17 @@ let rec luminalConfluence =
     {
         Id = % nameof luminalConfluence
         Name = "Luminal Confluence"
-        LoreName = Some "Netherese Variator Tradition"
+               <?> "Netherese Variator Tradition"
         Description = "Distill elemental stains to boost your magic."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Elemental Concierge", "Elemental hits generate Stains; Stains empower next spell effects.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Luminal Conversion: Generate choice Stain or teleport/swap places.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "Luminal Conversion", "Generate choice Stain or teleport/swap places.") ]
             5<classLvl>, [ Complex("Stained Imprint", "50% chance not to consume Stains on use.") ]
-            7<classLvl>, [ Power(Action, AtWill, "Luminal Mayhem: Consume all stains for high single-target damage.") ]
+            7<classLvl>, [ Power(Action, AtWill, "Luminal Mayhem", "Consume all stains for high single-target damage.") ]
             9<classLvl>, [ Complex("Weavewalker’s Expedition", "Generating a stain has chance to grant a second random one.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Luminal Genesis: Consume all stains for high AOE damage.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Luminal Genesis", "Consume all stains for high AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
     }
@@ -1596,7 +1560,7 @@ let rec necromancer =
     {
         Id = % nameof necromancer
         Name = "Necromancer"
-        LoreName = Some "Thayan Necromancer Tradition"
+               <?> "Thayan Necromancer Tradition"
         Description = "Wounds inflict the curse of undeath, raising zombie minions."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1615,12 +1579,12 @@ let rec elementalist =
     {
         Id = % nameof elementalist
         Name = "Elementalist"
-        LoreName = Some "Zakharan Sha'ir Tradition"
+               <?> "Zakharan Sha'ir Tradition"
         Description = "Elements answer your call as loyal companions."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Primal Bond: Summon scaling Fire, Air, Earth, or Water Elemental.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Primal Bond", "Summon scaling Fire, Air, Earth, or Water Elemental.") ]
             3<classLvl>, [ Complex("Rend Elements", "Ignore Resistances/Immunities matching your summoned Elemental.") ]
             5<classLvl>, [ Complex("Channeled Infusion", "Deal extra 1d4 damage matching your summoned Elemental.") ]
             7<classLvl>, [ Complex("Primordial Ward", "Gain Resistance matching your summoned Elemental.") ]

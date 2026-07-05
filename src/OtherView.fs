@@ -71,7 +71,7 @@ let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>
 
     let centerText = 
         concat {
-            forEach (rct.Split '\n') <| fun l -> p { l }
+            printRichText rct
         }
 
     div {
@@ -332,7 +332,11 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 radialStage rct dispatch
                     l.SubclassId
                     (validSubclasses
-                     |> Map.map (fun _ v -> {| v with Name = v.DisplayName model.UseLoreNames |}))
+                     |> Map.map (fun _ v -> 
+                        {| v with 
+                            Name = v.DisplayName model.UseLoreNames 
+                            Description = v.DisplayDescription model.UseLoreNames
+                        |}))
                     subclassIconPath
                     SetSubclass
 

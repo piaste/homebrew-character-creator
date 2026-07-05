@@ -132,7 +132,7 @@ let statusText (model: Model) =
         let clLevels = character.CurrentHistory.LevelsBySubclass
         let classNames = 
             character.CurrentHistory.Levels
-            |> List.map (_.SubclassId >> subclassById >> _.Name)            
+            |> List.map (_.SubclassId >> subclassById >> fun sc -> sc.DisplayName model.UseLoreNames)
             |> List.distinct
             |> String.concat "/"
         $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."

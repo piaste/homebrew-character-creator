@@ -109,9 +109,9 @@ type StatModifiers = {
 
 type Passive = 
     | Simple of string
-    | Complex of title: string * description: string
+    | Complex of title: LoreableString * description: string
     | Buff of StatModifiers
-    | Power of ActionCost * Frequency * description: string
+    | Power of ActionCost * Frequency * title: LoreableString * description: string
     with 
         static member op_Implicit(simpleAbility: string) = Simple simpleAbility
         member this.Description = 
@@ -119,7 +119,7 @@ type Passive =
             | Simple txt -> txt
             | Complex (_, d) -> d
             | Buff sm -> sm.ToString()
-            | Power (cost, freq, txt) -> $"{cost}{freq}: {txt}"
+            | Power (cost, freq, title, txt) -> $"{cost}{freq}: {txt}"
 
         member this.Effect = 
             match this with
@@ -240,9 +240,8 @@ type [<Measure>] subclassId
 type SubclassDef =
     {
         Id : string<subclassId>
-        Name: string
-        LoreName : string option
-        Description: string
+        Name: LoreableString
+        Description: LoreableString
         BaseClassId: string<classId>
         CasterType: CasterType        
         ScalingAbilities: int<charLvl> -> int<classLvl> -> Passive list
@@ -250,10 +249,11 @@ type SubclassDef =
     }
     with 
         member this.DisplayName useLoreNames = 
-            match useLoreNames, this.LoreName with
-            | true, Some ln -> ln
-            | _ -> this.Name
+            this.Name.Display useLoreNames
         
+        member this.DisplayDescription useLoreNames = 
+            this.Description.Display useLoreNames
+
         member this.SpellList = 
             match this.CasterType with
             | Martial -> None

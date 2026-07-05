@@ -94,3 +94,19 @@ type KeyedMap<[<Measure>] 'm, 'v
 
 let toFileName (entityName : string) = 
     entityName.ToLower().Replace(' ', '-')
+
+type LoreableString(defaultText: string, ?loreText : string) =
+    member private this.DefaultText = defaultText
+    member private this.LoreText = loreText
+    member this.Display useLoreNames = 
+        match useLoreNames, loreText with
+        | true, Some lt -> lt
+        | _ -> defaultText
+    static member op_Implicit(text: string) = LoreableString(defaultText = text)
+
+    static member inline (+) (ls: LoreableString, s: string) =
+        match ls.LoreText with
+        | None -> LoreableString(ls.DefaultText + s)
+        | Some lt -> LoreableString(ls.DefaultText + s, lt + s)
+
+let inline (<?>) defaultText loreText = LoreableString(defaultText, loreText)

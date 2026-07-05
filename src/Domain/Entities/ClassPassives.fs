@@ -553,7 +553,7 @@ let rec ``Mantra of Restoration`` = {
     ClassId = druid.Id
     Id = % nameof ``Mantra of Restoration``
     Grants = [
-        Power(FreeAction, AtWill, "Solar Mend: Expend Wild Shape charges to restore Spell Slots while not Wild Shaped.")
+        Power(FreeAction, AtWill, "Solar Mend", "Expend Wild Shape charges to restore Spell Slots while not Wild Shaped.")
         Simple "Lunar Mend: Heal yourself while in the form of a Wild Shape."
     ]
 }
@@ -609,7 +609,7 @@ let rec ``Primal Takedown`` = {
 let rec ``Shapechanger’s Versatility`` = {
     ClassId = druid.Id
     Id = % nameof ``Shapechanger’s Versatility``
-    Grants = [ Power(FreeAction, AtWill, "Wild Shape: Outside of combat, you may Wild Shape as a Free Action without consuming charges.") ]
+    Grants = [ Power(FreeAction, AtWill, "Wild Shape", "Outside of combat, you may Wild Shape as a Free Action without consuming charges.") ]
 }
 
 let rec ``Territorial Dominance`` = {
@@ -732,14 +732,14 @@ let rec ``Tranquil Fortitude`` = {
     Id = % nameof ``Tranquil Fortitude``
     Grants = [
         Simple "Gain an additional Reaction."
-        Power(BonusAction, AtWill, "Patient Defense: All Attack Rolls against you have disadvantage and you have Advantage on Dexterity Saving Throws for 1 turn.")
+        Power(BonusAction, AtWill, "Patient Defense", "All Attack Rolls against you have disadvantage and you have Advantage on Dexterity Saving Throws for 1 turn.")
     ]
 }
 
 let rec Windwaker = {
     ClassId = monk.Id
     Id = % nameof Windwaker
-    Grants = [ Power(FreeAction, OncePerTurn, "Step of the Wind: Dash and Disengage at the cost of a Ki point.") ]
+    Grants = [ Power(FreeAction, OncePerTurn, "Step of the Wind", "Dash and Disengage at the cost of a Ki point.") ]
 }
 
 let rec ``Zen Recovery`` = {
@@ -1048,7 +1048,7 @@ let rec ``Grievous Wounds`` = {
 let rec ``Illusory Advantage`` = {
     ClassId = rogue.Id
     Id = % nameof ``Illusory Advantage``
-    Grants = [ Power(BonusAction, AtWill, "Enhanced Illusion: Create an Illusory Decoy that blinds nearby enemies for 1 round upon vanishing.") ]
+    Grants = [ Power(BonusAction, AtWill, "Enhanced Illusion", "Create an Illusory Decoy that blinds nearby enemies for 1 round upon vanishing.") ]
 }
 
 let rec ``Light Footwork`` = {
@@ -1187,7 +1187,7 @@ let rec ``Ephemeral Vacuum`` = {
 let rec ``Essential Epiphany`` = {
     ClassId = sorcerer.Id
     Id = % nameof ``Essential Epiphany``
-    Grants = [ Power(BonusAction, AtWill, "Astral Knowledge: Gain proficiency in all skills of a single Ability Score until Long Rest.") ]
+    Grants = [ Power(BonusAction, AtWill, "Astral Knowledge", "Gain proficiency in all skills of a single Ability Score until Long Rest.") ]
 }
 
 let rec ``Evasive Warp`` = {
@@ -1601,7 +1601,7 @@ let rec ``Spell Surge`` = {
 let rec ``Telekinetic Command`` = {
     ClassId = wizard.Id
     Id = % nameof ``Telekinetic Command``
-    Grants = [ Power(FreeAction, OncePerTurn, "Telekinetic Push and Telekinetic Pull: Move a target 9m/30ft.") ]
+    Grants = [ Power(FreeAction, OncePerTurn, "Telekinetic Push and Telekinetic Pull", "Move a target 9m/30ft.") ]
 }
 
 let rec ``War Magic`` = {

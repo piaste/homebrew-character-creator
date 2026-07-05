@@ -11,7 +11,7 @@ let blackDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn,  $"Acid Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Acid Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -22,7 +22,7 @@ let blueDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -33,7 +33,7 @@ let brassDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -44,7 +44,7 @@ let bronzeDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -55,7 +55,7 @@ let copperDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn, $"Acid Breath Cantrip")
+                Power(Action, OncePerTurn, $"Acid Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -66,7 +66,7 @@ let goldDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -77,7 +77,7 @@ let greenDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Poison damage"
-                Power(Action, OncePerTurn,  $"Poison Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Poison Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -88,7 +88,7 @@ let redDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Fire damage"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -99,7 +99,7 @@ let silverDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Cold damage"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -110,7 +110,7 @@ let whiteDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Cold damage"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -121,7 +121,7 @@ let amethystDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Force damage"
-                Power(Action, OncePerTurn,  $"Force Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Force Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -132,7 +132,7 @@ let crystalDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Radiant damage"
-                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -143,7 +143,7 @@ let emeraldDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Psychic damage"
-                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip")
+                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -154,7 +154,7 @@ let sapphireDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Thunder damage"
-                Power(Action, OncePerTurn, $"Thunder Breath Cantrip")
+                Power(Action, OncePerTurn, $"Thunder Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 
@@ -165,7 +165,7 @@ let topazDragonborn =
             BaseRaceId = Dragonborn.Id
             RacialPassives = [
                 Simple $"Resistance to Necrotic damage"
-                Power(Action, OncePerTurn, $"Radiant Breath Cantrip")
+                Power(Action, OncePerTurn, $"Radiant Breath Cantrip", "TODODESCRIPTION")
             ]
         }
 

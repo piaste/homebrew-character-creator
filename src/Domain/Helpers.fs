@@ -1,5 +1,3 @@
-#nowarn 3391
-
 module Bg3HomebrewCCreator.Domain.Helpers
 
 open FSharp.UMX
