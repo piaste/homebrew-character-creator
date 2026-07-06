@@ -94,6 +94,18 @@ let checkErrors (character: Character) =
         let numCPassivePicks = nPassivePicks character.NextLevelUp
         if character.NextLevelUp.ClassPassiveIds.Count <> numCPassivePicks then
              $"Choose exactly {numCPassivePicks} class passives."
+
+        for KeyValue(t, q) in character.Picks do
+            match t with
+            | ClassSpecific cs ->
+                let picked = 
+                    character.NextLevelUp.SpecialPickIds
+                    |> Seq.map (Map.findIn SpecialPicks.allSpecialPicks)
+                    |> Seq.filter (fun p -> p.Type = cs)
+                    |> Seq.length
+                if picked <> q then $"Choose exactly {q} {cs.DisplayString}"
+            | _ -> () // covered above, to be unified
+
     ]
 
 type Model =
