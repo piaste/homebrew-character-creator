@@ -408,7 +408,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     (l.FeatId |> Option.toList |> Set.ofList)
 
             | Pick (ClassSpecific sp) ->
-                ph Feats <| Picker.view sp.DisplayString
+                ph (ClassSpecific sp) <| Picker.view sp.DisplayString
                     ((SpecialPicks.allSpecialPicksOfType sp).Values
                      |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
