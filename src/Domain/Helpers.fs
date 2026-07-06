@@ -129,8 +129,47 @@ let getRegularSpellSlots (character: Character) =
     ]
     |> List.map (fun l -> List.append l [0;0;0;0;0;0] |> List.take 6)
     |> List.fold (fun l1 l2 -> List.zip l1 l2 |> List.map (fun (s1, s2) -> s1 + s2)) [0;0;0;0;0;0]
-    |> List.takeWhile (fun l -> l > 0)
+    |> List.where (fun l -> l > 0)
 
+let getWarlockSpellSlots (character: Character) = 
+    [
+        for KeyValue(subclass, lvl) in character.CurrentHistory.LevelsBySubclass do
+            match (subclassById subclass).CasterType with            
+            | FullCaster Bargained ->
+                match lvl with
+                |  1<classLvl> -> [2]
+                |  2<classLvl> -> [2]
+                |  3<classLvl> -> [0; 2]
+                |  4<classLvl> -> [0; 2]
+                |  5<classLvl> -> [0; 0; 3]
+                |  6<classLvl> -> [0; 0; 3]
+                |  7<classLvl> -> [0; 0; 0; 3]
+                |  8<classLvl> -> [0; 0; 0; 3]
+                |  9<classLvl> -> [0; 0; 0; 0; 4]
+                | 10<classLvl> -> [0; 0; 0; 0; 4]
+                | 11<classLvl> -> [0; 0; 0; 0; 2; 4]
+                | 12<classLvl> -> [0; 0; 0; 0; 2; 4]
+                | _ -> []
+            | HalfCaster Bargained ->
+                match lvl with
+                |  1<classLvl> -> [2]
+                |  2<classLvl> -> [2]
+                |  3<classLvl> -> [2]
+                |  4<classLvl> -> [2]
+                |  5<classLvl> -> [0; 2]
+                |  6<classLvl> -> [0; 2]
+                |  7<classLvl> -> [0; 2]
+                |  8<classLvl> -> [0; 2]
+                |  9<classLvl> -> [0; 0; 2]
+                | 10<classLvl> -> [0; 0; 2]
+                | 11<classLvl> -> [0; 0; 2]
+                | 12<classLvl> -> [0; 0; 2]
+                | _ -> []
+            | _ -> []
+    ]
+    |> List.map (fun l -> List.append l [0;0;0;0;0;0] |> List.take 6)
+    |> List.fold (fun l1 l2 -> List.zip l1 l2 |> List.map (fun (s1, s2) -> s1 + s2)) [0;0;0;0;0;0]
+    |> List.where (fun l -> l > 0)
 let getValidSubclassesForClass clId (c: Character) =
     c.PreviousHistory.LevelsBySubclass
     |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0<classLvl>)

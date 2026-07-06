@@ -79,9 +79,10 @@ let checkbox isActive dispatch msg =
         on.click (fun _ -> dispatch msg)
     }
 
-let fakeCheckbox isActive = 
+let fakeCheckbox fillColor isActive = 
     button {
         attr.disabled true
+        attr.style $"--checkbox-fill: {fillColor}"
         cl("square-checkbox" + if isActive then " is-on" else "")
     }
 

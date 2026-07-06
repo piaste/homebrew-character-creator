@@ -38,6 +38,8 @@ html, body, .sheet{
   /* “Glass” tones tuned to the warm mural background */
   --glass: rgba(28,18,16,0.74);
   --glass2: rgba(12,8,9,0.35);
+
+  --checkbox-fill: rgba(212,175,55,0.95);
 }
 
 *{ box-sizing:border-box; }
@@ -1284,7 +1286,7 @@ select.trait-select:focus{
   width: 8px;
   height: 8px;
   border-radius: 2px;
-  background: rgba(212,175,55,0.95);
+  background: var(--checkbox-fill);
 }
 
 

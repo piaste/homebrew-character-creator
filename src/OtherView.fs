@@ -155,19 +155,29 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                     )
                 }
                 let spellSlots = getRegularSpellSlots chr
-                cond spellSlots <| function
+                let warlockSlots = getWarlockSpellSlots chr
+                cond (List.append spellSlots warlockSlots) <| function
                 | [] -> empty()
                 | slots -> 
                     concat {
                         div { cl "sheet-section-title"; "SPELL SLOTS" }
                         div { 
                             cl "sheet-attrs"
-                            forEach (List.indexed slots) (fun (i, n) ->
+                            forEach (List.indexed spellSlots) (fun (i, n) ->
                                 div { 
                                     cl "sheet-attr"
                                     span { toRoman (i + 1)}
                                     forEach (List.init n (fun _ -> ())) (fun _ -> 
-                                        fakeCheckbox true
+                                        fakeCheckbox "rgba(3, 108, 161, 0.95)" true
+                                    )
+                                } 
+                            )
+                            forEach (List.indexed warlockSlots) (fun (i, n) ->
+                                div { 
+                                    cl "sheet-attr"
+                                    span { toRoman (i + 1)}
+                                    forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                        fakeCheckbox "rgba(240, 49, 192, 0.95)" true
                                     )
                                 } 
                             )
