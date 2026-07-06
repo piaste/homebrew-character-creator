@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+ 
     <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
     <link rel="stylesheet" href="./css/otherui.css">
 </head>
-
+ 
 <body>
     <div id="app" class="app-root" aria-label="HBCR Character Builder" data-screen="radial">
         <div class="frame">
-
+ 
             <div class="topbar">
                 <div class="brand-row">
                     <img class="hbcr-logo" src="./assets/ui/hbcr-logo-cutout.png"
@@ -20,73 +20,144 @@
                     <div class="brand-text">
                     </div>
                 </div>
-                <div class="version-pill">
-                    <span>Mod v8.9.1</span>
-                    <span style="opacity:.55">•</span>
-                    <span>Builder v0.3.0-radial</span>
+                <div class="topbar-meta">
+                    <div class="topbar-actions" aria-label="Builder actions">
+                        ${ActionButtons}
+                    </div>
+                    <div class="version-pill">
+                        <span>Mod v8.9.1</span>
+                        <span style="opacity:.55">•</span>
+                        <span>Builder v0.3.0-radial</span>
+                    </div>
                 </div>
             </div>
             <div class="divider"></div>
-
+ 
             <div class="content">
-
-
+ 
+ 
                 <div class="radial-shell">
                     <div class="radial-pane" style="position:relative;z-index:2;pointer-events:auto;">
-
+ 
                         <div class="stage-and-picks" aria-label="Stage navigation">
-                            <div class="stage-tabs">                                
-                                ${StageTabs}                                
-                            </div>
-                            <div class="picks-dock">
-                                <div class="pick-grid pick-grid--dock" aria-label="Picks this level">      
-                               ${PicksDocks}                                
+                            <button class="stage-carousel-nav stage-carousel-nav--prev" type="button" aria-label="Scroll stage navigation left" onclick="window.hbcrScrollStageCarousel?.(this, -1)">
+                                <span aria-hidden="true">&#8249;</span>
+                            </button>
+                            <div class="stage-carousel" data-stage-carousel>
+                                <div class="stage-carousel-track" data-stage-carousel-track>
+                                    <div class="stage-tabs">                                
+                                        ${StageTabs}                                
+                                    </div>
+                                    <div class="picks-dock">
+                                        <div class="pick-grid pick-grid--dock" aria-label="Picks this level">      
+                                       ${PicksDocks}                                
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <button class="stage-carousel-nav stage-carousel-nav--next" type="button" aria-label="Scroll stage navigation right" onclick="window.hbcrScrollStageCarousel?.(this, 1)">
+                                <span aria-hidden="true">&#8250;</span>
+                            </button>
                         </div>
-
+ 
                         ${RadialStage}
                     </div>
                     <div class="radial-summary">
-
+ 
                         <div class="sheet-title">CHARACTER SUMMARY</div>
-
+ 
                         <div class="summary-grid">
                             <div class="summary-left">
                                 <div class="sheet-controls summary-top">
                                     ${SheetPills}
-<!-- 
-                                    <div class="sheet-pill trait-pill" title="Trait" style="margin-left:12px">
-                                        <span class="trait-label">TRAIT</span>
-                                        <select class="trait-select" data-action="set-trait" style="width:180px">
-                                            ${TraitOptions}
-                                        </select>
-                                    </div> -->
-                                    ${ActionButtons}
                                 </div>
-
+ 
                                 <div class="sheet-muted trait-desc">
-                                    useful text here?
-
+                                    ${TraitDescription}
                                 </div>
                                 ${CharacterSummary}
                             </div>
-
+ 
                             <div class="summary-right">
                                 ${LevelBoxes}
                             </div>
                         </div>
-
+ 
                     </div>
-
+ 
                 </div>
-
+ 
             </div>
         </div>
     </div>
     <script type="module" src="./src/app.js"></script>
-
-
+    <script>
+        (function () {
+            function syncStageCarousel(shell) {
+                if (!shell) {
+                    return;
+                }
+ 
+                var viewport = shell.querySelector('[data-stage-carousel]');
+                var prev = shell.querySelector('.stage-carousel-nav--prev');
+                var next = shell.querySelector('.stage-carousel-nav--next');
+ 
+                if (!viewport || !prev || !next) {
+                    return;
+                }
+ 
+                var maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+                var atStart = viewport.scrollLeft <= 4;
+                var atEnd = viewport.scrollLeft >= maxScrollLeft - 4;
+                var hasOverflow = maxScrollLeft > 4;
+ 
+                prev.disabled = !hasOverflow || atStart;
+                next.disabled = !hasOverflow || atEnd;
+                prev.classList.toggle('is-disabled', prev.disabled);
+                next.classList.toggle('is-disabled', next.disabled);
+                prev.setAttribute('aria-disabled', String(prev.disabled));
+                next.setAttribute('aria-disabled', String(next.disabled));
+            }
+ 
+            function syncAllStageCarousels() {
+                document.querySelectorAll('.stage-and-picks').forEach(syncStageCarousel);
+            }
+ 
+            window.hbcrSyncStageCarousel = syncAllStageCarousels;
+ 
+            window.hbcrScrollStageCarousel = function (button, direction) {
+                var shell = button && button.closest('.stage-and-picks');
+                var viewport = shell && shell.querySelector('[data-stage-carousel]');
+                if (!viewport) {
+                    return;
+                }
+ 
+                var amount = Math.max(viewport.clientWidth * 0.72, 220);
+                viewport.scrollBy({ left: amount * direction, behavior: 'smooth' });
+                window.setTimeout(function () { syncStageCarousel(shell); }, 220);
+            };
+ 
+            document.addEventListener('DOMContentLoaded', function () {
+                syncAllStageCarousels();
+                document.querySelectorAll('[data-stage-carousel]').forEach(function (viewport) {
+                    viewport.addEventListener('scroll', function () {
+                        syncStageCarousel(viewport.closest('.stage-and-picks'));
+                    }, { passive: true });
+                });
+            });
+ 
+            window.addEventListener('resize', syncAllStageCarousels);
+            var observer = new MutationObserver(function () {
+                syncAllStageCarousels();
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            window.setTimeout(syncAllStageCarousels, 50);
+            window.setTimeout(syncAllStageCarousels, 300);
+            window.setTimeout(syncAllStageCarousels, 900);
+        })();
+    </script>
+ 
+ 
 </body>
-
+ 
 </html>
