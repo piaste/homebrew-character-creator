@@ -278,7 +278,7 @@ let rec ``Warpstone`` : CantripDef = {
 
 let rec ``Word of Radiance`` : CantripDef = {
     Id = % nameof ``Word of Radiance``
-    CantripDescription = "Deal 1d12 damage to ALL targets in a 3m/10ft AOE around you. Double damage to aberrations, fey, fiends and undead. On Save: half damage. Offense: CON Save."
+    CantripDescription = "Deal 1d12 radiant damage to ALL targets in a 3m/10ft AOE around you. Double damage to aberrations, fey, fiends and undead. On Save: half damage. Offense: CON Save."
     Concentration = false
     ActionCost = Action
 }

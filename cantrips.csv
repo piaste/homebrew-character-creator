@@ -1,0 +1,41 @@
+Cantrip Name,Action (Concentration),Duration,Offense,Effect,Level 5 Improvement,Level 9 Improvement
+Acid Burst,Action,1 turn,Ranged 18m,Deal 1d8 acid damage 1.5m/5ft AOE (18m range) and inflicts Acid (-2 AC) on targets,Deal 2d8 acid damage,Deal 3d8 acid damage
+Blade Surge,Action,,DEX Save,"Deal 1d12 force damage on all targets within 3m/10ft, potentially inflicting Bleeding.",Deal 2d12 force damage,Deal 3d12 force damage
+Blade Ward,Bonus,3 turns,,Gain Resistance to your next instance of physical damage,,
+Bone Chill,Action,1 turn,Ranged 18m,Deal 1d8 necrotic damage and prevent target from regaining HP. Undead creatures also have disadvantage on attack rolls,Deal 2d8 necrotic damage,Deal 3d8 necrotic damage
+Create or Extinguish Flames,Action,,,"Create a 3m flame surface, or remove Burning from a creature/object",,
+Dancing Lights,Bonus,Until Long Rest,,Create light 9m. Invisible and sneaking enemies are revealed.,,
+Disguise Self,Bonus,Until Long Rest,,Disguise yourself. Invisible until end of your current turn.,,
+Druidcraft,Bonus,1 turn,STR Save,"Entangle a creature if they fail a save, 18m range",,
+Fire Bolt,Action,1 turn,Ranged 18m,Deal 1d8 fire damage on hit and burn your target (no save),Deal 2d8 fire damage,Deal 3d8 fire damage
+Friends,Bonus ,Until Long Rest,,Gain Advantage on Charisma checks. Might make targets hostile in Honor Mode when spell end,,
+Frostbite,Action,1 turn,Melee,"Deal 1d12 cold damage if hit (melee range), target get disadvantage on their next attack roll",Deal 2d12 cold damage,Deal 3d12 cold damage
+Green Flame Blade,Action,,Melee Weapon,"Strike with your melee weapon, dealing an additional +1d8 Fire damage to your target and 1d8 FIre damage to another enemy within 9m/30ft.",Deal +2d8 / 2d8 fire damage,Deal +3d8 / 3d8 fire damage
+Guidance,Bonus ,Until Long Rest,,Grant +1d4 on ability checks,,
+Guiding Moonlight (Light) ,Bonus,Until Long Rest,,Infuse weapon with light and +2 bonus to attack rolls and damage. Spells and Cantrips that improves your weapon can't stack with each others.,,
+Gust Bellow,Bonus,,STR Save,"Remove surfaces within a 9m radius, push back 9m creatures within 3m on failed save",,
+Mage Hand,Bonus,Until Long Rest,,Mage Hand,,
+Mind Sliver,Action,3 turns,Ranged 18m,Deal 1d8 psychic damage and inflict Mind Fracture (-1d4 on next save) on failed INT save,Deal 2d8 psychic damage,Deal 3d8 psychic damage
+Minor Illusion,Bonus,Until Long Rest,,Distract targets,,
+Mud Mantle,Bonus,1 turn,,Gain Resistance to Elemental Damage for a single hit.,,
+Poison Spray,Action,,CON Save,"Deal 1d8 poison damage, 18m range, On Save: half damage. When you fire Poison Spray at an enemy, it will fire another shot at any other nearby enemies who are Poisoned.",Deal 2d12 poison damage,Deal 3d12 poison damage
+Prestidigitation,Bonus,3 turn,,The next attack roll against you is rolled with Disadvantage,,
+Primal Savagery,Action,1 turn,Melee,Deal 1d12 poison damage and Poison target for 3 turn on failed CON save,Deal 2d12 poison damage,Deal 3d12 poison damage
+Produce Flame,Bonus,Until Long Rest,CON Save,"Create a flame, provides light and can be used to inflict Burn (permanent) to a creature within 18m/60ft on a failed CON save.",,
+Ray of Frost,Action,1 turn,Ranged 18m,Deal 1d8 cold damage on hit (18m range) and Halve movement speed (no save),Deal 2d8 cold damage,Deal 3d8 cold damage
+Resistance,Bonus ,Until Long Rest,,Grant your target +1d4 to Saving Throws,,
+Sacred Flame,Action,,Ranged 18m,"Deals 1d8 radiant damage to a target. Deals double damage to Aberrations, Fey, Fiends, and Undead.",Deal 2d8 radiant damage,Deal 3d8 radiant damage
+Shocking Grasp,Action,1 turn,Melee,Deal 1d12 lightning damageand target can't use reaction (no save). This spell has advantage on creatures with metal armour,Deal 2d12 lightning damage,Deal 3d12 lightning damage
+Spare the Dying,Bonus,,,"1d8 heal, 18m range",2d8 heal,3d8 heal
+Spark Surge,Action,1 turn,Ranged 18m,"Deal 1d8 lightning damage, inflicts Shocked (no reactions, disadvantage on DEX saving throws/ability checks) on failed DEX save.",Deal 2d8 lightning damage,Deal 3d8 lightning damage
+Spellbound Empowerment,Bonus,Until Long Rest,,Your melee or ranged weapon(s) use your spellcasting ability for attack and damge,,
+Titan's Boon,Bonus (C),Until Long Rest,,Increase size causing melee and unarmed attacks do +1d4 dmg,,
+Thorn Whip,Action,,Ranged 18m,Deal 1d8 piercing damage and pull Large or smaller target 9m/30ft closer on failed STR save.,Deal 2d8 piercing damage,Deal 3d8 piercing damage
+Thunderclap,Action,,CON Save,Deal 1d12 thunder damage on a 3m AOE around you and potentially applies Reverberation. On Save: half damage,Deal 2d12 thunder damage,Deal 3d12 thunder damage
+Thunderous Strike,Action,1 turn,Melee Weapon,"Strike with your melee weapon, dealing an additional +1d8 thunder damage to your target and an additional 1d8 thunder damage should they choose to move before the end of their next turn.",Deal +2d8 / 2d8 thunder damage,Deal +3d8 / 3d8 thunder damage
+Toll the Dead,Action,,WIS Save,"Deal 1d8 necrotic damage (18m range). If target is below half HP, deal double dmg.",Deal 2d8 necrotic damage,Deal 3d8 necrotic damage
+Torrent,Bonus,3 turn,,Target creature (18m range) become Wet (no save),,
+True Strike,Bonus,1 turn,,Your target ignore all resistances for a turn. This includes damage reduction by armor,,
+Vicious Mockery,Bonus,1 turn,WIS Save,"Target creature within 18m/60ft. On failed save, target has disadvantage on all attack rolls for a round.",,
+Warpstone,Bonus,,,"While not Threatened, throw a stone, immediatly warping to wherever it lands (9m range) ",,
+Word of Radiance,Action,,CON Save,"Deal 1d12 damage to ALL targets in a 3m/10ft AOE around you. Double damage to aberrations, fey, fiends and undead. On Save: half damage.",Deal 2d12 radiant damage,Deal 3d12 radiant damage
