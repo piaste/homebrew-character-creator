@@ -6,7 +6,6 @@
 - **Index Page**: [Starting Guide : Homebrew](https://docs.google.com/document/d/1u-URJyBh-IDHQ27XyQ9Gu_jG2aEQip-vMjTS5QjLCk8)
 - **Entity Files**: Located in `src/Domain/Entities/` (e.g., `Classes.fs`, `Spells.fs`, `Feats.fs`, etc.)
 
-
 **Instructions**:
 
 1.  **Access Documentation**:
@@ -24,6 +23,8 @@
 *   `Traits.fs` -> "Traits" Doc link
 *   `Skills.fs` -> "Skills" section in the Main Doc or linked page
 
+2.  **Verify existing PRs**:    
+    * Check the repository's open PRs. If any open PRs include changes to one or more Entities files, exclude those files from the rest of the task.
 
 2.  **Compare and Synchronize**:
     *   Analyze each documentation page and compare the entities described there with the F# objects defined in the corresponding file in `src/Domain/Entities/`.
@@ -42,7 +43,5 @@
     *   After making changes to a file, run `dotnet build src/Bg3HomebrewCCreator.Client.fsproj` to ensure that the strict typing is respected and there are no compile-time errors.
     
 5.  **PR Management**:
-    *   Create a **separate Pull Request for each entity type** (i.e., one PR for `Spells.fs`, one for `Classes.fs`, etc.) to facilitate easier review.
-    *   **Handle Existing PRs**: If a PR for the entity type you are working on is already open (check the repository's open PRs), do not create a new one. Instead, check out that PR's branch. Compare the current state of that branch with the documentation. If further changes are needed to align with the latest documentation, add a new commit to the existing PR branch.
     *   **PR Summary**: The PR description (or the new commit message if updating an existing PR) must include a **plain-language summary** of the changes, specifically listing the names of the entities that were added, updated, or removed.
 
