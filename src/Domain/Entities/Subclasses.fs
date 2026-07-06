@@ -455,7 +455,11 @@ let rec arcaneArcher =
         ScalingAbilities = fun _  cl -> [
             Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}"
         ]
-        CustomPicks = Map []
+        CustomPicks = Map [
+            1<classLvl>, [ArcaneArcherInfusion, 3]
+            5<classLvl>, [ArcaneArcherInfusion, 3]
+            9<classLvl>, [ArcaneArcherInfusion, 3]
+        ]
     }
 
 let rec dragoon =
@@ -614,10 +618,10 @@ let rec infusedArcsmith =
             11<classLvl>, [ Complex("Experimental Augmentation", "Infusing triggers Wild Magic surges (Positive for allies, Negative for enemies).") ]
         ]
         ScalingAbilities = fun _ _ -> []
-        CustomPicks = 
-            [ 1 .. +2 .. 11 ]
-            |> List.map (fun i -> UMX.tag<classLvl> i, [InfusedArcsmithOptimizationMatrix, 1; InfusedArcsmithSabotageMatrix, 1])
-            |> Map.ofList
+        CustomPicks = Map [
+            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl> ] do
+             yield lvl, [InfusedArcsmithOptimizationMatrix, 1; InfusedArcsmithSabotageMatrix, 1]
+        ]
     }
 
 let rec striker =

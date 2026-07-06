@@ -104,11 +104,14 @@ let rec fighter = {
         ])
 
         FixedAbilities = Map[
-            1<classLvl>, [Simple "Manoeuvres"; Simple "Second Wind"]
+            1<classLvl>, [Simple "Second Wind"]
             5<classLvl>, [Simple "Extra Attack"; Simple "Action Surge"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Indomitable"]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map [
+            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
+                yield lvl, [(FighterManoeuvre, 1)]
+        ]
     }
 
 let rec monk = {
