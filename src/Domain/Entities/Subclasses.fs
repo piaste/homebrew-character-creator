@@ -284,7 +284,7 @@ let rec circleOfTheElements =
             11<classLvl>, [ Complex("Avatar of Gaia", "Recover all Wild Shape charges every turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
-        CustomPicks = Map []
+        CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
     }
 
 let rec circleOfTheLand =
@@ -306,7 +306,7 @@ let rec circleOfTheLand =
             11<classLvl>, [ Complex("Blessing of the Oak Father", "Entangled creatures emit a Blessing aura.") ]
         ]
         ScalingAbilities = fun _ _ -> []
-        CustomPicks = Map []
+        CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
     }
 
 let rec circleOfTheMoon =
@@ -344,7 +344,7 @@ let rec circleOfTheShadows =
             11<classLvl>, [ Complex("Hallucinatory Horror", "Maddened enemies are Vulnerable to Psychic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
-        CustomPicks = Map []
+        CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
     }
 
 let rec circleOfTheSpores =
@@ -366,7 +366,7 @@ let rec circleOfTheSpores =
             11<classLvl>, [ Power(BonusAction, AtWill, "Sovereign Spores", "Reanimate Dangerous/Fatal foes.") ]
         ]
         ScalingAbilities = fun _ _ -> []
-        CustomPicks = Map []
+        CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
     }
 
 let rec circleOfTheStars =
@@ -388,7 +388,7 @@ let rec circleOfTheStars =
             11<classLvl>, [ Complex("Eyes of the Cosmos", "All three constellation forms active at all times.") ]
         ]
         ScalingAbilities = fun _ _ -> []
-        CustomPicks = Map []
+        CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
     }
 
 // --- FIGHTER ---
@@ -435,7 +435,10 @@ let rec frontierKnight =
             Simple $"{cl} Combat Techniques Known"
             Simple $"Technique Cooldown: {if cl >= 9<classLvl> then 1 elif cl >= 5<classLvl> then 2 else 3} turns"
         ]
-        CustomPicks = Map []
+        CustomPicks = Map [
+            for lvl in [ 1<classLvl> .. 1<classLvl> .. 12<classLvl> ] do
+                yield lvl, [(FrontierKnightTechnique, 1)]
+        ]
     }
 
 let rec arcaneArcher =
