@@ -150,7 +150,10 @@ let rec paladin = {
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Smitten"]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map [
+            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
+                yield lvl, [(PaladinSmite, 1)]
+        ]
     }
 
 let rec ranger = {
@@ -167,7 +170,10 @@ let rec ranger = {
             5<classLvl>, [Simple "Extra Attack"; Simple "Horde Breaker"]
             9<classLvl>, [Simple "Improved Extra Attack"; Simple "Eagle Eyed"]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map [
+            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
+                yield lvl, [(RangerArrow, 1)]
+        ]
     }
 
 let rec rogue = {
@@ -206,7 +212,10 @@ let rec sorcerer = {
             5<classLvl>, [Simple "Morbid Creation"]
             9<classLvl>, [Simple "Philosopher’s Stone"]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map [
+            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
+                yield lvl, [(SorcererMetamagic, 1)]
+        ]
     }
 
 let rec warlock = {
