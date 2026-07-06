@@ -6,7 +6,7 @@ open Bg3HomebrewCCreator.Domain.Types
 
 // Artificer: Optimization Matrix
 let rec adaptiveShield : ClassLevelUpPick = {
-    Type = ArtificerOptimizationMatrix
+    Type = InfusedArcsmithOptimizationMatrix
     TypeId = nameof adaptiveShield
     Name = "Adaptive Shielding"
     Grants = [ 
@@ -15,7 +15,7 @@ let rec adaptiveShield : ClassLevelUpPick = {
 }
 
 let rec armourReinforcement : ClassLevelUpPick = {
-    Type = ArtificerOptimizationMatrix
+    Type = InfusedArcsmithOptimizationMatrix
     TypeId = nameof armourReinforcement
     Name = "Armour Reinforcement"
     Grants = [ 
@@ -25,7 +25,7 @@ let rec armourReinforcement : ClassLevelUpPick = {
 
 // Artificer: Sabotage Matrix
 let rec armourCompromise : ClassLevelUpPick = {
-    Type = ArtificerSabotageMatrix
+    Type = InfusedArcsmithSabotageMatrix
     TypeId = nameof armourCompromise
     Name = "Armour Compromise"
     Grants = [ 
@@ -33,7 +33,7 @@ let rec armourCompromise : ClassLevelUpPick = {
     ]
 }
 let rec concentrationBreach : ClassLevelUpPick = {
-    Type = ArtificerSabotageMatrix
+    Type = InfusedArcsmithSabotageMatrix
     TypeId = nameof concentrationBreach
     Name = "Concentration Breach"
     Grants = [ 

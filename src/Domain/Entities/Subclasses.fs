@@ -616,7 +616,7 @@ let rec infusedArcsmith =
         ScalingAbilities = fun _ _ -> []
         CustomPicks = 
             [ 1 .. +2 .. 11 ]
-            |> List.map (fun i -> UMX.tag<classLvl> i, [ArtificerOptimizationMatrix, 1; ArtificerSabotageMatrix, 1])
+            |> List.map (fun i -> UMX.tag<classLvl> i, [InfusedArcsmithOptimizationMatrix, 1; InfusedArcsmithSabotageMatrix, 1])
             |> Map.ofList
     }
 

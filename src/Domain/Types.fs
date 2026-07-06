@@ -224,11 +224,12 @@ type CasterType =
     | Martial
 
 type ClassLevelUpPickType = 
-    | ArtificerOptimizationMatrix
-    | ArtificerSabotageMatrix
+    | InfusedArcsmithOptimizationMatrix
+    | InfusedArcsmithSabotageMatrix
     | DruidWildshape
-    | FighterManoeuvres
-    | FighterCombatTechniques
+    | FighterManoeuvre
+    | ArcaneArcherInfusion
+    | FrontierKnightTechnique
     | PaladinOath
     | PaladinSmite
     | RangerArrow
@@ -236,11 +237,12 @@ type ClassLevelUpPickType =
     | WarlockPatron
     member this.DisplayString = 
         match this with
-        | ArtificerOptimizationMatrix -> "Optimization Matrix"
-        | ArtificerSabotageMatrix -> "Sabotage Matrix"
+        | ArcaneArcherInfusion -> "Elemental Fletchings"
+        | InfusedArcsmithOptimizationMatrix -> "Optimization Matrix"
+        | InfusedArcsmithSabotageMatrix -> "Sabotage Matrix"
         | DruidWildshape -> "Wild Shape"
-        | FighterManoeuvres -> "Manoeuvre"
-        | FighterCombatTechniques -> "Combat Techniques"
+        | FighterManoeuvre -> "Manoeuvre"
+        | FrontierKnightTechnique -> "Combat Techniques"
         | PaladinOath -> "Oath"
         | PaladinSmite -> "Smites"
         | RangerArrow -> "Frontier Ballistics"
