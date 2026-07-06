@@ -729,8 +729,7 @@ let rec collegeOfNostalgia =
 let rec collegeOfSteel =
     {
         Id = % nameof collegeOfSteel
-        Name = "College of Steel"
-               <?> "College of Swords"
+        Name = "College of Steel"               
         Description = "Strike a crescendo of attacks and leave enemies off-beat."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile

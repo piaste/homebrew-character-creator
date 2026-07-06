@@ -90,7 +90,25 @@ let applyCharacterChangeAnd cmd saveCmd' (change: Character -> Character) (model
 
 let applyCharacterChange = applyCharacterChangeAnd Cmd.none
 
-let update load save copyCharacter message model =
+let elementIdForStage (mss : MainStageSelection) = 
+    match mss with
+    | Pick p -> 
+        $"scrollable-pick-{p}"
+    | _ ->
+        $"scrollable-{mss}"
+
+let update 
+    (jsHelper : {| 
+        CopyCharacter: Character -> Async<unit>
+        Load: unit -> Async<option<PersistedState>>
+        Save: PersistedState -> Async<unit>
+        ScrollIntoView: string -> Async<unit>
+    |})
+    message
+    model =
+
+    let load, save, copyCharacter, scrollIntoView = 
+        jsHelper.Load, jsHelper.Save, jsHelper.CopyCharacter, jsHelper.ScrollIntoView
 
     let saveCmd' = saveCmd save
 
@@ -105,7 +123,8 @@ let update load save copyCharacter message model =
         { model with Page = page }, Cmd.none
     
     | SetMainStageSelection mss ->
-        { model with MainStageSelection = mss }, Cmd.none
+        { model with MainStageSelection = mss }
+        , Cmd.OfAsync.perform scrollIntoView (string mss) (fun _ -> NoOp)
 
     | SetRadialCenterText txt ->
         { model with RadialCenterText = txt }, Cmd.none

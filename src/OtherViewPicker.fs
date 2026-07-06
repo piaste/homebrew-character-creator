@@ -52,7 +52,7 @@ let view
                 cond (thingsPicked.Count = maxPicks) <| function
                 | false -> 
                     div {
-                        cl "h2 invalid"
+                        cl "h2 error"
                         $"Pick {maxPicks} ({thingsPicked.Count}/{maxPicks})"
                     }
                 | true -> 

@@ -61,7 +61,7 @@ let getAllPassives useLoreNames (character : Character) =
     
 let getAllPassiveDescriptions useLoreNames (character : Character) = 
     getAllPassives useLoreNames character
-    |> List.map (fun (source, p) -> source, p.Description)
+    |> List.map (fun (source, p) -> source, p.Name.Display useLoreNames, p.Description)
 
 let levelUpDefault character =     
     { character with 

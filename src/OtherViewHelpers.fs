@@ -91,11 +91,16 @@ let toRoman = function
     | 4 -> "IV" | 5 -> "V" | 6 -> "VI"
     | _ -> failwith "Roman numbers up to 6 only"
 
-let sheetAttr (key : string) (value : string) = 
+let sheetAttr (key : string) (value : string) (tooltipText: string option)= 
     div { 
         cl "sheet-attr"
         span { key }
-        b { value }
+        b { cl "tooltip"
+            value 
+            cond tooltipText <| function
+            | None -> empty()
+            | Some tt -> span { cl "tooltip-text"; tt}
+        }
     }
 
 let printRichText (text: string) = 

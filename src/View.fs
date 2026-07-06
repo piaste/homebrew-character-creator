@@ -374,7 +374,8 @@ let summarySection (model: Model) dispatch =
                 summaryList "Cantrips" cantripNames
                 summaryList "Spells" spellNames
                 summaryList "Feats" featNames
-                forEach (getAllPassiveDescriptions model.UseLoreNames character) <| fun (source, desc) -> summaryRow source desc
+                forEach (getAllPassiveDescriptions model.UseLoreNames character) <| fun (source, name, desc) -> 
+                    summaryRow name desc
             })
 
         fieldCard

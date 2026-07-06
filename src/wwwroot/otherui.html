@@ -7,6 +7,10 @@
  
     <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
     <link rel="stylesheet" href="./css/otherui.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400&display=swap" rel="stylesheet">
 </head>
  
 <body>
@@ -89,6 +93,7 @@
  
             </div>
         </div>
+        <div id="notification-area">${Error}</div>
     </div>
     <script type="module" src="./src/app.js"></script>
     <script>
@@ -161,3 +166,12 @@
 </body>
  
 </html>
+
+
+
+<template id="ErrorNotification">
+    <div class="error-banner error">
+    <span>${Text}</span>
+    <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
+    </div>
+</template>

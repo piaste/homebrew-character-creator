@@ -114,6 +114,13 @@ type Passive =
     | Power of ActionCost * Frequency * title: LoreableString * description: string
     with 
         static member op_Implicit(simpleAbility: string) = Simple simpleAbility
+
+        member this.Name : LoreableString = 
+            match this with
+            | Simple txt -> txt
+            | Complex (n, _) -> n
+            | Buff sm -> sm.ToString()
+            | Power (_, _, title, _) -> title
         member this.Description = 
             match this with
             | Simple txt -> txt
@@ -163,8 +170,8 @@ type BaseRaceDef =
     {
         Id : string<baseRaceId>
         Name : string
+        Description : string
     }    
-    member this.Description = UMX.untag this.Id
 
 type SubraceDef =
     {

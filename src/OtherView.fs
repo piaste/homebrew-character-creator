@@ -21,6 +21,7 @@ type OtherUi = Template<"wwwroot/otherui.html">
 let stageTabButton enabled dispatch model stage iconPath = 
     let isActive = model.MainStageSelection = stage
     button {
+        attr.id (elementIdForStage stage)
         attr.disabled (not enabled)
         clActive isActive "stage-tab"
         on.click (fun _ -> dispatch <| SetMainStageSelection stage)
@@ -33,7 +34,8 @@ let picksDockButton (title : string) (count: int) (max: int) dispatch stage =
     | false -> empty()
     | true ->
         button {
-            attr.``class`` "pick-card pick-card--dock"
+            attr.id (elementIdForStage (Pick stage))
+            attr.``class`` <| "pick-card pick-card--dock" + (count = max).IfThen " error"
             attr.``type`` "button"
             on.click (fun _ -> dispatch <| SetMainStageSelection (Pick stage))
 
@@ -88,13 +90,14 @@ let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>
 let sheetPill (title : string) (text : string) = 
     div { cl "sheet-pill"; attr.title text; text }
 
-let actionButton (text: string) dispatch msg = 
+let actionButtonWithClass (text: string) abCl dispatch msg = 
     button {
-        cl "btn action-btn"
+        cl $"btn action-btn ${abCl}"
         on.click (fun _ -> dispatch msg)
         text        
     }
-
+let actionButton (text: string) dispatch msg = 
+    actionButtonWithClass text "" dispatch msg
 let summaryAbilities useLoreNames (chr: Character) dispatch = 
     let abB = chr.AbBuy
     concat {
@@ -151,7 +154,7 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                 div { 
                     cl "sheet-attrs"
                     forEach (chr.StatModifiers.ToMap()) (fun kv ->
-                        sheetAttr kv.Value kv.Key 
+                        sheetAttr kv.Value kv.Key None
                     )
                 }
                 let spellSlots = getRegularSpellSlots chr
@@ -186,8 +189,8 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                 div { cl "sheet-section-title"; "PASSIVES" }
                 div { 
                     cl "sheet-attrs"
-                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (name, desc) ->
-                        sheetAttr name desc
+                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (source, name, desc) ->
+                        sheetAttr source name (Some desc)
                     )
                 }
             }
@@ -240,16 +243,18 @@ let levelBoxes (model: Model) =
                                 cl "sheet-attrs"
                                 forEach lr.CantripIds <| fun s ->
                                     let c = Cantrips.allCantrips[s] in
-                                    sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}"
+                                    sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}" (Some c.Description)
                                 forEach lr.SpellIds <| fun s ->
                                     let sp = Spells.allSpells[s] in 
-                                    sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}"
+                                    sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}" (Some sp.Description)
                                 forEach lr.ClassPassiveIds <| fun s ->
-                                    sheetAttr "Passive" ClassPassives.allClassPassives[s].Name 
+                                    let cp = ClassPassives.allClassPassives[s]
+                                    sheetAttr "Passive" cp.Name (Some cp.Description)
                                 cond lr.FeatId <| function
                                 | None -> empty()
                                 | Some fId -> 
-                                    sheetAttr "Feat" Feats.allFeats[fId].Name
+                                    let f = Feats.allFeats[fId]
+                                    sheetAttr "Feat" f.Name (Some f.Description)
                             }
                     }
                 }
@@ -503,4 +508,36 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         .CharacterSummary(summaryAbilities model.UseLoreNames model.Character dispatch)
         .LevelBoxes(levelBoxes model)
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
+        .Error(
+            concat {
+                cond model.Errors <| function
+                    | [] -> actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
+                    | _ -> empty()
+                cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                    | true -> empty()
+                    | false -> actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
+                cond model.UndoStack <| function
+                    | [] -> empty()
+                    | _ -> 
+                        concat {
+                            actionButtonWithClass "Undo" "secondary disabled"  dispatch Undo
+                            actionButtonWithClass "Reset" "secondary disabled" dispatch ResetCharacter
+                        }
+                cond model.SystemErrors <| function
+                    | [] -> 
+                        cond model.Errors.IsEmpty <| function
+                        | true -> empty()
+                        | false ->                
+                            OtherUi.ErrorNotification()
+                                .Text(forEach model.Errors (fun vi -> p { vi } ))
+                                .VisibleClass("display:none")
+                                // .Hide(fun _ -> dispatch ClearSystemError)
+                                .Elt()
+                    | errs ->
+                        OtherUi.ErrorNotification()
+                            .Text(String.concat "\n" errs)
+                            .Hide(fun _ -> dispatch ClearSystemError)
+                            .Elt()   
+            }
+        )
         .Elt()

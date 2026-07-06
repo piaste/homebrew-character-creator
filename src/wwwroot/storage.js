@@ -12,3 +12,13 @@ window.characterStorage = {
     await navigator.clipboard.writeText(text);
   }
 };
+
+windows.uiHelpers = {
+  scrollIntoView: function(elementId) {
+    document.getElementById(elementId).scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+    })
+  }
+}
