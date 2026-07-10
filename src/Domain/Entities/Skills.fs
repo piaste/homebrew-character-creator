@@ -130,7 +130,7 @@ let rec performance = {
             Name = "Performance"
             KeyAbility = CHA
             Description = "Proficiency in Performance allows characters to play instruments, and the skill is used when attempting to entertain others."
-            Grants = Simple "Chance to survive chasms"
+            Grants = Simple "Immunity to Chasm death"
         }
 
 type private Placeholder = class end
