@@ -96,7 +96,7 @@ let rec ``Guidance`` : CantripDef = {
 
 let rec ``Guiding Moonlight`` : CantripDef = {
     Id = % nameof ``Guiding Moonlight``
-    CantripDescription = "Infuse weapon with light and +2 bonus to attack rolls and damage. Spells and Cantrips that improves your weapon can't stack with each others. Duration: Until Long Rest."
+    CantripDescription = "Infuse weapon with light and +2 bonus to attack rolls and damage. Spells and Cantrips that improves your weapon can't stack with each other. Duration: Until Long Rest."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -213,13 +213,6 @@ let rec ``Spellbound Empowerment`` : CantripDef = {
     ActionCost = BonusAction
 }
 
-let rec ``Titan's Boon`` : CantripDef = {
-    Id = % nameof ``Titan's Boon``
-    CantripDescription = "Increase size causing melee and unarmed attacks do +1d4 dmg. Duration: Until Long Rest."
-    Concentration = true
-    ActionCost = BonusAction
-}
-
 let rec ``Thorn Whip`` : CantripDef = {
     Id = % nameof ``Thorn Whip``
     CantripDescription = "Deal 1d8 piercing damage and pull Large or smaller target 9m/30ft closer on failed STR save. Offense: Ranged 18m."
@@ -239,6 +232,13 @@ let rec ``Thunderous Strike`` : CantripDef = {
     CantripDescription = "Strike with your melee weapon, dealing an additional +1d8 thunder damage to your target and an additional 1d8 thunder damage should they choose to move before the end of their next turn. Duration: 1 turn. Offense: Melee Weapon."
     Concentration = false
     ActionCost = Action
+}
+
+let rec ``Titan's Boon`` : CantripDef = {
+    Id = % nameof ``Titan's Boon``
+    CantripDescription = "Increase size causing melee and unarmed attacks do +1d4 dmg. Duration: Until Long Rest."
+    Concentration = true
+    ActionCost = BonusAction
 }
 
 let rec ``Toll the Dead`` : CantripDef = {
