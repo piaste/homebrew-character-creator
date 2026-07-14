@@ -33,11 +33,13 @@
     *   **Remove** any entities from the code that are no longer present in the documentation.
 
 3.  **Strict Constraints**:
-    *   **Do NOT** change the structure of the code, the file organization, or the underlying F# types (defined in `src/Domain/Types.fs`).
+    *   **Do NOT** change the structure of the code, the file organization, or the underlying F# types (defined in `src/Domain/Types.fs`).    
     *   Only modify the values and instances of the objects. Only touch files under `src/Domain/Entities`.
     *   Use existing constants and patterns (e.g., `Simple "Ability"`, `ACTION`, `BONUS_ACTION`) as seen in the current files.
     *   Prefer using `Power`and `Buff` types if possible, then `Complex` whenever there is a valid name. Only use `Simple` if `Complex` is impossible to write.
-    *   Make descriptions shorter and concise where possible without losing information. For example, if the documentation reads "Your maximum Hit Points increases by 4 for each level you have gained.", you can replace it with "+4 HP per level".
+    *   Make descriptions shorter and concise where possible without losing information. For example, if the documentation reads "Your maximum Hit Points increases by 4 for each level you have gained.", you can replace it with "+4 HP per level".    
+    *   **Do NOT** change the content of descriptions and summaries unless they are factually incorrect. That is, do not update text purely for reasons of style.
+    *   **Do** update entities' names to be in line with the documentation.
 
 4.  **Verification**:
     *   After making changes to a file, run `dotnet build src/Bg3HomebrewCCreator.Client.fsproj` to ensure that the strict typing is respected and there are no compile-time errors.
