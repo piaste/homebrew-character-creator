@@ -1,6 +1,6 @@
 ### Task: Synchronize Game Entities with Google Docs Documentation
 
-**Objective**: Update the game entities encoded in the repository to match the latest documentation found in the project's Google Docs and Google Sheets.
+**Objective**: Update the game entities encoded in the repository to match the latest documentation found in the project's Google Docs and Google Sheets. Your schedule will specify which entities should be updated.
 
 **Resources**:
 - **Index Page**: [Starting Guide : Homebrew](https://docs.google.com/document/d/1u-URJyBh-IDHQ27XyQ9Gu_jG2aEQip-vMjTS5QjLCk8)
@@ -9,7 +9,7 @@
 **Instructions**:
 
 1.  **Access Documentation**:
-    *   Start from the **Index Page** above.
+    *   Start from the **Index Page** above and look for the documents describing the entities you care about.
     *   For **Google Docs** links (Classes, Races, Feats, etc.), access them using the Markdown export format by appending `/export?format=md` to the document URL.
     *   For **Google Sheets** links (specifically **Spells & Cantrips**), access them using the CSV export format. The Spells & Cantrips sheet can be exported as CSV by using `/export?format=csv&gid=[GID]` for the relevant tab (e.g., gid 1414579635 for Cantrips).
 
