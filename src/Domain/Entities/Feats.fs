@@ -93,8 +93,8 @@ let rec composed : FeatDef = {
     Id = % nameof composed
     Name = "Composed"
     Grants = [
-        Passive.Power (Reaction, AtWill, "Regain Composure", "Restore 1d8*Proficiency Bonus HP in 3m radius when hit.")
-        Passive.Power (Reaction, AtWill, "Targeted Composure", "Restore 1d8*Proficiency Bonus HP in 3m radius around target when hitting.")
+        Passive.Power (Reaction, AtWill, "Regain Composure", "Restore 1d6*Proficiency Bonus HP in 3m radius when hit.")
+        Passive.Power (Reaction, AtWill, "Targeted Composure", "Restore 1d6*Proficiency Bonus HP in 3m radius around target when hitting.")
     ]
 }
 
@@ -154,7 +154,7 @@ let rec galvanizedStormsoul : FeatDef = {
     Grants = [
         Passive.Simple "Gain Resistance to Lightning and Thunder damage."
         Passive.Simple "Upon dealing or taking damage, you receive one stack of Lightning Charge."
-        Passive.Simple "Gain Galvanized Storm Strike melee cantrip (weapon damage + 1d8/2d8/3d8 and cast Witch Bolt nearby)."
+        Passive.Simple "Gain Galvanized Storm Strike melee cantrip (weapon damage + 1d8/2d8/3d8 and cast Witch Bolt at all enemies within 9m of you)."
     ]
 }
 
@@ -212,7 +212,7 @@ let rec meleeExpertise : FeatDef = {
 let rec multifaceted : FeatDef = {
     Id = % nameof multifaceted
     Name = "Multifaceted"
-    Grants = [ Passive.Simple "Select a Character Trait, a personality type, and four additional skills to become proficient in." ]
+    Grants = [ Passive.Simple "Select a Character Trait, an additional Archetype, and four additional skills to become proficient in." ]
 }
 
 let rec performer : FeatDef = {
@@ -314,9 +314,9 @@ let rec tavernBrawler : FeatDef = {
     ]
 }
 
-let rec togetherInTorment : FeatDef = {
-    Id = % nameof togetherInTorment
-    Name = "Together in Torment"
+let rec tormentor : FeatDef = {
+    Id = % nameof tormentor
+    Name = "Tormentor"
     Grants = [ Passive.Simple "Whenever you deal damage, you heal for 25% of that damage." ]
 }
 
