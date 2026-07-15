@@ -87,9 +87,6 @@ let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>
         }
     }
 
-let sheetPill (title : string) (text : string) = 
-    div { cl "sheet-pill"; attr.title text; text }
-
 let actionButtonWithClass (text: string) abCl dispatch msg = 
     button {
         cl $"btn action-btn ${abCl}"
@@ -399,7 +396,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | Some sl -> 
 
                     ph Spells <| Picker.view "Spells"
-                        (allSpellsWithIcons
+                        (allSpellsWithIconsIn sl
                         |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
@@ -472,9 +469,19 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
         )
         .SheetPills(
-            concat {
-                sheetPill "Name" (model.Character.CharName)
-                sheetPill "Subrace" (Races.allSubraces[model.Character.RaceId].Name)
+            concat {                
+                div { 
+                    cl "sheet-pill";
+                    input {
+                        cl "character-name-input"
+                        attr.value model.Character.CharName
+                        on.change (fun v -> dispatch <| SetName (v.Value :?> string))
+                    } } 
+                
+                div { 
+                    cl "sheet-pill";
+                    Races.allSubraces[model.Character.RaceId].Name
+                }
             }
         )
         .ActionButtons(
@@ -515,7 +522,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | true -> empty()
                 }
 
-                actionButton $"""TOGGLE {if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
+                actionButton $"""SHOW {if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
                     dispatch (ToggleLoreNames (not model.UseLoreNames))
             }
         )

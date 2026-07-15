@@ -102,7 +102,8 @@ html,body{
 .topbar{
   padding: 18px 28px 12px;
   display:grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 1fr 20fr;
+  
   align-items:start;
   gap: 16px 24px;
   background: rgba(0,0,0,0.22);
@@ -110,17 +111,42 @@ html,body{
   border-top-right-radius: 0;
  
   & .brand-row{
-    display:flex;
+    display: grid;
+    grid-template-rows: 1fr 0.1fr;
     align-items:center;
     gap:14px;
     min-width: 0;
+    width: 280px;
+    
   }
  
+  & .hbcr-logo {
+    grid-row: 1;
+    grid-column: 1;
+  }
+  
   & .brand-text{
     display:flex;
     flex-direction:column;
-    gap:2px;
-    min-width: 0;
+    grid-column: 1;
+    grid-row: 1;
+    margin-left: 60px;
+    margin-top: 20px;
+    z-index: 1;   
+    
+    letter-spacing: 0.14em;
+    font-weight: 600;
+
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.6));
+
+    background: linear-gradient(
+        to bottom,
+        #d6bb7c,
+        #9c7b45
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
  
   & .topbar-meta{
@@ -129,12 +155,22 @@ html,body{
     align-items:flex-end;
     gap: 10px;
     min-width: 0;
+    
+    & .undo-redo {
+      display: flex;
+      
+    }
+    
+    & .levelup-down {
+      display: flex;
+      flex-direction: column;
+      width: max-content;
+    }
   }
  
   & .topbar-actions{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:flex-end;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
     max-width: min(56rem, 100%);
  
@@ -368,21 +404,6 @@ html,body{
   border-radius: 999px;
 }
  
-/* Responsive */
-@media (max-width: 720px){
-  body{ overflow:auto; }
-  .app-root{ padding: 14px; }
-  .frame{ height: auto; min-height: 92vh; }
-  .content{ padding: 14px; }
-  .screen{ padding: 14px; }
-  .h1{ font-size: 28px; }
-}
- 
-/* Big screens: use more of the available width */
-@media (min-width: 1280px){
-  .frame{ width: 100vw; }
-  .screen{ width: 100%; }
-}
 /* HBCR logo */
 .hbcr-logo{
   height: 56px;
@@ -555,6 +576,57 @@ html,body{
   }
 }
 
+.character-name-input {
+  width: 250px;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  
+
+  /* Match the dark UI panels */
+  background: rgba(41, 31, 27, 0.75);
+  color: #d8d0c4;
+
+  /* Typography */
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  /* Shape */
+  border: 1px solid var(--gold-rgb);
+  border-radius: 999px;
+
+  padding: 0.65rem 1rem;
+
+  /* Subtle depth */
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  
+  
+}
+
+.character-name-input::placeholder {
+  color: rgba(216, 208, 196, 0.45);
+}
+
+.character-name-input:hover {
+  background: rgba(45, 39, 33, 0.85);
+  border-color: rgba(180, 155, 110, 0.55);
+}
+
+.character-name-input:focus {
+  background: rgba(45, 39, 33, 0.95);
+  border-color: #b79b63;
+  box-shadow:
+    0 0 0 2px rgba(183, 155, 99, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
  
 .sheet-title{
   font-size: 15px;
@@ -602,59 +674,6 @@ html,body{
   color: var(--error-color);
 }
  
- 
-/* ---------------------------------------------
-   Stacked (single-column) layout + document scroll
- 
-   Below 1280px the radial pane and summary stack
-   vertically. The base layout locks everything to
-   100vh with overflow:hidden, which crops the
-   stacked panes. Here we release that height lock so
-   the panes grow to their content and the page
-   scrolls instead of clipping.
-   --------------------------------------------- */
-@media (max-width: 1280px){
-  .app-root{
-    height: auto;
-    min-height: 100vh;
-  }
- 
-  .frame{
-    height: auto;
-    min-height: 100vh;
-  }
- 
-  .content{
-    overflow: visible;
-    align-items: stretch;
-  }
- 
-  .radial-shell{
-    height: auto;
-    grid-template-columns: 1fr;
-  }
- 
-  .radial-pane,
-  .radial-summary{
-    overflow: visible;
-  }
-}
- 
-@media (max-width: 960px){
-  .topbar{
-    grid-template-columns: 1fr;
- 
-    & .topbar-meta,
-    & .topbar-actions{
-      align-items: flex-start;
-      justify-content: flex-start;
-    }
-  }
- 
-  .content{
-    padding: 14px;
-  }
-}
  
  
 /* ===============================
@@ -737,7 +756,7 @@ html,body{
    ===================================================== */
 .summary-grid{
   display: grid;
-  grid-template-columns: minmax(0, 22.5rem) minmax(0, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 22px;
   align-items: start;
 }
@@ -768,21 +787,7 @@ html,body{
   max-width: 100%;
 }
  
-@media (max-width: 1100px){
-  .summary-grid{
-    grid-template-columns: 1fr;
-  }
- 
-  .summary-right,
-  .level-summary-title{
-    align-items: stretch;
-    align-self: stretch;
-  }
- 
-  .level-boxes{
-    margin-left: 0;
-  }
-}
+
  
 .sheet-attr{
   display: flex;
@@ -895,7 +900,7 @@ html,body{
    =============================== */
 .level-boxes{
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, max-content));
   gap: 6px;
   width: min(100%, 51.25rem);
   margin-top: 4px;
@@ -903,16 +908,7 @@ html,body{
   margin-left: auto;
 }
  
- 
-/* Fall back to 1 column when too wide for vertical layout
-   but too narrow for two columns */
-@media (max-width: 1280px){
-  .level-boxes{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 1600px){
-  .level-boxes{ grid-template-columns: 1fr; }
-}
- 
+
 .lvlbox{
   border-radius: 16px;
   border: 1px solid rgba(212,175,55,0.20);
@@ -1058,12 +1054,6 @@ html,body{
   
 }
  
-@media (max-width: 1280px){
-  .picker-drawer{
-    width: 100vw;
-    top: 58px;
-  }
-}
 /* Picker readability overrides */
 .picker-screen .desc{
   font-size: 13px;
@@ -1370,8 +1360,114 @@ html,body{
     opacity: 0.9;
   }
 }
+  
+/* Big screens: use more of the available width */
+@media (min-width: 1280px){
+  .frame{ width: 100vw; }
+  .screen{ width: 100%; }
+}
  
-@media (max-width: 720px){
+/* Fall back to 1 column when too wide for vertical layout
+   but too narrow for two columns */
+/* @media (max-width: 1280px){
+  .level-boxes{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1600px){
+  .level-boxes{ grid-template-columns: 1fr; }
+}
+ 
+
+
+ */
+
+
+/* ---------------------------------------------
+   Stacked (single-column) layout + document scroll
+ 
+   Below 1280px the radial pane and summary stack
+   vertically. The base layout locks everything to
+   100vh with overflow:hidden, which crops the
+   stacked panes. Here we release that height lock so
+   the panes grow to their content and the page
+   scrolls instead of clipping.
+   --------------------------------------------- */
+@media (max-width: 1280px){
+  .app-root{
+    height: auto;
+    min-height: 100vh;
+  }
+ 
+  .frame{
+    height: auto;
+    min-height: 100vh;
+  }
+ 
+  .content{
+    overflow: visible;
+    align-items: stretch;
+  }
+ 
+  .radial-shell{
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+ 
+  .radial-pane,
+  .radial-summary{
+    overflow: visible;    
+    justify-content: center;
+  }
+}
+
+ @media (max-width: 1100px){ 
+  .summary-left {
+    justify-content: center;
+  }
+  
+  .summary-right,
+  .level-summary-title{
+    align-items: stretch;
+    align-self: stretch;
+  }
+ 
+  .level-boxes{
+    margin-left: 0;
+  }
+}
+
+/* @media (max-width: 1280px){
+  .picker-drawer{
+    width: 100vw;
+    top: 58px;
+  }
+} */
+
+@media (max-width: 960px){
+  .topbar{
+    grid-template-columns: 1fr;
+ 
+    & .topbar-meta,
+    & .topbar-actions{
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  }
+ 
+  .content{
+    padding: 14px;
+  }
+}
+ 
+
+@media (max-width: 720px){ 
+
+  body{ overflow:auto; }
+  .app-root{ padding: 14px; }
+  .frame{ height: auto; min-height: 92vh; }
+  .content{ padding: 14px; }
+  .screen{ padding: 14px; }
+  .h1{ font-size: 28px; }  
+  
   .stage-and-picks{
     grid-template-columns: minmax(0, 1fr);
     padding: 10px;
@@ -1513,6 +1609,11 @@ html,body{
       font-size: 12px;
     }
   }
+  
+  .summary-abilities-compact .ability-row{
+    grid-template-columns: 32px 32px 18px 14px 32px 16px 16px;
+    column-gap: 5px;
+  }
 }
  
 @media (max-width: 560px){
@@ -1576,11 +1677,6 @@ html,body{
     gap: 10px;
   }
  
-  .summary-abilities-compact .ability-row{
-    grid-template-columns: 32px 16px 24px 24px 16px 16px 16px;
-    column-gap: 5px;
-  }
- 
   .summary-abilities-compact .ability-k,
   .summary-abilities-compact .ability-v,
   .summary-abilities-compact .ability-m,
@@ -1642,8 +1738,8 @@ html,body{
     padding: 8px;
   }
  
-  .summary-abilities-compact .ability-row{
-    grid-template-columns: 28px 14px 22px 22px 14px 14px 14px;
+  .ability-row{
+    grid-template-columns: 28px 12px 22px 22px 14px 14px 14px;
     column-gap: 4px;
   }
  
@@ -1654,11 +1750,7 @@ html,body{
   .sheet-attr,
   .sheet-muted{
     font-size: 11px;
-  }
- 
-  .level-boxes{
-    grid-template-columns: 1fr;
-  }
+  } 
 }
 
 
@@ -1741,7 +1833,7 @@ html,body{
 }
 
 .dismiss-button {
-  display: none;
+  display: block;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.5);
   color: #fff;

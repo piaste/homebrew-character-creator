@@ -64,8 +64,8 @@ let spellIcon spellId =
         else
             $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
-let allSpellsWithIcons = 
-    Spells.allSpells.Values                     
+let allSpellsWithIconsIn spellList = 
+    (Spells.allSpellsInList spellList).Values                     
     |> Seq.indexed
     |> Seq.map (fun (i, c) -> 
         c, if i <= 143 then 
