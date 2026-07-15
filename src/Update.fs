@@ -1,5 +1,6 @@
 module Bg3HomebrewCCreator.Update
 
+open System.Threading.Tasks
 open FSharp.UMX
 open Elmish
 
@@ -49,8 +50,10 @@ type Message =
     | LevelDown    
     
     | CopyBuildJson
+    | PasteBuildJson
     | Undo
     | Redo
+    | LoadCharacter of Character
     | ResetCharacter
     | NoOp
     | ShowSystemError of string
@@ -66,7 +69,7 @@ let saveCmd save (model: Model) =
         }
 
     if model.Loaded then
-        Cmd.OfAsync.either 
+        Cmd.OfTask.either 
             save (toPersistedState model)
             (fun () -> NoOp)
             (fun ex -> ShowSystemError ex.Message)
@@ -99,16 +102,17 @@ let elementIdForStage (mss : MainStageSelection) =
 
 let update 
     (jsHelper : {| 
-        CopyCharacter: Character -> Async<unit>
-        Load: unit -> Async<option<PersistedState>>
-        Save: PersistedState -> Async<unit>
-        ScrollIntoView: string -> Async<unit>
+        CopyCharacter: Character -> Task<unit>
+        PasteCharacter: unit -> Task<Character option>
+        Load: unit -> Task<option<PersistedState>>
+        Save: PersistedState -> Task<unit>
+        ScrollIntoView: string -> Task<unit>
     |})
     message
     model =
 
-    let load, save, copyCharacter, scrollIntoView = 
-        jsHelper.Load, jsHelper.Save, jsHelper.CopyCharacter, jsHelper.ScrollIntoView
+    let load, save =
+        jsHelper.Load, jsHelper.Save
 
     let saveCmd' = saveCmd save
 
@@ -124,7 +128,7 @@ let update
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss }
-        , Cmd.OfAsync.perform scrollIntoView (string mss) (fun _ -> NoOp)
+        , Cmd.OfTask.perform jsHelper.ScrollIntoView (string mss) (fun _ -> NoOp)
 
     | SetRadialCenterText txt ->
         { model with RadialCenterText = txt }, Cmd.none
@@ -153,7 +157,7 @@ let update
         }, Cmd.none
 
     | LoadState ->
-        model, Cmd.OfAsync.either load () 
+        model, Cmd.OfTask.either load () 
                     LoadedState 
                     (ShowSystemError << sprintf "Unable to restore local data: %s" << _.Message)
 
@@ -380,13 +384,24 @@ let update
 
     | CopyBuildJson ->
         model, 
-        Cmd.OfAsync.either 
-            copyCharacter model.Character
+        Cmd.OfTask.either 
+            jsHelper.CopyCharacter model.Character
             (fun () -> NoOp)
             (fun ex -> ShowSystemError ex.Message)
 
+    | PasteBuildJson ->
+        model, 
+        Cmd.OfTask.either 
+            jsHelper.PasteCharacter ()
+            (function | None -> ShowSystemError "Failed to load a valid character"
+                      | Some character -> LoadCharacter character)
+            (fun ex -> ShowSystemError ex.Message)
+
+    | LoadCharacter character ->
+        apply <| fun _ -> character
+
     | ResetCharacter -> 
-        apply <| fun _ -> Model.Initial.Character
+        model, Cmd.ofMsg (LoadCharacter Model.Initial.Character)
 
     | NoOp ->
         model, Cmd.none

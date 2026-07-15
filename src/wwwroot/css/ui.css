@@ -40,6 +40,7 @@ html, body, .sheet{
   --muted: rgba(215,207,178,0.72);
   --muted2: rgba(183,173,147,0.58);
   --shadow: rgba(0,0,0,0.70);
+  --error-color: rgba(255, 89, 38, 0.94);
  
   /* “Glass” tones tuned to the warm mural background */
   --glass: rgba(28,18,16,0.74);
@@ -527,6 +528,28 @@ html,body{
   place-self: center center;
   gap: 2em;
   
+  & .error {
+ 
+    & .error-title {
+      font-weight: 2000;
+      color: var(--error-color);
+    }
+    
+    appearance:none;
+    border: 1px solid var(--error-color);
+    background: rgba(0,0,0,0.30);
+    padding: 10px 14px;
+    border-radius: 10px;
+    letter-spacing: 0.10em;    
+    color: var(--amber);
+    text-align: center;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.1;
+    cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  }
+  
   & .action-btn {
     padding-block: 20px;
   }
@@ -576,7 +599,7 @@ html,body{
  
 .error {
   border-color: rgba(215, 133, 103, 0.55);
-  color: rgba(255, 89, 38, 0.94);
+  color: var(--error-color);
 }
  
  
@@ -640,9 +663,10 @@ html,body{
 .sheet-controls.summary-top{
   display:flex;
   gap:8px;
-  align-items:center;
+  align-items:start;
   flex-wrap:wrap;
  
+  flex-direction: column;
   & .sheet-pill{
     padding:4px 10px;
     border-radius:999px;
@@ -769,6 +793,13 @@ html,body{
 
   & .icon {
     max-width: 1.8em;
+  }
+  
+  & .spell-slot-lvl {
+    font-family: "Times New Roman";
+    font-weight: bolder;
+    font-size: 1.2em;
+    align-self: anchor-center
   }
 }
  
@@ -946,7 +977,7 @@ html,body{
  
 .lvlbox-clLvl{
   font-size: var(--small-text);
-  letter-spacing: .16em;
+  letter-spacing: .005em;
   text-transform: uppercase;  
   color: var(--gold3);
   white-space: nowrap;

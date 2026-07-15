@@ -20,33 +20,44 @@ let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     let storageKey = "homebrew-character-creator-state"
 
-    let load () = async {
+    let load () = task {
         let jsRuntime = getJsRuntime ()
-        let! raw = jsRuntime.InvokeAsync<string>("characterStorage.load", [| box storageKey |]).AsTask() |> Async.AwaitTask
+        let! raw = jsRuntime.InvokeAsync<string>("characterStorage.load", [| box storageKey |]).AsTask()
         if String.IsNullOrWhiteSpace raw then
             return None
         else
             return JsonSerializer.Deserialize<PersistedState>(raw, serializerOptions) |> Some
     }
 
-    let save (state: PersistedState) = async {
+    let save (state: PersistedState) = task {
         let jsRuntime = getJsRuntime ()
         let json = JsonSerializer.Serialize(state, serializerOptions)
-        do! jsRuntime.InvokeVoidAsync("characterStorage.save", [| box storageKey; box json |]).AsTask() |> Async.AwaitTask
+        do! jsRuntime.InvokeVoidAsync("characterStorage.save", [| box storageKey; box json |]).AsTask()
     }
 
-    let copyCharacter (char: Character) = async {
+    let copyCharacter (char: Character) = task {
         let jsRuntime = getJsRuntime ()
         let json = JsonSerializer.Serialize(char, serializerOptions)        
-        do! jsRuntime.InvokeVoidAsync("characterStorage.copyToClipboard", [| box json |]).AsTask() |> Async.AwaitTask
+        do! jsRuntime.InvokeVoidAsync("characterStorage.copyToClipboard", [| box json |]).AsTask()
     }
 
-    let scrollIntoView (elementId : string) = async {
+    let pasteCharacter () = task {
+        let jsRuntime = getJsRuntime ()
+        let! json = jsRuntime.InvokeAsync<string>("characterStorage.pasteFromClipboard", [||]).AsTask()        
+        try 
+            let character = JsonSerializer.Deserialize<Character>(json, serializerOptions)
+            return Some character
+        with | :? JsonException as e ->
+            Console.WriteLine $"Deserialization failure: {e}"
+            return None
+    }
+
+    let scrollIntoView (elementId : string) = task {
         let jsRuntime = getJsRuntime ()        
-        do! jsRuntime.InvokeVoidAsync("uiHelpers.scrollIntoView", [| box elementId |]).AsTask() |> Async.AwaitTask
+        do! jsRuntime.InvokeVoidAsync("uiHelpers.scrollIntoView", [| box elementId |]).AsTask()
     }
 
-    {| Load = load; Save = save; CopyCharacter = copyCharacter; ScrollIntoView = scrollIntoView |}
+    {| Load = load; Save = save; CopyCharacter = copyCharacter; PasteCharacter = pasteCharacter; ScrollIntoView = scrollIntoView |}
 
 
 type MyApp() =

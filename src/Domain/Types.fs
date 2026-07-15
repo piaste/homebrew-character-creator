@@ -250,7 +250,7 @@ type ClassLevelUpPickType =
         | InfusedArcsmithSabotageMatrix -> "Sabotage Matrix"
         | DruidWildshape -> "Wild Shape"
         | FighterManoeuvre -> "Manoeuvre"
-        | FrontierKnightTechnique -> "Combat Techniques"
+        | FrontierKnightTechnique -> "Combat Technique"
         | PaladinOath -> "Oath"
         | PaladinSmite -> "Smites"
         | RangerArrow -> "Frontier Ballistics"
@@ -267,6 +267,15 @@ type ClassLevelUpPick =
     }
     member this.Id = 
         UMX.tag<specialPickId> (this.Type.ToString() + "-" + this.TypeId)
+
+    static let unionCases = 
+        Reflection.FSharpType.GetUnionCases typeof<ClassLevelUpPickType>
+    static member typeFromId (id : string<specialPickId>) = 
+        let typeName = (UMX.untag id).Split("-")[0]
+        unionCases
+        |> Array.find (fun c -> c.Name = typeName)
+        |> fun c -> Reflection.FSharpValue.MakeUnion(c, [||]) :?> 'T
+
     member this.Description = 
         this.Grants
         |> Seq.map _.Description

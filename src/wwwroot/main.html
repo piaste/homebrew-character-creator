@@ -21,17 +21,16 @@
                 <div class="brand-row">
                     <img class="hbcr-logo" src="./assets/ui/hbcr-logo-cutout.png"
                         alt="Home Brew - Comprehensive Reworks" onclick="${ClickLogo}">
-                    <div class="brand-text">
+                    <div class="brand-text">Baldur's Gate III: Home Brew</div>
+                    <div class="version-pill">
+                        <span>Mod v8.9.1</span>
+                        <span style="opacity:.55">•</span>
+                        <span>Builder v0.4.0-bolero</span>
                     </div>
                 </div>
                 <div class="topbar-meta">
                     <div class="topbar-actions" aria-label="Builder actions">
                         ${ActionButtons}
-                    </div>
-                    <div class="version-pill">
-                        <span>Mod v8.9.1</span>
-                        <span style="opacity:.55">•</span>
-                        <span>Builder v0.3.0-radial</span>
                     </div>
                 </div>
             </div>
@@ -76,9 +75,9 @@
                                     ${SheetPills}
                                 </div>
  
-                                <div class="sheet-muted trait-desc">
+                                <!-- <div class="sheet-muted trait-desc">
                                     ${TraitDescription}
-                                </div>
+                                </div> -->
                                 ${CharacterSummary}
                             </div>
  
@@ -170,7 +169,7 @@
 
 
 <template id="ErrorNotification">
-    <div class="error-banner error">
+    <div class="error-banner btn error">
     <span>${Text}</span>
     <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
     </div>

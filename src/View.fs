@@ -131,7 +131,7 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
                         //img { attr.src "/assets/ui/ability-minus.png"}
                     }
-                    div { cl "ability-v"; string <| abB.BoughtAbility ab}
+                    div { cl "ability-v"; string <| chr.Ability ab}
                     div { cl "ability-m"; modifierText <| abB.BoughtAbilityModifier ab}
                     button {
                         let enabled = abB.BoughtAbilityBeforeBonuses ab < 15 in 
@@ -150,7 +150,7 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
             )
             div {
                 cl "summary-under-abilities"
-                div { cl "sheet-section-title"; "STATS BONUSES" }
+                div { cl "sheet-section-title"; "STAT MODIFIERS" }
                 div { 
                     cl "sheet-attrs"
                     forEach (chr.StatModifiers.ToMap()) (fun kv ->
@@ -169,7 +169,7 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                             forEach (List.indexed spellSlots) (fun (i, n) ->
                                 div { 
                                     cl "sheet-attr"
-                                    span { toRoman (i + 1)}
+                                    span { cl "spell-slot-lvl"; toRoman (i + 1)}
                                     forEach (List.init n (fun _ -> ())) (fun _ -> 
                                         fakeCheckbox "rgba(3, 108, 161, 0.95)" true
                                     )
@@ -178,7 +178,7 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                             forEach (List.indexed warlockSlots) (fun (i, n) ->
                                 div { 
                                     cl "sheet-attr"
-                                    span { toRoman (i + 1)}
+                                    span { cl "spell-slot-lvl"; toRoman (i + 1)}
                                     forEach (List.init n (fun _ -> ())) (fun _ -> 
                                         fakeCheckbox "rgba(240, 49, 192, 0.95)" true
                                     )
@@ -241,15 +241,18 @@ let levelBoxes (model: Model) =
                         | Some lr ->
                             div { 
                                 cl "sheet-attrs"
+                                forEach lr.SpecialPickIds <| fun s ->
+                                    let sp = SpecialPicks.allSpecialPicks[s]
+                                    sheetAttr sp.Type.DisplayString sp.Name (Some (sp.Description.Display model.UseLoreNames)) None
+                                forEach lr.ClassPassiveIds <| fun s ->
+                                    let cp = ClassPassives.allClassPassives[s]
+                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames)) None
                                 forEach lr.CantripIds <| fun s ->
                                     let c = Cantrips.allCantrips[s]  in
                                     sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}" (Some c.Description) None
                                 forEach lr.SpellIds <| fun s ->
                                     let sp = Spells.allSpells[s] in 
                                     sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}" (Some sp.Description) None
-                                forEach lr.ClassPassiveIds <| fun s ->
-                                    let cp = ClassPassives.allClassPassives[s]
-                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames)) None
                                 cond lr.FeatId <| function
                                 | None -> empty()
                                 | Some fId -> 
@@ -287,13 +290,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cl "main-stage-levelup"
                     
                     cond model.Errors <| function
-                        | [] -> actionButton "LEVEL UP" dispatch LevelUp
+                        | [] ->                             
+                            actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
                         | errs -> 
-                            forEach errs <| fun e ->
-                                div {
-                                    cl "main-stage-error error"
-                                    e
-                                }
+                            div {
+                                cl "main-stage-error error"
+                                p { cl "error-title"; "FIX ERRORS TO LEVEL UP" }
+                                forEach errs <| fun e -> p { e }
+                            }
                                             
                     cond (model.Character = defaultCharacter) <| function
                         | false -> 
@@ -304,7 +308,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | true -> empty()
                     
                     cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                        | false -> actionButton "LEVEL DOWN" dispatch LevelDown
+                        | false -> 
+                            actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
                         | true -> empty()
 
                 }
@@ -420,13 +425,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     (l.FeatId |> Option.toList |> Set.ofList)
 
             | Pick (ClassSpecific sp) ->
+                let sps = SpecialPicks.allSpecialPicksOfType sp
                 ph (ClassSpecific sp) <| Picker.view sp.DisplayString
-                    ((SpecialPicks.allSpecialPicksOfType sp).Values
+                    (sps.Values
                      |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
                      |> Seq.toList
                     )
                     c.PreviousHistory.AllSpecialPicks
-                    l.SpecialPickIds
+                    (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp))
         )
         .StageTabs(
             concat {
@@ -458,7 +464,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     | Feats -> 
                         picksDockButton "Feats" (Option.count l.FeatId)
                     | ClassSpecific sp -> 
-                        picksDockButton sp.DisplayString l.SpecialPickIds.Count
+                        picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
                 
                 in f p.Value dispatch p.Key
 
@@ -473,33 +479,44 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         )
         .ActionButtons(
             concat {
-                actionButton $"""{if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
+                div {
+                    cl "undo-redo"
+                    cond model.UndoStack.IsEmpty <| function 
+                        | false -> actionButton "↶ UNDO" dispatch Undo
+                        | true -> empty()
+                    
+                    cond model.RedoStack.IsEmpty <| function 
+                        | false -> actionButton "↷ REDO" dispatch Redo
+                        | true -> empty()
+                }
+                
+                div {
+                    cl "json-stuff"
+                    cond (model.Character = defaultCharacter) <| function
+                        | false -> 
+                            concat { 
+                                actionButton "RESET CHARACTER" dispatch ResetCharacter
+                                actionButton "EXPORT TO CLIPBOARD" dispatch CopyBuildJson
+                            }
+                        | true ->                            
+                                actionButton "IMPORT FROM CLIPBOARD" dispatch PasteBuildJson
+                    
+                }
+                div {
+                    cl "levelup-down"
+                    cond model.Errors <| function
+                        | [] -> 
+                            actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
+                        | _ -> empty()
+                    
+                    cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                        | false -> 
+                            actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
+                        | true -> empty()
+                }
+
+                actionButton $"""TOGGLE {if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
                     dispatch (ToggleLoreNames (not model.UseLoreNames))
-
-                cond model.UndoStack.IsEmpty <| function 
-                    | false -> actionButton "UNDO" dispatch Undo
-                    | true -> empty()
-                
-                cond model.RedoStack.IsEmpty <| function 
-                    | false -> actionButton "REDO" dispatch Redo
-                    | true -> empty()
-                
-                cond (model.Character = defaultCharacter) <| function
-                    | false -> 
-                        concat { 
-                            actionButton "RESET" dispatch ResetCharacter
-                            actionButton "COPY BUILD JSON" dispatch CopyBuildJson
-                        }
-                    | true -> empty()
-                
-                cond model.Errors <| function
-                    | [] -> actionButton "LEVEL UP" dispatch LevelUp
-                    | _ -> empty()
-                
-                cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                    | false -> actionButton "LEVEL DOWN" dispatch LevelDown
-                    | true -> empty()
-
             }
         )
         .CharacterSummary(summaryAbilities model.UseLoreNames model.Character dispatch)
@@ -507,34 +524,26 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Error(
             concat {
-                cond model.Errors <| function
-                    | [] -> actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
-                    | _ -> empty()
-                cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                    | true -> empty()
-                    | false -> actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
-                cond model.UndoStack <| function
-                    | [] -> empty()
-                    | _ -> 
-                        concat {
-                            actionButtonWithClass "Undo" "secondary disabled"  dispatch Undo
-                            actionButtonWithClass "Reset" "secondary disabled" dispatch ResetCharacter
-                        }
+                // cond model.Errors <| function
+                //     | [] -> actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
+                //     | _ -> empty()
+                // cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                //     | true -> empty()
+                //     | false -> actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
+                // cond model.UndoStack <| function
+                //     | [] -> empty()
+                //     | _ -> 
+                //         concat {
+                //             actionButtonWithClass "Undo" "secondary disabled"  dispatch Undo
+                //             actionButtonWithClass "Reset" "secondary disabled" dispatch ResetCharacter
+                //         }
                 cond model.SystemErrors <| function
-                    | [] -> 
-                        cond model.Errors.IsEmpty <| function
-                        | true -> empty()
-                        | false ->                
-                            OtherUi.ErrorNotification()
-                                .Text(forEach model.Errors (fun vi -> p { vi } ))
-                                .VisibleClass("display:none")
-                                // .Hide(fun _ -> dispatch ClearSystemError)
-                                .Elt()
+                    | [] -> empty()
                     | errs ->
                         OtherUi.ErrorNotification()
                             .Text(String.concat "\n" errs)
                             .Hide(fun _ -> dispatch ClearSystemError)
                             .Elt()   
             }
-        )
+        )        
         .Elt()
