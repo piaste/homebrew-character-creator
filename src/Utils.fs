@@ -1,6 +1,7 @@
 [<AutoOpen>]
 module Utils 
 
+open System
 open FSharp.UMX
 open System.Text.Json
 open System.Text.Json.Serialization
@@ -95,9 +96,16 @@ type KeyedMap<[<Measure>] 'm, 'v
 let camelCaseToKebabCase (entityName : string) = 
     entityName.ToLower().Replace(' ', '-')
 
+let englishToPascalCase (text: string) = 
+    if String.IsNullOrWhiteSpace text then text else
+    text.Split ' '
+    |> Array.map (fun s -> $"{Char.ToUpper s[0]}{s[1..]}")
+    |> String.concat ""
+
 type LoreableString(defaultText: string, ?loreText : string) =
-    member private _.DefaultText = defaultText
+    member _.DefaultText = defaultText
     member private _.LoreText = loreText
+    
     member _.Display useLoreNames = 
         match useLoreNames, loreText with
         | true, Some lt -> lt
@@ -108,5 +116,11 @@ type LoreableString(defaultText: string, ?loreText : string) =
         match ls.LoreText with
         | None -> LoreableString(ls.DefaultText + s)
         | Some lt -> LoreableString(ls.DefaultText + s, lt + s)
+
+    static member concat (separator: string) (ls: LoreableString seq) = 
+        new LoreableString(
+            defaultText = (ls |> Seq.map _.DefaultText |> String.concat separator),
+            loreText = (ls |> Seq.map (fun s -> s.Display true) |> String.concat separator)
+        )
 
 let inline (<?>) defaultText loreText = LoreableString(defaultText, loreText)

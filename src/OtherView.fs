@@ -190,7 +190,7 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                 div { 
                     cl "sheet-attrs"
                     forEach (getAllPassiveDescriptions useLoreNames chr) (fun (source, name, desc) ->
-                        sheetAttr source name (Some desc)
+                        sheetAttr source name (Some (desc.Display useLoreNames))
                     )
                 }
             }
@@ -249,12 +249,12 @@ let levelBoxes (model: Model) =
                                     sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}" (Some sp.Description)
                                 forEach lr.ClassPassiveIds <| fun s ->
                                     let cp = ClassPassives.allClassPassives[s]
-                                    sheetAttr "Passive" cp.Name (Some cp.Description)
+                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames))
                                 cond lr.FeatId <| function
                                 | None -> empty()
                                 | Some fId -> 
                                     let f = Feats.allFeats[fId]
-                                    sheetAttr "Feat" f.Name (Some f.Description)
+                                    sheetAttr "Feat" f.Name (Some (f.Description.Display model.UseLoreNames))
                             }
                     }
                 }
@@ -346,7 +346,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Archetypes ->
                 ph Archetypes <| Picker.view "Archetype"                    
                     (Archetypes.allArchetypes.Values
-                     |> Seq.map<_, Picker.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Picker.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
                      |> Seq.toList
                     )
                     Set.empty
@@ -355,7 +355,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Traits ->
                 ph Traits <| Picker.view "Trait"
                     (Traits.allTraits.Values
-                     |> Seq.map<_, Picker.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Picker.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
                      |> Seq.toList
                     )
                     Set.empty
@@ -407,7 +407,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick ClassPassives ->
                 ph ClassPassives <| Picker.view "Passives"
                     (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
-                     |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
                      |> Seq.toList
                     )
                     c.PreviousHistory.AllClassPassiveIdsByClass[classIdBySubclassId l.SubclassId]
@@ -416,7 +416,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Feats ->
                 ph Feats <| Picker.view "Feat"
                     (Feats.allFeats.Values
-                     |> Seq.map<_, Picker.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Picker.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
                      |> Seq.toList
                     )
                     c.PreviousHistory.AllFeatIds
@@ -425,7 +425,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick (ClassSpecific sp) ->
                 ph (ClassSpecific sp) <| Picker.view sp.DisplayString
                     ((SpecialPicks.allSpecialPicksOfType sp).Values
-                     |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
                      |> Seq.toList
                     )
                     c.PreviousHistory.AllSpecialPicks

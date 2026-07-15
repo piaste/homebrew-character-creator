@@ -68,6 +68,16 @@ let withSpellIcons (spells: SpellDef seq) =
                 $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
 
+
+let tryGetPassiveIconName = 
+    function
+    | Simple s
+    | Complex (s, _)
+         -> $"PassiveFeature_{englishToPascalCase (s.DefaultText)}"
+    
+
+
+
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection
     let indexed = Seq.indexed collection

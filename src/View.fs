@@ -136,7 +136,8 @@ let characterSummaryChips (character: Character) useLoreNames =
     }
 
 let inline selector
-        (itemList: 't seq when 't: (member Name : string) and 't : (member Description : string))   
+        (itemList: 't seq when 't: (member Name : string) 
+                          and 't : (member Description : LoreableString))  
         title subtitle itemTitle
         numPicks numPicked 
         isPicked
@@ -157,7 +158,8 @@ let inline selector
                 (concat {
                     forEach itemList (fun item ->
                         let active = isPicked item
-                        choiceCard active itemTitle item.Name item.Description (fun _ -> toggleEvent item))
+                        // selectable stuff doesn't have lore text usually
+                        choiceCard active itemTitle item.Name item.Description.DefaultText (fun _ -> toggleEvent item))
                 })
 
 

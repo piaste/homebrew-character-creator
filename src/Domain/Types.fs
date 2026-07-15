@@ -108,7 +108,7 @@ type StatModifiers = {
         |> String.concat "\n"
 
 type Passive = 
-    | Simple of string
+    | Simple of LoreableString
     | Complex of title: LoreableString * description: string
     | Buff of StatModifiers
     | Power of ActionCost * Frequency * title: LoreableString * description: string
@@ -155,7 +155,7 @@ type GrantsPassives<[<Measure>] 'm> = {
     Grants: Passive list
 } with
     member this.Description = 
-        this.Grants |> List.map _.Description |> String.concat "\n"
+        this.Grants |> List.map _.Description |> LoreableString.concat "\n"
 
 type ArchetypeDef = GrantsPassives<archetypeId>
 type TraitDef = GrantsPassives<traitId>
@@ -182,7 +182,8 @@ type SubraceDef =
     }
     member this.Description = 
         this.RacialPassives
-        |> List.map _.Description
+        // racial passives aren't lored
+        |> List.map (fun p -> p.Description.DefaultText)
         |> String.concat "\n"
 
 
@@ -269,7 +270,7 @@ type ClassLevelUpPick =
     member this.Description = 
         this.Grants
         |> Seq.map _.Description
-        |> String.concat "\n" 
+        |> LoreableString.concat "\n" 
 
 type [<Measure>] classId
 
@@ -319,6 +320,6 @@ type ClassPassiveDef = {
     Grants: Passive list
 } with    
     member this.Description = 
-        this.Grants |> List.map _.Description |> String.concat "\n"
+        this.Grants |> List.map _.Description |> LoreableString.concat "\n"
 
 

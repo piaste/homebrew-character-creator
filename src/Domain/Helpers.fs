@@ -34,7 +34,7 @@ let getAllPassives useLoreNames (character : Character) =
     
       for f in character.CurrentHistory.AllFeatIds do
         let fDef = Feats.allFeats[f]
-        yield $"Feat: {fDef.Name}", fDef.Description
+        yield $"Feat: {fDef.Name}", fDef.Description.Display useLoreNames
 
       for KeyValue(scid, lvl) in character.CurrentHistory.LevelsBySubclass do        
         
@@ -55,7 +55,7 @@ let getAllPassives useLoreNames (character : Character) =
         // class passives
         for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
             let cpDef = ClassPassives.allClassPassives[cpId]
-            yield clDef.Name, cpDef.Description       
+            yield clDef.Name, cpDef.Description.Display useLoreNames
 
     ]
     
