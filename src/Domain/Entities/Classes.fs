@@ -49,7 +49,7 @@ let rec bard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Bardic Inspiration Charges", "Bards have 3 Bardic Inspiration charges that are replenished on a short rest or a long rest."); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Complex ("Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
+            1<classLvl>, [Resource (3, "Bardic Inspiration", OncePerShortRest); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Complex ("Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
             5<classLvl>, [Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
             9<classLvl>, [Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]
@@ -100,10 +100,10 @@ let rec fighter = {
         ScalingAbilities = (fun _ cl -> [
             Simple $"{cl} Superiority Dice"
             Simple $"{if cl >= 11<classLvl> then 6 elif cl >= 9<classLvl> then 5 elif cl >= 7<classLvl> then 4 elif cl >= 5<classLvl> then 3 elif cl >= 3<classLvl> then 2 else 1}d6 Superiority Die damage"
+            Complex ("Second Wind", $"Every 3 rounds of battle, you restore {cl/2}d12 fighter level in Hit Points and recover a Superiority Die at the end of your turn.")
         ])
 
-        FixedAbilities = Map[
-            1<classLvl>, [Complex ("Second Wind", "Every 3 rounds of battle, you restore 1d12 / 2 fighter level in Hit Points and recover a Superiority Die at the end of your turn.")]
+        FixedAbilities = Map[            
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Action Surge", "Gain an additional Action and restore 3 superiority Dice once per Short Rest.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Indomitable", "Whenever you fail a Saving Throw, you can roll again, using the new result instead.")]
         ]
@@ -121,7 +121,7 @@ let rec monk = {
         SpellcastingAbility = WIS
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{cl} Ki Points"
+            Resource (UMX.untag cl, $"Ki Points", OncePerShortRest)
             Simple $"1d{if cl >= 9<classLvl> then 8 elif cl >= 5<classLvl> then 6 else 4} Unarmed Damage Die"
         ])
 
@@ -202,8 +202,7 @@ let rec sorcerer = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{cl} Sorcery Points (Max 24)"
-            Simple $"{int (cl + 1<classLvl>) / 2} Metamagic Known"
+            Resource(UMX.untag cl, "Sorcery Points", OncePerShortRest)
         ])
 
         FixedAbilities = Map [

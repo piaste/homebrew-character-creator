@@ -112,6 +112,7 @@ type Passive =
     | Complex of title: GameString * description: string
     | Buff of StatModifiers
     | Power of ActionCost * Frequency * title: GameString * description: string
+    | Resource of quantity: int * name : string * refresh: Frequency
     with 
         static member op_Implicit(simpleAbility: string) = Simple simpleAbility
 
@@ -121,12 +122,14 @@ type Passive =
             | Complex (n, _) -> n
             | Buff sm -> sm.ToString()
             | Power (_, _, title, _) -> title
+            | Resource (_, n, _) -> n
         member this.Description = 
             match this with
             | Simple txt -> txt
             | Complex (_, d) -> d
             | Buff sm -> sm.ToString()
             | Power (cost, freq, title, txt) -> $"{cost}{freq}: {txt}"
+            | Resource (q, n, _) -> $"{q}x {n}"
 
         member this.Effect = 
             match this with

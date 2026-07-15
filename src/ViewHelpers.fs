@@ -86,6 +86,8 @@ let tryGetVanillaIconSubpath =
         -> [ $"vanilla_icons/Action_{englishToPascalCase (title.DefaultText)}"
              $"homebrew_icons/Action_{englishToPascalCase (title.DefaultText)}"
            ]
+    | Resource (_, name, _)
+        -> [ $"cc_icons/Resource_{englishToPascalCase name}" ]
     >> List.tryFind (iconPathFromSubpath >> IO.File.Exists )
 
 let inline tryGetAnyVanillaIconSubpath (gp : 'gp when 'gp : (member Grants : Passive list)) = 
