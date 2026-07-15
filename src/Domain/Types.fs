@@ -108,14 +108,14 @@ type StatModifiers = {
         |> String.concat "\n"
 
 type Passive = 
-    | Simple of LoreableString
-    | Complex of title: LoreableString * description: string
+    | Simple of GameString
+    | Complex of title: GameString * description: string
     | Buff of StatModifiers
-    | Power of ActionCost * Frequency * title: LoreableString * description: string
+    | Power of ActionCost * Frequency * title: GameString * description: string
     with 
         static member op_Implicit(simpleAbility: string) = Simple simpleAbility
 
-        member this.Name : LoreableString = 
+        member this.Name : GameString = 
             match this with
             | Simple txt -> txt
             | Complex (n, _) -> n
@@ -155,7 +155,7 @@ type GrantsPassives<[<Measure>] 'm> = {
     Grants: Passive list
 } with
     member this.Description = 
-        this.Grants |> List.map _.Description |> LoreableString.concat "\n"
+        this.Grants |> List.map _.Description |> GameString.concat "\n"
 
 type ArchetypeDef = GrantsPassives<archetypeId>
 type TraitDef = GrantsPassives<traitId>
@@ -270,7 +270,7 @@ type ClassLevelUpPick =
     member this.Description = 
         this.Grants
         |> Seq.map _.Description
-        |> LoreableString.concat "\n" 
+        |> GameString.concat "\n" 
 
 type [<Measure>] classId
 
@@ -290,8 +290,8 @@ type [<Measure>] subclassId
 type SubclassDef =
     {
         Id : string<subclassId>
-        Name: LoreableString
-        Description: LoreableString
+        Name: GameString
+        Description: GameString
         BaseClassId: string<classId>
         CasterType: CasterType        
         ScalingAbilities: int<charLvl> -> int<classLvl> -> Passive list
@@ -320,6 +320,6 @@ type ClassPassiveDef = {
     Grants: Passive list
 } with    
     member this.Description = 
-        this.Grants |> List.map _.Description |> LoreableString.concat "\n"
+        this.Grants |> List.map _.Description |> GameString.concat "\n"
 
 

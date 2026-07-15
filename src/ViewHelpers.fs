@@ -17,9 +17,13 @@ let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabl
 
 let private iconPathFromSubpath subpath = $"/assets/icons/{subpath}.png"
 let icon subpath = img { 
+    cl "icon"
     attr.style "width:100%; height:100%; object-fit:contain;"
     attr.src (iconPathFromSubpath subpath)
 }
+
+let maybeIcon iconSubpath = 
+    cond iconSubpath <| function | None -> empty() | Some s -> icon s
 
 let baseraceIconPath (baseRaceId : string<baseRaceId>) = 
     $"races/{baseRaceId}/{baseRaceId}"
@@ -47,8 +51,8 @@ let cantripIcon cantripId =
     |> Seq.tryFindIndex (_.Id >> (=) cantripId)
     |> Option.map (fun i -> $"""abilities_sheet/cantrips/cantrip_{i.ToString "000"}""")
 
-let withCantripIcons (cantrips: CantripDef seq) = 
-    cantrips
+let allCantripsWithIcons = 
+    Cantrips.allCantrips.Values                     
     |> Seq.indexed
     |> Seq.map (fun (i, c) -> c, $"""abilities_sheet/cantrips/cantrip_{i.ToString "000"}""")
 let spellIcon spellId = 
@@ -60,8 +64,8 @@ let spellIcon spellId =
         else
             $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
-let withSpellIcons (spells: SpellDef seq) = 
-    spells
+let allSpellsWithIcons = 
+    Spells.allSpells.Values                     
     |> Seq.indexed
     |> Seq.map (fun (i, c) -> 
         c, if i <= 143 then 
@@ -110,9 +114,10 @@ let toRoman = function
     | 4 -> "IV" | 5 -> "V" | 6 -> "VI"
     | _ -> failwith "Roman numbers up to 6 only"
 
-let sheetAttr (key : string) (value : string) (tooltipText: string option)= 
+let sheetAttr (key : string) (value : string) (tooltipText: string option) (iconSubpath: string option)= 
     div { 
         cl "sheet-attr"
+        maybeIcon iconSubpath
         span { key }
         b { cl "tooltip"
             value 

@@ -62,7 +62,7 @@ let rec frostbreaker =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage", "Frostwoven: Resistance to physical and Cold immunity.")
+                Power(BonusAction, AtWill, "homebrew_icons/Action_Barbarian_Rage_Bifrost" <!!> "Rage", "Frostwoven: Resistance to physical and Cold immunity.")
                 Complex("Bifrost", "Cannot slip on ice; hits afflict Frigidity.")
             ]
             3<classLvl>, [ Complex("Frigid Omen", "Melee hits while enraged fire a Ray of Frost at another enemy.") ]

@@ -111,25 +111,31 @@ let englishToPascalCase (text: string) =
             newWord <- true
     sb.ToString()
 
-type LoreableString(defaultText: string, ?loreText : string) =
+type GameString(defaultText: string, ?loreText : string, ?iconSubpath : string) =
+    
+    member _.Icon = iconSubpath
     member _.DefaultText = defaultText
     member private _.LoreText = loreText
     
+    member _.HasLoreText = loreText.IsSome
     member _.Display useLoreNames = 
         match useLoreNames, loreText with
         | true, Some lt -> lt
         | _ -> defaultText
-    static member op_Implicit(text: string) = LoreableString(defaultText = text)
+    static member op_Implicit(text: string) = GameString(defaultText = text)
 
-    static member (+) (ls: LoreableString, s: string) =
+    static member (+) (ls: GameString, s: string) =
         match ls.LoreText with
-        | None -> LoreableString(ls.DefaultText + s)
-        | Some lt -> LoreableString(ls.DefaultText + s, lt + s)
+        | None -> GameString(ls.DefaultText + s)
+        | Some lt -> GameString(ls.DefaultText + s, lt + s)
 
-    static member concat (separator: string) (ls: LoreableString seq) = 
-        new LoreableString(
+    static member concat (separator: string) (ls: GameString seq) = 
+        new GameString(
             defaultText = (ls |> Seq.map _.DefaultText |> String.concat separator),
             loreText = (ls |> Seq.map (fun s -> s.Display true) |> String.concat separator)
         )
 
-let inline (<?>) defaultText loreText = LoreableString(defaultText, loreText)
+let inline (<?>) (gs : GameString) loreText = 
+    match gs.Icon with | None -> GameString(gs.DefaultText, loreText) | Some i -> GameString(gs.DefaultText, loreText, i)
+let inline (<!!>) iconSubpath (gs : GameString) = 
+    if gs.HasLoreText then GameString(gs.DefaultText, gs.Display true, iconSubpath) else GameString(gs.DefaultText, iconSubpath = iconSubpath)

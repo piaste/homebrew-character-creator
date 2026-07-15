@@ -38,16 +38,14 @@ let view
         attr.aria "label" "Picker"
 
         div {
-            cl "picker-inner"
+            cl "screen picker-screen"
 
             div {
-                cl "screen picker-screen"
-
+                cl "picker-header"
                 div {
                     cl "h1"
                     title
                 }
-
                 
                 cond (thingsPicked.Count = maxPicks) <| function
                 | false -> 
@@ -78,55 +76,55 @@ let view
                     cl "mini-muted"
                     $"Showing {filtered.Length}/{sourceList.Length}"
                 }
+            }
 
-                div {
-                    cl "grid grid-rows"
+            div {
+                cl "grid grid-rows"
 
-                    for c in filtered do
+                for c in filtered do
 
-                        button {
-                            attr.disabled (thingsUnpickable.Contains c.Id)
-                            cl (
-                                if thingsPicked.Contains c.Id then
-                                    "card compact-row selected"
-                                else
-                                    "card compact-row"
-                            )
+                    button {
+                        attr.disabled (thingsUnpickable.Contains c.Id)
+                        cl (
+                            if thingsPicked.Contains c.Id then
+                                "card compact-row selected"
+                            else
+                                "card compact-row"
+                        )
 
-                            on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag<'m> c.Id))
+                        on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag<'m> c.Id))
+
+                        div {
+                            cl "card-top compact-row-top"
+
+                            cond c.Icon <| function
+                            | None -> empty()
+                            | Some iconPath -> 
+                                div {
+                                    cl "icon sm"
+
+                                    img {
+                                        cl "icon-img"
+                                        attr.src $"/assets/icons/{iconPath}.png"
+                                        attr.alt ""
+                                    }
+                                }
 
                             div {
-                                cl "card-top compact-row-top"
-
-                                cond c.Icon <| function
-                                | None -> empty()
-                                | Some iconPath -> 
-                                    div {
-                                        cl "icon sm"
-
-                                        img {
-                                            cl "icon-img"
-                                            attr.src $"/assets/icons/{iconPath}.png"
-                                            attr.alt ""
-                                        }
-                                    }
+                                cl "card-copy"
 
                                 div {
-                                    cl "card-copy"
+                                    cl "label"
+                                    c.Name
+                                }
 
-                                    div {
-                                        cl "label"
-                                        c.Name
-                                    }
-
-                                    div {
-                                        cl "desc"
-                                        c.Description
-                                    }
+                                div {
+                                    cl "desc"
+                                    c.Description
                                 }
                             }
                         }
-                }
+                    }
             }
         }
     }

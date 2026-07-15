@@ -154,14 +154,14 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                 div { 
                     cl "sheet-attrs"
                     forEach (chr.StatModifiers.ToMap()) (fun kv ->
-                        sheetAttr kv.Value kv.Key None
+                        sheetAttr kv.Value kv.Key None None
                     )
                 }
                 let spellSlots = getRegularSpellSlots chr
                 let warlockSlots = getWarlockSpellSlots chr
                 cond (List.append spellSlots warlockSlots) <| function
                 | [] -> empty()
-                | slots -> 
+                | _ -> 
                     concat {
                         div { cl "sheet-section-title"; "SPELL SLOTS" }
                         div { 
@@ -189,8 +189,8 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                 div { cl "sheet-section-title"; "PASSIVES" }
                 div { 
                     cl "sheet-attrs"
-                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (source, name, desc) ->
-                        sheetAttr source name (Some (desc.Display useLoreNames))
+                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (source, name, desc, icon) ->
+                        sheetAttr source name (Some (desc.Display useLoreNames)) icon
                     )
                 }
             }
@@ -242,19 +242,19 @@ let levelBoxes (model: Model) =
                             div { 
                                 cl "sheet-attrs"
                                 forEach lr.CantripIds <| fun s ->
-                                    let c = Cantrips.allCantrips[s] in
-                                    sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}" (Some c.Description)
+                                    let c = Cantrips.allCantrips[s]  in
+                                    sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}" (Some c.Description) None
                                 forEach lr.SpellIds <| fun s ->
                                     let sp = Spells.allSpells[s] in 
-                                    sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}" (Some sp.Description)
+                                    sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}" (Some sp.Description) None
                                 forEach lr.ClassPassiveIds <| fun s ->
                                     let cp = ClassPassives.allClassPassives[s]
-                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames))
+                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames)) None
                                 cond lr.FeatId <| function
                                 | None -> empty()
                                 | Some fId -> 
                                     let f = Feats.allFeats[fId]
-                                    sheetAttr "Feat" f.Name (Some (f.Description.Display model.UseLoreNames))
+                                    sheetAttr "Feat" f.Name (Some (f.Description.Display model.UseLoreNames)) None
                             }
                     }
                 }
@@ -283,15 +283,18 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         .RadialStage(
             match model.MainStageSelection with
             | Proceed ->
-                concat {
-                    cond model.UndoStack.IsEmpty <| function 
-                        | false -> actionButton "UNDO" dispatch Undo
-                        | true -> empty()
+                div {
+                    cl "main-stage-levelup"
                     
-                    cond model.RedoStack.IsEmpty <| function 
-                        | false -> actionButton "REDO" dispatch Redo
-                        | true -> empty()
-                    
+                    cond model.Errors <| function
+                        | [] -> actionButton "LEVEL UP" dispatch LevelUp
+                        | errs -> 
+                            forEach errs <| fun e ->
+                                div {
+                                    cl "main-stage-error error"
+                                    e
+                                }
+                                            
                     cond (model.Character = defaultCharacter) <| function
                         | false -> 
                             concat { 
@@ -299,10 +302,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                                 actionButton "COPY BUILD JSON" dispatch CopyBuildJson
                             }
                         | true -> empty()
-                    
-                    cond model.Errors <| function
-                        | [] -> actionButton "LEVEL UP" dispatch LevelUp
-                        | _ -> empty()
                     
                     cond model.Character.PreviousLevelHistory.IsEmpty <| function
                         | false -> actionButton "LEVEL DOWN" dispatch LevelDown
@@ -382,8 +381,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
             | Pick Cantrips ->
                 ph Cantrips <| Picker.view "Cantrips"
-                    (Cantrips.allCantrips.Values
-                     |> withCantripIcons
+                    (allCantripsWithIcons
                      |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                      |> Seq.toList
                     )
@@ -396,8 +394,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | Some sl -> 
 
                     ph Spells <| Picker.view "Spells"
-                        ((Spells.allSpellsInList sl).Values
-                        |> withSpellIcons
+                        (allSpellsWithIcons
                         |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
