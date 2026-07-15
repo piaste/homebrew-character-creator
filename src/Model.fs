@@ -1,7 +1,6 @@
 module Bg3HomebrewCCreator.Model
 
 open System
-open FSharp.UMX
 
 open Domain.Types
 open Domain.Character
@@ -20,10 +19,10 @@ type MainStageSelection =
 
 let defaultCharacter =
     {
-        Version = Version(0, 1)
+        Version = Version(0, 4, 0)
 
         CharName = "John Baldur"
-        RaceId = % "human" 
+        RaceId = Domain.Entities.Races.human.Id
         AbBuy = {
             PointBuy = 
                 Map [
@@ -111,8 +110,9 @@ type Model =
     {
         Page: Page
         MainStageSelection: MainStageSelection
-        RadialCenterText: string
+        RadialCenterText: string        
         SearchQueries : Map<LevelUpPick, string>
+        FilterPassives : string option
 
         Character: Character
         UndoStack: Character list
@@ -128,13 +128,14 @@ type Model =
                 MainStageSelection = Race
                 RadialCenterText = ""
                 SearchQueries = Map []
+                FilterPassives = None
 
                 Character = defaultCharacter
                 UndoStack = []
                 RedoStack = []
                 Loaded = false
                 SystemErrors = []
-                UseLoreNames = true
+                UseLoreNames = false
             }
 
 let statusText (model: Model) =

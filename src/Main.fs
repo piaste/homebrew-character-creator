@@ -43,13 +43,17 @@ let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     let pasteCharacter () = task {
         let jsRuntime = getJsRuntime ()
-        let! json = jsRuntime.InvokeAsync<string>("characterStorage.pasteFromClipboard", [||]).AsTask()        
         try 
+            let! json = jsRuntime.InvokeAsync<string>("characterStorage.pasteFromClipboard", [||]).AsTask()        
             let character = JsonSerializer.Deserialize<Character>(json, serializerOptions)
             return Some character
-        with | :? JsonException as e ->
-            Console.WriteLine $"Deserialization failure: {e}"
-            return None
+        with
+            | :? JsonException as e ->
+                Console.WriteLine $"Character import error: deserialization failure: {e}"
+                return None
+            | e ->
+                Console.WriteLine $"Character import error: {e}"
+                return None
     }
 
     let scrollIntoView (elementId : string) = task {

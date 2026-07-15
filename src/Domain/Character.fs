@@ -139,15 +139,30 @@ type Character =
             if this.CharacterLevel <= 0<charLvl> then 2 
             else 2 + (this.CharacterLevel - 1<charLvl>) / 4<charLvl>
 
-        member this.HighestSpellDC = 
-            this.CurrentHistory.LevelsBySubclass.Keys
-            |> Seq.map (Map.findIn allSubclasses 
-                        >> _.BaseClassId 
-                        >> Map.findIn allClasses
-                        >> _.SpellcastingAbility)
-            |> Seq.map this.AbilityModifier
-            |> Seq.max
+        member this.SpellDCByClass = 
+            Map [
+                for scId in this.CurrentHistory.LevelsBySubclass.Keys do                    
+                    let sc = allSubclasses[scId]
+                    
+                    match sc.SpellList with
+                    | None -> ()
+                    | Some _ ->
+                        yield sc
+                              |> _.BaseClassId
+                              |> Map.findIn allClasses
+                              |> _.SpellcastingAbility
+                              |> fun scAb -> 
+                                scAb, 8 + this.AbilityModifier scAb + this.ProficiencyBonus
+            ]
+
+        member this.HighestAttackBonus = 
+            Seq.max [this.AbilityModifier STR; this.AbilityModifier DEX]     
             |> (+) this.ProficiencyBonus
+        member this.CriticalThreshold =
+            20 - this.StatModifiers.``Critical Range``            
+        member this.HighestSpellDC = 
+            if Map.isEmpty this.SpellDCByClass then None
+            else Some <| (this.SpellDCByClass |> Seq.maxBy _.Value)
             
         member this.CharacterLevel = 
             List.length (this.CurrentHistory |> _.Levels)

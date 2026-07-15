@@ -12,7 +12,7 @@ window.characterStorage = {
     await navigator.clipboard.writeText(text);
   },
   pasteFromClipboard: async function () {
-    await navigator.clipboard.readText();
+    return await navigator.clipboard.readText();
   }
 };
 

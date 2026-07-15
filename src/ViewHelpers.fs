@@ -120,7 +120,7 @@ let sheetAttr (key : string) (value : string) (tooltipText: string option) (icon
         maybeIcon iconSubpath
         span { key }
         b { cl "tooltip"
-            value 
+            value
             cond tooltipText <| function
             | None -> empty()
             | Some tt -> span { cl "tooltip-text"; tt}

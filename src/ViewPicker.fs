@@ -65,7 +65,7 @@ let view
 
                     input {
                         cl "search"
-                        attr.placeholder "Search…"
+                        attr.placeholder "Search name or description…"
                         attr.value sq
 
                         on.input (fun e -> dispatch (SetSearchQuery(pick, unbox e.Value)))

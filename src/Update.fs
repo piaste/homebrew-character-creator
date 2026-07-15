@@ -18,6 +18,7 @@ type Message =
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
     | SetRadialCenterText of string
+    | FilterPassives of string option
 
     | LoadState
     | LoadedState of PersistedState option
@@ -132,6 +133,9 @@ let update
 
     | SetRadialCenterText txt ->
         { model with RadialCenterText = txt }, Cmd.none
+
+    | FilterPassives fp ->
+        { model with FilterPassives = fp }, Cmd.none
 
     | NextMainStageSelection ->
         { model with 

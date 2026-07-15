@@ -95,23 +95,19 @@ let actionButtonWithClass (text: string) abCl dispatch msg =
     }
 let actionButton (text: string) dispatch msg = 
     actionButtonWithClass text "" dispatch msg
-let summaryAbilities useLoreNames (chr: Character) dispatch = 
+let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch = 
     let abB = chr.AbBuy
     concat {
-        div { 
-            cl ("summary-ability-points" + if abB.SpentPoints <> POINT_BUDGET then " error" else "")
-            attr.title "Point Buy"
-            $"Ability points: {abB.SpentPoints} / {POINT_BUDGET}"
-        }
+        
         div { 
             cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
             div {
                 cl "ability-row ability-row--head"; attr.aria "hidden" "true"
-                div { cl "ability-k" }
-                div {}
-                div { cl "ability-v" }
-                div { cl "ability-m" }
-                div {}
+                div { 
+                    cl ("summary-ability-points" + if abB.SpentPoints <> POINT_BUDGET then " error" else "")
+                    attr.title "Point Buy"
+                    $"Ability points: {abB.SpentPoints} / {POINT_BUDGET}"
+                }
                 div { cl "ability-bonus-h"; "+3" }
                 div { cl "ability-bonus-h"; "+1" }
 
@@ -147,12 +143,49 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
             )
             div {
                 cl "summary-under-abilities"
-                div { cl "sheet-section-title"; "STAT MODIFIERS" }
+
+                let passives = getAllPassives useLoreNames chr
+                let passiveDescs = getAllPassiveDescriptions useLoreNames chr
+
+                div { cl "sheet-section-title"; "STATISTICS" }
                 div { 
-                    cl "sheet-attrs"
-                    forEach (chr.StatModifiers.ToMap()) (fun kv ->
-                        sheetAttr kv.Value kv.Key None None
-                    )
+                    cl "sheet-attrs sheet-stats"
+
+                    let tooltipsFor names = 
+                        passives
+                        |> List.collect (function
+                            | source, Buff sm ->
+                                [for name in names do
+                                    match Map.tryFind name (sm.ToMap()) with
+                                    | Some v -> $"{v} to {name} from {source}"
+                                    | None -> ()
+                                ]
+                            | _ -> []
+                        )
+                        |> fun s -> if List.isEmpty s then None else Some(String.concat "\n" s)
+
+                    let inline stat names (data : obj) = 
+                        let name = Seq.head names
+                        sheetAttr name (data.ToString()) (tooltipsFor names) None
+
+                    let inline condStat defaultValue name data = 
+                        cond (data = defaultValue) <| function
+                            | true -> empty()
+                            | false -> stat name data
+
+                    stat ["Hit Points"; "Base HP"; "HP per level"] chr.HitPoints
+                    stat ["Initiative"] (modifierText chr.Initiative)
+                    
+                    stat ["Base AC"; "AC"] chr.BaseAC
+                    condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
+                    
+                    stat ["Best attack bonus"; "Attack rolls"] (modifierText chr.HighestAttackBonus)
+                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
+                    cond chr.HighestSpellDC <| function
+                        | None -> empty()
+                        | Some dc -> 
+                            stat ["Best spell DC"; "Spell DC"] $"{dc.Value} ({dc.Key})"
+
                 }
                 let spellSlots = getRegularSpellSlots chr
                 let warlockSlots = getWarlockSpellSlots chr
@@ -183,10 +216,32 @@ let summaryAbilities useLoreNames (chr: Character) dispatch =
                             )
                         }
                     }
+
                 div { cl "sheet-section-title"; "PASSIVES" }
+                let sources = 
+                    let p = passiveDescs 
+                            |> List.map (fun (s, _, _, _) -> Some s) 
+                            |> List.distinct
+                    in None :: p
+                
+                div {
+                    cl "filter-passives"
+                    forEach sources <| fun source ->
+                        button { 
+                            cl "btn sheet-pill"
+                            on.click (fun _ -> dispatch (FilterPassives source))
+                            source |> Option.defaultValue "All"
+                        }
+                }
+
+                let filteredPassives = 
+                    match filterPassives with
+                    | None -> passiveDescs
+                    | Some f -> passiveDescs |> List.where (fun (s, _, _, _) -> s = f)
+
                 div { 
                     cl "sheet-attrs"
-                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (source, name, desc, icon) ->
+                    forEach filteredPassives (fun (source, name, desc, icon) ->
                         sheetAttr source name (Some (desc.Display useLoreNames)) icon
                     )
                 }
@@ -469,19 +524,27 @@ let otherView (model: Model) (dispatch : Message -> unit) =
 
         )
         .SheetPills(
-            concat {                
-                div { 
-                    cl "sheet-pill";
-                    input {
-                        cl "character-name-input"
-                        attr.value model.Character.CharName
-                        on.change (fun v -> dispatch <| SetName (v.Value :?> string))
-                    } } 
-                
+            concat {                                
+                input {
+                    cl "character-name-input"
+                    attr.value model.Character.CharName
+                    on.change (fun v -> dispatch <| SetName (v.Value :?> string))
+                }
+            
                 div { 
                     cl "sheet-pill";
                     Races.allSubraces[model.Character.RaceId].Name
                 }
+
+                let sortedClasses = 
+                    model.Character.CurrentHistory.LevelsBySubclass
+                    |> Seq.sortByDescending _.Value
+
+                forEach sortedClasses <| fun (KeyValue(scId, lvl)) ->
+                    div { 
+                        cl "sheet-pill";
+                        $"{Subclasses.allSubclasses[scId].DisplayName model.UseLoreNames} {lvl}"
+                    }
             }
         )
         .ActionButtons(
@@ -526,7 +589,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     dispatch (ToggleLoreNames (not model.UseLoreNames))
             }
         )
-        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character dispatch)
+        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives dispatch)
         .LevelBoxes(levelBoxes model)
         .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Error(
