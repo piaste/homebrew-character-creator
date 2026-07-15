@@ -14,9 +14,11 @@ let inline cl s = attr.``class`` s
 
 let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
 let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
+
+let private iconPathFromSubpath subpath = $"/assets/icons/{subpath}.png"
 let icon subpath = img { 
     attr.style "width:100%; height:100%; object-fit:contain;"
-    attr.src $"/assets/icons/{subpath}.png"
+    attr.src (iconPathFromSubpath subpath)
 }
 
 let baseraceIconPath (baseRaceId : string<baseRaceId>) = 
@@ -67,16 +69,23 @@ let withSpellIcons (spells: SpellDef seq) =
            else
                 $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
-
-
-let tryGetPassiveIconName = 
+let tryGetVanillaIconSubpath = 
     function
     | Simple s
     | Complex (s, _)
-         -> $"PassiveFeature_{englishToPascalCase (s.DefaultText)}"
-    
+        -> [ $"vanilla_icons/PassiveFeature_{englishToPascalCase (s.DefaultText)}"
+             $"homebrew_icons/Passive_{englishToPascalCase (s.DefaultText)}"
+           ]
+    | Buff _ 
+        -> []
+    | Power (_, _, title, _)
+        -> [ $"vanilla_icons/Action_{englishToPascalCase (title.DefaultText)}"
+             $"homebrew_icons/Action_{englishToPascalCase (title.DefaultText)}"
+           ]
+    >> List.tryFind (iconPathFromSubpath >> IO.File.Exists )
 
-
+let inline tryGetAnyVanillaIconSubpath (gp : 'gp when 'gp : (member Grants : Passive list)) = 
+    gp.Grants |> List.tryPick tryGetVanillaIconSubpath
 
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection

@@ -98,9 +98,18 @@ let camelCaseToKebabCase (entityName : string) =
 
 let englishToPascalCase (text: string) = 
     if String.IsNullOrWhiteSpace text then text else
-    text.Split ' '
-    |> Array.map (fun s -> $"{Char.ToUpper s[0]}{s[1..]}")
-    |> String.concat ""
+    let sb = Text.StringBuilder()
+    sb.Append(Char.ToUpper text[0]) |> ignore
+    let mutable newWord = false
+    for c in text[1..] do
+        if Char.IsLetterOrDigit c then 
+            if newWord then
+                sb.Append (Char.ToUpper c) |> ignore
+                newWord <- false
+            else sb.Append c |> ignore
+        else 
+            newWord <- true
+    sb.ToString()
 
 type LoreableString(defaultText: string, ?loreText : string) =
     member _.DefaultText = defaultText
