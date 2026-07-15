@@ -13,8 +13,7 @@ let rec adrenalineSurge : TraitDef = {
     Id = % nameof adrenalineSurge
     Name = "Adrenaline Surge"
     Grants = [ 
-        Simple "While below 75% of your maximum Hit Points, you gain a +2 bonus to all damage dealt."
-        Simple "While above 75% of your maximum Hit Points, you receive a -2 penalty instead."
+        Simple "While below 50% of your maximum Hit Points, you gain a +prof bonus to all damage dealt."
     ]
 }
 
@@ -23,7 +22,7 @@ let rec blindEmotions : TraitDef = {
     Name = "Blind Emotions"
     Grants = [ 
         Simple "You permanently benefit from the effects of being Calmed."
-        Simple "Your targeting range is limited to 3m/10ft."
+        Simple "However, you have a -4 penalty to all attack rolls."
     ]
 }
 
@@ -41,7 +40,7 @@ let rec borrowedTime : TraitDef = {
     Name = "Borrowed Time"
     Grants = [
         Simple "At the beginning of any combat encounter, you receive Temporary Hit Points equal to your level multiplied by two."
-        Simple "Upon ending combat, you lose the temporary HP and you take force damage equal to your level multiplied by four."
+        Simple "Upon ending combat, you lose the temporary HP and you take force damage equal to your level multiplied by 2."
     ]
 }
 
@@ -74,8 +73,7 @@ let rec crybaby : TraitDef = {
     Id = % nameof crybaby
     Name = "Crybaby"
     Grants = [
-        Simple "Upon being damaged while not enraged, you immediately fall Prone and begin to cry."
-        Simple "Upon starting your next turn, you become enraged for three turns."
+        Simple "When you are Critically Hit, you begin to Cry for a turn. However, you are Calm the first 3 turns of combat."
     ]
 }
 
@@ -102,7 +100,7 @@ let rec gentleGiant : TraitDef = {
     Name = "Gentle Giant"
     Grants = [
         Simple "You are permanently Enlarged."
-        Simple "However, you don't gain the damage bonus while Enlarged."
+        Simple "However, your damage is reduced by 2."
     ]
 }
 
@@ -323,7 +321,7 @@ let rec splitFocus : TraitDef = {
     Name = "Split Focus"
     Grants = [
         Simple "Gain the ability to target two enemies at once with your weapon-based Attack Rolls."
-        Simple "All weapon-based Attack Rolls also deal half damage."
+        Simple "However, you have no Reaction and you can’t gain additional Reactions."
     ]
 }
 
