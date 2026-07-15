@@ -85,7 +85,7 @@ let rec medicine = {
             Name = "Medicine"
             KeyAbility = WIS
             Description = "Medicine is used during dialogue to heal and aid others."
-            Grants = Simple "You craft 2 potions instead of one if you succeed a DC 15 test when crafting."
+            Grants = Simple "Craft 2x alchemy (DC 15 check)"
         }
 let rec animalHandling = {
             Id = % nameof animalHandling
