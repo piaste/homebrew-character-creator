@@ -307,13 +307,7 @@ type SubclassDef =
         FixedAbilities: Map<int<classLvl>, Passive list>
         CustomPicks: Map<int<classLvl>, (ClassLevelUpPickType * int) list>
     }
-    with 
-        member this.DisplayName useLoreNames = 
-            this.Name.Display useLoreNames
-        
-        member this.DisplayDescription useLoreNames = 
-            this.Description.Display useLoreNames
-
+    with         
         member this.SpellList = 
             match this.CasterType with
             | Martial -> None

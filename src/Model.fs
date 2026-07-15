@@ -2,6 +2,7 @@ module Bg3HomebrewCCreator.Model
 
 open System
 
+open FSharp.UMX
 open Domain.Types
 open Domain.Character
 open Domain.PickRules
@@ -16,6 +17,17 @@ type MainStageSelection =
     | Race | Subrace | Class | Subclass
     | Pick of LevelUpPick
     | Proceed
+
+type FilterPassives = 
+    | All
+    | Starting
+    | FromSubclass of string<subclassId>
+    | FromFeats
+    member this.Display useLoreNames = 
+        match this with
+        | All -> "All" | Starting -> "Starting" | FromFeats -> "Feats" 
+        | FromSubclass scId ->
+            Subclasses.allSubclasses[scId].Name.Display useLoreNames
 
 let defaultCharacter =
     {
@@ -112,7 +124,7 @@ type Model =
         MainStageSelection: MainStageSelection
         RadialCenterText: string        
         SearchQueries : Map<LevelUpPick, string>
-        FilterPassives : string option
+        FilterPassives : FilterPassives
 
         Character: Character
         UndoStack: Character list
@@ -128,7 +140,7 @@ type Model =
                 MainStageSelection = Race
                 RadialCenterText = ""
                 SearchQueries = Map []
-                FilterPassives = None
+                FilterPassives = All
 
                 Character = defaultCharacter
                 UndoStack = []
@@ -146,7 +158,7 @@ let statusText (model: Model) =
         let clLevels = character.CurrentHistory.LevelsBySubclass
         let classNames = 
             character.CurrentHistory.Levels
-            |> List.map (_.SubclassId >> subclassById >> fun sc -> sc.DisplayName model.UseLoreNames)
+            |> List.map (_.SubclassId >> subclassById >> fun sc -> sc.Name.Display model.UseLoreNames)
             |> List.distinct
             |> String.concat "/"
         $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."

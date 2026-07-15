@@ -145,7 +145,6 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                 cl "summary-under-abilities"
 
                 let passives = getAllPassives useLoreNames chr
-                let passiveDescs = getAllPassiveDescriptions useLoreNames chr
 
                 div { cl "sheet-section-title"; "STATISTICS" }
                 div { 
@@ -219,10 +218,12 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
 
                 div { cl "sheet-section-title"; "PASSIVES" }
                 let sources = 
-                    let p = passiveDescs 
-                            |> List.map (fun (s, _, _, _) -> Some s) 
-                            |> List.distinct
-                    in None :: p
+                    [   All
+                        Starting
+                        if not chr.CurrentHistory.AllFeatIds.IsEmpty then FromFeats
+                        for sc in chr.CurrentHistory.LevelsBySubclass.Keys do 
+                            FromSubclass sc
+                    ]
                 
                 div {
                     cl "filter-passives"
@@ -230,18 +231,30 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                         button { 
                             cl "btn sheet-pill"
                             on.click (fun _ -> dispatch (FilterPassives source))
-                            source |> Option.defaultValue "All"
+                            source.Display useLoreNames
                         }
                 }
 
                 let filteredPassives = 
-                    match filterPassives with
-                    | None -> passiveDescs
-                    | Some f -> passiveDescs |> List.where (fun (s, _, _, _) -> s = f)
+                    let filter = 
+                        match filterPassives with
+                        | All -> fun _ -> true
+                        | Starting -> fun source -> List.contains source ["Race"; "Archetype"; "Trait"; "Skill"]
+                        | FromFeats -> fun source -> source.StartsWith "Feat"
+                        | FromSubclass scId -> 
+                            let sc = Subclasses.allSubclasses[scId]
+                            let bn = Classes.allClasses[sc.BaseClassId]
+                            fun source -> source = sc.Name.Display useLoreNames || source = bn.Name
+
+                    passives |> List.filter (fst >> filter)
+
+                let passiveDescs = 
+                    filteredPassives
+                    |> List.map (fun (source, p) -> source, p.Name.Display useLoreNames, p.Description, p.Name.Icon)
 
                 div { 
                     cl "sheet-attrs"
-                    forEach filteredPassives (fun (source, name, desc, icon) ->
+                    forEach passiveDescs (fun (source, name, desc, icon) ->
                         sheetAttr source name (Some (desc.Display useLoreNames)) icon
                     )
                 }
@@ -281,7 +294,7 @@ let levelBoxes (model: Model) =
                     div { 
                         cl "col right"
                         div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> (classBySubclassId lr.SubclassId).Name }
-                        div { cl "lvlbox-subclass"; match lr' with None -> "—" | Some lr -> (subclassById lr.SubclassId).DisplayName model.UseLoreNames }
+                        div { cl "lvlbox-subclass"; match lr' with None -> "—" | Some lr -> (subclassById lr.SubclassId).Name.Display model.UseLoreNames }
                     }
                 }
                 div { 
@@ -393,8 +406,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     (validSubclasses
                      |> Map.map (fun _ v -> 
                         {| v with 
-                            Name = v.DisplayName model.UseLoreNames 
-                            Description = v.DisplayDescription model.UseLoreNames
+                            Name = v.Name.Display model.UseLoreNames 
+                            Description = v.Description.Display model.UseLoreNames
                         |}))
                     subclassIconPath
                     SetSubclass
@@ -543,7 +556,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 forEach sortedClasses <| fun (KeyValue(scId, lvl)) ->
                     div { 
                         cl "sheet-pill";
-                        $"{Subclasses.allSubclasses[scId].DisplayName model.UseLoreNames} {lvl}"
+                        $"{Subclasses.allSubclasses[scId].Name.Display model.UseLoreNames} {lvl}"
                     }
             }
         )
@@ -585,7 +598,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | true -> empty()
                 }
 
-                actionButton $"""SHOW {if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
+                actionButton $"""SHOW {if model.UseLoreNames then "DEFAULT" else "LORE"} NAMES""" 
                     dispatch (ToggleLoreNames (not model.UseLoreNames))
             }
         )

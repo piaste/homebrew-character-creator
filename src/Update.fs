@@ -18,7 +18,7 @@ type Message =
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
     | SetRadialCenterText of string
-    | FilterPassives of string option
+    | FilterPassives of FilterPassives
 
     | LoadState
     | LoadedState of PersistedState option

@@ -32,6 +32,10 @@ let getAllPassives useLoreNames (character : Character) =
       for t in Traits.allTraits[character.TraitId].Grants do
         yield "Trait", t
     
+      for s in character.SkillIds do
+        let skill = Skills.allSkills[s]
+        yield "Skill", skill.Grants
+
       for f in character.CurrentHistory.AllFeatIds do
         let fDef = Feats.allFeats[f]
         yield $"Feat: {fDef.Name}", fDef.Description.Display useLoreNames
@@ -48,9 +52,9 @@ let getAllPassives useLoreNames (character : Character) =
         // subclass benefits
         let scDef = allSubclasses[scid]
         for scAb in scDef.ScalingAbilities character.CharacterLevel lvl do
-            yield scDef.DisplayName useLoreNames, scAb
+            yield scDef.Name.Display useLoreNames, scAb
         for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield scDef.DisplayName useLoreNames, fAb            
+            if lvl >= lvlReq then for fAb in ab do yield scDef.Name.Display useLoreNames, fAb            
 
         // class passives
         for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
@@ -59,10 +63,6 @@ let getAllPassives useLoreNames (character : Character) =
 
     ]
     
-let getAllPassiveDescriptions useLoreNames (character : Character) = 
-    getAllPassives useLoreNames character
-    |> List.map (fun (source, p) -> source, p.Name.Display useLoreNames, p.Description, p.Name.Icon)
-
 let levelUpDefault character =     
     { character with 
         PreviousLevelHistory = character.NextLevelUp :: character.PreviousLevelHistory

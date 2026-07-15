@@ -13,7 +13,7 @@ let rec artificer = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Simple "Firepower"; Simple "3 Ammunition"]
+            1<classLvl>, [Simple "3 Ammunition"]
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Improved Extra Attack"]
         ]
@@ -49,7 +49,7 @@ let rec bard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Simple "Bardic Inspiration"; Simple "3 Bardic Inspiration Charges"; Simple "Perform"; Simple "Climax"; Simple "Song of Rest"]
+            1<classLvl>, [Simple "3 Bardic Inspiration Charges"; Simple "Perform"; Simple "Climax"; Simple "Song of Rest"]
             5<classLvl>, [Simple "Font of Inspiration"]
             9<classLvl>, [Simple "Reliable Talent"]
         ]
@@ -66,7 +66,7 @@ let rec cleric = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Simple "3 Channel Divinity Charges"; Simple "Pacify Undead"; Simple "Divine Intervention"; Simple "Divine Miracles"]
+            1<classLvl>, [Simple "3 Channel Divinity Charges"; Simple "Pacify Undead"; Simple "Divine Miracles"]
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Steel Cast"]
         ]
@@ -83,7 +83,7 @@ let rec druid = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Simple "3 Wild Shape Charges"; Simple "Wild Shape"; Simple "Beastcraft"; Simple "Return to Form"]
+            1<classLvl>, [Simple "3 Wild Shape Charges"; Simple "Beastcraft"; Simple "Return to Form"]
             5<classLvl>, [Simple "Extra Attack"]
             9<classLvl>, [Simple "Steel Cast"]
         ]
@@ -100,7 +100,6 @@ let rec fighter = {
         ScalingAbilities = (fun _ cl -> [
             Simple $"{cl} Superiority Dice"
             Simple $"{if cl >= 11<classLvl> then 6 elif cl >= 9<classLvl> then 5 elif cl >= 7<classLvl> then 4 elif cl >= 5<classLvl> then 3 elif cl >= 3<classLvl> then 2 else 1}d6 Superiority Die damage"
-            Simple $"{int (cl + 1<classLvl>) / 2} Manoeuvres Known"
         ])
 
         FixedAbilities = Map[
@@ -228,7 +227,7 @@ let rec warlock = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Simple "Eldritch Blast"; Simple "Serrated Hematic Invocation"]
+            1<classLvl>, [Simple "Eldritch Blast"]
             5<classLvl>, [Simple "Mystic Arcanum"]
             9<classLvl>, [Simple "Deepened Arcanum"]
         ]
