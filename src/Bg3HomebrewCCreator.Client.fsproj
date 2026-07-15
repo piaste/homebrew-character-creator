@@ -11,6 +11,9 @@
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>full</TrimMode>
 -->
+
+  <InvariantGlobalization>true</InvariantGlobalization>
+  <InvariantTimezone>true</InvariantTimezone>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />
