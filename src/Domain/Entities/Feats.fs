@@ -113,7 +113,7 @@ let rec duellistsInstinct : FeatDef = {
     Name = "Duellist’s Instinct"
     Grants = [
         Passive.Simple "While dual-wielding, gain the ability to make an off-hand attack as a Bonus Action."
-        Passive.Simple "Gain three Duellist Charges per Short Rest. Spend to gain Advantage on Attack Rolls, or force Disadvantage on attackers."
+        Passive.Resource (3, "Duellist Charges", OncePerShortRest)
         Passive.Simple "Landing a killing blow or Critical hit restores one Duellist Charge (once per turn)."
         Passive.Simple "Opportunity Attacks hit with both weapons when dual-wielding."
         Passive.Simple "Add your Global STR bonus to your main-hand attack while dual wielding."
@@ -293,7 +293,7 @@ let rec shieldbearer : FeatDef = {
     Name = "Shieldbearer"
     Grants = [
         Passive.Simple "Gain Advantage on Dexterity based Saving Throws while wielding a shield."
-        Passive.Simple "Gain three Shieldbearer Charges to negate damage (recharge on Short Rest/Kill/Crit)."
+        Passive.Resource (3, "Shieldbearer Charges", OncePerShortRest)
         Passive.Power (FreeAction, AtWill, "Shieldbearer", "Spend a charge to reflect projectiles for 1 turn after a Shield Bash.")
     ]
 }

@@ -13,7 +13,7 @@ let rec artificer = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Ammunition", "Artificers have a pool of 3 ammunition that is refreshed on a Short or Long rest, or when you use the Reload Bonus Action.")]
+            1<classLvl>, [Resource (3, "Ammunition", OncePerShortRest)]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack.")]
         ]
@@ -30,7 +30,7 @@ let rec barbarian = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Complex ("3 Rage Charges", "Barbarians have 3 rage charges that are replenished on a short rest or long rest. Rage charges are primarily used for entering a rage.")]
+            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Resource (3, "Rage Charges", OncePerShortRest)]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
         ]
@@ -66,7 +66,7 @@ let rec cleric = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Channel Divinity Charges", "Clerics have 3 Channel Divinity charges that are replenished on a short rest or long rest."); Complex ("Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Complex ("Divine Miracles", "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
+            1<classLvl>, [Resource (3, "Channel Divinity Charges", OncePerShortRest); Complex ("Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Complex ("Divine Miracles", "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
@@ -83,7 +83,7 @@ let rec druid = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Wild Shape Charges", "Druids have 3 Wild Shape charges that are replenished on a short rest or long rest."); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Wild Shape Charges", OncePerShortRest); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
@@ -98,7 +98,7 @@ let rec fighter = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{cl} Superiority Dice"
+            Resource (UMX.untag cl, "Superiority Dice", OncePerShortRest)
             Simple $"{if cl >= 11<classLvl> then 6 elif cl >= 9<classLvl> then 5 elif cl >= 7<classLvl> then 4 elif cl >= 5<classLvl> then 3 elif cl >= 3<classLvl> then 2 else 1}d6 Superiority Die damage"
             Complex ("Second Wind", $"Every 3 rounds of battle, you restore {cl/2}d12 fighter level in Hit Points and recover a Superiority Die at the end of your turn.")
         ])
@@ -145,7 +145,7 @@ let rec paladin = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Channel Oath Charges", "Paladins have 3 Channel Oath charges that are replenished on a short rest or long rest."); Complex ("3 Crusader's Smite Charges", "Paladins have 3 Crusader's Smite charges that are replenished on a short rest or long rest."); Complex ("Smites", "All Smites are melee or ranged weapon attacks that add an additional +1d12 damage determined by the Smite used.")]
+            1<classLvl>, [Resource (3, "Channel Oath Charges", OncePerShortRest); Resource (3, "Crusader's Smite Charges", OncePerShortRest); Complex ("Smites", "All Smites are melee or ranged weapon attacks that add an additional +1d12 damage determined by the Smite used.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Smitten", "When making an Attack Roll with one of your Smites, you make your roll with a +20 bonus.")]
         ]
@@ -165,7 +165,7 @@ let rec ranger = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Natural Focus Charges", "Rangers have 3 Natural Focus charges that are replenished on a short rest or long rest."); Complex ("Conjure Rangers Companion", "Summon one of five beasts to a target location within 18m. Ranger Companions have a duration of permanent and grow in power alongside Ranger class levels."); Complex ("Frontier Ballistics", "Learn special arrows to use with your ranged weapons by consuming Natural Focus."); Complex ("Natural Movement", "Gain the ability to Dash, Disengage, and Hide as a free action by consuming Natural Focus charges. This effect can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Natural Focus Charges", OncePerShortRest); Complex ("Conjure Rangers Companion", "Summon one of five beasts to a target location within 18m. Ranger Companions have a duration of permanent and grow in power alongside Ranger class levels."); Complex ("Frontier Ballistics", "Learn special arrows to use with your ranged weapons by consuming Natural Focus."); Complex ("Natural Movement", "Gain the ability to Dash, Disengage, and Hide as a free action by consuming Natural Focus charges. This effect can be toggled at any time.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Horde Breaker", "Make a basic attack with your main hand weapon. All creatures within 3m of your target receive the condition Horde Breaker that lasts 1 turn. You receive a temporary action, Horde Breaker Follow-Up.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Eagle Eyed", "When making an attack roll with advantage your damage roll will also roll with advantage.")]
         ]
@@ -187,7 +187,7 @@ let rec rogue = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Luck Points", "Rogues have 3 Luck Points that are replenished on a short rest or long rest."); Complex ("Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Luck Points", OncePerShortRest); Complex ("Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
         ]
@@ -241,7 +241,7 @@ let rec wizard = {
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{cl} Arcane Recovery Charges"
+            Resource (UMX.untag cl, "Arcane Recovery Charges", OncePerShortRest)
         ])
 
         FixedAbilities = Map [

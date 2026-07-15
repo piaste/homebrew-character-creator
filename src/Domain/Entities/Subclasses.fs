@@ -613,7 +613,7 @@ let rec infusedArcsmith =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies.") ]
+            1<classLvl>, [ Resource (3, "Matrix Charges", OncePerShortRest) ]
             3<classLvl>, [ Power(FreeAction, AtWill, "Adaptive Intervention", "Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
             5<classLvl>, [ Complex("Distributed Subroutine", "Infuse two creatures at once (or one for 2 rounds) per charge.") ]
             7<classLvl>, [ Complex("Wanton Processing", "Killing blow or Critical Hit restores a Matrix Charge.") ]
