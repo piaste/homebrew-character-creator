@@ -10,8 +10,8 @@ let rec blackDragonborn =
             Name = "Black Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Acid damage"
-                Power(Action, OncePerTurn,  $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts  1 turn")
+                Simple $"Resistance to Acid damage (becomes immunity at character level 9)"
+                Power(Action, OncePerTurn,  $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
             ]
         }
 
@@ -21,8 +21,8 @@ let rec blueDragonborn =
             Name = "Blue Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
+                Simple $"Resistance to Lightning damage (becomes immunity at character level 9)"
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Lightning dmg in a cone, inflicts Shocked 1 turn")
             ]
         }
 
@@ -32,7 +32,7 @@ let rec brassDragonborn =
             Name = "Brass Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage"
+                Simple $"Resistance to Fire damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
             ]
         }
@@ -43,8 +43,8 @@ let rec bronzeDragonborn =
             Name = "Bronze Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Lightning damage"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Electric dmg in a cone, inflicts Shocked 1 turn")
+                Simple $"Resistance to Lightning damage (becomes immunity at character level 9)"
+                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Lightning dmg in a cone, inflicts Shocked 1 turn")
             ]
         }
 
@@ -54,7 +54,7 @@ let rec copperDragonborn =
             Name = "Copper Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Acid damage"
+                Simple $"Resistance to Acid damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn, $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
             ]
         }
@@ -65,7 +65,7 @@ let rec goldDragonborn =
             Name = "Gold Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage"
+                Simple $"Resistance to Fire damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
             ]
         }
@@ -76,7 +76,7 @@ let rec greenDragonborn =
             Name = "Green Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Poison damage"
+                Simple $"Resistance to Poison damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Poison Breath Cantrip", "1d12 Poison dmg in a cone, inflicts Poisoned 1 turn")
             ]
         }
@@ -87,7 +87,7 @@ let rec redDragonborn =
             Name = "Red Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage"
+                Simple $"Resistance to Fire damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
             ]
         }
@@ -98,7 +98,7 @@ let rec silverDragonborn =
             Name = "Silver Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Cold damage"
+                Simple $"Resistance to Cold damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "1d12 Cold dmg in a cone, inflicts Frostbite 1 turn")
             ]
         }
@@ -109,7 +109,7 @@ let rec whiteDragonborn =
             Name = "White Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Cold damage"
+                Simple $"Resistance to Cold damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "1d12 Cold dmg in a cone, inflicts Frostbite 1 turn")
             ]
         }
@@ -120,7 +120,7 @@ let rec amethystDragonborn =
             Name = "Amethyst Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Force damage"
+                Simple $"Resistance to Force damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Force Breath Cantrip", "1d12 Force dmg in a cone, inflicts Dazed 1 turn")
             ]
         }
@@ -131,7 +131,7 @@ let rec crystalDragonborn =
             Name = "Crystal Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Radiant damage"
+                Simple $"Resistance to Radiant damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Radiant Breath Cantrip", "1d12 Radiant dmg in a cone, inflicts Blind 1 turn")
             ]
         }
@@ -142,7 +142,7 @@ let rec emeraldDragonborn =
             Name = "Emerald Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Psychic damage"
+                Simple $"Resistance to Psychic damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn,  $"Psychic Breath Cantrip", "1d12 Psychic dmg in a cone, inflicts Mental Fatigue 1 turn")
             ]
         }
@@ -153,7 +153,7 @@ let rec sapphireDragonborn =
             Name = "Sapphire Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Thunder damage"
+                Simple $"Resistance to Thunder damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn, $"Thunder Breath Cantrip", "1d12 Thunder dmg in a cone, inflicts Reverberation 1 turn")
             ]
         }
@@ -164,7 +164,7 @@ let rec topazDragonborn =
             Name = "Topaz Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Necrotic damage"
+                Simple $"Resistance to Necrotic damage (becomes immunity at character level 9)"
                 Power(Action, OncePerTurn, $"Necrotic Breath Cantrip", "1d12 Necrotic dmg in a cone, inflicts Bone Chilled 1 turn")
             ]
         }
