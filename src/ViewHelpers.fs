@@ -115,15 +115,17 @@ let toRoman = function
     | _ -> failwith "Roman numbers up to 6 only"
 
 let sheetAttr (key : string) (value : string) (tooltipText: string option) (iconSubpath: string option)= 
+    let anchorId = Guid.NewGuid().ToString();
     div { 
         cl "sheet-attr"
+        attr.style $"anchor-name: --{anchorId}"
         maybeIcon iconSubpath
         span { key }
         b { cl "tooltip"
             value
             cond tooltipText <| function
             | None -> empty()
-            | Some tt -> span { cl "tooltip-text"; tt}
+            | Some tt -> span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; tt}
         }
     }
 

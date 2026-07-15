@@ -250,12 +250,12 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
 
                 let passiveDescs = 
                     filteredPassives
-                    |> List.map (fun (source, p) -> source, p.Name.Display useLoreNames, p.Description, p.Name.Icon)
+                    |> List.map (fun (source, p) -> source, p.Name.Display useLoreNames, p.Description.Display useLoreNames, p.Name.Icon)
 
                 div { 
                     cl "sheet-attrs"
                     forEach passiveDescs (fun (source, name, desc, icon) ->
-                        sheetAttr source name (Some (desc.Display useLoreNames)) icon
+                        sheetAttr source name (Some desc) icon
                     )
                 }
             }

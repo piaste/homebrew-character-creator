@@ -128,7 +128,7 @@ let getRegularSpellSlots (character: Character) =
                 | _ -> []
     ]
     |> List.map (fun l -> List.append l [0;0;0;0;0;0] |> List.take 6)
-    |> List.fold (fun l1 l2 -> List.zip l1 l2 |> List.map (fun (s1, s2) -> s1 + s2)) [0;0;0;0;0;0]
+    |> List.fold (List.map2 (+)) [0;0;0;0;0;0]
     |> List.where (fun l -> l > 0)
 
 let getWarlockSpellSlots (character: Character) = 
@@ -168,13 +168,13 @@ let getWarlockSpellSlots (character: Character) =
             | _ -> []
     ]
     |> List.map (fun l -> List.append l [0;0;0;0;0;0] |> List.take 6)
-    |> List.fold (fun l1 l2 -> List.zip l1 l2 |> List.map (fun (s1, s2) -> s1 + s2)) [0;0;0;0;0;0]
+    |> List.fold (List.map2 (+)) [0;0;0;0;0;0]
     |> List.where (fun l -> l > 0)
 let getValidSubclassesForClass clId (c: Character) =
     c.PreviousHistory.LevelsBySubclass
     |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0<classLvl>)
     |> function
-    | None ->  Subclasses.allSubclassesByClass[clId]
+    | None ->  allSubclassesByClass[clId]
     | Some sclId -> Map [sclId, subclassById sclId ]
 
 let getValidSubclassesFor (c: Character) =

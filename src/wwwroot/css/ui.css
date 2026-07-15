@@ -818,8 +818,9 @@ html,body{
   }
 }
  
-.sheet-attr span{
-  opacity: .85;
+.sheet-attr > span {
+    opacity: .85;
+  
 }
  
 .sheet-attr b{
@@ -1777,14 +1778,33 @@ html,body{
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.5s linear;
 
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  
+  xxbottom: auto;
+  xxtop: anchor(bottom);
+  xxleft: anchor(center);
+  xxtranslate: -80% 45%;
 
-  background: var(--panel);
+  position-area: block-start span-inline-end;
+
+  position-try-fallbacks:
+    flip-block,
+    flip-inline;
+
+  margin-block: 8px;
+  
+  xxposition-try-order: most-width;
+  xxposition-area: block-end center;
+  xxposition-try-fallbacks: flip-inline;
+  
+  xxxbottom: 125%;
+  xxxleft: 50%;
+  xxxtransform: translateX(-50%);
+
+  xxxbackground: var(--panel);
+  background: rgba(20,14,12,1);
   color: var(--bright);
   padding: 6px 10px;
   border-radius: 4px;
@@ -1797,10 +1817,14 @@ html,body{
 .tooltip-text::after {
   content: "";
   position: absolute;
-  top: 100%;
+  xxxtop: 100%;
+  xxxleft: 50%;
+  xxxtransform: translateX(-50%);
+  
+  bottom: -10px;
   left: 50%;
-  transform: translateX(-50%);
-
+  translate: -50% 0;
+  
   border-width: 5px;
   border-style: solid;
   border-color: #333 transparent transparent transparent;
