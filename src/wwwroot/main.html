@@ -1,173 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
+    <link rel="stylesheet" href="./css/ui.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-  <link rel="icon" type="image/png" href="./assets/ui/hbcr-icon.png">
-  <link rel="stylesheet" href="./css/forge.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400&display=swap" rel="stylesheet">
 </head>
-
+ 
 <body>
-  <div class="app-shell">
-    <header class="hero-panel">
-      <div>
-        <p class="eyebrow">A Baldur's Gate 3 overhaul mod by Havenii7</p>
-        <h1 class="hero-title" onclick="${ClickLogo}">HomeBrew Character Creator</h1>
-        <p class="hero-copy">
-          by <a href="mail:hbcc@piaste.com">@brogue8006</a>
-        </p>
-        <p class="hero-copy opposite">
-        </p>
-      </div>
-      <!-- <p class="hero-status">${StatusText}</p>     -->
-    </header>
-
-    <div class="workspace">
-      <main class="builder-column">${BuilderContent}</main>
-      <aside class="summary-column">${SummaryContent}</aside>
+    <div id="app" class="app-root" aria-label="HBCR Character Builder" data-screen="radial">
+        <div class="frame">
+ 
+            <div class="topbar">
+                <div class="brand-row">
+                    <img class="hbcr-logo" src="./assets/ui/hbcr-logo-cutout.png"
+                        alt="Home Brew - Comprehensive Reworks" onclick="${ClickLogo}">
+                    <div class="brand-text">
+                    </div>
+                </div>
+                <div class="topbar-meta">
+                    <div class="topbar-actions" aria-label="Builder actions">
+                        ${ActionButtons}
+                    </div>
+                    <div class="version-pill">
+                        <span>Mod v8.9.1</span>
+                        <span style="opacity:.55">•</span>
+                        <span>Builder v0.3.0-radial</span>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+ 
+            <div class="content">
+ 
+ 
+                <div class="radial-shell">
+                    <div class="radial-pane" style="position:relative;z-index:2;pointer-events:auto;">
+ 
+                        <div class="stage-and-picks" aria-label="Stage navigation">
+                            <button class="stage-carousel-nav stage-carousel-nav--prev" type="button" aria-label="Scroll stage navigation left" onclick="window.hbcrScrollStageCarousel?.(this, -1)">
+                                <span aria-hidden="true">&#8249;</span>
+                            </button>
+                            <div class="stage-carousel" data-stage-carousel>
+                                <div class="stage-carousel-track" data-stage-carousel-track>
+                                    <div class="stage-tabs">                                
+                                        ${StageTabs}                                
+                                    </div>
+                                    <div class="picks-dock">
+                                        <div class="pick-grid pick-grid--dock" aria-label="Picks this level">      
+                                       ${PicksDocks}                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="stage-carousel-nav stage-carousel-nav--next" type="button" aria-label="Scroll stage navigation right" onclick="window.hbcrScrollStageCarousel?.(this, 1)">
+                                <span aria-hidden="true">&#8250;</span>
+                            </button>
+                        </div>
+ 
+                        ${RadialStage}
+                    </div>
+                    <div class="radial-summary">
+ 
+                        <div class="sheet-title">CHARACTER SUMMARY</div>
+ 
+                        <div class="summary-grid">
+                            <div class="summary-left">
+                                <div class="sheet-controls summary-top">
+                                    ${SheetPills}
+                                </div>
+ 
+                                <div class="sheet-muted trait-desc">
+                                    ${TraitDescription}
+                                </div>
+                                ${CharacterSummary}
+                            </div>
+ 
+                            <div class="summary-right">
+                                ${LevelBoxes}
+                            </div>
+                        </div>
+ 
+                    </div>
+ 
+                </div>
+ 
+            </div>
+        </div>
+        <div id="notification-area">${Error}</div>
     </div>
-
-    ${LevelUp}
-
-    <div id="notification-area">${Error}</div>
-
-    <template id="Grouping">
-      <section class="section-card">
-        <div class="section-body">${Body}</div>
-      </section>
-    </template>
-
-    <template id="SectionCard">
-      <section class="section-card">
-        <div class="section-head">
-          <div>
-            <h2>${Title}</h2>
-            <p>${Helper}</p>
-            <div class="section-body">${HeadContent}</div>
-          </div>
-        </div>
-        <div class="section-body">${Body}</div>
-      </section>
-    </template>
-
-    <template id="TextField">
-      <label class="field-card">
-        <span class="field-label">${Label}</span>
-        <span class="field-helper">${Helper}</span>
-        <input class="field-input" bind="${Value}" />
-      </label>
-    </template>
-
-    <template id="SelectField">
-      <label class="field-card">
-        <span class="field-label">${Label}</span>
-        <span class="field-helper">${Helper}</span>
-        <select class="field-select" bind="${Value}">${Options}</select>
-      </label>
-    </template>
-
-    <template id="FieldOption">
-      <option value="${Value}">${Label}</option>
-    </template>
-
-    <template id="AbilityRow">
-      <div class="ability-row">
-        <div>
-          <p class="ability-name">${Ability}</p>
-          <p class="ability-abbrev">${Abbreviation}</p>
-        </div>
-        <div class="ability-controls">
-          <select class="field-select compact" bind="${Score}">${Options}</select>
-          <div class="ability-controls">
-            <div class="ability-bonuses">${BonusInfo}</div>
-          </div>
-        </div>
-    </template>
-
-    <template id="Chip">
-      <span class="chip ${ToneClass}">${Text}</span>
-    </template>
-
-    <template id="ChoiceCard">
-      <button class="choice-card ${ActiveClass}" onclick="${Action}">
-        <span class="choice-meta display:none">${Meta}</span>
-        <strong>${Title}</strong>
-        <span>${Description}</span>
-      </button>
-    </template>
-
-    <template id="PointBudget">
-      <div class="meter-row">
-        <span class="meter-label">Point buy</span>
-        <span class="meter-value">${Used} used / ${Remaining} remaining</span>
-      </div>
-    </template>
-
-    <template id="SelectionMeter">
-      <div class="meter-row">
-        <span class="meter-label">${Label}</span>
-        <span class="meter-value">${Selected} / ${Maximum}</span>
-      </div>
-    </template>
-
-    <template id="SummaryRow">
-      <div class="summary-row">
-        <span>${Label}</span>
-        <strong>${Value}</strong>
-      </div>
-    </template>
-
-    <template id="Nameplate">
-      <div class="nameplate">
-        <div>
-          <p class="eyebrow">Current character</p>
-          <h3>${Name}</h3>
-        </div>
-        <div class="chip-row">${Details}</div>
-      </div>
-    </template>
-
-    <template id="LockedSummary">
-      <div class="locked-summary">
-        <div><span>Name</span><strong>${Name}</strong></div>
-        <div><span>Race</span><strong>${Race}</strong></div>
-        <div><span>Class</span><strong>${Class}</strong></div>
-        <div><span>Subclass</span><strong>${Subclass}</strong></div>
-      </div>
-    </template>
-
-    <template id="TimelineRow">
-      <div class="timeline-row">
-        <strong>${Level}</strong>
-        <span>${ClassName}</span>
-        <small>${Detail}</small>
-      </div>
-    </template>
-
-    <template id="EmptyState">
-      <div class="empty-state">${Text}</div>
-    </template>
-
-
-    <template id="ActionButton">
-      <div class="action-banner">
-        <button class="action-button ${ToneClass} ${DisabledClass}" onclick="${Action}">${Text}</button>
-      </div>
-    </template>
-
-
-    <template id="ErrorNotification">
-      <div class="error-banner">
-        <span>${Text}</span>
-        <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
-      </div>
-    </template>
-
-
-  </div>
+    <script type="module" src="./src/app.js"></script>
+    <script>
+        (function () {
+            function syncStageCarousel(shell) {
+                if (!shell) {
+                    return;
+                }
+ 
+                var viewport = shell.querySelector('[data-stage-carousel]');
+                var prev = shell.querySelector('.stage-carousel-nav--prev');
+                var next = shell.querySelector('.stage-carousel-nav--next');
+ 
+                if (!viewport || !prev || !next) {
+                    return;
+                }
+ 
+                var maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+                var atStart = viewport.scrollLeft <= 4;
+                var atEnd = viewport.scrollLeft >= maxScrollLeft - 4;
+                var hasOverflow = maxScrollLeft > 4;
+ 
+                prev.disabled = !hasOverflow || atStart;
+                next.disabled = !hasOverflow || atEnd;
+                prev.classList.toggle('is-disabled', prev.disabled);
+                next.classList.toggle('is-disabled', next.disabled);
+                prev.setAttribute('aria-disabled', String(prev.disabled));
+                next.setAttribute('aria-disabled', String(next.disabled));
+            }
+ 
+            function syncAllStageCarousels() {
+                document.querySelectorAll('.stage-and-picks').forEach(syncStageCarousel);
+            }
+ 
+            window.hbcrSyncStageCarousel = syncAllStageCarousels;
+ 
+            window.hbcrScrollStageCarousel = function (button, direction) {
+                var shell = button && button.closest('.stage-and-picks');
+                var viewport = shell && shell.querySelector('[data-stage-carousel]');
+                if (!viewport) {
+                    return;
+                }
+ 
+                var amount = Math.max(viewport.clientWidth * 0.72, 220);
+                viewport.scrollBy({ left: amount * direction, behavior: 'smooth' });
+                window.setTimeout(function () { syncStageCarousel(shell); }, 220);
+            };
+ 
+            document.addEventListener('DOMContentLoaded', function () {
+                syncAllStageCarousels();
+                document.querySelectorAll('[data-stage-carousel]').forEach(function (viewport) {
+                    viewport.addEventListener('scroll', function () {
+                        syncStageCarousel(viewport.closest('.stage-and-picks'));
+                    }, { passive: true });
+                });
+            });
+ 
+            window.addEventListener('resize', syncAllStageCarousels);
+            var observer = new MutationObserver(function () {
+                syncAllStageCarousels();
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            window.setTimeout(syncAllStageCarousels, 50);
+            window.setTimeout(syncAllStageCarousels, 300);
+            window.setTimeout(syncAllStageCarousels, 900);
+        })();
+    </script>
+ 
+ 
 </body>
-
+ 
 </html>
+
+
+
+<template id="ErrorNotification">
+    <div class="error-banner error">
+    <span>${Text}</span>
+    <button class="dismiss-button ${VisibleClass}" onclick="${Hide}">Dismiss</button>
+    </div>
+</template>

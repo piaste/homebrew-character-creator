@@ -11,7 +11,6 @@ open Utils
 
 open Model
 open Update
-open View
 open Bg3HomebrewCCreator.Domain.Character
 
 
@@ -66,9 +65,5 @@ type MyApp() =
 #endif 
         let jsHelper = buildStorage (fun () -> this.JSRuntime)
 
-        let dynamicView = function
-            | x as { Page = Forge } -> view x
-            | x as { Page = ForgeOtherUi } -> OtherView.View.otherView x
-        
-        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update jsHelper) dynamicView
+        Program.mkProgram (fun _ -> Model.Initial, Cmd.ofMsg LoadState) (update jsHelper) OtherView.View.otherView
         |> Program.withRouter router

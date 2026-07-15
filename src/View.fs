@@ -1,450 +1,540 @@
-module Bg3HomebrewCCreator.View
+module Bg3HomebrewCCreator.OtherView.View
 
 open FSharp.UMX
 open System
 open Bolero
 open Bolero.Html
 
+
 open Bg3HomebrewCCreator.Domain.Entities
-open Domain.Types
-open Domain.Character
-open Domain.PickRules
-open Domain.Helpers
-open Model
-open Update
+open Bg3HomebrewCCreator.Domain.Types
+open Bg3HomebrewCCreator.Domain.Character
+open Bg3HomebrewCCreator.Domain.PickRules
+open Bg3HomebrewCCreator.Domain.Helpers
+open Bg3HomebrewCCreator.Model
+open Bg3HomebrewCCreator.Update
 open Utils
+open Helpers
 
-let pointBuyOptions = [ 0;1;2;3;4;5;7;9 ] |> List.map ((*) 1<pbuy>)
+type OtherUi = Template<"wwwroot/main.html">
 
-let abilityName = function
-    | STR -> "Strength"
-    | DEX -> "Dexterity"
-    | CON -> "Constitution"
-    | INT -> "Intelligence"
-    | WIS -> "Wisdom"
-    | CHA -> "Charisma"
-
-
-type Main = Template<"wwwroot/main.html">
-
-let actionButton (text: string) (tone: string) isDisabled (action: obj -> unit) =
-    Main.ActionButton()
-        .Text(text)
-        .ToneClass(tone)
-        .DisabledClass(if isDisabled then "is-disabled" else "")
-        .Action(action)
-        .Elt()
-
-let fieldOption value (label: string) =
-    Main.FieldOption()
-        .Value(value.ToString())
-        .Label(label)
-        .Elt()
-
-let abilityOption ability =
-    fieldOption (string ability) (abilityName ability)
-
-let scoreOption points =
-    let score = getAbilityFromPoints points
-    fieldOption (string points) ($"{score} ({points} pts)")
-
-let fieldCard (title: string) (helper: string) (body: Node) =
-    Main.SectionCard()
-        .Title(title)
-        .Helper(helper)
-        .HeadContent(empty())
-        .Body(body)
-        .Elt()
-
-let fieldCardRich (title: string) (helper: string) (headContent: Node) (body: Node) =
-    Main.SectionCard()
-        .Title(title)
-        .Helper(helper)
-        .HeadContent(headContent)
-        .Body(body)
-        .Elt()
-let grouping (body: Node) =
-    Main.Grouping()
-        .Body(body)
-        .Elt()
-
-let summaryRow (label: string) (value: string) =
-    Main.SummaryRow()
-        .Label(label)
-        .Value(value)
-        .Elt()
-
-let chip (text: string) (tone: string) =
-    Main.Chip()
-        .Text(text)
-        .ToneClass(tone)
-        .Elt()
-
-let choiceCard isActive (meta: string) (title: string) (description: string) (action: obj -> unit) =
-    Main.ChoiceCard()
-        .ActiveClass(if isActive then "active" else "")
-        .Meta(meta)
-        .Title(title)
-        .Description(if description = title then "" else description)
-        .Action(action)
-        .Elt()
-
-let textField (label: string) (helper: string) (value: string) (action: string -> unit) =
-    Main.TextField()
-        .Label(label)
-        .Helper(helper)
-        .Value(value, action)
-        .Elt()
-
-let selectField (label: string) (helper: string) (currentValue: string) (options: Node) (action: string -> unit) =
-    Main.SelectField()
-        .Label(label)
-        .Helper(helper)
-        .Value(currentValue, action)
-        .Options(options)
-        .Elt()
-
-let pointBuyRow (character: Character) ability dispatch =
-    let finalScore = character.Ability ability
-    Main.AbilityRow()
-        .Ability(abilityName ability)
-        .Abbreviation(ability.ToString())
-        .Score(string (character.AbBuy.PointBuy[ability]), 
-               fun value -> dispatch (SetAbilityPointBuy(ability, value |> Int32.Parse |> UMX.tag<pbuy>)))
-        .Options(forEach pointBuyOptions scoreOption)
-        .BonusInfo(
-            concat {
-                if character.AbBuy.BonusPlusThree = ability then
-                    chip "+3 bonus" "accent"
-                if character.AbBuy.BonusPlusOne = ability then
-                    chip "+1 bonus" "neutral"
-            })
-        .Elt()
-
-let characterSummaryChips (character: Character) useLoreNames =
-    let race = raceById character.RaceId
-    
-    let subclassTags = 
-        [ for KeyValue(sc, lvl) in character.CurrentHistory.LevelsBySubclass ->        
-            $"{Subclasses.allSubclasses[sc].DisplayName useLoreNames} {lvl}"
-        ]
-    
-    concat {
-        chip $"Level {character.CharacterLevel}" "success"
-        chip race.Name "accent"
-        forEach subclassTags (fun ct -> chip ct "neutral")
+let stageTabButton enabled dispatch model stage iconPath = 
+    let isActive = model.MainStageSelection = stage
+    button {
+        attr.id (elementIdForStage stage)
+        attr.disabled (not enabled)
+        clActive isActive "stage-tab"
+        on.click (fun _ -> dispatch <| SetMainStageSelection stage)
+        div { cl "stage-tab-title"; stage.ToString() }
+        div { cl "stage-tab-icon"; icon iconPath }
     }
 
-let inline selector
-        (itemList: 't seq when 't: (member Name : string) 
-                          and 't : (member Description : LoreableString))  
-        title subtitle itemTitle
-        numPicks numPicked 
-        isPicked
-        toggleEvent 
-        = 
-    cond (numPicks > 0) <| function
-        | false -> empty()
-        | true ->
-            fieldCardRich title subtitle
-                (cond (numPicks > 1) <| function
-                    | false -> empty()
-                    | true -> 
-                        Main.SelectionMeter()
-                            .Selected(string numPicked)
-                            .Maximum(string numPicks)
-                            .Elt()
-                )
-                (concat {
-                    forEach itemList (fun item ->
-                        let active = isPicked item
-                        // selectable stuff doesn't have lore text usually
-                        choiceCard active itemTitle item.Name item.Description.DefaultText (fun _ -> toggleEvent item))
-                })
+let picksDockButton (title : string) (count: int) (max: int) dispatch stage = 
+    cond (max > 0) <| function
+    | false -> empty()
+    | true ->
+        button {
+            attr.id (elementIdForStage (Pick stage))
+            attr.``class`` <| "pick-card pick-card--dock" + (count = max).IfThen " error"
+            attr.``type`` "button"
+            on.click (fun _ -> dispatch <| SetMainStageSelection (Pick stage))
 
+            div {
+                attr.``class`` "pick-name"
+                title
+            }
 
-let inline requiredSelector itemList title subtitle itemTitle mustPick isPicked toggleEvent = 
-    selector itemList title subtitle itemTitle
-        (if mustPick then 1 else 0)
-        1 isPicked (fun item -> if isPicked item then () else toggleEvent item)
+            div {
+                attr.``class`` "pick-count"
+                $"{count}/{max}"
+            }
+        }
 
-let levelUpSection (model: Model) dispatch = concat {
-    let character = model.Character
+let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
 
-    let subclassId = character.NextLevelUp.SubclassId
-    let classId = classIdBySubclassId subclassId
-    let subclass = subclassById subclassId
+    let radius = 220.0
 
-    let validSubclassesFor clId =
-        character.PreviousHistory.LevelsBySubclass
-        |> Map.tryFindKey (fun scId lvl -> classIdBySubclassId scId = clId && lvl > 0<classLvl>)
-        |> function
-           | None ->  Subclasses.allSubclassesByClass[clId].Values :> seq<_>
-           | Some sclId -> seq { subclassById sclId }
-        |> Seq.map (fun sc -> {| sc with Name = sc.DisplayName model.UseLoreNames; Description = sc.DisplayDescription model.UseLoreNames |})
+    let radialButton index total (text: string) iconSubpath action hoverAction = 
+        let angle = 1.5 * Math.PI + index * 2. * Math.PI / total
+        let posX = radius * Math.Cos angle
+        let posY = radius * Math.Sin angle
 
-    let defaultSubclassFor = 
-        validSubclassesFor >> Seq.head >> _.Id
+        button { 
+            cl "radial-node"
+            on.click action
+            on.mouseover hoverAction
+            attr.style $"--scale: 0.92; --x: {posX}px; --y: {posY}px;"
+            div {
+                cl "radial-node-button"
+                icon iconSubpath
+            }
+            div { cl "radial-node-label"; text}
+        }
 
-    requiredSelector Classes.allClasses.Values
-        "Class" "Choose the class for your next level" "class"
-        true
-        (fun cl -> classIdBySubclassId character.NextLevelUp.SubclassId = cl.Id)
-        (fun cl -> dispatch <| SetSubclass (defaultSubclassFor cl.Id))
+    let centerText = 
+        concat {
+            printRichText rct
+        }
 
-    requiredSelector (validSubclassesFor classId)
-        "Subclass" "Choose a subclass for your next level" "subclass"
-        true
-        (fun subclass -> character.NextLevelUp.SubclassId = subclass.Id)
-        (fun subclass -> dispatch <| SetSubclass subclass.Id)
-
-    selector ClassPassives.allPassivesByClass[classId].Values
-        "Passives" "Choose two class-specific passives" "Passive"
-        (nPassivePicks character.NextLevelUp)
-        character.NextLevelUp.ClassPassiveIds.Count
-        (fun cp -> character.CurrentHistory.AllClassPassiveIdsByClass.GetOrElse(classId, Set.empty) |> Seq.contains cp.Id)
-        (fun cp -> dispatch <| ToggleClassPassive cp.Id)
-
-    selector Feats.allFeats.Values
-        "Feat" "Choose a feat" "Feat"
-        (nFeatPicks character.NextLevelUp)
-        (character.NextLevelUp.FeatId |> Option.count)
-        (fun feat -> character.CurrentHistory.AllFeatIds |> Set.contains feat.Id)
-        (fun feat -> dispatch <| ToggleFeat feat.Id)
-
-    let numCantripPicks = nCantripPicks character.NextLevelUp in 
-    selector Cantrips.allCantrips.Values
-        "Cantrips" $"Choose {numCantripPicks} cantrips" "Cantrip"
-        numCantripPicks
-        character.NextLevelUp.CantripIds.Count
-        (_.Id >> character.CurrentHistory.AllCantripIds.Contains)
-        (fun cantrip -> dispatch <| ToggleCantrip cantrip.Id)
-
-    let numSpellPicks = nSpellPicks subclass.CasterType in 
-    let spellList = if hasFlexibleSpellPicks character.NextLevelUp then Some Versatile else subclass.SpellList
-    selector (spellList 
-              |> Option.map Spells.allSpellsInList
-              |> Option.defaultValue (Map []) 
-              |> _.Values)
-        "Spells" $"Choose {numSpellPicks} spells" "Spell"
-        numSpellPicks
-        character.NextLevelUp.SpellIds.Count
-        (_.Id >> character.CurrentHistory.AllSpellIds.Contains)
-        (fun spell -> dispatch <| ToggleSpell spell.Id)
-}
-
-let creationSection (model: Model) dispatch =
-    let character = model.Character
-    concat {
-        fieldCard
-            "Character Creation"
-            "Choose your name and initial characteristics."
-            (concat {
-                textField "Character name" "" character.CharName (fun value -> dispatch (SetName value))
-                        
-                requiredSelector BaseRaces.allBaseRaces.Values
-                    "Race" "Choose a race" "race"
-                    (character.CharacterLevel = 1<charLvl>)
-                    (fun race -> baseRaceIdBySubraceId character.RaceId = race.Id)
-                    (fun race -> dispatch <| SetSubrace (Seq.head <| Races.allSubracesByBaseRace[race.Id].Keys))
-
-                requiredSelector Races.allSubracesByBaseRace[baseRaceIdBySubraceId character.RaceId].Values
-                    "Subrace" "Choose a subrace" "subrace"
-                    (character.CharacterLevel = 1<charLvl>)
-                    (fun race -> character.RaceId = race.Id)
-                    (fun race -> dispatch <| SetSubrace race.Id)
-
-                requiredSelector Archetypes.allArchetypes.Values
-                    "Archetype" "Choose an archetype" "archetype"
-                    (character.CharacterLevel = 1<charLvl>)
-                    (fun archetype -> character.ArchetypeId = archetype.Id)
-                    (fun archetype -> dispatch <| SetArchetype archetype.Id)
-
-                requiredSelector (Traits.allTraits.Values |> Seq.sortBy (fun tr -> if tr.Name = "None" then "" else tr.Name))
-                    "Trait" "Choose a trait (or leave it as None)" "trait"
-                    (character.CharacterLevel = 1<charLvl>)
-                    (fun tr -> character.TraitId = tr.Id)
-                    (fun tr -> dispatch <| SetTrait tr.Id)
-        })
-
-        fieldCard
-            "Point Buy"
-            $"Base scores use the standard {POINT_BUDGET}-point buy before a +3 and +1 bonus land on different abilities."
-            (concat {
-                Main.PointBudget()
-                    .Used(string character.AbBuy.SpentPoints)
-                    .Remaining(string character.AbBuy.UnspentPoints)
-                    .Elt()
-                grouping <| forEach allAbilities (fun ability -> pointBuyRow character ability dispatch)
-                grouping <| concat {
-                    selectField
-                        "+3 bonus"
-                        "Must target a different ability than the +1 bonus."
-                        (string character.AbBuy.BonusPlusThree)
-                        (forEach allAbilities abilityOption)
-                        (fun value -> dispatch (SetBonusPlusThree(parseCase<Ability> value)))
-                    selectField
-                        "+1 bonus"
-                        "Bolero will normalize duplicate choices, but the validation panel also calls it out."
-                        (string character.AbBuy.BonusPlusOne)
-                        (forEach allAbilities abilityOption)
-                        (fun value -> dispatch (SetBonusPlusOne(parseCase<Ability> value)))
-                }
-            })
-
-        selector Skills.allSkills.Values
-            "Skills" "Choose 4 proficiencies" "Skill"
-            nSkillProfPicks character.SkillIds.Count
-            (_.Id >> character.SkillIds.Contains)
-            (_.Id >> ToggleSkill >> dispatch)
-
-        selector (Skills.allSkills.Values |> Seq.where (_.Id >> character.SkillIds.Contains))
-            "Skills" "Choose 2 expertises" "Skill"
-            nSkillExpPicks character.SkillExpIds.Count
-            (_.Id >> character.SkillExpIds.Contains)
-            (_.Id >> ToggleSkillExp >> dispatch)
+    div {
+        cl "radial-stage"; attr.style "position:relative;z-index:1"
+        div { cl "radial-center"
+              div { cl "radial-center-title"; centerText }
+              forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
+                radialButton i count v.Name (getIcon k) 
+                    (fun _ -> dispatch (msg k)) 
+                    (fun _ -> dispatch (SetRadialCenterText options[k].Description)))
+        }
     }
 
-let summarySection (model: Model) dispatch =
-    let character = model.Character
-    
-    let featNames =
-        character.CurrentHistory.AllFeatIds
-        |> Seq.map (fun fid -> Map.find fid Feats.allFeats |> _.Name)
+let sheetPill (title : string) (text : string) = 
+    div { cl "sheet-pill"; attr.title text; text }
 
-    let cantripNames =
-        character.CurrentHistory.AllCantripIds        
-        |> Seq.map (fun sid -> Map.find sid Cantrips.allCantrips |> _.Name)
-
-    let spellNames =
-        character.CurrentHistory.AllSpellIds        
-        |> Seq.map (fun sid -> Map.find sid Spells.allSpells |> _.Name)
-
-    let summaryList title names = 
-        cond (Seq.isEmpty names) <| function
-        | true -> empty()
-        | false -> summaryRow title (names |> Seq.sort |> String.concat ", ")
-
-
+let actionButtonWithClass (text: string) abCl dispatch msg = 
+    button {
+        cl $"btn action-btn ${abCl}"
+        on.click (fun _ -> dispatch msg)
+        text        
+    }
+let actionButton (text: string) dispatch msg = 
+    actionButtonWithClass text "" dispatch msg
+let summaryAbilities useLoreNames (chr: Character) dispatch = 
+    let abB = chr.AbBuy
     concat {
+        div { 
+            cl ("summary-ability-points" + if abB.SpentPoints <> POINT_BUDGET then " error" else "")
+            attr.title "Point Buy"
+            $"Ability points: {abB.SpentPoints} / {POINT_BUDGET}"
+        }
+        div { 
+            cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
+            div {
+                cl "ability-row ability-row--head"; attr.aria "hidden" "true"
+                div { cl "ability-k" }
+                div {}
+                div { cl "ability-v" }
+                div { cl "ability-m" }
+                div {}
+                div { cl "ability-bonus-h"; "+3" }
+                div { cl "ability-bonus-h"; "+1" }
+
+            }
         
-        fieldCard
-            "Live Sheet"
-            ""
-            (concat {
-
-                label {
-                    attr.``class`` "checkbox"
-                    input {
-                        attr.``type`` "checkbox"
-                        attr.``id`` "lorenames-toggle"
-                        bind.``checked`` model.UseLoreNames (dispatch << ToggleLoreNames)
+            forEach allAbilities (fun ab -> 
+                div { 
+                    cl "ability-row"
+                    div { cl "ability-k"; string ab }
+                    button {
+                        let enabled = abB.BoughtAbilityBeforeBonuses ab > 8 in 
+                        attr.disabled (not enabled)
+                        clEnabled enabled "ability-face-btn ability-minus-btn"
+                        on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
+                        //img { attr.src "/assets/ui/ability-minus.png"}
                     }
-                    "Use lore-based subclass names"
+                    div { cl "ability-v"; string <| abB.BoughtAbility ab}
+                    div { cl "ability-m"; modifierText <| abB.BoughtAbilityModifier ab}
+                    button {
+                        let enabled = abB.BoughtAbilityBeforeBonuses ab < 15 in 
+                        attr.disabled (not enabled)
+                        clEnabled enabled "ability-face-btn ability-plus-btn"
+                        on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
+                        //img { attr.src "/assets/ui/ability-plus.png"}
+                    }
+                    checkbox 
+                        (chr.AbBuy.BonusPlusThree = ab) 
+                        dispatch (SetBonusPlusThree ab)
+                    checkbox 
+                        (chr.AbBuy.BonusPlusOne = ab) 
+                        dispatch (SetBonusPlusOne ab)
                 }
-                Main.Nameplate()
-                    .Name(if String.IsNullOrWhiteSpace character.CharName then "Unnamed Adventurer" else character.CharName)
-                    .Details(characterSummaryChips character model.UseLoreNames)
-                    .Elt()
-                summaryRow "Proficiency bonus" (character.ProficiencyBonus |> sprintf "%+i")
-                summaryRow "Highest Spell DC" (modifierText character.HighestSpellDC)
-                summaryRow "Initiative" (modifierText character.Initiative)
-                summaryRow "Hit points" (string character.HitPoints)
-
-                forEach allAbilities (fun ability ->
-                    let score = character.Ability ability
-                    summaryRow (ability.ToString()) $"{score} ({modifierText <| character.AbilityModifier ability})")
-                cond (character.CharacterLevel = 1<charLvl>) <| function
-                    | true -> summaryRow "Point buy spent" (string character.AbBuy.SpentPoints)
-                    | false -> empty()
-            })
-
-
-        fieldCard
-            "Talents"
-            "All skills, spells, and assorted benefits gained."
-            (concat {
-                summaryRow "Skills" (
-                    character.SkillIds 
-                    |> Seq.map (fun s -> 
-                        let skill = Skills.allSkills[s] in
-                        $"""{skill.Name}{if character.SkillExpIds.Contains skill.Id then "++" else ""}"""
+            )
+            div {
+                cl "summary-under-abilities"
+                div { cl "sheet-section-title"; "STATS BONUSES" }
+                div { 
+                    cl "sheet-attrs"
+                    forEach (chr.StatModifiers.ToMap()) (fun kv ->
+                        sheetAttr kv.Value kv.Key None
                     )
-                    |> Seq.sort
-                    |> String.concat ", "
-                )
-                summaryList "Cantrips" cantripNames
-                summaryList "Spells" spellNames
-                summaryList "Feats" featNames
-                forEach (getAllPassiveDescriptions model.UseLoreNames character) <| fun (source, name, desc) -> 
-                    summaryRow name desc
-            })
+                }
+                let spellSlots = getRegularSpellSlots chr
+                let warlockSlots = getWarlockSpellSlots chr
+                cond (List.append spellSlots warlockSlots) <| function
+                | [] -> empty()
+                | slots -> 
+                    concat {
+                        div { cl "sheet-section-title"; "SPELL SLOTS" }
+                        div { 
+                            cl "sheet-attrs"
+                            forEach (List.indexed spellSlots) (fun (i, n) ->
+                                div { 
+                                    cl "sheet-attr"
+                                    span { toRoman (i + 1)}
+                                    forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                        fakeCheckbox "rgba(3, 108, 161, 0.95)" true
+                                    )
+                                } 
+                            )
+                            forEach (List.indexed warlockSlots) (fun (i, n) ->
+                                div { 
+                                    cl "sheet-attr"
+                                    span { toRoman (i + 1)}
+                                    forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                        fakeCheckbox "rgba(240, 49, 192, 0.95)" true
+                                    )
+                                } 
+                            )
+                        }
+                    }
+                div { cl "sheet-section-title"; "PASSIVES" }
+                div { 
+                    cl "sheet-attrs"
+                    forEach (getAllPassiveDescriptions useLoreNames chr) (fun (source, name, desc) ->
+                        sheetAttr source name (Some (desc.Display useLoreNames))
+                    )
+                }
+            }
 
-        fieldCard
-            "Timeline"
-            "Every confirmed level is recorded below."
-            (forEach character.PreviousHistory.Levels (fun levelRecord ->
-                let classDef = classBySubclassId levelRecord.SubclassId
-                let detail =
-                    [
-                        levelRecord.FeatId |> Option.bind Feats.allFeats.TryFind |> Option.map _.Name
-                        yield! levelRecord.ClassPassiveIds |> Seq.map (ClassPassives.allClassPassives.TryFind >> Option.map _.Name)
-                        yield! levelRecord.CantripIds |> Seq.map (Cantrips.allCantrips.TryFind >> Option.map _.Name)
-                        yield! levelRecord.SpellIds |> Seq.map (Spells.allSpells.TryFind >> Option.map _.Name)
-                    ]
-                    |> List.choose id
-                    |> function
-                        | [] -> "No extra choices"
-                        | xs -> String.concat " • " xs
-
-                Main.TimelineRow()
-                    .Level($"Level {levelRecord.ClassLevel}")
-                    .ClassName(classDef.Name)
-                    .Detail(detail)
-                    .Elt()))
+        }
 
     }
-let view (model: Model) dispatch =
-    let validationIssues = checkErrors model.Character
-    Main()       
-        .ClickLogo(fun _ -> dispatch (SetPage ForgeOtherUi))
-        .BuilderContent(
-            concat {
-                cond (model.Character.CharacterLevel > 1<charLvl>) <| function
-                    | true -> empty()
-                    | _ -> creationSection model dispatch
-                levelUpSection model dispatch
-            })
-        .SummaryContent(summarySection model dispatch)
-        // .LevelUp(levelUpModal model dispatch)
-        .Error(
 
+let levelBoxes (model: Model) = 
+    let lvlTo12 = 
+        List.init 12 (fun _ -> None)
+        |> List.append (model.Character.NextLevelUp :: model.Character.PreviousLevelHistory 
+                        |> List.map Some 
+                        |> List.rev)
+        |> List.take 12
+        |> List.indexed
+
+    div {
+        cl "level-boxes"
+        forEach lvlTo12 <| fun (lvl0, lr') ->
+            div { 
+                cl ("lvlbox" + if Option.isNone lr' then " empty" else "")
+                div { 
+                    cl "lvlbox-h"
+                    div { 
+                        cl "col left"
+                        div { cl "lvlbox-lvl"; $"Level {lvl0 + 1}"}
+                        cond lr' <| function
+                        | None -> empty()
+                        | Some lr -> 
+                            cond (UMX.untag lr.ClassLevel <> lvl0 + 1) <| function
+                            | false -> empty()
+                            | true -> 
+                                div { cl "lvlbox-clLvl"; $"Class level {lr.ClassLevel}"}
+                    }
+                    div { 
+                        cl "col right"
+                        div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> (classBySubclassId lr.SubclassId).Name }
+                        div { cl "lvlbox-subclass"; match lr' with None -> "—" | Some lr -> (subclassById lr.SubclassId).DisplayName model.UseLoreNames }
+                    }
+                }
+                div { 
+                    cl "lvbox-body"
+                    div { 
+                        cl "lvlbox-muted"
+                        match lr' with 
+                        | None -> empty()
+                        | Some lr ->
+                            div { 
+                                cl "sheet-attrs"
+                                forEach lr.CantripIds <| fun s ->
+                                    let c = Cantrips.allCantrips[s] in
+                                    sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}" (Some c.Description)
+                                forEach lr.SpellIds <| fun s ->
+                                    let sp = Spells.allSpells[s] in 
+                                    sheetAttr "Spell" $"{sp.ActionCost} {sp.Name}" (Some sp.Description)
+                                forEach lr.ClassPassiveIds <| fun s ->
+                                    let cp = ClassPassives.allClassPassives[s]
+                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames))
+                                cond lr.FeatId <| function
+                                | None -> empty()
+                                | Some fId -> 
+                                    let f = Feats.allFeats[fId]
+                                    sheetAttr "Feat" f.Name (Some (f.Description.Display model.UseLoreNames))
+                            }
+                    }
+                }
+            }
+    }
+
+let otherView (model: Model) (dispatch : Message -> unit) = 
+    let raceTag = 
+        BaseRaces.allBaseRaces[Races.allSubraces[model.Character.RaceId].BaseRaceId].Name
+
+    let c = model.Character
+    let l = c.NextLevelUp
+
+    let rct = model.RadialCenterText
+
+    let ph pick f = 
+        cond (Map.tryFind pick c.Picks) <| function
+        | None -> empty()
+        | Some pickCount -> 
+            f pickCount pick model dispatch
+
+    let validSubclasses =
+        getValidSubclassesFor c   
+                
+    OtherUi()
+        .RadialStage(
+            match model.MainStageSelection with
+            | Proceed ->
+                concat {
+                    cond model.UndoStack.IsEmpty <| function 
+                        | false -> actionButton "UNDO" dispatch Undo
+                        | true -> empty()
+                    
+                    cond model.RedoStack.IsEmpty <| function 
+                        | false -> actionButton "REDO" dispatch Redo
+                        | true -> empty()
+                    
+                    cond (model.Character = defaultCharacter) <| function
+                        | false -> 
+                            concat { 
+                                actionButton "RESET" dispatch ResetCharacter
+                                actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+                            }
+                        | true -> empty()
+                    
+                    cond model.Errors <| function
+                        | [] -> actionButton "LEVEL UP" dispatch LevelUp
+                        | _ -> empty()
+                    
+                    cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                        | false -> actionButton "LEVEL DOWN" dispatch LevelDown
+                        | true -> empty()
+
+                }
+            | Race -> 
+                radialStage rct dispatch
+                    (baseRaceIdBySubraceId c.RaceId)
+                    BaseRaces.allBaseRaces
+                    baseraceIconPath
+                    SetBaseRace
+                    
+            | Subrace -> 
+                radialStage rct dispatch
+                    c.RaceId
+                    Races.allSubracesByBaseRace[baseRaceIdBySubraceId c.RaceId]
+                    subraceIconPath
+                    SetSubrace
+                    
+            | Class -> 
+                radialStage rct dispatch
+                    (classIdBySubclassId l.SubclassId)
+                    Classes.allClasses
+                    baseclassIconPath
+                    SetBaseClass
+
+            | Subclass ->                    
+
+                radialStage rct dispatch
+                    l.SubclassId
+                    (validSubclasses
+                     |> Map.map (fun _ v -> 
+                        {| v with 
+                            Name = v.DisplayName model.UseLoreNames 
+                            Description = v.DisplayDescription model.UseLoreNames
+                        |}))
+                    subclassIconPath
+                    SetSubclass
+
+            | Pick Archetypes ->
+                ph Archetypes <| Picker.view "Archetype"                    
+                    (Archetypes.allArchetypes.Values
+                     |> Seq.map<_, Picker.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
+                     |> Seq.toList
+                    )
+                    Set.empty
+                    (Set.singleton c.ArchetypeId)
+
+            | Pick Traits ->
+                ph Traits <| Picker.view "Trait"
+                    (Traits.allTraits.Values
+                     |> Seq.map<_, Picker.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
+                     |> Seq.toList
+                    )
+                    Set.empty
+                    (Set.singleton c.TraitId)
+
+            | Pick Skills ->
+                ph Skills <| Picker.view "Skill Proficiences"
+                    (Skills.allSkills.Values
+                     |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.toList
+                    )
+                    Set.empty
+                    c.SkillIds
+                    
+            | Pick SkillExps ->
+                ph SkillExps <| Picker.view "Skill Expertises"
+                    (Skills.allSkills.Values
+                     |> Seq.filter (fun s -> c.SkillIds.Contains s.Id)
+                     |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.toList
+                    )
+                    Set.empty
+                    c.SkillExpIds
+
+            | Pick Cantrips ->
+                ph Cantrips <| Picker.view "Cantrips"
+                    (Cantrips.allCantrips.Values
+                     |> withCantripIcons
+                     |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                     |> Seq.toList
+                    )
+                    c.PreviousHistory.AllCantripIds
+                    l.CantripIds
+
+            | Pick Spells ->
+                match (subclassById l.SubclassId).SpellList with
+                | None -> empty()
+                | Some sl -> 
+
+                    ph Spells <| Picker.view "Spells"
+                        ((Spells.allSpellsInList sl).Values
+                        |> withSpellIcons
+                        |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.toList
+                        )
+                        c.PreviousHistory.AllSpellIds
+                        l.SpellIds
+
+            | Pick ClassPassives ->
+                ph ClassPassives <| Picker.view "Passives"
+                    (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
+                     |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
+                     |> Seq.toList
+                    )
+                    c.PreviousHistory.AllClassPassiveIdsByClass[classIdBySubclassId l.SubclassId]
+                    l.ClassPassiveIds
+
+            | Pick Feats ->
+                ph Feats <| Picker.view "Feat"
+                    (Feats.allFeats.Values
+                     |> Seq.map<_, Picker.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
+                     |> Seq.toList
+                    )
+                    c.PreviousHistory.AllFeatIds
+                    (l.FeatId |> Option.toList |> Set.ofList)
+
+            | Pick (ClassSpecific sp) ->
+                ph (ClassSpecific sp) <| Picker.view sp.DisplayString
+                    ((SpecialPicks.allSpecialPicksOfType sp).Values
+                     |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = None})
+                     |> Seq.toList
+                    )
+                    c.PreviousHistory.AllSpecialPicks
+                    l.SpecialPickIds
+        )
+        .StageTabs(
+            concat {
+                let stb enabled = stageTabButton enabled dispatch model in 
+                stb true Race (baseraceIconPath (baseRaceIdBySubraceId c.RaceId))
+                stb true Subrace (subraceIconPath c.RaceId)
+                stb true Class (baseclassIconPath (classIdBySubclassId l.SubclassId))
+                stb (validSubclasses.Count > 1) Subclass (subclassIconPath l.SubclassId)
+            }
+        )
+        .PicksDocks(
+            forEach c.Picks (fun p ->
+                let f = 
+                    match p.Key with
+                    | Archetypes -> 
+                        picksDockButton "Archetype" 1
+                    | Traits -> 
+                        picksDockButton "Trait" 1
+                    | Skills ->
+                        picksDockButton "Skills" c.SkillIds.Count
+                    | SkillExps ->
+                        picksDockButton "Expertises" c.SkillExpIds.Count
+                    | Cantrips -> 
+                        picksDockButton "Cantrips" l.CantripIds.Count
+                    | Spells -> 
+                        picksDockButton "Spells" l.SpellIds.Count
+                    | ClassPassives -> 
+                        picksDockButton "Passives" l.ClassPassiveIds.Count
+                    | Feats -> 
+                        picksDockButton "Feats" (Option.count l.FeatId)
+                    | ClassSpecific sp -> 
+                        picksDockButton sp.DisplayString l.SpecialPickIds.Count
+                
+                in f p.Value dispatch p.Key
+
+            )
+
+        )
+        .SheetPills(
+            concat {
+                sheetPill "Name" (model.Character.CharName)
+                sheetPill "Subrace" (Races.allSubraces[model.Character.RaceId].Name)
+            }
+        )
+        .ActionButtons(
+            concat {
+                actionButton $"""{if model.UseLoreNames then "LORE" else "DEFAULT"} NAMES""" 
+                    dispatch (ToggleLoreNames (not model.UseLoreNames))
+
+                cond model.UndoStack.IsEmpty <| function 
+                    | false -> actionButton "UNDO" dispatch Undo
+                    | true -> empty()
+                
+                cond model.RedoStack.IsEmpty <| function 
+                    | false -> actionButton "REDO" dispatch Redo
+                    | true -> empty()
+                
+                cond (model.Character = defaultCharacter) <| function
+                    | false -> 
+                        concat { 
+                            actionButton "RESET" dispatch ResetCharacter
+                            actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+                        }
+                    | true -> empty()
+                
+                cond model.Errors <| function
+                    | [] -> actionButton "LEVEL UP" dispatch LevelUp
+                    | _ -> empty()
+                
+                cond model.Character.PreviousLevelHistory.IsEmpty <| function
+                    | false -> actionButton "LEVEL DOWN" dispatch LevelDown
+                    | true -> empty()
+
+            }
+        )
+        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character dispatch)
+        .LevelBoxes(levelBoxes model)
+        .ClickLogo(fun _ -> dispatch (SetPage Forge))
+        .Error(
             concat {
                 cond model.Errors <| function
-                    | [] -> actionButton $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" false (fun _ -> dispatch LevelUp)
+                    | [] -> actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
                     | _ -> empty()
                 cond model.Character.PreviousLevelHistory.IsEmpty <| function
                     | true -> empty()
-                    | false -> actionButton $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary" false (fun _ -> dispatch LevelDown)
+                    | false -> actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
                 cond model.UndoStack <| function
                     | [] -> empty()
                     | _ -> 
                         concat {
-                            actionButton "Undo" "secondary" true (fun _ -> dispatch Undo)
-                            actionButton "Reset" "secondary" true (fun _ -> dispatch ResetCharacter)
+                            actionButtonWithClass "Undo" "secondary disabled"  dispatch Undo
+                            actionButtonWithClass "Reset" "secondary disabled" dispatch ResetCharacter
                         }
                 cond model.SystemErrors <| function
                     | [] -> 
-                        cond (validationIssues.IsEmpty && model.Errors.IsEmpty) <| function
+                        cond model.Errors.IsEmpty <| function
                         | true -> empty()
                         | false ->                
-                            Main.ErrorNotification()
-                                .Text(forEach validationIssues (fun vi -> p { vi } ))
+                            OtherUi.ErrorNotification()
+                                .Text(forEach model.Errors (fun vi -> p { vi } ))
                                 .VisibleClass("display:none")
                                 // .Hide(fun _ -> dispatch ClearSystemError)
                                 .Elt()
                     | errs ->
-                        Main.ErrorNotification()
+                        OtherUi.ErrorNotification()
                             .Text(String.concat "\n" errs)
                             .Hide(fun _ -> dispatch ClearSystemError)
                             .Elt()   

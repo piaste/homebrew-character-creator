@@ -8,7 +8,7 @@ open Bg3HomebrewCCreator.Domain.Entities
 open Utils
 open Bg3HomebrewCCreator.Domain.Types
 
-type OtherUi = Template<"wwwroot/otherui.html">
+type OtherUi = Template<"wwwroot/main.html">
 
 let inline cl s = attr.``class`` s
 

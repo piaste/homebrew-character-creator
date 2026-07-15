@@ -11,7 +11,6 @@ open Domain.Helpers
 
 type Page =
     | [<Bolero.EndPoint "/">] Forge
-    | [<Bolero.EndPoint "/other">] ForgeOtherUi
 
 
 type MainStageSelection = 
