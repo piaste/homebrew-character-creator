@@ -57,7 +57,7 @@ let rec perception = {
             Name = "Perception"
             KeyAbility = WIS
             Description = "Perception is used when a creature attempts to discover hidden or hard to find things in their surroundings, such as hidden containers, mechanisms, or traps, as well as when attempting to spot hidden creatures. During dialogue, it is used to notice hard to spot details."
-            Grants = Simple "Advantage vs. slipping"
+            Grants = Simple "Advantage to avoid falling Prone while walking on slippery surfaces."
         }
 let rec persuasion = {
             Id = % nameof persuasion
@@ -100,7 +100,7 @@ let rec survival = {
             Name = "Survival"
             KeyAbility = WIS
             Description = "Survival is used when attempting to spot hidden treasure, as well as during dialogues when dealing with anything related to experience with animals or the wilderness."
-            Grants = Simple "Advantage vs. Death"
+            Grants = Simple "Advantage to your Death Saving Throws."
         }
 
 let rec stealth = {
@@ -130,7 +130,7 @@ let rec performance = {
             Name = "Performance"
             KeyAbility = CHA
             Description = "Proficiency in Performance allows characters to play instruments, and the skill is used when attempting to entertain others."
-            Grants = Simple "Chance to survive chasms"
+            Grants = Simple "You can’t fall to your death when thrown inside Chasms."
         }
 
 type private Placeholder = class end
