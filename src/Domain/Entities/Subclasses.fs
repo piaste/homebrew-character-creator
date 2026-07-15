@@ -95,7 +95,7 @@ let rec giantsBlood =
             9<classLvl>, [ Complex("Towering Blows", "Advantage on damage rolls against Large or smaller creatures.") ]
             11<classLvl>, [
                 Complex("Titanic Strength", "Dual-wield Two-Handed weapons.")
-                Simple "Hits while enraged knock enemies Prone."
+                Complex ("Hits while enraged knock enemies Prone.", "While enraged, dealing damage to another creature will always knock them prone.")
             ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -114,7 +114,7 @@ let rec rosemourn =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(BonusAction, AtWill, "Rage", "Briar Blood: Thorns deal damage to attackers and leave Spike Growth.")
-                Simple "Allies within 18m immune to your Spike Growth."
+                Complex ("Allies within 18m immune to your Spike Growth.", "Allies within 18m of you are immune to the effect of Difficult Terrain and your Spike Growth.")
             ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Bloodvine Grasp", "Pull target 18m closer; potential Bleed.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Barbed Protection", "Use Bloodvine Grasp on ally's aggressor.") ]
@@ -736,9 +736,9 @@ let rec collegeOfSteel =
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Steelforged Flourish", "Defensive, Mobile, or Slashing weapon techniques.") ]
             3<classLvl>, [ Complex("Melodic Steel", "Killing blow or Critical Hit restores Inspiration.") ]
-            5<classLvl>, [ Simple "Extra Attack" ]
+            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("Performative Edge", "Advantage on weapon Attack and Damage Rolls while Performing.") ]
-            9<classLvl>, [ Simple "Steel Cast" ]
+            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
             11<classLvl>, [ Complex("Climactic Strikes", "Weapon killing blow while Performing puts you in Performative Chorus.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -844,7 +844,7 @@ let rec wayOfTheOpenHand =
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Simple "Flurry of Blows: Topple/Stagger/Push" ]
+            1<classLvl>, [ Complex ("Flurry of Blows: Topple/Stagger/Push", "Punch twice in rapid succession as a Bonus Action, with options to Topple (knock Prone), Stagger, or Push your target.") ]
             3<classLvl>, [ Power(Action, AtWill, "Weaponized Fists", "Unarmed punch twice in rapid succession.") ]
             5<classLvl>, [ Power(Action, AtWill, "Stunning Strike", "Strike to potentially Stun target.") ]
             7<classLvl>, [ Complex("Manifestation of Self", $"{TOGGLEABLE}: Unarmed attacks deal additional Wisdom damage (Necrotic, Psychic, or Radiant).") ]
@@ -1318,9 +1318,9 @@ let rec draconicBloodline =
                 Power(Action, AtWill, "Elemental Breath", "Cone attack inflicting element and condition.")
             ]
             3<classLvl>, [ Complex("Draconic Form", "Gain +2 AC and Fly.") ]
-            5<classLvl>, [ Simple "Extra Attack" ]
+            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("Draconic Affinity", "Elemental Immunity; add Charisma to associated elemental damage.") ]
-            9<classLvl>, [ Simple "Steel Cast" ]
+            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
             11<classLvl>, [ Complex("Dragontongue", "Elemental Breath always deals maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1357,7 +1357,7 @@ let rec shadeWalker =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(BonusAction, AtWill, "Darkness", "Cast 3-turn Darkness without slot.")
-                Simple "Devil’s Sight"
+                Complex ("Devil’s Sight", "You can see normally in darkness, both magical and non-magical, to a distance of 18m.")
                 Power(BonusAction, AtWill, "Hound of Ill Omen", "Summon scaling companion.")
             ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Soul Siphon", "Kill summon to deal AOE Necrotic damage and heal.") ]
@@ -1445,9 +1445,9 @@ let rec pactOfTheBlade =
                 Complex("Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
             ]
             3<classLvl>, [ Complex("Dark One’s Blessing", "Kills grant Temporary HP = Charisma + Level.") ]
-            5<classLvl>, [ Simple "Extra Attack" ]
+            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("Hellblade Resonation", "Ignore Fire Resistance; Hellfire deals AOE Fire damage.") ]
-            9<classLvl>, [ Simple "Steel Cast" ]
+            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
             11<classLvl>, [ Complex("Eldritch Inferno", "Erupt for 6d12 Fire damage every 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1483,7 +1483,7 @@ let rec pactOfPenumbra =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Penumbral Oscillation", "Automatically shift between Light (heal) and Darkness (Necrotic damage) each turn.")
-                Simple "Necrotic/Radiant Eldritch Blast"
+                Complex ("Necrotic/Radiant Eldritch Blast", "Cast Necrotic Eldritch Blast during Penumbral Darkness, or Radiant Eldritch Blast during Penumbral Light.")
             ]
             3<classLvl>, [ Complex("Dawnbreak of the Sunsetter", "Darkness raises Spectres; Light heals allies.") ]
             5<classLvl>, [ Complex("Penumbral Guidance", "Eldritch Blast chains to a second target.") ]
@@ -1505,7 +1505,7 @@ let rec pactOfSeverance =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Going Ghost", "Deal extra Cold damage = Warlock level.")
-                Simple "Severing Eldritch Blast"
+                Complex ("Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force.")
             ]
             3<classLvl>, [ Complex("Curse of the Spectre", "Cold damage applies Encrusted with Frost.") ]
             5<classLvl>, [ Complex("Severed Resolve", "Using Hematic Invocation restores Action.") ]
@@ -1572,9 +1572,9 @@ let rec arcblade =
                 Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip.")
                 Power(Action, AtWill, "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
             ]
-            5<classLvl>, [ Simple "Extra Attack" ]
+            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("Winds of the Arcblade", "Killing blows grant a free Steel-Wind Strike.") ]
-            9<classLvl>, [ Simple "Steel Cast" ]
+            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
             11<classLvl>, [ Complex("A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1592,9 +1592,9 @@ let rec arcaneWarden =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Arcane Ward", "Maintain damage-absorbing ward; first spell cast adds charges.") ]
             3<classLvl>, [ Power(Reaction, AtWill, "Projected Ward", "Protect allies with your active Ward.") ]
-            5<classLvl>, [ Simple "Extra Attack" ]
+            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("Aggressive Warding", "Dealing damage adds a Ward stack once per turn.") ]
-            9<classLvl>, [ Simple "Steel Cast" ]
+            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
             11<classLvl>, [ Complex("Retaliatory Ward", "Melee damage against you reflects Force damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
