@@ -13,7 +13,9 @@ type LevelRecord =
         ClassLevel: int<classLvl>
 
         ClassPassiveIds: Set<string<classPassiveId>>
+
         FeatId: string<featId> option
+        FeatSubPicks: Map<FeatSubpickType, Set<string>>
         
         CantripIds: Set<string<cantripId>>
         SpellIds: Set<string<spellId>>
@@ -26,6 +28,7 @@ type LevelRecord =
             ClassLevel = classLevel
                             
             FeatId = None
+            FeatSubPicks = Map []
             ClassPassiveIds = Set.empty
 
             CantripIds = Set.empty
@@ -101,7 +104,7 @@ type Character =
 
                 AllCantripIds = 
                     levelHistory
-                    |> Seq.collect _.CantripIds
+                    |> Seq.collect (fun l -> Set.union l.CantripIds (l.FeatSubPicks.GetOrElse(Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>))
                     |> Set.ofSeq
 
                 AllSpellIds = 

@@ -41,6 +41,7 @@ type Message =
     | SetSubclass of string<subclassId>
     | ToggleClassPassive of string<classPassiveId>
     | ToggleSpecialPick of string<specialPickId>
+    | ToggleFeatSubPick of FeatSubpickType * string
     | ToggleFeat of string<featId>
     | ToggleCantrip of string<cantripId>
     | ToggleSpell of string<spellId>
@@ -355,6 +356,8 @@ let update
                     if character.NextLevelUp.FeatId = Some featId then None
                     else Some featId
 
+                NextLevelUp.FeatSubPicks = Map []
+
                 AbilityImprovement = 
                     let ai = Feats.abilityImprovement.Id
                     match featId, character.NextLevelUp.FeatId with
@@ -373,6 +376,17 @@ let update
                     character.NextLevelUp.SpecialPickIds.Toggle spId
             }
 
+    | ToggleFeatSubPick (fsp, id) ->        
+        apply <| fun character -> 
+
+            let currFsp = character.NextLevelUp.FeatSubPicks
+            {
+                character with
+                    NextLevelUp.FeatSubPicks = 
+                        match currFsp.TryFind fsp with
+                        | None -> Map [fsp, Set.singleton id]
+                        | Some s -> currFsp |> Map.add fsp (s.Toggle id)
+            }
 
     | TogglePick (pick, id) ->
         let msg = 
@@ -386,6 +400,7 @@ let update
             | Feats -> ToggleFeat (UMX.tag id)
             | ClassPassives -> ToggleClassPassive (UMX.tag id)
             | ClassSpecific cs -> ToggleSpecialPick (UMX.tag id)
+            | FeatSubpick fsp -> ToggleFeatSubPick (fsp, id)
         model, Cmd.ofMsg msg // maybe use Cmd.batch to autoforward?
  
     | SetSearchQuery (pick, q) ->

@@ -9,6 +9,7 @@ open Helpers
 type LevelUpPick = 
     | Archetypes | Traits | Skills | SkillExps | Feats | ClassPassives | Cantrips | Spells
     | ClassSpecific of ClassLevelUpPickType
+    | FeatSubpick of FeatSubpickType
     
 let nSkillProfPicks = 4
 let nSkillExpPicks = 2
@@ -66,5 +67,13 @@ type Bg3HomebrewCCreator.Domain.Character.Character with
             
             for pick, q in subCl.CustomPicks.GetOrElse(l.ClassLevel, []) do
                ClassSpecific pick, q
+
+            match l.FeatId with
+            | None -> ()
+            | Some fId ->
+                for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
+                    FeatSubpick fspt, q
+            
+
         ]
         |> Map.filter (fun _ n -> n > 0)

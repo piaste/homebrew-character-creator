@@ -162,7 +162,33 @@ type GrantsPassives<[<Measure>] 'm> = {
 
 type ArchetypeDef = GrantsPassives<archetypeId>
 type TraitDef = GrantsPassives<traitId>
-type FeatDef = GrantsPassives<featId>
+
+
+type FeatSubpickType = 
+    | ClassPassives
+    | Cantrips
+    | Traits
+    | Archetypes
+    | SkillProficiencies
+    | ElementalTypes
+    member this.DisplayString = 
+        match this with
+        | ClassPassives -> "Class Specialist"
+        | Cantrips -> "Accord of the Arcane"
+        | Traits -> "Multifaceted Trait"
+        | Archetypes -> "Multifaceted Archetype"
+        | SkillProficiencies -> "Multifaceted Skills"
+        | ElementalTypes -> "Elemental Adept"
+
+type FeatDef = {
+    Id : string<featId>
+    Name : string
+    Grants: Passive list
+    Subpicks: Map<FeatSubpickType, int>
+} with
+    member this.Description = 
+        this.Grants |> List.map _.Description |> GameString.concat "\n"
+
 
 
 // Races

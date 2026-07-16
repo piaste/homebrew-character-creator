@@ -507,6 +507,19 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     )
                     c.PreviousHistory.AllSpecialPicks
                     (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp))
+
+            | Pick (FeatSubpick f) ->
+                cond f <| function
+                | FeatSubpickType.Cantrips ->
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (allCantripsWithIcons
+                        |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.toList
+                        )
+                        // We can cheat a bit because we know that cantrips are never picked at the same level as feats
+                        c.PreviousHistory.AllCantripIds
+                        (l.FeatSubPicks.GetOrElse(FeatSubpickType.Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>)
+
         )
         .StageTabs(
             concat {
@@ -539,6 +552,9 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         picksDockButton "Feats" (Option.count l.FeatId)
                     | ClassSpecific sp -> 
                         picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
+                    | FeatSubpick fsp ->
+                        picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
+
                 
                 in f p.Value dispatch p.Key
 

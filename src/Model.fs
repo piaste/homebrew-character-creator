@@ -72,7 +72,8 @@ let defaultCharacter =
             CantripIds = Set.empty
 
             FeatId = None
-            ClassPassiveIds = Set.empty
+            FeatSubPicks = Map []
+            ClassPassiveIds = Set.empty            
 
             SpecialPickIds = Set.empty
         }

@@ -63,7 +63,8 @@ let getAllPassives useLoreNames (character : Character) =
 
     ]
     
-let levelUpDefault character =     
+let levelUpDefault (character : Character) =     
+    if character.CharacterLevel >= 12<charLvl> then character else
     { character with 
         PreviousLevelHistory = character.NextLevelUp :: character.PreviousLevelHistory
         NextLevelUp = { 
@@ -71,6 +72,7 @@ let levelUpDefault character =
             ClassLevel = character.NextLevelUp.ClassLevel + 1<Types.classLvl>
 
             FeatId = None
+            FeatSubPicks = Map[]
             ClassPassiveIds = Set.empty
             
             CantripIds = Set.empty
