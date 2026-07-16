@@ -363,6 +363,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cl "main-stage-levelup"
                     
                     cond model.Errors <| function
+                        | [] when c.CharacterLevel >= 12<charLvl> -> empty()
                         | [] ->                             
                             actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
                         | errs -> 
@@ -376,7 +377,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | false -> 
                             concat { 
                                 actionButton "RESET" dispatch ResetCharacter
-                                actionButton "COPY BUILD JSON" dispatch CopyBuildLink
+                                actionButton "COPY BUILD LINK" dispatch CopyBuildLink
                             }
                         | true -> empty()
                     
@@ -599,6 +600,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 div {
                     cl "levelup-down"
                     cond model.Errors <| function
+                        | [] when c.CharacterLevel >= 12<charLvl> -> empty()
                         | [] -> 
                             actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
                         | _ -> empty()

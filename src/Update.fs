@@ -138,12 +138,12 @@ let update
         | Forge (Some encodedCharacter) ->
             match decodeFromBase64 encodedCharacter with
             | Ok character when character.Version < defaultCharacter.Version -> 
-                { model with Page = Forge None; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
+                { model with Page = page; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
             | Ok character -> 
-                { model with Page = Forge None; Character = character }, Cmd.none
+                { model with Page = page; Character = character }, Cmd.none
             | Error e ->
                 System.Console.WriteLine e;
-                { model with Page = Forge None; SystemErrors = [ e.Message ]}, Cmd.none
+                { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss }
@@ -179,9 +179,13 @@ let update
         }, Cmd.none
 
     | LoadState ->
-        model, Cmd.OfTask.either load () 
-                    LoadedState 
-                    (ShowSystemError << sprintf "Unable to restore local data: %s" << _.Message)
+        match model.Page with
+        | Forge None -> 
+            model, Cmd.OfTask.either load () 
+                        LoadedState 
+                        (ShowSystemError << sprintf "Unable to restore local data: %s" << _.Message)
+        | Forge (Some _) -> 
+            model, Cmd.none
 
     | LoadedState None ->
         { model with Loaded = true }, Cmd.none
