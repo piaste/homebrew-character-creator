@@ -50,7 +50,7 @@ let picksDockButton (title : string) (count: int) (max: int) dispatch stage =
             }
         }
 
-let inline radialStage (rct : string) dispatch currKey (options : KeyedMap<_, _>) getIcon msg = 
+let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIcon msg = 
 
     let radius = 220.0
 
@@ -389,21 +389,18 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 }
             | Race -> 
                 radialStage rct dispatch
-                    (baseRaceIdBySubraceId c.RaceId)
                     BaseRaces.allBaseRaces
                     baseraceIconPath
                     SetBaseRace
                     
             | Subrace -> 
                 radialStage rct dispatch
-                    c.RaceId
                     Races.allSubracesByBaseRace[baseRaceIdBySubraceId c.RaceId]
                     subraceIconPath
                     SetSubrace
                     
             | Class -> 
                 radialStage rct dispatch
-                    (classIdBySubclassId l.SubclassId)
                     Classes.allClasses
                     baseclassIconPath
                     SetBaseClass
@@ -411,7 +408,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Subclass ->                    
 
                 radialStage rct dispatch
-                    l.SubclassId
                     (validSubclasses
                      |> Map.map (fun _ v -> 
                         {| v with 
@@ -519,6 +515,26 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         // We can cheat a bit because we know that cantrips are never picked at the same level as feats
                         c.PreviousHistory.AllCantripIds
                         (l.FeatSubPicks.GetOrElse(FeatSubpickType.Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>)
+
+                | FeatSubpickType.ClassPassives ->
+                    cond model.ClassSpecialistClass <| function
+                    | None -> 
+                        radialStage rct dispatch
+                            Classes.allClasses
+                            baseclassIconPath
+                            (Some >> SetClassSpecialistClass)
+
+                    | Some classSpecialistId ->
+                        let className = Classes.allClasses[classSpecialistId].Name
+                        ph (FeatSubpick f) <| Picker.view $"{className} Specialist"
+                            (ClassPassives.allPassivesByClass[classSpecialistId].Values
+                            |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
+                            |> Seq.toList
+                            )
+                            (c.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(classSpecialistId, Set.empty))
+                            (l.FeatSubPicks.GetOrElse(FeatSubpickType.ClassPassives, Set.empty) |> Set.map UMX.tag<classPassiveId>)
+
+
 
         )
         .StageTabs(

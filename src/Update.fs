@@ -42,6 +42,7 @@ type Message =
     | ToggleClassPassive of string<classPassiveId>
     | ToggleSpecialPick of string<specialPickId>
     | ToggleFeatSubPick of FeatSubpickType * string
+    | SetClassSpecialistClass of string<classId> option
     | ToggleFeat of string<featId>
     | ToggleCantrip of string<cantripId>
     | ToggleSpell of string<spellId>
@@ -348,7 +349,7 @@ let update
                     character.NextLevelUp.ClassPassiveIds.Toggle cpId
             }
     | ToggleFeat featId ->
-        apply <| fun character ->
+        applyAnd (SetClassSpecialistClass None) <| fun character ->
             if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
             
             { character with 
@@ -356,7 +357,7 @@ let update
                     if character.NextLevelUp.FeatId = Some featId then None
                     else Some featId
 
-                NextLevelUp.FeatSubPicks = Map []
+                NextLevelUp.FeatSubPicks = Map []                
 
                 AbilityImprovement = 
                     let ai = Feats.abilityImprovement.Id
@@ -387,6 +388,9 @@ let update
                         | None -> Map [fsp, Set.singleton id]
                         | Some s -> currFsp |> Map.add fsp (s.Toggle id)
             }
+
+    | SetClassSpecialistClass s ->
+        { model with ClassSpecialistClass = s }, Cmd.none
 
     | TogglePick (pick, id) ->
         let msg = 

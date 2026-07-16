@@ -158,8 +158,9 @@ type Model =
     {
         Page: Page
         MainStageSelection: MainStageSelection
-        RadialCenterText: string        
+        RadialCenterText: string
         SearchQueries : Map<LevelUpPick, string>
+        ClassSpecialistClass : string<classId> option
         FilterPassives : FilterPassives
         CopyButtonState : CopyButtonState
 
@@ -177,6 +178,7 @@ type Model =
                 MainStageSelection = Race
                 RadialCenterText = ""
                 SearchQueries = Map []
+                ClassSpecialistClass = None
                 FilterPassives = All
                 CopyButtonState = Rest
 
