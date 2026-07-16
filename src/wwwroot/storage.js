@@ -8,15 +8,16 @@ window.characterStorage = {
   clear: function (key) {
     window.localStorage.removeItem(key);
   },
-  copyToClipboard: async function (text) {
-    await navigator.clipboard.writeText(text);
+  copyToClipboard: async function (version, text) {
+    let linkUrl = `${window.location.origin}?version=${version}&character=${encodeURIComponent(text)}`
+    await navigator.clipboard.writeText(linkUrl);
   },
   pasteFromClipboard: async function () {
     return await navigator.clipboard.readText();
   }
 };
 
-windows.uiHelpers = {
+window.uiHelpers = {
   scrollIntoView: function(elementId) {
     document.getElementById(elementId).scrollIntoView({
         behavior: "smooth",

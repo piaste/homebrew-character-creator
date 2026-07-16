@@ -33,6 +33,7 @@ type Message =
     | ModifyAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
+    | SetAbilityImprovement of Ability
     | ToggleSkill of string<skillId>
     | ToggleSkillExp of string<skillId>
 
@@ -50,8 +51,8 @@ type Message =
     | LevelUp
     | LevelDown    
     
-    | CopyBuildJson
-    | PasteBuildJson
+    | CopyBuildLink
+    | SetCopyFeedback of CopyButtonState
     | Undo
     | Redo
     | LoadCharacter of Character
@@ -60,6 +61,13 @@ type Message =
     | ShowSystemError of string
     | ClearSystemError
 
+
+module Cmd = 
+    let delayThen t msg = 
+        Cmd.OfTask.perform (fun () -> task { 
+            let! _ = Task.Delay (t : System.TimeSpan)
+            return () 
+        }) () (fun _ -> msg)
 
 let saveCmd save (model: Model) =
 
@@ -104,7 +112,6 @@ let elementIdForStage (mss : MainStageSelection) =
 let update 
     (jsHelper : {| 
         CopyCharacter: Character -> Task<unit>
-        PasteCharacter: unit -> Task<Character option>
         Load: unit -> Task<option<PersistedState>>
         Save: PersistedState -> Task<unit>
         ScrollIntoView: string -> Task<unit>
@@ -125,7 +132,18 @@ let update
 
     match message with
     | SetPage page ->
-        { model with Page = page }, Cmd.none
+        match page with
+        | Forge None -> 
+            { model with Page = page }, Cmd.none
+        | Forge (Some encodedCharacter) ->
+            match decodeFromBase64 encodedCharacter with
+            | Ok character when character.Version < defaultCharacter.Version -> 
+                { model with Page = Forge None; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
+            | Ok character -> 
+                { model with Page = Forge None; Character = character }, Cmd.none
+            | Error e ->
+                System.Console.WriteLine e;
+                { model with Page = Forge None; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss }
@@ -265,6 +283,20 @@ let update
                     }
             }
 
+    | SetAbilityImprovement ability ->
+        apply <| fun character ->
+            {
+                character with
+                    AbilityImprovement = 
+                        match character.AbilityImprovement with
+                        | None -> None
+                        | Some (a, _) | Some (_, a) when a = ability ->
+                            None
+                        | Some (_, b) ->
+                            // By swapping, we ensure the oldest is the one replaced
+                            Some (b, ability)
+            }
+
 
     | ToggleSkill skillId ->
         apply <| fun character ->
@@ -313,11 +345,18 @@ let update
     | ToggleFeat featId ->
         apply <| fun character ->
             if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
-
+            
             { character with 
                 NextLevelUp.FeatId = 
-                            if character.NextLevelUp.FeatId = Some featId then None
-                            else Some featId
+                    if character.NextLevelUp.FeatId = Some featId then None
+                    else Some featId
+
+                AbilityImprovement = 
+                    let ai = Feats.abilityImprovement.Id
+                    match featId, character.NextLevelUp.FeatId with
+                    | _, Some f2 when f2 = ai -> None // toggled off or replaced
+                    | f1, _ when f1 = ai -> Some (STR, DEX) // activated
+                    | _ -> character.AbilityImprovement // no change                    
             }
 
     | ToggleSpecialPick spId ->
@@ -386,20 +425,20 @@ let update
                 }
             nextModel, saveCmd' nextModel
 
-    | CopyBuildJson ->
+    | CopyBuildLink ->
         model, 
         Cmd.OfTask.either 
             jsHelper.CopyCharacter model.Character
-            (fun () -> NoOp)
-            (fun ex -> ShowSystemError ex.Message)
+            (fun () -> SetCopyFeedback Success)
+            (fun ex -> SetCopyFeedback Failure)
 
-    | PasteBuildJson ->
-        model, 
-        Cmd.OfTask.either 
-            jsHelper.PasteCharacter ()
-            (function | None -> ShowSystemError "Failed to load a valid character"
-                      | Some character -> LoadCharacter character)
-            (fun ex -> ShowSystemError ex.Message)
+    | SetCopyFeedback s -> 
+        match s with
+        | Rest -> 
+            { model with CopyButtonState = Rest }, Cmd.none
+        | x -> 
+            { model with CopyButtonState = x }, 
+                Cmd.delayThen (System.TimeSpan.FromSeconds 5) (SetCopyFeedback Rest)
 
     | LoadCharacter character ->
         apply <| fun _ -> character

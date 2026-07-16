@@ -37,23 +37,9 @@ let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     let copyCharacter (char: Character) = task {
         let jsRuntime = getJsRuntime ()
-        let json = JsonSerializer.Serialize(char, serializerOptions)        
-        do! jsRuntime.InvokeVoidAsync("characterStorage.copyToClipboard", [| box json |]).AsTask()
-    }
-
-    let pasteCharacter () = task {
-        let jsRuntime = getJsRuntime ()
-        try 
-            let! json = jsRuntime.InvokeAsync<string>("characterStorage.pasteFromClipboard", [||]).AsTask()        
-            let character = JsonSerializer.Deserialize<Character>(json, serializerOptions)
-            return Some character
-        with
-            | :? JsonException as e ->
-                Console.WriteLine $"Character import error: deserialization failure: {e}"
-                return None
-            | e ->
-                Console.WriteLine $"Character import error: {e}"
-                return None
+        //let json = JsonSerializer.Serialize(char, serializerOptions)        
+        let json = Model.encodeToUrl char
+        do! jsRuntime.InvokeVoidAsync("characterStorage.copyToClipboard", [| box (char.Version.ToString()); box json |]).AsTask()
     }
 
     let scrollIntoView (elementId : string) = task {
@@ -61,7 +47,7 @@ let buildStorage (getJsRuntime: unit -> IJSRuntime) =
         do! jsRuntime.InvokeVoidAsync("uiHelpers.scrollIntoView", [| box elementId |]).AsTask()
     }
 
-    {| Load = load; Save = save; CopyCharacter = copyCharacter; PasteCharacter = pasteCharacter; ScrollIntoView = scrollIntoView |}
+    {| Load = load; Save = save; CopyCharacter = copyCharacter; ScrollIntoView = scrollIntoView |}
 
 
 type MyApp() =

@@ -52,7 +52,7 @@ type AbilityBuy =
     {
         PointBuy: Map<Ability, int<pbuy>>
         BonusPlusThree: Ability
-        BonusPlusOne: Ability
+        BonusPlusOne: Ability      
     } with
 
         member this.SpentPoints = 
@@ -77,6 +77,8 @@ type Character =
 
         RaceId: string<subraceId>
         AbBuy: AbilityBuy
+        AbilityImprovement: (Ability * Ability) option  
+
         SkillIds: Set<string<skillId>>
         SkillExpIds: Set<string<skillId>>
         
@@ -169,8 +171,11 @@ type Character =
             * 1<charLvl>
 
         member this.Ability ab = 
-            this.AbBuy.BoughtAbility ab + 
-            this.StatModifiers.Abilities.GetOrDefault ab
+            this.AbBuy.BoughtAbility ab 
+            + this.StatModifiers.Abilities.GetOrDefault ab
+            + match this.AbilityImprovement with
+              | Some (_, x) | Some (x, _) when x = ab -> this.ProficiencyBonus
+              | _ -> 0
 
         member this.AbilityModifier ab = 
             (this.Ability ab - 10) / 2
@@ -200,6 +205,8 @@ type Character =
             |> List.map _.Effect
             |> List.sum
 
+        member this.HasAbilityImprovement = 
+            this.CurrentHistory.AllFeatIds.Contains Feats.abilityImprovement.Id
 
 type PersistedState =
     {

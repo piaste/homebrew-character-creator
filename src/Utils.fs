@@ -34,6 +34,7 @@ let serializerOptions =
     options.WriteIndented <- false
     options
 
+
 let inline clamp a b value =
     if a >= b then value |> min a |> max b
               else value |> min b |> max a

@@ -110,7 +110,9 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                 }
                 div { cl "ability-bonus-h"; "+3" }
                 div { cl "ability-bonus-h"; "+1" }
-
+                cond chr.HasAbilityImprovement <| function
+                    | false -> empty()
+                    | true -> div { cl "ability-bonus-h"; "FEAT" }
             }
         
             forEach allAbilities (fun ab -> 
@@ -139,6 +141,12 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     checkbox 
                         (chr.AbBuy.BonusPlusOne = ab) 
                         dispatch (SetBonusPlusOne ab)
+                    cond chr.AbilityImprovement <| function
+                    | None -> empty()
+                    | Some (x, y) -> 
+                        checkbox 
+                            (x = ab || y = ab) 
+                            dispatch (SetAbilityImprovement ab)
                 }
             )
             div {
@@ -368,7 +376,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | false -> 
                             concat { 
                                 actionButton "RESET" dispatch ResetCharacter
-                                actionButton "COPY BUILD JSON" dispatch CopyBuildJson
+                                actionButton "COPY BUILD JSON" dispatch CopyBuildLink
                             }
                         | true -> empty()
                     
@@ -576,13 +584,16 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 div {
                     cl "json-stuff"
                     cond (model.Character = defaultCharacter) <| function
-                        | false -> 
+                        | false ->                                 
                             concat { 
                                 actionButton "RESET CHARACTER" dispatch ResetCharacter
-                                actionButton "EXPORT TO CLIPBOARD" dispatch CopyBuildJson
+                                cond model.CopyButtonState <| function
+                                | Rest -> actionButton "COPY BUILD LINK" dispatch CopyBuildLink
+                                | Success -> actionButton "<<LINK COPIED!>>" dispatch CopyBuildLink
+                                | Failure -> actionButtonWithClass "error" "<<ERROR>>" dispatch NoOp                                
                             }
                         | true ->                            
-                                actionButton "IMPORT FROM CLIPBOARD" dispatch PasteBuildJson
+                                empty()
                     
                 }
                 div {
@@ -604,7 +615,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         )
         .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives dispatch)
         .LevelBoxes(levelBoxes model)
-        .ClickLogo(fun _ -> dispatch (SetPage Forge))
         .Error(
             concat {
                 // cond model.Errors <| function
@@ -628,5 +638,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             .Hide(fun _ -> dispatch ClearSystemError)
                             .Elt()   
             }
-        )        
+        )
+        .Version($"{defaultCharacter.Version.ToString()}-bolero")   
         .Elt()

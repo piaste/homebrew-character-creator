@@ -8,9 +8,12 @@ open Domain.Character
 open Domain.PickRules
 open Bg3HomebrewCCreator.Domain.Entities
 open Domain.Helpers
+open System.IO.Compression
+open System.Text.Json
+open System.IO
 
 type Page =
-    | [<Bolero.EndPoint "/">] Forge
+    | [<Bolero.EndPoint "/?{character}">] Forge of character : string option
 
 
 type MainStageSelection = 
@@ -28,6 +31,11 @@ type FilterPassives =
         | All -> "All" | Starting -> "Starting" | FromFeats -> "Feats" 
         | FromSubclass scId ->
             Subclasses.allSubclasses[scId].Name.Display useLoreNames
+
+type CopyButtonState = 
+    | Rest
+    | Success
+    | Failure
 
 let defaultCharacter =
     {
@@ -48,6 +56,7 @@ let defaultCharacter =
             BonusPlusThree = STR
             BonusPlusOne = CON
         }
+        AbilityImprovement = None
         SkillIds = Set.empty
         SkillExpIds = Set.empty
         ArchetypeId = Archetypes.arcanePrecision.Id
@@ -68,6 +77,32 @@ let defaultCharacter =
             SpecialPickIds = Set.empty
         }
     }
+
+
+let encodeToUrl object = 
+    let json = JsonSerializer.Serialize(object, serializerOptions)
+    let jsonBytes = Text.Encoding.UTF8.GetBytes json
+    use m = new MemoryStream()
+    
+    do 
+        use gzip = new GZipStream(m, CompressionLevel.SmallestSize)        
+        gzip.Write(jsonBytes, 0, jsonBytes.Length)
+    let b = Convert.ToBase64String(m.ToArray())
+    b
+
+let decodeFromBase64<'t> base64 = 
+
+    try
+        let bytes = Convert.FromBase64String base64
+        use m = new MemoryStream(bytes)
+        use m2 = new MemoryStream()
+        do
+            use gzip = new GZipStream(m, CompressionMode.Decompress)
+            gzip.CopyTo m2
+        let json = m2.ToArray() |> Text.Encoding.UTF8.GetString
+        Ok <| JsonSerializer.Deserialize<'t>(json, serializerOptions)
+    with e ->
+        Error e
 
 let trimSet limit values =
     values |> Set.toList |> List.sort |> List.truncate limit |> Set.ofList
@@ -125,6 +160,7 @@ type Model =
         RadialCenterText: string        
         SearchQueries : Map<LevelUpPick, string>
         FilterPassives : FilterPassives
+        CopyButtonState : CopyButtonState
 
         Character: Character
         UndoStack: Character list
@@ -136,11 +172,12 @@ type Model =
         member this.Errors = checkErrors this.Character
         static member Initial = 
             {
-                Page = Forge
+                Page = Forge None
                 MainStageSelection = Race
                 RadialCenterText = ""
                 SearchQueries = Map []
                 FilterPassives = All
+                CopyButtonState = Rest
 
                 Character = defaultCharacter
                 UndoStack = []
