@@ -1,4 +1,4 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.9+**
 
 # **Ranger: Beast Master**
 
@@ -388,7 +388,7 @@ When making a attack roll with advantage your damage roll will also roll with ad
 
 **Passive Feature**
 
-Damage against targets with the Hunted condition is rolled with Advantage. 
+Damage against targets with the Hunted condition is rolled with Advantage. You ignore Physical Resistances and Immunities.
 
 | 11th Level |
 | :---- |
@@ -398,6 +398,137 @@ Damage against targets with the Hunted condition is rolled with Advantage.
 **Passive Feature**
 
 You can select two targets with any weapon based Attack Roll.
+
+# **Ranger: Mire Mist**
+
+*Through stagnant waters, decay takes root. Through drifting vapors and creeping corrosion, the wilderness slowly consumes all who trespass within it.*
+
+|  | Level | Class Features | 1st | 2nd | 3rd |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: |
+|  | **1st** | Conjure Rangers Companion, Frontier Ballistics, Natural Movement, Cantrips, Caustic Mire | 2 | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 2 | \- | \- |  |
+|  | **3rd** | Corrosive Bloom | 4 | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | \- | \- |  |
+|  | **5th** | Extra Attack, Dissolving Touch | 4 | 2 | \- |  |
+|  | **6th** | Passive Selection (2) | 4 | 2 | \- |  |
+|  | **7th** | Burning Quarry | 4 | 4 | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- |  |
+|  | **9th** | Improved Extra Attack, Eagle Eyed, Spreading Mire | 4 | 4 | 2 |  |
+|  | **10th** | Passive Selection (2) | 4 | 4 | 2 |  |
+|  | **11th** | Fatal Decay | 4 | 4 | 4 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Natural Focus**
+
+Rangers have 3 Natural Focus charges that are replenished on a short rest or long rest. *Natural Focus charges can also be recovered through the Hidden Inventory class passive.*
+
+## **Conjure Rangers Companion**
+
+▲ **Bonus Action,** Consumes Natural Focus charge
+
+Summon one of five beasts to a target location within 18m/60ft. Ranger Companions have a duration of permanent and grow in power alongside Ranger class levels. You may only have a single Ranger Companion active at any time.
+
+## **Frontier Ballistics**
+
+⬤ **Action,** Consumes Natural Focus charge, Requires Ranged Weapon
+
+At first level and every odd lever thereafter, select one special arrow to learn. These arrows behave identically to the special arrows found in the game. *(Throwing Weapons do not qualify as a Ranged Weapon and will not be used with Frontier Ballistics.)*
+
+## **Natural Movement**
+
+**🔄 Toggleable,** Consumes Natural Focus charge
+
+Gain the ability to Dash, Disengage, and Hide as a free action by consuming Natural Focus charges. This effect can be toggled at any time.
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Ranger is Wisdom. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+## At first level you may select one spell from the Druid spell list. Your Spellcasting Ability as a Ranger is Wisdom. At each level gained, you may select an additional spell known. At class levels 3, 7, and 11 you are not limited to the Druid spell list and may instead select a single spell from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Druid list.
+
+## **Caustic Mire**
+
+**Passive Feature**
+
+Both you and your Ranger Companions deal an additional 1d4 acid damage when dealing damage to an enemy.
+
+In addition, each time that you deal damage, you apply one stack of Acid (each stack reduces AC by 1 and negates Physical DR, at 7 stacks the target is Corroded : \-10 AC and no Physical Resistance) .
+
+| 3rd Level |
+| :---- |
+
+## **Corrosive Bloom**
+
+**Passive Feature**
+
+When Corroded is removed from an enemy, all enemies within 9m of them receive Caustic Brine for 3 rounds (1d12 Acid damage per round).
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Horde Breaker**
+
+⬤ **Action,** Weapon Action, Recharge: Per Turn
+
+Make a basic attack with your main hand weapon. This attack deals normal damage. All creatures within 3m/10ft of your target receive the condition Horde Breaker that lasts 1 turn. You receive a temporary action, Horde Breaker Follow-Up. *(You have two versions of this ability- a Melee and Ranged version. Both behave based on the range of your equipped weapon as appropriate. As Horde Breaker is a Weapon Action, it qualifies as a basic attack for the purposes of Extra Attack.)*
+
+## **Horde Breaker Follow-Up**
+
+**▢** **Free Action,** Weapon Action, Temporary Action
+
+Make a basic attack with your main hand weapon against a target with the Horde Breaker condition. This temporary action is removed after using it.
+
+## **Dissolving Touch**
+
+**Passive Feature**
+
+You ignore all forms of Acid based Resistances and Immunities when dealing damage to an enemy or item.
+
+| 7th Level |
+| :---- |
+
+## **Burning Quarry**
+
+**Passive Feature**
+
+When dealing damage to a creature suffering from Caustic Brine, you roll the damage with Advantage.
+
+| 9th Level |
+| :---- |
+
+## **Improved Extra Attack**
+
+Extra Attack now provides an additional Action at all times, rather than a free attack.
+
+## **Eagle Eyed**
+
+**Passive Feature**
+
+When making an attack roll with advantage your damage roll will also roll with advantage.
+
+## **Spreading Mire**
+
+**Passive Feature**
+
+Corrosive Bloom now applies Caustic Brine to your targets indefinitely.
+
+| 11th Level |
+| :---- |
+
+## **Fatal Decay**
+
+**Passive Feature**
+
+When dealing damage to a Corroded enemy, you will only roll Critical Hits.
 
 # **Ranger: Swarmkeeper**
 
@@ -462,7 +593,7 @@ At first level you forge a bond with a swarm of nature spirits that take the sha
   * **Teleport**: While the colony of bees is active on the ranger, you may teleport to a new location within 9m/30ft once per turn as a free action.  
   * **On Enemy:** Deals 1d4 piercing damage to your target at the start of each of their turns. This damage increases by 1d4 at level 3 and every odd level thereafter.  
 * **Bloom of Jellyfish** (Ranger or Ally only)  
-  * **On Ranger or Ally:** Regain Hit Points at the start of each turn equal to your Proficiency Bonus multiplied by 2\. This can be improved by items and features that increase healing. The swarm also deals 1d4 Lightning Damage to any creature that makes an attack roll against you while within 3m/10ft. This damage increases by 1d4 at level 3 and every odd level thereafter.  
+  * **On Ranger or Ally:** Regain Hit Points at the start of each turn equal to your Proficiency Bonus multiplied by 2\. This can be improved by items and features that increase healing. The swarm also deals prof x 4 Damage to any creature that makes an attack roll against you while within 3m/10ft. This damage increases by 1d4 at level 3 and every odd level thereafter.
   * ***Engine Notes:** Due to limitations in the Baldur’s Gate 3 engine and the way that this feature has been implemented, it is advised that you do not use the Sooth temporary action to return a swarm of Jellyfish to the original Ranger. Doing so may not count the swarm as having been “returned,” and create unusual behaviors in the Ranger’s abilities. Instead, always use the Recall Swarm action to bring Jellyfish back to the Ranger. If you become affected by this error, simply use the Sooth temporary action to apply the Jellyfish to another character and then Recall Swarm as usual.*   
 * **Eclipse of Moths** (Ranger or Enemy only)  
   * **On Ranger:** You and all allies within 3m/10ft gain a \+1d4 bonus on all Attack Rolls and Saving Throws.   
@@ -666,32 +797,32 @@ When both you and your ranger companion damage the same creature, they become cr
 
 **Passive Feature**
 
-When either you or your Ranger companion deal damage to a creature the other has already damaged, you both deal an additional 1d8 damage.
+When either you or your Ranger companion deal damage to a creature the other has already damaged, you both deal an additional 1d12 damage.
 
 #  **Frontier Ballistics**
 
 All special arrows cost an Action to use, consume a single Natural Focus charge, and make an Attack Roll using your equipped Ranged Weapon. Damage is determined by your Ranged Weapon damage and any additional effects provided by the special arrow. These arrows otherwise behave identically to those found throughout your travels in Faerun. 
 
-* Arrow of Aberration Slaying: Rolls an additional damage die against Aberrations  
+* Arrow of Weakening: Applies Bane for three turns
 * Arrow of Acid: Rolls an additional 1d6 acid damage and creates acid surface  
 * Arrow of Arcane Interference: Breaks target’s Concentration and inflicts Silence  
-* Arrow of Beast Slaying: Rolls an additional damage die against Beasts  
-* Arrow of Construct Slaying: Rolls an additional damage die against Constructs  
-* Arrow of Darkness: Creates 3m/10ft radius Darkness for 3 turns  
-* Arrow of Dispelling: Casts Latent Restoration on target   
-* Arrow of Elemental Slaying: Rolls an additional damage die against Elementals  
-* Arrow of Fiend Slaying: Rolls an additional damage die against Fiends  
-* Arrow of Fire: Rolls an additional 1d6 fire damage and creates fire surface  
+* Arrow of Tracking: Cannot miss and applies Faerie Fire
+* Arrow of Slaying: Deals an additional 1-12 damage to non-humanoid target
+* Arrow of Darkness: (Bonus Action) Creates 3m/10ft radius Darkness for 3 turns
+* Arrow of Aleviation: ( Bonus Action) Shoot an arrow that heals your target.
+* Arrow of Horde Shuttling: Pulls all enemies within 9m towards your target.
+* Arrow of Chaos: Your target experiences a negative surge of Wild Magic.
+* Arrow of Fire: Rolls an additional 1d6 fire damage and creates a fire surface
 * Arrow of Humanoid Slaying: Rolls an additional damage die against Humanoids  
 * Arrow of Ice: Rolls an additional 1d6 ice damage and creates ice surface  
 * Arrow of Ilmater: Rolls an additional 1d6 necrotic damage and prevents healing  
 * Arrow of Lightning: Rolls an additional 1d6 lightning damage  
 * Arrow of Many Targets: Arrow can strike up to two targets within 3m/10ft  
-* Arrow of Monstrosity Slaying: Rolls an additional damage die against Monstrosities  
-* Arrow of Piercing: Deals half damage to targets directly behind your initial target  
+* Arrow of Boxing: Deals additional bludgeoning damage and knocks your target Prone.
+* Arrow of Piercing: Deals damage to creatures in a 9m line.
 * Arrow of Roaring Thunder: Pushes target back 9m/30ft  
-* Arrow of Teleportation: Teleport to wherever arrow lands  
-* Arrow of Undead Slaying: Rolls an additional damage die against Undead
+* Arrow of Teleportation: (Bonus Action) Teleport to wherever the arrow lands
+* Arrow of Malediction: Your target bleeds permanently.
 
 # **Rangers’ Companions**
 
@@ -840,7 +971,7 @@ When dealing damage, you ignore Piercing Resistance.
 
 ## **Sure Shot**
 
-The number needed to land a Critical Hit while making a Ranged Weapon Attack is reduced by 1\.
+The number needed to land a Critical Hit while making a Weapon Attack is reduced by 1\.
 
 ---
 

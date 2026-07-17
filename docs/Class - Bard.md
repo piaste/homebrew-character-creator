@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Bard
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.9+**
 
 # **Bard: College Of Captivation**
 
@@ -383,7 +385,138 @@ All Necromancy based Spells and Cantrips make both their Attack Rolls and Damage
 
 All Necromancy based Spells and Cantrips may target an additional creature.
 
-#  **Bard: College Of Steel**
+#  **Bard: College Of Nostalgia**
+
+*Within Music lies the beating heart of nostalgia. And within that nostalgia, power is cultivated through a lifetime of experience. You manifest that experience in displays of raw intensity that only music can convey.*
+
+|  | Level | Class Features | 1st | 2nd | 3rd | 4th | 5th | 6th |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  | **1st** | Bardic Inspiration, Perform, Climax, Cantrips, The Sufferer and the Witness  | 2 | \- | \- | \- | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 4 | \- | \- | \- | \- | \- |  |
+|  | **3rd** | Lateralus | 4 | 2 | \- | \- | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- | \- | \- | \- |  |
+|  | **5th** | Font of Inspiration, Meteora | 4 | 4 | 2 | \- | \- | \- |  |
+|  | **6th** | Passive Selection (2) | 4 | 4 | 4 | \- | \- | \- |  |
+|  | **7th** | The Paramoure Sessions | 4 | 4 | 4 | 1 | \- | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
+|  | **9th** | Reliable Talent, Fallen | 4 | 4 | 4 | 2 | 1 | \- |  |
+|  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
+|  | **11th** | The Black Parade | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Bardic Inspiration**
+
+Bards have 3 Bardic Inspiration charges that are replenished on a short rest or a long rest. Bardic Inspiration charges are primarily used by the Bardic Inspiration class feature.
+
+## **Bardic Inspiration**
+
+▲ **Bonus Action**, Consumes Bardic Inspiration Charge, Duration: Until Long Rest
+
+Inspire an ally to add \+1d4 bonus to their next Attack Roll, Ability Check, or Saving Throw. The affected ally will remain inspired until they choose to consume the effect or take a long rest.
+
+Your Bardic Inspiration die increases to 1d8 at level 5, and 1d12 at level 9\.
+
+## **Perform**
+
+**▢** **Free Action**
+
+While in combat, begin a performance that reaches all creatures with 18m/60ft of you. Performing is broken when taking damage, and prevents the Bard from acting or moving. Performances last three turns before beginning again automatically. The first turn is Performative Intro, the second is Performative Verse, and the third is Performative Chorus. During your performance as a free action, you may spend a Bardic Inspiration charge to prematurely enter the next stage of your performance, drop back to the previous stage, or resume a performance that was interrupted.
+
+Perform does not require an instrument.
+
+## **The Sound Of Silence**
+
+**🔄 Toggleable**
+
+Through magic, you convey your Performances without making a sound, reducing their area of effect to 9m/30ft but allowing you to act freely, and keep your performance on even when taking damage.
+
+## **Climax**
+
+**▢** **Free Action**
+
+You deal 1d12 Thunder Damage/2 bard level to all enemies within 18m, potentially Reverberating them.
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Bard is Charisma. You may select an additional cantrip at levels 5 and 9\.
+
+## **The Sufferer and the Witness**
+
+**Passive Feature**
+
+When you deal damage to an enemy, you deal an additional 1d4 Thunder Damage. Increases to 1d8 at level 5 and 1d12 at level 9\. Doesn’t apply to your off-hand weapon.
+
+## **Spellcasting**
+
+At first level you may select one spell from any spell list. Your Spellcasting Ability as a Bard is Charisma. At each level gained, you may select an additional spell known. At every level after 1st, you may choose to replace a single spell known with a different spell.
+
+## **Song Of Rest**
+
+⬤ **Action**, Recharge: Long Rest
+
+You and your allies are revitalized as though you would have taken a Short Rest.
+
+| 3rd Level |
+| :---- |
+
+## **Lateralus**
+
+**Passive Feature**
+
+When dealing Thunder damage, you inflict one stack of Reverberation (-1 to saving throws per stack, up to 5\. At 5 stacks, remove them, deal 1d12 thunder damage and knock prone).
+
+| 5th Level |
+| :---- |
+
+## **Font Of Inspiration**
+
+**Passive Feature**
+
+Upon entering combat, restore all three Bardic Inspiration charges.
+
+## **Meteora**
+
+**Passive Feature**
+
+You ignore all Thunder based Resistances and Immunities.
+
+| 7th Level |
+| :---- |
+
+## **The Paramoure Sessions**
+
+**Passive Feature**
+
+Upon Knocking an enemy Prone, all creatures within 9m of your target take an additional 1d4 thunder damage.
+
+| 9th Level |
+| :---- |
+
+## **Reliable Talent**
+
+**Passive Feature**
+
+When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8\.
+
+## **Fallen**
+
+**Passive Feature**
+
+Upon knocking an enemy Prone, all allies within 9m of your target receive the effects of your Bardic Inspiration.
+
+| 11th Level |
+| :---- |
+
+## **The Black Parade**
+
+**Passive Feature**
+
+Upon dealing Thunder damage, you potentially Lure (target can’t act and can only move to you) your target for one turn.
+
+# **Bard: College Of Steel**
 
 *A highly trained and skilled warrior, you use your prowess with words and weapons to fight and entertain in equal measure.*
 
@@ -514,7 +647,7 @@ Casting a Spell will activate Extra Attack.
 
 **Passive Feature**
 
-Once per turn while Performing in combat, landing a killing blow or Critical Hit with a weapon based Attack Roll will immediately put you into a state of Performative Chorus.
+Once per turn while Performing in combat, landing a killing blow with a weapon based Attack Roll will immediately put you into a state of Performative Chorus.
 
 # **Bard: College Of Valour**
 
@@ -654,7 +787,7 @@ While Performing in combat, provide affected allies a \+2 bonus to damage rolls.
 
 ## **Discerning Insult**
 
-As a **✦** Reaction, reduce the confidence of your target, applying a \-1d4 penalty to Attack Rolls, Ability Checks, and Saving Throws.  
+As a **▢** Free Reaction, reduce the confidence of your target, applying a \-1d4 penalty to Attack Rolls, Ability Checks, and Saving Throws.
 ---
 
 ## **Distracting Dissonance**
@@ -686,7 +819,7 @@ Targets of your Bardic Inspiration may make one additional weapon attack using t
 
 ## **Guided Inspiration\***
 
-Dealing damage to an enemy has a 20% chance to apply your Bardic Inspiration to allies within 9m/30ft of you.  
+Dealing damage to an enemy has a 25% chance to apply your Bardic Inspiration to allies within 9m/30ft of you.
 ---
 
 ## **Harmonious Aura**

@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Fighter
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0 \+**
 
 # **Fighter: Arcane Archer**
 
@@ -34,7 +36,7 @@ Manoeuvres are powerful Weapon Actions that utilize your Superiority Dice. Weapo
 
 **Passive Feature**
 
-Once per combat encounter, upon dropping to 50% of your total Hit Points, you restore 1d12/2 fighter level in Hit Points at the end of your turn. 
+Every 3 rounds of battle, you restore 1d12/2 fighter level in Hit Points and recover a Superiority Dice at the end of your turn.
 
 ## **Focused Weave** 🔄 **Toggleable**
 
@@ -94,13 +96,13 @@ When you use your action to make an unarmed or weapon-based Attack Roll with you
 
 **▢** **Free Action,** Recharge: Short Rest
 
-Gain an additional Action.
+Gain an additional Action and restore 3 superiority Dice.
 
 ## **Improved Fletchings**
 
 ## 🔄 **Toggleable**
 
-Cantrips which cost an action may now be cast using your Bonus Action. Furthermore, you can learn 3 additional Elemental Infusions. 
+When casting a Cantrip, reduce the number needed to roll a Critical Hit by 1\. Furthermore, you can learn 3 additional Elemental Infusions.
 
 | 7th Level |
 | :---- |
@@ -126,7 +128,7 @@ Whenever you fail a Saving Throw, you can roll again, using the new result inste
 
 **Passive Feature**
 
-When casting a Cantrip, reduce the number needed to roll a Critical Hit by 1\. Furthermore, you can learn 3 additional Elemental Infusions.
+Cantrips which cost an action may now be cast using your Bonus Action. Furthermore, you can learn 3 additional Elemental Infusions.
 
 | 11th Level |
 | :---- |
@@ -169,7 +171,7 @@ Manoeuvres are powerful Weapon Actions that utilize your Superiority Dice. Weapo
 
 **Passive Feature**
 
-Once per combat encounter, upon dropping to 50% of your total Hit Points, you restore 1d12/2 fighter level in Hit Points at the end of your turn. 
+Every 3 rounds of battle, you restore 1d12/2 fighter level in Hit Points and recover a Superiority Dice at the end of your turn.
 
 ## **Challenger** 🔄 **Toggleable**
 
@@ -207,7 +209,7 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 **▢** **Free Action,** Recharge: Short Rest
 
-Gain an additional Action.
+Gain an additional Action and restore 3 superiority Dice.
 
 ## **Challenger’s Call**
 
@@ -286,12 +288,12 @@ Manoeuvres are powerful Weapon Actions that utilize your Superiority Dice. Weapo
 
 **Passive Feature**
 
-Once per combat encounter, upon dropping to 50% of your total Hit Points, you restore 1d12/2 fighter level in Hit Points at the end of your turn. 
+Every 3 rounds of battle, you restore 1d12/2 fighter level in Hit Points and recover a Superiority Dice at the end of your turn.
 
 ## **Body of the Lancer** **Passive Feature**
 
 Leap upon your enemies from afar with Draconic Dive.  
-**Draconic Dive (**⬤ **Action, stack with extra attack):**
+**Draconic Dive (**⬤ **Action, stack with extra attack,** is considered both a cantrip and a weapon attack**):**
 
 * **Single target**  
 * **Range:** 9m  
@@ -317,7 +319,7 @@ When you use your action to make an unarmed or weapon-based Attack Roll with you
 
 **▢** **Free Action,** Recharge: Short Rest
 
-Gain an additional Action.
+Gain an additional Action and restore 3 superiority Dice.
 
 ## **Mind of the Wizened**
 
@@ -325,7 +327,7 @@ Gain an additional Action.
 
 Run your enemies through with Draconic Blitz
 
-**Draconic Blitz** (⬤ **Action, stack with extra attack):**
+**Draconic Blitz** (⬤ **Action, stack with extra attack,** is considered both a cantrip and a weapon attack**):**
 
 * **AOE (charge)**  
 * **Range:** 9m  
@@ -355,9 +357,9 @@ Whenever you fail a Saving Throw, you can roll again, using the new result inste
 
 ## **Soul of the Dragon** **Passive Feature**
 
-Utterly decimate your enemies with Draconic Blitz, a single target attack.
+Utterly decimate your enemies with Draconic Maul, a single target attack.
 
-**Draconic Blitz (**⬤ **Action, stack with extra attack)**
+**Draconic Maul (**⬤ **Action, stack with extra attack,** is considered both a cantrip and a weapon attack**)**
 
 * **Range:** Melee  
 * **Damage:** Weapon Damage \+ 3d12 Fire.
@@ -405,7 +407,7 @@ Manoeuvres are powerful Weapon Actions that utilize your Superiority Dice. Weapo
 
 **Passive Feature**
 
-Once per combat encounter, upon dropping to 50% of your total Hit Points, you restore 1d12/2 fighter level in Hit Points at the end of your turn. 
+Every 3 rounds of battle, you restore 1d12/2 fighter level in Hit Points and recover a Superiority Dice at the end of your turn.
 
 ## **Cantrips**
 
@@ -441,7 +443,7 @@ When you use your action to make an unarmed or weapon-based Attack Roll with you
 
 **▢** **Free Action,** Recharge: Short Rest
 
-Gain an additional Action.
+Gain an additional Action and restore 3 superiority Dice.
 
 ## **From Beyond**
 
@@ -527,7 +529,7 @@ Manoeuvres are powerful Weapon Actions that utilize your Superiority Dice. Weapo
 
 **Passive Feature**
 
-Once per combat encounter, upon dropping to 50% of your total Hit Points, you restore 1d12/2 fighter level in Hit Points at the end of your turn. 
+Every 3 rounds of battle, you restore 1d12/2 fighter level in Hit Points and recover a Superiority Dice at the end of your turn.
 
 ## **Combat Techniques**
 
@@ -541,7 +543,7 @@ At first level you know a single Combat Technique selected from the list below. 
 * Backbreaker: ⬤ **Action**, Weapon Damage and possibly Prone for 1 turn  
 * Befuddling Strike: ⬤ **Action**, Weapon Damage and possibly Befuddle for 1 turn  
 * Brace (Melee): ▲ **Bonus Action**, Advantage on Melee Damage Rolls for 1 turn  
-* Cleave: ⬤ **Action**, Weapon Damage in wide arc in front of you (no friendly fire)  
+* Cleave: ⬤ **Action**, Weapon Damage in wide arc in front of you
 * Concussive Smash: ⬤ **Action**, Weapon Damage and possibly Daze for 3 turns  
 * Crowning Strike: ⬤ **Action**, Weapon Damage and possibly inflicts Reeling for 3 turns  
 * Disarming Strike: ⬤ **Action**, Weapon Damage and possibly Disarm  
@@ -598,7 +600,7 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 **▢** **Free Action,** Recharge: Short Rest
 
-Gain an additional Action.
+Gain an additional Action and restore 3 superiority Dice.
 
 ## **Improved Frontier Recovery** **Passive Feature**
 
@@ -637,7 +639,110 @@ Your Combat Techniques now recharge after one turn.
 
 Your Combat Techniques can now be used as a Bonus Action. This ability can be toggled at any time.
 
-# **Manoeuvres**
+# **Fighter: Palisade**
+
+*The best offense is a good defense, and you’ve taken the adage to heart. Shield in hand, you march forward, ready to bash any who challenge you into a fine mist.*
+
+|  | Level | Class Features | Superiority Dice |  |
+| :---: | :---: | :---- | :---: | :---: |
+|  | **1st** | Manoeuvres, Second Wind, Reinforced Strikes | 1d6 |  |
+|  | **2nd** | Passive Selection (2) | 1d6 |  |
+|  | **3rd** | Projected Bulwark | 2d6 |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 2d6 |  |
+|  | **5th** | Extra Attack, Action Surge, Sentinel’s Rebuke | 3d6 |  |
+|  | **6th** | Passive Selection (2) | 3d6 |  |
+|  | **7th** | Iron Avalanche | 4d6 |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4d6 |  |
+|  | **9th** | Improved Extra Attack, Indomitable, Cascading Iron | 5d6 |  |
+|  | **10th** | Passive Selection (2) | 5d6 |  |
+|  | **11th** | Superior Impact | 6d6 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 6d6 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Superiority Dice (1/level)**
+
+Fighters have a pool of Superiority Dice equal to their level in Fighter. These dice recharge on a Short or Long Rest, and are used to fuel the special abilities of the class. When an ability adds your Superiority Dice to damage, that ability deals an additional 1d6 damage. This damage increases to 2d6 at level 3 and by an additional 1d6 every two levels thereafter. *Superiority Dice can also be replenished through the Full Arsenal and Reckless Abandon Fighter Passive abilities.*
+
+## **Manoeuvres**
+
+Manoeuvres are powerful Weapon Actions that utilize your Superiority Dice. Weapon Actions are considered basic attacks for the purposes of Extra Attack and Improved Extra Attack. A Fighter selects a single Manoeuvre at level 1 and an additional Manoeuvre at every odd lever thereafter.
+
+## **Second Wind**
+
+**Passive Feature**
+
+Every 3 rounds of battle, you restore 1d12/2 fighter level in Hit Points and recover a Superiority Dice at the end of your turn.
+
+## **Projected Bulwark**
+
+## **Passive Feature**
+
+Dazing Bash is now capable of targeting creatures within 9m of you.
+
+| 3rd Level |
+| :---- |
+
+## **Sentinel’s Rebuke**
+
+**✦ Reaction**
+
+When an ally within 9m is damaged by an enemy, you may use Dazing Bash against their aggressor as a ✦ Reaction.
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Action Surge**
+
+**▢** **Free Action,** Recharge: Short Rest
+
+Gain an additional Action and restore 3 superiority Dice.
+
+## **Reinforced Strikes** **Passive Feature**
+
+Whenever you deal damage with your shield, you deal additional damage equal to your Superiority Dice.
+
+Damage with your shield includes Shield Bash (✦ Reaction) and Dazing Bash (▲ Bonus Action).
+
+| 7th Level |
+| :---- |
+
+## **Iron Avalanche**
+
+**Passive Feature**
+
+Killing a creature with your shield now causes them to erupt, dealing Force damage to any other enemies within 3m of them equal to your Superiority Dice.
+
+| 9th Level |
+| :---- |
+
+## **Improved Extra Attack**
+
+Extra Attack now provides an additional Action at all times, rather than a free attack.
+
+## **Indomitable**
+
+**Passive Feature**
+
+Whenever you fail a Saving Throw, you can roll again, using the new result instead.
+
+## **Cascading Iron** **Passive Feature**
+
+Damage dealt with your shield will ricochet to another enemy within 9m of your original target.
+
+| 11th Level |
+| :---- |
+
+## **Superior Impact**
+
+Upon dealing damage with your shield, you may expend a Superiority Dice in order to deal the maximum damage possible.
+
+#  **Manoeuvres**
 
 All Manoeuvres consume 1 Superiority Die when used. Manoeuvres that deal damage inflict weapon damage plus your Superiority Dice damage. 
 
@@ -683,7 +788,7 @@ When damaged below 75% of your Hit Points, gain Resistance to all forms of physi
 
 **Challenger’s Call**
 
-When an ally within 9m/30ft of you is damaged while below 75% of their total Hit Points, use your **✦** Reaction in order to immediately Challenge that enemy, as well as any additional enemies within 9m/30ft of the aggressor. (*Challenged enemies have \-5 to their attack roll when they are not attacking you. The AI will try to focus you.*)
+When an ally within 9m/30ft of you is damaged while below 75% of their total Hit Points, use a ▢ Free Reaction in order to immediately Challenge that enemy, as well as any additional enemies within 9m/30ft of the aggressor. (*Challenged enemies have \-5 to their attack roll when they are not attacking you. The AI will try to focus you.*)
 
 ## ---
 

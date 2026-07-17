@@ -46,4 +46,5 @@
     
 5.  **PR Management**:
     *   **PR Summary**: The PR description (or the new commit message if updating an existing PR) must include a **plain-language summary** of the changes, specifically listing the names of the entities that were added, updated, or removed.
+    *   **Human Guidance**: If you need human guidance or clarification on ambiguous documentation, do not ask questions in chat. Instead, open a Pull Request (PR) and use the PR description or comments to ask your questions and request feedback.
 

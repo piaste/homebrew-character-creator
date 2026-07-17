@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Monk
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Monk: Way Of The Arcane**
 
@@ -48,7 +50,7 @@ At first level you may select one spell from any spell list. Your Spellcasting A
 
 **🔄 Toggleable**
 
-Utilize your Ki Points to cast Spells which require an Action or Bonus action, rather than Spell Slots. The cost of a Spell is equal to one Ki Point per level of the Spell that you cast. In addition, your unarmed and cantrip based Attack Rolls and damage receive a bonus equal to your Spellcasting Ability. This can be toggled at any time.
+Utilize your Ki Points to cast Spells which require an Action or Bonus action, rather than Spell Slots. The cost of a Spell is equal to one Ki Point per level of the Spell that you cast. This can be toggled at any time.
 
 Additionally, your Flurry of Blows and Unarmed Strikes are considered both Unarmed attacks and Evocation Cantrips.
 
@@ -123,7 +125,102 @@ Upon a successful killing blow on an enemy with a Spell or a Cantrip cast using 
 
 When you use Ki Points to cast a damage dealing Spell, gain Immunity to that type of damage until the beginning of your next turn.
 
-# **Monk: Way Of The Drunken Fist**
+# **Monk: Way Of The Gentle Fist**
+
+ *Through harmony, your guiding hands provide relief. Though practiced inner peace, those around you are blessed with a calming sense of solidarity.*
+
+|  | Level | Class Features | Unarmed |  |
+| :---: | :---: | :---- | :---: | :---: |
+|  | **1st** | Ki Points, Martial Arts, Flurry of Blows, Serenity | 1d4 |  |
+|  | **2nd** | Passive Selection (2) | 1d4 |  |
+|  | **3rd** | Merciful Counter | 1d4 |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 1d4 |  |
+|  | **5th** | Martial Flux, Fists of Equilibrium | 1d6 |  |
+|  | **6th** | Passive Selection (2) | 1d6 |  |
+|  | **7th** | Mending Blows | 1d6 |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 1d6 |  |
+|  | **9th** | Martial Mastery, Cleansing Guidance | 1d8 |  |
+|  | **10th** | Passive Selection (2) | 1d8 |  |
+|  | **11th** | Flow of Compassion | 1d8 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 1d8 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Ki Points (1/Level)**
+
+Monks have a pool of Ki Points equal to their class level that replenishes on a short rest or long rest. Ki Points are the primary resource used to fuel your advanced monk techniques. *Ki Points can also be recovered through the class passives Critical Flow, Martial Empowerment, and Resonance of Body.*
+
+## **Martial Arts**
+
+Attacks with Monk Weapons (weapons without the two-handed or heavy property) and unarmed attacks deal 1d4 Bludgeoning damage, unless their normal damage is higher. These attacks may scale with either your Strength or Dexterity, whichever is higher. Additionally, you are able to make an additional unarmed strike as a Bonus Action.
+
+## **Flurry Of Blows**
+
+▲ **Bonus Action**, Consumes Ki Point
+
+Punch twice in rapid succession, making two unarmed strikes against your target.
+
+## **Mending Blows**
+
+**Passive Feature**
+
+Dealing damage to an enemy heals all allies within 9m for an amount equal to your unarmed dice.
+
+| 3rd Level |
+| :---- |
+
+## **Merciful Counter**
+
+**▢ Free Reaction**
+
+When an ally within 9m of you is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice as a ▢ Free Reaction.
+
+| 5th Level |
+| :---- |
+
+## **Martial Flux**
+
+Gain an additional Bonus Action.
+
+## **Fists of Equilibrium**
+
+**Passive Feature**
+
+Healing an ally Calms them (calmed allies are immune to confusion, madness, provocation and rage). No effect on enraged allies.
+
+| 7th Level |
+| :---- |
+
+## **Serenity**
+
+## 🔄 **Toggleable**
+
+## You are considered a preferred target for your enemies. Each turn, you heal for an amount equal to your unarmed dice. This can be toggled at any time.
+
+| 9th Level |
+| :---- |
+
+## **Martial Mastery**
+
+Gain an additional Action.
+
+## **Cleansing Guidance**
+
+**Passive Feature**
+
+Healing an ally provides both Latent Restoration and Great Cleanse.
+
+| 11th Level |
+| :---- |
+
+## **Flow of Compassion**
+
+**Passive Feature**
+
+When dodging an Attack Roll, you restore Hit Points to yourself and all allies in a 9m radius equal to your unarmed dice.
+
+# **Monk: Way Of The Drunken Master**
 
 *With the unpredictable lurches of a tippler, you sway through every battle, frustrating foes with carefully executed movements concealed beneath a facade of incompetence.*
 
@@ -167,7 +264,7 @@ Throw bottles of alcohol from your inventory as a free action. Affected targets 
 
 ## **Breath Of The Brewery**
 
-⬤ **Action**
+▲ **Bonus Action**
 
 While Inebriated, belch a 6m/20ft cone of pungent breath, dealing 1d12 Acid damage and potentially inflicting Mad for 1 turn on a failed Constitution Save. The initial damage from this Cantrip increases to 2d12 Acid damage at level 5, and 3d12 Acid damage at level 9\.
 
@@ -178,7 +275,7 @@ While Inebriated, belch a 6m/20ft cone of pungent breath, dealing 1d12 Acid dama
 
 **Passive Feature**
 
-Upon drinking alcohol, you immediately Dash. While Inebriated or Tipsy, you will not provoke Opportunity Attacks.
+Upon drinking alcohol, you immediately Dash. While Inebriated or Tipsy, you will not provoke Opportunity Attacks and you have advantage on your Damage Rolls.
 
 | 5th Level |
 | :---- |
@@ -222,9 +319,9 @@ While Inebriated or Tipsy, all enemies make Attack Rolls against you with Disadv
 
 **Passive Feature**
 
-Upon taking damage by a melee attack while Inebriated or Tipsy, you immediately fall Prone. Enemies have Disadvantage when targeting you while Prone, and Standing back up requires no Movement Speed. Upon standing back up, your next instance of damage will always roll as a Critical Hit. 
+Upon taking damage by a melee attack while Inebriated or Tipsy, you immediately fall Prone. Enemies have Disadvantage when targeting you while Prone, and Standing back up requires no Movement Speed. Upon standing back up, all your damage this turn will roll as a Critical Hit.
 
-# **Monk: Way Of The Open Hand**
+#  **Monk: Way Of The Open Hand**
 
 *You specialize in unarmed combat, using your hands and your control of ki to heal or inflict grievous hurt.*
 
@@ -320,7 +417,7 @@ Make an unarmed strike against a target, dealing damage and inflicting them with
 
 **▢** **Free Action**, Consumes Ki Point
 
-Detonate a target with Resonate within 18m/60ft. The target explodes, taking 1d12 Force damage and dealing 1d12 Force damage to all enemies within 9m/30ft. Damage dealt by Erupt will cause targets with Resonate to also detonate. Enemies that pass a Dexterity Save take half damage, but are not prevented from detonating. 
+Detonate a target with Resonate within 18m/60ft. The target explodes, taking 3d12 Force damage and dealing 1d12 Force damage to all enemies within 9m/30ft. Damage dealt by Erupt will cause targets with Resonate to also detonate. Enemies that pass a Dexterity Save take half damage, but are not prevented from detonating.
 
 | 11th Level |
 | :---- |
@@ -555,7 +652,7 @@ Ending your turn without moving will restore one Ki Point. (Teleport with Mirage
 
 **Passive Feature**
 
-Judgement Cut, Mirage Blade and Tempered Strike will always trigger a Critical Strike.
+Judgement Cut, Mirage Blade and Tempered Strike will always trigger a Critical Strike when they hit a creature with full HP.
 
 # **Ki Masteries (Passives)**
 
@@ -685,6 +782,6 @@ Gain Step of the Wind (Once per turn, **▢** Free Action, cost a Ki point : You
 
 ## **Zen Recovery**
 
-Upon landing a killing blow or Critical Hit, you may expend your **✦** Reaction in order to restore your ▲ Bonus Action. Only triggers if you don’t already have a ▲ Bonus Action *(you can’t stockpile them).*
+Upon landing a killing blow, you may expend your **✦** Reaction in order to restore your ▲ Bonus Action. Only triggers if you don’t already have a ▲ Bonus Action *(you can’t stockpile them).*
 
 ♡ available on a set of Clothing armor found in Act 1 ♡  

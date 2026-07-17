@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Artificer
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Artificer: Arcanist**
 
@@ -183,7 +185,7 @@ Swapping your firearms may be done at any time and will not consume a **✦** Re
 
 **Passive Feature**
 
-When dealing damage with a Ranged Weapon Attack, you ignore piercing Resistance.
+When dealing damage with a Ranged Weapon Attack, you ignore piercing Resistance and Immunities.
 
 | 3rd Level |
 | :---- |
@@ -238,11 +240,11 @@ Once per turn, landing a Killing Blow with a Ranged Weapon Attack will restore a
 | 11th Level |
 | :---- |
 
-## **Double Tap**
+## **Quintessential Stockpile**
 
 **Passive Feature**
 
-Your Ranged Weapon Attacks, which only target one creature, may now target two creatures instead.
+You get an additional 9 rounds of ammunition.
 
 #  **Artificer: Battle Synthetic**
 
@@ -615,11 +617,133 @@ Upon Infusing an ally, they will experience a sudden surge of positive Wild Magi
 
 ---
 
+# **Artificer: Striker**
+
+*A fight is won not only through brute strength, but through tactics. Your expertise is one of manipulation \- to tactically snowball through a grounded, lead based argument.*
+
+|  | Level | Class Features |  |  |  |  |  |  |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  | **1st** | Firepower, First Strike |  |  |  |  |  |  |  |
+|  | **2nd** | Passive Selection (2) |  |  |  |  |  |  |  |
+|  | **3rd** | Controlled Tempo |  |  |  |  |  |  |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |  |  |  |  |  |  |
+|  | **5th** | Lethal Company, Extra Attack |  |  |  |  |  |  |  |
+|  | **6th** | Passive Selection (2) |  |  |  |  |  |  |  |
+|  | **7th** | Delayed Reaction |  |  |  |  |  |  |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |  |  |  |  |  |  |
+|  | **9th** | Coordinated Strike, Improved Extra Attack |  |  |  |  |  |  |  |
+|  | **10th** | Passive Selection (2) |  |  |  |  |  |  |  |
+|  | **11th** | Kill Windowf |  |  |  |  |  |  |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |  |  |  |  |  |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Ammunitions**
+
+Artificers have a pool of 3 ammunition that is refreshed on a Short or Long rest, or when you use the Reload ▲ Bonus Action.
+
+## **Firepower**
+
+Gain three firearms, each with unique uses. As you level within Artificer, they will deal additional damage and gain new effects.
+
+Swapping your firearms may be done at any time and will not consume a **✦** Reaction
+
+**Blunderboss:** 1d20 \+ DEX modifier Piercing
+
+**Weapon Action, Scattershot:** (1 ammo) Fire a scattershot round from your blunderbuss, dealing damage in an area and leaving your targets no chance to evade it. This weapon can’t miss. As such, it can’t roll a Critical Hit
+
+- **Level 1, Close Range Bruiser:** While firing at multiple enemies within 3m of each other, this weapon rolls all damage dealt with Advantage
+- **Level 5**, **Splattershot:** Upon landing a Killing Blow with this weapon, your target explodes, dealing 3d8 Force damage to all enemies within 3m of them.
+- **Level 9**, **Double-Barrel:** Dealing damage with this weapon twice to the same enemy within a turn will always roll the second hit as a Critical Hit.
+
+**Flintlock:** 1d8 \+ DEX modifier Piercing
+
+**Weapon Action, Fan the Hammer:** (2 ammo) Fire two shots from your flintlock simultaneously
+
+- **Level 1,** **Quickdraw:** When dealing damage with this weapon to an enemy who has yet to take a turn, you deal the maximum amount of damage possible.
+- **Level 5**, **Look Away, Lenny:** While your target is looking away from you, this weapon deals additional damage equal to your Proficiency Bonus
+- **Level 9**, **Dead Eye:** While firing this weapon, you make your Attack Rolls with Advantage
+
+**Musket:** 1d12 \+ DEX modifier Piercing
+
+**Weapon Action, Precision Aim: ▢** Free Action. Enters a crouched stance, doubling your musket range and the bonus provided by Boots on the Ground. Attack Rolls are made with Advantage, and Movement Speed is reduced to 0\. Using this ⬤ Action again will cause you to stand back up, restoring your ability to move. While in this stance, each standard shot will consume 1 ammunition.
+
+- **Level 1, Boots on the Ground:** If you have not moved this turn, increase your Ranged Weapon damage by your proficiency bonus.
+- **Level 5**, **Kill Confirmed:** Dealing damage with this weapon to an enemy below 33% of their total Hit Points will deal the maximum damage possible.
+- **Level 9, One in the Chambers:** Dealing damage with this weapon to an enemy below 33% of their total Hit Points will always roll a Critical Hit.
+
+## **First Strike**
+
+**Passive Feature**
+
+You can no longer be Surprised. In addition, you gain Alpha Strike during your first turn of combat.
+**Alpha Strike :** Affected creature’s Ranged Weapon Attacks fire two projectiles which can target two different creatures, or the same creature twice.
+
+| 3rd Level |
+| :---- |
+
+## **Controlled Tempo**
+
+▲ **Bonus Action**
+
+Gain the ability to Expedite (+20 initiative) or Delay (-20 initiative) a creature’s turn. The buff or debuff lasts until long rest. You can only Expedite one creature at a time, and Delay one creature at a time.
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your ⬤ Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Lethal Company**
+
+**Passive Feature**
+
+Landing a Killing Blow will extend the duration of Alpha Strike by one turn.
+
+| 7th Level |
+| :---- |
+
+## **Delayed Reaction**
+
+**Passive Feature**
+
+When you Delay the turn of a creature, they can’t use Reactions.
+
+| 9th Level |
+| :---- |
+
+## **Extra Attack: Martial Surge**
+
+**Passive Feature**
+
+Gain an additional ⬤ Action at all times
+
+This passive acts as a replacement for Extra Attack.
+
+## **Coordinated Strike**
+
+**Passive Feature**
+
+Expediting a creature’s turn grants them Advantage on all Damage Rolls.
+
+Attack Rolls made against a creature suffering from Delayed Turn are rolled with Advantage.
+
+| 11th Level |
+| :---- |
+
+## **Kill Window**
+
+**Passive Feature**
+
+While Alpha Strike is active, all Attack Rolls you make are considered to be Critical Hits.
+
 # **Optimization Matrix**
 
 Upon Infusing an ally, they will get **all** effects of the selected optimization matrices for one turn.
 
-**Adaptive Shielding:** Grants Resistance to all damage
+**Adaptive Shielding:** Grants Resistance to elemental damage
 
 **Armour Reinforcement:** Grants \+2 to Armour Class
 
@@ -629,11 +753,11 @@ Upon Infusing an ally, they will get **all** effects of the selected optimizatio
 
 **Critical Dampener:** Number needed to roll a Critical Hit is lowered by 1\.
 
-**Damage Amplifier:** Grants Advantage on all damage rolls
+**Damage Amplifier:** Grants a bonus to all damage dealt equal to your proficiency bonus.
 
 **Defensive Calibration:** Grants \+2 to Saving Throws
 
-**Emergency Plating:** Grants Temporary Hit Points equal to allies’ level multiplied by 4\.
+**Emergency Plating:** Grants Temporary Hit Points equal to allies’ level multiplied by 2\.
 
 **Evasive Protocol:** Allies immediately Dash and Disengage.
 
@@ -645,15 +769,15 @@ Upon Infusing an ally, they will get **all** effects of the selected optimizatio
 
 **Output Contingency :** Allies always roll at least 4 when dealing damage.
 
-**Precision Boost:** Grants \+2 to Attack Rolls
+**Precision Boost:** Grants \+4 to Attack Rolls
 
 **Predictive Targeting Module:** Grants Advantage on all Attack Rolls
 
-**Reactive Overload:** Grants an additional **✦** Reaction.
+**Proactive Overload:** Hasten your target
 
 **Resistance Override:** Allies ignore damage resistance.
 
-**Spell Calibration Sequence:** Grants+2 to Difficulty Class
+**Spell Calibration Sequence:** Grants+1 to Difficulty Class
 
 **Spell Slot Bypass:** Allies may cast one Spell without expending a Spell Slot.
 
@@ -687,7 +811,7 @@ Upon Infusing an enemy, they will get **all** effects of the selected optimizati
 
 **Output Limiter:** Enemies are Reduced
 
-**Precision Degradation:** Lowers Attack Rolls by 2
+**Precision Degradation:** Lowers Attack Rolls by 4
 
 **Reaction Suppression:** Enemies can’t use **✦** Reactions
 
@@ -697,7 +821,7 @@ Upon Infusing an enemy, they will get **all** effects of the selected optimizati
 
 **Signal Silence:** Mutes enemies
 
-**Spell Interference:** Lowers Difficulty Class by 2
+**Spell Interference:** Lowers Difficulty Class by 1
 
 **Targeting Disruption:** Attack Rolls are made with disadvantage.
 
@@ -724,7 +848,7 @@ When an enemy casts a Spell, you may expend one round of Ammunition in order to 
 ---
 
 **Castle Defense**  
-Gain the ability to deploy two Turrets in battle. (▲ Bonus Action, at will, infinite duration. The turret can’t move, and deal 1d8 ranged damage at level 1/2d8 at level 5/ 3d8 at level 9). You can only have two turrets active at all times.  
+Gain the ability to deploy a Turret in battle. (▲ Bonus Action, at will, infinite duration. The turret can’t move, and deal 1d8 ranged damage at level 1/2d8 at level 5/ 3d8 at level 9). You can only have one turret active at all times.
 ---
 
 **Dead-Zone Calibration**  
@@ -740,7 +864,7 @@ Once per turn, missing an Attack Roll will refund your ⬤ Action.
 ---
 
 **Failsafe Injection\***  
-Once per combat, when you start your turn below 25% HP, you consume a synthetic potion. The synthetic potion acts as a healing potion.  
+Once per combat, when you start your turn below 75% HP, you consume a synthetic potion. The synthetic potion acts as a healing potion.
 ---
 
 **Incendiary Rounds**  
@@ -784,7 +908,7 @@ After landing a Killing Blow, you may Reload your firearms as a **▢** Free Act
 ---
 
 **Synthetic Action Economy**  
-You may expend your ▲ Bonus Action in order to regain your ⬤ Action. Afterwards, you will be unable to use your ▲ Bonus Action until you land a Killing Blow.  
+Once per combat, you may expend your ▲ Bonus Action in order to regain a single ⬤ Action.
 ---
 
 **Vital Aim\***  

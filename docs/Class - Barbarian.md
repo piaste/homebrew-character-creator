@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Barbarian
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Barbarian: Beastheart**
 
@@ -10,9 +12,9 @@
 |  | **2nd** | Passive Selection (2) |  |
 |  | **3rd** | Bestial Dominance |  |
 |  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |
-|  | **5th** | Extra Attack, Reckless Assault, Call of the Wild |  |
+|  | **5th** | Extra Attack, Reckless Assault, Howl of the Wild |  |
 |  | **6th** | Passive Selection (2) |  |
-|  | **7th** | Bestial Instinct |  |
+|  | **7th** | Beast Blood |  |
 |  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |
 |  | **9th** | Improved Extra Attack, Reckless Rampage, Howl of the Wild |  |
 |  | **10th** | Passive Selection (2) |  |
@@ -30,7 +32,7 @@ Barbarians have 3 rage charges that are replenished on a short rest or long rest
 
 **🔄 Toggleable**
 
-Make all Melee and Throw based Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
 ## **Rage: Bestial Heart**
 
@@ -48,20 +50,22 @@ Gain an additional benefit depending on which Bestial Heart you choose when ente
 * Tiger: When damaging an enemy, you may potentially cause them to Bleed.  
 * Wolf: Grant Advantage to all allied Attack Rolls within 3m/10ft.
 
-| 3rd Level |
-| :---- |
-
-##  **Call Of The Wild**
-
-**Passive Feature**
-
-Each of your Bestial Hearts now grant a unique action while enraged.
+Each of your Bestial Hearts additionally grant a unique action while enraged.
 
 * Bear: ▲ **Bonus Action:** Goad enemies within 9m/30ft for 3 turns.   
 * Eagle: ⬤ **Action:** Diving attack with 9m/30ft range that may knock enemy Prone.   
 * Elk: ⬤ **Action:** Charge 9m/30ft dealing light damage and knocking enemies Prone.  
 * Tiger: ⬤ **Action:** 3m/10ft cone attack (as Cleave).  
 * Wolf: ⬤ **Action:** Each ally within 3m/10ft can move twice as far on their next turn.
+
+| 3rd Level |
+| :---- |
+
+## **Bestial Dominance**
+
+**Passive Feature**
+
+When entering into a rage, you Dominate all Beasts and Monstrosities within 9m/30ft of you with no save.
 
 | 5th Level |
 | :---- |
@@ -76,20 +80,20 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
-## **Bestial Dominance**
-
-**Passive Feature**
-
-When entering into a rage, you Dominate all Beasts and Monstrosities within 9m/30ft of you with no save.
-
-| 7th Level |
-| :---- |
-
 ## **Howl of the Wild**
 
 **Passive Feature**
 
 Your Beastial Heart actions are now available to every rage.
+
+| 7th Level |
+| :---- |
+
+## **Beast Blood**
+
+**Passive Feature**
+
+While enraged, all damage taken is reduced by 2\.
 
 | 9th Level |
 | :---- |
@@ -108,7 +112,7 @@ Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce
 
 **Passive Feature**
 
-While raging under your Beastial Hearts, killing blows and Critical Hits increase your Strength by 1 until the end of battle. This effect stack.
+While raging under your Beastial Hearts, killing blows and Critical Hits increase your Strength by 2 until the end of battle. This effect stack, up to 30 STR.
 
 | 11th Level |
 | :---- |
@@ -151,7 +155,7 @@ Barbarians have 3 rage charges that are replenished on a short rest or long rest
 
 **🔄 Toggleable**
 
-Make all Melee and Throw based Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
 ## **Rage: Frenzy**
 
@@ -165,7 +169,7 @@ Killing blows and Critical Hits will reset the duration of your Rage. Rage block
 
 ▲ **Bonus Action**, Must be Enraged
 
-Throw a character or item from the world or your inventory. You gain a cumulative stack of Frenzied Strain (-1 to hit). 
+Throw a character or item from the world or your inventory.
 
 Your Strength affects how much weight you can throw. Heavier items deal more damage. The damage of Thrown Weapons is the same as the weapon’s melee damage. 
 
@@ -176,7 +180,7 @@ Your Strength affects how much weight you can throw. Heavier items deal more dam
 
 ▲ **Bonus Action**, Must be Enraged
 
-Make a melee attack with your equipped main-hand weapon. You gain a cumulative stack of Frenzied Strain (-1 to hit). This attack is made with disadvantage.
+Make a melee attack with your equipped main-hand weapon. This attack is made with disadvantage.
 
 You can only use Frenzied Strike once per turn, unless you get a Killing Blow or a Critical Hit, which enables the action again (if you have multiple Bonus Actions).
 
@@ -197,7 +201,7 @@ Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce
 
 **Passive Feature**
 
-When dealing damage, you ignore all Resistances to Bludgeoning, Piercing, and Slashing damage.
+When dealing damage, you ignore all Resistances and Immunities to Bludgeoning, Piercing, and Slashing damage.
 
 | 7th Level |
 | :---- |
@@ -266,7 +270,7 @@ Barbarians have 3 rage charges that are replenished on a short rest or long rest
 
 **🔄 Toggleable**
 
-Make all Melee and Throw based Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
 ## **Rage: Frostwoven**
 
@@ -291,7 +295,7 @@ Difficult Terrain no longer slows you, and you are incapable of slipping on ice.
 
 **Passive Feature**
 
-Upon dealing damage to enemies with a melee-based Attack Roll while enraged, a Ray of Frost will fire towards another enemy within 9m/30ft of your target.
+Upon dealing damage to enemies with a melee-based Attack Roll while enraged, a Ray of Frost will fire towards another enemy within 9m/30ft of your target. You can’t increase the damage of this Ray of Frost by any mean (*it is not a cantrip*).
 
 | 5th Level |
 | :---- |
@@ -381,7 +385,7 @@ Barbarians have 3 rage charges that are replenished on a short rest or long rest
 
 **🔄 Toggleable**
 
-Make all Melee and Throw based Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
 ## **Rage: Giant’s Blood**
 
@@ -402,7 +406,7 @@ Once per turn, you may brutally kick a creature away from you. This attack deals
 
 ## **Mighty Impel**
 
-⬤ **Action**, Must be Enraged
+▲ **Bonus Action**, Must be Enraged
 
 Once per turn, you may pick up and throw a creature or object. Your increased size allows you to move creatures far heavier than what would typically be possible. Your Strength affects how much weight you can throw. Heavier items deal more damage. The damage of Thrown Weapons is the same as the weapon’s melee damage. Gargantuan targets cannot be thrown.
 
@@ -423,7 +427,7 @@ Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce
 
 **Passive Feature**
 
-While enraged, making a Melee Weapon Attack deals damage equal to your Strength Modifier to all creatures in a 3m/10ft area. This can be toggled at any time.
+While enraged, Melee Attacks deal damage equal to your levels in Barbarian to all creatures in a 3m/10ft area. This can be toggled at any time.
 
 | 7th Level |
 | :---- |
@@ -432,7 +436,7 @@ While enraged, making a Melee Weapon Attack deals damage equal to your Strength 
 
 **Passive Feature**
 
-Upon using Stormheel or Mighty Impel to displace an enemy, they become Staggered. After Staggering another creature, you are able to immediately dive to their location as an action, smashing your weapon down upon them. This followup action cannot miss.
+Upon using Stormheel or Mighty Impel to displace an enemy, they become Staggered. After Staggering another creature, you are able to immediately dive to their location as an ⬤ Action, smashing your weapon down upon them. This followup action is an attack roll.
 
 | 9th Level |
 | :---- |
@@ -462,7 +466,122 @@ While Enraged, all damage rolls are made with Advantage against creatures that a
 
 You can dual-wield Two-Handed weapons. Additionally, while enraged, dealing damage to another creature will always knock them prone.
 
-# 
+# **Barbarian: Rosemourn**
+
+*Your fury runs unconscionably deep, resting soundly in scars of the past. The briars of that past help you to forge both strength and resilience.*
+
+|  | Level | Class Features |  |
+| :---: | :---: | :---- | :---: |
+|  | **1st** | Reckless Attack, Rage: Briar Blood |  |
+|  | **2nd** | Passive Selection (2) |  |
+|  | **3rd** | Bloodvine Grasp |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |
+|  | **5th** | Extra Attack, Reckless Assault, Barbed Protection |  |
+|  | **6th** | Passive Selection (2) |  |
+|  | **7th** | Thornfall |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |
+|  | **9th** | Improved Extra Attack, Reckless Rampage, Bloodvine Thicket, Bloodvine Eruption |  |
+|  | **10th** | Passive Selection (2) |  |
+|  | **11th** | Heart of Thorns |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Rage Charges**
+
+Barbarians have 3 rage charges that are replenished on a short rest or long rest. Rage charges are primarily used for entering a rage. *Rage charges can also be recovered through the Rooted in Anger class passive.*
+
+## **Reckless Attack**
+
+**🔄 Toggleable**
+
+Make Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+
+## **Rage: Briar Blood**
+
+▲ **Bonus Action**, Consumes Rage Charge, Duration: 3 turns
+
+While in combat, enter a rage, covering yourself in thorns. Deal 2 additional damage with Melee Weapon Attacks, Improvised Weapons, and when Throwing objects or creatures. Gain Resistance to all physical damage, and Advantage on Strength based Ability Checks and Saving Throws.
+
+Killing blows and Critical Hits will reset the duration of your Rage. Rage blocks the ability to both cast and Concentrate on Spells.
+
+While enraged, enemies who damage you with a melee based Attack Roll will take 1d6 piercing damage/2 Barbarian level and potentially Bleed. In addition, while moving, you will leave behind a trail of Spike Growth (difficult terrain, 1d12 damage per 1,5m you move).
+
+Additionally, both yourself and allies within 18m of you are immune to the effect of Difficult Terrain and Spike Growth.
+
+| 3rd Level |
+| :---- |
+
+##  **Bloodvine Grasp**
+
+ ▲ **Bonus Action**
+
+Potentially pull a target up to 18m closer to you, dealing 1d12/2d12/3d12 (cantrip scaling) Piercing damage and causing them to potentially Bleed for 1 turn (*This is a STR based manoeuvre. Half damage on save*).
+
+Huge targets can’t be pulled.
+
+| 5th Level |
+| :---- |
+
+##  **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Reckless Assault (Replaces Reckless Attack)**
+
+**🔄 Toggleable**
+
+Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+
+## **Barbed Protection**
+
+ **✦ Reaction**
+
+When an ally within 18m of you is attacked, you may use Bloodvine Grasp on their aggressor as a Reaction.
+
+| 7th Level |
+| :---- |
+
+## **Thornfall**
+
+**Passive Feature**
+
+Causing an enemy to take damage by falling will deal an additional 1d6 Piercing damage/2 Barbarian level to the target and all enemies within 3m of them.
+
+| 9th Level |
+| :---- |
+
+## **Improved Extra Attack**
+
+Extra Attack now provides an additional Action at all times, rather than a free attack.
+
+## **Reckless Rampage (Replaces Reckless Assault)**
+
+**🔄 Toggleable**
+
+Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+
+## **Bloodvine Thicket**
+
+**Passive Feature**
+
+When you enrage, you create a 9m area of Spiked Growth beneath your feet that last 3 rounds.
+
+##  **Bloodvine Eruption**
+
+⬤ **Action**
+
+Potentially pull all targets within a 18m radius closer to you, dealing 1d12/2d12/3d12 (cantrip scaling) Piercing damage and causing them to potentially Bleed for 1 turn (*This is a STR based manoeuvre. Half damage on save*).
+
+| 11th Level |
+| :---- |
+
+## **Heart of Thorns**
+
+**Passive Feature**
+
+Upon ending your turn, you deal 1d6 Piercing damage/2 Barbarian level to all enemies within 3m of you.
 
 # **Barbarian: Wild Soul**
 
@@ -474,13 +593,13 @@ You can dual-wield Two-Handed weapons. Additionally, while enraged, dealing dama
 |  | **2nd** | Passive Selection (2) | 2 | \- | \- |  |
 |  | **3rd** | Chaotic Roar | 4 | \- | \- |  |
 |  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | \- | \- |  |
-|  | **5th** | Extra Attack, Reckless Assault, Unstable Backlash | 4 | 2 | \- |  |
+|  | **5th** | Extra Attack, Reckless Assault, Unstable Recovery | 4 | 2 | \- |  |
 |  | **6th** | Passive Selection (2) | 4 | 2 | \- |  |
 |  | **7th** | Chance Surge | 4 | 4 | \- |  |
 |  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- |  |
-|  | **9th** | Improved Extra Attack, Reckless Rampage, Wild Bloodlust | 4 | 4 | 2 |  |
+|  | **9th** | Improved Extra Attack, Reckless Rampage, Tenacious Chaos | 4 | 4 | 2 |  |
 |  | **10th** | Passive Selection (2) | 4 | 4 | 2 |  |
-|  | **11th** | Tenacious Chaos | 4 | 4 | 4 |  |
+|  | **11th** | Wild Bloodlust | 4 | 4 | 4 |  |
 |  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 |  |
 
 | 1st Level |
@@ -494,13 +613,13 @@ Barbarians have 3 rage charges that are replenished on a short rest or long rest
 
 **🔄 Toggleable**
 
-Make all Melee and Throw based Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
+Make Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
 ## **Rage: Wild Magic**
 
 ▲ **Bonus Action**, Consumes Rage Charge, Duration: 3 turns
 
-While in combat, enter a rage. Deal 2 additional damage with Melee Weapon Attacks, Improvised Weapons, and when Throwing objects or creatures. Gain Resistance to all physical damage, and Advantage on Strength based Ability Checks and Saving Throws. Spells (not cantrips) cast during your rage will potentially trigger a positive surge of Wild Magic. 
+While in combat, enter a rage. Deal 2 additional damage with Melee Weapon Attacks, Improvised Weapons, and when Throwing objects or creatures. Gain Resistance to all elemental damage, and Advantage on Strength-based Ability Checks and Saving Throws. Spells (not cantrips) cast during your rage dwill potentially trigger a positive surge of Wild Magic. Deal additional damage with Spells and Cantrips.
 
 Killing blows and Critical Hits will reset the duration of your Rage. 
 
@@ -519,7 +638,7 @@ At first level you may select one spell from the Sorcerer spell list. Your Spell
 
 **Passive Feature**
 
-Upon Enraging, you immediately experience a positive surge of Wild Magic. Your Wild Magic surges now have new effects unique to the Barbarian.
+Upon Enraging, you immediately experience a positive surge of Wild Magic. Upon taking damage, your aggressor may experience a negative surge of Wild Magic. Your Wild Magic surges now have new effects unique to the Barbarian.
 
 | 5th Level |
 | :---- |
@@ -534,11 +653,11 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
-## **Unstable Backlash**
+## **Unstable Recovery**
 
 **Passive Feature**
 
-Upon taking damage, your aggressor may experience a negative surge of Wild Magic.
+Upon killing an enemy, you restore a Spell Slot of the highest level you could cst basedon your levels in Barbarian.
 
 | 7th Level |
 | :---- |
@@ -547,7 +666,7 @@ Upon taking damage, your aggressor may experience a negative surge of Wild Magic
 
 **Passive Feature**
 
-Upon rolling a Critical Hit, your target immediately experiences a negative surge of Wild Magic. This effect can trigger once per turn.
+Upon rolling a Critical Hit or Killing Blow, your target immediately experiences a negative surge of Wild Magic. This effect can trigger once per turn.
 
 | 9th Level |
 | :---- |
@@ -562,20 +681,20 @@ Extra Attack now provides an additional Action at all times, rather than a free 
 
 Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.
 
-## **Wild Bloodlust**
-
-**Passive Feature**
-
-Upon landing a killing blow, you immediately experience a positive surge of Wild Magic. This effect can trigger once per turn.
-
-| 11th Level |
-| :---- |
-
 ## **Tenacious Chaos**
 
 **Passive Feature**
 
-Upon Enraging, all allies within 9m/30ft immediate experience a positive surge of Wild Magic. This effect can trigger once per turn.
+Upon Enraging, all allies within 9m/30ft immediately experience a positive surge of Wild Magic. This effect can trigger once per turn.
+
+| 11th Level |
+| :---- |
+
+## **Wild Bloodlust**
+
+**Passive Feature**
+
+When you land a Critical Hit or a Killing Blow, you may cast a spell without using a spell slot as a free action.
 
 ---
 
@@ -602,7 +721,7 @@ When you land a Critical Hit, roll an additional damage die.
 
 ## **Danger Sense**
 
-Gain the ability to forcibly succeed any Saving Throw at the cost of one of your Rage Charges.  
+Gain the ability to forcibly succeed any Saving Throw as a **▢** Free Reaction at the cost of one of your Rage Charges.
 ---
 
 ## **Death Glare**
@@ -612,7 +731,7 @@ Use your ▲ Bonus Action to potentially Intimidate a target. *(Intimidate is a 
 
 ## **Faceoff**
 
-If an enemy damages you, use your **✦** Reaction in order to potentially Intimidate them. *(Intimidate is a Charisma based Ability Check)*  
+If an enemy damages you, use a Rage Charge and a **▢** Free Reaction in order to potentially Intimidate them. *(Intimidate is a Charisma based Ability Check)*
 ---
 
 ## **Furious Criticals\***
@@ -629,7 +748,7 @@ Difficult Terrain no longer slows you down. While enraged, you benefit from the 
 
 ## **Overwhelming Power\***
 
-When dealing damage while enraged, you ignore all physical Resistances.
+When dealing damage while enraged, you ignore all physical Resistances and Immunities.
 
 ♡ available on a Greatclub found in Act 2 ♡   
 ---
@@ -655,7 +774,7 @@ While below 25% of your total Hit Points, you may make an additional Melee Weapo
 
 ## **Raging Vitality\***
 
-While enraged, recover \+1d6 Hit Points per turn. *(No effect while Downed.)*  
+While enraged, recover \+1d12 Hit Points per turn. *(No effect while Downed.)*
 ---
 
 ## **Relentless Endurance**
@@ -665,7 +784,7 @@ Upon starting your turn while below half of your total Hit Points you receive to
 
 ## **Rip And Tear\***
 
-Once per turn, landing a killing blow or Critical Hit causes enemies within 9m/30ft of your target to potentially become Intimidated. This effect can trigger once per turn. *(Intimidate is a Charisma based Ability Check)*  
+Once per turn, landing a killing blow or Critical Hit causes enemies within 9m/30ft of your target to potentially become Intimidated. *(Intimidate is a Charisma based Ability Check)*
 ---
 
 ## **Rooted In Anger**
