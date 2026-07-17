@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Wizard
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Wizard: Arcblade**
 
@@ -92,7 +94,7 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 **Passive Feature**
 
-Once per turn, upon landing a Killing Blow or a Critical Hit, you can cast Steel-Wind Strike as a free action.
+Once per turn, upon landing a Killing Blow, you can cast Steel-Wind Strike as a free action.
 
 | 9th Level |
 | :---- |
@@ -128,7 +130,7 @@ Upon casting Steel-Wind Strike, a Cloak of Daggers (as the Spell) is created und
 |  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
 |  | **9th** | Steel Cast | 4 | 4 | 4 | 2 | 1 | \- |  |
 |  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
-|  | **11th** | Retaliatory Ward | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **11th** | Retaliatory Reckoning | 4 | 4 | 4 | 2 | 2 | 1 |  |
 |  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
 
 | 1st Level |
@@ -196,7 +198,7 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 **Passive Feature**
 
-Once per turn, dealing damage adds a stack of Arcane Ward.
+Whenever you deal damage, you gain a stack of Arcane Ward.
 
 | 9th Level |
 | :---- |
@@ -210,13 +212,125 @@ Casting a Spell will activate Extra Attack.
 | 11th Level |
 | :---- |
 
-## **Retaliatory Ward**
+## **Retaliatory Reckoning**
 
 **Passive Feature**
 
-Being damaged by a melee based Attack Roll deals Force damage to your aggressor equal to the amount of Arcane Ward charges you currently have. 
+Being damaged deals Force damage to your aggressor equal to the amount of Arcane Ward charges you currently have.
 
-# **Wizard: Evoker**
+# **Wizard: Elementalist**
+
+*The elements answer your call as loyal companions. Whether flame, storm, stone, or tide, each serves as an extension of your arcane mastery.*
+
+|  | Level | Class Features | 1st | 2nd | 3rd | 4th | 5th | 6th |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  | **1st** | Arcane Recovery Charges, Arcane Channeling, Scholarly Acumen, Cantrips, Primal Bond | 2 | \- | \- | \- | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 4 | \- | \- | \- | \- | \- |  |
+|  | **3rd** | Rend Elements | 4 | 2 | \- | \- | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- | \- | \- | \- |  |
+|  | **5th** | Channeled Infusion | 4 | 4 | 2 | \- | \- | \- |  |
+|  | **6th** | Passive Selection (2) | 4 | 4 | 4 | \- | \- | \- |  |
+|  | **7th** | Primordial Ward | 4 | 4 | 4 | 1 | \- | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
+|  | **9th** | Parallel Echo | 4 | 4 | 4 | 2 | 1 | \- |  |
+|  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
+|  | **11th** | Primal Convergence | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Arcane Recovery Charge**
+
+Wizards have a maximum of 1 Arcane Recovery Charge per level in the class. These charges are refilled on a Short or Long Rest.
+
+## **Arcane Channeling**
+
+**▢** **Free Action,** Consumes Arcane Recovery Charges (varies), Recharge: Per Turn
+
+Recover an expended Spell Slot, up to the maximum level provided by your levels in Wizard. This ability costs 1 Arcane Recovery Charge per level of the Spell Slot recovered.
+
+## **Scribing**
+
+**Passive Feature**
+
+You can consume scrolls to permanently learn Spells or Cantrips. You can learn any Spell this way, even spells that are not on the Wizard’s spell list.
+
+## **Scholarly Acumen**
+
+**Passive Feature**
+
+Each turn in combat, the wizard will be given a directive to accomplish a specific magical task. This will either be to deal specific type of elemental damage or to cast a Cantrip or Spell from a specific school of magic. Accomplishing this directive will recover one charge of Arcane Recovery. There is no penalty for failing to complete this directive. Tasks are chosen randomly and may include directives that you cannot accomplish with your known cantrips and spells. *(Your current Scholarly Acumen shows up as a condition on your Wizard. Hover over the condition to see the directive.)*
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Wizard is Intelligence. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+At first level you may select two spells from the Wizard spell list. Your Spellcasting Ability as a Wizard is Intelligence. At each level gained, you may select two additional spells known. At class levels 3, 7, and 11 you are not limited to the Wizard spell list and may instead select two spells from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Wizard list.
+
+## **Primal Bond**
+
+▲ **Bonus Action,** Consumes Arcane Recovery Charges
+
+Gain the ability to summon one of four elemental until Long Rest. Each Elemental scales with your level in Wizard :
+
+* Fire Elemental
+* Air Elemental
+* Earth Elemental
+* Water Elemental
+
+| 3rd Level |
+| :---- |
+
+## **Rend Elements**
+
+**Passive Feature**
+
+Depending on which Elemental you currency have summoned, you ignore Resistances and Immunities of their respective damage type when targeting an enemy or item.
+
+| 5th Level |
+| :---- |
+
+## **Channeled Infusion**
+
+**Passive Feature**
+
+Depending on which Elemental you currently have summoned, you deal an additional 1d4 damage of their respective type whenever you deal damage. Doesn’t affect your off-hand weapon.
+
+In addition, each of your elementals have learned a new action.
+
+| 7th Level |
+| :---- |
+
+## **Primordial Ward**
+
+**Passive Feature**
+
+Depending on which Elemental you currently have summoned, you gain Resistance to their respective type of damage.
+
+| 9th Level |
+| :---- |
+
+## **Parallel Echo**
+
+**Passive Feature**
+
+Depending on which Elemental you currently have summoned, when taking damage of their respective type, you reflect it at Force damage back at your aggressor.
+
+In addition, each of your elementals have learned a new action.
+
+| 11th Level |
+| :---- |
+
+## **Primal Convergence**
+
+**Passive Feature**
+
+You can now summon all four Elementals at once.
+
+#  **Wizard: Evoker**
 
 *As an Evoker, you stride unharmed through the unfettered chaos you call, a storm of mysticism contained only by the flick of your wrist.*
 
@@ -299,7 +413,7 @@ Upon casting a Spell, restore one of your Arcane Recovery charges. A Spell Slot 
 
 **Passive Feature**
 
-You add your Intelligence Modifier to the damage roll of the first Spell you cast each turn. When casting spells which allow for multiple targets, only the first target selected will receive this damage bonus. 
+You add your Intelligence Modifier to the damage roll of all spells. When casting spells which allow for multiple targets, only the first target selected will receive this damage bonus.
 
 | 9th Level |
 | :---- |
@@ -387,7 +501,7 @@ Elemental Stains empower your Spells and Cantrips in various ways :
 * **Necrotic :** The next Spell or Cantrip you cast will prevent your target from regaining Hit Points for 1 turn.  
 * **Poison :** The next Spell or Cantrip will impose Disadvantage on your target’s Attack Rolls until the end of their next turn.  
 * **Psychic :** The next Spell or Cantrip you cast will impose Disadvantage on your target’s Saving Throws for 1 turn.  
-* **Radiant :** The next Spell or Cantrip you cast will heal an allied target. The amount healed scales with your character level.  
+* **Radiant :** The next Spell or Cantrip you cast will heal an allied target. The amount healed scales with your character level (1d12/2d12/3d12, cantrip scaling).
 * **Thunder :** The next Spell or Cantrip you cast will Mute your target for 1 turn.
 
 | 3rd Level |

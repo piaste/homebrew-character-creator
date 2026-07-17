@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Paladin
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.9+**
 
 # **Paladin: Ancient Warden**
 
@@ -185,7 +187,7 @@ All Smites are melee OR ranged weapon attacks that add an additional \+1d12 dama
 
 ▲ **Bonus Action,** Consumes Channel Oath charge
 
-Teleport to an area you can see within 18m/60ft, dealing 1d12 Fire damage to all creatures within a 3m/10ft area, or half as much on a successful Dexterity save. This damage increases by \+1d12 Fire damage at 3rd level and every odd level thereafter. 
+Teleport to an area you can see within 18m/60ft, dealing 1d6 Fire damage to all creatures within a 3m/10ft area, or half as much on a successful Dexterity save. This damage increases by \+1d6 Fire damage at 3rd level and every odd level thereafter.
 
 ## **Searing Protection**
 
@@ -477,7 +479,7 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 ⬤ **Action,** Consumes Channel Oath charge
 
-Terrify all creatures in a 9m radius and deal 1d6 radiant damage per 2 Paladin levels. Undead suffer double the damage.
+Potentially Terrify all creatures in a 9m radius and deal 1d6 radiant damage per 2 Paladin levels. Undead suffer double the damage.
 
 | 7th Level |
 | :---- |
@@ -514,7 +516,7 @@ Emit an aura across 9m/30ft which grants yourself and allies Resistance to damag
 
 **Passive Feature**
 
-Once per Short Rest, erupt in radiant fury. Your weapon attacks deal an additional 12 Radiant damage for three turns, and all Attack Rolls you make are rolled with Advantage.
+Once per combat, erupt in radiant fury. Your weapon attacks deal an additional 12 Radiant damage for three turns, and all Attack Rolls you make are rolled with Advantage.
 
 # **Paladin: Oathbreaker**
 
@@ -639,7 +641,136 @@ Emit an aura across 9m/30ft which grants yourself, Subjugated creatures, and nea
 
 In addition to raising Shadow Servants, Turn the Living now Terrifies living creatures for one turn.
 
-# **Refined Adjudications (Passives)**
+# **Paladin: Tyrant**
+
+*Through fear, obedience is secured. Through absolute authority, the weak are broken and even the defiant learn their place.*
+
+|  | Level | Class Features | Smite damage | 1st | 2nd | 3rd |  |
+| :---: | :---: | :---- | ----- | :---: | :---: | :---: | :---: |
+|  | **1st** | Cantrips, Smites, Commanding Grasp, Reign of Fear, Tyrant’s Judgement | 1d12 | 2 | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 1d12 | 2 | \- | \- |  |
+|  | **3rd** | Grovel Beneath Me | 2d12 | 4 | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 2d12 | 4 | \- | \- |  |
+|  | **5th** | Extra Attack, Turn the Defiant | 3d12 | 4 | 2 | \- |  |
+|  | **6th** | Passive Selection (2) | 3d12 | 4 | 2 | \- |  |
+|  | **7th** | Escalation of Fear | 4d12 | 4 | 4 | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4d12 | 4 | 4 | \- |  |
+|  | **9th** | Extra Attack: Martial Surge, Smitten, Aura of the Conquerer | 5d12 | 4 | 4 | 2 |  |
+|  | **10th** | Passive Selection (2) | 5d12 | 4 | 4 | 2 |  |
+|  | **11th** | Fist of the Tyrant | 6d12 | 4 | 4 | 4 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 6d12 | 4 | 4 | 4 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Channel Oath Charge**
+
+Paladins have 3 Channel Oath charges that are replenished on a short rest or long rest. *Channel Oath charges can also be restored through the Atonement, Critical Oath, Oathbound Renewal, and Smite Makes Right class passives.*
+
+## **Class Resource: Crusader’s Smite**
+
+## Paladins have 3 Crusader’s Smite charges that are replenished on a short rest or long rest. *Crusader’s Smite charges can also be restored through the Atonement, Death Sentence, and Divine Resurgence class passives, as well as the Righteous Judgement class feature.*
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Paladin is Charisma. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+## At first level you may select one spell from the Cleric spell list. Your Spellcasting Ability as a Paladin is Charisma. At each level gained, you may select an additional spell known. At class levels 3, 7, and 11 you are not limited to the Cleric spell list and may instead select a single spell from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Cleric list.
+
+## **Smites**
+
+⬤ **Action,** Consumes Crusader’s Smite charge
+
+All Smites are melee OR Ranged weapon attacks that add an additional \+1d12 damage determined by the Smite used. Each Smite also applies a debuff on a failed saving throw. The paladin begins with Oathbroken Smite and their choice of 1 additional smite. The paladin may select an additional Smite at 3rd level and every odd level thereafter. The damage of all smites increases by \+1d12 damage at 3rd level and every odd level thereafter.
+
+* **Tyrannical Smite:** (Default Smite) Force damage, inflicts Grovel (target can’t act for a round) on the target (no save).
+* **Blinding Smite:** Radiant damage, inflicts Blind for 3 turns
+* **Branding Smite:** Radiant damage, prevents your target from using their BA for 3 turns.
+* **Searing Smite:** Fire damage, inflicts Searing for 3 turns (1d12 Fire damage)
+* **Staggering Smite:** Psychic damage, target has Disadvantage on saves for 3 turns.
+* **Thunderous Smite:** Thunder damage, inflicts prone for 1 turn
+* **Wrathful Smite:** Psychic damage, inflicts Frightened for 3 turns
+
+## **Commanding Grasp**
+
+⬤ **Action,** Consumes Channel Oath charge
+
+You Command (like the Command spell, WIS save to resist) a single hostile creature in a 18m radius.
+
+## **Reign of Fear**
+
+▲ **Bonus Action,** Consumes Channel Oath charge
+
+You potentially Frighten all enemies in a 18m radius for 3 turns. (Frightened creatures roll their Attack Rolls and Ability Checks with disadvantage, have no Elemental DR, and have their movement speed halved).
+
+## **Tyrant’s Judgement**
+
+**Passive Feature**
+
+When making an Attack Roll or dealing damage to a creature under Lockdown Immunity, roll with Advantage. Once per turn, upon landing a killing blow on an enemy under Lockdown Immunity, restore one Crusader’s Smite charge.
+
+| 3rd Level |
+| :---- |
+
+## **Grovel Beneath Me**
+
+**Passive Feature**
+
+Once per turn, upon using Tyrannical Smite, all Frightened enemies within 9m of you potentially Grovel (can’t act) for a round.
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Turn the Defiant**
+
+⬤ **Action,** Consumes Channel Oath charge
+
+Potentially Terrify all creatures in a 9m radius and deal 1d6 force damage per 2 Paladin levels. Creatures under Lockdown Immunity suffer double the damage.
+
+| 7th Level |
+| :---- |
+
+## **Escalation of Fear**
+
+**Passive Feature**
+
+Dealing damage to a Frightened enemy will potentially cause them to become Terrified for a round.
+
+| 9th Level |
+| :---- |
+
+## **Extra Attack: Martial Surge**
+
+Extra Attack now provides an additional Action at all times, rather than a free attack.
+
+## **Smitten**
+
+**Passive Feature**
+
+When making an Attack Roll with one of your Smites, you make your roll with a \+20 bonus.
+
+## **Aura of the Conquerer**
+
+⬤ **Action,** Duration: Until Long Rest
+
+Emit an aura across 9m/30ft which always Frightens enemies within 3m of you.
+
+| 11th Level |
+| :---- |
+
+## **Fist of the Tyrant**
+
+**Passive Feature**
+
+Once per turn, upon dealing damage to another creature with your Tyrannical Smite, you conjure a massive Fist of Bane. Upon ending your turn, the fist will fall, dealing 12d12 damage to any creature in a 3m AOE beneath it. Looks hella cool. *Can hit your allies\!*
+
+#  **Refined Adjudications (Passives)**
 
 A character may select two passive abilities at levels 2, 6, and 10\. Certain passive abilities also appear on Rare quality equipment found throughout your adventures.   
 *\*Also affect your summons.*  

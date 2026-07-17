@@ -140,12 +140,12 @@ let rec predictiveTargetingModule : ClassLevelUpPick = {
     ]
 }
 
-let rec reactiveOverload : ClassLevelUpPick = {
+let rec proactiveOverload : ClassLevelUpPick = {
     Type = InfusedArcsmithOptimizationMatrix
-    TypeId = nameof reactiveOverload
-    Name = "Reactive Overload"
+    TypeId = nameof proactiveOverload
+    Name = "Proactive Overload"
     Grants = [
-        Simple $"Optimization Matrix grants an additional {REACTION}"
+        Simple "Optimization Matrix hastens your target"
     ]
 }
 

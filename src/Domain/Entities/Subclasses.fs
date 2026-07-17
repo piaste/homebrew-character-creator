@@ -17,11 +17,11 @@ let rec beastheart =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Power(BonusAction, AtWill, "Rage", "Bestial Heart: Gain resistance and unique heart benefits.") ]
-            3<classLvl>, [ Complex("Call of the Wild", "Bestial Hearts grant unique actions while enraged.") ]
-            5<classLvl>, [ Complex("Bestial Dominance", "Dominate Beasts and Monstrosities on Rage.") ]
-            7<classLvl>, [ Complex("Howl of the Wild", "Bestial Heart actions available to every rage.") ]
-            9<classLvl>, [ Complex("Bestial Growth", "Kills/Crits increase Strength by 1 until end of battle.") ]
-            11<classLvl>, [ Complex("Totemic Beast", "Nearby allies benefit from active Bestial Heart passives.") ]
+            3<classLvl>, [ Complex("Bestial Dominance", "When entering into a rage, you Dominate all Beasts and Monstrosities within 9m with no save.") ]
+            5<classLvl>, [ Complex("Howl of the Wild", "Your Bestial Heart actions are now available to every rage.") ]
+            7<classLvl>, [ Complex("Beast Blood", "While enraged, all damage taken is reduced by 2.") ]
+            9<classLvl>, [ Complex("Bestial Growth", "While raging under your Bestial Hearts, killing blows and Critical Hits increase your Strength by 2 (stacks up to 30 STR) until the end of battle.") ]
+            11<classLvl>, [ Complex("Totemic Beast", "While enraged, nearby allies within 9m benefit from your active Bestial Heart passive features.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -191,7 +191,7 @@ let rec illusoryDomain =
     {
         Id = % nameof illusoryDomain
         Name = "Illusory Domain"
-        Description = "Faith of occlusion and obscurity, forged in shadow."
+        Description = "Your faith is one of occlusion and obscurity. Secrets forged in shadow, bound in rites which elude all but the most devout of followers."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
@@ -552,12 +552,12 @@ let rec artillerist =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Armour-Piercing Rounds", "Ranged attacks ignore Piercing Resistance.") ]
+            1<classLvl>, [ Complex("Armour-Piercing Rounds", "When dealing damage with a Ranged Weapon Attack, you ignore piercing Resistance and Immunities.") ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Anti-Material Ammunition", "Make a Ranged Weapon Attack after a killing blow.") ]
             5<classLvl>, [ Complex("Marked Suppression", "Ranged damage Marks enemies, granting Advantage to all allies.") ]
             7<classLvl>, [ Complex("Focus Fire", "Consecutive Ranged hits on the same target deal stacking additional damage.") ]
             9<classLvl>, [ Complex("Covering Fire", "Ranged killing blow restores an Action.") ]
-            11<classLvl>, [ Complex("Double Tap", "Single-target Ranged attacks now target two creatures.") ]
+            11<classLvl>, [ Complex("Quintessential Stockpile", "You get an additional 9 rounds of ammunition.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -638,8 +638,8 @@ let rec striker =
             1<classLvl>, [ Complex("First Strike", "Cannot be Surprised. Gain Alpha Strike (double projectiles) on first turn.") ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Controlled Tempo", "Expedite (+20 initiative) or Delay (-20 initiative) a creature.") ]
             5<classLvl>, [ Complex("Lethal Company", "Killing blows extend Alpha Strike duration.") ]
-            7<classLvl>, [ Complex("Delayed Reaction", "Advantage on Attack Rolls against Delayed targets.") ]
-            9<classLvl>, [ Complex("Coordinated Strike", "Expedited allies gain Advantage on Damage Rolls.") ]
+            7<classLvl>, [ Complex("Delayed Reaction", "When you Delay the turn of a creature, they can’t use Reactions.") ]
+            9<classLvl>, [ Complex("Coordinated Strike", "Expediting a creature’s turn grants them Advantage on all Damage Rolls. Attack Rolls made against a creature suffering from Delayed Turn are rolled with Advantage.") ]
             11<classLvl>, [ Complex("Kill Window", "While Alpha Strike is active, all Attack Rolls are Critical Hits.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -803,7 +803,7 @@ let rec wayOfTheGentleFist =
             1<classLvl>, [ Complex("Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
             3<classLvl>, [ Complex("Mending Blows", "Damaging enemies heals allies within 9m.") ]
             5<classLvl>, [ Complex("Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter", "Heal an ally within 9m when they are damaged.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
             9<classLvl>, [ Complex("Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
             11<classLvl>, [ Complex("Flow of Compassion", "Dodging an attack heals you and all allies within 9m.") ]
         ]
@@ -1373,7 +1373,7 @@ let rec shadeWalker =
 let rec frenziedTundra =
     {
         Id = % nameof frenziedTundra
-        Name = "Frenzied Tundra"
+        Name = "Soul of the Frenzied Tundra"
         Description = "Frozen power driving foes into a maddened frenzy."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1545,7 +1545,7 @@ let rec pactOfThePrimordial =
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Pact of the Primordial", "33% chance to shift to Demonic Visage (Advantage, free spells) each turn.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Advocatus Diaboli", "Absorb corpses to remove Hematic Invocation stacks.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Advocatus Diaboli", "Absorb corpses to remove Hematic Invocation stacks.") ]
             5<classLvl>, [ Complex("Profane Metamorphosis", $"{TOGGLEABLE}: Use Collected Souls in place of health for invocations.") ]
             7<classLvl>, [ Complex("Hematic Ascent", "Target enemies with Invocations (6d6 Necrotic); kills grant Souls.") ]
             9<classLvl>, [ Complex("Sacrificial Surrogate", "Killing while Demonic extends it and grants physical buffs.") ]

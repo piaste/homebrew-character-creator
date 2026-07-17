@@ -1,4 +1,4 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Cleric: Death Domain**
 
@@ -201,7 +201,7 @@ In addition, when dealing damage, you deal additional Fire damage equal to your 
 
 ⬤ **Action, Weapon Cantrip,** Consumes Channel Divinity charge
 
-Strike a target with divine conviction. Upon doing so, all creatures within 3m of you will erupt in a violent inferno, causing them to take the hit as well.
+Strike a target with divine conviction, dealing your weapon damage \+1d8/2d8/3d8 (cantrip scaling) fire damage to all creatures within 3m of you.
 
 | 5th Level |
 | :---- |
@@ -244,7 +244,7 @@ Casting a Spell will activate Extra Attack.
 
 **Passive Feature**
 
-Upon reaching ten stacks of Heat, you immediately gain a charge of Divine intervention.
+Once per turn, upon reaching ten stacks of Heat, you immediately gain a charge of Divine intervention.
 
 | 11th Level |
 | :---- |
@@ -255,7 +255,127 @@ Upon reaching ten stacks of Heat, you immediately gain a charge of Divine interv
 
 Striking Iron now causes enemies to Melt for three turns. (Melting: Affected creature takes 6-36 Fire damage at the beginning of each of their turns.)
 
-#  **Cleric: Life Domain**
+#  **Cleric: Illusory Domain**
+
+*Your faith is one of occlusion and obscurity. Secrets forged in shadow, bound in rites which elude all but the most devout of followers.*
+
+|  | Level | Class Features | 1st | 2nd | 3rd | 4th | 5th | 6th |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  | **1st** | Channel Divinity: Pacify Undead, Divine Miracles, Cantrips, Veilcasting | 2 | \- | \- | \- | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 4 | \- | \- | \- | \- | \- |  |
+|  | **3rd** | Channel Divinity: Mirror Force | 4 | 2 | \- | \- | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- | \- | \- | \- |  |
+|  | **5th** | Extra Attack, Phantom Communion | 4 | 4 | 2 | \- | \- | \- |  |
+|  | **6th** | Passive Selection (2) | 4 | 4 | 4 | \- | \- | \- |  |
+|  | **7th** | Dreamfracture | 4 | 4 | 4 | 1 | \- | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
+|  | **9th** | Steel Cast, Phantom Exchange | 4 | 4 | 4 | 2 | 1 | \- |  |
+|  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
+|  | **11th** | Fractured Reality | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Channel Divinity**
+
+Clerics have 3 Channel Divinity charges that are replenished on a short rest or long rest. *Channel Divinity charges can also be recovered through the Paradisiacal Gift class passive.*
+
+## **Channel Divinity: Pacify Undead**
+
+⬤ **Action,** Consumes Channel Divinity charge
+
+All undead within 9m/30ft are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m/10ft are always Critical Hits.
+
+## **Class Resource: Divine Intervention**
+
+During combat, at the start of each turn the Cleric rolls for a chance to obtain their Deity’s favor. The cleric has a 33% chance to gain a charge of Divine Intervention. When you gain a charge of Divine Intervention you will see a shaft of light briefly appear over the Cleric, and a golden ring will encircle the Cleric’s feet until consumed. A Cleric can have no more than one Divine Intervention charge at any time, and will lose a held charge when combat ends.
+
+You can also use an ⬤ **Action** and a Channel Divinity charge to trigger a Miracle during your turn.
+
+## **Divine Miracles**
+
+**▢** **Free Action**
+
+This feature allows the Cleric to expend a Divine Intervention charge to perform powerful miracles. The Divine Miracles ability will change color from dim to bright when you have a Divine Intervention charge. Each of the four abilities within this feature is a free action and consumes your Divine Intervention charge.
+
+* **Arcane Bounty:** Recover one expended Spell Slot equal to the highest level you are capable of casting with Cleric levels. *(This ability only uses Cleric levels to determine your highest level Spell Slot. It will not restore lower spell slots, even if those are your only expended slots. It will also not restore higher spell slots if you have gained them from another spellcasting class.)*
+* **Psychic Rift:** Deal 1d6 Psychic damage to all enemies within 9m/30ft on a failed Wisdom Save. Enemies take half damage on a successful save. Damage improves to 2d6 at Cleric level 3, with an additional 1d6 every odd level thereafter.
+* **Holy Restoration:** Restore 1d6 Hit Points to yourself and all allies within 9m/30ft. This healing improves to 2d6 at Cleric level 3, with an additional 1d6 every odd level thereafter.
+* **Wreathed in Radiance:** Grant yourself and all allies within 9m/30ft a bonus to Attack Rolls equal to half your cleric level (rounded up) for 3 turns.
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Cleric is Wisdom. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+At first level you may select two spells from the Cleric spell list. Your Spellcasting Ability as a Cleric is Wisdom. At each level gained, you may select two additional spells known. At class levels 3, 7, and 11 you are not limited to the Cleric spell list and may instead select two spells from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Cleric list.
+
+## **Veilcasting**
+
+**Passive Feature**
+
+If they are not currently Revealed, targeting an ally with a Spell or Cantrip will cause them to become Invisible for 3 turns (*You need to target the ally ; AOE will not work*).
+
+Additionally, upon causing a creature to become Invisible through Veilcasting, all enemies within 3m of them receive 1d6 psychic damage/2 cleric level.
+
+| 3rd Level |
+| :---- |
+
+## **Channel Divinity: Mirror Force**
+
+**✦ Reaction,** Consumes Channel Divinity
+
+When an ally is damaged by an enemy, use a Channel Divinity charge to deal 1d6 Psychic damage/ 2 cleric level to their aggressor. You then heal the ally by the same amount.
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Phantom Communion**
+
+**Passive Feature**
+
+If you are not currently Revealed, targeting an ally with a Spell or Cantrip will cause you to become Invisible for one turn as well.
+
+| 7th Level |
+| :---- |
+
+## **Dreamfracture**
+
+**Passive Feature**
+
+Upon dealing Psychic damage, you potentially Surprise your target for one turn (*Surprised targets can’t act*).
+
+| 9th Level |
+| :---- |
+
+## **Steel Cast**
+
+**Passive Feature**
+
+Casting a Spell will activate Extra Attack.
+
+## **Phantom Exchange**
+
+**▢** **Free Action**
+
+Gain the ability to swap places with an Invisible ally as a free action.
+
+| 11th Level |
+| :---- |
+
+## **Fractured Reality**
+
+**Passive Feature**
+
+Upon Surprising a creature, they become Vulnerable to Psychic damage for a round.
+
+# **Cleric: Life Domain**
 
 *Tasked with the holy edict of preserving the body, mind, and soul, your god grants you a plethora of healing magics.* 
 
@@ -469,7 +589,7 @@ Your Discharge now affects all enemies within 18m/60ft.
 
 ## **Wrath of the Storm: Cold, Lightning, or Thunder**
 
-**✦ Reaction**
+**▢** **Free Reaction,** Consumes Channel Divinity charge
 
 When an enemy damages you while within a range of 18m/60ft, you retaliate with a burst of elemental damage equal to your character level. *(You actually receive three versions of this ability: one for each element listed.)*
 
@@ -511,9 +631,9 @@ When you deal Cold, Lightning, or Thunder damage, your target must succeed a Con
 |  | **6th** | Passive Selection (2) | 4 | 4 | 4 | \- | \- | \- |  |
 |  | **7th** | War Priest | 4 | 4 | 4 | 1 | \- | \- |  |
 |  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
-|  | **9th** | Steel Cast, Deific | 4 | 4 | 4 | 2 | 1 | \- |  |
+|  | **9th** | Steel Cast, War God Vessel | 4 | 4 | 4 | 2 | 1 | \- |  |
 |  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
-|  | **11th** | War Gods Vessel | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **11th** | Deific | 4 | 4 | 4 | 2 | 2 | 1 |  |
 |  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
 
 | 1st Level |
@@ -558,14 +678,14 @@ At first level you may select two spells from the Cleric spell list. Your Spellc
 
 **Passive Feature**
 
-You deal an additional 1d4 Radiant damage on any successful Attack Roll. *(This includes melee, ranged, and spell-based Attack Rolls.)*
+You deal an additional 1d4 Radiant damage whenever you damage an enemy. *(This includes melee, ranged, spells, Cantrips, DoT, …)*
 
 | 3rd Level |
 | :---- |
 
 ## **Channel Divinity: War God’s Blessing**
 
-**✦ Reaction,** Consumes Channel Divinity charge, Recharge: Per Turn
+**▢** **Free Reaction,** Consumes Channel Divinity charge, Recharge: Per Turn
 
 When you or an ally within 9m/30ft would miss an Attack Roll, you may add a \+10 bonus to that roll.
 
@@ -589,7 +709,7 @@ After using one of your Miracles, gain Advantage on both Attack rolls and damage
 
 ▲ **Bonus Action**
 
-When you make an unarmed, melee or ranged based attack against a target, you can make an additional attack as a Bonus Action. 
+When you make a melee or ranged based attack against a target, you can make an additional attack as a Bonus Action.
 
 | 9th Level |
 | :---- |
@@ -600,20 +720,20 @@ When you make an unarmed, melee or ranged based attack against a target, you can
 
 Casting a Spell will activate Extra Attack.
 
-## **Deific**
-
-**Passive Feature**
-
-After using one of your Miracles, your next attack roll will always be a Critical Hit.
-
-| 11th Level |
-| :---- |
-
 ## **War Gods Vessel**
 
 **Passive Feature**
 
 When you utilize your Channel Divinity: War God’s Blessing in order to succeed on an Attack Roll, the bonus to your Attack Rolls remains active for three turns.
+
+| 11th Level |
+| :---- |
+
+##  **Deific**
+
+**Passive Feature**
+
+After using one of your Miracles, your next attack roll will always be a Critical Hit.
 
 # **Holy Divinations (Passives)**
 

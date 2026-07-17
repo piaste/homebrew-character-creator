@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Sorcerer
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Sorcerer: Draconic Bloodline**
 
@@ -312,7 +314,7 @@ Your Soulfire spark has been upgraded to a soulfire ignition. Allies within the 
 
 **Passive Feature**
 
-Allies within the radius( of your Soulfire ignition gain Divine Favour (Divine favour: your attacks gain 1d4 radiant damage). In addition, each time that you deal Radiant Damage your target is afflicted with one radiating Orb. (Radiating Orb: affected creature has a \-1 penalty to attack rolls per stack).
+Allies within the radius of your Soulfire Ignition gain Divine Favour (Divine favour: your attacks gain 1d4 radiant damage). In addition, each time that you deal Radiant Damage your target is afflicted with one radiating Orb. (Radiating Orb: affected creature has a \-1 penalty to attack rolls per stack).
 
 | 9th Level |
 | :---- |
@@ -475,7 +477,126 @@ While Heavily Obscured, all Attack Rolls and Damage Rolls you make are rolled wi
 
 ## 
 
-# **Sorcerer: Volcanist**
+# **Sorcerer: Soul of the Frenzied Tundra**
+
+*Within your blood rages an endless winter. Those touched by your frozen power are driven into a maddened frenzy beneath the tundra’s merciless chill.*
+
+|  | Level | Class Features | 1st | 2nd | 3rd | 4th | 5th | 6th |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  | **1st** | Sorcery Channeling, Spell Channeling, Creationary, Metamagic, Cantrips, Winter is Coming | 2 | \- | \- | \- | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 4 | \- | \- | \- | \- | \- |  |
+|  | **3rd** | Frigid Madness  | 4 | 2 | \- | \- | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- | \- | \- | \- |  |
+|  | **5th** | Morbid Creation, Winter Harvest | 4 | 4 | 2 | \- | \- | \- |  |
+|  | **6th** | Passive Selection (2) | 4 | 4 | 4 | \- | \- | \- |  |
+|  | **7th** | Frenzied Blizzard | 4 | 4 | 4 | 1 | \- | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
+|  | **9th** | Philosopher’s Stone, Murderous Delirium | 4 | 4 | 4 | 2 | 1 | \- |  |
+|  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
+|  | **11th** | Frozen Soul | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Sorcery Points**
+
+Sorcerers have a pool of Sorcery Points equal to their class level that is refreshed on a Short or Long rest. You may have up to 24 Sorcery Points at any given time, but a rest will reset them to your class level regardless of their current total.
+
+## **Sorcery Channeling**
+
+**▢** **Free Action,** Consumes Spell Slot, Recharge: Per Turn
+
+Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2\.
+
+## **Spell Channeling**
+
+**▢** **Free Action,** Consumes Sorcery Points, Recharge: Per Turn
+
+Generate a single Spell Slot by consuming a number of Sorcery Points equal to the level of the Spell Slot multiplied by 2\.
+
+## **Creationary**
+
+**▢** **Free Reaction**
+
+When a Spell is cast within 18m/60ft of you, you may grant yourself a stack of Sorcerous Overflow. Upon reaching three stacks of Sorcerous Overflow, the condition is removed and you gain a single Sorcery Point.
+
+## **Metamagic**
+
+You gain the ability to twist your Spells to suit your needs. Metamagic abilities are covered in their own section later in this guide.
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Sorcerer is Charisma. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+At first level you may select two spells from the Sorcerer spell list. Your Spellcasting Ability as a Sorcerer is Charisma. At each level gained, you may select two additional spells known. At class levels 3, 7, and 11 you are not limited to the Sorcerer spell list and may instead select two spells from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Sorcerer list.
+
+## **Winter is Coming**
+
+**Passive Feature**
+
+When you deal damage, deal additional Cold damage equal to your levels in Sorcerer. Doesn’t affect your off-hand weapon.
+
+| 3rd Level |
+| :---- |
+
+## **Frigid Madness**
+
+**Passive Feature**
+
+When you deal damage, you potentially apply one turn of Madness (target is hostile to everyone) to your target.
+
+| 5th Level |
+| :---- |
+
+## **Morbid Creation**
+
+**Passive Feature**
+
+While in combat, you gain one stack of Sorcerous Overflow per turn.
+
+## **Winter Harvest**
+
+**Passive Feature**
+
+Once per turn, upon landing a killing blow or a Critical Hit against a Maddened enemy, you create a Sorcery Point.
+
+| 7th Level |
+| :---- |
+
+## **Frenzied Blizzard**
+
+**Passive Feature**
+
+Enemies suffering from Madness receive 1d12 Cold damage per round. You ignore Cold based Resistances and Immunities.
+
+| 9th Level |
+| :---- |
+
+## **Philosopher’s Stone**
+
+**Passive Feature**
+
+Once per Short Rest, you may use Sorcery Channeling without consuming Sorcery Points or Spell Channeling without consuming a Spell Slot.
+
+## **Murderous Delirium**
+
+**Passive Feature**
+
+Maddened enemies deal the maximum damage possible when targeting their allies. Maddened enemies are considered to be priority targets and are significantly more likely to be targeted by their allies.
+
+| 11th Level |
+| :---- |
+
+## **Frozen Soul**
+
+**Passive Feature**
+
+Upon casting Creationary, you deal 6d6 Cold damage to all enemies within 18m of you.
+
+#  **Sorcerer: Volcanist**
 
 *Searing heat broils within you, an ancient and irrevocable flame as unpredictable as it is uncontrollable.*
 
@@ -535,7 +656,7 @@ At first level you may select two spells from the Sorcerer spell list. Your Spel
 
 **Passive Feature**
 
-When dealing damage, you ignore Fire Resistance. At the start of each of your turns, and upon landing a Killing Blow or a Critical Hit, you generate one stack of Heat (*Heat is a stacking debuff dealing 1d4 fire damage each turn. You can expend your stacks of Heat as a free action to add 1 additional fire damage per stack to your next spell*).
+When dealing damage, you ignore Fire Resistance and Immunities. At the start of each of your turns, and upon landing a Killing Blow or a Critical Hit, you generate one stack of Heat (*Heat is a stacking debuff dealing 1d4 fire damage each turn. You can expend your stacks of Heat as a free action to add 1 additional fire damage per stack to your next spell*).
 
 | 3rd Level |
 | :---- |
@@ -731,26 +852,26 @@ All Metamagic abilities are toggleable passives that consume a specific amount o
 
 ---
 
-* Absorbing Spell (2): Damage dealing Spell/Cantrip grants Resistance to Elemental damage for 3 turns  
-* Bloodied Spell (2): Damaging Spell/Cantrip inflicts Bleeding for 3 turns  
-* Careful Spell (1): Allies automatically succeed Saving Throws against Spell/Cantrip. AOE spells don’t affect your allies  
-* Defensive Spell (2): Damage dealing Spell/Cantrip grants Resistance to Physical damage for 3 turns   
-* Distance Spell (1): Increase range of targeted Spell/Cantrip by 50%, or increase melee Spell/Cantrip range to 9m/30ft  
-* Dreadful Spell (2): Damage dealing Spell/Cantrip inflicts Terrified for 1 turn  
-* Empowered Spell (2): Damage dealing Spell/Cantrip rolls damage with Advantage  
-* Extended Spell (2): Double duration of conditions, summons, and surfaces created by Spell/Cantrip  
-* Favored Spell (2): Damage dealing Spell/Cantrip gains a \+10 bonus to the Attack Roll  
-* Heightened Spell (2): Targets of Spell/Cantrip roll Saving Throw with Disadvantage  
-* Maximized Spell (2): Cantrip deals maximum amount of damage possible  
-* Piercing Spell (2): Damage dealing Spell/Cantrip ignores all Resistances  
-* Quickened Spell🩸(2): Spell/Cantrip that costs an Action now costs Bonus Action  
-* Regenerative Spell🩸(1): Damage dealing Spell/Cantrip heals you for half damage inflicted  
-* Restorative Spell (1): Single target Spell/Cantrip also provides Latent Restoration  
-* Seeking Spell (1): Spell/Cantrip rolls Attack Roll with Advantage  
-* Subtle Spell (1): Spell/Cantrip may be cast while Silenced  
-* Tempestuous Spell (2): Spell/Cantrip pushes targets back 9m/30ft and inflicts Prone on failed Strength Save  
-* Tripled Spell🩸(3): Single target Spell/Cantrip now targets 3 creatures  
-* Twinned Spell🩸(2): Single target Spell/Cantrip now targets 2 creatures
+* **Absorbing Spell (2):** Damage dealing Spell/Cantrip grants Resistance to Elemental damage for 3 turns
+* **Bloodied Spell (2):** Damaging Spell/Cantrip inflicts Bleeding for 3 turns
+* **Careful Spell (1):** Allies automatically succeed Saving Throws against Spell/Cantrip. AOE spells don’t affect your allies
+* **Defensive Spell (2):** Damage dealing Spell/Cantrip grants Resistance to Physical damage for 3 turns
+* **Distance Spell (1):** Increase range of targeted Spell/Cantrip by 50%, or increase melee Spell/Cantrip range to 9m/30ft
+* **Dreadful Spell (2):** Damage dealing Spell/Cantrip inflicts Terrified for 1 turn
+* **Empowered Spell (2):** Damage dealing Spell/Cantrip rolls damage with Advantage
+* **Extended Spell (2):** Double duration of conditions, summons, and surfaces created by Spell/Cantrip
+* **Favored Spell (2):** Damage dealing Spell/Cantrip gains a \+10 bonus to the Attack Roll
+* **Heightened Spell (2):** Targets of Spell/Cantrip roll Saving Throw with Disadvantage
+* **Maximized Magic (3):** Spell and Cantrip deals maximum amount of damage possible
+* **Piercing Spell (2):** Damage dealing Spell/Cantrip ignores all Resistances
+* **Quickened Spell🩸(2):** Spell/Cantrip that costs an Action now costs Bonus Action
+* **Regenerative Spell🩸(1):** Damage dealing Spell/Cantrip heals you for half damage inflicted
+* **Restorative Spell (1):** Single target Spell/Cantrip also provides Latent Restoration
+* **Seeking Spell (1):** Spell/Cantrip rolls Attack Roll with Advantage
+* **Subtle Spell (1):** Spell/Cantrip may be cast while Silenced
+* **Tempestuous Spell (2):** Spell/Cantrip pushes targets back 9m/30ft and inflicts Prone on failed Strength Save
+* **Tripled Spell🩸(3):** Single target Spell/Cantrip now targets 3 creatures
+* **Twinned Spell🩸(2):** Single target Spell/Cantrip now targets 2 creatures
 
 ---
 

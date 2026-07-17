@@ -1,3 +1,5 @@
+# Warlock
+
 ## **This Document Has Been Updated Through 8.0.4**
 
 # **Warlock: Pact Of The Blade**
@@ -85,7 +87,7 @@ When you use your action to make an unarmed or weapon based Attack Roll with you
 
 **Passive Feature**
 
-When dealing damage, you ignore all forms of Fire Resistance. Additionally, while your weapons are coated in Hellfire, dealing damage with them causes all targets in a 3m radius to take Fire damage equal to your Warlock level (including your main target).
+When dealing damage, you ignore all forms of Fire Resistance and Immunities. Additionally, while your weapons are coated in Hellfire, dealing damage with them causes all targets in a 3m radius to take Fire damage equal to your Warlock level (including your main target).
 
 | 9th Level |
 | :---- |
@@ -165,7 +167,9 @@ Warlocks that have taken the Pact of the Chain have 3 Chained Bonds charges that
 
 ▲ **Bonus Action**, Consumes Chained Bonds charge
 
-You gain the ability to summon a fiendish familiar. Each Chained Companion lasts until long rest. Initially you may summon a Hellsboar, Imp, or Quasit. You may only have a single Chained Companion active at any time. 
+You gain the ability to summon a fiendish familiar. Each Chained Companion lasts until long rest. Initially you may summon a Hellsboar, Imp, or Quasit. You may have as many active companions as you want, as long as you can pay the Chained Bonds charge ; but you can only have one companion of each type active at the same time.
+
+When a companion dies, you recover their Chained Bond cost.
 
 | 3rd Level |
 | :---- |
@@ -189,7 +193,7 @@ On your first turn of any combat encounter, restore one Warlock Spell Slot.
 
 **Passive Feature**
 
-Your Chained Companions grow in power, gaining Extra Attack and inflicting a stack of Eldritch Inertia when dealing damage. Further, you may now choose to summon an Azer, Cambion, or Succubus.
+Your Chained Companions grow in power, gaining Extra Attack and inflicting a stack of Eldritch Inertia when dealing damage. Further, you may now choose to summon an Azer, Cambion, or Succubus for 2 Chained Bonds.
 
 | 7th Level |
 | :---- |
@@ -213,7 +217,7 @@ On your first turn of any combat encounter, restore two Warlock Spell Slots.
 
 **Passive Feature**
 
-Your Chained Companions grow in power, gaining Improved Extra Attack and inflicting a stack of Curse of Hellfire when dealing damage. Further, you gain the ability to summon Greater Chained Companions. Greater Chained Companions last only three turns.
+Your Chained Companions grow in power, gaining Improved Extra Attack and inflicting a stack of Curse of Hellfire when dealing damage. Further, you gain the ability to summon Greater Chained Companions for 3 Chained Bonds.
 
 | 11th Level |
 | :---- |
@@ -357,7 +361,7 @@ Your Eldritch Blasts will now chain to a second target. Projectiles created will
 
 **Passive Feature**
 
-When starting your turn under the effects of Penumbral Darkness, you become Invisible. When starting your turn under the effects of Penumbral Light, you create a Globe of Resistance where you are standing.
+When starting your turn under the effects of Penumbral Darkness, you become Invisible. When starting your turn under the effects of Penumbral Light, you benefit from the effect of Dispel Evil and Good.
 
 | 9th Level |
 | :---- |
@@ -383,7 +387,116 @@ Your Eldritch Blasts will now chain to two additional targets. Projectiles creat
 
 Your Eldritch Blast can now be infused with a Warlock Spell Slot in order to afflict enemies with Eldritch Bombs. At the end of three turns, an afflicted enemy and all enemies within 3m/10ft of them will take either 6d12 Necrotic Damage or 6d12 Radiant damage, depending on which Eldritch Blast was used to inflict the bomb. Eldritch Bombs are further modified by effects which would alter your Eldritch Blast, and may be immediately detonated by casting Serrated Hematic Invocation. 
 
-# **Warlock: Pact Of The Tome**
+# **Warlock: Pact Of Severance**
+
+*You have bargained with forces that dwell beyond the veil. By surrendering flesh and certainty alike, you walk the boundary between life and death.*
+
+|  | Level | Class Features | Spell Slots | Spell Slot Level |  |
+| :---: | :---: | :---- | :---: | :---: | :---: |
+|  | **1st** | Severing Eldritch Blast, Severing Hematic Invocation, Going Ghost | 2 | 1st |  |
+|  | **2nd** | Passive Selection (2) | 2 | 1st |  |
+|  | **3rd** | Curse of the Spectre | 2 | 2nd |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 2 | 2nd |  |
+|  | **5th** | Mystic Arcanum, Severed Resolve | 3 | 3rd |  |
+|  | **6th** | Passive Selection (2) | 3 | 3rd |  |
+|  | **7th** | Bitter Cold | 3 | 4th |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 3 | 4th |  |
+|  | **9th** | Deepened Arcanum, Absolute Zero | 4 | 5th |  |
+|  | **10th** | Passive Selection (2) | 4 | 5th |  |
+|  | **11th** | Spectral Rebirth | 4 | 6th |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 6th |  |
+
+| 1st Level |
+| :---- |
+
+## **Severing Eldritch Blast**
+
+⬤ **Action**, Evocation Cantrip
+
+Conjure a beam of crackling energy, targeting one enemy within 18m/60ft. Requires a Ranged Spell Attack to hit, and deals 1d12 Cold damage. This damage increases to 2d12 at level 5, and 3d12 at level 9\.
+
+## **Severing Hematic Invocation**
+
+**▢** **Free Action**, Recharge: Per Turn
+
+Sacrifice 10% of your total Hit Points to an Eldritch abomination in order to restore a Warlock Spell Slot. Your maximum Hit Points will be reduced by this amount until your next Long Rest.
+
+Using Severing Hematic Invocation will Sever yourself for a round (you can’t be targeted, and you are permeable ; additionally, you can teleport to a place of your choosing within 18m as a Bonus action, not limited by line of sight).
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Warlock is Charisma. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+At first level you may select two spells from the Warlock spell list. Your Spellcasting Ability as a Warlock is Charisma. At each level gained, you may select two additional spells known. At class levels 3, 7, and 11 you are not limited to the Warlock spell list and may instead select two spells from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Warlock list.
+
+Unlike other spellcasters, Warlocks only ever have a small pool of spell slots that recharge on a Short Rest or a Long Rest. You begin with 2 spell slots, and gain another at levels 5 and 9\. These spell slots grow in power as your Warlock level rises, becoming 2nd level spell slots at level 3 and increasing every 2 levels thereafter.
+
+## **Going Ghost**
+
+**Passive Feature**
+
+When dealing damage, you deal additional Cold damage equal to your levels in Warlock. Doesn’t apply to your off-hand weapon.
+
+| 3rd Level |
+| :---- |
+
+## **Curse of the Spectre**
+
+**Passive Feature**
+
+Dealing Cold damage applies one stack of Encrusted with Frost (at 7 stacks, target takes 1d4 Cold Damage and is potentially Frozen for a round).
+
+| 5th Level |
+| :---- |
+
+## **Mystic Arcanum**
+
+**Passive Feature**
+
+On your first turn of any combat encounter, restore one Warlock Spell Slot.
+
+## **Severed Resolve**
+
+**Passive Feature**
+
+Upon using Severing Hematic Invocation, you restore your Action.
+
+| 7th Level |
+| :---- |
+
+## **Bitter Cold**
+
+**Passive Feature**
+
+Dealing Cold damage will apply one stack of Frigidity (Disadvantage on attack rolls).
+
+| 9th Level |
+| :---- |
+
+## **Deepened Arcanum (Replaces Mystic Arcanum)**
+
+**Passive Feature**
+
+On your first turn of any combat encounter, restore two Warlock Spell Slots.
+
+## **Absolute Zero**
+
+**Passive Feature**
+
+Upon using Severing Hematic Invocation, your next instance of damage will deal the maximum damage possible.
+
+| 11th Level |
+| :---- |
+
+## **Spectral Rebirth**
+
+**Passive Feature**
+
+Upon being killed while in combat, you instead survive with one hit point and receive one stack of Hematic Invocation.
+
+#  **Warlock: Pact Of The Tome**
 
 *You’ve bound your soul to something eldritch and ancient for powers obscure. Within the corners of your mind, you feel it clawing, begging to be let out. And thus begins your journey to feed it….*
 
@@ -462,7 +575,7 @@ Divide your Eldritch Blast into two separate beams. Each beam will deal 1d12 For
 
 **Passive Feature**
 
-When you cast Eldritch Blast, the number you need in order to roll a Critical Hit is reduced by 1\.
+When you cast Eldritch Blast, the number you need in order to roll a Critical Hit is reduced by 2\.
 
 | 9th Level |
 | :---- |
@@ -547,9 +660,9 @@ Unlike other spellcasters, Warlocks only ever have a small pool of spell slots t
 
 ## **Advocatus Diaboli**
 
-**Free Action**
+ ▲ **Bonus Action**
 
-Gain the ability to absorb the life force from a corpse within 18m of you, removing one stack of Hematic Invocation. This action cannot be used while under Demonic Visage.
+Gain the ability to absorb the life force from a corpse within 18m of you, removing one stack of Hematic Invocation as a ▲ Bonus Action. This action cannot be used while under Demonic Visage.
 
 | 5th Level |
 | :---- |
@@ -705,7 +818,7 @@ When making a successful Attack Roll with your Eldritch Blast, your target may p
 
 ## **One With Shadows\***
 
-Upon killing a target or landing a Critical Hit, you and all Chained Companions visible within 18m/60ft of you become Invisible for three turns.
+On Kill or when you inflict a Critical Hit, you and all Chained Companions visible within 18m/60ft of you become Invisible for three turns.
 
 ---
 

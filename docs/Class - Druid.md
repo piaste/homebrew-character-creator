@@ -1,4 +1,4 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Druid: Circle of the Elements**
 
@@ -30,7 +30,7 @@ Druids have 3 Wild Shape charges that are replenished on a short rest or long re
 
 ▲ **Bonus Action**, Consumes Wild Shape Charge
 
-## You may magically assume the shape of a beast. At first level, you may learn 3 of the 9 available Wild Shape forms. At class level 5 you may learn another 3 forms, and at class level 9 you may learn the final 3 forms. This ability is explained further in the Wild Shape Forms section of this document. 
+## You may magically assume the shape of a beast. You can only select a single wildshape form (only Moon druids can select them all). This ability is explained further in the Wild Shape Forms section of this document.
 
 ## **Beastcraft**
 
@@ -90,7 +90,7 @@ When you use your action to make an unarmed or weapon-based Attack Roll with you
 
 **Passive Feature**
 
-Gain the ability to manually advance your seasons by expanding a Wildshape Charge, dealing damage, within a 9m area. The damage type dealt changes to make the season that you had upon advancing. 
+Gain the ability to manually advance your seasons by expanding a Wildshape Charge, dealing 1d8/2d8/3d8 (*cantrip scaling*) damage within a 9m area. The damage type dealt changes to make the season that you had upon advancing.
 
 | 7th Level |
 | :---- |
@@ -114,7 +114,7 @@ Casting a Spell will activate Extra Attack.
 
 **Passive Feature**
 
-On a killing blow or Critical Hit, you trigger Tempestuous Seasons within a 9m radius around your target.  
+Once per turn, On a killing blow or Critical Hit, you trigger Tempestuous Seasons within a 9m radius around your target.
 Triggering Tempestuous Seasons in this manner will not advance your seasons.
 
 | 11th Level |
@@ -156,7 +156,7 @@ Druids have 3 Wild Shape charges that are replenished on a short rest or long re
 
 ▲ **Bonus Action**, Consumes Wild Shape Charge
 
-## You may magically assume the shape of a beast. At first level, you may learn 3 of the 9 available Wild Shape forms. At class level 5 you may learn another 3 forms, and at class level 9 you may learn the final 3 forms. This ability is explained further in the Wild Shape Forms section of this document. 
+## You may magically assume the shape of a beast. You can only select a single wildshape form (only Moon druids can select them all). This ability is explained further in the Wild Shape Forms section of this document.
 
 ## **Beastcraft**
 
@@ -188,7 +188,7 @@ Summon a woodland Dryad at a location within 18m/60ft. The dryad grows in streng
 
 **Passive Feature**
 
-Creatures that you damage must succeed a Strength based Saving Throw or become Entangled.
+Creatures that you damage must succeed a Strength based Saving Throw or become Entangled. Huge creatures are immune.
 
 | 3rd Level |
 | :---- |
@@ -362,7 +362,124 @@ While assuming the form of a Wild Shape, when you use your action to make an Att
 
 Upon casting a Spell, you may assume the form of a Wild Shape as a free action. Upon landing a killing blow or Critical Hit while assuming the form of a Wild Shape, you may cast one Spell without expending a Spell Slot.
 
-# **Druid: Circle of the Spores**
+# **Druid: Circle of the Shadows**
+
+*Death is the most natural occurrence within nature. From within the shadows, you observe this fact in the truest of form, and guide others to a more intimate understanding.*
+
+|  | Level | Class Features | 1st | 2nd | 3rd | 4th | 5th | 6th |  |
+| :---: | :---: | :---- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+|  | **1st** | Wild Shape, Beastcraft, Return to Form, Cantrips, Displaced Nature | 2 | \- | \- | \- | \- | \- |  |
+|  | **2nd** | Passive Selection (2) | 4 | \- | \- | \- | \- | \- |  |
+|  | **3rd** | Veilstalker | 4 | 2 | \- | \- | \- | \- |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | \- | \- | \- | \- |  |
+|  | **5th** | Extra Attack, Predatory Communion | 4 | 4 | 2 | \- | \- | \- |  |
+|  | **6th** | Passive Selection (2) | 4 | 4 | 4 | \- | \- | \- |  |
+|  | **7th** | Distorted Visage | 4 | 4 | 4 | 1 | \- | \- |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | \- | \- |  |
+|  | **9th** | Steel Cast, Nightspill | 4 | 4 | 4 | 2 | 1 | \- |  |
+|  | **10th** | Passive Selection (2) | 4 | 4 | 4 | 2 | 2 | \- |  |
+|  | **11th** | Hallucinatory Horror | 4 | 4 | 4 | 2 | 2 | 1 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4 | 4 | 4 | 2 | 2 | 2 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Wild Shape Charges**
+
+Druids have 3 Wild Shape charges that are replenished on a short rest or long rest. *Wild Shape charges can also be recovered through the Natural Bounty and Wild Stride class passives.*
+
+## **Wild Shape**
+
+▲ **Bonus Action**, Consumes Wild Shape Charge
+
+## You may magically assume the shape of a beast. You can only select a single wildshape form (only Moon druids can select them all). This ability is explained further in the Wild Shape Forms section of this document.
+
+## **Beastcraft**
+
+**🔄 Toggleable**
+
+This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time.
+
+## **Return to Form**
+
+**🔄 Toggleable**
+
+At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.
+
+## **Cantrips**
+
+At first level you may select two cantrips. Your Spellcasting Ability as a Druid is Wisdom. You may select an additional cantrip at levels 5 and 9\.
+
+## **Spellcasting**
+
+At first level you may select two spells from the Druid spell list. Your Spellcasting Ability as a Druid is Wisdom. At each level gained, you may select two additional spells known. At class levels 3, 7, and 11 you are not limited to the Druid spell list and may instead select two spells from any spell list. At every level after 1st, you may choose to replace a single spell known with a different spell from the Druid list.
+
+## **Displaced Nature**
+
+**Passive Feature**
+
+While assuming the form of a Wild Shape, you are able to transform into a Displacer Beast, able to drive your targets to Madness and create Illusory Copies of yourself.
+
+Additionally, you can see in magical darkness.
+
+| 3rd Level |
+| :---- |
+
+## **Veilstalker**
+
+**Passive Feature**
+
+While Wildshaped or Obscured, you recover HP equal to your Druid level at the start of each of your turns.
+
+Additionally, while Wildshaped or obscured, you deal additional Psychic damage equal to your Druid level whenever you deal damage. This bonus does not apply to damage dealt with your off-hand weapon.
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Predatory Communion**
+
+▲ **Bonus Action**
+
+You can morph your allies into Displacer Beasts (*viable allies include summons*).
+
+| 7th Level |
+| :---- |
+
+## **Distorted Visage**
+
+**Passive Feature**
+
+You are permanently considered to be Heavily Obscured to any creature further than 3m from you.
+
+| 9th Level |
+| :---- |
+
+## **Steel Cast**
+
+**Passive Feature**
+
+Casting a Spell will activate Extra Attack.
+
+## **Nightspill**
+
+**🔄 Toggleable**
+
+Upon moving in combat, you leave behind a cloud of magical darkness. This can be toggled at any time.
+
+| 11th Level |
+| :---- |
+
+## **Hallucinatory Horror**
+
+**Passive Feature**
+
+Upon driving a creature to Madness, they become Vulnerable to Psychic damage.
+
+#  **Druid: Circle of the Spores**
 
 *Viewing death, necrosis, fungal growth, and sporulation as just another part of life, you can manipulate such spores to augment yourself and harm your foes.*
 
@@ -392,7 +509,7 @@ Druids have 3 Wild Shape charges that are replenished on a short rest or long re
 
 ▲ **Bonus Action**, Consumes Wild Shape Charge
 
-## You may magically assume the shape of a beast. At first level, you may learn 3 of the 9 available Wild Shape forms. At class level 5 you may learn another 3 forms, and at class level 9 you may learn the final 3 forms. This ability is explained further in the Wild Shape Forms section of this document. 
+## You may magically assume the shape of a beast. You can only select a single wildshape form (only Moon druids can select them all). This ability is explained further in the Wild Shape Forms section of this document.
 
 ## **Beastcraft**
 
@@ -515,7 +632,7 @@ Druids have 3 Wild Shape charges that are replenished on a short rest or long re
 
 ▲ **Bonus Action**, Consumes Wild Shape Charge
 
-## You may magically assume the shape of a beast. At first level, you may learn 3 of the 9 available Wild Shape forms. At class level 5 you may learn another 3 forms, and at class level 9 you may learn the final 3 forms. This ability is explained further in the Wild Shape Forms section of this document. 
+## You may magically assume the shape of a beast. You can only select a single wildshape form (only Moon druids can select them all). This ability is explained further in the Wild Shape Forms section of this document.
 
 ## **Beastcraft**
 
@@ -553,7 +670,7 @@ Restore one Star Map.
 
 Take on a Shape of the Cosmos, allowing the constellation of a guiding figure to watch over you. Each Shape lasts until Long Rest and enables the use of a unique Cantrip.
 
-* **Archer:** Grants Luminous Arrow (Bonus Action, \[1d12/2d12 at level 5/3d12 at level 9\] Radiant damage to a target within 18m/60ft, consumes 1 Star Map)  
+* **Archer:** Grants Luminous Arrow (Bonus Action, \[1d8/2d8 at level 5/3d8 at level 9\] Radiant damage to a target within 18m/60ft, consumes 1 Star Map)
 * **Chalice:** Grants Chalice Healing (Bonus action, heals a creature within 18m/60ft \[1d12/2d12 at level 5/3d12 at level 9\] hit points, consumes 1 Star Map)  
 * **Dragon:** Grants Breath of the Cosmos (Bonus action, deals \[1d12/2d12 at level 5/3d12 at level 9\] Radiant damage to all targets in a 6m/20ft cone, consumes 1 Star Map)
 
@@ -688,33 +805,29 @@ Attacks in Wild Shape forms use the higher of Strength or Dexterity when determi
 | :---- |
 | HP 10 | Str 10, Dex 18, Con 14 **Resistances:** none **Venomous Bite*:*** Default Attack, 1d8+4 Piercing, inflicts Poison for 1 turn on failed Con Save **Web:** Bonus Action, create flammable Web surface within 18m/60ft that Enwebs creatures on failed Dex save. Enwebbed creatures cannot move and make all Dexterity saving throws with Disadvantage. Attacks against Enwebbed targets are made with Advantage.  **Arachnid:** You are immune to becoming Enwebbed and have an increased jump distance. Additionally, you are Infested at all times and are immune to its negative effects. *(Infested deals 1d4 poison damage each turn and spreads to melee attackers. Infested is removed by fire or acid damage or if Helped.)*   **HP Growth:** HP increases by 6 every level, to a maximum of 76 at Druid 12\.  **Level 5:** Venomous Bite increases to 2d8+4. **Level 9:** Venomous Bite increases to 3d8+4. |
 
-| Sabre-Toothed Tiger |
-| :---- |
-| HP 11 | Str 13, Dex 18, Con 16 **Resistances:** none **Bite*:*** Default Attack, 1d8+4 Piercing **Shred Armour:** Attack, 1d8+4 Slashing, reduce target’s Armour Class by 2 for 1 turn on a failed Dex Save. Recharge: Per Turn **Animalistic Vitality:** Regain 1d6 hit points every round of combat. **HP Growth:** HP increases by 7 every level, to a maximum of 88 at Druid 12\.  **Level 5:** Bite and Shred Armour increase to 2d8+4. **Level 9:** Bite and Shred Armour increase to 3d8+4. |
-
 | Myrmidon (Air) \- Circle of the Element Exclusive |
 | :---- |
-| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Thunder Immunity, Lightning Immunity **Flail of the Vortex:** Flail (Weapon), Default Attack, 1d8+4 Lightning  **Raging Vortex:** Bonus Action, 1d12 Thunder damage in a 3m/10ft radius each round, prevents creatures inside from leaving on failed Str Save, requires Concentration. **Electrified Flail:** Attack, 1d8+4 Lightning, inflicts Stun for 1 turn on failed Con Save, Recharge: Per Turn. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Electrified Flail increases to 2d8+4. **Level 9:** Electrified Flail increases to 3d8+4. |
+| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Thunder Immunity, Lightning Immunity **Flail of the Vortex:** Flail (Weapon), Default Attack, 1d8+4 Lightning  **Free action :** All Myrmidon actions are able to be cast for free, once per turn. **Raging Vortex:** Bonus Action, 1d12 Thunder damage in a 3m/10ft radius each round for 3 rounds, prevents creatures inside from leaving on failed Str Save. **Electrified Flail:** Attack, 1d8+4 Lightning, inflicts Stun for 1 turn on failed Con Save, Recharge: Per Turn. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Electrified Flail increases to 2d8+4. **Level 9:** Electrified Flail increases to 3d8+4. |
 
 | Myrmidon (Earth) \- Circle of the Element Exclusive |
 | :---- |
-| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Acid Immunity, Poison Immunity **Earthen Fists*:*** Default Attack, 1d8+4 Force **Seismic Slam:** Attack, deal 1d8+4 Bludgeoning to all creatures within 3m/10ft, knocks targets prone on failed Str Save and creates a Mud surface, Recharge: Per Turn. **Transmute Steel:** Bonus Action, increase your Armour Class by 4 until your next turn. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Earthen Fists and Seismic Slam increase to 2d8+4. **Level 9:** Earthen Fists and Seismic Slam increase to 3d8+4. |
+| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Acid Immunity, Poison Immunity **Earthen Fists*:*** Default Attack, 1d8+4 Force **Seismic Slam:** Attack, deal 1d8+4 Bludgeoning to all creatures within 3m/10ft, knocks targets prone on failed Str Save and creates a Mud surface, Recharge: Per Turn. **Free action :** All Myrmidon actions are able to be cast for free, once per turn. **Transmute Steel:** Bonus Action, increase your Armour Class by 4 for 3 turns. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Earthen Fists and Seismic Slam increase to 2d8+4. **Level 9:** Earthen Fists and Seismic Slam increase to 3d8+4. |
 
 | Myrmidon (Fire) \- Circle of the Element Exclusive |
 | :---- |
-| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Fire Immunity, Radiant Immunity **Scimitar of Cinder:** Scimitar (Weapon), Default Attack, 1d8+4 Fire  **Cinderous Inferno:** Action, Deal 1d8+4 fire damage to all targets in a 3m/10ft radius area within 18m/60ft, inflicts Burn for 3 turns, Recharge: Per Turn **Hellfire’s Rebuke:** Reaction, deal 1d8+4 Fire damage to attacker. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Electrified Flail increases to 2d8+4. **Level 9:** Electrified Flail increases to 3d8+4. |
+| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Fire Immunity, Radiant Immunity **Scimitar of Cinder:** Scimitar (Weapon), Default Attack, 1d8+4 Fire  **Free action :** All Myrmidon actions are able to be cast for free, once per turn. **Cinderous Inferno:** Action, Deal 1d8+4 fire damage to all targets in a 3m/10ft radius area within 18m/60ft, inflicts Burn for 3 turns, Recharge: Per Turn **Hellfire’s Rebuke:** Reaction, deal 1d8+4 Fire damage to attacker. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Electrified Flail increases to 2d8+4. **Level 9:** Electrified Flail increases to 3d8+4. |
 
 | Myrmidon (Water) \- Circle of the Element Exclusive |
 | :---- |
-| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Cold Immunity, Force Immunity **Trident of the Depths:** Trident (Weapon), Default Attack, 1d12+4 Cold  **Elemental Vapours:** Bonus action, while in combat you explode with elemental water, affecting all creatures within 3m/10ft. This ability by default heals creatures for 1d8+4 hit points, but will instead deal 1d8+4 poison damage if you are Poisoned. Creates Water surface. Recharge: Per Turn. **Snap Freeze:** Action, Deal 1d8+4 cold damage to all targets in 3m/10ft radius area within 18m/60ft, creates ice surface, Recharge: Per Turn. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Electrified Flail increases to 2d8+4. **Level 9:** Electrified Flail increases to 3d8+4. |
+| HP 12 | Str 18, Dex 18, Con 18 **Resistances:** Cold Immunity, Force Immunity **Trident of the Depths:** Trident (Weapon), Default Attack, 1d12+4 Cold  **Free action :** All Myrmidon actions are able to be cast for free, once per turn. **Elemental Vapours:** Bonus action, while in combat you explode with elemental water, affecting all creatures within 3m/10ft. This ability by default heals creatures for 1d8+4 hit points, but will instead deal 1d8+4 poison damage if you are Poisoned. Creates Water surface. Recharge: Per Turn. **Snap Freeze:** Action, Deal 1d8+4 cold damage to all targets in 3m/10ft radius area within 18m/60ft, creates ice surface, Recharge: Per Turn. **Elemental Warp:** Bonus Action, teleport to an unoccupied space within 18m/60ft **Natural Flight:** Gain the fly action and a flight movement speed of 18m/60ft.  **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Electrified Flail increases to 2d8+4. **Level 9:** Electrified Flail increases to 3d8+4. |
 
 | Owlbear \- Circle of the Moon Exclusive |
 | :---- |
-| HP 12 | Str 22, Dex 16, Con 18 **Resistances:** none **Claws*:*** Default Attack, 1d8+6 Slashing **Animalist Rage:** Gain 3 Rage charges that are replenished on a Short Rest, or when landing a killing blow or Critical Hit. Rage charges are used to fuel the Owlbear’s special attacks and persist after leaving the form.  **Crushing Flight:** Bonus Action, leap 18m/60ft and deal 1d8+6 bludgeoning damage to a target, knocking it and all creatures within 3m/10ft prone on a failed Strength save. Costs 1 Rage charge. **Terrifying Rage:** Bonus action, Increase Strength by 2 for 3 turns, inflicts Terrify on all enemies within 9m/30ft on a failed Wis Save. Costs 1 Rage charge. **Rupture:** Attack, deal 1d8+6 bludgeoning damage to all creatures and objects within 3m/10ft and push them back 4.5m/15ft on a failed Str Save. Costs 1 Rage charge. **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Claws, Crushing Flight, and Rupture increase to 2d8+6. **Level 9:** Claws, Crushing Flight, and Rupture increase to 3d8+6. |
+| HP 12 | Str 26, Dex 16, Con 18 **Resistances:** none **Claws*:*** Default Attack, 1d8+6 Slashing **Animalist Rage:** Gain 3 Rage charges that are replenished on a Short Rest, or when landing a killing blow or Critical Hit. Rage charges are used to fuel the Owlbear’s special attacks and persist after leaving the form.  **Crushing Flight:** Bonus Action, leap 18m/60ft and deal 1d8+6 bludgeoning damage to a target, knocking it and all creatures within 3m/10ft prone on a failed Strength save. Costs 1 Rage charge. **Terrifying Rage:** Bonus action, Increase Strength by 2 for 3 turns, inflicts Terrify on all enemies within 9m/30ft on a failed Wis Save. Costs 1 Rage charge. **Rupture:** Attack, deal 1d8+6 bludgeoning damage to all creatures and objects within 3m/10ft and push them back 4.5m/15ft on a failed Str Save. Costs 1 Rage charge. **HP Growth:** HP increases by 8 every level, to a maximum of 100 at Druid 12\.  **Level 5:** Claws, Crushing Flight, and Rupture increase to 2d8+6. **Level 9:** Claws, Crushing Flight, and Rupture increase to 3d8+6. |
 
 | Panther \- Circle of the Moon Exclusive |
 | :---- |
-| HP 10 | Str 18, Dex 22, Con 14 **Resistances:** none **Bite*:*** Default Attack, 1d8+6 Piercing **Pounce:** Attack, leap at a target within 18m/60ft and deal 1d8+6 bludgeoning damage, knocking it prone on a failed Str Save. Consumes Movement Speed, Recharge: Per Turn. **Prowl:** Bonus Action, turn invisible until long rest, your first attack deals an additional \+1d8 damage, Concentration, Recharge: Per Turn. **Apex Predator:** You deal an additional \+1d6 damage to Prone targets. **HP Growth:** HP increases by 6 every level, to a maximum of 76 at Druid 12\.  **Level 5:** Bite and Pounce increase to 2d8+6. **Level 9:** Bite and Pounce increase to 3d8+6. |
+| HP 10 | Str 18, Dex 22, Con 14 **Resistances:** none **Bite*:*** Default Attack, 1d8+6 Piercing **Pounce:** Attack, leap at a target within 18m/60ft and deal 1d8+6 bludgeoning damage, knocking it prone on a failed Str Save. Consumes Movement Speed, Recharge: Per Turn. **Prowl:** Bonus Action, turn invisible until long rest, your first attack deals an additional \+1d8 damage, Concentration, Recharge: Per Turn. **Apex Predator:** You deal an additional \+1d8 damage to Prone targets. **HP Growth:** HP increases by 6 every level, to a maximum of 76 at Druid 12\.  **Level 5:** Bite and Pounce increase to 2d8+6. **Level 9:** Bite and Pounce increase to 3d8+6. |
 
 # **Druidic Roots (Passives)**
 
@@ -743,19 +856,19 @@ When you roll a Critical hit with a Spell, Petrify your target for one turn.
 
 ## **Feral Precision\***
 
-Gain a \+2 bonus to all Attack Rolls. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active. 
+Gain a \+2 bonus to all Attack Rolls. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, while Symbiotic Entity is active, or while you have a summoned Dryad active.
 
 ---
 
 ## **Feral Resilience**
 
-Upon assuming the form of a While Shape, gain Temporary Hit Points equal to your Druid level multiplied by four. *(This only occurs when entering a Wild Shape form from your natural form, not when swapping between forms with Moonbreak.)*
+Upon assuming the form of a While Shape or while you have a summoned Dryad active , gain Temporary Hit Points equal to your Druid level multiplied by four. *(This only occurs when entering a Wild Shape form from your natural form, not when swapping between forms with Moonbreak.)*
 
 ---
 
 ## **Ferocious Stand\***
 
-Gain a \+1 bonus to your Armour Class. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active. 
+Gain a \+1 bonus to your Armour Class. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, while Symbiotic Entity is active, or while you have a summoned Dryad active.
 
 ---
 
@@ -809,7 +922,7 @@ Damaging other creatures potentially Goads them into attacking you. (*Challenged
 
 ## **Primal Bloodletter\***
 
-While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to inflict Gaping Wounds on your target when you make a successful Attack Roll. 
+While assuming the form of a Wild Shape, a Shape of the Cosmos, while Symbiotic Entity is active or while you have a summoned Dryad active, you have a chance to inflict Gaping Wounds on your target when you make a successful Attack Roll.
 
 ---
 
@@ -821,7 +934,7 @@ Deal additional damage while Wild Shaped equal to your Wisdom Modifier.
 
 ## **Primal Takedown\***
 
-While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to knock your target Prone when you make a successful Attack Roll. 
+While assuming the form of a Wild Shape, a Shape of the Cosmos,while Symbiotic Entity is active or while you have a summoned Dryad active, you have a chance to knock your target Prone when you make a successful Attack Roll.
 
 ---
 

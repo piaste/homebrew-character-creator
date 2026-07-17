@@ -1,4 +1,6 @@
-**THIS DOCUMENT HAS BEEN UPDATED THROUGH 8.0.4**
+# Rogue
+
+**THIS DOCUMENT HAS BEEN UPDATED THROUGH 9.0+**
 
 # **Rogue: Arcane Trickster**
 
@@ -30,7 +32,7 @@ Rogues have 3 Luck Points that are replenished on a short rest or long rest. Luc
 
 **🔄 Toggleable**
 
-Spend one of your Lucky dice to gain Advantage on Attack Rolls or force Enemies to Attack you with Disadvantage. Once per turn, the first time you deal or take damage will consume one Luck Point. 
+Spend one of your Lucky dice to gain Advantage on Attack Rolls or force Enemies to Attack you with Disadvantage. Once per turn, the first time you deal or take damage will 7 one Luck Point.
 
 ## **Lucky Odds: Ability Checks**
 
@@ -47,7 +49,7 @@ Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can
 ## **Arcane Sneak Attack**
 
 **▢** **Free Reaction**  
-Once per turn, deal an extra 1d6 Piercing damage to a creature within 1.5m/5ft of an ally, or against one you have Advantage against. If casting a Cantrip or Spell, Sneak Attack will deal 1d6 Force Damage. You must be wielding a Finesse Weapon in order to trigger Sneak Attack.
+Once per turn, deal an extra 1d6 Piercing damage to a creature within 1.5m/5ft of an ally, or against one you have Advantage against. If casting a Cantrip or Spell, Sneak Attack will deal 1d6 Force Damage and doesn’t require advantage on an adjacent ally. You must be wielding a Finesse Weapon in order to trigger Sneak Attack.
 
 ## **Cantrips**
 
@@ -225,7 +227,7 @@ You may now utilize your Sneak Attack two times per turn. Sneak Attack is still 
 
 **Passive Feature**
 
-While Sneaking or Invisible, you have a chance to Paralyze your target upon dealing damage.
+While Sneaking or Invisible, you have a chance to Paralyze your target upon dealing damage. When you attack a target that is not in combat, they automatically fail the saving throw.
 
 | 7th Level |
 | :---- |
@@ -268,7 +270,7 @@ While Sneaking or Invisible, dealing damage to a target leaves it unable to be A
 
 **Passive Feature**
 
-Dealing damage to a target with less than 10% of its total Hit Points instantly kills them.
+Dealing damage to a target with less than 20% of its total Hit Points instantly kills them.
 
 # **Rogue: Hidden Toxicant**
 
@@ -328,7 +330,7 @@ Dealing poison damage to an enemy afflicts them with one stack of Toxicity. Whil
 
 ## **Detonate Toxicity** 
 
-▲ **Bonus Action,** 18m range, consume 3 stacks of Toxicity
+**▢** **Free Action,** 18m range, consume 3 stacks of Toxicity
 
 - **Delirium Surge**: Your enemy is Critically Off-Balanced for 3 turns with no save.  
 - **Withering Step**: Your enemy is Slowed for 3 turns with no save.  
@@ -364,7 +366,7 @@ You may now utilize your Sneak Attack two times per turn. Sneak Attack is still 
 
 ## **Deepened Toxicity**
 
-▲ **Bonus Action,** 18m range, consume 5 stacks of Toxicity
+**▢** **Free Action,** 18m range, consume 5 stacks of Toxicity
 
 - **Hazed Capitulation:** Wreck your targets sense of direction, Confusing them for 3 turns with no save.   
 - **Septic Silence:** Debilitate an enemies ability to speak, Muting them for 3 turns and breaking their Concentration with no save.   
@@ -400,7 +402,7 @@ You may now utilise your Sneak Attack three times per turn. Sneak Attack is stil
 
 ## **Perfected Toxicity**
 
-▲ **Bonus Action,** 18m range, consume 7 stacks of Toxicity
+**▢** **Free Action,** 18m range, consume 7 stacks of Toxicity
 
 - **Neurotic Lockdown:** Ravage your target's senses of pain, Paralyzing them for 1 turn with no save.   
 - **Violent Nausea:** Debilitate your target with an intense sickness, Nauseating them for 1 turn with no save.  
@@ -711,7 +713,140 @@ Lucky Toss now restores a Luck Point every turn.
 
 Gain three additional Reactions. 
 
-# **Cunning Subversions (Passives)**
+# **Rogue: Virulence**
+
+*A single wound is all you require. What begins as a scratch soon festers into ruin as virulent corruption courses through your victim.*
+
+|  | Level | Class Features | Sneak Attack |  |
+| :---: | :---: | :---- | :---: | :---: |
+|  | **1st** | Luck Points, Nimble Movement, Virulent Sneak Attack, Virulent Edge | 1d6 |  |
+|  | **2nd** | Passive Selection (2) | 1d6 |  |
+|  | **3rd** | Acidic Laceration | 2d6 |  |
+|  | **4th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 2d6 |  |
+|  | **5th** | Extra Attack, Lucky Toss, Greater Sneak Attack, Corrosive Strike | 3d6 |  |
+|  | **6th** | Passive Selection (2) | 3d6 |  |
+|  | **7th** | Virulent Detonation | 4d6 |  |
+|  | **8th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 4d6 |  |
+|  | **9th** | Improved Extra Attack, Uncanny Dodge, Superior Sneak Attack, Toxic Opportunity | 5d6 |  |
+|  | **10th** | Passive Selection (2) | 5d6 |  |
+|  | **11th** | Terminal Exposure | 6d6 |  |
+|  | **12th** | [Feat Selection](https://docs.google.com/document/d/19H_pSSD2HMtQtbz10i60m2nvsd8cGJnlNxbEV6R-Zg4/edit?tab=t.0#heading=h.f6aj1awker) | 6d6 |  |
+
+| 1st Level |
+| :---- |
+
+## **Class Resource: Luck Points**
+
+Rogues have 3 Luck Points that are replenished on a short rest or long rest. Luck Points are primarily used to give yourself Advantage or force an enemy to redo their roll. *Luck Points can also be recovered through the Cunning Strikes class passive.*
+
+## **Lucky Odds: Attack Rolls**
+
+**🔄 Toggleable**
+
+Spend one of your Lucky dice to gain Advantage on Attack Rolls or force Enemies to Attack you with Disadvantage. Once per turn, the first time you deal or take damage will consume one Luck Point.
+
+## **Lucky Odds: Ability Checks**
+
+**🔄 Toggleable**
+
+Spend one of your Lucky dice to gain Advantage on your next Ability Check. This effect can be toggled at any time.
+
+## **Nimble Movement**
+
+**🔄 Toggleable**
+
+Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.
+
+## **Virulent Sneak Attack**
+
+**▢** **Free Reaction**
+
+Once per turn, deal an extra 1d6 Acid damage to a creature within 1.5m/5ft of an ally, or against one you have Advantage against. You must be wielding a Finesse Weapon in order to trigger Sneak Attack.
+
+## **Virulent edge**
+
+**Passive Feature**
+
+When dealing damage to an enemy, you deal additional Acid damage equal to your levels in Rogue. Doesn’t affect your off-hand weapon.
+
+| 3rd Level |
+| :---- |
+
+##  **Acidic Laceration**
+
+**Passive Feature**
+
+Dealing Acid damage applies one stack of Acid.
+
+| 5th Level |
+| :---- |
+
+## **Extra Attack**
+
+When you use your action to make an unarmed or weapon based Attack Roll with your main hand, you may make an additional attack for free.
+
+## **Lucky Toss**
+
+**Passive Feature**
+
+While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns.
+
+## **Greater Sneak Attack**
+
+**Passive Feature**
+
+You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.
+
+## **Corrosive Strike**
+
+**Passive Feature**
+
+Upon triggering Sneak Attack on an enemy, they immediately become Corroded for one turn.
+
+| 7th Level |
+| :---- |
+
+## **Virulent Detonation**
+
+**Passive Feature**
+
+Your Sneak Attack now deals damage to all enemies in a 3m radius around your target.
+
+| 9th Level |
+| :---- |
+
+## **Improved Extra Attack**
+
+Extra Attack now provides an additional Action at all times, rather than a free attack.
+
+## **Uncanny Dodge**
+
+**✦ Reaction**
+
+When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss.
+
+## **Superior Sneak Attack (Replaces Greater Sneak Attack)**
+
+**Passive Feature**
+
+You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.
+
+## **Toxic Opportunity**
+
+**Passive Feature**
+
+When targeting a creature coated in Acid or Corroded, you make all Attack Rolls with Advantage and you have Advantage on damage rolls.
+
+| 11th Level |
+| :---- |
+
+## **Terminal Exposure**
+
+**Passive Feature**
+
+When dealing weapon damage to a Corroded enemy, you deal additional damage equal to your Sneak Attack.
+
+#  **Cunning Subversions (Passives)**
 
 A character may select two passive abilities at levels 2, 6, and 10\. Certain passive abilities also appear on Rare quality equipment found throughout your adventures. 
 
@@ -820,7 +955,7 @@ While Sneaking or Invisible, teleport up to 9m/30ft. Your ability to warp is not
 
 ## **Spectral Hunter**
 
-Upon dealing damage, you afflict your target with Hunter’s Mark. 
+Upon dealing damage while sneaking or invisible, you afflict your target with Hunter’s Mark.
 
 ---
 
