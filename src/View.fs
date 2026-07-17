@@ -337,9 +337,22 @@ let levelBoxes (model: Model) =
             }
     }
 
+let inline toPicker<
+        [<Measure>] 'm, 
+        't when 't : (member Id : string<'m>) 
+            and 't: (member Name : string)
+            and 't: (member Description: GameString)
+    > 
+    useLoreNames
+    (iconPicker : 't -> string option)
+    (s : 't seq)
+     =
+    s
+    |> Seq.map<'t, Picker.Thing<'m>> (fun (c : 't) -> { Id = c.Id; Name = c.Name; Description = c.Description.Display useLoreNames; Icon = iconPicker c})
+    |> Seq.toList
+
 let otherView (model: Model) (dispatch : Message -> unit) = 
-    let raceTag = 
-        BaseRaces.allBaseRaces[Races.allSubraces[model.Character.RaceId].BaseRaceId].Name
+    System.Console.WriteLine "View updated"
 
     let c = model.Character
     let l = c.NextLevelUp
@@ -420,8 +433,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Archetypes ->
                 ph Archetypes <| Picker.view "Archetype"                    
                     (Archetypes.allArchetypes.Values
-                     |> Seq.map<_, Picker.Thing<archetypeId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
-                     |> Seq.toList
+                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     Set.empty
                     (Set.singleton c.ArchetypeId)
@@ -429,8 +441,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Traits ->
                 ph Traits <| Picker.view "Trait"
                     (Traits.allTraits.Values
-                     |> Seq.map<_, Picker.Thing<traitId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
-                     |> Seq.toList
+                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     Set.empty
                     (Set.singleton c.TraitId)
@@ -479,8 +490,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick ClassPassives ->
                 ph ClassPassives <| Picker.view "Passives"
                     (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
-                     |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
-                     |> Seq.toList
+                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllClassPassiveIdsByClass[classIdBySubclassId l.SubclassId]
                     l.ClassPassiveIds
@@ -488,8 +498,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Feats ->
                 ph Feats <| Picker.view "Feat"
                     (Feats.allFeats.Values
-                     |> Seq.map<_, Picker.Thing<featId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
-                     |> Seq.toList
+                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllFeatIds
                     (l.FeatId |> Option.toList |> Set.ofList)
@@ -498,8 +507,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 let sps = SpecialPicks.allSpecialPicksOfType sp
                 ph (ClassSpecific sp) <| Picker.view sp.DisplayString
                     (sps.Values
-                     |> Seq.map<_, Picker.Thing<specialPickId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
-                     |> Seq.toList
+                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllSpecialPicks
                     (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp))
@@ -533,7 +541,31 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             )
                             (c.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(classSpecialistId, Set.empty))
                             (l.FeatSubPicks.GetOrElse(FeatSubpickType.ClassPassives, Set.empty) |> Set.map UMX.tag<classPassiveId>)
+                            
+                | FeatSubpickType.Archetypes ->
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (Archetypes.allArchetypes.Values
+                        |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                        )
+                        Set.empty
+                        (Set.singleton c.ArchetypeId)
 
+                | FeatSubpickType.Traits ->
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (Traits.allTraits.Values
+                        |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                        )
+                        Set.empty
+                        (Set.singleton c.TraitId)
+
+                | FeatSubpickType.SkillProficiencies ->
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (Skills.allSkills.Values
+                        |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                        |> Seq.toList
+                        )
+                        Set.empty
+                        c.SkillIds
 
 
         )
@@ -547,33 +579,32 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             }
         )
         .PicksDocks(
-            forEach c.Picks (fun p ->
-                let f = 
-                    match p.Key with
-                    | Archetypes -> 
-                        picksDockButton "Archetype" 1
-                    | Traits -> 
-                        picksDockButton "Trait" 1
-                    | Skills ->
-                        picksDockButton "Skills" c.SkillIds.Count
-                    | SkillExps ->
-                        picksDockButton "Expertises" c.SkillExpIds.Count
-                    | Cantrips -> 
-                        picksDockButton "Cantrips" l.CantripIds.Count
-                    | Spells -> 
-                        picksDockButton "Spells" l.SpellIds.Count
-                    | ClassPassives -> 
-                        picksDockButton "Passives" l.ClassPassiveIds.Count
-                    | Feats -> 
-                        picksDockButton "Feats" (Option.count l.FeatId)
-                    | ClassSpecific sp -> 
-                        picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
-                    | FeatSubpick fsp ->
-                        picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
-
-                
-                in f p.Value dispatch p.Key
-
+            forEach c.Picks (fun p ->                
+                match p.Key with
+                | Archetypes -> 
+                    picksDockButton "Archetype" 1
+                | Traits -> 
+                    picksDockButton "Trait" 1
+                | Skills ->
+                    picksDockButton "Skills" c.SkillIds.Count
+                | SkillExps ->
+                    picksDockButton "Expertises" c.SkillExpIds.Count
+                | Cantrips -> 
+                    picksDockButton "Cantrips" l.CantripIds.Count
+                | Spells -> 
+                    picksDockButton "Spells" l.SpellIds.Count
+                | ClassPassives -> 
+                    picksDockButton "Passives" l.ClassPassiveIds.Count
+                | Feats -> 
+                    picksDockButton "Feats" (Option.count l.FeatId)
+                | ClassSpecific sp -> 
+                    picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
+                | FeatSubpick fsp ->
+                    picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
+            
+                <| p.Value
+                <| dispatch
+                <| p.Key
             )
 
         )
@@ -651,19 +682,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         .LevelBoxes(levelBoxes model)
         .Error(
             concat {
-                // cond model.Errors <| function
-                //     | [] -> actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
-                //     | _ -> empty()
-                // cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                //     | true -> empty()
-                //     | false -> actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
-                // cond model.UndoStack <| function
-                //     | [] -> empty()
-                //     | _ -> 
-                //         concat {
-                //             actionButtonWithClass "Undo" "secondary disabled"  dispatch Undo
-                //             actionButtonWithClass "Reset" "secondary disabled" dispatch ResetCharacter
-                //         }
                 cond model.SystemErrors <| function
                     | [] -> empty()
                     | errs ->

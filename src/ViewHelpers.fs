@@ -65,7 +65,7 @@ let spellIcon spellId =
             $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
 let allSpellsWithIconsIn spellList = 
-    (Spells.allSpellsInList spellList).Values                     
+    Spells.allSpells.Values                     
     |> Seq.indexed
     |> Seq.map (fun (i, c) -> 
         c, if i <= 143 then 
@@ -73,6 +73,7 @@ let allSpellsWithIconsIn spellList =
            else
                 $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
+    |> Seq.filter (fst >> Spells.filterSpellsByList spellList)
 let tryGetVanillaIconSubpath = 
     function
     | Simple s
