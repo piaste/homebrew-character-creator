@@ -376,7 +376,7 @@ let rec asmodeusTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power(Action, OncePerCombat, "Fireball", "As the spell, upcast to the maximum for a spellcaster of your character level")
+                Power(Action, OncePerCombat, "Fireball", "As the spell. Scales at character level 3 and every odd level thereafter (treated as if cast with a higher-level slot).")
             ]
         }
 
@@ -388,7 +388,7 @@ let rec mephistophelesTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power(Action, OncePerCombat, "Burning Hands", "As the spell, upcast to the maximum for a spellcaster of your character level")
+                Power(Action, OncePerCombat, "Burning Hands", "As the spell. Scales at character level 3 and every odd level thereafter (treated as if cast with a higher-level slot).")
             ]
         }
 
@@ -400,7 +400,7 @@ let rec zarielTiefling =
             RacialPassives = [
                 Simple $"Resist Fire damage"
                 Simple $"Darkvision"
-                Power (Action, OncePerCombat, "Fire Shield", "As the spell, upcast to the maximum for a spellcaster of your character level")
+                Power (Action, OncePerCombat, "Fire Shield", "As the spell. Scales at character level 3 and every odd level thereafter (treated as if cast with a higher-level slot).")
             ]
         }
 

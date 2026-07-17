@@ -274,7 +274,7 @@ let rec planarSkipping : TraitDef = {
     Name = "Planar Skipping"
     Grants = [
         Buff { StatModifiers.Zero with Speed = -4.5 }
-        Complex ("Planar Skipping: Teleport", "Each turn, you may teleport up to 18m/60ft as a free action.")
+        Complex ("Planar Skipping: Teleport", "Each turn, you may teleport up to 18m/60ft as a free action. However, your movement speed is reduced by 4.5m.")
         Complex ("Planar Skipping: Banish", "You also have a 33% chance upon doing so to be suddenly Banished.")
     ]
 }
@@ -357,7 +357,7 @@ let rec waningImmortality : TraitDef = {
     Name = "Waning Immortality"
     Grants = [
         Buff { StatModifiers.Zero with ``HP per level`` = 6 }
-        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6.")
+        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6. This reduction in Hit Points cannot be undone.")
     ]
 }
 
