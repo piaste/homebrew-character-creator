@@ -46,4 +46,5 @@
     
 5.  **PR Management**:
     *   **PR Summary**: The PR description (or the new commit message if updating an existing PR) must include a **plain-language summary** of the changes, specifically listing the names of the entities that were added, updated, or removed.
+    *   **Human Guidance**: If you need clarification or human guidance on any task, do **NOT** ask questions in interactive chat. Instead, make your best effort to implement the changes, submit the code by opening a Pull Request (PR) from a new branch, and explain your questions or choices in the PR description or comments so that the human reviewer can provide feedback directly on the PR.
 
