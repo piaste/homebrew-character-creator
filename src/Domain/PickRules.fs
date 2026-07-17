@@ -5,6 +5,7 @@ open Character
 open Bg3HomebrewCCreator.Domain.Entities.Subclasses
 open FSharp.UMX
 open Helpers
+open System.Runtime.CompilerServices
 
 type LevelUpPick = 
     | Archetypes | Traits | Skills | SkillExps | Feats | ClassPassives | Cantrips | Spells
@@ -45,35 +46,37 @@ let nFeatPicks lr =
     | 4 | 8 | 12 -> 1
     | _ -> 0
 
-type Bg3HomebrewCCreator.Domain.Character.Character with
-    member c.Picks = 
-        let l = c.NextLevelUp
-        let subCl = Entities.Subclasses.allSubclasses[l.SubclassId]
-        let cl = Entities.Classes.allClasses[subCl.BaseClassId]
-        Map [
-            if c.CharacterLevel = 1<charLvl> then
-                Archetypes, 1
-                Traits, 1
-                Skills, 4
-                SkillExps, 2
+let private pickCache = ConditionalWeakTable<Character.Character, Map<LevelUpPick, int>>()
+
+type Character.Character with
+    member this.Picks =         
+        pickCache.GetValue(this, fun c ->            
+            let l = c.NextLevelUp
+            let subCl = Entities.Subclasses.allSubclasses[l.SubclassId]
+            let cl = Entities.Classes.allClasses[subCl.BaseClassId]
+            Map [
+                if c.CharacterLevel = 1<charLvl> then
+                    Archetypes, 1
+                    Traits, 1
+                    Skills, 4
+                    SkillExps, 2
+                    
+                Cantrips, nCantripPicks l 
+                Spells, nSpellPicks (subclassById l.SubclassId).CasterType
+                ClassPassives, nPassivePicks l 
+                Feats, nFeatPicks l 
+
+                for pick, q in cl.CustomPicks.GetOrElse(l.ClassLevel, []) do
+                ClassSpecific pick, q 
                 
-            Cantrips, nCantripPicks l 
-            Spells, nSpellPicks (subclassById l.SubclassId).CasterType
-            ClassPassives, nPassivePicks l 
-            Feats, nFeatPicks l 
+                for pick, q in subCl.CustomPicks.GetOrElse(l.ClassLevel, []) do
+                ClassSpecific pick, q
 
-            for pick, q in cl.CustomPicks.GetOrElse(l.ClassLevel, []) do
-               ClassSpecific pick, q 
-            
-            for pick, q in subCl.CustomPicks.GetOrElse(l.ClassLevel, []) do
-               ClassSpecific pick, q
-
-            match l.FeatId with
-            | None -> ()
-            | Some fId ->
-                for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
-                    FeatSubpick fspt, q
-            
-
-        ]
-        |> Map.filter (fun _ n -> n > 0)
+                match l.FeatId with
+                | None -> ()
+                | Some fId ->
+                    for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
+                        FeatSubpick fspt, q
+            ]
+            |> Map.filter (fun _ n -> n > 0)
+        )

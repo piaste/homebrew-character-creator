@@ -5,6 +5,7 @@ open Types
 open Bg3HomebrewCCreator.Domain.Entities
 open Bg3HomebrewCCreator.Domain.Entities.Classes
 open Bg3HomebrewCCreator.Domain.Entities.Subclasses
+open System.Runtime.CompilerServices
 
 
 type LevelRecord =
@@ -73,6 +74,8 @@ type AbilityBuy =
         member this.BoughtAbilityModifier ab = 
             (this.BoughtAbility ab - 10) / 2
 
+
+
 type Character =
     {
         Version: System.Version
@@ -91,15 +94,28 @@ type Character =
         PreviousLevelHistory: LevelRecord list
         
         NextLevelUp: LevelRecord
-    } with
+    }
 
-        member private this.History includeCurrentLevel = 
+type CharacterHistory = {
+    Levels : LevelRecord list
+    AllCantripIds : Set<string<cantripId>>
+    AllSpellIds: Set<string<spellId>>
+    AllFeatIds: Set<string<featId>>
+    AllSpecialPicks: Set<string<specialPickId>>
+    AllClassPassiveIdsByClass: Map<string<classId>,Set<string<classPassiveId>>>
+    LevelsBySubclass: Map<string<subclassId>,int<classLvl>>
+}
+let prevHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
+let currHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
+
+type Character with
+        member private this.BuildHistory includeCurrentLevel = 
             let levelHistory =
                 if includeCurrentLevel then 
                     this.NextLevelUp :: this.PreviousLevelHistory
                 else
                     this.PreviousLevelHistory
-            {|              
+            {              
                 Levels = levelHistory
 
                 AllCantripIds = 
@@ -135,10 +151,12 @@ type Character =
                     |> Map.ofSeq
                     |> Map.map (fun _ lvl -> lvl * 1<classLvl>)
 
-            |}
+            }
 
-        member this.CurrentHistory = this.History true
-        member this.PreviousHistory = this.History false
+        member this.CurrentHistory =             
+            currHistoryCache.GetValue(this, fun c-> c.BuildHistory true)
+        member this.PreviousHistory =             
+            prevHistoryCache.GetValue(this, fun c -> c.BuildHistory false)
 
         member this.ProficiencyBonus =
             if this.CharacterLevel <= 0<charLvl> then 2 

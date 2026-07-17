@@ -352,8 +352,7 @@ let inline toPicker<
     |> Seq.toList
 
 let otherView (model: Model) (dispatch : Message -> unit) = 
-    let raceTag = 
-        BaseRaces.allBaseRaces[Races.allSubraces[model.Character.RaceId].BaseRaceId].Name
+    System.Console.WriteLine "View updated"
 
     let c = model.Character
     let l = c.NextLevelUp
@@ -580,33 +579,32 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             }
         )
         .PicksDocks(
-            forEach c.Picks (fun p ->
-                let f = 
-                    match p.Key with
-                    | Archetypes -> 
-                        picksDockButton "Archetype" 1
-                    | Traits -> 
-                        picksDockButton "Trait" 1
-                    | Skills ->
-                        picksDockButton "Skills" c.SkillIds.Count
-                    | SkillExps ->
-                        picksDockButton "Expertises" c.SkillExpIds.Count
-                    | Cantrips -> 
-                        picksDockButton "Cantrips" l.CantripIds.Count
-                    | Spells -> 
-                        picksDockButton "Spells" l.SpellIds.Count
-                    | ClassPassives -> 
-                        picksDockButton "Passives" l.ClassPassiveIds.Count
-                    | Feats -> 
-                        picksDockButton "Feats" (Option.count l.FeatId)
-                    | ClassSpecific sp -> 
-                        picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
-                    | FeatSubpick fsp ->
-                        picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
-
-                
-                in f p.Value dispatch p.Key
-
+            forEach c.Picks (fun p ->                
+                match p.Key with
+                | Archetypes -> 
+                    picksDockButton "Archetype" 1
+                | Traits -> 
+                    picksDockButton "Trait" 1
+                | Skills ->
+                    picksDockButton "Skills" c.SkillIds.Count
+                | SkillExps ->
+                    picksDockButton "Expertises" c.SkillExpIds.Count
+                | Cantrips -> 
+                    picksDockButton "Cantrips" l.CantripIds.Count
+                | Spells -> 
+                    picksDockButton "Spells" l.SpellIds.Count
+                | ClassPassives -> 
+                    picksDockButton "Passives" l.ClassPassiveIds.Count
+                | Feats -> 
+                    picksDockButton "Feats" (Option.count l.FeatId)
+                | ClassSpecific sp -> 
+                    picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
+                | FeatSubpick fsp ->
+                    picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
+            
+                <| p.Value
+                <| dispatch
+                <| p.Key
             )
 
         )
@@ -684,19 +682,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         .LevelBoxes(levelBoxes model)
         .Error(
             concat {
-                // cond model.Errors <| function
-                //     | [] -> actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
-                //     | _ -> empty()
-                // cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                //     | true -> empty()
-                //     | false -> actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
-                // cond model.UndoStack <| function
-                //     | [] -> empty()
-                //     | _ -> 
-                //         concat {
-                //             actionButtonWithClass "Undo" "secondary disabled"  dispatch Undo
-                //             actionButtonWithClass "Reset" "secondary disabled" dispatch ResetCharacter
-                //         }
                 cond model.SystemErrors <| function
                     | [] -> empty()
                     | errs ->

@@ -1923,6 +1923,7 @@ let zephyrMovement = {
 type private Placeholder = class end
 let allSpells = getAll<Placeholder, SpellDef, spellId>()
 
-let allSpellsInList = function
-  | DoubleVersatile | Versatile -> allSpells
-  | spellList -> allSpells |> Map.filter (fun _ spell -> List.contains spellList spell.SpellLists)
+let filterSpellsByList spellList spell =
+  match spellList with
+  | DoubleVersatile | Versatile -> true
+  | spellList -> List.contains spellList spell.SpellLists
