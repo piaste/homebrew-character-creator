@@ -63,7 +63,7 @@ let rec frostbreaker =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(BonusAction, AtWill, "homebrew_icons/Action_Barbarian_Rage_Bifrost" <!!> "Rage", "Frostwoven: Resistance to physical and Cold immunity.")
-                Complex("Bifrost", "Cannot slip on ice; hits afflict Frigidity.")
+                Complex("Bifrost" <?> "Reghedman's Stride", "Cannot slip on ice; hits afflict Frigidity.")
             ]
             3<classLvl>, [ Complex("Frigid Omen", "Melee hits while enraged fire a Ray of Frost at another enemy.") ]
             5<classLvl>, [ Complex("Frostfields", "Apply Encrusted with Frost on hit.") ]
@@ -475,12 +475,12 @@ let rec dragoon =
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Power(Action, AtWill, "Draconic Dive", "Leap from afar dealing Weapon + Fire damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Wyrmcall Eruption", "Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Draconic Blitz", "Charge through enemies dealing Weapon + Fire damage.") ]
-            7<classLvl>, [ Complex("Wyrmcall Resonance", "Killing blows allow Draconic abilities as Bonus Actions and double melee reach.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Draconic Maul", "Single target strike dealing Weapon + 3d12 Fire damage.") ]
-            11<classLvl>, [ Complex("Wyrmcall Breakpoint", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
+            1<classLvl>, [ Power(Action, AtWill, "Draconic Dive" <?> "Chivalric Hunt", "Leap from afar dealing Weapon + Fire damage.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Wyrmcall Eruption" <?> "Cataphract Shock", "Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Draconic Blitz" <?> "Chivalric Spearhead", "Charge through enemies dealing Weapon + Fire damage.") ]
+            7<classLvl>, [ Complex("Wyrmcall Resonance" <?> "Zealous Pursuit", "Killing blows allow Draconic abilities as Bonus Actions and double melee reach.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Draconic Maul" <?> "Chivalric Breach", "Single target strike dealing Weapon + 3d12 Fire damage.") ]
+            11<classLvl>, [ Complex("Wyrmcall Breakpoint" <?> "Slaying the Dragon", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -772,6 +772,7 @@ let rec wayOfTheArcane =
         Name = "Way of the Arcane"
                <?> "Shining Hand Training"
         Description = "Focus ki to bend the elements to your will as an extension of your body."
+                      <?> "You trained in Amn with the time-honoured Azuthian monks of the Shining Hand, who mix wizardry with monastic discipline in devotion to the Lord of Spells."
         BaseClassId = monk.Id
         CasterType = HalfCaster Versatile
         FixedAbilities = Map [
@@ -797,6 +798,7 @@ let rec wayOfTheGentleFist =
         Name = "Way of the Gentle Fist"
                <?> "Broken Ones Training"
         Description = "Harmony and practiced inner peace providing relief to those around you."
+                      <?> "You trained in the Dalelands with the wandering Ilmatari monks called the Broken Ones, who pursue the path of healers and protectors of the meek."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -817,6 +819,7 @@ let rec wayOfTheDrunkenMaster =
         Name = "Way of the Drunken Master"
                <?> "St. Dionysus Training"
         Description = "Lurch through battle with deceptive movements and unpredictable sways."
+                      <?> "You trained in Damara with the eccentric Ilmatari monks of the Order of St. Dionysus, who revere their founder as the patron saint of alcohol and wine."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -841,6 +844,7 @@ let rec wayOfTheOpenHand =
         Name = "Way of the Open Hand"
                <?> "White Rod Training"
         Description = "Control ki to heal or inflict grievous hurt with specialized strikes."
+                      <?> "You trained in Calimshan with the renowned Loviatan monks of the White Rod, who know a thousand and one ways to inflict pain with their bare hands."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -864,6 +868,7 @@ let rec wayOfTheShadowArts =
         Name = "Way of the Shadow Arts"
                <?> "Dark Moon Training"
         Description = "Stealth and subterfuge, bending shadows to strike without warning."
+                      <?> "You trained in the Cloud Peaks with the secretive Sharran monks of the Dark Moon, who wrap themselves in the very shadows to hunt down the enemies of their faith."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -888,6 +893,7 @@ let rec wayOfTheTemperedSteel =
         Name = "Way of the Tempered Steel"
                <?> "Soaring Way Training"
         Description = "Rest your hand on the hilt of a summoned Katana in subtle anticipation."
+                      <?> "You trained in Telflamm with the exotic Shou monks of Xiang Temple, who hone their blades no less than their own bodies."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -900,7 +906,7 @@ let rec wayOfTheTemperedSteel =
             5<classLvl>, [ Complex("Macabre Patience", "Judgement Cut/Mirage Blade target additional enemies; Tempered Strike rolls with Advantage.") ]
             7<classLvl>, [ Complex("Unanswered Angle", "Weapon damage ignores all physical Resistances.") ]
             9<classLvl>, [ Complex("Concentration", "Ending turn without moving restores one Ki Point.") ]
-            11<classLvl>, [ Complex("Strike of the Yamato", "Special techniques always Critical Strike targets with full HP.") ]
+            11<classLvl>, [ Complex("Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -914,19 +920,20 @@ let rec ancientWarden =
         Name = "Ancient Warden"
                <?> "Sibling of the Ruby Rose"
         Description = "Preserve the sanctity of life and the beauty of nature."
+                      <?> "You served with the legendary Sisters and Brothers of the Ruby Rose, an order of paladins devoted to the defence of beauty, truth, and purity."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Action, AtWill, "Healing Radiance", "AOE heal that repeats after 3 turns.")
-                Power(BonusAction, AtWill, "Binding Radiance", "Restrain an enemy for 3 turns.")
-                Complex("Ancient Judgement", "Advantage against Fey; killing Fey restores a Smite charge.")
+                Power(BonusAction, AtWill, "Binding Radiance" <?> "Gilded Chains", "Restrain an enemy for 3 turns.")
+                Complex("Ancient Judgement" <?> "Bane of the Wretched", "Advantage against Fey; killing Fey restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Soothing Radiance", "Healing Radiance cures conditions; Binding Radiance is harder to save against.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Faithless", "Terrify and damage creatures in a 9m radius.") ]
-            7<classLvl>, [ Complex("Extended Oath", "Double range of Healing Radiance; Binding Radiance targets 3 targets.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Protection", "Allies in 9m have Advantage on Saving Throws.") ]
-            11<classLvl>, [ Complex("Oathbound Defender", "Healing Radiance grants Resistance; Advantage against Bound targets.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Faithless" <?> "Turn the Wretched", "Terrify and damage creatures in a 9m radius.") ]
+            7<classLvl>, [ Complex("Extended Oath" <?> "Expansive Vow", "Double range of Healing Radiance; Binding Radiance targets 3 targets.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Protection" <?> "Aura of Confidence", "Allies in 9m have Advantage on Saving Throws.") ]
+            11<classLvl>, [ Complex("Oathbound Defender" <?> "Paragon of Grace", "Healing Radiance grants Resistance; Advantage against Bound targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -938,19 +945,20 @@ let rec crownedPhoenix =
         Name = "Crowned Phoenix"
                <?> "Mystic Fire Knight"
         Description = "Ensuring civilization is reborn from the ashes of mistakes."
+                      <?> "You served with Mystra's paladins or with their non-religious allies, the Knights of the Weave. You have learned to channel the power of &lt;i&gt;spellfire&lt;/i&gt; in service of your holy mission."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Phoenix Landing", "Teleport dealing Fire damage in an area.")
-                Power(Reaction, AtWill, "Searing Protection", "Swap places and heal ally by taking damage.")
-                Complex("Crowned Judgement", "Advantage against Aberrations; killing them restores a Smite charge.")
+                Power(BonusAction, AtWill, "Phoenix Landing" <?> "Spellfire Vortex", "Teleport dealing Fire damage in an area.")
+                Power(Reaction, AtWill, "Searing Protection" <?> "Spellfire Ward", "Swap places and heal ally by taking damage.")
+                Complex("Crowned Judgement" <?> "Bane of the Warped", "Advantage against Aberrations; killing them restores a Smite charge.")
             ]
-            3<classLvl>, [ Complex("To the Sun", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Aberrant", "Terrify and damage Aberrations in a 9m radius.") ]
-            7<classLvl>, [ Complex("Scorched Earth", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Cinder", "Allies gain Warding Bond; enemies take Fire damage.") ]
-            11<classLvl>, [ Complex("Rebirth", "Downing for the first time restores all HP and erupts in an explosion.") ]
+            3<classLvl>, [ Complex("To the Sun" <?> "Arcane Ignition", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
+            7<classLvl>, [ Complex("Scorched Earth" <?> "Arcane Dominion", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Cinder" <?> "Aura of Spellfire", "Allies gain Warding Bond; enemies take Fire damage.") ]
+            11<classLvl>, [ Complex("Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all HP and erupts in an explosion.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -961,20 +969,20 @@ let rec devoutParagon =
         Id = % nameof devoutParagon
         Name = "Devout Paragon"
                <?> "Radiant Heart Auxiliary"
-        Description = "Act with honour and virtue to protect the weak."
+        Description = "Act with honour and virtue to protect the weak." <?> "You served in the junior ranks of the Most Noble Order of the Radiant Heart, a fraternal organization that preserves peace and protects the weak across the Realms."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Action, AtWill, "Holy Rebuke", "Grant aura that inflicts Radiating Orb to melee attackers.")
                 Power(BonusAction, AtWill, "Sacred Weapon", "Add Charisma to Attack Rolls for 3 turns.")
-                Complex("Divine Judgement", "Advantage against Fiends; killing them restores a Smite charge.")
+                Complex("Divine Judgement" <?> "Bane of the Wicked", "Advantage against Fiends; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Sacred Oath", "Holy Rebuke hits additional targets; Sacred Weapon damage heals you.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Unholy", "Terrify and damage Fiends in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Turn the Unholy" <?> "Turn the Wicked", "Terrify and damage Fiends in a 9m radius.") ]
             7<classLvl>, [ Complex("Radiant Reflection", "Holy Rebuke deals damage; Sacred Weapon inflicts Radiating Orb.") ]
             9<classLvl>, [ Power(Action, AtWill, "Aura of Courage", "Grant allies Heroism and Fear Immunity.") ]
-            11<classLvl>, [ Complex("Pure Radiance", "Advantage and bonus Radiant damage against Orbed targets.") ]
+            11<classLvl>, [ Complex("Pure Radiance" <?> "Champion of Justice", "Advantage and bonus Radiant damage against Orbed targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -986,19 +994,20 @@ let rec oathboundCrusader =
         Name = "Oathbound Crusader"
                <?> "Gilded Eye Inquisitor"
         Description = "Righting wrongs and delivering justice to grievous sinners."
+                      <?> "You served with the fanatic Order of the Gilded Eye, knights of Helm who mercilessly hunt down corruption and evil in the North."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Action, AtWill, "Abjure Enemy", "Frighten or Slow an enemy.")
                 Power(BonusAction, AtWill, "Inquisitor’s Might", "Bonus Radiant damage and potential Daze.")
-                Complex("Righteous Judgement", "Advantage against Undead; killing them restores a Smite charge.")
+                Complex("Righteous Judgement" <?> "Bane of the Damned", "Advantage against Undead; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Sanctified Commands", "Abjure Enemy/Inquisitor's Might can be cast as Free Action once per combat.") ]
             5<classLvl>, [ Power(Action, AtWill, "Turn the Damned", "Terrify and damage Undead in a 9m radius.") ]
-            7<classLvl>, [ Complex("Abjure the Weak", "Advantage against Abjured targets; Inquisitor's Might grants Advantage.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Warding", "Allies gain Resistance to spell damage.") ]
-            11<classLvl>, [ Complex("I Am Vengeance", "Erupt in radiant fury: bonus Radiant damage and Advantage for 3 turns.") ]
+            7<classLvl>, [ Complex("Abjure the Weak" <?> "Abjure the Guilty", "Advantage against Abjured targets; Inquisitor's Might grants Advantage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Aura of Warding" <?> "Aura of Perseverance", "Allies gain Resistance to spell damage.") ]
+            11<classLvl>, [ Complex("I Am Vengeance" <?> "Vengeance Incarnate", "Erupt in radiant fury: bonus Radiant damage and Advantage for 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1033,6 +1042,7 @@ let rec tyrant =
         Name = "Tyrant"
                <?> "Black Gauntlet Crusader"
         Description = "Secure obedience through fear and absolute authority."
+                      <?> "You served with the Banite knights of the Black Gauntlet, a ruthless brotherhood from Mintar intent on imposing absolute order and fealty to the Black Hand."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
@@ -1059,6 +1069,7 @@ let rec beastMaster =
         Name = "Beast Master"
                <?> "High Forest Trail"
         Description = "Cultivate the bond with a bestial companion that grows with you."
+                      <?> "You explored the endless paths of the Great Everwood and learned to befriend the many beasts that call it home."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
@@ -1079,15 +1090,16 @@ let rec gloomStalker =
         Name = "Gloom Stalker"
                <?> "Underdark Trail"
         Description = "Ambush and put down foes from the envelope of darkness."
+                      <?> "You explored the treacherous caverns of the Realms Below and learned their merciless ways - ambush and kill, before you are ambushed and killed."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Gloom Stalker’s Initiative", "Gain +4 to Initiative and 18m Darkvision.") ]
+            1<classLvl>, [ Complex("Gloom Stalker’s Initiative" <?> "Upperdark Adventurer", "Gain +4 to Initiative and 18m Darkvision.") ]
             3<classLvl>, [ Complex("Dread Shot", "Once per combat, guarantee a Critical Hit.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Gloom Stalker’s Deceit", "Turn a failed Attack Roll into a success.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Gloom Stalker’s Deceit" <?> "Middledark Survivor", "Turn a failed Attack Roll into a success.") ]
             7<classLvl>, [ Complex("Dread Fletched", "Critical Hits potentially cause Terror.") ]
-            9<classLvl>, [ Complex("Gloom Stalker’s Cruelty", "Attacks against Terrified targets are always Critical Hits.") ]
-            11<classLvl>, [ Complex("Dread Ambusher", "Every successful Attack Roll on the first turn is a Critical Hit.") ]
+            9<classLvl>, [ Complex("Gloom Stalker’s Cruelty" <?> "Dread Tormentor", "Attacks against Terrified targets are always Critical Hits.") ]
+            11<classLvl>, [ Complex("Dread Ambusher" <?> "Lowerdark Predator", "Every successful Attack Roll on the first turn is a Critical Hit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1099,6 +1111,7 @@ let rec hunter =
         Name = "Hunter"
                <?> "Greypeaks Trails"
         Description = "Excel at slaying Faerun’s most dangerous prey."
+                      <?> "You explored the fearsome mountains of the Savage Frontier and learned to hunt the many great monsters that inhabit their ridges."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
@@ -1122,6 +1135,7 @@ let rec mireMist =
         Name = "Mire Mist"
                <?> "Merdelain Trail"
         Description = "Through stagnant waters and drifting vapors, decay takes root."
+                      <?> "You explored the tainted ruins of the Mere of Dead Men and learned the power of the dreadful acid breathed by its black dragons."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
@@ -1142,6 +1156,7 @@ let rec swarmkeeper =
         Name = "Swarmkeeper"
                <?> "Neverwinter Woods Trail"
         Description = "Forged deep connections with swarms of nature spirits."
+                      <?> "You explored the fey-touched meadows of the old Llewyrrwood and learned to bond with swarms of tiny nature spirits."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
@@ -1162,6 +1177,7 @@ let rec twinfang =
         Name = "Twinfang"
                <?> "Evermoors Trail"
         Description = "A second shadow moves at your side; together you descend upon quarry."
+                      <?> "You explored the giants-infested swamps of the Trollmoors and learned that a ranger and his companion can fell far bigger prey when fighting together."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
@@ -1182,7 +1198,10 @@ let rec arcaneTrickster =
     {
         Id = % nameof arcaneTrickster
         Name = "Arcane Trickster"
-        Description = "Illusions and enchantments keep opponents on the back foot."
+               <?> "Telflamm Streets"
+        Description = 
+                "Illusions and enchantments keep opponents on the back foot."
+                <?> "You apprenticed with the mysterious Shadowmasters of the East, picking up some of their signature magic tricks."
         BaseClassId = rogue.Id
         CasterType = HalfCaster Arcane
         FixedAbilities = Map [
@@ -1204,7 +1223,9 @@ let rec assassin =
     {
         Id = % nameof assassin
         Name = "Assassin"
+               <?> "Galenas' Paths"
         Description = "Sublime punishment to a single foe at a time."
+                      <?> "You apprenticed with the legendary Assassins of the Galenas Peaks, slaying your targets with a single strike."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1223,7 +1244,9 @@ let rec hiddenToxicant =
     {
         Id = % nameof hiddenToxicant
         Name = "Hidden Toxicant"
+               <?> "Westgate Docks"
         Description = "Measured tinctures and precise brews turn flesh into a vessel for ruin."
+        <?> "You apprenticed with the ruthless Night Masks, acquiring a collection of deadly recipes."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1242,8 +1265,9 @@ let rec mercenary =
     {
         Id = % nameof mercenary
         Name = "Mercenary"
-               <?> "Swashbuckler"
+               <?> "Skullport Caves"
         Description = "Talk your way through anything, and let the blades speak when that fails."
+        <?> "You apprenticed with the chaotic Xanathar Guild, making a name for yourself by wit and weapon"
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1267,7 +1291,9 @@ let rec thief =
     {
         Id = % nameof thief
         Name = "Thief"
+               <?> "Amnian Roads"
         Description = "Larcenous arts and quick hands for third floor windows or forgotten ruins."
+        <?> "You apprenticed with the powerful Shadow Thieves, pursuing coin and adventure wherever luck took you."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1288,7 +1314,9 @@ let rec virulence =
     {
         Id = % nameof virulence
         Name = "Virulence"
+               <?> "Cormyr Corridors"
         Description = "A scratch soon festers into ruin through virulent corruption."
+                      <?> "You apprenticed with the aristocratic Fire Knives, making your blades lethal enough to slay kings."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1333,15 +1361,16 @@ let rec radiantBloom =
         Name = "Radiant Bloom"
                <?> "Spellfire Wielder"
         Description = "Illuminated brilliance healing allies and frightening foes."
+                      <?> "You are gifted with the rare and wild talent of spellfire, the raw energy of the Weave itself, at once all-consuming flame and rejuvenating touch."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Soulfire Spark", "Casting spells emits aura healing allies/damaging enemies for 1d6.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Radiance in Bloom", "3m AOE heal/radiant damage.") ]
-            5<classLvl>, [ Complex("Soulfire Ignition", "Soulfire aura damage/heal increased to 1d12.") ]
-            7<classLvl>, [ Complex("Immeasurable Light", "Aura grants Divine Favour; Radiant damage inflicts Radiating Orb.") ]
-            9<classLvl>, [ Complex("Soulfire Inferno", "Aura triggers at both start and end of turns.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Radiance Unhinged", "9m area heal/damage.") ]
+            1<classLvl>, [ Complex("Soulfire Spark" <?> "Spellfire Spark", "Casting spells emits aura healing allies/damaging enemies for 1d6.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Radiance in Bloom" <?> "Whirlflame", "3m AOE heal/radiant damage.") ]
+            5<classLvl>, [ Complex("Soulfire Ignition" <?> "Spellfire Ignition", "Soulfire aura damage/heal increased to 1d12.") ]
+            7<classLvl>, [ Complex("Immeasurable Light" <?> "Crown of Fire", "Aura grants Divine Favour; Radiant damage inflicts Radiating Orb.") ]
+            9<classLvl>, [ Complex("Soulfire Inferno" <?> "Spellfire Hierophant", "Aura triggers at both start and end of turns.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Radiance Unhinged" <?> "Maelstrom of Fire", "9m area heal/damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1395,14 +1424,15 @@ let rec volcanist =
         Name = "Volcanist"
                <?> "Volcanic Heart"
         Description = "Ancient flame as uncontrollable as it is uncontrollable."
+                      <?> "You burn with an inner link to the Undying Pyre, its heat arduous to control and impossible to quench."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Magmatic", "Ignore Fire Resistance; generate Heat stacks on hit/turn.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Pyrrhic Retort", "Counter with Pyrrhic Flare at cost of Heat.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Pyrrhic Retort" <?> "Pyric Retort", "Counter with Pyric Flare at cost of Heat.") ]
             5<classLvl>, [ Complex("Singe Song", $"{TOGGLEABLE}: Fire Immunity; Fire damage shoots additional flares.") ]
             7<classLvl>, [ Power(Action, OncePerCombat, "Volcanic Eruption", "Create lava pools inflicting Melting.") ]
-            9<classLvl>, [ Complex("Melting Pot", "Pyrrhic Flares now inflict Melting.") ]
+            9<classLvl>, [ Complex("Melting Pot", "Pyric Flares now inflict Melting.") ]
             11<classLvl>, [ Power(Action, AtWill, "Pyrebound", "Expend 10 Heat for Meteoric Burst (30d6).") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1563,6 +1593,7 @@ let rec arcblade =
         Name = "Arcblade"
                <?> "Anarchs of Shyr Tradition"
         Description = "A mobile spellsword storming with steel and magic."
+                      <?> "You studied magic with adventuring swordmages, familiar with the magical bladework spread by the stormsoul genasi of Shyr and Akanûl."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
@@ -1573,7 +1604,7 @@ let rec arcblade =
                 Power(Action, AtWill, "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
             ]
             5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
-            7<classLvl>, [ Complex("Winds of the Arcblade", "Killing blows grant a free Steel-Wind Strike.") ]
+            7<classLvl>, [ Complex("Winds of the Arcblade" <?> "Aegis of Assault", "Killing blows grant a free Steel-Wind Strike.") ]
             9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
             11<classLvl>, [ Complex("A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]
         ]
@@ -1587,6 +1618,7 @@ let rec arcaneWarden =
         Name = "Arcane Warden"
                <?> "Coronal Guards Tradition"
         Description = "Blend martial skill with hardening the Weave into Arcane Wards."
+                      <?> "You studied magic with professional spellguards, familiar with the defensive techniques developed by the elite elvish armathors of Myth Drannor."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
@@ -1607,6 +1639,7 @@ let rec evoker =
         Name = "Evoker"
                <?> "Cormyr War Wizard Tradition"
         Description = "Master of offensive magic with precision and control."
+                      <?> "You studied magic with hardened battlemages, familiar with the finest tactics and doctrines of the College of War Wizards in Suzail."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
@@ -1627,15 +1660,16 @@ let rec luminalConfluence =
         Name = "Luminal Confluence"
                <?> "Netherese Variator Tradition"
         Description = "Distill elemental stains to boost your magic."
+                      <?> "You studied magic with erudite teachers, familiar with the surviving writings of the Netherese elementalist Yrix Alquinnar and the Variators of Eileanar."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Elemental Concierge", "Elemental hits generate Stains; Stains empower next spell effects.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Luminal Conversion", "Generate choice Stain or teleport/swap places.") ]
-            5<classLvl>, [ Complex("Stained Imprint", "50% chance not to consume Stains on use.") ]
-            7<classLvl>, [ Power(Action, AtWill, "Luminal Mayhem", "Consume all stains for high single-target damage.") ]
-            9<classLvl>, [ Complex("Weavewalker’s Expedition", "Generating a stain has chance to grant a second random one.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Luminal Genesis", "Consume all stains for high AOE damage.") ]
+            1<classLvl>, [ Complex("Elemental Concierge" <?> "Yrix's Sieve", "Elemental hits generate Stains; Stains empower next spell effects.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "Luminal Conversion" <?> "Scribani's Distillation", "Generate choice Stain or teleport/swap places.") ]
+            5<classLvl>, [ Complex("Stained Imprint" <?> "Heroicus's Containment", "50% chance not to consume Stains on use.") ]
+            7<classLvl>, [ Power(Action, AtWill, "Luminal Mayhem" <?> "Darius's Channeling", "Consume all stains for high single-target damage.") ]
+            9<classLvl>, [ Complex("Weavewalker’s Expedition" <?> "Carvajal's Variation", "Generating a stain has chance to grant a second random one.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Luminal Genesis" <?> "Arrias's Genesis", "Consume all stains for high AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1647,6 +1681,7 @@ let rec necromancer =
         Name = "Necromancer"
                <?> "Thayan Necromancer Tradition"
         Description = "Wounds inflict the curse of undeath, raising zombie minions."
+                      <?> "You studied magic with unscrupulous occultists, familiar with the dark arts of undeath taught in the secretive enclaves of the Red Wizards."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
@@ -1667,15 +1702,16 @@ let rec elementalist =
         Name = "Elementalist"
                <?> "Zakharan Sha'ir Tradition"
         Description = "Elements answer your call as loyal companions."
+                      <?> "You studied magic with far-travelling wizards, familiar with the elemental summoning rituals practiced in the deserts of the remote Land of Fate."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Primal Bond", "Summon scaling Fire, Air, Earth, or Water Elemental.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Primal Bond" <?> "Calling the Janni", "Summon scaling Fire, Air, Earth, or Water Elemental.") ]
             3<classLvl>, [ Complex("Rend Elements", "Ignore Resistances/Immunities matching your summoned Elemental.") ]
-            5<classLvl>, [ Complex("Channeled Infusion", "Deal extra 1d4 damage matching your summoned Elemental.") ]
-            7<classLvl>, [ Complex("Primordial Ward", "Gain Resistance matching your summoned Elemental.") ]
-            9<classLvl>, [ Complex("Parallel Echo", "Matching damage type reflection as Force damage.") ]
-            11<classLvl>, [ Complex("Primal Convergence", "Can summon all four Elementals at once.") ]
+            5<classLvl>, [ Complex("Channeled Infusion" <?> "Janni's Favour", "Deal extra 1d4 damage matching your summoned Elemental.") ]
+            7<classLvl>, [ Complex("Primordial Ward" <?> "Janni's Protection", "Gain Resistance matching your summoned Elemental.") ]
+            9<classLvl>, [ Complex("Parallel Echo" <?> "Janni's Revenge", "Matching damage type reflection as Force damage.") ]
+            11<classLvl>, [ Complex("Primal Convergence" <?> "Seal of Jafar the Incomparable", "Can summon all four Elementals at once.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []

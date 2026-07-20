@@ -40,6 +40,7 @@
     *   Make descriptions shorter and concise where possible without losing information. For example, if the documentation reads "Your maximum Hit Points increases by 4 for each level you have gained.", you can replace it with "+4 HP per level".    
     *   **Do NOT** change the content of descriptions and summaries unless they are factually incorrect. That is, do not update text purely for reasons of style.
     *   **Do** update entities' names to be in line with the documentation.
+    *   All strings preceded by '<?>' are LORE STRINGS that you must never touch.
 
 4.  **Verification**:
     *   After making changes to a file, run `dotnet build src/Bg3HomebrewCCreator.Client.fsproj` to ensure that the strict typing is respected and there are no compile-time errors.
