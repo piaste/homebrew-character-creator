@@ -10,8 +10,8 @@ let rec blackDragonborn =
             Name = "Black Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Acid damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
+                Complex ("Acid Resistance", "Gain Resistance to Acid damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Acid Breath Cantrip", "1d12 Acid damage in a 6m Cone, inflicts Acid for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -21,8 +21,8 @@ let rec blueDragonborn =
             Name = "Blue Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Lightning damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Lightning dmg in a cone, inflicts Shocked 1 turn")
+                Complex ("Lightning Resistance", "Gain Resistance to Lightning damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Lightning Breath Cantrip", "1d12 Lightning damage in a 6m Cone, inflicts Shocked for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -32,8 +32,8 @@ let rec brassDragonborn =
             Name = "Brass Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
+                Complex ("Fire Resistance", "Gain Resistance to Fire damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Fire Breath Cantrip", "1d12 Fire damage in a 6m Cone, inflicts Burning for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -43,8 +43,8 @@ let rec bronzeDragonborn =
             Name = "Bronze Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Lightning damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Lightning Breath Cantrip", "1d12 Lightning dmg in a cone, inflicts Shocked 1 turn")
+                Complex ("Lightning Resistance", "Gain Resistance to Lightning damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Lightning Breath Cantrip", "1d12 Lightning damage in a 6m Cone, inflicts Shocked for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -54,8 +54,8 @@ let rec copperDragonborn =
             Name = "Copper Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Acid damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn, $"Acid Breath Cantrip", "1d12 Acid dmg in a cone, inflicts Acid 1 turn")
+                Complex ("Acid Resistance", "Gain Resistance to Acid damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Acid Breath Cantrip", "1d12 Acid damage in a 6m Cone, inflicts Acid for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -65,8 +65,8 @@ let rec goldDragonborn =
             Name = "Gold Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
+                Complex ("Fire Resistance", "Gain Resistance to Fire damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Fire Breath Cantrip", "1d12 Fire damage in a 6m Cone, inflicts Burning for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -76,8 +76,8 @@ let rec greenDragonborn =
             Name = "Green Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Poison damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Poison Breath Cantrip", "1d12 Poison dmg in a cone, inflicts Poisoned 1 turn")
+                Complex ("Poison Resistance", "Gain Resistance to Poison damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Poison Breath Cantrip", "1d12 Poison damage in a 6m Cone, inflicts Poisoned for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -87,8 +87,8 @@ let rec redDragonborn =
             Name = "Red Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Fire damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Fire Breath Cantrip", "1d12 Fire dmg in a cone, inflicts Burning 1 turn")
+                Complex ("Fire Resistance", "Gain Resistance to Fire damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Fire Breath Cantrip", "1d12 Fire damage in a 6m Cone, inflicts Burning for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -98,8 +98,8 @@ let rec silverDragonborn =
             Name = "Silver Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Cold damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "1d12 Cold dmg in a cone, inflicts Frostbite 1 turn")
+                Complex ("Cold Resistance", "Gain Resistance to Cold damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Cold Breath Cantrip", "1d12 Cold damage in a 6m Cone, inflicts Frostbite for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -109,8 +109,8 @@ let rec whiteDragonborn =
             Name = "White Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Cold damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Cold Breath Cantrip", "1d12 Cold dmg in a cone, inflicts Frostbite 1 turn")
+                Complex ("Cold Resistance", "Gain Resistance to Cold damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Cold Breath Cantrip", "1d12 Cold damage in a 6m Cone, inflicts Frostbite for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -120,8 +120,8 @@ let rec amethystDragonborn =
             Name = "Amethyst Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Force damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Force Breath Cantrip", "1d12 Force dmg in a cone, inflicts Dazed 1 turn")
+                Complex ("Force Resistance", "Gain Resistance to Force damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Force Breath Cantrip", "1d12 Force damage in a 6m Cone, inflicts Dazed for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -131,8 +131,8 @@ let rec crystalDragonborn =
             Name = "Crystal Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Radiant damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Radiant Breath Cantrip", "1d12 Radiant dmg in a cone, inflicts Blind 1 turn")
+                Complex ("Radiant Resistance", "Gain Resistance to Radiant damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Radiant Breath Cantrip", "1d12 Radiant damage in a 6m Cone, inflicts Blind for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -142,8 +142,8 @@ let rec emeraldDragonborn =
             Name = "Emerald Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Psychic damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn,  $"Psychic Breath Cantrip", "1d12 Psychic dmg in a cone, inflicts Mental Fatigue 1 turn")
+                Complex ("Psychic Resistance", "Gain Resistance to Psychic damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Psychic Breath Cantrip", "1d12 Psychic damage in a 6m Cone, inflicts Mental Fatigue for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -153,8 +153,8 @@ let rec sapphireDragonborn =
             Name = "Sapphire Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Thunder damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn, $"Thunder Breath Cantrip", "1d12 Thunder dmg in a cone, inflicts Reverberation 1 turn")
+                Complex ("Thunder Resistance", "Gain Resistance to Thunder damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Thunder Breath Cantrip", "1d12 Thunder damage in a 6m Cone, inflicts Reverberation for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -164,8 +164,8 @@ let rec topazDragonborn =
             Name = "Topaz Dragonborn"
             BaseRaceId = dragonborn.Id
             RacialPassives = [
-                Simple $"Resistance to Necrotic damage (becomes immunity at character level 9)"
-                Power(Action, OncePerTurn, $"Necrotic Breath Cantrip", "1d12 Necrotic dmg in a cone, inflicts Bone Chilled 1 turn")
+                Complex ("Necrotic Resistance", "Gain Resistance to Necrotic damage. This improves to immunity at character level 9.")
+                Power(Action, OncePerTurn, "Necrotic Breath Cantrip", "1d12 Necrotic damage in a 6m Cone, inflicts Bone Chilled for 1 turn. Scales at character level 5 (2d12, 3 turns) and level 9 (3d12+12).")
             ]
         }
 
@@ -175,8 +175,8 @@ let rec lolthSwornDrow =
             Name = "Lolth-Sworn Drow"
             BaseRaceId = drow.Id
             RacialPassives = [
-                Simple $"Superior Darkvision"
-                Simple $"Advantage on Attack Rolls in total darkness"
+                Complex ("Superior Darkvision", "Gain the ability to see in magical darkness.")
+                Complex ("Darkness Advantage", "While shrouded in total darkness, you make all Attack Rolls with Advantage.")
                 Power(Action, OncePerCombat, "Silence", "Create a 9m sphere of silence")
             ]
         }
@@ -187,8 +187,8 @@ let rec seldarineDrow =
             Name = "Seldarine Drow"
             BaseRaceId = drow.Id
             RacialPassives = [
-                Simple $"Superior Darkvision"
-                Simple $"Advantage on Attack Rolls in total darkness"
+                Complex ("Superior Darkvision", "Gain the ability to see in magical darkness.")
+                Complex ("Darkness Advantage", "While shrouded in total darkness, you make all Attack Rolls with Advantage.")
                 Power(BonusAction, OncePerCombat, "Misty Step", "Teleport within 18m")
             ]
         }
@@ -199,7 +199,7 @@ let rec goldDwarf =
             Name = "Gold Dwarf"
             BaseRaceId = dwarf.Id
             RacialPassives = [
-                Simple $"+2 to all damage dealt with weapons"
+                Complex ("Dwarven Combat Training", "Gain a +2 bonus to all damage dealt with weapons (does not include unarmed attacks).")
             ]
         }
 
@@ -220,8 +220,8 @@ let rec duergar =
             BaseRaceId = dwarf.Id
             RacialPassives = [
                 Power(BonusAction, OncePerCombat, "Enlarge (self)", "Increase by one size category")
-                Simple $"Superior Darkvision"
-                Simple $"Advantage on Attack Rolls in total darkness"
+                Complex ("Superior Darkvision", "Gain the ability to see in magical darkness.")
+                Complex ("Darkness Advantage", "While shrouded in total darkness, you make all Attack Rolls with Advantage.")
             ]
         }
 
@@ -231,7 +231,7 @@ let rec highElf =
             Name = "High Elf"
             BaseRaceId = elf.Id
             RacialPassives = [
-                Simple $"Advantage on Wisdom based Ability Checks and Saving Throws"
+                Complex ("High Elf", "Gain Advantage on all Wisdom based Ability Checks and Saving Throws.")
             ]
         }
 
@@ -252,8 +252,8 @@ let rec githyanki =
             BaseRaceId = BaseRaces.githyanki.Id
             RacialPassives = [
                 Buff (StatModifiers.Create(attackRolls = +2))
-                Simple $"Resistant to Psychic damage"
-                Simple $"Basic Darkvision"
+                Complex ("Psychic Resistance", "You are Resistant to Psychic damage.")
+                Complex ("Basic Darkvision", "You have Basic Darkvision.")
             ]
         }
 
@@ -274,8 +274,8 @@ let rec forestGnome =
             BaseRaceId = gnome.Id
             RacialPassives = [
                 Power (Action, OncePerTurn, "Dominate Beast", "Dominate a Beast. Creature breaks free the first time it takes dmg from you or your allies.")
-                Simple $"Speak With Animals"
-                Simple $"Immune to effects that would Restrain them"
+                Complex ("Speak With Animals", "You have the ability to Speak With Animals at all times.")
+                Complex ("Restraint Immunity", "You are immune to effects that would Restrain you.")
             ]
         }
 
@@ -286,8 +286,8 @@ let rec deepGnome =
             BaseRaceId = gnome.Id
             RacialPassives = [
                 Power(BonusAction, OncePerCombat, "Invisibility (self)", "Become invisible until you attack or cast a spell")
-                Simple $"Superior Darkvision"
-                Simple $"Advantage on Attack Rolls in total darkness"
+                Complex ("Superior Darkvision", "Gain the ability to see in magical darkness.")
+                Complex ("Darkness Advantage", "While shrouded in total darkness, you make all Attack Rolls with Advantage.")
             ]
         }
 
@@ -298,7 +298,7 @@ let rec highHalfElf =
             BaseRaceId = halfElf.Id
             RacialPassives = [
                 Buff(StatModifiers.Create(initiative = +2))
-                Simple $"Advantage on Wisdom based Saving Throws"
+                Complex ("High Half-Elf", "Gain Advantage on all Wisdom based Saving Throws.")
             ]
         }
 
@@ -310,7 +310,6 @@ let rec woodHalfElf =
             RacialPassives = [                
                 Buff(StatModifiers.Create(initiative = +2))
                 Buff(StatModifiers.Create(speed = +4.5))
-
             ]
         }
 
@@ -321,8 +320,8 @@ let rec drowHalfElf =
             BaseRaceId = halfElf.Id
             RacialPassives = [                
                 Buff(StatModifiers.Create(initiative = +2))
-                Simple $"Superior Darkvision"
-                Simple $"Advantage on Attack Rolls in total darkness"
+                Complex ("Superior Darkvision", "Gain the ability to see in magical darkness.")
+                Complex ("Darkness Advantage", "While shrouded in total darkness, you make all Attack Rolls with Advantage.")
             ]
         }
 
@@ -334,7 +333,7 @@ let rec halfOrc =
             RacialPassives = [
                 Buff(StatModifiers.Create(initiative = +2))
                 Buff(StatModifiers.Create(abilities = Map[STR, 2]))
-                Simple $"Darkvision"
+                Complex ("Darkvision", "You have Darkvision.")
             ]
         }
 
@@ -344,7 +343,7 @@ let rec lightfootHalfling =
             Name = "Lightfoot Halfling"
             BaseRaceId = halfling.Id
             RacialPassives = [
-                Simple $"Advantage on Dexterity based Ability Checks and Saving Throws"
+                Complex ("Lightfoot Halfling", "Gain Advantage on all Dexterity based Ability Checks and Saving Throws.")
             ]
         }
 
@@ -354,7 +353,7 @@ let rec strongheartHalfling =
             Name = "Strongheart Halfling"
             BaseRaceId = halfling.Id
             RacialPassives = [
-                Simple $"Advantage on Constitution based Ability Checks and Saving Throws"
+                Complex ("Strongheart Halfling", "Gain Advantage on all Constitution based Ability Checks and Saving Throws.")
             ]
         }
 
@@ -374,8 +373,8 @@ let rec asmodeusTiefling =
             Name = "Asmodeus Tiefling"
             BaseRaceId = tiefling.Id
             RacialPassives = [
-                Simple $"Resist Fire damage"
-                Simple $"Darkvision"
+                Complex ("Fire Resistance", "Gain Resistance to Fire damage.")
+                Complex ("Darkvision", "You have Darkvision.")
                 Power(Action, OncePerCombat, "Fireball", "As the spell, upcast to the maximum for a spellcaster of your character level")
             ]
         }
@@ -386,8 +385,8 @@ let rec mephistophelesTiefling =
             Name = "Mephistopheles Tiefling"
             BaseRaceId = tiefling.Id
             RacialPassives = [
-                Simple $"Resist Fire damage"
-                Simple $"Darkvision"
+                Complex ("Fire Resistance", "Gain Resistance to Fire damage.")
+                Complex ("Darkvision", "You have Darkvision.")
                 Power(Action, OncePerCombat, "Burning Hands", "As the spell, upcast to the maximum for a spellcaster of your character level")
             ]
         }
@@ -398,9 +397,9 @@ let rec zarielTiefling =
             Name = "Zariel Tiefling"
             BaseRaceId = tiefling.Id
             RacialPassives = [
-                Simple $"Resist Fire damage"
-                Simple $"Darkvision"
-                Power (Action, OncePerCombat, "Fire Shield", "As the spell, upcast to the maximum for a spellcaster of your character level")
+                Complex ("Fire Resistance", "Gain Resistance to Fire damage.")
+                Complex ("Darkvision", "You have Darkvision.")
+                Power(Action, OncePerCombat, "Fire Shield", "As the spell, upcast to the maximum for a spellcaster of your character level")
             ]
         }
 
@@ -412,5 +411,3 @@ let rec allSubracesByBaseRace =
     |> Seq.groupBy (snd >> _.BaseRaceId)
     |> Map.ofSeq
     |> Map.map (fun _ v -> Map.ofSeq v)
-
-
