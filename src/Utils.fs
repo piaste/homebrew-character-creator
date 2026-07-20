@@ -96,6 +96,16 @@ type KeyedMap<[<Measure>] 'm, 'v
 let camelCaseToKebabCase (entityName : string) = 
     entityName.ToLower().Replace(' ', '-')
 
+let camelCaseToEnglish (text : string) =
+    if String.IsNullOrWhiteSpace text then text else
+    let sb = Text.StringBuilder()
+    sb.Append(Char.ToUpper text[0]) |> ignore
+    for c in text[1..] do
+        if Char.IsAsciiLetterUpper c then 
+            sb.Append " " |> ignore            
+        sb.Append c |> ignore
+    sb.ToString()
+
 let englishToPascalCase (text: string) = 
     if String.IsNullOrWhiteSpace text then text else
     let sb = Text.StringBuilder()

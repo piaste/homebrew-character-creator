@@ -130,7 +130,10 @@ let update
     let apply f = 
         applyCharacterChange saveCmd' f model
 
-    let applyAnd msgs f = 
+    let applyAnd msg f = 
+        applyCharacterChangeAnd (Cmd.ofMsg msg) saveCmd' f model
+
+    let applyAnds msgs f = 
         applyCharacterChangeAnd (Cmd.batch (msgs |> List.map Cmd.ofMsg)) saveCmd' f model
 
     match message with
@@ -214,10 +217,10 @@ let update
             |> Seq.head
             |> _.Key
         
-        applyAnd [NextMainStageSelection] <| fun character -> { character with RaceId = defaultSubrace }
+        applyAnd NextMainStageSelection <| fun character -> { character with RaceId = defaultSubrace }
 
     | SetSubrace race ->
-        applyAnd [NextMainStageSelection] <| fun character -> { character with RaceId = race }
+        applyAnd NextMainStageSelection <| fun character -> { character with RaceId = race }
 
     | SetArchetype atId -> 
         apply <| fun character -> { character with ArchetypeId = atId }
@@ -231,10 +234,10 @@ let update
             |> Seq.head
             |> _.Key
         
-        applyAnd [NextMainStageSelection] <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
+        applyAnd NextMainStageSelection <| fun character -> { character with NextLevelUp.SubclassId = defaultSubclassId }
 
     | SetSubclass subclassId ->
-        applyAnd [NextMainStageSelection] <| fun character -> 
+        applyAnd NextMainStageSelection <| fun character -> 
 
             let previousMaxLevelInSubclass =    
                 character.PreviousHistory.LevelsBySubclass
@@ -350,7 +353,7 @@ let update
                     character.NextLevelUp.ClassPassiveIds.Toggle cpId
             }
     | ToggleFeat featId ->
-        applyAnd [SetClassSpecialistClass None; SetYokebreakerClass None] <| fun character ->
+        applyAnd (SetClassSpecialistClass None) <| fun character ->
             if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
             
             { character with 
@@ -416,7 +419,7 @@ let update
 
     | LevelUp ->
         if model.Errors.IsEmpty then
-            applyAnd [NextMainStageSelection]  <| levelUpDefault
+            applyAnd NextMainStageSelection  <| levelUpDefault
         else
             model, Cmd.none
 

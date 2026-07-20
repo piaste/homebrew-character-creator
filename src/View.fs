@@ -330,7 +330,15 @@ let levelBoxes (model: Model) =
                                 | None -> empty()
                                 | Some fId -> 
                                     let f = Feats.allFeats[fId]
-                                    sheetAttr "Feat" f.Name (Some f.Description) None
+                                    let featName = 
+                                        if Map.isEmpty lr.FeatSubPicks then f.Name else
+                                        lr.FeatSubPicks.Values
+                                        |> Set.unionMany
+                                        |> Seq.map camelCaseToEnglish
+                                        |> String.concat ","
+                                        |> fun p -> $"{f.Name} [{p}]"
+                                        
+                                    sheetAttr "Feat" featName (Some f.Description) None
                             }
                     }
                 }

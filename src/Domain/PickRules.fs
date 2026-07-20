@@ -8,8 +8,11 @@ open Helpers
 open System.Runtime.CompilerServices
 
 type LevelUpPick = 
-    | Archetypes | Traits | Skills | SkillExps | Feats | ClassPassives | Cantrips | Spells
-    | ClassSpecific of ClassLevelUpPickType
+    // this is also the display order!
+    | Archetypes | Traits | Skills | SkillExps     
+    | ClassSpecific of ClassLevelUpPickType | ClassPassives
+    | Cantrips | Spells
+    | Feats
     | FeatSubpick of FeatSubpickType
     
 let nSkillProfPicks = 4
@@ -56,27 +59,27 @@ type Character.Character with
             let cl = Entities.Classes.allClasses[subCl.BaseClassId]
             Map [
                 if c.CharacterLevel = 1<charLvl> then
-                    Archetypes, 1
-                    Traits, 1
-                    Skills, 4
-                    SkillExps, 2
+                    yield Archetypes, 1
+                    yield Traits, 1
+                    yield Skills, 4
+                    yield SkillExps, 2
                     
-                Cantrips, nCantripPicks l 
-                Spells, nSpellPicks (subclassById l.SubclassId).CasterType
-                ClassPassives, nPassivePicks l 
-                Feats, nFeatPicks l 
+                yield Cantrips, nCantripPicks l 
+                yield Spells, nSpellPicks (subclassById l.SubclassId).CasterType
+                yield ClassPassives, nPassivePicks l 
+                yield Feats, nFeatPicks l 
 
                 for pick, q in cl.CustomPicks.GetOrElse(l.ClassLevel, []) do
-                ClassSpecific pick, q 
+                    yield ClassSpecific pick, q 
                 
                 for pick, q in subCl.CustomPicks.GetOrElse(l.ClassLevel, []) do
-                ClassSpecific pick, q
+                    yield ClassSpecific pick, q
 
-                match l.FeatId with
+                match withDebug l.FeatId with
                 | None -> ()
                 | Some fId ->
                     for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
-                        FeatSubpick fspt, q
+                        yield FeatSubpick fspt, q
             ]
             |> withDebug
             |> Map.filter (fun _ n -> n > 0)

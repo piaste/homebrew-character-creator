@@ -130,7 +130,7 @@ type Character with
 
                 AllFeatIds = 
                     levelHistory
-                    |> Seq.collect (_.FeatId >> Option.toList)
+                    |> Seq.choose _.FeatId
                     |> Set.ofSeq
 
                 AllSpecialPicks = 
