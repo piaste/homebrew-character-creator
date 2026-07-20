@@ -777,8 +777,17 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | true -> empty()
                 }
 
-                actionButton $"""SHOW {if model.UseLoreNames then "DEFAULT" else "LORE"} NAMES""" 
-                    dispatch (ToggleLoreNames (not model.UseLoreNames))
+                div {
+                    cl "lore-controls"
+
+                    actionButton $"""SHOW {if model.UseLoreNames then "DEFAULT" else "LORE"} NAMES""" 
+                        dispatch (ToggleLoreNames (not model.UseLoreNames))
+                    
+                    a { 
+                        attr.href "https://github.com/piaste/Home-Brew---Comprehensive-Reworks/releases/latest" 
+                        span { "get the lore submod here"}
+                    }
+                }
             }
         )
         .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives dispatch)

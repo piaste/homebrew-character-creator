@@ -39,7 +39,7 @@ type CopyButtonState =
 
 let defaultCharacter =
     {
-        Version = Version(0, 4, 0)
+        Version = Version(0, 5, 0)
 
         CharName = "John Baldur"
         RaceId = Domain.Entities.Races.human.Id
