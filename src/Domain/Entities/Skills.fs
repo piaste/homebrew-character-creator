@@ -7,7 +7,7 @@ let rec athletics = {
             Id = % nameof athletics
             Name = "Athletics"
             KeyAbility = STR
-            Description = "Athletics is used during attempts to Shoveother creatures, as well as when attempting to resist being shoved."
+            Description = "Athletics is used during attempts to Shove other creatures, as well as when attempting to resist being shoved."
             Grants = Simple "+100% carrying capacity"
         }
 let rec acrobatics = {

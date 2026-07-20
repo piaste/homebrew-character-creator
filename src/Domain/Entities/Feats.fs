@@ -7,7 +7,7 @@ let rec abilityImprovement : FeatDef = {
     Id = % nameof abilityImprovement
     Name = "Ability Improvement"
     Subpicks = Map []
-    Grants = [ Passive.Simple "Select two Abilities. These abilities increase by an amount equal to your Proficiency Bonus."]
+    Grants = [ Passive.Complex ("Ability Improvement", "Select two Abilities. These abilities increase by an amount equal to your Proficiency Bonus.") ]
 }
 
 let rec accordOfTheArcane : FeatDef = {
@@ -15,8 +15,8 @@ let rec accordOfTheArcane : FeatDef = {
     Name = "Accord of the Arcane"
     Subpicks = Map [Cantrips, 2]
     Grants = [
-        Passive.Simple "Learn two Cantrips of your choice."
-        Passive.Simple "Cantrips which cost an Action may be cast as a Bonus Action instead. This may be toggled at any time."
+        Passive.Complex ("Accord of the Arcane: Cantrips", "Learn two Cantrips of your choice.")
+        Passive.Complex ("Accord of the Arcane: Speed", "Cantrips which cost an Action may be cast as a Bonus Action instead. This may be toggled at any time.")
     ]
 }
 
@@ -25,9 +25,9 @@ let rec alchemist : FeatDef = {
     Name = "Alchemist"
     Subpicks = Map []
     Grants = [ 
-        Passive.Simple "Healing potions you consume always restore the maximum amount of Hit Points possible."
-        Passive.Simple "Thrown grenades will trigger an additional explosion, dealing 1d12 damage per 2 character level to all creatures in a 3m radius around your original target."
-        Passive.Simple "Upon applying a coating to your weapon, it will persist until your next Long Rest."
+        Passive.Complex ("Alchemist: Potions", "Healing potions you consume always restore the maximum amount of Hit Points possible.")
+        Passive.Complex ("Alchemist: Grenades", "Thrown grenades will trigger an additional explosion, dealing 1d12 damage per 2 character level to all creatures in a 3m radius around your original target.")
+        Passive.Complex ("Alchemist: Coatings", "Upon applying a coating to your weapon, it will persist until your next Long Rest.")
     ]
 }
 
@@ -37,8 +37,8 @@ let rec alert : FeatDef = {
     Subpicks = Map []
     Grants = [
         Passive.Buff { StatModifiers.Zero with Initiative = 8 }
-        Passive.Simple "While starting your turn Threatened, you Dash and Disengage."
-        Passive.Simple "You cannot be Surprised."
+        Passive.Complex ("Alert: Defiance", "While starting your turn Threatened, you Dash and Disengage.")
+        Passive.Complex ("Alert: Vigilance", "You cannot be Surprised.")
     ]
 }
 
@@ -46,14 +46,14 @@ let rec anchoredFocus : FeatDef = {
     Id = % nameof anchoredFocus
     Name = "Anchored Focus"
     Subpicks = Map []
-    Grants = [ Passive.Simple "You can’t lose Concentration." ]
+    Grants = [ Passive.Complex ("Anchored Focus", "You can’t lose Concentration.") ]
 }
 
 let rec arcaneEchoes : FeatDef = {
     Id = % nameof arcaneEchoes
     Name = "Arcane Echoes"
     Subpicks = Map []
-    Grants = [ Passive.Simple "At the start of your turn, gain 1d6 Arcane Echoes. You can use these echoes to recover a spell slot of a level equal to the number of Arcane Echoes you have." ]
+    Grants = [ Passive.Complex ("Arcane Echoes", "At the start of your turn, gain 1d6 Arcane Echoes. You can use these echoes to recover a spell slot of a level equal to the number of Arcane Echoes you have.") ]
 }
 
 let rec athleticism : FeatDef = {
@@ -61,8 +61,8 @@ let rec athleticism : FeatDef = {
     Name = "Athleticism"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "You gain an additional Bonus Action."
-        Passive.Simple "Your jump distance is doubled."
+        Passive.Complex ("Athleticism: Action", "You gain an additional Bonus Action.")
+        Passive.Complex ("Athleticism: Jump", "Your jump distance is doubled.")
     ]
 }
 
@@ -71,8 +71,8 @@ let rec blessingOfTheMoon : FeatDef = {
     Name = "Blessing of the Moon"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Gain 3 cantrips: Blessing of Moonfire, Lunar Flare, and Lunar Strike."
-        Passive.Simple "Dealing damage to an enemy restores 1d4 heal points to all nearby allies around your target."
+        Passive.Complex ("Blessing of the Moon: Cantrips", "Gain 3 cantrips: Blessing of Moonfire, Lunar Flare, and Lunar Strike.")
+        Passive.Complex ("Blessing of the Moon: Radiance", "Dealing damage to an enemy restores 1d4 heal points to all nearby allies around your target.")
     ]
 }
 
@@ -90,14 +90,14 @@ let rec classSpecialist : FeatDef = {
     Id = % nameof classSpecialist
     Name = "Class Specialist"
     Subpicks = Map [ ClassPassives, 2]
-    Grants = [ Passive.Simple "Select two passives from any class passives list. You can pick this feat once per class, including your current class." ]
+    Grants = [ Passive.Complex ("Class Specialist", "Select two passives from any class passives list. You can pick this feat once per class, including your current class.") ]
 }
 
 let rec combatMedic : FeatDef = {
     Id = % nameof combatMedic
     Name = "Combat Medic"
     Subpicks = Map []
-    Grants = [ Passive.Simple "Upon Helping another creature, they regain additional Hit Points equal to the amount you currently have." ]
+    Grants = [ Passive.Complex ("Combat Medic", "Upon Helping another creature, they regain additional Hit Points equal to the amount you currently have.") ]
 }
 
 let rec composed : FeatDef = {
@@ -117,7 +117,7 @@ let rec defensiveDuellist : FeatDef = {
     Grants = [
         Passive.Power (FreeAction, AtWill, "Defensive Duelist", "Gain AC equal to your proficiency bonus when attacked.")
         Passive.Power (Reaction, AtWill, "Defensive Duelist", "Counterattack with a Melee or a Ranged Attack.")
-        Passive.Simple "You gain an additional Reaction."
+        Passive.Complex ("Defensive Duellist: Extra Reaction", "You gain an additional Reaction.")
     ]
 }
 
@@ -126,11 +126,11 @@ let rec duellistsInstinct : FeatDef = {
     Name = "Duellist’s Instinct"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "While dual-wielding, gain the ability to make an off-hand attack as a Bonus Action."
-        Passive.Simple "Gain three Duellist Charges per Short Rest. Spend to gain Advantage on Attack Rolls, or force Disadvantage on attackers."
-        Passive.Simple "Landing a killing blow or Critical hit restores one Duellist Charge (once per turn)."
-        Passive.Simple "Opportunity Attacks hit with both weapons when dual-wielding."
-        Passive.Simple "Add your Global STR bonus to your main-hand attack while dual wielding."
+        Passive.Complex ("Duellist’s Instinct: Off-hand", "While dual-wielding, gain the ability to make an off-hand attack as a Bonus Action.")
+        Passive.Complex ("Duellist’s Instinct: Charges", "Gain three Duellist Charges per Short Rest. Spend to gain Advantage on Attack Rolls, or force Disadvantage on attackers.")
+        Passive.Complex ("Duellist’s Instinct: Recovery", "Landing a killing blow or Critical hit restores one Duellist Charge (once per turn).")
+        Passive.Complex ("Duellist’s Instinct: Opportunity", "Opportunity Attacks hit with both weapons when dual-wielding.")
+        Passive.Complex ("Duellist’s Instinct: Strength", "Add your Global STR bonus to your main-hand attack while dual wielding.")
     ]
 }
 
@@ -139,9 +139,9 @@ let rec dunesis : FeatDef = {
     Name = "Dunesis"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Your AOE Spells don’t affect your allies."
-        Passive.Simple "Spells you cast and Conditions you apply have their Difficulty Class increased by 1."
-        Passive.Simple "Generate Dunesis Charges upon casting spells to further increase DC (up to max 3)."
+        Passive.Complex ("Dunesis: Careful", "Your AOE Spells don’t affect your allies.")
+        Passive.Complex ("Dunesis: Power", "Spells you cast and Conditions you apply have their Difficulty Class increased by 1.")
+        Passive.Complex ("Dunesis: Generation", "Generate Dunesis Charges upon casting spells to further increase DC (up to max 3).")
     ]
 }
 
@@ -150,8 +150,8 @@ let rec durable : FeatDef = {
     Name = "Durable"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "You have Resistance to Physical damage."
-        Passive.Simple "You have Lockdown Immunity (immune to most Crowd Control effects)."
+        Passive.Complex ("Durable: Resistance", "You have Resistance to Physical damage.")
+        Passive.Complex ("Durable: Unstoppable", "You have Lockdown Immunity (immune to most Crowd Control effects).")
     ]
 }
 
@@ -160,8 +160,8 @@ let rec elementalAdept : FeatDef = {
     Name = "Elemental Adept"
     Subpicks = Map[ElementalTypes, 2]
     Grants = [
-        Passive.Simple "Ignore Resistances and Immunities to two elemental damage types of your choice."
-        Passive.Simple "Deal an additional +1d4 damage of the same type."
+        Passive.Complex ("Elemental Adept: Bypass", "Ignore Resistances and Immunities to two elemental damage types of your choice.")
+        Passive.Complex ("Elemental Adept: Damage", "Deal an additional +1d4 damage of the same type.")
     ]
 }
 
@@ -170,9 +170,9 @@ let rec galvanizedStormsoul : FeatDef = {
     Name = "Galvanized Stormsoul"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Gain Resistance to Lightning and Thunder damage."
-        Passive.Simple "Upon dealing or taking damage, you receive one stack of Lightning Charge."
-        Passive.Simple "Gain Galvanized Storm Strike melee cantrip (weapon damage + 1d8/2d8/3d8 and cast Witch Bolt at all enemies within 9m of you)."
+        Passive.Complex ("Galvanized Stormsoul: Resistance", "Gain Resistance to Lightning and Thunder damage.")
+        Passive.Complex ("Galvanized Stormsoul: Charging", "Upon dealing or taking damage, you receive one stack of Lightning Charge.")
+        Passive.Complex ("Galvanized Stormsoul: Strike", "Gain Galvanized Storm Strike melee cantrip (weapon damage + 1d8/2d8/3d8 and cast Witch Bolt at all enemies within 9m of you).")
     ]
 }
 
@@ -188,8 +188,8 @@ let rec intrinsicBulwark : FeatDef = {
     Name = "Intrinsic Bulwark"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "You have Resistance to Elemental damage."
-        Passive.Simple "You are immune to effects which deal damage over time (burning, shocked, bleeding, ...)"
+        Passive.Complex ("Intrinsic Bulwark: Resistance", "You have Resistance to Elemental damage.")
+        Passive.Complex ("Intrinsic Bulwark: Immunity", "You are immune to effects which deal damage over time (burning, shocked, bleeding, ...)")
     ]
 }
 
@@ -197,7 +197,7 @@ let rec lucky : FeatDef = {
     Id = % nameof lucky
     Name = "Lucky"
     Subpicks = Map []
-    Grants = [ Passive.Simple "Any time that you roll a 7 or less on an Attack Roll, Saving Throw, Ability Check, or Skill Check, the result is immediately rerolled." ]
+    Grants = [ Passive.Complex ("Lucky", "Any time that you roll a 7 or less on an Attack Roll, Saving Throw, Ability Check, or Skill Check, the result is immediately rerolled.") ]
 }
 
 let rec mageSlayer : FeatDef = {
@@ -205,8 +205,8 @@ let rec mageSlayer : FeatDef = {
     Name = "Mage Slayer"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Enemies you damage immediately lose Concentration."
-        Passive.Simple "Upon dealing damage, you silence the target for one turn."
+        Passive.Complex ("Mage Slayer: Disruption", "Enemies you damage immediately lose Concentration.")
+        Passive.Complex ("Mage Slayer: Silence", "Upon dealing damage, you silence the target for one turn.")
     ]
 }
 
@@ -221,7 +221,7 @@ let rec masonryOfChaos : FeatDef = {
     Id = % nameof masonryOfChaos
     Name = "Masonry of Chaos"
     Subpicks = Map []
-    Grants = [ Passive.Simple "20% chance to experience a positive surge of Wild Magic at the beginning/end of combat, start of turn, and when dealing/taking damage." ]
+    Grants = [ Passive.Complex ("Masonry of Chaos", "20% chance to experience a positive surge of Wild Magic at the beginning/end of combat, start of turn, and when dealing/taking damage.") ]
 }
 
 let rec meleeExpertise : FeatDef = {
@@ -229,8 +229,8 @@ let rec meleeExpertise : FeatDef = {
     Name = "Melee Expertise"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Adds your Proficiency Bonus multiplied by 2 when dealing damage with your main-hand melee weapon."
-        Passive.Simple "Ignore all Physical Resistances and Immunities."
+        Passive.Complex ("Melee Expertise: Damage", "Adds your Proficiency Bonus multiplied by 2 when dealing damage with your main-hand melee weapon.")
+        Passive.Complex ("Melee Expertise: Bypass", "Ignore all Physical Resistances and Immunities.")
     ]
 }
 
@@ -238,7 +238,7 @@ let rec multifaceted : FeatDef = {
     Id = % nameof multifaceted
     Name = "Multifaceted"
     Subpicks = Map [ Traits, 1; Archetypes, 1; SkillProficiencies, 4]
-    Grants = [ Passive.Simple "Select a Character Trait, an additional Archetype, and four additional skills to become proficient in." ]
+    Grants = [ Passive.Complex ("Multifaceted", "Select a Character Trait, an additional Archetype, and four additional skills to become proficient in.") ]
 }
 
 let rec performer : FeatDef = {
@@ -246,7 +246,7 @@ let rec performer : FeatDef = {
     Name = "Performer"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Gain Musical Instrument Proficiency."
+        Passive.Complex ("Performer: Instrument", "Gain Musical Instrument Proficiency.")
         Passive.Power (Action, OncePerLongRest, "Performative Presence", "Buff party with +1d4 to Attack Rolls, Ability Checks, or Saving Throws. Lasts until long rest.")
     ]
 }
@@ -256,8 +256,8 @@ let rec psionicDominance : FeatDef = {
     Name = "Psionic Dominance"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "When dealing damage, you deal an additional 1d4 psychic damage and inflict one stack of Mental Fatigue."
-        Passive.Simple "Illithid Powers no longer reduce your maximum hit points."
+        Passive.Complex ("Psionic Dominance: Psychic", "When dealing damage, you deal an additional 1d4 psychic damage and inflict one stack of Mental Fatigue.")
+        Passive.Complex ("Psionic Dominance: Shield", "Illithid Powers no longer reduce your maximum hit points.")
     ]
 }
 
@@ -273,8 +273,8 @@ let rec resilient : FeatDef = {
     Name = "Resilient"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Add your Proficiency Bonus to any Saving Throws that you make."
-        Passive.Simple "Heal for the maximum amount when healed."
+        Passive.Complex ("Resilient: Saves", "Add your Proficiency Bonus to any Saving Throws that you make.")
+        Passive.Complex ("Resilient: Healing", "Heal for the maximum amount when healed.")
     ]
 }
 
@@ -284,8 +284,8 @@ let rec restrictedTerritory : FeatDef = {
     Subpicks = Map []
     Grants = [
         Passive.Power (Reaction, AtWill, "Restricted Territory", "Make a Melee Weapon Attack against an enemy who enters your weapon’s range.")
-        Passive.Simple "Enemies entering your range are knocked back if they take damage before ending their turn."
-        Passive.Simple "Opportunity Attacks deal the maximum damage possible."
+        Passive.Complex ("Restricted Territory: Knockback", "Enemies entering your range are knocked back if they take damage before ending their turn.")
+        Passive.Complex ("Restricted Territory: Opportunity", "Opportunity Attacks deal the maximum damage possible.")
     ]
 }
 
@@ -294,8 +294,8 @@ let rec savageAssault : FeatDef = {
     Name = "Savage Assault"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Roll all of your damage dice with Advantage."
-        Passive.Simple "When you damage a target, you reduce its AC by 1 (stacking)."
+        Passive.Complex ("Savage Assault: Advantage", "Roll all of your damage dice with Advantage.")
+        Passive.Complex ("Savage Assault: Corrosive", "When you damage a target, you reduce its AC by 1 (stacking).")
     ]
 }
 
@@ -305,9 +305,9 @@ let rec sentinel : FeatDef = {
     Subpicks = Map []
     Grants = [
         Passive.Power (Reaction, AtWill, "Sentinel", "Make a Weapon Attack against an enemy who attacks an ally.")
-        Passive.Simple "Gain Advantage on Opportunity Attacks."
-        Passive.Simple "Hits with Melee Opportunity Attacks stop creature movement."
-        Passive.Simple "You gain an additional Reaction."
+        Passive.Complex ("Sentinel: Opportunity", "Gain Advantage on Opportunity Attacks.")
+        Passive.Complex ("Sentinel: Lockdown", "Hits with Melee Opportunity Attacks stop creature movement.")
+        Passive.Complex ("Sentinel: Extra Reaction", "You gain an additional Reaction.")
     ]
 }
 
@@ -316,9 +316,9 @@ let rec sharpshooter : FeatDef = {
     Name = "Sharpshooter"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Your Ranged Weapon Attacks do not receive penalties from High Ground Rules."
-        Passive.Simple "Toggled: -Proficiency to attack rolls, +2*Proficiency to damage rolls."
-        Passive.Simple "Ignore Physical Resistances and Immunities."
+        Passive.Complex ("Sharpshooter: High Ground", "Your Ranged Weapon Attacks do not receive penalties from High Ground Rules.")
+        Passive.Complex ("Sharpshooter: Aim", "Toggled: -Proficiency to attack rolls, +2*Proficiency to damage rolls.")
+        Passive.Complex ("Sharpshooter: Bypass", "Ignore Physical Resistances and Immunities.")
     ]
 }
 
@@ -327,8 +327,8 @@ let rec shieldbearer : FeatDef = {
     Name = "Shieldbearer"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Gain Advantage on Dexterity based Saving Throws while wielding a shield."
-        Passive.Simple "Gain three Shieldbearer Charges to negate damage (recharge on Short Rest/Kill/Crit)."
+        Passive.Complex ("Shieldbearer: Saves", "Gain Advantage on Dexterity based Saving Throws while wielding a shield.")
+        Passive.Complex ("Shieldbearer: Charges", "Gain three Shieldbearer Charges to negate damage (recharge on Short Rest/Kill/Crit).")
         Passive.Power (FreeAction, AtWill, "Shieldbearer", "Spend a charge to reflect projectiles for 1 turn after a Shield Bash.")
     ]
 }
@@ -345,9 +345,9 @@ let rec tavernBrawler : FeatDef = {
     Name = "Tavern Brawler"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "When making an unarmed attack or Throw, your Strength Modifier is added to all damage rolls."
-        Passive.Simple "Your Dexterity Modifier is added to all Attack Rolls."
-        Passive.Simple "Main-Hand melee weapons gain Thrown and Returning properties."
+        Passive.Complex ("Tavern Brawler: Unarmed", "When making an unarmed attack or Throw, your Strength Modifier is added to all damage rolls.")
+        Passive.Complex ("Tavern Brawler: Dexterous", "Your Dexterity Modifier is added to all Attack Rolls.")
+        Passive.Complex ("Tavern Brawler: Thrown", "Main-Hand melee weapons gain Thrown and Returning properties.")
     ]
 }
 
@@ -355,7 +355,7 @@ let rec tormentor : FeatDef = {
     Id = % nameof tormentor
     Name = "Tormentor"
     Subpicks = Map []
-    Grants = [ Passive.Simple "Whenever you deal damage, you heal for 25% of that damage." ]
+    Grants = [ Passive.Complex ("Tormentor", "Whenever you deal damage, you heal for 25% of that damage.") ]
 }
 
 let rec tough : FeatDef = {
@@ -364,7 +364,7 @@ let rec tough : FeatDef = {
     Subpicks = Map []
     Grants = [
         Passive.Buff { StatModifiers.Zero with ``HP per level`` = 4 }
-        Passive.Simple "Any damage dealt to you that totals 2 or less is nullified."
+        Passive.Complex ("Tough: Nullify", "Any damage dealt to you that totals 2 or less is nullified.")
     ]
 }
 
@@ -372,7 +372,7 @@ let rec visageOfReflection : FeatDef = {
     Id = % nameof visageOfReflection
     Name = "Visage of Reflection"
     Subpicks = Map []
-    Grants = [ Passive.Simple "Upon receiving physical damage, your aggressor takes 100% of the damage you received as Force damage." ]
+    Grants = [ Passive.Complex ("Visage of Reflection", "Upon receiving physical damage, your aggressor takes 100% of the damage you received as Force damage.") ]
 }
 
 let rec warCaster : FeatDef = {
@@ -380,10 +380,10 @@ let rec warCaster : FeatDef = {
     Name = "War Caster"
     Subpicks = Map []
     Grants = [
-        Passive.Simple "Gain Advantage on Concentration based Saving Throws."
+        Passive.Complex ("War Caster: Focus", "Gain Advantage on Concentration based Saving Throws.")
         Passive.Power (FreeAction, AtWill, "War Caster", "Cast Shocking Grasp against an enemy entering melee range.")
         Passive.Power (BonusAction, AtWill, "Bind Weapons", "Use Spellcasting Ability for Attack/Damage. Kill/Crit restores lvl 1 slot.")
-        Passive.Simple "Toggled: cast any ranged Spell or Cantrip as a melee Spell."
+        Passive.Complex ("War Caster: Melee Spell", "Toggled: cast any ranged Spell or Cantrip as a melee Spell.")
     ]
 }
 
@@ -391,10 +391,9 @@ let rec yokebreaker : FeatDef = {
     Id = % nameof yokebreaker
     Name = "Yokebreaker"
     Subpicks = Map []
-    Grants = [ Passive.Simple "Pick another subclass from one of your core classes. You gain all abilities from the first 3 levels of that subclass." ]
+    Grants = [ Passive.Complex ("Yokebreaker", "Pick another subclass from one of your core classes. You gain all abilities from the first 3 levels of that subclass.") ]
 }
 
 
 type private Placeholder = class end
 let allFeats = getAll<Placeholder, FeatDef, featId>()
-
