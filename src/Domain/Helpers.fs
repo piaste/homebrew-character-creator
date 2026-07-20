@@ -36,11 +36,40 @@ let getAllPassives useLoreNames (character : Character) =
         let skill = Skills.allSkills[s]
         yield "Skill", skill.Grants
 
-      for f in character.CurrentHistory.AllFeatIds do
-        let fDef = Feats.allFeats[f]
-        yield $"Feat: {fDef.Name}", fDef.Description.Display useLoreNames
+      let mutable classLevelsForBenefits = character.CurrentHistory.LevelsBySubclass
 
-      for KeyValue(scid, lvl) in character.CurrentHistory.LevelsBySubclass do        
+      for lr in character.CurrentHistory.Levels do
+        match lr.FeatId with
+        | None -> ()
+        | Some f when f = Feats.abilityImprovement.Id -> ()
+        | Some f when f = Feats.classSpecialist.Id -> 
+
+            for cpId in lr.FeatSubPicks.GetOrElse(ClassPassives, Set.empty) do
+                let cpDef = ClassPassives.allClassPassives[UMX.tag<classPassiveId> cpId]
+                for g in cpDef.Grants do
+                    yield $"CS: {allClasses[cpDef.ClassId].Name}", g
+
+        | Some f when f = Feats.yokebreaker.Id -> 
+            
+            for scId in lr.FeatSubPicks.GetOrElse(Yokebreaking, Set.empty) do
+                classLevelsForBenefits <- Map.add (UMX.tag<subclassId> scId) 3<classLvl> classLevelsForBenefits 
+                    
+        | Some f when f = Feats.elementalAdept.Id ->
+
+            for eDmgT in lr.FeatSubPicks.GetOrElse(ElementalTypes, Set.empty) do
+                let fDef = Feats.allFeats[f]
+                for g in fDef.Grants do
+                    match g with
+                    | Complex (n, d) -> 
+                        yield $"Feat: {fDef.Name}", Complex(n, d.Replace("{{DMGTYPE}}", eDmgT))
+                    | _ -> () // should only have two complex grants
+
+        | Some f ->
+            let fDef = Feats.allFeats[f]
+            yield $"Feat: {fDef.Name}", fDef.Description
+
+
+      for KeyValue(scid, lvl) in classLevelsForBenefits do        
         
         // class benefits
         let clDef = classBySubclassId scid
@@ -59,7 +88,8 @@ let getAllPassives useLoreNames (character : Character) =
         // class passives
         for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
             let cpDef = ClassPassives.allClassPassives[cpId]
-            yield clDef.Name, cpDef.Description.Display useLoreNames
+            for g in cpDef.Grants do
+                yield clDef.Name, g
 
     ]
     
@@ -183,3 +213,16 @@ let getValidSubclassesFor (c: Character) =
     let clId = classIdBySubclassId c.NextLevelUp.SubclassId
     getValidSubclassesForClass clId c
         
+let hasClassSpecialistFor (c: Character) = 
+    c.CurrentHistory.Levels
+    |> List.choose (fun lr -> 
+        if lr.FeatId <> Some Feats.classSpecialist.Id then None else
+        
+        let cpPick = 
+            lr.FeatSubPicks[FeatSubpickType.ClassPassives].MinimumElement
+            |> UMX.tag<classPassiveId> 
+
+        Some ClassPassives.allClassPassives[cpPick].ClassId
+    )
+
+    

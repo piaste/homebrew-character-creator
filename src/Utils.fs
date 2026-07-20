@@ -60,8 +60,7 @@ type Collections.Map<'K, 'V when 'K : comparison > with
     member this.GetOrDefault k = 
         match this.TryGetValue k with
         | false, _ -> Unchecked.defaultof<'V>
-        | true, v -> v      
-
+        | true, v -> v     
     member this.GetOrElse(k, vd) = 
         match this.TryGetValue k with
         | false, _ -> vd

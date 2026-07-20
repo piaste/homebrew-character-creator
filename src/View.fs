@@ -330,14 +330,14 @@ let levelBoxes (model: Model) =
                                 | None -> empty()
                                 | Some fId -> 
                                     let f = Feats.allFeats[fId]
-                                    sheetAttr "Feat" f.Name (Some (f.Description.Display model.UseLoreNames)) None
+                                    sheetAttr "Feat" f.Name (Some f.Description) None
                             }
                     }
                 }
             }
     }
 
-let inline toPicker<
+let inline toPickerLore<
         [<Measure>] 'm, 
         't when 't : (member Id : string<'m>) 
             and 't: (member Name : string)
@@ -348,7 +348,31 @@ let inline toPicker<
     (s : 't seq)
      =
     s
-    |> Seq.map<'t, Picker.Thing<'m>> (fun (c : 't) -> { Id = c.Id; Name = c.Name; Description = c.Description.Display useLoreNames; Icon = iconPicker c})
+    |> Seq.map<'t, Picker.Thing<'m>> (fun (c : 't) -> { 
+        Id = c.Id
+        Name = c.Name
+        Description = c.Description.Display useLoreNames
+        Icon = iconPicker c
+    })
+    |> Seq.toList
+
+
+let inline toPicker<
+        [<Measure>] 'm, 
+        't when 't : (member Id : string<'m>) 
+            and 't: (member Name : string)
+            and 't: (member Description: string)
+    > 
+    (iconPicker : 't -> string option)
+    (s : 't seq)
+     =
+    s
+    |> Seq.map<'t, Picker.Thing<'m>> (fun (c : 't) -> { 
+        Id = c.Id
+        Name = c.Name
+        Description = c.Description
+        Icon = iconPicker c
+    })
     |> Seq.toList
 
 let otherView (model: Model) (dispatch : Message -> unit) = 
@@ -433,7 +457,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Archetypes ->
                 ph Archetypes <| Picker.view "Archetype"                    
                     (Archetypes.allArchetypes.Values
-                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     Set.empty
                     (Set.singleton c.ArchetypeId)
@@ -441,7 +465,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Traits ->
                 ph Traits <| Picker.view "Trait"
                     (Traits.allTraits.Values
-                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     Set.empty
                     (Set.singleton c.TraitId)
@@ -490,7 +514,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick ClassPassives ->
                 ph ClassPassives <| Picker.view "Passives"
                     (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
-                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllClassPassiveIdsByClass[classIdBySubclassId l.SubclassId]
                     l.ClassPassiveIds
@@ -498,7 +522,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Feats ->
                 ph Feats <| Picker.view "Feat"
                     (Feats.allFeats.Values
-                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPicker tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllFeatIds
                     (l.FeatId |> Option.toList |> Set.ofList)
@@ -507,7 +531,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 let sps = SpecialPicks.allSpecialPicksOfType sp
                 ph (ClassSpecific sp) <| Picker.view sp.DisplayString
                     (sps.Values
-                     |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllSpecialPicks
                     (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp))
@@ -524,11 +548,46 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         c.PreviousHistory.AllCantripIds
                         (l.FeatSubPicks.GetOrElse(FeatSubpickType.Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>)
 
+                | FeatSubpickType.Yokebreaking ->
+                    cond model.YokebreakerClass <| function
+                    | None -> 
+                        let validClassesForYB = 
+                            Classes.allClasses
+                            |> Map.filter (fun cId _ -> 
+                                c.CurrentHistory.LevelsBySubclass.Keys
+                                |> Seq.map (fun scId -> Subclasses.allSubclasses[scId].BaseClassId)
+                                |> Seq.contains cId
+                            )
+
+                        radialStage rct dispatch
+                            validClassesForYB
+                            baseclassIconPath
+                            (Some >> SetYokebreakerClass)
+
+                    | Some ybClassId ->
+                        let validSubclassesForYb = 
+                            Subclasses.allSubclassesByClass[ybClassId]
+                            |> Map.filter (fun scId _ -> c.CurrentHistory.LevelsBySubclass.Keys |> Seq.contains scId |> not)
+
+                        radialStage rct dispatch
+                            (validSubclassesForYb
+                            |> Map.map (fun _ v -> 
+                            {| v with 
+                                Name = v.Name.Display model.UseLoreNames 
+                                Description = v.Description.Display model.UseLoreNames
+                            |}))
+                            subclassIconPath
+                            (fun scId -> ToggleFeatSubPick (Yokebreaking, UMX.untag scId))
+
                 | FeatSubpickType.ClassPassives ->
                     cond model.ClassSpecialistClass <| function
                     | None -> 
+                        let validClassesForSpecialist = 
+                            Classes.allClasses 
+                            |> Map.filter (fun cId _ -> not (hasClassSpecialistFor c |> List.contains cId))
+
                         radialStage rct dispatch
-                            Classes.allClasses
+                            validClassesForSpecialist
                             baseclassIconPath
                             (Some >> SetClassSpecialistClass)
 
@@ -540,12 +599,12 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             |> Seq.toList
                             )
                             (c.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(classSpecialistId, Set.empty))
-                            (l.FeatSubPicks.GetOrElse(FeatSubpickType.ClassPassives, Set.empty) |> Set.map UMX.tag<classPassiveId>)
+                            (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<classPassiveId>)
                             
                 | FeatSubpickType.Archetypes ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Archetypes.allArchetypes.Values
-                        |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                        |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                         )
                         Set.empty
                         (Set.singleton c.ArchetypeId)
@@ -553,7 +612,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | FeatSubpickType.Traits ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Traits.allTraits.Values
-                        |> toPicker model.UseLoreNames tryGetAnyVanillaIconSubpath
+                        |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                         )
                         Set.empty
                         (Set.singleton c.TraitId)
@@ -567,6 +626,19 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         Set.empty
                         c.SkillIds
 
+                | FeatSubpickType.ElementalTypes ->
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (elementalDmgTypes
+                        |> Seq.map<_, Picker.Thing<element>> (fun c -> { 
+                            Id = UMX.tag<element> (c.ToString())
+                            Name = c.ToString()
+                            Description = $"Damage from {c} sources"
+                            Icon = None
+                        })
+                        |> Seq.toList
+                        )
+                        Set.empty
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<element>)
 
         )
         .StageTabs(

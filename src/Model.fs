@@ -161,7 +161,9 @@ type Model =
         RadialCenterText: string
         SearchQueries : Map<LevelUpPick, string>
         ClassSpecialistClass : string<classId> option
+        YokebreakerClass: string<classId> option
         FilterPassives : FilterPassives
+        
         CopyButtonState : CopyButtonState
 
         Character: Character
@@ -179,6 +181,7 @@ type Model =
                 RadialCenterText = ""
                 SearchQueries = Map []
                 ClassSpecialistClass = None
+                YokebreakerClass = None
                 FilterPassives = All
                 CopyButtonState = Rest
 

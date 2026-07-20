@@ -78,5 +78,6 @@ type Character.Character with
                     for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
                         FeatSubpick fspt, q
             ]
+            |> withDebug
             |> Map.filter (fun _ n -> n > 0)
         )

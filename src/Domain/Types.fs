@@ -29,6 +29,26 @@ type Frequency =
         | OncePerShortRest -> " [1/short rest]"
         | OncePerLongRest -> " [1/long rest]"
 
+type PhysicalDmg = Crushing | Slashing | Piercing
+type ElementalDmg = 
+    | Fire | Cold 
+    | Lightning | Thunder
+    | Acid | Poison
+    | Radiant | Necrotic
+    | Psychic | Force
+
+type [<Measure>] element
+let elementalDmgTypes =     
+    [ Fire ; Cold 
+      Lightning ; Thunder
+      Acid ; Poison
+      Radiant ; Necrotic
+      Psychic ; Force ]
+
+type DamageType = 
+    | Physical of PhysicalDmg
+    | Elemental of ElementalDmg
+
 type Ability =
     | STR
     | DEX
@@ -165,6 +185,7 @@ type TraitDef = GrantsPassives<traitId>
 
 
 type FeatSubpickType = 
+    | Yokebreaking
     | ClassPassives
     | Cantrips
     | Traits
@@ -173,6 +194,7 @@ type FeatSubpickType =
     | ElementalTypes
     member this.DisplayString = 
         match this with
+        | Yokebreaking -> "Yokebreaker"
         | ClassPassives -> "Class Specialist"
         | Cantrips -> "Accord of the Arcane"
         | Traits -> "Multifaceted Trait"
@@ -183,11 +205,15 @@ type FeatSubpickType =
 type FeatDef = {
     Id : string<featId>
     Name : string
+    ExplicitDescription : string option
     Grants: Passive list
     Subpicks: Map<FeatSubpickType, int>
 } with
     member this.Description = 
-        this.Grants |> List.map _.Description |> GameString.concat "\n"
+        this.ExplicitDescription 
+        |> Option.defaultWith (fun () -> 
+            this.Grants |> List.map _.Description.DefaultText |> String.concat "\n"
+        )
 
 
 
