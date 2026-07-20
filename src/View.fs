@@ -87,6 +87,12 @@ let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIco
         }
     }
 
+let bigActionButtonWithClass (node: Node) abCl dispatch msg = 
+    button {
+        cl $"btn action-btn ${abCl}"
+        on.click (fun _ -> dispatch msg)
+        node
+    }
 let actionButtonWithClass (text: string) abCl dispatch msg = 
     button {
         cl $"btn action-btn ${abCl}"
@@ -337,7 +343,7 @@ let levelBoxes (model: Model) =
                                         |> Seq.map camelCaseToEnglish
                                         |> String.concat ","
                                         |> fun p -> $"{f.Name} [{p}]"
-                                        
+
                                     sheetAttr "Feat" featName (Some f.Description) None
                             }
                     }
@@ -383,6 +389,23 @@ let inline toPicker<
     })
     |> Seq.toList
 
+let levelUpOptions useLoreNames (c: Character) dispatch = 
+    div {
+        cl "main-stage-levelup-options"
+        forEach c.CurrentHistory.LevelsBySubclass <| (fun (KeyValue(scId, lvl)) ->
+            let nextLvl = lvl + 1<classLvl>
+            let nextLvlBenefits = getNewClassBenefitsAt useLoreNames scId nextLvl c.CharacterLevel
+
+            bigActionButtonWithClass (
+                concat {
+                    p { $"⬆️ {Subclasses.allSubclasses[scId].Name.Display useLoreNames} {nextLvl}" }
+                    forEach nextLvlBenefits <| (fun (n, d) ->
+                        sheetAttr n (d.Name.Display useLoreNames) (Some <| d.Description.Display useLoreNames) None
+                    )
+                }) "primary" dispatch (LevelUp (Some scId))
+        )
+    }
+
 let otherView (model: Model) (dispatch : Message -> unit) = 
     System.Console.WriteLine "View updated"
 
@@ -410,7 +433,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cond model.Errors <| function
                         | [] when c.CharacterLevel >= 12<charLvl> -> empty()
                         | [] ->                             
-                            actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
+                            levelUpOptions model.UseLoreNames c dispatch
                         | errs -> 
                             div {
                                 cl "main-stage-error error"
@@ -745,7 +768,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cond model.Errors <| function
                         | [] when c.CharacterLevel >= 12<charLvl> -> empty()
                         | [] -> 
-                            actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch LevelUp
+                            actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch (LevelUp None)
                         | _ -> empty()
                     
                     cond model.Character.PreviousLevelHistory.IsEmpty <| function
@@ -771,5 +794,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             .Elt()   
             }
         )
+        .ModVersion("9.0.5")
         .Version($"{defaultCharacter.Version.ToString()}-bolero")   
         .Elt()

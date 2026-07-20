@@ -381,6 +381,7 @@ html,body{
   line-height: 1.1;
   cursor:pointer;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  width: fit-content;
 }
 .btn:hover{
   border-color: rgba(212,175,55,0.55);
@@ -550,6 +551,27 @@ html,body{
   place-self: center center;
   gap: 2em;
   
+  padding: 4em;
+  align-items: center;
+  & .main-stage-levelup-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    gap: 1em;
+    
+    align-content: center;
+      > sheet-attr {
+      text-transform: "";
+    }
+    
+    & .action-btn {
+      flex: 0 0 15rem;
+      width: 15rem;
+      padding-block: 15px;
+      padding-inline: 10px;
+    }
+}
   & .error {
  
     & .error-title {
@@ -573,7 +595,8 @@ html,body{
   }
   
   & .action-btn {
-    padding-block: 20px;
+    padding-block: 15px;
+    padding-inline: 25px;
   }
 }
 
@@ -1035,15 +1058,40 @@ html,body{
 .picker-screen{
   
   & .picker-header {
-    display: flex;
-    flex-direction: column;
+    /*! display: flex; */
+    /*! flex-direction: column; */
     position: sticky;
     top: 0;
     z-index: 1000;
     background: rgba(14,10,10,1);
     padding: 18px 18px 28px;  
     
-    &::after {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    gap: 10px;
+    
+    
+    & .h1 {
+      grid-column: 1 / -1;
+    }
+    
+    &  .btn:nth-of-type(1) {
+      grid-column: 2;
+      justify-self: end;
+    }
+
+       & .btn:nth-of-type(2) {
+      grid-column: 3;
+      justify-self: start;
+    }
+    
+    & .filter-panel {
+      grid-column: 1 / 4; 
+      width: 100%;
+    }
+    
+      &::after {
       content: "";
       position: absolute;
       left: 0;
@@ -1058,7 +1106,7 @@ html,body{
         transparent
       );
     }
-  }
+}
   
   & .grid.grid-rows{
     padding: 18px 18px 28px;  
@@ -1627,6 +1675,36 @@ html,body{
   .summary-abilities-compact .ability-row{
     grid-template-columns: 32px 32px 18px 14px 32px 16px 16px;
     column-gap: 5px;
+  } 
+
+    /* picker */
+  .picker-screen{
+  
+  &   .picker-header {
+    grid-template-columns: 1fr;
+    
+    
+    & .h1 {
+    grid-column: 1;
+    justify-self: stretch;
+    }  
+    & .btn:nth-of-type(1) {
+      grid-column: 1;
+      justify-self: center;
+    }  
+    & .btn:nth-of-type(2) {
+      grid-column: 1;
+      justify-self: center;
+    }  
+    & .filter-panel{
+      grid-column: 1;
+      justify-self: stretch;
+    }  
+    & .label {
+      grid-column: 1;
+      justify-self: stretch;
+    }  
+  }
   }
 }
  

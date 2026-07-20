@@ -49,9 +49,10 @@ type Message =
     | ToggleSpell of string<spellId>
 
     | TogglePick of LevelUpPick * string
+    | ClearPicks of LevelUpPick
     | SetSearchQuery of LevelUpPick * string
 
-    | LevelUp
+    | LevelUp of string<subclassId> option
     | LevelDown    
     
     | CopyBuildLink
@@ -353,7 +354,7 @@ let update
                     character.NextLevelUp.ClassPassiveIds.Toggle cpId
             }
     | ToggleFeat featId ->
-        applyAnd (SetClassSpecialistClass None) <| fun character ->
+        applyAnds [SetClassSpecialistClass None; SetYokebreakerClass None] <| fun character ->
             if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
             
             { character with 
@@ -414,12 +415,52 @@ let update
             | FeatSubpick fsp -> ToggleFeatSubPick (fsp, id)
         model, Cmd.ofMsg msg // maybe use Cmd.batch to autoforward?
  
+    | ClearPicks pick -> 
+        apply <| fun character ->
+            match pick with
+            | Archetypes -> character
+            | Traits -> { character with TraitId = Traits.none.Id }
+            | Skills -> 
+                    { character with 
+                        SkillIds = Set.empty
+                        SkillExpIds = Set.empty
+                    } 
+            | SkillExps -> 
+                    { character with 
+                        SkillExpIds = Set.empty
+                    } 
+            | Cantrips -> 
+                    { character with 
+                        NextLevelUp.CantripIds = Set.empty
+                    } 
+            | Spells -> 
+                    { character with 
+                        NextLevelUp.SpellIds = Set.empty
+                    } 
+            | Feats -> 
+                    { character with 
+                        NextLevelUp.FeatId = None
+                        NextLevelUp.FeatSubPicks = Map []
+                    } 
+            | ClassPassives ->
+                    { character with 
+                        NextLevelUp.ClassPassiveIds = Set.empty
+                    } 
+            | ClassSpecific _ ->
+                    { character with 
+                        NextLevelUp.SpecialPickIds = Set.empty
+                    } 
+            | FeatSubpick _ -> 
+                    { character with 
+                        NextLevelUp.FeatSubPicks = Map[]
+                    } 
+
     | SetSearchQuery (pick, q) ->
         { model with SearchQueries = Map.add pick q model.SearchQueries }, Cmd.none
 
-    | LevelUp ->
+    | LevelUp scId' ->
         if model.Errors.IsEmpty then
-            applyAnd NextMainStageSelection  <| levelUpDefault
+            applyAnd NextMainStageSelection  <| levelUpDefault scId'
         else
             model, Cmd.none
 

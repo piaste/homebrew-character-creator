@@ -59,7 +59,12 @@ let view
                         on.click (fun _ -> dispatch NextMainStageSelection)
                         "Done"
                     }
-
+ 
+                button {
+                    cl "btn primary picker-done"
+                    on.click (fun _ -> dispatch (ClearPicks pick))
+                    "Clear"
+                }
                 div {
                     cl "filter-panel compact"
 

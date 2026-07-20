@@ -22,6 +22,49 @@ let classIdBySubclassId =
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
+let getClassBenefits useLoreNames scid lvl charLvl = 
+    [
+        // class benefits
+        let clDef = classBySubclassId scid
+        for scAb in clDef.ScalingAbilities charLvl lvl do
+            yield clDef.Name, scAb
+        for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
+            if lvl >= lvlReq then for fAb in ab do yield clDef.Name, fAb
+        
+        // subclass benefits
+        let scDef = allSubclasses[scid]
+        for scAb in scDef.ScalingAbilities charLvl lvl do
+            yield scDef.Name.Display useLoreNames, scAb
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            if lvl >= lvlReq then for fAb in ab do yield scDef.Name.Display useLoreNames, fAb      
+    ]
+
+let getNewClassBenefitsAt useLoreNames scid lvl charLvl = 
+    [
+        // class benefits
+        let clDef = classBySubclassId scid
+        yield! 
+            [for scAb in clDef.ScalingAbilities charLvl lvl do
+                yield clDef.Name, scAb
+            ] |> List.except 
+            [for scAb in clDef.ScalingAbilities charLvl (lvl - 1<classLvl>) do
+                yield clDef.Name, scAb
+            ]
+        for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
+            if lvl = lvlReq then for fAb in ab do yield clDef.Name, fAb
+        
+        // subclass benefits
+        let scDef = allSubclasses[scid]
+        yield! 
+            [ for scAb in scDef.ScalingAbilities charLvl lvl do
+                yield scDef.Name.Display useLoreNames, scAb
+            ] |> List.except
+            [ for scAb in scDef.ScalingAbilities charLvl (lvl - 1<classLvl>) do
+                yield scDef.Name.Display useLoreNames, scAb
+            ]
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            if lvl = lvlReq then for fAb in ab do yield scDef.Name.Display useLoreNames, fAb      
+    ]
 let getAllPassives useLoreNames (character : Character) = 
     [ for t in allSubraces[character.RaceId].RacialPassives do
         yield "Race", t
@@ -70,22 +113,12 @@ let getAllPassives useLoreNames (character : Character) =
 
 
       for KeyValue(scid, lvl) in classLevelsForBenefits do        
-        
-        // class benefits
-        let clDef = classBySubclassId scid
-        for scAb in clDef.ScalingAbilities character.CharacterLevel lvl do
-            yield clDef.Name, scAb
-        for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield clDef.Name, fAb
-        
-        // subclass benefits
-        let scDef = allSubclasses[scid]
-        for scAb in scDef.ScalingAbilities character.CharacterLevel lvl do
-            yield scDef.Name.Display useLoreNames, scAb
-        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            if lvl >= lvlReq then for fAb in ab do yield scDef.Name.Display useLoreNames, fAb            
+
+        for n, p in getClassBenefits useLoreNames scid lvl character.CharacterLevel do
+            yield n, p
 
         // class passives
+        let clDef = classBySubclassId scid
         for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
             let cpDef = ClassPassives.allClassPassives[cpId]
             for g in cpDef.Grants do
@@ -93,13 +126,18 @@ let getAllPassives useLoreNames (character : Character) =
 
     ]
     
-let levelUpDefault (character : Character) =     
+let levelUpDefault scId' (character : Character) =     
     if character.CharacterLevel >= 12<charLvl> then character else
     { character with 
         PreviousLevelHistory = character.NextLevelUp :: character.PreviousLevelHistory
         NextLevelUp = { 
-            SubclassId = character.NextLevelUp.SubclassId
-            ClassLevel = character.NextLevelUp.ClassLevel + 1<Types.classLvl>
+            SubclassId = scId' |> Option.defaultValue character.NextLevelUp.SubclassId
+            ClassLevel = 
+                match scId' with
+                | None -> 
+                    character.NextLevelUp.ClassLevel + 1<classLvl>
+                | Some scId -> 
+                    1<classLvl> + Map.getOrDefault scId character.CurrentHistory.LevelsBySubclass
 
             FeatId = None
             FeatSubPicks = Map[]
