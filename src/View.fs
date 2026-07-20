@@ -89,13 +89,13 @@ let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIco
 
 let bigActionButtonWithClass (node: Node) abCl dispatch msg = 
     button {
-        cl $"btn action-btn ${abCl}"
+        cl $"btn action-btn {abCl}"
         on.click (fun _ -> dispatch msg)
         node
     }
 let actionButtonWithClass (text: string) abCl dispatch msg = 
     button {
-        cl $"btn action-btn ${abCl}"
+        cl $"btn action-btn {abCl}"
         on.click (fun _ -> dispatch msg)
         text        
     }
@@ -739,13 +739,17 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             concat {
                 div {
                     cl "undo-redo"
+
+                    let inline doBtn show txt msg= 
+                        actionButtonWithClass txt (if not show then "visibility-hidden" else "") dispatch msg
+
                     cond model.UndoStack.IsEmpty <| function 
-                        | false -> actionButton "↶ UNDO" dispatch Undo
-                        | true -> empty()
+                        | false -> doBtn true "↶ UNDO" Undo
+                        | true -> doBtn false "↶ UNDO" Undo
                     
                     cond model.RedoStack.IsEmpty <| function 
-                        | false -> actionButton "↷ REDO" dispatch Redo
-                        | true -> empty()
+                        | false -> doBtn true "↷ REDO" Redo
+                        | true -> doBtn false "↷ REDO" Redo
                 }
                 
                 div {
@@ -765,16 +769,22 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 }
                 div {
                     cl "levelup-down"
-                    cond model.Errors <| function
-                        | [] when c.CharacterLevel >= 12<charLvl> -> empty()
-                        | [] -> 
-                            actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" "primary" dispatch (LevelUp None)
-                        | _ -> empty()
                     
+                    let inline levelup show = 
+                        actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}""" dispatch (LevelUp None)
+
+                    cond model.Errors <| function
+                        | [] when c.CharacterLevel >= 12<charLvl> -> levelup false
+                        | [] -> levelup true
+                        | _ -> levelup false
+                    
+                    let inline leveldown show = 
+
+                        actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}"""   dispatch LevelDown
+
                     cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                        | false -> 
-                            actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
-                        | true -> empty()
+                        | false -> leveldown true
+                        | true -> leveldown false
                 }
 
                 div {

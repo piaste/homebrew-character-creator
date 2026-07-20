@@ -33,7 +33,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore && dotnet workload restore
+        run: dotnet workload restore && dotnet restore
 
       - name: Publish
         run: dotnet publish -c Release -o ../publish
