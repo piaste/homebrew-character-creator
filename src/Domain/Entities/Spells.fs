@@ -46,7 +46,7 @@ let arcaneGate =
       SpellDescription = "Create two linked teleporation portals (18m range)"
       SpellLists = [ Divine; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let arcaneLock =
@@ -127,7 +127,7 @@ let barrierOfHolding =
       SpellDescription = "Creatures in a 3m AOE are bound and can't move on failed save"
       SpellLists = [ Divine; Arcane ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = Action }
 
 let beaconOfHope =
@@ -181,7 +181,7 @@ let blink =
       SpellDescription = "Swap place with another creature"
       SpellLists = [ Innate; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let bloodBroker =
@@ -208,7 +208,7 @@ let borrowedKnowledge =
       SpellDescription = "Grants yourself or another creature advantage on Skill Checks."
       SpellLists = [ Divine; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let burningHands =
@@ -244,7 +244,7 @@ let catnap =
       SpellDescription = "Make an ally sleep for 3 turn, then it gains a short rest. Can't target the same ally twice until long rest"
       SpellLists = [ Primal; Innate ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = Action }
 
 let causeFear =
@@ -442,7 +442,7 @@ let daylight =
       SpellDescription = "Makes 18m AOE light which dispel darkness magical or not."
       SpellLists = [ Divine; Primal ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let deathWard =
@@ -469,7 +469,7 @@ let detectThoughts =
       SpellDescription = "Can Read Thoughts"
       SpellLists = [ Innate; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let dimensionDoor =
@@ -541,7 +541,7 @@ let dominate =
       SpellDescription = "Dominate a creature. Creature break free the first time they take dmg from you or your allies."
       SpellLists = [ Innate; Bargained ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = Action }
 
 let earthTremor =
@@ -991,7 +991,7 @@ let heroesFeast =
       SpellDescription = "Summon some camp supplies"
       SpellLists = [ Divine; Primal ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let heroism =
@@ -1081,7 +1081,7 @@ let insectPlague =
       SpellDescription = "Locusts attack everyone within 18m, Bleed and Gaping Wound on a failed save until healed"
       SpellLists = [ Primal; Bargained ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = Action }
 
 let internalFortress =
@@ -1243,7 +1243,7 @@ let mirrorImage =
       SpellDescription = "Increase AC by 6. Each time you evade a hit, decrease AC by 2."
       SpellLists = [ Innate; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = Action }
 
 let mistyStep =
@@ -1252,7 +1252,7 @@ let mistyStep =
       SpellDescription = "Teleport 18m"
       SpellLists = [ Bargained; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let moonbeam =
@@ -1468,7 +1468,7 @@ let shield =
       SpellDescription = "Increase AC by 4 for this turn and become immune to Force dmg"
       SpellLists = [ Bargained; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = Reaction }
 
 let shieldOfFaith =
@@ -1504,7 +1504,7 @@ let sleetStorm =
       SpellDescription = "Disrupt concentration on failed save in huge area. Douses fires"
       SpellLists = [ Primal; Innate ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let slow =
@@ -1531,7 +1531,7 @@ let speakWithAnimals =
       SpellDescription = "Speak with animals"
       SpellLists = [ Primal; Bargained ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let speakWithDead =
@@ -1540,7 +1540,7 @@ let speakWithDead =
       SpellDescription = "Speak with dead"
       SpellLists = [ Divine; Bargained ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let spewAcid =
@@ -1657,7 +1657,7 @@ let transposition =
       SpellDescription = "Forcibly teleport another creature to an area you can see on failed save"
       SpellLists = [ Divine; Innate ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let unseenServant =
@@ -1666,7 +1666,7 @@ let unseenServant =
       SpellDescription = "Summon an invisible servant. Can interact with the environment"
       SpellLists = [ Divine; Arcane ]
       Concentration = false
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let vampiricTouch =
@@ -1747,7 +1747,7 @@ let wardingWinds =
       SpellDescription = "Clear clouds in 3m radius, create difficult terrain, ranged attacks against creatures inside are rolled with Disadvantage"
       SpellLists = [ Primal; Arcane ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 let waterWalk =
@@ -1801,7 +1801,7 @@ let zephyrMovement =
       SpellDescription = "You ignore Opportunity attacks. You can teleport once per turn (9m range) as a free action. Your ability to wrap is not limited by sight."
       SpellLists = [ Primal; Arcane ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = BonusAction }
 
 
