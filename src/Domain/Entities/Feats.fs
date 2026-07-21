@@ -174,13 +174,14 @@ let rec durable : FeatDef = {
 let rec elementalAdept : FeatDef = {
     Id = % nameof elementalAdept
     Name = "Elemental Adept"
-    ExplicitDescription = None
+    ExplicitDescription = 
+        Some "Choose two elemental damage types. When dealing damage with those elements, you deal +1d4 damage and bypass Resistances and Immunities."
     Subpicks = Map[ElementalTypes, 2]
     Grants = 
         // special handling for this feat, must have {{DMGTYPE}} to template it for each selection
         [
-           Complex ("Elemental Adept: Bypass", "Ignore Resistances and Immunities to {{DMGTYPE}}.")
-           Complex ("Elemental Adept: Damage", "Deal an additional +1d4 {{DMGTYPE}} damage.")
+           Complex ("{{DMGTYPE}} Adept: Bypass", "Ignore Resistances and Immunities to {{DMGTYPE}}.")
+           Complex ("{{DMGTYPE}} Adept: Damage", "Deal an additional +1d4 {{DMGTYPE}} damage.")
         ]
 }
 

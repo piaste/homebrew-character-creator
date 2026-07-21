@@ -104,7 +104,7 @@ let getAllPassives useLoreNames (character : Character) =
                 for g in fDef.Grants do
                     match g with
                     | Complex (n, d) -> 
-                        yield $"Feat: {fDef.Name}", Complex(n, d.Replace("{{DMGTYPE}}", eDmgT))
+                        yield $"Feat", Complex(n.DefaultText.Replace("{{DMGTYPE}}", eDmgT), d.Replace("{{DMGTYPE}}", eDmgT))
                     | _ -> () // should only have two complex grants
 
         | Some f ->
