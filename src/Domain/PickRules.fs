@@ -30,6 +30,12 @@ let hasFlexibleSpellPicks lr =
     | 3 | 7 | 11 -> true
     | _ -> false
 
+let getSpellListSelectionFor lr = 
+    match (subclassById lr.SubclassId).SpellList with
+    | None -> None
+    | Some _ when hasFlexibleSpellPicks lr -> Some Versatile
+    | Some sl -> Some sl
+
 let nCantripPicks lr = 
     match allSubclasses[lr.SubclassId].CasterType with
     | Martial -> 0

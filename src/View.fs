@@ -531,10 +531,9 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     l.CantripIds
 
             | Pick Spells ->
-                match (subclassById l.SubclassId).SpellList with
+                match getSpellListSelectionFor l with
                 | None -> empty()
                 | Some sl -> 
-
                     ph Spells <| Picker.view "Spells"
                         (allSpellsWithIconsIn sl
                         |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
