@@ -125,7 +125,7 @@ let view
 
                                 div {
                                     cl "desc"
-                                    c.Description
+                                    printRichText c.Description
                                 }
                             }
                         }

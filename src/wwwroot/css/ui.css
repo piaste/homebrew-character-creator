@@ -1228,7 +1228,7 @@ html,body{
 .picker-screen .card .desc{
   font-size: 13px;
   color: rgba(242,230,196,0.86);
-  line-height: 1.45;
+  line-height: 0.75;
   text-align: left;
 }
  

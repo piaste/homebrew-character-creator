@@ -163,9 +163,11 @@ type SkillDef =
         Id: string<skillId>
         Name: string
         KeyAbility  : Ability
-        Description: string
+        SkillDescription: string
         Grants: Passive
     }
+    member this.Description = 
+        $"({this.KeyAbility}) {this.SkillDescription}\n&lt;i&gt;Proficiency grants:&lt;/i&gt; {this.Grants.Description.DefaultText}"
 
 
 type [<Measure>] archetypeId
