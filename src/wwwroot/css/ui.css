@@ -106,7 +106,7 @@ html,body{
 .topbar{
   padding: 18px 28px 12px;
   display:grid;
-  grid-template-columns: 1fr 20fr;
+  grid-template-columns: 1fr auto;
   
   align-items:start;
   gap: 16px 24px;
@@ -120,7 +120,7 @@ html,body{
     align-items:center;
     gap:14px;
     min-width: 0;
-    width: 280px;
+    width: fit-content;
     
   }
  
@@ -200,7 +200,7 @@ html,body{
   
   & .topbar-actions{
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
     gap: 8px;
     max-width: min(56rem, 100%);
  
@@ -1625,7 +1625,7 @@ html,body{
    in .radial-node, so resetting transform/position here makes
    those variables inert without any F# change.
    --------------------------------------------- */
-@media (max-width: 720px){
+@media (max-width: 720px), (max-height: 800px) {
   .radial-stage{
     min-height: 0;
   }
