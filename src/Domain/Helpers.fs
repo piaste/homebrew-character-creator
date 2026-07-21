@@ -253,14 +253,13 @@ let getValidSubclassesFor (c: Character) =
         
 let hasClassSpecialistFor (c: Character) = 
     c.CurrentHistory.Levels
-    |> List.choose (fun lr -> 
-        if lr.FeatId <> Some Feats.classSpecialist.Id then None else
+    |> List.collect (fun lr -> 
+        if lr.FeatId <> Some Feats.classSpecialist.Id then [] else
         
-        let cpPick = 
-            lr.FeatSubPicks[FeatSubpickType.ClassPassives].MinimumElement
-            |> UMX.tag<classPassiveId> 
-
-        Some ClassPassives.allClassPassives[cpPick].ClassId
+        
+        lr.FeatSubPicks.GetOrElse(FeatSubpickType.ClassPassives, Set.empty)        
+        |> Seq.map (fun cpId -> ClassPassives.allClassPassives[UMX.tag<classPassiveId> cpId].ClassId)
+        |> Seq.toList
     )
-
+    |> List.distinct
     
