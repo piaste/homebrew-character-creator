@@ -302,7 +302,8 @@ let update
                         match character.AbilityImprovement with
                         | None -> None
                         | Some (a, _) | Some (_, a) when a = ability ->
-                            None
+                            // no change; to disable you must remove the feat
+                            character.AbilityImprovement
                         | Some (_, b) ->
                             // By swapping, we ensure the oldest is the one replaced
                             Some (b, ability)
