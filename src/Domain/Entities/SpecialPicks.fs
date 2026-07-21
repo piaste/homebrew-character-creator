@@ -1073,11 +1073,11 @@ let rec tyrannicalSmite : ClassLevelUpPick = {
 }
 
 // Ranger: Frontier Ballistics
-let rec arrowOfAberrationSlaying : ClassLevelUpPick = {
+let rec arrowOfWeakening : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfAberrationSlaying
-    Name = "Arrow of Aberration Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Aberrations" ]
+    TypeId = nameof arrowOfWeakening
+    Name = "Arrow of Weakening"
+    Grants = [ Simple "Applies Bane for three turns" ]
 }
 
 let rec arrowOfAcid : ClassLevelUpPick = {
@@ -1094,18 +1094,18 @@ let rec arrowOfArcaneInterference : ClassLevelUpPick = {
     Grants = [ Simple "Breaks target’s Concentration and inflicts Silence" ]
 }
 
-let rec arrowOfBeastSlaying : ClassLevelUpPick = {
+let rec arrowOfTracking : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfBeastSlaying
-    Name = "Arrow of Beast Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Beasts" ]
+    TypeId = nameof arrowOfTracking
+    Name = "Arrow of Tracking"
+    Grants = [ Simple "Cannot miss and applies Faerie Fire" ]
 }
 
-let rec arrowOfConstructSlaying : ClassLevelUpPick = {
+let rec arrowOfSlaying : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfConstructSlaying
-    Name = "Arrow of Construct Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Constructs" ]
+    TypeId = nameof arrowOfSlaying
+    Name = "Arrow of Slaying"
+    Grants = [ Simple "Deals an additional 1-12 damage to non-humanoid target" ]
 }
 
 let rec arrowOfDarkness : ClassLevelUpPick = {
@@ -1115,25 +1115,25 @@ let rec arrowOfDarkness : ClassLevelUpPick = {
     Grants = [ Simple "Creates 3m radius Darkness for 3 turns" ]
 }
 
-let rec arrowOfDispelling : ClassLevelUpPick = {
+let rec arrowOfAleviation : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfDispelling
-    Name = "Arrow of Dispelling"
-    Grants = [ Simple "Casts Latent Restoration on target" ]
+    TypeId = nameof arrowOfAleviation
+    Name = "Arrow of Aleviation"
+    Grants = [ Simple "Shoot an arrow that heals your target." ]
 }
 
-let rec arrowOfElementalSlaying : ClassLevelUpPick = {
+let rec arrowOfHordeShuttling : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfElementalSlaying
-    Name = "Arrow of Elemental Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Elementals" ]
+    TypeId = nameof arrowOfHordeShuttling
+    Name = "Arrow of Horde Shuttling"
+    Grants = [ Simple "Pulls all enemies within 9m towards your target." ]
 }
 
-let rec arrowOfFiendSlaying : ClassLevelUpPick = {
+let rec arrowOfChaos : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfFiendSlaying
-    Name = "Arrow of Fiend Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Fiends" ]
+    TypeId = nameof arrowOfChaos
+    Name = "Arrow of Chaos"
+    Grants = [ Simple "Your target experiences a negative surge of Wild Magic." ]
 }
 
 let rec arrowOfFire : ClassLevelUpPick = {
@@ -1178,18 +1178,18 @@ let rec arrowOfManyTargets : ClassLevelUpPick = {
     Grants = [ Simple "Arrow can strike up to two targets within 3m" ]
 }
 
-let rec arrowOfMonstrositySlaying : ClassLevelUpPick = {
+let rec arrowOfBoxing : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfMonstrositySlaying
-    Name = "Arrow of Monstrosity Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Monstrosities" ]
+    TypeId = nameof arrowOfBoxing
+    Name = "Arrow of Boxing"
+    Grants = [ Simple "Deals additional bludgeoning damage and knocks your target Prone." ]
 }
 
 let rec arrowOfPiercing : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfPiercing
     Name = "Arrow of Piercing"
-    Grants = [ Simple "Deals half damage to targets directly behind your initial target" ]
+    Grants = [ Simple "Deals damage to creatures in a 9m line." ]
 }
 
 let rec arrowOfRoaringThunder : ClassLevelUpPick = {
@@ -1206,11 +1206,11 @@ let rec arrowOfTeleportation : ClassLevelUpPick = {
     Grants = [ Simple "Teleport to wherever arrow lands" ]
 }
 
-let rec arrowOfUndeadSlaying : ClassLevelUpPick = {
+let rec arrowOfMalediction : ClassLevelUpPick = {
     Type = RangerArrow
-    TypeId = nameof arrowOfUndeadSlaying
-    Name = "Arrow of Undead Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Undead" ]
+    TypeId = nameof arrowOfMalediction
+    Name = "Arrow of Malediction"
+    Grants = [ Simple "Your target bleeds permanently." ]
 }
 
 // Sorcerer: Metamagic
@@ -1360,4 +1360,3 @@ let allSpecialPicks = getAll<Placeholder, ClassLevelUpPick, specialPickId>()
 let allSpecialPicksOfType t = 
     allSpecialPicks
     |> Map.filter (fun _ v -> v.Type = t)
-
