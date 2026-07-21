@@ -526,6 +526,8 @@ html,body{
   letter-spacing: .08em;
   text-transform: none;
   color: var(--muted);
+  position: absolute;
+  padding: 2%;
 }
  
 .radial-center-title p{
@@ -1652,13 +1654,12 @@ html,body{
     scroll-snap-type: x proximity;
     scrollbar-width: thin;
     scrollbar-color: rgba(212,175,55,0.4) rgba(0,0,0,0.14);
+    overflow: hidden;
  
     & .radial-center-title{
       /* Pin the description to the horizontal centre of the visible
          scrollport so it stays put while the button row scrolls. */
       position: sticky;
-      left: 50%;
-      transform: translateX(-50%);
       z-index: 1;
       display: block;
       width: max-content;
@@ -1668,6 +1669,11 @@ html,body{
       margin-bottom: 12px;
       padding-bottom: 12px;
       border-bottom: 1px solid rgba(212,175,55,0.16);
+    }
+    
+    & .radial-buttons {
+      overflow: auto;
+      white-space: nowrap;
     }
  
     & > .radial-node:last-child{

@@ -80,10 +80,13 @@ let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIco
         cl "radial-stage"; attr.style "position:relative;z-index:1"
         div { cl "radial-center"
               div { cl "radial-center-title"; centerText }
-              forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
-                radialButton i count v.Name (getIcon k) 
-                    (fun _ -> dispatch (msg k)) 
-                    (fun _ -> dispatch (SetRadialCenterText options[k].Description)))
+              div { 
+                cl "radial-buttons"
+                forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
+                  radialButton i count v.Name (getIcon k) 
+                      (fun _ -> dispatch (msg k)) 
+                      (fun _ -> dispatch (SetRadialCenterText options[k].Description)))
+              }
         }
     }
 
