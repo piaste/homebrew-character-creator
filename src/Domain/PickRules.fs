@@ -75,12 +75,11 @@ type Character.Character with
                 for pick, q in subCl.CustomPicks.GetOrElse(l.ClassLevel, []) do
                     yield ClassSpecific pick, q
 
-                match withDebug l.FeatId with
+                match l.FeatId with
                 | None -> ()
                 | Some fId ->
                     for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
                         yield FeatSubpick fspt, q
             ]
-            |> withDebug
             |> Map.filter (fun _ n -> n > 0)
         )

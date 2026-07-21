@@ -9,7 +9,7 @@ open Microsoft.FSharp.Reflection
 
 let debug x = 
 #if DEBUG
-    System.Console.WriteLine(sprintf "%A" x |> _.PadRight(200).Substring(0,200))
+    System.Console.WriteLine(sprintf "%A" x)
 #endif
     ()
 
