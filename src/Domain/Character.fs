@@ -226,6 +226,11 @@ type Character with
               yield! Traits.allTraits[this.TraitId].Grants
               for s in this.SkillIds do
                 yield Skills.allSkills[s].Grants
+              for setCpId in this.CurrentHistory.AllClassPassiveIdsByClass.Values do
+                for cpId in setCpId do
+                  yield! ClassPassives.allClassPassives[cpId].Grants
+              for featId in this.CurrentHistory.AllFeatIds do
+                yield! Feats.allFeats[featId].Grants
             ]
             |> List.map _.Effect
             |> List.sum
