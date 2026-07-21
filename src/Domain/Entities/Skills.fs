@@ -8,7 +8,7 @@ let rec athletics = {
             Name = "Athletics"
             KeyAbility = STR
             Description = "Athletics is used during attempts to Shove other creatures, as well as when attempting to resist being shoved."
-            Grants = Simple "+100% carrying capacity"
+            Grants = Simple "Double your carrying capacity"
         }
 let rec acrobatics = {
             Id = % nameof acrobatics
@@ -64,28 +64,28 @@ let rec persuasion = {
             Name = "Persuasion"
             KeyAbility = CHA
             Description = "Persuasion is used when attempting to negotiate with or convince others. It affects the price that traders give a character when buying or selling items."
-            Grants = Simple "Advantage vs. Charmed"
+            Grants = Simple "Advantage against Charm effects."
         }
 let rec deception = {
             Id = % nameof deception
             Name = "Deception"
             KeyAbility = CHA
             Description = "Deception is used when attempting to deceive or trick others."
-            Grants = Simple "No penalties for late joining combat"
+            Grants = Simple "When you join combat late, you don’t skip your turn."
         }
 let rec insight = {
             Id = % nameof insight
             Name = "Insight"
             KeyAbility = WIS
             Description = "Insight is used to read situations and when attempting to get a greater understanding of someone's intentions."
-            Grants = Simple "Disadvantage on enemy Opportunity Attacks."
+            Grants = Simple "Opportunity Attacks have Disadvantages against you."
         }
 let rec medicine = {
             Id = % nameof medicine
             Name = "Medicine"
             KeyAbility = WIS
             Description = "Medicine is used during dialogue to heal and aid others."
-            Grants = Simple "Craft 2x alchemy (DC 15 check)"
+            Grants = Simple "You craft 2 potions instead of one if you succeed a DC 15 test when crafting."
         }
 let rec animalHandling = {
             Id = % nameof animalHandling
@@ -116,7 +116,7 @@ let rec investigation = {
             Name = "Investigation"
             KeyAbility = INT
             Description = "Investigation is used by creatures to discover unusual things in their surroundings, and is used during attempts at deduction during dialogue."
-            Grants = Simple "Immune to Surprised"
+            Grants = Simple "You can’t be Surprised."
         }
 let rec sleightOfHand = {
             Id = % nameof sleightOfHand

@@ -98,7 +98,7 @@ let rec charger : FeatDef = {
 let rec classSpecialist : FeatDef = {
     Id = % nameof classSpecialist
     Name = "Class Specialist"
-    ExplicitDescription = Some "Select two class passives from any class list. You can pick this feat once per class, including your current class."
+    ExplicitDescription = Some "Select two passives from any class passives list. You can pick this feat once per class, including your current class."
     Subpicks = Map [ ClassPassives, 2]
     Grants = [] // this feat is manually implenmented
 }
@@ -128,8 +128,8 @@ let rec defensiveDuellist : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Power (FreeAction, AtWill, "Defensive Duelist", "Gain AC equal to your proficiency bonus when attacked.")
-        Power (Reaction, AtWill, "Defensive Duelist", "Counterattack with a Melee or a Ranged Attack.")
+        Power (FreeAction, AtWill, "Defensive Duellist", "Gain AC equal to your proficiency bonus when attacked.")
+        Power (Reaction, AtWill, "Defensive Duellist", "Counterattack with a Melee or a Ranged Attack.")
         Complex ("Defensive Duellist: Extra Reaction", "You gain an additional Reaction.")
     ]
 }
