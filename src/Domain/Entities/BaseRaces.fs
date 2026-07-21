@@ -18,8 +18,7 @@ let rec halfling = { Id = % nameof halfling; Name = "Halfling" ;
 let rec gnome = { Id = % nameof gnome; Name = "Gnome" ;
     Description = "Small, clever, and energetic, gnomes use their long lives to explore Faerûn's brightest corners and darkest depths." }
 let rec halfOrc = { Id = % nameof halfOrc; Name = "Half-Orc" ;
-    Description = "Creatures of intense emotion, half-orcs are more inclined to act than contemplate - whether the rage burning their bodies compels them to fight, or the love filling their hearts inspires acts of incredible kindness.
-„" }
+    Description = "Creatures of intense emotion, half-orcs are more inclined to act than contemplate - whether the rage in their bodies compels them to fight, or the love in their hearts inspires them to kindness." }
 let rec tiefling = { Id = % nameof tiefling; Name = "Tiefling" ;
     Description = "Descended from devils of the Nine Hells, tieflings face constant suspicion in Faerûn. Thankfully, their arcane abilities make them natural survivors." }
 let rec dragonborn = { Id = % nameof dragonborn; Name = "Dragonborn";
