@@ -101,6 +101,7 @@ type CharacterHistory = {
     AllCantripIds : Set<string<cantripId>>
     AllSpellIds: Set<string<spellId>>
     AllFeatIds: Set<string<featId>>
+    AllFeatSubPicks: Map<FeatSubpickType, Set<string>>
     AllSpecialPicks: Set<string<specialPickId>>
     AllClassPassiveIdsByClass: Map<string<classId>,Set<string<classPassiveId>>>
     LevelsBySubclass: Map<string<subclassId>,int<classLvl>>
@@ -132,6 +133,15 @@ type Character with
                     levelHistory
                     |> Seq.choose _.FeatId
                     |> Set.ofSeq
+
+                AllFeatSubPicks = 
+                    levelHistory
+                    |> Seq.collect _.FeatSubPicks
+                    |> Seq.fold (fun m (KeyValue(fspt, ps)) ->                         
+                        match Map.tryFind fspt m with
+                        | None -> m |> Map.add fspt ps
+                        | Some ps' -> m |> Map.add fspt (Set.union ps ps')
+                    ) (Map []) 
 
                 AllSpecialPicks = 
                     levelHistory

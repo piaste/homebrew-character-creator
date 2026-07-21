@@ -598,7 +598,18 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     | Some ybClassId ->
                         let validSubclassesForYb = 
                             Subclasses.allSubclassesByClass[ybClassId]
-                            |> Map.filter (fun scId _ -> c.CurrentHistory.LevelsBySubclass.Keys |> Seq.contains scId |> not)
+                            |> Map.filter (fun scId _ -> 
+                                // exclude if already picked for YB
+                                if c.PreviousHistory.AllFeatSubPicks.GetOrElse(Yokebreaking, Set.empty) 
+                                   |> Set.contains (UMX.untag scId)
+                                        then false else
+                                
+                                // exclude if level >= 3
+                                // wtf is this allowed???
+                                //if c.CurrentHistory.LevelsBySubclass.GetOrDefault scId >= 3<classLvl> then false else
+
+                                true                                                   
+                            )
 
                         radialStage rct dispatch
                             (validSubclassesForYb
@@ -613,9 +624,10 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | FeatSubpickType.ClassPassives ->
                     cond model.ClassSpecialistClass <| function
                     | None -> 
+                        let sp = hasClassSpecialistFor c
                         let validClassesForSpecialist = 
                             Classes.allClasses 
-                            |> Map.filter (fun cId _ -> not (hasClassSpecialistFor c |> List.contains cId))
+                            |> Map.filter (fun cId _ -> not (sp |> Set.contains cId))
 
                         radialStage rct dispatch
                             validClassesForSpecialist
