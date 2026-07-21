@@ -357,7 +357,7 @@ let rec waningImmortality : TraitDef = {
     Name = "Waning Immortality"
     Grants = [
         Buff { StatModifiers.Zero with ``HP per level`` = 6 }
-        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6.")
+        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6. This reduction in Hit Points cannot be undone.")
     ]
 }
 

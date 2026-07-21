@@ -1,5 +1,7 @@
 module Bg3HomebrewCCreator.Domain.Entities.BaseRaces
 
+// Checked and synchronized with Google Docs Races
+
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types
 

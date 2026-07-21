@@ -1,5 +1,7 @@
 module Bg3HomebrewCCreator.Domain.Entities.Archetypes
 
+// Checked and synchronized with Google Docs Archetypes
+
 open FSharp.UMX
 
 open Bg3HomebrewCCreator.Domain.Types
