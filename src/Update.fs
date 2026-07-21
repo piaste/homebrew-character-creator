@@ -383,6 +383,17 @@ let update
                     character.NextLevelUp.SpecialPickIds.Toggle spId
             }
 
+    | ToggleFeatSubPick (Yokebreaking, id) ->        
+        // since yokebreaking uses a radial selector instead of a picker,
+        // it needs to advance to the next step
+        applyAnd NextMainStageSelection <| fun character -> 
+
+            {
+                character with
+                    NextLevelUp.FeatSubPicks = 
+                        Map [Yokebreaking, Set.singleton id]
+            }
+
     | ToggleFeatSubPick (fsp, id) ->        
         apply <| fun character -> 
 
