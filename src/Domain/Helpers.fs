@@ -109,7 +109,8 @@ let getAllPassives useLoreNames (character : Character) =
 
         | Some f ->
             let fDef = Feats.allFeats[f]
-            yield $"Feat: {fDef.Name}", fDef.Description
+            for g in fDef.Grants do
+                yield "Feat", g
 
 
       for KeyValue(scid, lvl) in classLevelsForBenefits do        

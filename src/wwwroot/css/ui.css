@@ -1229,9 +1229,14 @@ html,body{
  
 .picker-screen .card .desc{
   font-size: 13px;
-  color: rgba(242,230,196,0.86);
-  line-height: 0.75;
+  color: rgba(242,230,196,0.86);  
+  
   text-align: left;
+  line-height: 1.25;
+  
+  & p + p {
+    margin-top: -0.25em;    
+  }
 }
  
 /* ------------------------------
