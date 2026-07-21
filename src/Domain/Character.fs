@@ -183,7 +183,7 @@ type Character with
                 [ STR; DEX ]
                 |> Seq.maxBy this.AbilityModifier
             bestAbility, this.ProficiencyBonus + this.AbilityModifier bestAbility
-            
+
         member this.CriticalThreshold =
             20 - this.StatModifiers.``Critical Range``            
         member this.HighestSpellDC = 
@@ -218,7 +218,7 @@ type Character with
                              + this.StatModifiers.``HP per level``
             in 
                 12 + this.StatModifiers.``Base HP`` 
-                   + hpPerLvl * this.CharacterLevel / 1<charLvl>
+                   + hpPerLvl * ((this.CharacterLevel / 1<charLvl>) - 1)
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives
