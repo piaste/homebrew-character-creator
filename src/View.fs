@@ -192,7 +192,8 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     stat ["Base AC"; "AC"] chr.BaseAC
                     condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
                     
-                    stat ["Best attack bonus"; "Attack rolls"] (modifierText chr.HighestAttackBonus)
+                    let (attackAb, score) = chr.HighestAttackBonus in
+                    stat ["Best attack bonus"; "Attack rolls"] $"{modifierText score} ({attackAb})"
                     condStat 20 ["Critical Threshold"] chr.CriticalThreshold
                     cond chr.HighestSpellDC <| function
                         | None -> empty()

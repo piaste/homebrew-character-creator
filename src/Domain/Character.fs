@@ -179,8 +179,11 @@ type Character with
             ]
 
         member this.HighestAttackBonus = 
-            Seq.max [this.AbilityModifier STR; this.AbilityModifier DEX]     
-            |> (+) this.ProficiencyBonus
+            let bestAbility = 
+                [ STR; DEX ]
+                |> Seq.maxBy this.AbilityModifier
+            bestAbility, this.ProficiencyBonus + this.AbilityModifier bestAbility
+            
         member this.CriticalThreshold =
             20 - this.StatModifiers.``Critical Range``            
         member this.HighestSpellDC = 
@@ -206,7 +209,8 @@ type Character with
             + this.StatModifiers.Initiative
 
         member this.BaseAC = 
-            this.AbilityModifier DEX
+            14
+            + this.AbilityModifier DEX
             + this.StatModifiers.AC
 
         member this.HitPoints = 
