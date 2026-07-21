@@ -1279,7 +1279,7 @@ let otilukeFreezingSphere =
       SpellDescription = "Freeze a creature solid"
       SpellLists = [ Innate; Bargained ]
       Concentration = false
-      Upcastable = false
+      Upcastable = true
       ActionCost = Action }
 
 let otilukeResilientSphere =
@@ -1450,7 +1450,7 @@ let shadowBlade =
       SpellDescription = "Illusion Blade 1d12 Psychic damage. In Heavily Obscured area, has advantage on damage. All attacks roll with advantage"
       SpellLists = [  ]
       Concentration = false
-      Upcastable = false
+      Upcastable = true
       ActionCost = BonusAction }
 
 let shatter =

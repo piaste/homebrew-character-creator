@@ -187,7 +187,7 @@ let rec ``Sacred Flame`` : CantripDef = {
 
 let rec ``Shocking Grasp`` : CantripDef = {
     Id = % nameof ``Shocking Grasp``
-    CantripDescription = "Deal 1d12 lightning damage and target can't use reaction (no save). This spell has advantage on creatures with metal armour. Duration: 1 turn. Offense: Melee."
+    CantripDescription = "Deal 1d12 lightning damageand target can't use reaction (no save). This spell has advantage on creatures with metal armour. Duration: 1 turn. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
