@@ -331,7 +331,7 @@ let rec circleOfTheMoon =
 let rec circleOfTheShadows =
     {
         Id = % nameof circleOfTheShadows
-        Name = "Circle of Shadows"
+        Name = "Circle of the Shadows"
         Description = "Death is the most natural occurrence within nature."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
@@ -803,9 +803,9 @@ let rec wayOfTheGentleFist =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
-            3<classLvl>, [ Complex("Mending Blows", "Damaging enemies heals allies within 9m.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
             5<classLvl>, [ Complex("Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
+            7<classLvl>, [ Complex("Mending Blows", "Damaging enemies heals allies within 9m.") ]
             9<classLvl>, [ Complex("Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
             11<classLvl>, [ Complex("Flow of Compassion", "Dodging an attack heals you and all allies within 9m.") ]
         ]
@@ -1321,8 +1321,8 @@ let rec virulence =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Virulent Edge", "Deal additional Acid damage = Rogue level.") ]
-            3<classLvl>, [ Complex("Corrosive Strike", "Sneak Attack immediately Corrodes targets for one turn.") ]
-            5<classLvl>, [ Complex("Acidic Laceration", "Acid damage applies Acid stacks.") ]
+            3<classLvl>, [ Complex("Acidic Laceration", "Acid damage applies Acid stacks.") ]
+            5<classLvl>, [ Complex("Corrosive Strike", "Sneak Attack immediately Corrodes targets for one turn.") ]
             7<classLvl>, [ Complex("Virulent Detonation", "Sneak Attack damage applies to all enemies in 3m radius.") ]
             9<classLvl>, [ Complex("Toxic Opportunity", "Advantage against Acid-coated targets.") ]
             11<classLvl>, [ Complex("Terminal Exposure", "Extra damage = Sneak Attack against Corroded targets.") ]
@@ -1687,10 +1687,10 @@ let rec necromancer =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Necromantic Apprentice", "Direct damage applies Crawling Gnaw; death raises as Newborn Zombie.") ]
             3<classLvl>, [ Complex("Lifedrinker", "Spell damage heals you for half damage dealt.") ]
-            5<classLvl>, [ Complex("Apostle of the Risen Dead", "Nearby allied Undead gain Intelligence to Attack/Damage.") ]
-            7<classLvl>, [ Complex("Dominion Over Death", "Summoned Undead are immune to Decay.") ]
-            9<classLvl>, [ Complex("Preemptive Atrocity", "Start combat by summoning a Death Shepherd; gain Bind Undead.") ]
-            11<classLvl>, [ Complex("Raise Hell", "Start combat by raising all suitable nearby corpses.") ]
+            5<classLvl>, [ Complex("Preemptive Atrocity", "Start combat by summoning a Death Shepherd; gain Bind Undead.") ]
+            7<classLvl>, [ Complex("Raise Hell", "Start combat by raising all suitable nearby corpses.") ]
+            9<classLvl>, [ Complex("Apostle of the Risen Dead", "Nearby allied Undead gain Intelligence to Attack/Damage.") ]
+            11<classLvl>, [ Complex("Dominion Over Death", "Summoned Undead are immune to Decay.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
