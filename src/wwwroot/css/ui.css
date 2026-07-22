@@ -1679,6 +1679,10 @@ html,body{
     & .radial-buttons {
       overflow: auto;
       white-space: nowrap;
+
+      /* these two are needed to fix scrolling on chrome mobile */
+      width: 100%;
+      box-sizing: border-box;
     }
  
     & > .radial-node:last-child{
