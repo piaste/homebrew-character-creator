@@ -1223,9 +1223,9 @@ let rec assassin =
     {
         Id = % nameof assassin
         Name = "Assassin"
-               <?> "Galenas' Paths"
+               <?> "Galenas Paths"
         Description = "Sublime punishment to a single foe at a time."
-                      <?> "You apprenticed with the legendary Assassins of the Galenas Peaks, slaying your targets with a single strike."
+                      <?> "You apprenticed with the legendary Assassins of the Galenas Mountains, slaying your targets with a single strike."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1246,7 +1246,7 @@ let rec hiddenToxicant =
         Name = "Hidden Toxicant"
                <?> "Westgate Docks"
         Description = "Measured tinctures and precise brews turn flesh into a vessel for ruin."
-        <?> "You apprenticed with the ruthless Night Masks, acquiring a collection of deadly recipes."
+        <?> "You apprenticed with the ruthless Night Masks, acquiring a collection of deadly recipes from all over Faerûn."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1267,7 +1267,7 @@ let rec mercenary =
         Name = "Mercenary"
                <?> "Skullport Caves"
         Description = "Talk your way through anything, and let the blades speak when that fails."
-        <?> "You apprenticed with the chaotic Xanathar Guild, making a name for yourself by wit and weapon"
+        <?> "You apprenticed with the chaotic Xanathar Guild, making a name for yourself by wit and weapon in the lawless Port of Shadows under Waterdeep."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -1314,9 +1314,9 @@ let rec virulence =
     {
         Id = % nameof virulence
         Name = "Virulence"
-               <?> "Cormyr Corridors"
+               <?> "Cormyr Hallways"
         Description = "A scratch soon festers into ruin through virulent corruption."
-                      <?> "You apprenticed with the aristocratic Fire Knives, making your blades lethal enough to slay kings."
+                      <?> "You apprenticed with the aristocratic Fire Knives, coating your blades in substance lethal enough to pierce armour and slay kings."
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
