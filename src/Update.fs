@@ -153,7 +153,7 @@ let update
                 { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
-        { model with MainStageSelection = mss }
+        { model with MainStageSelection = mss; RadialCenterText = "" }
         , Cmd.OfTask.perform jsHelper.ScrollIntoView (string mss) (fun _ -> NoOp)
 
     | SetRadialCenterText txt ->
@@ -164,6 +164,7 @@ let update
 
     | NextMainStageSelection ->
         { model with 
+            RadialCenterText = "" 
             MainStageSelection = 
                 let picks = Seq.toList model.Character.Picks.Keys in
                 let firstPick = match picks with | [] -> Proceed | p :: _ -> Pick p
