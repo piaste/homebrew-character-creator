@@ -124,8 +124,8 @@ let sheetAttr (key : string) (value : string) (tooltipText: string option) (icon
     div { 
         cl "sheet-attr"
         attr.style $"anchor-name: --{anchorId}"
-        maybeIcon iconSubpath
         span { key }
+        maybeIcon iconSubpath
         b { cl "tooltip"
             value
             cond tooltipText <| function

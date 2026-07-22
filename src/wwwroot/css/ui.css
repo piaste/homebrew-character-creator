@@ -460,7 +460,7 @@ html,body{
   height: 100%;
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1fr);
+  grid-template-columns: minmax(0, 0.66fr) minmax(24rem, 1fr);
   gap: 18px;
   align-items: stretch;
   max-width: none;
@@ -597,15 +597,34 @@ html,body{
     gap: 1em;
     
     align-content: center;
-      > sheet-attr {
-      text-transform: "";
-    }
     
     & .action-btn {
       flex: 0 0 15rem;
       width: 15rem;
       padding-block: 15px;
       padding-inline: 10px;
+      
+      
+      
+      & p {
+        margin-block-end: 25px;
+      }
+      
+      & .sheet-attr {
+        text-transform: initial;
+        margin: 10px 10px;
+        place-items: center;
+        
+        & span {
+          min-width: 20%;
+          text-align: left;            
+        }
+        
+        & b {
+          flex: 0 0 50%;
+        }
+      }
+    
     }
 }
   & .error {
@@ -815,9 +834,9 @@ html,body{
  
 .sheet-attrs{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
-  gap: 6px;
-  margin-bottom: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+  gap: 6px 20px;
+  margin-block: 8px;
 }
  
 /* =====================================================
@@ -860,32 +879,47 @@ html,body{
  
 .sheet-attr{
   display: flex;
-  justify-content: flex-start;   /* ← move numbers left */
-  gap: 14px;                     /* space between label and value */
+  justify-content: flex-start;  /* ← move numbers left */
+  align-content: flex-start;
+  place-content: flex-start;
+  gap: 4px;                     /* space between label and value */
   font-size: var(--small-text);
   opacity: .95;
 
-  & .icon {
-    max-width: 1.8em;
+  & span {
+    flex: 1 1 auto;    
+    min-width: 35%;    
+    opacity: .85;  
   }
   
-  & .spell-slot-lvl {
+  & .spell-slot-lvl {    
     font-family: "Times New Roman";
     font-weight: bolder;
     font-size: 1.2em;
-    align-self: anchor-center
+    flex: 0 0 0.65em;
+    min-width: max-content;
+  }
+  
+  & .icon {
+    flex: 0 0 15%;
+    max-width: 2em;
+    object-fit: contain;
+    object-position: top;
+    margin-block-start: 5px;
+  }
+    
+  & b {
+    flex: 0 0 45%;
+    font-weight: 700;
+  }  
+  
+  /* spell slot cubes */
+  & .square-checkbox {
+    margin: 2.5px 2px;
+    flex: 0 0 1.3em;
   }
 }
  
-.sheet-attr > span {
-    opacity: .85;
-  
-}
- 
-.sheet-attr b{
-  font-weight: 700;
-}
-
 .sheet-muted{
   font-size: var(--small-text);
   line-height: 1.35;
