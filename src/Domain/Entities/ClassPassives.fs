@@ -1889,4 +1889,4 @@ let allPassivesByClass =
     allClassPassives.Values
     |> Seq.groupBy _.ClassId
     |> Map.ofSeq
-    |> Map.map (fun _ v -> Map.fromProp _.Id v)
+    |> Map.map (fun _ v -> Map.fromProp (_.Id : ClassPassiveDef -> string<classPassiveId>) v)

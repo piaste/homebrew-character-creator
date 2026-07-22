@@ -1909,11 +1909,6 @@ html,body{
 
   position: fixed;
   
-  xxbottom: auto;
-  xxtop: anchor(bottom);
-  xxleft: anchor(center);
-  xxtranslate: -80% 45%;
-
   position-area: block-start span-inline-end;
 
   position-try-fallbacks:
@@ -1921,16 +1916,7 @@ html,body{
     flip-inline;
 
   margin-block: 8px;
-  
-  xxposition-try-order: most-width;
-  xxposition-area: block-end center;
-  xxposition-try-fallbacks: flip-inline;
-  
-  xxxbottom: 125%;
-  xxxleft: 50%;
-  xxxtransform: translateX(-50%);
 
-  xxxbackground: var(--panel);
   background: rgba(20,14,12,1);
   color: var(--bright);
   padding: 6px 10px;
@@ -1944,9 +1930,6 @@ html,body{
 .tooltip-text::after {
   content: "";
   position: absolute;
-  xxxtop: 100%;
-  xxxleft: 50%;
-  xxxtransform: translateX(-50%);
   
   bottom: -10px;
   left: 50%;

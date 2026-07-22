@@ -382,4 +382,61 @@ type ClassPassiveDef = {
     member this.Description = 
         this.Grants |> List.map _.Description |> GameString.concat "\n"
 
+type [<Measure>] itemId
+type [<Measure>] attunement
 
+type ItemRarity = 
+    | Common | Uncommon | Rare | Epic | Legendary
+    member this.AttunementCost = 
+        match this with
+        | Common -> 0<attunement>
+        | Uncommon -> 1<attunement>
+        | Rare -> 2<attunement>
+        | Epic -> 3<attunement>
+        | Legendary -> 4<attunement>
+    member this.AttackBonus = 
+        match this with
+        | Common | Uncommon -> 0
+        | Rare -> 1
+        | Epic -> 2
+        | Legendary -> 3
+    
+
+type EquipmentSlot = 
+    | Helmet | Chest | Feet | Arms
+    | Necklace | Ring | Trinket
+
+type WeaponSlot = 
+    | MeleeOneHand | MeleeTwoHands | Shield
+    | RangedOneHand | RangedTwoHands
+
+type Item = {
+    Id : string<itemId>
+    Name : string
+    Icon: string
+    Rarity : ItemRarity
+    Grants: Passive list
+}
+
+type WeaponType = 
+    Shield | Dagger | Shortsword | Rapier  // etc..
+
+type [<Measure>] dmg
+type DamageValue = 
+    | Static of int<dmg>
+    | Dice of number: int * size: int
+    member this.DamageRange = 
+        match this with
+        | Static x -> x, x
+        | Dice (number, size) -> number * 1<dmg>, number * size * 1<dmg>
+
+type Weapon = {
+    Item : Item
+    Type: WeaponType
+    DamageBonus: DamageValue * DamageType
+}
+
+type Equipment = {
+    Item : Item
+    Slot : EquipmentSlot
+}
