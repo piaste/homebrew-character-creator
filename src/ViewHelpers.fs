@@ -20,6 +20,7 @@ let icon subpath = img {
     cl "icon"
     attr.style "width:100%; height:100%; object-fit:contain;"
     attr.src (iconPathFromSubpath subpath)
+    "onerror" => "this.style.display='none'"
 }
 
 let maybeIcon iconSubpath = 
@@ -78,21 +79,22 @@ let tryGetVanillaIconSubpath =
     function
     | Simple s
     | Complex (s, _)
-        -> [ $"vanilla_icons/PassiveFeature_{englishToPascalCase (s.DefaultText)}"
-             $"homebrew_icons/Passive_{englishToPascalCase (s.DefaultText)}"
-           ]
+        -> Some $"unsorted_icons/PassiveFeature_{englishToPascalCase (s.DefaultText)}"
     | Buff _ 
-        -> []
+        -> None
     | Power (_, _, title, _)
-        -> [ $"vanilla_icons/Action_{englishToPascalCase (title.DefaultText)}"
-             $"homebrew_icons/Action_{englishToPascalCase (title.DefaultText)}"
-           ]
+        -> Some $"unsorted_icons/Action_{englishToPascalCase (title.DefaultText)}"           
     | Resource (_, name, _)
-        -> [ $"cc_icons/Resource_{englishToPascalCase name}" ]
-    >> List.tryFind (iconPathFromSubpath >> IO.File.Exists )
+        -> Some $"cc_icons/Resource_{englishToPascalCase name}"    
 
 let inline tryGetAnyVanillaIconSubpath (gp : 'gp when 'gp : (member Grants : Passive list)) = 
-    gp.Grants |> List.tryPick tryGetVanillaIconSubpath
+    gp.Grants 
+    |> List.sortBy (function | Resource _ -> 0 | Power _ -> 1 | Complex _ -> 2 | Simple _ -> 3 | Buff _ -> 5)
+    |> List.tryPick tryGetVanillaIconSubpath
+
+type Bg3HomebrewCCreator.Domain.Types.Passive with
+    member p.Icon = 
+        p.Name.Icon |> Option.orElseWith (fun () -> tryGetVanillaIconSubpath p)
 
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection

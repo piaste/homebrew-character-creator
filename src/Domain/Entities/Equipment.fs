@@ -1,4 +1,4 @@
-module Bg3HomebrewCCreator.Domain.Entities.Weapons
+module Bg3HomebrewCCreator.Domain.Entities.Equipment
 
 open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Types

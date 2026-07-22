@@ -268,7 +268,12 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
 
                 let passiveDescs = 
                     filteredPassives
-                    |> List.map (fun (source, p) -> source, p.Name.Display useLoreNames, p.Description.Display useLoreNames, p.Name.Icon)
+                    |> List.map (fun (source, p) -> 
+                        source, 
+                        p.Name.Display useLoreNames,
+                        p.Description.Display useLoreNames, 
+                        p.Icon
+                    )
 
                 div { 
                     cl "sheet-attrs"
@@ -404,7 +409,7 @@ let levelUpOptions useLoreNames (c: Character) dispatch =
                 concat {
                     p { $"⬆️ {Subclasses.allSubclasses[scId].Name.Display useLoreNames} {nextLvl}" }
                     forEach nextLvlBenefits <| (fun (n, d) ->
-                        sheetAttr n (d.Name.Display useLoreNames) (Some <| d.Description.Display useLoreNames) None
+                        sheetAttr n (d.Name.Display useLoreNames) (Some <| d.Description.Display useLoreNames) d.Icon
                     )
                 }) "primary" dispatch (LevelUp (Some scId))
         )
