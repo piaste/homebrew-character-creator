@@ -112,6 +112,8 @@ let view
                                         cl "icon-img"
                                         attr.src $"/assets/icons/{iconPath}.png"
                                         attr.alt ""
+                                        // must hide the 'icon sm' div if icon is missing
+                                        "onerror" => "this.parentElement.style.display='none'"
                                     }
                                 }
 
