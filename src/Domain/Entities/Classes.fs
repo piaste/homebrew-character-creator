@@ -170,7 +170,7 @@ let rec ranger = {
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Eagle Eyed", "When making an attack roll with advantage your damage roll will also roll with advantage.")]
         ]
         CustomPicks = Map [
-            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
+            for lvl in [ 1<classLvl> .. 1<classLvl> .. 12<classLvl>] do
                 yield lvl, [(RangerArrow, 1)]
         ]
     }

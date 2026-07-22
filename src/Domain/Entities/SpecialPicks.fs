@@ -1112,7 +1112,7 @@ let rec arrowOfDarkness : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfDarkness
     Name = "Arrow of Darkness"
-    Grants = [ Simple "Creates 3m radius Darkness for 3 turns" ]
+    Grants = [ Simple "Creates 3m/10ft radius Darkness for 3 turns" ]
 }
 
 let rec arrowOfAleviation : ClassLevelUpPick = {
@@ -1175,7 +1175,7 @@ let rec arrowOfManyTargets : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfManyTargets
     Name = "Arrow of Many Targets"
-    Grants = [ Simple "Arrow can strike up to two targets within 3m" ]
+    Grants = [ Simple "Arrow can strike up to two targets within 3m/10ft" ]
 }
 
 let rec arrowOfBoxing : ClassLevelUpPick = {
@@ -1196,7 +1196,7 @@ let rec arrowOfRoaringThunder : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfRoaringThunder
     Name = "Arrow of Roaring Thunder"
-    Grants = [ Simple "Pushes target back 9m" ]
+    Grants = [ Simple "Pushes target back 9m/30ft" ]
 }
 
 let rec arrowOfTeleportation : ClassLevelUpPick = {
