@@ -555,7 +555,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
                      |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
                     )
-                    c.PreviousHistory.AllClassPassiveIdsByClass[classIdBySubclassId l.SubclassId]
+                    (c.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(classIdBySubclassId l.SubclassId, Set.empty))
                     l.ClassPassiveIds
 
             | Pick Feats ->
