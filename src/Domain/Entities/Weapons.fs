@@ -16,3 +16,7 @@ let rec pelorsunBlade = {
     Type = Rapier
     DamageBonus= Dice (1, 8), Elemental Radiant
 }
+
+
+type private Placeholder = class end
+let allTraits = getAll<Placeholder, WeaponDef, itemId>()

@@ -430,13 +430,18 @@ type DamageValue =
         | Static x -> x, x
         | Dice (number, size) -> number * 1<dmg>, number * size * 1<dmg>
 
-type Weapon = {
+type WeaponDef = {
     Item : Item
     Type: WeaponType
     DamageBonus: DamageValue * DamageType
-}
+} with
+    member this.Id = this.Item.Id
+    member this.Name = this.Item.Name
 
-type Equipment = {
+
+type EquipmentDef = {
     Item : Item
     Slot : EquipmentSlot
-}
+} with
+    member this.Id = this.Item.Id
+    member this.Name = this.Item.Name
