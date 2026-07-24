@@ -21,7 +21,7 @@ let rec artificer = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec barbarian = {
@@ -41,7 +41,7 @@ let rec barbarian = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. This effect can be toggled at any time.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. This effect can be toggled at any time.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec bard = {
@@ -66,7 +66,7 @@ let rec bard = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec cleric = {
@@ -84,7 +84,7 @@ let rec cleric = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Divination", "Upon starting combat, you immediately experience Divine Intervention.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("True Belief", "Upon starting combat, you regain one Channel Divinity charge.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec druid = {
@@ -102,7 +102,7 @@ let rec druid = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Mantle of Concentration", "Upon using Mantra of Recovery, you cannot lose Concentration for 3 turns.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Mantra of Rebirth", "You regain one Wildshape Charge per turn.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec fighter = {
@@ -146,7 +146,7 @@ let rec monk = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Martial Flux", "You regain one Ki Point per turn. Additionally, when you expend a Ki Point to make an Attack Roll, the number needed to roll a Critical Hit is reduced by 1.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Ki Resonance", "When using a Ki Point to deal damage, the lowest number you can roll per die is an 8.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec paladin = {
@@ -213,7 +213,7 @@ let rec rogue = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec sorcerer = {
@@ -255,7 +255,7 @@ let rec warlock = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Mystic Arcanum", "On your first turn of any combat encounter, restore one Warlock Spell Slot.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Deepened Arcanum", "On your first turn of any combat encounter, restore two Warlock Spell Slots.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec wizard = {
@@ -275,7 +275,7 @@ let rec wizard = {
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Studious Results", "Fulfilling a Scholarly Acumen will immediately roll for a new one during your same turn.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Acumen Supreme", "Once per turn, upon fulfilling your Scholarly Acumen, your next Spell or Cantrip during your turn will automatically roll as a Critical Hit.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 type Placeholder = class end
