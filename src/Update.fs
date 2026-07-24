@@ -137,16 +137,18 @@ let update
         | Forge None -> 
             { model with Page = page }, Cmd.none
         | Forge (Some encodedCharacter) ->
+            
             match decodeFromBase64 encodedCharacter with
             | Ok character ->
                 { model with Page = page }, Cmd.ofMsg (LoadCharacter character)
-            // | Ok character when character.Version < defaultCharacter.Version -> 
-            //     { model with Page = page; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
-            // | Ok character -> 
-            //     { model with Page = page; Character = character }, Cmd.none
             | Error e ->
-                System.Console.WriteLine e;
-                { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
+                // outdated character?
+                match decodeFromBase64<CharacterV05> encodedCharacter with
+                | Ok character ->
+                    { model with Page = page }, Cmd.ofMsg (LoadCharacter (migrateFromV5 character))
+                | Error e ->
+                    System.Console.WriteLine e;
+                    { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss; RadialCenterText = Blank }
@@ -366,7 +368,7 @@ let update
                         if character.NextLevelUp.FeatId = Some featId then None
                         else Some featId
 
-                    NextLevelUp.FeatSubPicks = Map []                
+                    NextLevelUp.FeatSubPicks = Map.empty                
 
                     AbilityImprovement = 
                         let ai = Feats.abilityImprovement.Id
@@ -450,7 +452,7 @@ let update
             | Feats -> 
                     { character with 
                         NextLevelUp.FeatId = None
-                        NextLevelUp.FeatSubPicks = Map []
+                        NextLevelUp.FeatSubPicks = Map.empty
                     } 
             | ClassPassives ->
                     { character with 
@@ -540,19 +542,8 @@ let update
         if character = defaultCharacter then
             apply <| fun _ -> character
         else
+            applyAnds [SetMainStageSelection Subclass; NextMainStageSelection] <| fun _ -> character
 
-            match character.Version with
-            | v when v = defaultCharacter.Version ->
-                // when you load a non-default character, go to the first unmade pick
-                applyAnds [SetMainStageSelection Subclass; NextMainStageSelection] <| fun _ -> character
-
-            // handle 
-            | v ->
-                match tryMigrate character with
-                | None -> 
-                    { model with SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none            
-                | Some updatedCharacter -> 
-                    model, Cmd.ofMsg (LoadCharacter updatedCharacter)
 
     | ResetCharacter -> 
         model, Cmd.ofMsg (LoadCharacter Model.Initial.Character)

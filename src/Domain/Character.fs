@@ -29,7 +29,7 @@ type LevelRecord =
             ClassLevel = classLevel
                             
             FeatId = None
-            FeatSubPicks = Map []
+            FeatSubPicks = Map.empty
             ClassPassiveIds = Set.empty
 
             CantripIds = Set.empty
@@ -75,6 +75,30 @@ type AbilityBuy =
             (this.BoughtAbility ab - 10) / 2
 
 
+type CharacterGear = {
+    Equipment: Map<EquipmentSlot, EquipmentDef>
+    Weapons: Map<WeaponSlot, WeaponDef>
+}
+
+type CharacterV05 =
+    {
+        Version: System.Version
+        CharName: string
+
+        RaceId: string<subraceId>
+        AbBuy: AbilityBuy
+        AbilityImprovement: (Ability * Ability) option  
+
+        SkillIds: Set<string<skillId>>
+        SkillExpIds: Set<string<skillId>>
+        
+        ArchetypeId: string<archetypeId>
+        TraitId: string<traitId>
+
+        PreviousLevelHistory: LevelRecord list
+        
+        NextLevelUp: LevelRecord
+    }
 
 type Character =
     {
@@ -94,6 +118,9 @@ type Character =
         PreviousLevelHistory: LevelRecord list
         
         NextLevelUp: LevelRecord
+
+        Equipment: Map<EquipmentSlot, EquipmentDef>
+        Weapons: Map<WeaponSlot, WeaponDef>
     }
 
 type CharacterHistory = 
@@ -169,7 +196,7 @@ type Character with
                         match Map.tryFind fspt m with
                         | None -> m |> Map.add fspt ps
                         | Some ps' -> m |> Map.add fspt (Set.union ps ps')
-                    ) (Map []) 
+                    ) (Map.empty) 
 
                 AllSpecialPicks = 
                     levelHistory

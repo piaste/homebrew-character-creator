@@ -80,7 +80,7 @@ type StatModifiers = {
     ``HP per level`` : int
     ``Base HP`` : int
 } with 
-    static member Zero = { Abilities = Map []; ``Attack rolls`` = 0; Speed = 0.; 
+    static member Zero = { Abilities = Map.empty; ``Attack rolls`` = 0; Speed = 0.; 
     ``Critical Range`` = 0; ``Magic Critical Range`` = 0; 
     AC = 0; DR = 0; Initiative = 0; ``HP per level`` = 0; ``Base HP`` = 0 }
     

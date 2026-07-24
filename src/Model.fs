@@ -40,7 +40,7 @@ type CopyButtonState =
 
 let defaultCharacter =
     {
-        Version = Version(0, 5, 0)
+        Version = Version(0, 6, 0)
 
         CharName = "John Baldur"
         RaceId = Domain.Entities.Races.human.Id
@@ -73,11 +73,14 @@ let defaultCharacter =
             CantripIds = Set.empty
 
             FeatId = None
-            FeatSubPicks = Map []
+            FeatSubPicks = Map.empty
             ClassPassiveIds = Set.empty            
 
             SpecialPickIds = Set.empty
         }
+
+        Equipment = Map.empty
+        Weapons = Map.empty
     }
 
 
