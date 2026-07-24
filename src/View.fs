@@ -265,8 +265,6 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                         p.Icon
                     )
 
-                printf "%A" passiveDescs
-
                 let filters = 
                     [   All
                         Starting

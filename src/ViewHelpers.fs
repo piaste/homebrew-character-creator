@@ -102,7 +102,9 @@ let inline tryGetAnyVanillaIconSubpath (gp : 'gp when 'gp : (member Grants : Pas
 
 type Bg3HomebrewCCreator.Domain.Types.Passive with
     member p.Icon = 
-        p.Name.Icon |> Option.orElseWith (fun () -> tryGetVanillaIconSubpath p)
+        match p.Name.Icon with
+        | Some i -> Some $"unsorted_icons/{i}"
+        | None -> None // Option.orElseWith (fun () -> tryGetVanillaIconSubpath p)
 
 let inline forEachIndexed collection nodeGen = 
     let count = Seq.length collection

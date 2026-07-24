@@ -617,7 +617,7 @@ html,body{
       flex: 0 0 15rem;
       width: 15rem;
       padding-block: 15px;
-      padding-inline: 10px;
+      padding-inline: 5px;
       
       
       
@@ -633,6 +633,10 @@ html,body{
         & span {
           min-width: 20%;
           text-align: left;            
+        }
+        
+        & img {
+          flex: 0 0 10%;
         }
         
         & b {
@@ -849,7 +853,7 @@ html,body{
  
 .sheet-attrs{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
   gap: 6px 20px;
   margin-block: 8px;
 }
@@ -930,11 +934,11 @@ html,body{
   
   &:has(.icon:not([style*="display: none"])) {
     span {
-      flex: 30 1 0;
+      flex: 25 1 0;
     }
 
     .icon {
-      flex: 7 1 0;
+      flex: 15 1 0;
     }
 
     b {

@@ -1464,7 +1464,7 @@ let rec brutalCritical = {
     ClassId = barbarian.Id
     Id = % nameof brutalCritical
     Name = "Brutal Critical"
-    Grants = [ Simple ("When you land a Critical Hit, roll an additional damage die.") ]
+    Grants = [ Simple ("PassiveFeature_RelentlessRage" <!!> "When you land a Critical Hit, roll an additional damage die.") ]
 }
 
 let rec dangerSense = {

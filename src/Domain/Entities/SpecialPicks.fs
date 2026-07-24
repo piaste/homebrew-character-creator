@@ -407,7 +407,7 @@ let rec commandersStrike : ClassLevelUpPick = {
     TypeId = nameof commandersStrike
     Name = "Commander's Strike"
     Grants = [
-        Power(Action, AtWill, "Commander's Strike", "Direct an ally to attack using their reaction on their next turn")
+        Power(Action, AtWill, "Action_CommanderSStrike.png" <!!> "Commander's Strike", "Direct an ally to attack using their reaction on their next turn")
     ]
 }
 
@@ -724,7 +724,7 @@ let rec heartstopper : ClassLevelUpPick = {
     TypeId = nameof heartstopper
     Name = "Heartstopper"
     Grants = [
-        Power(Action, AtWill, "Heartstopper", "Weapon Damage and possible Chest Trauma")
+        Power(Action, AtWill, "Action_Heartstopper.png" <!!> "Heartstopper", "Weapon Damage and possible Chest Trauma")
     ]
 }
 
