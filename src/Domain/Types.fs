@@ -428,7 +428,12 @@ type Item = {
 }
 
 type WeaponType = 
-    Shield | Dagger | Shortsword | Rapier  // etc..
+    | Shield | Dagger | Shortsword | Rapier
+    | Club | Flail | LightHammer | Mace | MorningStar | Warhammer | Quarterstaff
+    | Battleaxe | Handaxe | Longsword | Scimitar | Sickle | WarPick
+    | Javelin | Spear | Trident | Greataxe | Greatsword | Halberd | Glaive
+    | Greatclub | Maul | Pike | HandCrossbow | LightCrossbow | HeavyCrossbow
+    | Shortbow | Longbow | Wand
 
 type [<Measure>] dmg
 type DamageValue = 
