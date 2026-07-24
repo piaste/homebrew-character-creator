@@ -75,11 +75,6 @@ type AbilityBuy =
             (this.BoughtAbility ab - 10) / 2
 
 
-type CharacterGear = {
-    Equipment: Map<EquipmentSlot, EquipmentDef>
-    Weapons: Map<WeaponSlot, WeaponDef>
-}
-
 type CharacterV05 =
     {
         Version: System.Version
@@ -120,8 +115,8 @@ type Character =
         
         NextLevelUp: LevelRecord
 
-        Equipment: Map<EquipmentSlot, EquipmentDef>
-        Weapons: Map<WeaponSlot, WeaponDef>
+        Equipment: Map<CharacterEquipmentSlot, string<equipmentId>>
+        Weapons: Map<CharacterWeaponSlot, string<weaponId>>
     }
 
 type CharacterHistory = 
