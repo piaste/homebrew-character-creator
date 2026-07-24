@@ -133,6 +133,8 @@ type Passive =
     | Buff of StatModifiers
     | Power of ActionCost * Frequency * title: GameString * description: string
     | Resource of quantity: int * name : string * refresh: Frequency
+    /// A passive that affects your summons
+    | Summon of Passive
     with 
         static member op_Implicit(simpleAbility: string) = Simple simpleAbility
 
@@ -143,6 +145,7 @@ type Passive =
             | Buff sm -> sm.ToString()
             | Power (_, _, title, _) -> title
             | Resource (_, n, _) -> n
+            | Summon p -> p.Name + " (S)"
         member this.Description = 
             match this with
             | Simple txt -> txt
@@ -150,11 +153,17 @@ type Passive =
             | Buff sm -> sm.ToString()
             | Power (cost, freq, title, txt) -> $"{cost}{freq}: {txt}"
             | Resource (q, n, _) -> $"{q}x {n}"
+            | Summon p -> p.Description
 
         member this.Effect = 
             match this with
             | Buff sm -> sm
             | _ -> StatModifiers.Zero
+
+let alsoAffectsSummons passive = 
+    match passive with
+    | Summon _ | Resource _ -> [ passive ] // no change
+    | p -> [passive; Summon p ] // adds a copy for the summoned creature
 
 type [<Measure>] skillId
 

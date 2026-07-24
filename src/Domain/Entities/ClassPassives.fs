@@ -911,7 +911,9 @@ let rec divineSense = {
     ClassId = paladin.Id
     Id = % nameof divineSense
     Name = "Divine Sense"
-    Grants = [ Complex("Divine Sense", "Gain Advantage on Attack Rolls against Fey, Fiends, Undeads and Aberrations.") ]
+    Grants = [ 
+        yield! alsoAffectsSummons <| Complex("Divine Sense", "Gain Advantage on Attack Rolls against Fey, Fiends, Undeads and Aberrations.") 
+    ]
 }
 
 let rec divineShielding = {

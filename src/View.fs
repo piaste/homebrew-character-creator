@@ -234,36 +234,27 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     }
 
                 div { cl "sheet-section-title"; "PASSIVES" }
-                let sources = 
-                    [   All
-                        Starting
-                        if not chr.CurrentHistory.AllFeatIds.IsEmpty then FromFeats
-                        for sc in chr.CurrentHistory.LevelsBySubclass.Keys do 
-                            FromSubclass sc
-                    ]
+
+                let (mainCharPassives, summonsPassives) = 
+                    passives |> List.partition (snd >> function | Summon _ -> false | _ -> true)
                 
-                div {
-                    cl "filter-passives"
-                    forEach sources <| fun source ->
-                        button { 
-                            cl "btn sheet-pill"
-                            on.click (fun _ -> dispatch (FilterPassives source))
-                            source.Display useLoreNames
-                        }
-                }
-
                 let filteredPassives = 
-                    let filter = 
-                        match filterPassives with
-                        | All -> fun _ -> true
-                        | Starting -> fun source -> List.contains source ["Race"; "Archetype"; "Trait"; "Skill"]
-                        | FromFeats -> fun source -> source.StartsWith "Feat"
-                        | FromSubclass scId -> 
-                            let sc = Subclasses.allSubclasses[scId]
-                            let bn = Classes.allClasses[sc.BaseClassId]
-                            fun source -> source = sc.Name.Display useLoreNames || source = bn.Name
+                    match filterPassives with
+                    | Summons ->
+                        summonsPassives
+                    | fp -> 
+                        let filter = 
+                            match fp with
+                            | Summons -> failwith "impossibru"
+                            | All -> fun _ -> true
+                            | Starting -> fun source -> List.contains source ["Race"; "Archetype"; "Trait"; "Skill"]
+                            | FromFeats -> fun source -> source.StartsWith "Feat"
+                            | FromSubclass scId -> 
+                                let sc = Subclasses.allSubclasses[scId]
+                                let bn = Classes.allClasses[sc.BaseClassId]
+                                fun source -> source = sc.Name.Display useLoreNames || source = bn.Name
 
-                    passives |> List.filter (fst >> filter)
+                        mainCharPassives |> List.filter (fst >> filter)
 
                 let passiveDescs = 
                     filteredPassives
@@ -273,6 +264,27 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                         p.Description.Display useLoreNames, 
                         p.Icon
                     )
+
+                printf "%A" passiveDescs
+
+                let filters = 
+                    [   All
+                        Starting
+                        if not chr.CurrentHistory.AllFeatIds.IsEmpty then FromFeats
+                        for sc in chr.CurrentHistory.LevelsBySubclass.Keys do 
+                            FromSubclass sc
+                        if not <| List.isEmpty summonsPassives then Summons
+                    ]
+                
+                div {
+                    cl "filter-passives"
+                    forEach filters <| fun source ->
+                        button { 
+                            cl "btn sheet-pill"
+                            on.click (fun _ -> dispatch (FilterPassives source))
+                            source.Display useLoreNames
+                        }
+                }
 
                 div { 
                     cl "sheet-attrs"

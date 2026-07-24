@@ -77,7 +77,7 @@ let allSpellsWithIconsIn spellList =
                 $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
     |> Seq.filter (fst >> Spells.filterSpellsByList spellList)
-let tryGetVanillaIconSubpath = 
+let rec tryGetVanillaIconSubpath = 
     function
     | Simple s
     | Complex (s, _)
@@ -88,10 +88,16 @@ let tryGetVanillaIconSubpath =
         -> Some $"unsorted_icons/Action_{englishToPascalCase (title.DefaultText)}"           
     | Resource (_, name, _)
         -> Some $"cc_icons/Resource_{englishToPascalCase name}"    
+    | Summon p ->
+        tryGetVanillaIconSubpath p
 
 let inline tryGetAnyVanillaIconSubpath (gp : 'gp when 'gp : (member Grants : Passive list)) = 
+    let rec priority = function 
+        | Resource _ -> 0 | Power _ -> 1 | Complex _ -> 2 | Simple _ -> 3 | Buff _ -> 5
+        | Summon p -> priority p
+        
     gp.Grants 
-    |> List.sortBy (function | Resource _ -> 0 | Power _ -> 1 | Complex _ -> 2 | Simple _ -> 3 | Buff _ -> 5)
+    |> List.sortBy priority
     |> List.tryPick tryGetVanillaIconSubpath
 
 type Bg3HomebrewCCreator.Domain.Types.Passive with
