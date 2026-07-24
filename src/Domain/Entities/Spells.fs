@@ -29,7 +29,7 @@ let aid =
       SpellLists = [ Divine; Primal ]
       Concentration = false
       Upcastable = true
-      ActionCost = Action }
+      ActionCost = BonusAction }
 
 let animateDead =
     { Id = % "animate-dead"
@@ -126,7 +126,7 @@ let barrierOfHolding =
       Name = "Barrier of Holding"
       SpellDescription = "Creatures in a 3m AOE are bound and can't move on failed save"
       SpellLists = [ Divine; Arcane ]
-      Concentration = true
+      Concentration = false
       Upcastable = false
       ActionCost = Action }
 
@@ -144,7 +144,7 @@ let bladeBarrier =
       Name = "Blade Barrier"
       SpellDescription = "Wall of razor, 1d12 slashing dmg"
       SpellLists = [ Bargained; Arcane ]
-      Concentration = true
+      Concentration = false
       Upcastable = true
       ActionCost = Action }
 
@@ -234,7 +234,7 @@ let calmEmotions =
       Name = "Calm Emotions"
       SpellDescription = "Prevents a HUMANOID from being Charmed, Confused, Dominated, Enraged, Frightened or Inebriated"
       SpellLists = [ Divine; Innate ]
-      Concentration = true
+      Concentration = false
       Upcastable = true
       ActionCost = BonusAction }
 
@@ -247,9 +247,9 @@ let catnap =
       Upcastable = false
       ActionCost = Action }
 
-let causeFear =
-    { Id = % "cause-fear"
-      Name = "Cause Fear"
+let causeTerror =
+    { Id = % "cause-terror"
+      Name = "Cause Terror"
       SpellDescription = "Frighten a creature, 18m range"
       SpellLists = [ Innate; Bargained ]
       Concentration = false
@@ -497,7 +497,7 @@ let dispelEvilAndGood =
       SpellLists = [ Divine; Bargained ]
       Concentration = true
       Upcastable = true
-      ActionCost = Action }
+      ActionCost = BonusAction }
 
 let dispelMagic =
     { Id = % "dispel-magic"

@@ -35,7 +35,7 @@ let rec ``Create or Extinguish Flames`` : CantripDef = {
     Id = % nameof ``Create or Extinguish Flames``
     CantripDescription = "Create a 3m flame surface, or remove Burning from a creature/object."
     Concentration = false
-    ActionCost = Action
+    ActionCost = BonusAction
 }
 
 let rec ``Dancing Lights`` : CantripDef = {
@@ -80,8 +80,8 @@ let rec ``Frostbite`` : CantripDef = {
     ActionCost = Action
 }
 
-let rec ``Green Flame Blade`` : CantripDef = {
-    Id = % nameof ``Green Flame Blade``
+let rec ``Green Flame-Blade`` : CantripDef = {
+    Id = % nameof ``Green Flame-Blade``
     CantripDescription = "Strike with your melee weapon, dealing an additional +1d8 Fire damage to your target and 1d8 FIre damage to another enemy within 9m/30ft. Offense: Melee Weapon."
     Concentration = false
     ActionCost = Action
