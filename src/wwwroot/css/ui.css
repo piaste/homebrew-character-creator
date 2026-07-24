@@ -494,8 +494,6 @@ html,body{
   flex: 1 1 auto; 
   min-height: 34em; 
   width: 100%;
-  /*! display:flex; */
-  /*! direction:column; */
 }
 .radial-summary{
   padding-right: 18px; /* no reserved column; summary uses grid */
@@ -898,16 +896,18 @@ html,body{
   justify-content: flex-start;  /* ← move numbers left */
   align-content: flex-start;
   place-content: flex-start;
-  gap: 4px;                     /* space between label and value */
+  gap: 10px;                     /* space between label and value */
   font-size: var(--small-text);
   opacity: .95;
-
-  & span {
-    flex: 1 1 auto;    
-    min-width: 35%;    
-    opacity: .85;  
-  }
   
+  
+  & span {
+    flex: 4 1 0;    
+    min-width: 25%;    
+    opacity: .85;
+  }
+
+
   & .spell-slot-lvl {    
     font-family: "Times New Roman";
     font-weight: bolder;
@@ -916,18 +916,33 @@ html,body{
     min-width: max-content;
   }
   
-  & .icon {
-    flex: 0 0 15%;
+    
+  & b {
+    flex: 6 1 0;
+    text-align: left;
+    font-weight: 700;
+  }  
+
+  & .icon {    
     max-width: 2em;
     object-fit: contain;
     object-position: top;
     margin-block-start: 5px;
   }
-    
-  & b {
-    flex: 0 0 45%;
-    font-weight: 700;
-  }  
+  
+  &:has(.icon:not([style*="display: none"])) {
+    span {
+      flex: 30 1 0;
+    }
+
+    .icon {
+      flex: 7 1 0;
+    }
+
+    b {
+      flex: 60 1 0;
+    }
+  }
   
   /* spell slot cubes */
   & .square-checkbox {
@@ -935,7 +950,7 @@ html,body{
     flex: 0 0 1.3em;
   }
 }
- 
+
 .sheet-muted{
   font-size: var(--small-text);
   line-height: 1.35;
@@ -1776,7 +1791,7 @@ html,body{
       order: 1;
       padding-bottom: 12px;
     }
- 
+
     & > .radial-node:last-child{
       margin-right: 0;
     }
