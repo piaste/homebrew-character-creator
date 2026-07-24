@@ -486,8 +486,20 @@ type WeaponType =
 
 let weaponSlotForType = function
     | Shield -> WeaponSlot.Shield
-    | Dagger | Shortsword | Rapier
+    | Dagger | Shortsword | Rapier | Club | Flail | LightHammer | Mace 
+    | MorningStar | Warhammer | Quarterstaff | Battleaxe | Handaxe 
+    | Longsword | Scimitar | Sickle | WarPick | Javelin | Spear | Trident
         -> MeleeOneHand
+
+    | Greataxe | Greatsword | Halberd | Glaive
+    | Greatclub | Maul | Pike 
+        -> MeleeTwoHands
+
+    | HandCrossbow | Wand
+        -> RangedOneHand
+
+    | LightCrossbow | HeavyCrossbow | Shortbow | Longbow
+        -> RangedTwoHands
 let characterSlotForWeaponSlot = function
     | MeleeOneHand -> [Melee Main; Melee Offhand]
     | MeleeTwoHands -> [Melee Main ]
