@@ -427,7 +427,8 @@ type FeatDef = {
 
 // Gear
 
-type [<Measure>] itemId
+type [<Measure>] equipmentId
+type [<Measure>] weaponId
 type [<Measure>] attunement
 
 type ItemRarity = 
@@ -451,12 +452,23 @@ type EquipmentSlot =
     | Helmet | Chest | Feet | Arms
     | Necklace | Ring | Trinket
 
+type CharacterEquipmentSlot = 
+    | CHelmet | CChest | CFeet | CArms
+    | CNecklace | CRingLeft | CRingRight | CTrinket
+
 type WeaponSlot = 
     | MeleeOneHand | MeleeTwoHands | Shield
     | RangedOneHand | RangedTwoHands
 
-type Item = {
-    Id : string<itemId>
+type CharacterWeaponHand = Main | Offhand
+type CharacterWeaponSlot = 
+    | Melee of CharacterWeaponHand
+    | Ranged of CharacterWeaponHand
+    member this.Family = 
+         match this with | Melee _ -> Melee | Ranged _ -> Ranged     
+
+type Item<[<Measure>] 'm> = {
+    Id : string<'m>
     Name : string
     Icon: string
     Rarity : ItemRarity
@@ -471,6 +483,18 @@ type WeaponType =
     | Greatclub | Maul | Pike | HandCrossbow | LightCrossbow | HeavyCrossbow
     | Shortbow | Longbow | Wand
 
+
+let weaponSlotForType = function
+    | Shield -> WeaponSlot.Shield
+    | Dagger | Shortsword | Rapier
+        -> MeleeOneHand
+let characterSlotForWeaponSlot = function
+    | MeleeOneHand -> [Melee Main; Melee Offhand]
+    | MeleeTwoHands -> [Melee Main ]
+    | WeaponSlot.Shield -> [Melee Offhand]
+    | RangedOneHand -> [Ranged Main; Ranged Offhand]
+    | RangedTwoHands -> [Ranged Main ]
+
 type [<Measure>] dmg
 type DamageValue = 
     | Static of int<dmg>
@@ -481,7 +505,7 @@ type DamageValue =
         | Dice (number, size) -> number * 1<dmg>, number * size * 1<dmg>
 
 type WeaponDef = {
-    Item : Item
+    Item : Item<weaponId>
     Type: WeaponType
     DamageBonus: DamageValue * DamageType
 } with
@@ -490,7 +514,7 @@ type WeaponDef = {
 
 
 type EquipmentDef = {
-    Item : Item
+    Item : Item<equipmentId>
     Slot : EquipmentSlot
 } with
     member this.Id = this.Item.Id

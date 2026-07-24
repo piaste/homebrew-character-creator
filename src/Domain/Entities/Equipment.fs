@@ -5724,4 +5724,4 @@ let rec skeletonKey = {
 }
 
 type private Placeholder = class end
-let allTraits = getAll<Placeholder, EquipmentDef, itemId>()
+let allEquipment = getAll<Placeholder, EquipmentDef, equipmentId>()

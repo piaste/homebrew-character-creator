@@ -3137,4 +3137,4 @@ let rec splitFate = {
 }
 
 type private Placeholder = class end
-let allTraits = getAll<Placeholder, WeaponDef, itemId>()
+let allWeapons = getAll<Placeholder, WeaponDef, weaponId>()

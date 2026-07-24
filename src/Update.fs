@@ -42,6 +42,10 @@ type Message =
     | SetAbilityImprovement of Ability
     | FilterPassives of FilterPassives
 
+    // gear
+    | SetEquipment of CharacterEquipmentSlot * string<equipmentId>
+    | SetWeapon of CharacterWeaponSlot * string<weaponId>
+
     // page head controls
     | Undo
     | Redo
@@ -159,6 +163,73 @@ let update
 
     | FilterPassives fp ->
         { model with FilterPassives = fp }, Cmd.none
+
+    | SetEquipment (slot, itemId) ->
+        let item = Domain.Entities.Equipment.allEquipment[itemId]
+
+        let modify = 
+            match slot, item.Slot with
+            | CHelmet, Helmet
+            | CNecklace, Necklace
+            | CChest, Chest
+            | CFeet, Feet
+            | CArms, Arms
+            | CTrinket, Trinket
+                -> Map.add slot itemId 
+
+            | CRingLeft, Ring when model.Character.Equipment.TryFind CRingRight = Some itemId 
+                -> Map.remove CRingRight >> Map.add slot itemId
+            | CRingRight, Ring when model.Character.Equipment.TryFind CRingLeft = Some itemId 
+                -> Map.remove CRingLeft >> Map.add slot itemId
+
+            | CRingLeft, Ring | CRingRight, Ring
+                -> Map.add slot itemId
+            | _ 
+                -> id // rejected
+        
+        apply <| fun c -> { c with Equipment = modify c.Equipment }
+
+
+    | SetWeapon (slot, itemId) ->
+        let item = Domain.Entities.Weapons.allWeapons[itemId]
+        let weaponSlot = item.Type |> weaponSlotForType   
+        
+        let modify = 
+            match slot, weaponSlot with
+            | Melee Main, MeleeOneHand
+            | Ranged Main, RangedOneHand ->
+                Map.add slot itemId
+
+            | Melee _, MeleeTwoHands 
+            | Ranged _, RangedTwoHands ->
+                Map.remove (slot.Family Offhand) 
+                >> Map.add (slot.Family Main) itemId
+
+            | Melee Offhand, WeaponSlot.Shield
+            | Melee Offhand, MeleeOneHand
+            | Ranged Offhand, RangedOneHand ->          
+                let targetSlotIfMainHandFree = 
+                    if weaponSlot = WeaponSlot.Shield 
+                        then Melee Offhand
+                        else slot.Family Main
+
+                match Map.tryFind (slot.Family Main) model.Character.Weapons with
+                | None -> 
+                    Map.add targetSlotIfMainHandFree itemId
+                | Some mainHandItemId ->
+                    mainHandItemId
+                    |> Map.findIn Domain.Entities.Weapons.allWeapons
+                    |> _.Type 
+                    |> weaponSlotForType
+                    |> function
+                        | MeleeOneHand -> Map.add (slot.Family Offhand) itemId
+                        | _ -> Map.remove (slot.Family Main) 
+                               >> Map.add targetSlotIfMainHandFree itemId   
+            | _ 
+                -> id // rejected
+        
+        apply <| fun c -> { c with Weapons = modify c.Weapons }       
+
 
     | NextMainStageSelection ->
         let newStage = 
