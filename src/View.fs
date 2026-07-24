@@ -124,6 +124,23 @@ let actionButtonWithClass (text: Node) abCl dispatch msg =
     }
 let actionButton (text: Node) dispatch msg = 
     actionButtonWithClass text "" dispatch msg
+
+
+let gearDoll() = 
+    div {
+        cl "equipment"        
+        button { cl "slot head"; "data-label"=>"Head" }
+        button { cl "slot neck"; "data-label"=>"Neck" }
+        button { cl "slot chest"; "data-label"=>"Chest" }
+        button { cl "slot arms"; "data-label"=>"Arms" }
+        button { cl "slot ringl"; "data-label"=>"Left Ring" }
+        button { cl "slot ringr"; "data-label"=>"Right Ring" }
+        button { cl "slot feet"; "data-label"=>"Feet" }
+        button { cl "slot melee1"; "data-label"=>"Melee 1" }
+        button { cl "slot melee2"; "data-label"=>"Melee 2" }
+        button { cl "slot ranged1"; "data-label"=>"Ranged 1" }
+        button { cl "slot ranged2"; "data-label"=>"Ranged 2" }
+    }
 let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch = 
     let abB = chr.AbBuy
     concat {
@@ -178,6 +195,9 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                             dispatch (SetAbilityImprovement ab)
                 }
             )
+
+            gearDoll()
+
             div {
                 cl "summary-under-abilities"
 

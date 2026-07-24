@@ -1,0 +1,112 @@
+:root {
+    --slot-size: 78px;
+    --gap: 14px;
+    --bg: #1a1713;
+    --panel: #27211b;
+    --border: #8d7344;
+    --border-hover: #d8b55b;
+    --text: #e8ddc6;
+    --ghost: rgba(232,221,198,.8);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Alegreya", serif !important;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at top,#2c241a,#16120f 70%);
+    
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.equipment {
+    display: grid;
+    grid-template-columns: repeat(3, var(--slot-size));
+    grid-template-areas:
+        ". head . "
+        "neck chest arms"
+        "ringl feet ringr " 
+        "melee1 . ranged1"
+        "melee2 . ranged2";
+    gap: var(--gap);
+    padding: 28px;
+    background: var(--panel);
+    border: 2px solid #6b5432;
+    border-radius: 14px;
+    box-shadow:
+        0 0 0 3px rgba(255,220,140,.05),
+        0 12px 32px rgba(0,0,0,.45);
+    width:fit-content;
+}
+
+.slot {
+    width: var(--slot-size);
+    height: var(--slot-size);
+    position: relative;
+
+    border: 2px solid var(--border);
+    border-radius: 10px;
+
+    background:
+        linear-gradient(145deg,#3a3026,#241d17);
+
+    cursor: pointer;
+    transition: .18s;
+}
+
+.slot:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(216,181,91,.35);
+}
+
+.slot:active {
+    transform: scale(.97);
+}
+
+.slot::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 4px;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    color: var(--muted2);
+    text-shadow: none;
+
+    pointer-events: none;
+}
+
+/* Larger chest slot */
+
+/* Grid placement */
+.head    { grid-area: head; justify-self:center; }
+.neck    { grid-area: neck; }
+.chest   { grid-area: chest; }
+.arms    { grid-area: arms; }
+
+.ringl   { grid-area: ringl; }
+.ringr   { grid-area: ringr; }
+
+.feet    { grid-area: feet; justify-self:center; }
+
+.melee1  { grid-area: melee1; }
+.melee2  { grid-area: melee2; }
+
+.ranged1 { grid-area: ranged1; }
+.ranged2 { grid-area: ranged2; }
