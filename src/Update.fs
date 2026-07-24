@@ -14,16 +14,24 @@ open Bg3HomebrewCCreator.Domain.PickRules
 
 
 type Message =
+    // in-page routing
     | SetPage of Page
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
+
+    // radial controls
     | SetRadialCenterText of string
-    | FilterPassives of FilterPassives
+    | SetBaseClass of string<classId>
+    | SetSubclass of string<subclassId>
+    | SetClassSpecialistClass of string<classId> option
+    | SetYokebreakerClass of string<classId> option
 
-    | LoadState
-    | LoadedState of PersistedState option
-    | ToggleLoreNames of bool
+    // pickers
+    | TogglePick of LevelUpPick * string
+    | ClearPicks of LevelUpPick
+    | SetSearchQuery of LevelUpPick * string
 
+    // summary controls
     | SetName of string
     | SetBaseRace of string<baseRaceId>
     | SetSubrace of string<subraceId>
@@ -32,25 +40,24 @@ type Message =
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | SetAbilityImprovement of Ability
+    | FilterPassives of FilterPassives
 
-    | SetBaseClass of string<classId>
-    | SetSubclass of string<subclassId>
-    | SetClassSpecialistClass of string<classId> option
-    | SetYokebreakerClass of string<classId> option
-
-    | TogglePick of LevelUpPick * string
-    | ClearPicks of LevelUpPick
-    | SetSearchQuery of LevelUpPick * string
-
-    | LevelUp of string<subclassId> option
-    | LevelDown    
-    
-    | CopyBuildLink
-    | SetCopyFeedback of CopyButtonState
+    // page head controls
     | Undo
     | Redo
+    | LevelUp of string<subclassId> option
+    | LevelDown    
+    | ToggleLoreNames of bool
+    
+    // data load/reload
+    | LoadState
+    | LoadedState of PersistedState option
+    | CopyBuildLink
+    | SetCopyFeedback of CopyButtonState
     | LoadCharacter of Character
     | ResetCharacter
+
+    // miscellaneous
     | NoOp
     | ShowSystemError of string
     | ClearSystemError
@@ -113,10 +120,7 @@ let update
     message
     model =
 
-    let load, save =
-        jsHelper.Load, jsHelper.Save
-
-    let saveCmd' = saveCmd save
+    let saveCmd' = saveCmd jsHelper.Save
 
     let apply f = 
         applyCharacterChange saveCmd' f model
@@ -174,13 +178,13 @@ let update
                 | _ -> Proceed
             | Proceed -> 
                 firstPick
-                
+
         model, Cmd.ofMsg (SetMainStageSelection newStage)
 
     | LoadState ->
         match model.Page with
         | Forge None -> 
-            model, Cmd.OfTask.either load () 
+            model, Cmd.OfTask.either jsHelper.Load () 
                         LoadedState 
                         (ShowSystemError << sprintf "Unable to restore local data: %s" << _.Message)
         | Forge (Some _) -> 

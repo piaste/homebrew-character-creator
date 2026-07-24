@@ -480,11 +480,11 @@ html,body{
 }
  
 .radial-pane{
-  display:grid;
-  grid-template-rows:max-content minmax(0, 1fr);
+  display:flex;
+  flex-direction:column;
   width: 100%;
   min-width: 0;  
-  row-gap: 10px;
+  gap: 10px;
 }
  
 /* The stage is the coordinate-space for the orbit math.
@@ -493,7 +493,9 @@ html,body{
   position: relative; 
   flex: 1 1 auto; 
   min-height: 34em; 
-  min-width: 0;
+  width: 100%;
+  /*! display:flex; */
+  /*! direction:column; */
 }
 .radial-summary{
   padding-right: 18px; /* no reserved column; summary uses grid */
@@ -1733,8 +1735,11 @@ html,body{
       rgba(0,0,0,0.34);
     box-shadow: 0 12px 30px rgba(0,0,0,0.42);
  
-    /* Central text on its own line; nodes scroll in one row below. */
-    display: block;
+    
+    
+    /* Central text on its own line; nodes scroll in one row above. */
+    display: flex;
+    flex-direction: column;
     white-space: nowrap;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -1756,6 +1761,9 @@ html,body{
       margin-bottom: 12px;
       padding-bottom: 12px;
       border-bottom: 1px solid rgba(212,175,55,0.16);
+      
+      /* move it after the buttons to avoid annoying ccroll up/down */
+      order: 2;
     }
     
     & .radial-buttons {
@@ -1765,6 +1773,8 @@ html,body{
       /* these two are needed to fix scrolling on chrome mobile */
       width: 100%;
       box-sizing: border-box;
+      order: 1;
+      padding-bottom: 12px;
     }
  
     & > .radial-node:last-child{
