@@ -50,18 +50,18 @@ let view
                 cond (thingsPicked.Count = maxPicks) <| function
                 | false -> 
                     div {
-                        cl "h2 error"
+                        cl "picker-header-command h2 error"
                         $"Pick {maxPicks} ({thingsPicked.Count}/{maxPicks})"
                     }
                 | true -> 
                     button {
-                        cl "btn primary picker-done"
+                        cl "picker-header-command btn primary picker-done"
                         on.click (fun _ -> dispatch NextMainStageSelection)
                         "Done"
                     }
  
                 button {
-                    cl "btn primary picker-done"
+                    cl "picker-header-command btn primary picker-done"
                     on.click (fun _ -> dispatch (ClearPicks pick))
                     "Clear"
                 }
@@ -78,7 +78,7 @@ let view
                 }
 
                 div {
-                    cl "mini-muted"
+                    cl "filter-panel-summary mini-muted"
                     $"Showing {filtered.Length}/{sourceList.Length}"
                 }
             }

@@ -12,8 +12,10 @@ type OtherUi = Template<"wwwroot/main.html">
 
 let inline cl s = attr.``class`` s
 
-let inline clActive isActive s = cl $"""{s} {if isActive then "active" else ""}"""
-let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
+let inline clIf pairs s = 
+    cl <| String.concat " " [yield s; for b, c in pairs -> if b then c else ""]
+
+// let inline clEnabled isEnabled s = cl $"""{s} {if isEnabled then "" else "disabled"}"""
 
 let private iconPathFromSubpath subpath = $"/assets/icons/{subpath}.png"
 let icon subpath = img { 

@@ -18,24 +18,23 @@ open Helpers
 
 type OtherUi = Template<"wwwroot/main.html">
 
-let stageTabButton enabled dispatch model stage iconPath = 
-    let isActive = model.MainStageSelection = stage
+let stageTabButton enabled dispatch selected stage iconPath =     
     button {
         attr.id (elementIdForStage stage)
         attr.disabled (not enabled)
-        clActive isActive "stage-tab"
+        clIf [selected, "selected"] "stage-tab"
         on.click (fun _ -> dispatch <| SetMainStageSelection stage)
         div { cl "stage-tab-title"; stage.ToString() }
         div { cl "stage-tab-icon"; icon iconPath }
     }
 
-let picksDockButton (title : string) (count: int) (max: int) dispatch stage = 
+let picksDockButton (title : string) (count: int) (max: int) dispatch selected stage = 
     cond (max > 0) <| function
     | false -> empty()
     | true ->
         button {
             attr.id (elementIdForStage (Pick stage))
-            attr.``class`` <| "pick-card pick-card--dock" + (count = max).IfThen " error"
+            clIf [count=max, "error"; selected, "selected"] "pick-card pick-card--dock"
             attr.``type`` "button"
             on.click (fun _ -> dispatch <| SetMainStageSelection (Pick stage))
 
@@ -131,7 +130,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     button {
                         let enabled = abB.BoughtAbilityBeforeBonuses ab > 8 in 
                         attr.disabled (not enabled)
-                        clEnabled enabled "ability-face-btn ability-minus-btn"
+                        clIf [not enabled, "disabled"] "ability-face-btn ability-minus-btn"
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
                         //img { attr.src "/assets/ui/ability-minus.png"}
                     }
@@ -140,7 +139,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     button {
                         let enabled = abB.BoughtAbilityBeforeBonuses ab < 15 in 
                         attr.disabled (not enabled)
-                        clEnabled enabled "ability-face-btn ability-plus-btn"
+                        clIf [not enabled, "disabled"] "ability-face-btn ability-plus-btn"
                         on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
                         //img { attr.src "/assets/ui/ability-plus.png"}
                     }
@@ -627,7 +626,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                                 Description = v.Description.Display model.UseLoreNames
                             |}))
                             subclassIconPath
-                            (fun scId -> ToggleFeatSubPick (Yokebreaking, UMX.untag scId))
+                            (fun scId -> TogglePick (FeatSubpick Yokebreaking, UMX.untag scId))
 
                 | FeatSubpickType.ClassPassives ->
                     cond model.ClassSpecialistClass <| function
@@ -694,7 +693,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
         )
         .StageTabs(
             concat {
-                let stb enabled = stageTabButton enabled dispatch model in 
+                let stb enabled stage = stageTabButton enabled dispatch (model.MainStageSelection = stage) stage in 
                 stb true Race (baseraceIconPath (baseRaceIdBySubraceId c.RaceId))
                 stb true Subrace (subraceIconPath c.RaceId)
                 stb true Class (baseclassIconPath (classIdBySubclassId l.SubclassId))
@@ -727,6 +726,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             
                 <| p.Value
                 <| dispatch
+                <| (model.MainStageSelection = Pick p.Key)
                 <| p.Key
             )
 

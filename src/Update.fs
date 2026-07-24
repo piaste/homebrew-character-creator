@@ -27,26 +27,16 @@ type Message =
     | SetName of string
     | SetBaseRace of string<baseRaceId>
     | SetSubrace of string<subraceId>
-    | SetArchetype of string<archetypeId>
-    | SetTrait of string<traitId>
     | SetAbilityPointBuy of Ability * int<pbuy>
     | ModifyAbilityScore of Ability * int
     | SetBonusPlusThree of Ability
     | SetBonusPlusOne of Ability
     | SetAbilityImprovement of Ability
-    | ToggleSkill of string<skillId>
-    | ToggleSkillExp of string<skillId>
 
     | SetBaseClass of string<classId>
     | SetSubclass of string<subclassId>
-    | ToggleClassPassive of string<classPassiveId>
-    | ToggleSpecialPick of string<specialPickId>
-    | ToggleFeatSubPick of FeatSubpickType * string
     | SetClassSpecialistClass of string<classId> option
-    | SetYokebreakerClass of string<classId> option    
-    | ToggleFeat of string<featId>
-    | ToggleCantrip of string<cantripId>
-    | ToggleSpell of string<spellId>
+    | SetYokebreakerClass of string<classId> option
 
     | TogglePick of LevelUpPick * string
     | ClearPicks of LevelUpPick
@@ -144,17 +134,19 @@ let update
             { model with Page = page }, Cmd.none
         | Forge (Some encodedCharacter) ->
             match decodeFromBase64 encodedCharacter with
-            | Ok character when character.Version < defaultCharacter.Version -> 
-                { model with Page = page; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
-            | Ok character -> 
-                { model with Page = page; Character = character }, Cmd.none
+            | Ok character ->
+                { model with Page = page }, Cmd.ofMsg (LoadCharacter character)
+            // | Ok character when character.Version < defaultCharacter.Version -> 
+            //     { model with Page = page; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
+            // | Ok character -> 
+            //     { model with Page = page; Character = character }, Cmd.none
             | Error e ->
                 System.Console.WriteLine e;
                 { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss; RadialCenterText = "" }
-        , Cmd.OfTask.perform jsHelper.ScrollIntoView (string mss) (fun _ -> NoOp)
+        , Cmd.OfTask.perform jsHelper.ScrollIntoView (elementIdForStage mss) (fun _ -> NoOp)
 
     | SetRadialCenterText txt ->
         { model with RadialCenterText = txt }, Cmd.none
@@ -163,28 +155,27 @@ let update
         { model with FilterPassives = fp }, Cmd.none
 
     | NextMainStageSelection ->
-        { model with 
-            RadialCenterText = "" 
-            MainStageSelection = 
-                let picks = Seq.toList model.Character.Picks.Keys in
-                let firstPick = match picks with | [] -> Proceed | p :: _ -> Pick p
-                match model.MainStageSelection with
-                | Race -> Subrace 
-                | Subrace -> Class 
-                | Class -> 
-                    if (getValidSubclassesFor model.Character).Count > 1 then
-                        Subclass
-                    else
-                        firstPick
-                | Subclass -> 
-                    List.tryHead picks |> function | Some p -> Pick p | None -> Proceed
-                | Pick p ->
-                    match picks |> List.tryFindIndex ((=) p) with
-                    | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
-                    | _ -> Proceed
-                | Proceed -> 
+        let newStage = 
+            let picks = Seq.toList model.Character.Picks.Keys in
+            let firstPick = match picks with | [] -> Proceed | p :: _ -> Pick p
+            match model.MainStageSelection with
+            | Race -> Subrace 
+            | Subrace -> Class 
+            | Class -> 
+                if (getValidSubclassesFor model.Character).Count > 1 then
+                    Subclass
+                else
                     firstPick
-        }, Cmd.none
+            | Subclass -> 
+                firstPick
+            | Pick p ->                                        
+                match picks |> List.tryFindIndex ((=) p) with
+                | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
+                | _ -> Proceed
+            | Proceed -> 
+                firstPick
+                
+        model, Cmd.ofMsg (SetMainStageSelection newStage)
 
     | LoadState ->
         match model.Page with
@@ -223,12 +214,6 @@ let update
 
     | SetSubrace race ->
         applyAnd NextMainStageSelection <| fun character -> { character with RaceId = race }
-
-    | SetArchetype atId -> 
-        apply <| fun character -> { character with ArchetypeId = atId }
-
-    | SetTrait trId -> 
-        apply <| fun character -> { character with TraitId = trId }
 
     | SetBaseClass baseClassId ->
         let defaultSubclassId = 
@@ -310,123 +295,127 @@ let update
                             Some (b, ability)
             }
 
-
-    | ToggleSkill skillId ->
-        apply <| fun character ->
-            { character with 
-                SkillIds = 
-                    character.SkillIds.Toggle skillId
-                SkillExpIds = 
-                    character.SkillExpIds.Remove skillId
-            } 
-
-    | ToggleSkillExp skillId ->
-        apply <| fun character ->
-            { character with 
-                SkillExpIds = 
-                    character.SkillExpIds.Toggle skillId
-            } 
-    | ToggleCantrip cantripId ->
-        apply <| fun character ->
-            // ignore if already picked
-            if character.PreviousHistory.AllCantripIds.Contains cantripId then character else
-
-            { character with 
-                NextLevelUp.CantripIds = 
-                    character.NextLevelUp.CantripIds.Toggle cantripId
-            }
-
-    | ToggleSpell spellId ->
-        apply <| fun character ->
-            // ignore if already picked
-            if character.PreviousHistory.AllSpellIds.Contains spellId then character else
-
-            { character with 
-                NextLevelUp.SpellIds = 
-                    character.NextLevelUp.SpellIds.Toggle spellId
-            }
-
-    | ToggleClassPassive cpId ->
-        apply <| fun character ->
-
-            if character.PreviousHistory.AllClassPassiveIdsByClass.Values |> Seq.exists (Seq.contains cpId) then character else
-
-            { character with 
-                NextLevelUp.ClassPassiveIds = 
-                    character.NextLevelUp.ClassPassiveIds.Toggle cpId
-            }
-    | ToggleFeat featId ->
-        applyAnds [SetClassSpecialistClass None; SetYokebreakerClass None] <| fun character ->
-            if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
-            
-            { character with 
-                NextLevelUp.FeatId = 
-                    if character.NextLevelUp.FeatId = Some featId then None
-                    else Some featId
-
-                NextLevelUp.FeatSubPicks = Map []                
-
-                AbilityImprovement = 
-                    let ai = Feats.abilityImprovement.Id
-                    match featId, character.NextLevelUp.FeatId with
-                    | _, Some f2 when f2 = ai -> None // toggled off or replaced
-                    | f1, _ when f1 = ai -> Some (STR, DEX) // activated
-                    | _ -> character.AbilityImprovement // no change                    
-            }
-
-    | ToggleSpecialPick spId ->
-        apply <| fun character ->
-            if character.PreviousHistory.AllSpecialPicks
-               |> Set.contains spId then character else
-
-            { character with 
-                NextLevelUp.SpecialPickIds = 
-                    character.NextLevelUp.SpecialPickIds.Toggle spId
-            }
-
-    | ToggleFeatSubPick (Yokebreaking, id) ->        
-        // since yokebreaking uses a radial selector instead of a picker,
-        // it needs to advance to the next step
-        applyAnd NextMainStageSelection <| fun character -> 
-
-            {
-                character with
-                    NextLevelUp.FeatSubPicks = 
-                        Map [Yokebreaking, Set.singleton id]
-            }
-
-    | ToggleFeatSubPick (fsp, id) ->        
-        apply <| fun character -> 
-
-            let currFsp = character.NextLevelUp.FeatSubPicks
-            {
-                character with
-                    NextLevelUp.FeatSubPicks = 
-                        match currFsp.TryFind fsp with
-                        | None -> Map [fsp, Set.singleton id]
-                        | Some s -> currFsp |> Map.add fsp (s.Toggle id)
-            }
-
     | SetClassSpecialistClass s ->
         { model with ClassSpecialistClass = s }, Cmd.none
 
     | SetYokebreakerClass s ->
         { model with YokebreakerClass = s }, Cmd.none
 
-    | TogglePick (pick, id) ->
-        let msg = 
-            match pick with
-            | Archetypes -> SetArchetype (UMX.tag id)
-            | Traits -> SetTrait (UMX.tag id)
-            | Skills -> ToggleSkill (UMX.tag id)
-            | SkillExps -> ToggleSkillExp (UMX.tag id)
-            | Cantrips -> ToggleCantrip (UMX.tag id)
-            | Spells -> ToggleSpell (UMX.tag id)
-            | Feats -> ToggleFeat (UMX.tag id)
-            | ClassPassives -> ToggleClassPassive (UMX.tag id)
-            | ClassSpecific cs -> ToggleSpecialPick (UMX.tag id)
-            | FeatSubpick fsp -> ToggleFeatSubPick (fsp, id)
-        model, Cmd.ofMsg msg // maybe use Cmd.batch to autoforward?
+    | TogglePick (pick, id) ->        
+        match pick with
+        | Archetypes -> 
+            let atId = UMX.tag<archetypeId> id
+
+            apply <| fun character -> { character with ArchetypeId = atId }
+        | Traits -> 
+            let trId = UMX.tag<traitId> id
+            apply <| fun character -> { character with TraitId = trId }
+        | Skills ->
+            let skillId = UMX.tag<skillId> id
+
+            apply <| fun character ->
+                { character with 
+                    SkillIds = 
+                        character.SkillIds.Toggle skillId
+                    SkillExpIds = 
+                        character.SkillExpIds.Remove skillId
+                } 
+
+        | SkillExps -> 
+            let skillId = UMX.tag<skillId> id
+
+            apply <| fun character ->
+                { character with 
+                    SkillExpIds = 
+                        character.SkillExpIds.Toggle skillId
+                } 
+        | Cantrips -> 
+            let cantripId = UMX.tag<cantripId> id
+
+            apply <| fun character ->
+                // ignore if already picked
+                if character.PreviousHistory.AllCantripIds.Contains cantripId then character else
+
+                { character with 
+                    NextLevelUp.CantripIds = 
+                        character.NextLevelUp.CantripIds.Toggle cantripId
+                }
+
+        | Spells -> 
+            let spellId = UMX.tag<spellId> id
+
+            apply <| fun character ->
+                // ignore if already picked
+                if character.PreviousHistory.AllSpellIds.Contains spellId then character else
+
+                { character with 
+                    NextLevelUp.SpellIds = 
+                        character.NextLevelUp.SpellIds.Toggle spellId
+                }
+        | Feats -> 
+            let featId = UMX.tag<featId> id
+            applyAnds [SetClassSpecialistClass None; SetYokebreakerClass None] <| fun character ->
+                if character.PreviousHistory.AllFeatIds |> Set.contains featId then character else
+                
+                { character with 
+                    NextLevelUp.FeatId = 
+                        if character.NextLevelUp.FeatId = Some featId then None
+                        else Some featId
+
+                    NextLevelUp.FeatSubPicks = Map []                
+
+                    AbilityImprovement = 
+                        let ai = Feats.abilityImprovement.Id
+                        match featId, character.NextLevelUp.FeatId with
+                        | _, Some f2 when f2 = ai -> None // toggled off or replaced
+                        | f1, _ when f1 = ai -> Some (STR, DEX) // activated
+                        | _ -> character.AbilityImprovement // no change                    
+                }
+        | ClassPassives -> 
+            let cpId = UMX.tag<classPassiveId> id
+
+            apply <| fun character ->
+
+                if character.PreviousHistory.AllClassPassiveIdsByClass.Values |> Seq.exists (Seq.contains cpId) then character else
+
+                { character with 
+                    NextLevelUp.ClassPassiveIds = 
+                        character.NextLevelUp.ClassPassiveIds.Toggle cpId
+                }
+
+        | ClassSpecific cs -> 
+            let spId = UMX.tag<specialPickId> id
+            apply <| fun character ->
+                if character.PreviousHistory.AllSpecialPicks |> Set.contains spId then character else
+
+                { character with 
+                    NextLevelUp.SpecialPickIds = 
+                        character.NextLevelUp.SpecialPickIds.Toggle spId
+                }
+
+        | FeatSubpick Yokebreaking ->
+
+            // since yokebreaking uses a radial selector instead of a picker,
+            // it needs to advance to the next step
+            applyAnd NextMainStageSelection <| fun character -> 
+
+                {
+                    character with
+                        NextLevelUp.FeatSubPicks = 
+                            Map [Yokebreaking, Set.singleton id]
+                }    
+        | FeatSubpick fsp -> 
+                        
+            apply <| fun character -> 
+
+                let currFsp = character.NextLevelUp.FeatSubPicks
+                {
+                    character with
+                        NextLevelUp.FeatSubPicks = 
+                            match currFsp.TryFind fsp with
+                            | None -> Map [fsp, Set.singleton id]
+                            | Some s -> currFsp |> Map.add fsp (s.Toggle id)
+                }        
  
     | ClearPicks pick -> 
         apply <| fun character ->
@@ -525,7 +514,22 @@ let update
                 Cmd.delayThen (System.TimeSpan.FromSeconds 5) (SetCopyFeedback Rest)
 
     | LoadCharacter character ->
-        apply <| fun _ -> character
+        if character = defaultCharacter then
+            apply <| fun _ -> character
+        else
+
+            match character.Version with
+            | v when v = defaultCharacter.Version ->
+                // when you load a non-default character, go to the first unmade pick
+                applyAnds [SetMainStageSelection Subclass; NextMainStageSelection] <| fun _ -> character
+
+            // handle 
+            | v ->
+                match tryMigrate character with
+                | None -> 
+                    { model with SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none            
+                | Some updatedCharacter -> 
+                    model, Cmd.ofMsg (LoadCharacter updatedCharacter)
 
     | ResetCharacter -> 
         model, Cmd.ofMsg (LoadCharacter Model.Initial.Character)
