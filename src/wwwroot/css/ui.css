@@ -1180,7 +1180,7 @@ html,body{
   
   & .grid.grid-rows{
     padding: 18px 18px 28px;  
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(auto-fit, minmax(22em, 1fr));
     gap: 10px !important;
 }
   
