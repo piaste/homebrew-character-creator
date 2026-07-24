@@ -16,12 +16,12 @@ let rec beastheart =
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Rage", "Bestial Heart: Gain resistance and unique heart benefits.") ]
-            3<classLvl>, [ Complex("Bestial Dominance", "When entering into a rage, you Dominate all Beasts and Monstrosities within 9m with no save.") ]
-            5<classLvl>, [ Complex("Howl of the Wild", "Your Bestial Heart actions are now available to every rage.") ]
-            7<classLvl>, [ Complex("Beast Blood", "While enraged, all damage taken is reduced by 2.") ]
-            9<classLvl>, [ Complex("Bestial Growth", "While raging under your Bestial Hearts, killing blows and Critical Hits increase your Strength by 2 (stacks up to 30 STR) until the end of battle.") ]
-            11<classLvl>, [ Complex("Totemic Beast", "While enraged, nearby allies within 9m benefit from your active Bestial Heart passive features.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_MagicAwareness" <!!> "Rage", "Bestial Heart: Gain resistance and unique heart benefits.") ]
+            3<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Bestial Dominance", "When entering into a rage, you Dominate all Beasts and Monstrosities within 9m with no save.") ]
+            5<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Howl of the Wild", "Your Bestial Heart actions are now available to every rage.") ]
+            7<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Beast Blood", "While enraged, all damage taken is reduced by 2.") ]
+            9<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Bestial Growth", "While raging under your Bestial Hearts, killing blows and Critical Hits increase your Strength by 2 (stacks up to 30 STR) until the end of battle.") ]
+            11<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Totemic Beast", "While enraged, nearby allies within 9m benefit from your active Bestial Heart passive features.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -38,14 +38,14 @@ let rec berserker =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage", "Frenzy: Gain resistance and damage bonuses.")
-                Power(BonusAction, AtWill, "Frenzied Throw", "Throw characters or items.")
+                Power(BonusAction, AtWill, "Action_Barbarian_Frenzy" <!!> "Rage", "Frenzy: Gain resistance and damage bonuses.")
+                Power(BonusAction, AtWill, "Action_Barbarian_FrenziedThrow" <!!> "Frenzied Throw", "Throw characters or items.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Frenzied Strike", "Main-hand melee attack as Bonus Action.") ]
-            5<classLvl>, [ Complex("Steelbreaker", "Ignore physical resistances.") ]
-            7<classLvl>, [ Complex("Feral Instinct", "Double movement speed while Enraged.") ]
-            9<classLvl>, [ Complex("Thrill of the Kill", "Killing blow restores Bonus Action while Enraged.") ]
-            11<classLvl>, [ Complex("Let It Rip", "Frenzied Strike deals maximum damage once per turn.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_FrenziedStrike" <!!> "Frenzied Strike", "Main-hand melee attack as Bonus Action.") ]
+            5<classLvl>, [ Complex("Action_Barbarian_Frenzy" <!!> "Steelbreaker", "Ignore physical resistances.") ]
+            7<classLvl>, [ Complex("Action_Barbarian_Frenzy" <!!> "Feral Instinct", "Double movement speed while Enraged.") ]
+            9<classLvl>, [ Complex("Action_Barbarian_Frenzy" <!!> "Thrill of the Kill", "Killing blow restores Bonus Action while Enraged.") ]
+            11<classLvl>, [ Complex("Action_Barbarian_Frenzy" <!!> "Let It Rip", "Frenzied Strike deals maximum damage once per turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -62,14 +62,14 @@ let rec frostbreaker =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "homebrew_icons/Action_Barbarian_Rage_Bifrost" <!!> "Rage", "Frostwoven: Resistance to physical and Cold immunity.")
-                Complex("Bifrost" <?> "Reghedman's Stride", "Cannot slip on ice; hits afflict Frigidity.")
+                Power(BonusAction, AtWill, "Action_Barbarian_Rage_Bifrost" <!!> "Rage", "Frostwoven: Resistance to physical and Cold immunity.")
+                Complex("Action_Barbarian_Rage_Bifrost" <!!> "Bifrost" <?> "Reghedman's Stride", "Cannot slip on ice; hits afflict Frigidity.")
             ]
-            3<classLvl>, [ Complex("Frigid Omen", "Melee hits while enraged fire a Ray of Frost at another enemy.") ]
-            5<classLvl>, [ Complex("Frostfields", "Apply Encrusted with Frost on hit.") ]
-            7<classLvl>, [ Complex("Glacial Bellow", "Aura dealing Cold damage = Charisma Modifier.") ]
-            9<classLvl>, [ Power(Reaction, AtWill, "Tundral Strike", "Retaliate with a line of Cold damage.") ]
-            11<classLvl>, [ Complex("Frozen Hellscape", "Critical Hits immediately Freeze targets.") ]
+            3<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Frigid Omen", "Melee hits while enraged fire a Ray of Frost at another enemy.") ]
+            5<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Frostfields", "Apply Encrusted with Frost on hit.") ]
+            7<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Glacial Bellow", "Aura dealing Cold damage = Charisma Modifier.") ]
+            9<classLvl>, [ Power(Reaction, AtWill, "Action_Barbarian_Rage_Bifrost" <!!> "Tundral Strike", "Retaliate with a line of Cold damage.") ]
+            11<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Frozen Hellscape", "Critical Hits immediately Freeze targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -86,16 +86,16 @@ let rec giantsBlood =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage", "Giant’s Blood: Drastic size increase, reach, and damage.")
+                Power(BonusAction, AtWill, "Action_GiantsRage" <!!> "Rage", "Giant’s Blood: Drastic size increase, reach, and damage.")
                 Power(BonusAction, AtWill, "Stormheel", "Kick creatures away for Strength modifier damage.")
             ]
-            3<classLvl>, [ Power(Action, AtWill, "Mighty Impel", "Pick up and throw heavy creatures or objects.") ]
-            5<classLvl>, [ Complex("Poisebreaker", $"{TOGGLEABLE}: Melee attacks deal Strength modifier damage in 3m area.") ]
-            7<classLvl>, [ Complex("Frontline Backbreaker", "Displacing enemies Staggers them; allows immediate diving follow-up.") ]
-            9<classLvl>, [ Complex("Towering Blows", "Advantage on damage rolls against Large or smaller creatures.") ]
+            3<classLvl>, [ Power(Action, AtWill, "Action_MightyImpel" <!!> "Mighty Impel", "Pick up and throw heavy creatures or objects.") ]
+            5<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Poisebreaker", $"{TOGGLEABLE}: Melee attacks deal Strength modifier damage in 3m area.") ]
+            7<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Frontline Backbreaker", "Displacing enemies Staggers them; allows immediate diving follow-up.") ]
+            9<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Towering Blows", "Advantage on damage rolls against Large or smaller creatures.") ]
             11<classLvl>, [
-                Complex("Titanic Strength", "Dual-wield Two-Handed weapons.")
-                Complex ("Hits while enraged knock enemies Prone.", "While enraged, dealing damage to another creature will always knock them prone.")
+                Complex("PassiveFeature_GiantsRage" <!!> "Titanic Strength", "Dual-wield Two-Handed weapons.")
+                Complex("Status_Prone" <!!> "Hits while enraged knock enemies Prone.", "While enraged, dealing damage to another creature will always knock them prone.")
             ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -113,14 +113,14 @@ let rec rosemourn =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Rage", "Briar Blood: Thorns deal damage to attackers and leave Spike Growth.")
-                Complex ("Allies within 18m immune to your Spike Growth.", "Allies within 18m of you are immune to the effect of Difficult Terrain and your Spike Growth.")
+                Power(BonusAction, AtWill, "Action_Barbarian_Rage_Rosemourn" <!!> "Rage", "Briar Blood: Thorns deal damage to attackers and leave Spike Growth.")
+                Complex("Spell_Transmutation_SpikeGrowth" <!!> "Allies within 18m immune to your Spike Growth.", "Allies within 18m of you are immune to the effect of Difficult Terrain and your Spike Growth.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Bloodvine Grasp", "Pull target 18m closer; potential Bleed.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Barbed Protection", "Use Bloodvine Grasp on ally's aggressor.") ]
-            7<classLvl>, [ Complex("Thornfall", "Enemies taking fall damage also take Piercing damage in area.") ]
-            9<classLvl>, [ Complex("Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.") ]
-            11<classLvl>, [ Complex("Heart of Thorns", "Deal Piercing damage to all nearby enemies at turn end.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Bloodvine Grasp", "Pull target 18m closer; potential Bleed.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Barbed Protection", "Use Bloodvine Grasp on ally's aggressor.") ]
+            7<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Thornfall", "Enemies taking fall damage also take Piercing damage in area.") ]
+            9<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.") ]
+            11<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Heart of Thorns", "Deal Piercing damage to all nearby enemies at turn end.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -136,12 +136,12 @@ let rec wildSoul =
         BaseClassId = barbarian.Id
         CasterType = HalfCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Rage", "Wild Magic: Spells cast during rage trigger surges.") ]
-            3<classLvl>, [ Complex("Chaotic Roar", "Enraging immediately triggers a positive Wild Magic surge.") ]
-            5<classLvl>, [ Complex("Unstable Backlash", "Attackers may experience negative Wild Magic surges.") ]
-            7<classLvl>, [ Complex("Chance Surge", "Critical Hits trigger negative surges on targets.") ]
-            9<classLvl>, [ Complex("Wild Bloodlust", "Landing a killing blow triggers a positive surge.") ]
-            11<classLvl>, [ Complex("Tenacious Chaos", "Enraging triggers positive surges for all allies.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_Rage_WildMagic" <!!> "Rage", "Wild Magic: Spells cast during rage trigger surges.") ]
+            3<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Chaotic Roar", "Enraging immediately triggers a positive Wild Magic surge.") ]
+            5<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Unstable Backlash", "Attackers may experience negative Wild Magic surges.") ]
+            7<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Chance Surge", "Critical Hits trigger negative surges on targets.") ]
+            9<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Wild Bloodlust", "Landing a killing blow triggers a positive surge.") ]
+            11<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Tenacious Chaos", "Enraging triggers positive surges for all allies.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -157,12 +157,12 @@ let rec deathDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Power(Action, AtWill, "Bursting Sinew", "Detonate corpses/undead to apply Plague of Rot.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Curse of Undeath", "Afflict target to be considered Undead.") ]
-            5<classLvl>, [ Complex("Insurmountable Suffering", "Ignore all forms of Resistance and Immunity to Necrotic.") ]
-            7<classLvl>, [ Complex("Harvest", $"{TOGGLEABLE}: Corpses deal Necrotic damage and apply Rot to nearby enemies.") ]
-            9<classLvl>, [ Complex("True Pestilence", "Plague of Rot spreads to nearby allies of the target.") ]
-            11<classLvl>, [ Complex("Death of the Firstborns", "First Necrotic damage in battle causes total Vulnerability.") ]
+            1<classLvl>, [ Power(Action, AtWill, "Spell_Necromancy_BurstingSinew" <!!> "Bursting Sinew", "Detonate corpses/undead to apply Plague of Rot.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Curse of Undeath", "Afflict target to be considered Undead.") ]
+            5<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Insurmountable Suffering", "Ignore all forms of Resistance and Immunity to Necrotic.") ]
+            7<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Harvest", $"{TOGGLEABLE}: Corpses deal Necrotic damage and apply Rot to nearby enemies.") ]
+            9<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "True Pestilence", "Plague of Rot spreads to nearby allies of the target.") ]
+            11<classLvl>, [ Complex("Spell_Necromancy_Harm" <!!> "Death of the Firstborns", "First Necrotic damage in battle causes total Vulnerability.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -176,12 +176,12 @@ let rec forgeDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Divine Embers", "Summon scaling forge hammer; hits grant Heat.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Striking Iron", "Weapon strike dealing AOE Fire damage.") ]
-            5<classLvl>, [ Complex("Furnace Core", "Unique bonuses based on armor type (Ignore Fire Res, Divine Intervention, or Heat on hit).") ]
-            7<classLvl>, [ Complex("Brazen Embers", "Striking Iron grants Advantage against affected enemies.") ]
-            9<classLvl>, [ Complex("Forged in Flame", "Reaching 10 Heat grants Divine Intervention charge.") ]
-            11<classLvl>, [ Complex("Smeltsong", "Striking Iron now causes targets to Melt.") ]
+            1<classLvl>, [ Power(FreeAction, AtWill, "ForgeDomain" <!!> "Divine Embers", "Summon scaling forge hammer; hits grant Heat.") ]
+            3<classLvl>, [ Power(Action, AtWill, "ForgeDomain" <!!> "Striking Iron", "Weapon strike dealing AOE Fire damage.") ]
+            5<classLvl>, [ Complex("ForgeDomain" <!!> "Furnace Core", "Unique bonuses based on armor type (Ignore Fire Res, Divine Intervention, or Heat on hit).") ]
+            7<classLvl>, [ Complex("ForgeDomain" <!!> "Brazen Embers", "Striking Iron grants Advantage against affected enemies.") ]
+            9<classLvl>, [ Complex("ForgeDomain" <!!> "Forged in Flame", "Reaching 10 Heat grants Divine Intervention charge.") ]
+            11<classLvl>, [ Complex("ForgeDomain" <!!> "Smeltsong", "Striking Iron now causes targets to Melt.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -195,12 +195,12 @@ let rec illusoryDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Veilcasting", "Targeting ally makes them Invisible and deals AOE Psychic damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Mirror Force", "When ally damaged, retaliate with Psychic damage and heal.") ]
-            5<classLvl>, [ Complex("Phantom Communion", "Targeting ally with spell also makes you Invisible.") ]
-            7<classLvl>, [ Complex("Dreamfracture", "Psychic damage potentially Surprises targets.") ]
-            9<classLvl>, [ Power(FreeAction, AtWill, "Phantom Exchange", "Swap places with an Invisible ally.") ]
-            11<classLvl>, [ Complex("Fractured Reality", "Psychic damage strips Lockdown Immunity.") ]
+            1<classLvl>, [ Complex("Spell_2e_ColorSpray" <!!> "Veilcasting", "Targeting ally makes them Invisible and deals AOE Psychic damage.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_ColorSpray" <!!> "Mirror Force", "When ally damaged, retaliate with Psychic damage and heal.") ]
+            5<classLvl>, [ Complex("Spell_2e_ColorSpray" <!!> "Phantom Communion", "Targeting ally with spell also makes you Invisible.") ]
+            7<classLvl>, [ Complex("Spell_2e_ColorSpray" <!!> "Dreamfracture", "Psychic damage potentially Surprises targets.") ]
+            9<classLvl>, [ Power(FreeAction, AtWill, "Spell_2e_ColorSpray" <!!> "Phantom Exchange", "Swap places with an Invisible ally.") ]
+            11<classLvl>, [ Complex("Spell_2e_ColorSpray" <!!> "Fractured Reality", "Psychic damage strips Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -214,12 +214,12 @@ let rec lifeDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Virtuous Touch", "First heal each round regains extra HP = character level.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Preserve Life", "Heal target for 4x character level.") ]
-            5<classLvl>, [ Complex("Sanctity", "Healing applies Resistance for 3 turns.") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Dampen Elements", "Halve incoming elemental damage for self/ally.") ]
-            9<classLvl>, [ Complex("Benevolent Grace", "Healing applies Shield of Faith for 3 turns.") ]
-            11<classLvl>, [ Complex("Divine Presence", "Preserve Life can resurrect fallen allies with full HP.") ]
+            1<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Virtuous Touch", "First heal each round regains extra HP = character level.") ]
+            3<classLvl>, [ Power(Action, AtWill, "PassiveFeature_DiscipleOfLife" <!!> "Preserve Life", "Heal target for 4x character level.") ]
+            5<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Sanctity", "Healing applies Resistance for 3 turns.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_DiscipleOfLife" <!!> "Dampen Elements", "Halve incoming elemental damage for self/ally.") ]
+            9<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Benevolent Grace", "Healing applies Shield of Faith for 3 turns.") ]
+            11<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Divine Presence", "Preserve Life can resurrect fallen allies with full HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -233,15 +233,15 @@ let rec tempestDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Discharge", $"{TOGGLEABLE}: Hits create elemental discharges targeting multiple enemies.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Destructive Wrath", "Maximize elemental damage for an action.") ]
+            1<classLvl>, [ Complex("GenericIcon_DamageType_Lightning" <!!> "Discharge", $"{TOGGLEABLE}: Hits create elemental discharges targeting multiple enemies.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_ThunderboltStrike" <!!> "Destructive Wrath", "Maximize elemental damage for an action.") ]
             5<classLvl>, [
-                Power(FreeAction, AtWill, "Downpour", "Create Water as a free action.")
-                Complex("Improved Discharge", "Discharge affects all enemies in range.")
+                Power(FreeAction, AtWill, "Spell_Transmutation_CreateWater" <!!> "Downpour", "Create Water as a free action.")
+                Complex("GenericIcon_DamageType_Lightning" <!!> "Improved Discharge", "Discharge affects all enemies in range.")
             ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Wrath of the Storm", "Retaliate with elemental damage.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_ThunderboltStrike" <!!> "Wrath of the Storm", "Retaliate with elemental damage.") ]
             9<classLvl>, [ Complex("Storm Strike", $"{TOGGLEABLE}: Push targets 9m when dealing elemental damage.") ]
-            11<classLvl>, [ Complex("Static Shock", "Elemental damage can Stun targets.") ]
+            11<classLvl>, [ Complex("PassiveFeature_ThunderboltStrike" <!!> "Static Shock", "Elemental damage can Stun targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -255,12 +255,12 @@ let rec warDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Radiant Strikes", "Successful Attack Rolls deal additional Radiant damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "War God's Blessing", "+10 bonus to a missed Attack Roll.") ]
-            5<classLvl>, [ Complex("Divine Faith", "Gain Advantage on next turn after a Miracle.") ]
-            7<classLvl>, [ Power(BonusAction, AtWill, "War Priest", "Extra attack as a Bonus Action.") ]
-            9<classLvl>, [ Complex("War Gods Vessel", "War God's Blessing bonus remains active for 3 turns.") ]
-            11<classLvl>, [ Complex("Deific", "Next attack after a Miracle is always a Critical Hit.") ]
+            1<classLvl>, [ Complex("Action_DivineStrike_Radiant_Melee" <!!> "Radiant Strikes", "Successful Attack Rolls deal additional Radiant damage.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Action_DivineStrike_Radiant_Melee" <!!> "War God's Blessing", "+10 bonus to a missed Attack Roll.") ]
+            5<classLvl>, [ Complex("Action_DivineStrike_Radiant_Melee" <!!> "Divine Faith", "Gain Advantage on next turn after a Miracle.") ]
+            7<classLvl>, [ Power(BonusAction, AtWill, "Action_DivineStrike_Radiant_Melee" <!!> "War Priest", "Extra attack as a Bonus Action.") ]
+            9<classLvl>, [ Complex("Action_DivineStrike_Radiant_Melee" <!!> "War Gods Vessel", "War God's Blessing bonus remains active for 3 turns.") ]
+            11<classLvl>, [ Complex("Action_DivineStrike_Radiant_Melee" <!!> "Deific", "Next attack after a Miracle is always a Critical Hit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -276,12 +276,12 @@ let rec circleOfTheElements =
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Cycle of Balance", "Cycle through seasons each turn, gaining resistances and myrmidon forms.") ]
-            3<classLvl>, [ Complex("Terrasoul", "Gain Seasonal Reprieve to cast seasonal spells for free.") ]
-            5<classLvl>, [ Power(FreeAction, AtWill, "Tempestuous Seasons", "Advance seasons by expending Wild Shape for AOE damage.") ]
-            7<classLvl>, [ Complex("Natural Desolation", "Ignore seasonal damage Resistances and Immunities.") ]
-            9<classLvl>, [ Complex("Maelstrom", "Kills/Crits trigger AOE seasonal damage without advancing.") ]
-            11<classLvl>, [ Complex("Avatar of Gaia", "Recover all Wild Shape charges every turn.") ]
+            1<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Cycle of Balance", "Cycle through seasons each turn, gaining resistances and myrmidon forms.") ]
+            3<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Terrasoul", "Gain Seasonal Reprieve to cast seasonal spells for free.") ]
+            5<classLvl>, [ Power(FreeAction, AtWill, "Spell_2e_ElementalCounter" <!!> "Tempestuous Seasons", "Advance seasons by expending Wild Shape for AOE damage.") ]
+            7<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Natural Desolation", "Ignore seasonal damage Resistances and Immunities.") ]
+            9<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Maelstrom", "Kills/Crits trigger AOE seasonal damage without advancing.") ]
+            11<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Avatar of Gaia", "Recover all Wild Shape charges every turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
@@ -296,14 +296,14 @@ let rec circleOfTheLand =
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Conjure Dryad", "Summon a scaling woodland companion.")
-                Complex("Ensnaring Presence", "Damaging enemies potentially Entangles them.")
+                Power(Action, AtWill, "Spell_Conjuration_ConjureWoodlandBeings" <!!> "Conjure Dryad", "Summon a scaling woodland companion.")
+                Complex("PassiveFeature_Land_Coast" <!!> "Ensnaring Presence", "Damaging enemies potentially Entangles them.")
             ]
-            3<classLvl>, [ Complex("Nature's Grasp", "Entangled enemies have Disadvantage on saves against your spells.") ]
-            5<classLvl>, [ Power(FreeAction, OncePerCombat, "Vineburst", "Entangle: Cast Entangle at 3rd level.") ]
-            7<classLvl>, [ Complex("Untamed Freedom", "Self and nearby allies ignore Difficult Terrain.") ]
-            9<classLvl>, [ Complex("Verdant Aftermath", $"{TOGGLEABLE}: Kills create Entangling Vines.") ]
-            11<classLvl>, [ Complex("Blessing of the Oak Father", "Entangled creatures emit a Blessing aura.") ]
+            3<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Nature's Grasp", "Entangled enemies have Disadvantage on saves against your spells.") ]
+            5<classLvl>, [ Power(FreeAction, OncePerCombat, "Spell_Conjuration_Entangled" <!!> "Vineburst", "Entangle: Cast Entangle at 3rd level.") ]
+            7<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Untamed Freedom", "Self and nearby allies ignore Difficult Terrain.") ]
+            9<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Verdant Aftermath", $"{TOGGLEABLE}: Kills create Entangling Vines.") ]
+            11<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Blessing of the Oak Father", "Entangled creatures emit a Blessing aura.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
@@ -317,12 +317,12 @@ let rec circleOfTheMoon =
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Moonbreak", "Swap Wild Shape forms freely.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Wild Infusion", "Spend slot for extra elemental damage on hit.") ]
-            5<classLvl>, [ Complex("Primal Strike", "Ignore physical resistances in Wild Shape.") ]
-            7<classLvl>, [ Complex("Primal Speed", "Double movement speed in Wild Shape.") ]
-            9<classLvl>, [ Complex("Wild Strike", "Improved Extra Attack while in Wild Shape.") ]
-            11<classLvl>, [ Power(FreeAction, AtWill, "Lunar Shift", "Wild Shape after spell, or free spell after Wild Shape kill.") ]
+            1<classLvl>, [ Power(FreeAction, AtWill, "PassiveFeature_PrimalStrike" <!!> "Moonbreak", "Swap Wild Shape forms freely.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Skill_ArcanePropulsion_Blast" <!!> "Wild Infusion", "Spend slot for extra elemental damage on hit.") ]
+            5<classLvl>, [ Complex("PassiveFeature_PrimalStrike" <!!> "Primal Strike", "Ignore physical resistances in Wild Shape.") ]
+            7<classLvl>, [ Complex("PassiveFeature_PrimalStrike" <!!> "Primal Speed", "Double movement speed in Wild Shape.") ]
+            9<classLvl>, [ Complex("PassiveFeature_WildStrike" <!!> "Wild Strike", "Improved Extra Attack while in Wild Shape.") ]
+            11<classLvl>, [ Power(FreeAction, AtWill, "PassiveFeature_PrimalStrike" <!!> "Lunar Shift", "Wild Shape after spell, or free spell after Wild Shape kill.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -336,12 +336,12 @@ let rec circleOfTheShadows =
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness.") ]
-            3<classLvl>, [ Complex("Veilstalker", "While obscured, recover HP and deal extra Psychic damage.") ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "Predatory Communion", "Morph allies into Displacer Beasts.") ]
-            7<classLvl>, [ Complex("Distorted Visage", "Permanently Heavily Obscured beyond 3m.") ]
-            9<classLvl>, [ Complex("Nightspill", $"{TOGGLEABLE}: Leave magical darkness behind when moving.") ]
-            11<classLvl>, [ Complex("Hallucinatory Horror", "Maddened enemies are Vulnerable to Psychic damage.") ]
+            1<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness.") ]
+            3<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Veilstalker", "While obscured, recover HP and deal extra Psychic damage.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "TadpoleSuperPower_DisplacerShape" <!!> "Predatory Communion", "Morph allies into Displacer Beasts.") ]
+            7<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Distorted Visage", "Permanently Heavily Obscured beyond 3m.") ]
+            9<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Nightspill", $"{TOGGLEABLE}: Leave magical darkness behind when moving.") ]
+            11<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Hallucinatory Horror", "Maddened enemies are Vulnerable to Psychic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
@@ -356,13 +356,13 @@ let rec circleOfTheSpores =
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Reaction, AtWill, "Halo of Spores", "Deal Necrotic damage as a reaction.")
-                Power(Action, AtWill, "Symbiotic Entity", "Gain Temp HP and extra Necrotic damage.")
+                Power(Reaction, AtWill, "Action_HaloOfSpores" <!!> "Halo of Spores", "Deal Necrotic damage as a reaction.")
+                Power(Action, AtWill, "Action_SymbioticEntity" <!!> "Symbiotic Entity", "Gain Temp HP and extra Necrotic damage.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Animating Spores", "Reanimate corpses as fungal servants.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Spreading Spores", "Create area of DOT spores while Symbiotic.") ]
-            7<classLvl>, [ Complex("Necromantic Spores", "Spreading Spores trigger on killing blow.") ]
-            9<classLvl>, [ Complex("Symbiotic Spores", "Gain Symbiotic Entity on killing blow.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_SpreadingSpores" <!!> "Animating Spores", "Reanimate corpses as fungal servants.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Action_SpreadingSpores" <!!> "Spreading Spores", "Create area of DOT spores while Symbiotic.") ]
+            7<classLvl>, [ Complex("PassiveFeature_SpreadingSpores" <!!> "Necromantic Spores", "Spreading Spores trigger on killing blow.") ]
+            9<classLvl>, [ Complex("PassiveFeature_SpreadingSpores" <!!> "Symbiotic Spores", "Gain Symbiotic Entity on killing blow.") ]
             11<classLvl>, [ Power(BonusAction, AtWill, "Sovereign Spores", "Reanimate Dangerous/Fatal foes.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -379,13 +379,13 @@ let rec circleOfTheStars =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(FreeAction, OncePerTurn, "Resurgence of the Cosmos", "Restore Star Map charge.")
-                Power(BonusAction, AtWill, "Shape of the Cosmos", "Take constellation form (Archer, Chalice, Dragon).")
+                Power(BonusAction, AtWill, "PassiveFeature_StarMap" <!!> "Shape of the Cosmos", "Take constellation form (Archer, Chalice, Dragon).")
             ]
-            3<classLvl>, [ Complex("Singularity", "Restore Star Map every 3 turns in combat.") ]
-            5<classLvl>, [ Complex("Guidance of the Stars", "Cosmos cantrips upgraded to stronger versions.") ]
-            7<classLvl>, [ Power(Reaction, AtWill, "Cosmic Omens", "Weal/Woe to buff allies or debuff enemies.") ]
-            9<classLvl>, [ Complex("Twinkling Constellations", "Shapes grant passive bonuses; cantrips max out.") ]
-            11<classLvl>, [ Complex("Eyes of the Cosmos", "All three constellation forms active at all times.") ]
+            3<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Singularity", "Restore Star Map every 3 turns in combat.") ]
+            5<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Guidance of the Stars", "Cosmos cantrips upgraded to stronger versions.") ]
+            7<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_StarMap" <!!> "Cosmic Omens", "Weal/Woe to buff allies or debuff enemies.") ]
+            9<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Twinkling Constellations", "Shapes grant passive bonuses; cantrips max out.") ]
+            11<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Eyes of the Cosmos", "All three constellation forms active at all times.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)] ]
@@ -401,15 +401,15 @@ let rec champion =
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Challenger", $"{TOGGLEABLE}: Gain Physical Resistance, but enemies have Advantage on Attack Rolls against you. Chance to Challenge on hit.") ]
+            1<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Challenger", $"{TOGGLEABLE}: Gain Physical Resistance, but enemies have Advantage on Attack Rolls against you. Chance to Challenge on hit.") ]
             3<classLvl>, [
                 Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 HP * Proficiency Bonus.")
-                Power(BonusAction, AtWill, "Rallying Cry", "Grant 12 Temporary HP to all allies within 9m.")
-                Power(BonusAction, AtWill, "Battalion's March", "Allies within 9m have Advantage on Saving Throws for 3 turns.")
+                Power(BonusAction, AtWill, "Spell_2e_GirzanjesMarch" <!!> "Rallying Cry", "Grant 12 Temporary HP to all allies within 9m.")
+                Power(BonusAction, AtWill, "Spell_2e_MageArmor" <!!> "Battalion's March", "Allies within 9m have Advantage on Saving Throws for 3 turns.")
             ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "Challenger's Call", "Attempt to Challenge all enemies in a 9m area.") ]
-            7<classLvl>, [ Complex("Champion's Surge", "Gain Advantage on Attack and Damage Rolls against Challenged targets.") ]
-            9<classLvl>, [ Complex("Challenger's Presence", "Killing a Challenged enemy resets Short Rest cooldowns.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MediumArmorMaster" <!!> "Challenger's Call", "Attempt to Challenge all enemies in a 9m area.") ]
+            7<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Champion's Surge", "Gain Advantage on Attack and Damage Rolls against Challenged targets.") ]
+            9<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Challenger's Presence", "Killing a Challenged enemy resets Short Rest cooldowns.") ]
             11<classLvl>, [ Complex("Champion's Indomitability", "Adds Proficiency Bonus to all Saving Throws. (Replaces Indomitable)") ]
         ]
         ScalingAbilities = fun _  _ -> []
@@ -427,9 +427,9 @@ let rec frontierKnight =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Hunger for Knowledge", "Consume magical weapons to learn their unique weapon actions.") ]
-            3<classLvl>, [ Complex("Steadfast Onslaught", "Spend a Superiority Die to increase damage when using a Combat Technique.") ]
-            7<classLvl>, [ Complex("Critical Breakthrough", "Landing a Killing Blow or Critical Hit refreshes all Combat Techniques.") ]
-            11<classLvl>, [ Complex("Frontier Mastery" <?> "Weapon Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
+            3<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Steadfast Onslaught", "Spend a Superiority Die to increase damage when using a Combat Technique.") ]
+            7<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Critical Breakthrough", "Landing a Killing Blow or Critical Hit refreshes all Combat Techniques.") ]
+            11<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Frontier Mastery" <?> "Weapon Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
         ]
         ScalingAbilities = fun _  cl -> [
             Simple $"{cl} Combat Techniques Known"
@@ -449,11 +449,11 @@ let rec arcaneArcher =
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Focused Weave", $"{TOGGLEABLE}: Ranged attacks become cantrips dealing 1d12 Force damage (scaling), cannot miss or crit, but enable Focused Fletchings.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
-            5<classLvl>, [ Complex("Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
-            7<classLvl>, [ Complex("Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
-            11<classLvl>, [ Complex("Eye of the Arcana", "Action cantrips can be cast as a Bonus Action. Learn 3 more infusions.") ]
+            1<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Focused Weave", $"{TOGGLEABLE}: Ranged attacks become cantrips dealing 1d12 Force damage (scaling), cannot miss or crit, but enable Focused Fletchings.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MagicArrow" <!!> "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
+            5<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
+            7<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
+            11<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Eye of the Arcana", "Action cantrips can be cast as a Bonus Action. Learn 3 more infusions.") ]
         ]
         ScalingAbilities = fun _  cl -> [
             Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}"
@@ -476,11 +476,11 @@ let rec dragoon =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Draconic Dive" <?> "Chivalric Hunt", "Leap from afar dealing Weapon + Fire damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Wyrmcall Eruption" <?> "Cataphract Shock", "Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Draconic Blitz" <?> "Chivalric Spearhead", "Charge through enemies dealing Weapon + Fire damage.") ]
-            7<classLvl>, [ Complex("Wyrmcall Resonance" <?> "Zealous Pursuit", "Killing blows allow Draconic abilities as Bonus Actions and double melee reach.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Draconic Maul" <?> "Chivalric Breach", "Single target strike dealing Weapon + 3d12 Fire damage.") ]
-            11<classLvl>, [ Complex("Wyrmcall Breakpoint" <?> "Slaying the Dragon", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "DraconicSentinel" <!!> "Wyrmcall Eruption" <?> "Cataphract Shock", "Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Spell_2e_FlameWisp_Ranged" <!!> "Draconic Blitz" <?> "Chivalric Spearhead", "Charge through enemies dealing Weapon + Fire damage.") ]
+            7<classLvl>, [ Complex("DraconicSentinel" <!!> "Wyrmcall Resonance" <?> "Zealous Pursuit", "Killing blows allow Draconic abilities as Bonus Actions and double melee reach.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Spell_2e_FlameWisp" <!!> "Draconic Maul" <?> "Chivalric Breach", "Single target strike dealing Weapon + 3d12 Fire damage.") ]
+            11<classLvl>, [ Complex("DraconicSentinel" <!!> "Wyrmcall Breakpoint" <?> "Slaying the Dragon", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -494,12 +494,12 @@ let rec eldritchKnight =
         BaseClassId = fighter.Id
         CasterType = HalfCaster Bargained
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Call of the Old One", "Add Charisma Modifier to melee Attack Roll damage.") ]
-            3<classLvl>, [ Complex("Ex Oblivione", "Using a Manoeuvre restores a Warlock Spell Slot.") ]
-            5<classLvl>, [ Complex("From Beyond", "After a Manoeuvre, gain Advantage on Concentration and double melee reach for 3 turns.") ]
-            7<classLvl>, [ Power(BonusAction, AtWill, "Mountainous Madness", "After casting a Spell, make a Melee Weapon Attack.") ]
-            9<classLvl>, [ Complex("Lurking Fear", "Damaging targets has a chance to Frighten them.") ]
-            11<classLvl>, [ Complex("Shadowed Over", "Killing a Frightened creature restores all Warlock Spell Slots.") ]
+            1<classLvl>, [ Complex("PassiveFeature_WarMagic" <!!> "Call of the Old One", "Add Charisma Modifier to melee Attack Roll damage.") ]
+            3<classLvl>, [ Complex("PassiveFeature_WarMagic" <!!> "Ex Oblivione", "Using a Manoeuvre restores a Warlock Spell Slot.") ]
+            5<classLvl>, [ Complex("PassiveFeature_WarMagic" <!!> "From Beyond", "After a Manoeuvre, gain Advantage on Concentration and double melee reach for 3 turns.") ]
+            7<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_WarMagic" <!!> "Mountainous Madness", "After casting a Spell, make a Melee Weapon Attack.") ]
+            9<classLvl>, [ Complex("PassiveFeature_WarMagic" <!!> "Lurking Fear", "Damaging targets has a chance to Frighten them.") ]
+            11<classLvl>, [ Complex("PassiveFeature_WarMagic" <!!> "Shadowed Over", "Killing a Frightened creature restores all Warlock Spell Slots.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -513,12 +513,12 @@ let rec palisade =
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Reinforced Strikes", "Shield damage (Shield Bash/Dazing Bash) deals additional damage equal to Superiority Dice.") ]
-            3<classLvl>, [ Complex("Projected Bulwark", "Dazing Bash can target creatures within 9m.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Sentinel’s Rebuke", "Use Dazing Bash as a Reaction when an ally within 9m is damaged.") ]
-            7<classLvl>, [ Complex("Iron Avalanche", "Shield kills cause an eruption of Force damage.") ]
-            9<classLvl>, [ Complex("Cascading Iron", "Shield damage ricochets to another enemy within 9m.") ]
-            11<classLvl>, [ Complex("Superior Impact", "Expend a Superiority Die on shield hit to deal maximum damage.") ]
+            1<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Reinforced Strikes", "Shield damage (Shield Bash/Dazing Bash) deals additional damage equal to Superiority Dice.") ]
+            3<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Projected Bulwark", "Dazing Bash can target creatures within 9m.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_Shield" <!!> "Sentinel’s Rebuke", "Use Dazing Bash as a Reaction when an ally within 9m is damaged.") ]
+            7<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Iron Avalanche", "Shield kills cause an eruption of Force damage.") ]
+            9<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Cascading Iron", "Shield damage ricochets to another enemy within 9m.") ]
+            11<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Superior Impact", "Expend a Superiority Die on shield hit to deal maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -534,11 +534,11 @@ let rec arcanist =
         BaseClassId = artificer.Id
         CasterType = FullCaster DoubleVersatile
         FixedAbilities = Map [
-            3<classLvl>, [ Complex("Mystic Reload", "Killing blows with Ranged Weapon Attacks restore a Spell Slot (level = Artificer Lvl / 2).") ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "Arcane Ballistics", "Casting a spell allows a Ranged Weapon Attack.") ]
-            7<classLvl>, [ Complex("Ballistic Ricochet", "Ranged damage creates an Arcane Missile targeting another enemy.") ]
-            9<classLvl>, [ Complex("Runic Reload Module", "Reloading grants Advantage on next Spell Attack and Damage Rolls.") ]
-            11<classLvl>, [ Complex("Arcane Aim", "Critical Hits with Ranged attacks allow casting a spell without a slot.") ]
+            3<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Mystic Reload", "Killing blows with Ranged Weapon Attacks restore a Spell Slot (level = Artificer Lvl / 2).") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "Passive_AlchemicalSavant" <!!> "Arcane Ballistics", "Casting a spell allows a Ranged Weapon Attack.") ]
+            7<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Ballistic Ricochet", "Ranged damage creates an Arcane Missile targeting another enemy.") ]
+            9<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Runic Reload Module", "Reloading grants Advantage on next Spell Attack and Damage Rolls.") ]
+            11<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Arcane Aim", "Critical Hits with Ranged attacks allow casting a spell without a slot.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -552,11 +552,11 @@ let rec artillerist =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Armour-Piercing Rounds", "When dealing damage with a Ranged Weapon Attack, you ignore piercing Resistance and Immunities.") ]
+            1<classLvl>, [ Complex("Action_SummonFirearm" <!!> "Armour-Piercing Rounds", "When dealing damage with a Ranged Weapon Attack, you ignore piercing Resistance and Immunities.") ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Anti-Material Ammunition", "Make a Ranged Weapon Attack after a killing blow.") ]
-            5<classLvl>, [ Complex("Marked Suppression", "Ranged damage Marks enemies, granting Advantage to all allies.") ]
-            7<classLvl>, [ Complex("Focus Fire", "Consecutive Ranged hits on the same target deal stacking additional damage.") ]
-            9<classLvl>, [ Complex("Covering Fire", "Ranged killing blow restores an Action.") ]
+            5<classLvl>, [ Complex("Action_SummonFirearm" <!!> "Marked Suppression", "Ranged damage Marks enemies, granting Advantage to all allies.") ]
+            7<classLvl>, [ Complex("Action_SummonFirearm" <!!> "Focus Fire", "Consecutive Ranged hits on the same target deal stacking additional damage.") ]
+            9<classLvl>, [ Complex("Action_SummonFirearm" <!!> "Covering Fire", "Ranged killing blow restores an Action.") ]
             11<classLvl>, [ Complex("Quintessential Stockpile", "You get an additional 9 rounds of ammunition.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -576,11 +576,11 @@ let rec battleSynthetic =
                 Complex("Stabilizing Rounds", "Ranged attacks heal allies within 3m of the target for 1d4.")
                 Power(BonusAction, AtWill, "Summon Lil’G", "Summon a personal Automaton that grows with you.")
             ]
-            3<classLvl>, [ Complex("Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 HP.") ]
-            5<classLvl>, [ Complex("Take Your Medicine", "Firearms can heal allies when targeting them directly.") ]
-            7<classLvl>, [ Complex("Lil' Great Heal", "Allies within 9m of Lil' G regain HP every turn.") ]
-            9<classLvl>, [ Complex("Rapid Recovery Reload", "Reloading maximizes HP gained from healing for allies within 18m.") ]
-            11<classLvl>, [ Complex("Bigby Grym", "Lil' G grows to enormous size and power.") ]
+            3<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 HP.") ]
+            5<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Take Your Medicine", "Firearms can heal allies when targeting them directly.") ]
+            7<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Lil' Great Heal", "Allies within 9m of Lil' G regain HP every turn.") ]
+            9<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Rapid Recovery Reload", "Reloading maximizes HP gained from healing for allies within 18m.") ]
+            11<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Bigby Grym", "Lil' G grows to enormous size and power.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -594,12 +594,12 @@ let rec grenadier =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("The Anarchist’s Cookbook", "Generate a random grenade every turn in combat.") ]
-            3<classLvl>, [ Complex("Shockwave Theory", "Grenade damage forces targets Prone.") ]
-            5<classLvl>, [ Complex("Explosive Ammunition", "Killing blows or Critical Hits with Ranged attacks trigger 3m explosions.") ]
-            7<classLvl>, [ Power(BonusAction, AtWill, "Mortar Multiplicity", "Throw objects and creatures as a Bonus Action.") ]
+            1<classLvl>, [ Complex("Interrupt_FlashOfGenius" <!!> "The Anarchist’s Cookbook", "Generate a random grenade every turn in combat.") ]
+            3<classLvl>, [ Complex("Interrupt_FlashOfGenius" <!!> "Shockwave Theory", "Grenade damage forces targets Prone.") ]
+            5<classLvl>, [ Complex("Interrupt_FlashOfGenius" <!!> "Explosive Ammunition", "Killing blows or Critical Hits with Ranged attacks trigger 3m explosions.") ]
+            7<classLvl>, [ Power(BonusAction, AtWill, "Interrupt_FlashOfGenius" <!!> "Mortar Multiplicity", "Throw objects and creatures as a Bonus Action.") ]
             9<classLvl>, [ Complex("Collateral Damage", "Grenade damage cannot be reduced by successful Saving Throws.") ]
-            11<classLvl>, [ Complex("Grand Detonation", "Gain a Runepowder Vial upon Short Rest.") ]
+            11<classLvl>, [ Complex("Interrupt_FlashOfGenius" <!!> "Grand Detonation", "Gain a Runepowder Vial upon Short Rest.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -613,12 +613,12 @@ let rec infusedArcsmith =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Adaptive Intervention", "Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
-            5<classLvl>, [ Complex("Distributed Subroutine", "Infuse two creatures at once (or one for 2 rounds) per charge.") ]
-            7<classLvl>, [ Complex("Wanton Processing", "Killing blow or Critical Hit restores a Matrix Charge.") ]
-            9<classLvl>, [ Complex("Overclocked Subroutine", "Infuse three creatures at once per charge.") ]
-            11<classLvl>, [ Complex("Experimental Augmentation", "Infusing triggers Wild Magic surges (Positive for allies, Negative for enemies).") ]
+            1<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "Skill_ArcaneJolt_Damage" <!!> "Adaptive Intervention", "Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
+            5<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Distributed Subroutine", "Infuse two creatures at once (or one for 2 rounds) per charge.") ]
+            7<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Wanton Processing", "Killing blow or Critical Hit restores a Matrix Charge.") ]
+            9<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Overclocked Subroutine", "Infuse three creatures at once per charge.") ]
+            11<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Experimental Augmentation", "Infusing triggers Wild Magic surges (Positive for allies, Negative for enemies).") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map [
@@ -635,12 +635,12 @@ let rec striker =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("First Strike", "Cannot be Surprised. Gain Alpha Strike (double projectiles) on first turn.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Controlled Tempo", "Expedite (+20 initiative) or Delay (-20 initiative) a creature.") ]
-            5<classLvl>, [ Complex("Lethal Company", "Killing blows extend Alpha Strike duration.") ]
-            7<classLvl>, [ Complex("Delayed Reaction", "When you Delay the turn of a creature, they can’t use Reactions.") ]
-            9<classLvl>, [ Complex("Coordinated Strike", "Expediting a creature’s turn grants them Advantage on all Damage Rolls. Attack Rolls made against a creature suffering from Delayed Turn are rolled with Advantage.") ]
-            11<classLvl>, [ Complex("Kill Window", "While Alpha Strike is active, all Attack Rolls are Critical Hits.") ]
+            1<classLvl>, [ Complex("DT_CalledShot" <!!> "First Strike", "Cannot be Surprised. Gain Alpha Strike (double projectiles) on first turn.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "DT_CalledShot" <!!> "Controlled Tempo", "Expedite (+20 initiative) or Delay (-20 initiative) a creature.") ]
+            5<classLvl>, [ Complex("DT_CalledShot" <!!> "Lethal Company", "Killing blows extend Alpha Strike duration.") ]
+            7<classLvl>, [ Complex("DT_CalledShot" <!!> "Delayed Reaction", "When you Delay the turn of a creature, they can’t use Reactions.") ]
+            9<classLvl>, [ Complex("DT_CalledShot" <!!> "Coordinated Strike", "Expediting a creature’s turn grants them Advantage on all Damage Rolls. Attack Rolls made against a creature suffering from Delayed Turn are rolled with Advantage.") ]
+            11<classLvl>, [ Complex("DT_CalledShot" <!!> "Kill Window", "While Alpha Strike is active, all Attack Rolls are Critical Hits.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -660,11 +660,11 @@ let rec collegeOfCaptivation =
                 Complex("Sound of Silence", $"{TOGGLEABLE}: Performances act in 9m radius but allow Bard to act freely.")
                 Complex("Chorus Healing", "Allies in performance regain HP = Proficiency Bonus.")
             ]
-            3<classLvl>, [ Complex("Parade March", "Performance forces enemies to have Disadvantage unless attacking you.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Cover of Captivation", "Spend Inspiration to negate incoming damage.") ]
-            7<classLvl>, [ Complex("Captivating Reclaim", "Regain Inspiration when a creature becomes Charmed.") ]
-            9<classLvl>, [ Complex("Performative Shielding", "Gain Resistance to all damage while Performing.") ]
-            11<classLvl>, [ Complex("Countenance of Stoicism", "Concentration cannot be broken while Performing.") ]
+            3<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Parade March", "Performance forces enemies to have Disadvantage unless attacking you.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "Action_MantleOfInspiration" <!!> "Cover of Captivation", "Spend Inspiration to negate incoming damage.") ]
+            7<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Captivating Reclaim", "Regain Inspiration when a creature becomes Charmed.") ]
+            9<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Performative Shielding", "Gain Resistance to all damage while Performing.") ]
+            11<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Countenance of Stoicism", "Concentration cannot be broken while Performing.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -679,9 +679,9 @@ let rec collegeOfLore =
         CasterType = FullCaster DoubleVersatile
         FixedAbilities = Map [
             3<classLvl>, [ Complex("Secrets of the Lore", "Casting Inspiration makes your next spell not consume a slot.") ]
-            5<classLvl>, [ Complex("Mystic Echoes", "Recover Inspiration when an enemy fails a Saving Throw.") ]
-            7<classLvl>, [ Complex("Binding Vows", "Spells increase DC by 2.") ]
-            9<classLvl>, [ Complex("Macabre Secrets", "Killing blow with Spell/Cantrip restores Inspiration.") ]
+            5<classLvl>, [ Complex("PassiveFeature_ArcaneBattery" <!!> "Mystic Echoes", "Recover Inspiration when an enemy fails a Saving Throw.") ]
+            7<classLvl>, [ Complex("PassiveFeature_ArcaneBattery" <!!> "Binding Vows", "Spells increase DC by 2.") ]
+            9<classLvl>, [ Complex("PassiveFeature_ArcaneBattery" <!!> "Macabre Secrets", "Killing blow with Spell/Cantrip restores Inspiration.") ]
             11<classLvl>, [ Complex("Vow of Secrecy", "Recover level 6 spell slot when an enemy fails a save.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -696,12 +696,12 @@ let rec collegeOfMoriendi =
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Requiescat in Pace", "Deal additional Necrotic damage equal to Bard level.") ]
-            3<classLvl>, [ Complex("Funeral March", "Killing enemies while Performing creates skeletal involucres.") ]
-            5<classLvl>, [ Complex("Memento Mori", "Killing Bone Chilled creatures restores Inspiration.") ]
-            7<classLvl>, [ Complex("Grave Chill", "Enemies in Performance range are Bone Chilled.") ]
-            9<classLvl>, [ Complex("Bardic Necrosis", "Advantage on Attack and Damage Rolls for Necromancy spells.") ]
-            11<classLvl>, [ Complex("Ars Moriendi", "Necromancy spells target an additional creature.") ]
+            1<classLvl>, [ Complex("Spell_2e_Boneshaker" <!!> "Requiescat in Pace", "Deal additional Necrotic damage equal to Bard level.") ]
+            3<classLvl>, [ Complex("Spell_2e_Boneshaker" <!!> "Funeral March", "Killing enemies while Performing creates skeletal involucres.") ]
+            5<classLvl>, [ Complex("Spell_2e_Boneshaker" <!!> "Memento Mori", "Killing Bone Chilled creatures restores Inspiration.") ]
+            7<classLvl>, [ Complex("Spell_2e_Boneshaker" <!!> "Grave Chill", "Enemies in Performance range are Bone Chilled.") ]
+            9<classLvl>, [ Complex("Spell_2e_Boneshaker" <!!> "Bardic Necrosis", "Advantage on Attack and Damage Rolls for Necromancy spells.") ]
+            11<classLvl>, [ Complex("Spell_2e_Boneshaker" <!!> "Ars Moriendi", "Necromancy spells target an additional creature.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -715,12 +715,12 @@ let rec collegeOfNostalgia =
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("The Sufferer and the Witness", "Deal additional 1d4 Thunder damage (scaling).") ]
-            3<classLvl>, [ Complex("Lateralus", "Thunder damage inflicts Reverberation.") ]
-            5<classLvl>, [ Complex("Meteora", "Ignore Thunder Resistance and Immunity.") ]
-            7<classLvl>, [ Complex("The Paramoure Sessions", "Knocking an enemy Prone deals 1d4 Thunder damage to nearby creatures.") ]
-            9<classLvl>, [ Complex("Fallen", "Knocking an enemy Prone grants Inspiration to nearby allies.") ]
-            11<classLvl>, [ Complex("The Black Parade", "Thunder damage potentially Lures targets.") ]
+            1<classLvl>, [ Complex("Spell_2e_Organsight" <!!> "The Sufferer and the Witness", "Deal additional 1d4 Thunder damage (scaling).") ]
+            3<classLvl>, [ Complex("Spell_2e_Organsight" <!!> "Lateralus", "Thunder damage inflicts Reverberation.") ]
+            5<classLvl>, [ Complex("Spell_2e_Organsight" <!!> "Meteora", "Ignore Thunder Resistance and Immunity.") ]
+            7<classLvl>, [ Complex("Spell_2e_Organsight" <!!> "The Paramoure Sessions", "Knocking an enemy Prone deals 1d4 Thunder damage to nearby creatures.") ]
+            9<classLvl>, [ Complex("Spell_2e_Organsight" <!!> "Fallen", "Knocking an enemy Prone grants Inspiration to nearby allies.") ]
+            11<classLvl>, [ Complex("Spell_2e_Organsight" <!!> "The Black Parade", "Thunder damage potentially Lures targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -735,11 +735,11 @@ let rec collegeOfSteel =
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Steelforged Flourish", "Defensive, Mobile, or Slashing weapon techniques.") ]
-            3<classLvl>, [ Complex("Melodic Steel", "Killing blow or Critical Hit restores Inspiration.") ]
-            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
-            7<classLvl>, [ Complex("Performative Edge", "Advantage on weapon Attack and Damage Rolls while Performing.") ]
-            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
-            11<classLvl>, [ Complex("Climactic Strikes", "Weapon killing blow while Performing puts you in Performative Chorus.") ]
+            3<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Melodic Steel", "Killing blow or Critical Hit restores Inspiration.") ]
+            5<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            7<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Performative Edge", "Advantage on weapon Attack and Damage Rolls while Performing.") ]
+            9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            11<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Climactic Strikes", "Weapon killing blow while Performing puts you in Performative Chorus.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -753,12 +753,12 @@ let rec collegeOfValour =
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Refined Bardic Inspiration", "Inspiration can now add to Damage Rolls or Armour Class.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Song of Valor", "Revitalize as a Long Rest once per day. (Replaces Song of Rest)") ]
-            5<classLvl>, [ Complex("Valorous Camaraderie", "Inspiration hits two additional targets and deals Thunder damage to nearby enemies.") ]
-            7<classLvl>, [ Complex("Font of Valor", "Recover Inspiration every 3 turns in combat. (Replaces Font of Inspiration)") ]
-            9<classLvl>, [ Complex("Valiance Supreme", "Inspiration targets deal maximum damage on their next attack.") ]
-            11<classLvl>, [ Complex("Reliable Valor", "Cannot fail Ability Checks with Proficient Skills. (Replaces Reliable Talent)") ]
+            1<classLvl>, [ Complex("Action_Bard_RestoreBardicInspiration" <!!> "Refined Bardic Inspiration", "Inspiration can now add to Damage Rolls or Armour Class.") ]
+            3<classLvl>, [ Power(Action, AtWill, "PassiveFeature_BardicInspiration_Damage" <!!> "Song of Valor", "Revitalize as a Long Rest once per day. (Replaces Song of Rest)") ]
+            5<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Valorous Camaraderie", "Inspiration hits two additional targets and deals Thunder damage to nearby enemies.") ]
+            7<classLvl>, [ Complex("PassiveFeature_FontOfInspiration" <!!> "Font of Valor", "Recover Inspiration every 3 turns in combat. (Replaces Font of Inspiration)") ]
+            9<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Valiance Supreme", "Inspiration targets deal maximum damage on their next attack.") ]
+            11<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Reliable Valor", "Cannot fail Ability Checks with Proficient Skills. (Replaces Reliable Talent)") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -776,17 +776,17 @@ let rec wayOfTheArcane =
         BaseClassId = monk.Id
         CasterType = HalfCaster Versatile
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Flow State", $"{TOGGLEABLE}: Spend Ki Points (1 per spell level) to cast spells. Add Wisdom to unarmed/cantrip hits.") ]
+            1<classLvl>, [ Complex("Skill_Druid_NaturalRecovery" <!!> "Flow State", $"{TOGGLEABLE}: Spend Ki Points (1 per spell level) to cast spells. Add Wisdom to unarmed/cantrip hits.") ]
             3<classLvl>, [
-                Power(Action, AtWill, "Fangs of the Fire Snake", "Ranged Fire damage and bonus fire to melee.")
-                Power(Action, AtWill, "Fist of Unbroken Air", "Ranged Bludgeoning damage + knockback.")
-                Power(BonusAction, AtWill, "Ice Block", "Summon climbable ice that slows/chills enemies.")
-                Power(Action, AtWill, "Water Whip", "Ranged Bludgeoning damage + pull.")
+                Power(Action, AtWill, "Action_Monk_FangsOfTheFireSnake" <!!> "Fangs of the Fire Snake", "Ranged Fire damage and bonus fire to melee.")
+                Power(Action, AtWill, "Action_Monk_FistOfUnbrokenAir" <!!> "Fist of Unbroken Air", "Ranged Bludgeoning damage + knockback.")
+                Power(BonusAction, AtWill, "Action_Monk_IceCube" <!!> "Ice Block", "Summon climbable ice that slows/chills enemies.")
+                Power(Action, AtWill, "Action_Monk_WaterWhip" <!!> "Water Whip", "Ranged Bludgeoning damage + pull.")
             ]
-            5<classLvl>, [ Complex("Martial Elements", "Spells/Cantrips infuse spirit with element, dealing extra Wisdom damage on next hit.") ]
-            7<classLvl>, [ Complex("Elemental Overdrive", "Advantage on Attack and Damage Rolls for Ki spells and Cantrips.") ]
-            9<classLvl>, [ Complex("Elemental Recovery", "Killing blow with Ki spell/cantrip restores Ki cost.") ]
-            11<classLvl>, [ Complex("Protective Casting", "Casting Ki damage spells grants Immunity to that type for one turn.") ]
+            5<classLvl>, [ Complex("Skill_Druid_NaturalRecovery" <!!> "Martial Elements", "Spells/Cantrips infuse spirit with element, dealing extra Wisdom damage on next hit.") ]
+            7<classLvl>, [ Complex("Skill_Druid_NaturalRecovery" <!!> "Elemental Overdrive", "Advantage on Attack and Damage Rolls for Ki spells and Cantrips.") ]
+            9<classLvl>, [ Complex("Skill_Druid_NaturalRecovery" <!!> "Elemental Recovery", "Killing blow with Ki spell/cantrip restores Ki cost.") ]
+            11<classLvl>, [ Complex("Skill_Druid_NaturalRecovery" <!!> "Protective Casting", "Casting Ki damage spells grants Immunity to that type for one turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -802,12 +802,12 @@ let rec wayOfTheGentleFist =
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
-            5<classLvl>, [ Complex("Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
-            7<classLvl>, [ Complex("Mending Blows", "Damaging enemies heals allies within 9m.") ]
-            9<classLvl>, [ Complex("Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
-            11<classLvl>, [ Complex("Flow of Compassion", "Dodging an attack heals you and all allies within 9m.") ]
+            1<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_ForcefulHand" <!!> "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
+            5<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
+            7<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Mending Blows", "Damaging enemies heals allies within 9m.") ]
+            9<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
+            11<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Flow of Compassion", "Dodging an attack heals you and all allies within 9m.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -824,15 +824,15 @@ let rec wayOfTheDrunkenMaster =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Flurry", "Intoxicating: While inebriated, may knock targets Unconscious.")
+                Power(BonusAction, AtWill, "Skill_Infusion_ReplicateMagicItem" <!!> "Flurry", "Intoxicating: While inebriated, may knock targets Unconscious.")
                 Power(FreeAction, AtWill, "Slosh Toss", "Throw alcohol to inebriate targets.")
-                Power(Action, AtWill, "Breath of the Brewery", "Belch a cone of Acid damage and potential Madness.")
+                Power(Action, AtWill, "Action_DragonsBreath_Poison" <!!> "Breath of the Brewery", "Belch a cone of Acid damage and potential Madness.")
             ]
-            3<classLvl>, [ Complex("Leaf Hurricane", "Drinking alcohol grants Dash. Inebriation grants Advantage on Damage Rolls.") ]
-            5<classLvl>, [ Complex("Contact Buzz", "Damaging enemies inebriates them.") ]
-            7<classLvl>, [ Complex("Luck of the Drunkard", "Advantage on Attack Rolls while Inebriated.") ]
-            9<classLvl>, [ Complex("Drunken Awareness", "Enemies have Disadvantage on attacks against you while Inebriated.") ]
-            11<classLvl>, [ Complex("Eighth Gate of Sake", "Taking melee damage while Inebriated forces you Prone (disadvantage for enemies); standing up is free and grants Critical Hits.") ]
+            3<classLvl>, [ Complex("PassiveFeature_CheekyTipple" <!!> "Leaf Hurricane", "Drinking alcohol grants Dash. Inebriation grants Advantage on Damage Rolls.") ]
+            5<classLvl>, [ Complex("PassiveFeature_CheekyTipple" <!!> "Contact Buzz", "Damaging enemies inebriates them.") ]
+            7<classLvl>, [ Complex("PassiveFeature_CheekyTipple" <!!> "Luck of the Drunkard", "Advantage on Attack Rolls while Inebriated.") ]
+            9<classLvl>, [ Complex("PassiveFeature_CheekyTipple" <!!> "Drunken Awareness", "Enemies have Disadvantage on attacks against you while Inebriated.") ]
+            11<classLvl>, [ Complex("PassiveFeature_CheekyTipple" <!!> "Eighth Gate of Sake", "Taking melee damage while Inebriated forces you Prone (disadvantage for enemies); standing up is free and grants Critical Hits.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -848,13 +848,13 @@ let rec wayOfTheOpenHand =
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex ("Flurry of Blows: Topple/Stagger/Push", "Punch twice in rapid succession as a Bonus Action, with options to Topple (knock Prone), Stagger, or Push your target.") ]
-            3<classLvl>, [ Power(Action, AtWill, "Weaponized Fists", "Unarmed punch twice in rapid succession.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Stunning Strike", "Strike to potentially Stun target.") ]
-            7<classLvl>, [ Complex("Manifestation of Self", $"{TOGGLEABLE}: Unarmed attacks deal additional Wisdom damage (Necrotic, Psychic, or Radiant).") ]
+            1<classLvl>, [ Complex("Flurry of Blows: Topple/Stagger/Push", "Punch twice in rapid succession as a Bonus Action, with options to Topple (knock Prone), Stagger, or Push your target.") ]
+            3<classLvl>, [ Power(Action, AtWill, "PassiveFeature_KiFlurryOfBlows" <!!> "Weaponized Fists", "Unarmed punch twice in rapid succession.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Action_Monk_StunningStrike_Weapon" <!!> "Stunning Strike", "Strike to potentially Stun target.") ]
+            7<classLvl>, [ Complex("PassiveFeature_KiFlurryOfBlows" <!!> "Manifestation of Self", $"{TOGGLEABLE}: Unarmed attacks deal additional Wisdom damage (Necrotic, Psychic, or Radiant).") ]
             9<classLvl>, [
-                Power(Action, AtWill, "Ki Resonation", "Punch: Inflict Resonate for 3 turns.")
-                Power(FreeAction, AtWill, "Ki Resonation", "Erupt: Detonate Resonate targets for Force damage.")
+                Power(Action, AtWill, "Action_KiResonation_Punch" <!!> "Ki Resonation", "Punch: Inflict Resonate for 3 turns.")
+                Power(FreeAction, AtWill, "Action_KiResonation_Punch" <!!> "Ki Resonation", "Erupt: Detonate Resonate targets for Force damage.")
             ]
             11<classLvl>, [ Complex("Danse Macabre", "Killing an enemy restores an Action and Bonus Action once per turn.") ]
         ]
@@ -873,15 +873,15 @@ let rec wayOfTheShadowArts =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Shadow Step", "Teleport to shadow for Advantage.")
-                Power(BonusAction, AtWill, "Cloak of Shadows", "Grant Invisibility to self and nearby allies.")
-                Power(Action, AtWill, "Shadow Strike", "Warp to enemy while Hidden/Invisible for bonus Psychic damage.")
+                Power(BonusAction, AtWill, "Action_Monk_ShadowStep" <!!> "Shadow Step", "Teleport to shadow for Advantage.")
+                Power(BonusAction, AtWill, "Action_UmbralCloak" <!!> "Cloak of Shadows", "Grant Invisibility to self and nearby allies.")
+                Power(Action, AtWill, "Action_ShadowStrike" <!!> "Shadow Strike", "Warp to enemy while Hidden/Invisible for bonus Psychic damage.")
             ]
-            3<classLvl>, [ Complex("Void Stalker", "Hide as a Free Action in shadow; Superior Darkvision.") ]
-            5<classLvl>, [ Complex("Auspicious Shadows", "Shadow Strike kills ensure Critical Hits for the rest of the turn.") ]
-            7<classLvl>, [ Complex("Fade to Black", "Severely reduce peripheral vision of nearby enemies.") ]
-            9<classLvl>, [ Complex("Silent Strikes", "Damaging enemies Silences them.") ]
-            11<classLvl>, [ Complex("See No Evil", "Damaging enemies Blinds them.") ]
+            3<classLvl>, [ Complex("Action_Mag_Hellcrawler" <!!> "Void Stalker", "Hide as a Free Action in shadow; Superior Darkvision.") ]
+            5<classLvl>, [ Complex("Action_Mag_Hellcrawler" <!!> "Auspicious Shadows", "Shadow Strike kills ensure Critical Hits for the rest of the turn.") ]
+            7<classLvl>, [ Complex("Action_Mag_Hellcrawler" <!!> "Fade to Black", "Severely reduce peripheral vision of nearby enemies.") ]
+            9<classLvl>, [ Complex("Action_Mag_Hellcrawler" <!!> "Silent Strikes", "Damaging enemies Silences them.") ]
+            11<classLvl>, [ Complex("Action_Mag_Hellcrawler" <!!> "See No Evil", "Damaging enemies Blinds them.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -898,15 +898,15 @@ let rec wayOfTheTemperedSteel =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Tempered Strike", "Deliver a blow dealing double damage.")
-                Power(BonusAction, AtWill, "Judgement Cut / Mirage Blade", "Long-range weapon strikes and warps.")
-                Power(FreeAction, AtWill, "Summon Tempered Blade", "Summon a Versatile blade that scales with levels.")
+                Power(Action, AtWill, "TemperedStrike" <!!> "Tempered Strike", "Deliver a blow dealing double damage.")
+                Power(BonusAction, AtWill, "Action_Barbarian_Rage" <!!> "Judgement Cut / Mirage Blade", "Long-range weapon strikes and warps.")
+                Power(FreeAction, AtWill, "TemperedSteel" <!!> "Summon Tempered Blade", "Summon a Versatile blade that scales with levels.")
             ]
-            3<classLvl>, [ Complex("Focused Serenity", "Add base unarmed damage to weapon attacks.") ]
-            5<classLvl>, [ Complex("Macabre Patience", "Judgement Cut/Mirage Blade target additional enemies; Tempered Strike rolls with Advantage.") ]
-            7<classLvl>, [ Complex("Unanswered Angle", "Weapon damage ignores all physical Resistances.") ]
-            9<classLvl>, [ Complex("Concentration", "Ending turn without moving restores one Ki Point.") ]
-            11<classLvl>, [ Complex("Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full HP.") ]
+            3<classLvl>, [ Complex("TemperedSteel" <!!> "Focused Serenity", "Add base unarmed damage to weapon attacks.") ]
+            5<classLvl>, [ Complex("TemperedSteel" <!!> "Macabre Patience", "Judgement Cut/Mirage Blade target additional enemies; Tempered Strike rolls with Advantage.") ]
+            7<classLvl>, [ Complex("TemperedSteel" <!!> "Unanswered Angle", "Weapon damage ignores all physical Resistances.") ]
+            9<classLvl>, [ Complex("TemperedSteel" <!!> "Concentration", "Ending turn without moving restores one Ki Point.") ]
+            11<classLvl>, [ Complex("TemperedSteel" <!!> "Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -925,14 +925,14 @@ let rec ancientWarden =
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Healing Radiance", "AOE heal that repeats after 3 turns.")
+                Power(Action, AtWill, "Action_Paladin_HealingRadiance" <!!> "Healing Radiance", "AOE heal that repeats after 3 turns.")
                 Power(BonusAction, AtWill, "Binding Radiance" <?> "Gilded Chains", "Restrain an enemy for 3 turns.")
-                Complex("Ancient Judgement" <?> "Bane of the Wretched", "Advantage against Fey; killing Fey restores a Smite charge.")
+                Complex("Spell_Enchantment_Bane" <!!> "Ancient Judgement" <?> "Bane of the Wretched", "Advantage against Fey; killing Fey restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Soothing Radiance", "Healing Radiance cures conditions; Binding Radiance is harder to save against.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Faithless" <?> "Turn the Wretched", "Terrify and damage creatures in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Action_FeyPresence" <!!> "Turn the Faithless" <?> "Turn the Wretched", "Terrify and damage creatures in a 9m radius.") ]
             7<classLvl>, [ Complex("Extended Oath" <?> "Expansive Vow", "Double range of Healing Radiance; Binding Radiance targets 3 targets.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Protection" <?> "Aura of Confidence", "Allies in 9m have Advantage on Saving Throws.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Action_Paladin_AuraOfProtection" <!!> "Aura of Protection" <?> "Aura of Confidence", "Allies in 9m have Advantage on Saving Throws.") ]
             11<classLvl>, [ Complex("Oathbound Defender" <?> "Paragon of Grace", "Healing Radiance grants Resistance; Advantage against Bound targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -950,15 +950,15 @@ let rec crownedPhoenix =
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Phoenix Landing" <?> "Spellfire Vortex", "Teleport dealing Fire damage in an area.")
-                Power(Reaction, AtWill, "Searing Protection" <?> "Spellfire Ward", "Swap places and heal ally by taking damage.")
-                Complex("Crowned Judgement" <?> "Bane of the Warped", "Advantage against Aberrations; killing them restores a Smite charge.")
+                Power(BonusAction, AtWill, "Spell_Transmutation_AshardalonsStride" <!!> "Phoenix Landing" <?> "Spellfire Vortex", "Teleport dealing Fire damage in an area.")
+                Power(Reaction, AtWill, "Spell_Evocation_AganazzarsScorcher" <!!> "Searing Protection" <?> "Spellfire Ward", "Swap places and heal ally by taking damage.")
+                Complex("Spell_Enchantment_Bane" <!!> "Crowned Judgement" <?> "Bane of the Warped", "Advantage against Aberrations; killing them restores a Smite charge.")
             ]
-            3<classLvl>, [ Complex("To the Sun" <?> "Arcane Ignition", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
-            7<classLvl>, [ Complex("Scorched Earth" <?> "Arcane Dominion", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Cinder" <?> "Aura of Spellfire", "Allies gain Warding Bond; enemies take Fire damage.") ]
-            11<classLvl>, [ Complex("Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all HP and erupts in an explosion.") ]
+            3<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "To the Sun" <?> "Arcane Ignition", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DivineGuardian" <!!> "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
+            7<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Scorched Earth" <?> "Arcane Dominion", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Aura of Cinder" <?> "Aura of Spellfire", "Allies gain Warding Bond; enemies take Fire damage.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all HP and erupts in an explosion.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -974,14 +974,14 @@ let rec devoutParagon =
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Holy Rebuke", "Grant aura that inflicts Radiating Orb to melee attackers.")
-                Power(BonusAction, AtWill, "Sacred Weapon", "Add Charisma to Attack Rolls for 3 turns.")
-                Complex("Divine Judgement" <?> "Bane of the Wicked", "Advantage against Fiends; killing them restores a Smite charge.")
+                Power(Action, AtWill, "GenericIcon_DamageType_Radiant" <!!> "Holy Rebuke", "Grant aura that inflicts Radiating Orb to melee attackers.")
+                Power(BonusAction, AtWill, "Action_Paladin_SacredWeapon" <!!> "Sacred Weapon", "Add Charisma to Attack Rolls for 3 turns.")
+                Complex("Spell_Enchantment_Bane" <!!> "Divine Judgement" <?> "Bane of the Wicked", "Advantage against Fiends; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Sacred Oath", "Holy Rebuke hits additional targets; Sacred Weapon damage heals you.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Unholy" <?> "Turn the Wicked", "Terrify and damage Fiends in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Action_Fighter_KnowYourEnemy" <!!> "Turn the Unholy" <?> "Turn the Wicked", "Terrify and damage Fiends in a 9m radius.") ]
             7<classLvl>, [ Complex("Radiant Reflection", "Holy Rebuke deals damage; Sacred Weapon inflicts Radiating Orb.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Courage", "Grant allies Heroism and Fear Immunity.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Action_Paladin_AuraOfCourage" <!!> "Aura of Courage", "Grant allies Heroism and Fear Immunity.") ]
             11<classLvl>, [ Complex("Pure Radiance" <?> "Champion of Justice", "Advantage and bonus Radiant damage against Orbed targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -999,14 +999,14 @@ let rec oathboundCrusader =
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Abjure Enemy", "Frighten or Slow an enemy.")
-                Power(BonusAction, AtWill, "Inquisitor’s Might", "Bonus Radiant damage and potential Daze.")
-                Complex("Righteous Judgement" <?> "Bane of the Damned", "Advantage against Undead; killing them restores a Smite charge.")
+                Power(Action, AtWill, "Action_Paladin_AbjureEnemy" <!!> "Abjure Enemy", "Frighten or Slow an enemy.")
+                Power(BonusAction, AtWill, "Action_Paladin_InquisitorsMight" <!!> "Inquisitor’s Might", "Bonus Radiant damage and potential Daze.")
+                Complex("Spell_Enchantment_Bane" <!!> "Righteous Judgement" <?> "Bane of the Damned", "Advantage against Undead; killing them restores a Smite charge.")
             ]
             3<classLvl>, [ Complex("Sanctified Commands", "Abjure Enemy/Inquisitor's Might can be cast as Free Action once per combat.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Damned", "Terrify and damage Undead in a 9m radius.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_TurnTheUnholy" <!!> "Turn the Damned", "Terrify and damage Undead in a 9m radius.") ]
             7<classLvl>, [ Complex("Abjure the Weak" <?> "Abjure the Guilty", "Advantage against Abjured targets; Inquisitor's Might grants Advantage.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Warding" <?> "Aura of Perseverance", "Allies gain Resistance to spell damage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Action_Paladin_AuraOfWarding" <!!> "Aura of Warding" <?> "Aura of Perseverance", "Allies gain Resistance to spell damage.") ]
             11<classLvl>, [ Complex("I Am Vengeance" <?> "Vengeance Incarnate", "Erupt in radiant fury: bonus Radiant damage and Advantage for 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1023,13 +1023,13 @@ let rec oathbreaker =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Action, AtWill, "Subjugate Creature", "Claimed creature attacks its allies.")
-                Power(BonusAction, AtWill, "Spiteful Suffering", "Target fills with dread (Advantage for all); spawns Shadow on death.")
-                Complex("Righteous Judgement", "Advantage against Undead; killing them restores a Smite charge.")
+                Power(BonusAction, AtWill, "Action_Paladin_SpitefulSuffering" <!!> "Spiteful Suffering", "Target fills with dread (Advantage for all); spawns Shadow on death.")
+                Complex("Action_Legendary_Offensive" <!!> "Righteous Judgement", "Advantage against Undead; killing them restores a Smite charge.")
             ]
-            3<classLvl>, [ Complex("Vicious Condemnation", "Killing targets traps soul fragments in weapon for bonus Psychic damage.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Living", "Raise corpses as Shadow Servants until end of combat.") ]
+            3<classLvl>, [ Complex("PassiveFeature_Hex" <!!> "Vicious Condemnation", "Killing targets traps soul fragments in weapon for bonus Psychic damage.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DreadfulAspect" <!!> "Turn the Living", "Raise corpses as Shadow Servants until end of combat.") ]
             7<classLvl>, [ Complex("Vicious Subjugation", "Subjugated creatures deal maximum damage.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of Hate", "Allies/Undead deal bonus Charisma-based Necrotic damage.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Action_Paladin_AuraOfHate" <!!> "Aura of Hate", "Allies/Undead deal bonus Charisma-based Necrotic damage.") ]
             11<classLvl>, [ Complex("Oathbreaker Supreme", "Turn the Living also Terrifies living creatures.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1047,15 +1047,15 @@ let rec tyrant =
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Commanding Grasp", "WIS save or Command enemy.")
-                Power(BonusAction, AtWill, "Reign of Fear", "Frighten all enemies in 18m.")
-                Complex("Tyrant’s Judgement", "Advantage against targets with Lockdown Immunity; killing them restores Smite.")
+                Power(Action, AtWill, "Spell_Enchantment_CommandDrop" <!!> "Commanding Grasp", "WIS save or Command enemy.")
+                Power(BonusAction, AtWill, "Spell_2e_Agitate" <!!> "Reign of Fear", "Frighten all enemies in 18m.")
+                Complex("Spell_2e_BloodVendetta" <!!> "Tyrant’s Judgement", "Advantage against targets with Lockdown Immunity; killing them restores Smite.")
             ]
-            3<classLvl>, [ Complex("Grovel Beneath Me", "Tyrannical Smite causes Frightened enemies within 9m to potentially Grovel.") ]
-            5<classLvl>, [ Power(Action, AtWill, "Turn the Defiant", "Terrify/damage targets; double to Lockdown Immune.") ]
-            7<classLvl>, [ Complex("Escalation of Fear", "Damaging Frightened targets can Terrify them.") ]
-            9<classLvl>, [ Power(Action, AtWill, "Aura of the Conquerer", "Always Frighten enemies within 3m.") ]
-            11<classLvl>, [ Complex("Fist of the Tyrant", "Tyrannical Smite conjures a fall-out Fist dealing 12d12 AOE damage.") ]
+            3<classLvl>, [ Complex("Spell_2e_BloodVendetta" <!!> "Grovel Beneath Me", "Tyrannical Smite causes Frightened enemies within 9m to potentially Grovel.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Spell_2e_Heroism" <!!> "Turn the Defiant", "Terrify/damage targets; double to Lockdown Immune.") ]
+            7<classLvl>, [ Complex("Spell_2e_BloodVendetta" <!!> "Escalation of Fear", "Damaging Frightened targets can Terrify them.") ]
+            9<classLvl>, [ Power(Action, AtWill, "Spell_2e_SummonDeificHerald" <!!> "Aura of the Conquerer", "Always Frighten enemies within 3m.") ]
+            11<classLvl>, [ Complex("Spell_2e_BloodVendetta" <!!> "Fist of the Tyrant", "Tyrannical Smite conjures a fall-out Fist dealing 12d12 AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1074,11 +1074,11 @@ let rec beastMaster =
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Spear of the Wildfront", "Companion damage rolls with Advantage, but attackers have Advantage against it.") ]
-            3<classLvl>, [ Complex("Woodland Synergy", "Bonus +1d4 to all rolls for self and companion when within 18m.") ]
-            5<classLvl>, [ Complex("Bestial Fury", "Ranger Companions gain Extra Attack.") ]
-            7<classLvl>, [ Complex("Critical Bonds", "Killing blows grant the other (Ranger/Companion) a Critical Hit.") ]
-            9<classLvl>, [ Complex("Bestial Rampage", "Ranger Companions gain Improved Extra Attack.") ]
-            11<classLvl>, [ Complex("Leader of the Pack", "You can have two animal companions active simultaneously.") ]
+            3<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Woodland Synergy", "Bonus +1d4 to all rolls for self and companion when within 18m.") ]
+            5<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Bestial Fury", "Ranger Companions gain Extra Attack.") ]
+            7<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Critical Bonds", "Killing blows grant the other (Ranger/Companion) a Critical Hit.") ]
+            9<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Bestial Rampage", "Ranger Companions gain Improved Extra Attack.") ]
+            11<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Leader of the Pack", "You can have two animal companions active simultaneously.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1094,12 +1094,12 @@ let rec gloomStalker =
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Gloom Stalker’s Initiative" <?> "Upperdark Adventurer", "Gain +4 to Initiative and 18m Darkvision.") ]
-            3<classLvl>, [ Complex("Dread Shot", "Once per combat, guarantee a Critical Hit.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Gloom Stalker’s Deceit" <?> "Middledark Survivor", "Turn a failed Attack Roll into a success.") ]
-            7<classLvl>, [ Complex("Dread Fletched", "Critical Hits potentially cause Terror.") ]
-            9<classLvl>, [ Complex("Gloom Stalker’s Cruelty" <?> "Dread Tormentor", "Attacks against Terrified targets are always Critical Hits.") ]
-            11<classLvl>, [ Complex("Dread Ambusher" <?> "Lowerdark Predator", "Every successful Attack Roll on the first turn is a Critical Hit.") ]
+            1<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Initiative" <?> "Upperdark Adventurer", "Gain +4 to Initiative and 18m Darkvision.") ]
+            3<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Dread Shot", "Once per combat, guarantee a Critical Hit.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Deceit" <?> "Middledark Survivor", "Turn a failed Attack Roll into a success.") ]
+            7<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Dread Fletched", "Critical Hits potentially cause Terror.") ]
+            9<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Cruelty" <?> "Dread Tormentor", "Attacks against Terrified targets are always Critical Hits.") ]
+            11<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Dread Ambusher" <?> "Lowerdark Predator", "Every successful Attack Roll on the first turn is a Critical Hit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1115,15 +1115,15 @@ let rec hunter =
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Natural Hunter", "Weapon hits apply Hunted stacks, reducing enemy speed.") ]
+            1<classLvl>, [ Complex("PassiveFeature_ColossusSlayer" <!!> "Natural Hunter", "Weapon hits apply Hunted stacks, reducing enemy speed.") ]
             3<classLvl>, [ Power(Reaction, AtWill, "Opportune Strike", "Attack enemy who attacks an ally within 9m.") ]
             5<classLvl>, [
-                Power(Action, AtWill, "Volley", "Attack all enemies in 3m area (Ranged).")
-                Power(Action, AtWill, "Whirlwind", "Attack all enemies in 3m area (Melee).")
+                Power(Action, AtWill, "PassiveFeature_ColossusSlayer" <!!> "Volley", "Attack all enemies in 3m area (Ranged).")
+                Power(Action, AtWill, "Action_Multiattack_WhirlwindAttack" <!!> "Whirlwind", "Attack all enemies in 3m area (Melee).")
             ]
-            7<classLvl>, [ Complex("Marksman’s Eye", "Bonus to Attack Rolls against Hunted targets.") ]
-            9<classLvl>, [ Complex("On the Hunt", "Damage against Hunted targets is rolled with Advantage.") ]
-            11<classLvl>, [ Complex("Twinned Strikes", "Target two creatures with any weapon attack.") ]
+            7<classLvl>, [ Complex("PassiveFeature_ColossusSlayer" <!!> "Marksman’s Eye", "Bonus to Attack Rolls against Hunted targets.") ]
+            9<classLvl>, [ Complex("PassiveFeature_ColossusSlayer" <!!> "On the Hunt", "Damage against Hunted targets is rolled with Advantage.") ]
+            11<classLvl>, [ Complex("PassiveFeature_ColossusSlayer" <!!> "Twinned Strikes", "Target two creatures with any weapon attack.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1139,12 +1139,12 @@ let rec mireMist =
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Caustic Mire", "Self and companion deal extra 1d4 Acid; hits apply Acid stacks (7 = Corroded).") ]
-            3<classLvl>, [ Complex("Corrosive Bloom", "Removing Corroded applies Caustic Brine (1d12 Acid DOT) to nearby enemies.") ]
-            5<classLvl>, [ Complex("Dissolving Touch", "Ignore all forms of Acid Resistance and Immunity.") ]
-            7<classLvl>, [ Complex("Burning Quarry", "Advantage on damage against creatures with Caustic Brine.") ]
-            9<classLvl>, [ Complex("Spreading Mire", "Corrosive Bloom applies Caustic Brine indefinitely.") ]
-            11<classLvl>, [ Complex("Fatal Decay", "Attacks against Corroded enemies always Crit.") ]
+            1<classLvl>, [ Complex("Spell_2e_BrineDragonBile" <!!> "Caustic Mire", "Self and companion deal extra 1d4 Acid; hits apply Acid stacks (7 = Corroded).") ]
+            3<classLvl>, [ Complex("Spell_2e_BrineDragonBile" <!!> "Corrosive Bloom", "Removing Corroded applies Caustic Brine (1d12 Acid DOT) to nearby enemies.") ]
+            5<classLvl>, [ Complex("Spell_2e_BrineDragonBile" <!!> "Dissolving Touch", "Ignore all forms of Acid Resistance and Immunity.") ]
+            7<classLvl>, [ Complex("Spell_2e_BrineDragonBile" <!!> "Burning Quarry", "Advantage on damage against creatures with Caustic Brine.") ]
+            9<classLvl>, [ Complex("Spell_2e_BrineDragonBile" <!!> "Spreading Mire", "Corrosive Bloom applies Caustic Brine indefinitely.") ]
+            11<classLvl>, [ Complex("Spell_2e_BrineDragonBile" <!!> "Fatal Decay", "Attacks against Corroded enemies always Crit.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1160,12 +1160,12 @@ let rec swarmkeeper =
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Gathered Swarm", $"{TOGGLEABLE}: Activate Bee, Jellyfish, or Moth swarms for various buffs/debuffs.") ]
-            3<classLvl>, [ Complex("Free Spirited", "Killing/Critting enemies with swarms restores Natural Focus.") ]
-            5<classLvl>, [ Complex("Empowered Swarms", "Can target two creatures with swarms.") ]
-            7<classLvl>, [ Complex("Writhing Tide", "Advantage on attacks against swarmed enemies; Disadvantage for swarmed allies.") ]
-            9<classLvl>, [ Complex("Superior Swarms", "Can target three creatures with swarms.") ]
-            11<classLvl>, [ Complex("A Storm of Swarms", "Potency of all swarms is doubled.") ]
+            1<classLvl>, [ Complex("GenericIcon_Intent_Utility" <!!> "Gathered Swarm", $"{TOGGLEABLE}: Activate Bee, Jellyfish, or Moth swarms for various buffs/debuffs.") ]
+            3<classLvl>, [ Complex("Action_WrithingTide" <!!> "Free Spirited", "Killing/Critting enemies with swarms restores Natural Focus.") ]
+            5<classLvl>, [ Complex("Action_WrithingTide" <!!> "Empowered Swarms", "Can target two creatures with swarms.") ]
+            7<classLvl>, [ Complex("Action_WrithingTide" <!!> "Writhing Tide", "Advantage on attacks against swarmed enemies; Disadvantage for swarmed allies.") ]
+            9<classLvl>, [ Complex("Action_WrithingTide" <!!> "Superior Swarms", "Can target three creatures with swarms.") ]
+            11<classLvl>, [ Complex("Action_WrithingTide" <!!> "A Storm of Swarms", "Potency of all swarms is doubled.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1181,12 +1181,12 @@ let rec twinfang =
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Closing Bite", $"{TOGGLEABLE}: Ranged attacks allow a melee attack as a bonus action.") ]
-            3<classLvl>, [ Complex("Second Fang", "Companion makes an attack as a reaction when you do.") ]
-            5<classLvl>, [ Complex("Marked Quarry", "Ranged hits apply Hunter's Mark (Advantage/Bypass DR).") ]
-            7<classLvl>, [ Complex("Fang over Fang", "You make an attack as a reaction when companion does.") ]
-            9<classLvl>, [ Complex("Locked Jaws", "When both hit same target, it becomes Crippled.") ]
-            11<classLvl>, [ Complex("Apex Coordination", "Dealing damage to creature the other hit adds +1d8 damage.") ]
+            1<classLvl>, [ Complex("Twinfang" <!!> "Closing Bite", $"{TOGGLEABLE}: Ranged attacks allow a melee attack as a bonus action.") ]
+            3<classLvl>, [ Complex("Twinfang" <!!> "Second Fang", "Companion makes an attack as a reaction when you do.") ]
+            5<classLvl>, [ Complex("Twinfang" <!!> "Marked Quarry", "Ranged hits apply Hunter's Mark (Advantage/Bypass DR).") ]
+            7<classLvl>, [ Complex("Twinfang" <!!> "Fang over Fang", "You make an attack as a reaction when companion does.") ]
+            9<classLvl>, [ Complex("Twinfang" <!!> "Locked Jaws", "When both hit same target, it becomes Crippled.") ]
+            11<classLvl>, [ Complex("Twinfang" <!!> "Apex Coordination", "Dealing damage to creature the other hit adds +1d8 damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1207,13 +1207,13 @@ let rec arcaneTrickster =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Arcane Sneak Attack", "Once per turn bonus damage; Spells/Cantrips deal Force damage.")
-                Complex("Arcane Trickery", "Spells/Cantrips from Stealth do not break it.")
+                Complex("PassiveFeature_IllusorySelf" <!!> "Arcane Trickery", "Spells/Cantrips from Stealth do not break it.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Blessing of the Trickster", "Grant Invisibility and DEX Advantage.") ]
-            5<classLvl>, [ Complex("Trick of the Light", "Attacks against you have Disadvantage (until damaged).") ]
-            7<classLvl>, [ Complex("Ethereal Caster", "Casting a spell while Invisible doesn't consume a slot (once per turn).") ]
-            9<classLvl>, [ Power(FreeAction, OncePerTurn, "Magical Ambush", "Teleport up to 18m.") ]
-            11<classLvl>, [ Complex("Elusive Casting", "Turn Invisible at the start of each turn if visible.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_Cleric_BlessingOfTheTrickster" <!!> "Blessing of the Trickster", "Grant Invisibility and DEX Advantage.") ]
+            5<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Trick of the Light", "Attacks against you have Disadvantage (until damaged).") ]
+            7<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Ethereal Caster", "Casting a spell while Invisible doesn't consume a slot (once per turn).") ]
+            9<classLvl>, [ Power(FreeAction, OncePerTurn, "PassiveFeature_IllusorySelf" <!!> "Magical Ambush", "Teleport up to 18m.") ]
+            11<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Elusive Casting", "Turn Invisible at the start of each turn if visible.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1229,12 +1229,12 @@ let rec assassin =
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Assassinate", "Restore actions at combat start; Advantage on first-turn targets; bonus damage from Stealth.") ]
-            3<classLvl>, [ Complex("Assassin’s Focus", $"{TOGGLEABLE}: Gain Marks to trigger Assassinate in-combat every 3 turns.") ]
-            5<classLvl>, [ Complex("Hidden Implement", "Stealth/Invisibility hits have a chance to Paralyze.") ]
-            7<classLvl>, [ Complex("Critical Shock", "All hits against Out-of-Combat targets are Critical Hits.") ]
-            9<classLvl>, [ Complex("Marked for Blood", "Stealth hits leave targets unable to be Alerted.") ]
-            11<classLvl>, [ Complex("Execute", "Hits against targets < 10% HP kill instantly.") ]
+            1<classLvl>, [ Complex("Spell_2e_GhostlyWeapon" <!!> "Assassinate", "Restore actions at combat start; Advantage on first-turn targets; bonus damage from Stealth.") ]
+            3<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Assassin’s Focus", $"{TOGGLEABLE}: Gain Marks to trigger Assassinate in-combat every 3 turns.") ]
+            5<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Hidden Implement", "Stealth/Invisibility hits have a chance to Paralyze.") ]
+            7<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Critical Shock", "All hits against Out-of-Combat targets are Critical Hits.") ]
+            9<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Marked for Blood", "Stealth hits leave targets unable to be Alerted.") ]
+            11<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Execute", "Hits against targets < 10% HP kill instantly.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1250,12 +1250,12 @@ let rec hiddenToxicant =
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Imbue Toxicity", "Poison damage applies Toxicity stacks; bypass DR if target has stacks.") ]
-            3<classLvl>, [ Complex("Poisonous Foothold", "Main-hand hits deal bonus Poison damage = Rogue level.") ]
-            5<classLvl>, [ Power(FreeAction, AtWill, "Deepened Toxicity", "Detonate 5 stacks for Confusion, Mute, or Bufotoxin.") ]
-            7<classLvl>, [ Complex("Venomous Coatings", "Weapon coatings persist until next Long Rest.") ]
-            9<classLvl>, [ Power(FreeAction, AtWill, "Perfected Toxicity", "Detonate 7 stacks for Paralysis, Nausea, or Terminal Bloom.") ]
-            11<classLvl>, [ Complex("Toxic Eruption", "Detonating a toxin strips Lockdown Immunity.") ]
+            1<classLvl>, [ Complex("Spell_2e_PuffOfPoison" <!!> "Imbue Toxicity", "Poison damage applies Toxicity stacks; bypass DR if target has stacks.") ]
+            3<classLvl>, [ Complex("Spell_2e_PuffOfPoison" <!!> "Poisonous Foothold", "Main-hand hits deal bonus Poison damage = Rogue level.") ]
+            5<classLvl>, [ Power(FreeAction, AtWill, "Spell_2e_PuffOfPoison" <!!> "Deepened Toxicity", "Detonate 5 stacks for Confusion, Mute, or Bufotoxin.") ]
+            7<classLvl>, [ Complex("Spell_2e_PuffOfPoison" <!!> "Venomous Coatings", "Weapon coatings persist until next Long Rest.") ]
+            9<classLvl>, [ Power(FreeAction, AtWill, "Spell_2e_PuffOfPoison" <!!> "Perfected Toxicity", "Detonate 7 stacks for Paralysis, Nausea, or Terminal Bloom.") ]
+            11<classLvl>, [ Complex("Spell_2e_PuffOfPoison" <!!> "Toxic Eruption", "Detonating a toxin strips Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1273,15 +1273,15 @@ let rec mercenary =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Taking the Initiative", "Add Proficiency Bonus to Initiative.") ]
             3<classLvl>, [
-                Power(Action, AtWill, "Disarming Feint", "Deal damage and potentially disarm.")
+                Power(Action, AtWill, "Action_DisarmingAttack_Melee" <!!> "Disarming Feint", "Deal damage and potentially disarm.")
                 Power(BonusAction, AtWill, "Blinding Powder", "Sneak Attack damage and potential Blind.")
                 Power(Reaction, AtWill, "Mocking Tone", "Inflict Vicious Mockery.")
                 Power(BonusAction, AtWill, "Provocative Challenge", "Persuasion contest to Beguile/Provoke.")
             ]
-            5<classLvl>, [ Complex("Steady Footwork", "Immunity to Prone; always succeed DEX saving throws.") ]
+            5<classLvl>, [ Complex("statIcons_Steady" <!!> "Steady Footwork", "Immunity to Prone; always succeed DEX saving throws.") ]
             7<classLvl>, [ Power(Action, AtWill, "Improvised Explosives", "Grenade dealing Force and Fire damage.") ]
             9<classLvl>, [ Complex("Specialist", "Abilities target additional creatures; Challenge radius increased.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Cannon Fire", "Blanket 9m area with 16 explosions.") ]
+            11<classLvl>, [ Power(Action, AtWill, "GenericIcon_Intent_Damage" <!!> "Cannon Fire", "Blanket 9m area with 16 explosions.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1298,13 +1298,13 @@ let rec thief =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [
-                Complex("Get Out of Jail Free", "Start combat with full Luck; Reaction to force miss/hit at cost of Luck.")
-                Complex("Escape Artist", $"{TOGGLEABLE}: Fog Cloud on Stealth; Immunity to speed-impeding effects.")
+                Complex("GenericIcon_Intent_Utility" <!!> "Get Out of Jail Free", "Start combat with full Luck; Reaction to force miss/hit at cost of Luck.")
+                Complex("GenericIcon_Intent_Utility" <!!> "Escape Artist", $"{TOGGLEABLE}: Fog Cloud on Stealth; Immunity to speed-impeding effects.")
             ]
-            3<classLvl>, [ Complex("Reflexive", $"{TOGGLEABLE}: Use Common Actions (Jump, Hide, etc.) for free once per turn.") ]
-            7<classLvl>, [ Complex("Lucky Draw", "Crits/Misses guarantee next turn Critical Hits.") ]
+            3<classLvl>, [ Complex("GenericIcon_Intent_Utility" <!!> "Reflexive", $"{TOGGLEABLE}: Use Common Actions (Jump, Hide, etc.) for free once per turn.") ]
+            7<classLvl>, [ Complex("GenericIcon_Intent_Utility" <!!> "Lucky Draw", "Crits/Misses guarantee next turn Critical Hits.") ]
             9<classLvl>, [ Complex("Two-Headed Coins", "Restore Luck Point every turn.") ]
-            11<classLvl>, [ Complex("No Honor Among Us", "Gain three additional Reactions.") ]
+            11<classLvl>, [ Complex("GenericIcon_Intent_Utility" <!!> "No Honor Among Us", "Gain three additional Reactions.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1320,12 +1320,12 @@ let rec virulence =
         BaseClassId = rogue.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Virulent Edge", "Deal additional Acid damage = Rogue level.") ]
-            3<classLvl>, [ Complex("Acidic Laceration", "Acid damage applies Acid stacks.") ]
-            5<classLvl>, [ Complex("Corrosive Strike", "Sneak Attack immediately Corrodes targets for one turn.") ]
-            7<classLvl>, [ Complex("Virulent Detonation", "Sneak Attack damage applies to all enemies in 3m radius.") ]
-            9<classLvl>, [ Complex("Toxic Opportunity", "Advantage against Acid-coated targets.") ]
-            11<classLvl>, [ Complex("Terminal Exposure", "Extra damage = Sneak Attack against Corroded targets.") ]
+            1<classLvl>, [ Complex("Spell_2e_DeathKnell" <!!> "Virulent Edge", "Deal additional Acid damage = Rogue level.") ]
+            3<classLvl>, [ Complex("Spell_2e_DeathKnell" <!!> "Acidic Laceration", "Acid damage applies Acid stacks.") ]
+            5<classLvl>, [ Complex("Spell_2e_DeathKnell" <!!> "Corrosive Strike", "Sneak Attack immediately Corrodes targets for one turn.") ]
+            7<classLvl>, [ Complex("Spell_2e_DeathKnell" <!!> "Virulent Detonation", "Sneak Attack damage applies to all enemies in 3m radius.") ]
+            9<classLvl>, [ Complex("Spell_2e_DeathKnell" <!!> "Toxic Opportunity", "Advantage against Acid-coated targets.") ]
+            11<classLvl>, [ Complex("Spell_2e_DeathKnell" <!!> "Terminal Exposure", "Extra damage = Sneak Attack against Corroded targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1346,10 +1346,10 @@ let rec draconicBloodline =
                 Power(Action, AtWill, "Elemental Breath", "Cone attack inflicting element and condition.")
             ]
             3<classLvl>, [ Complex("Draconic Form", "Gain +2 AC and Fly.") ]
-            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
-            7<classLvl>, [ Complex("Draconic Affinity", "Elemental Immunity; add Charisma to associated elemental damage.") ]
-            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
-            11<classLvl>, [ Complex("Dragontongue", "Elemental Breath always deals maximum damage.") ]
+            5<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            7<classLvl>, [ Complex("PassiveFeature_DraconicResilience" <!!> "Draconic Affinity", "Elemental Immunity; add Charisma to associated elemental damage.") ]
+            9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            11<classLvl>, [ Complex("PassiveFeature_DraconicResilience" <!!> "Dragontongue", "Elemental Breath always deals maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1365,12 +1365,12 @@ let rec radiantBloom =
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Soulfire Spark" <?> "Spellfire Spark", "Casting spells emits aura healing allies/damaging enemies for 1d6.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Radiance in Bloom" <?> "Whirlflame", "3m AOE heal/radiant damage.") ]
-            5<classLvl>, [ Complex("Soulfire Ignition" <?> "Spellfire Ignition", "Soulfire aura damage/heal increased to 1d12.") ]
-            7<classLvl>, [ Complex("Immeasurable Light" <?> "Crown of Fire", "Aura grants Divine Favour; Radiant damage inflicts Radiating Orb.") ]
-            9<classLvl>, [ Complex("Soulfire Inferno" <?> "Spellfire Hierophant", "Aura triggers at both start and end of turns.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Radiance Unhinged" <?> "Maelstrom of Fire", "9m area heal/damage.") ]
+            1<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Spark" <?> "Spellfire Spark", "Casting spells emits aura healing allies/damaging enemies for 1d6.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_ConsecratedFlesh" <!!> "Radiance in Bloom" <?> "Whirlflame", "3m AOE heal/radiant damage.") ]
+            5<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Ignition" <?> "Spellfire Ignition", "Soulfire aura damage/heal increased to 1d12.") ]
+            7<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Immeasurable Light" <?> "Crown of Fire", "Aura grants Divine Favour; Radiant damage inflicts Radiating Orb.") ]
+            9<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Inferno" <?> "Spellfire Hierophant", "Aura triggers at both start and end of turns.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Spell_2e_ElementalCounter" <!!> "Radiance Unhinged" <?> "Maelstrom of Fire", "9m area heal/damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1385,15 +1385,15 @@ let rec shadeWalker =
         CasterType = FullCaster Innate
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Darkness", "Cast 3-turn Darkness without slot.")
-                Complex ("Devil’s Sight", "You can see normally in darkness, both magical and non-magical, to a distance of 18m.")
-                Power(BonusAction, AtWill, "Hound of Ill Omen", "Summon scaling companion.")
+                Power(BonusAction, AtWill, "Spell_Evocation_Darkness" <!!> "Darkness", "Cast 3-turn Darkness without slot.")
+                Complex("PassiveFeature_DevilsSight" <!!> "Devil’s Sight", "You can see normally in darkness, both magical and non-magical, to a distance of 18m.")
+                Power(BonusAction, AtWill, "Spell_HoundOfIllOmen" <!!> "Hound of Ill Omen", "Summon scaling companion.")
             ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Soul Siphon", "Kill summon to deal AOE Necrotic damage and heal.") ]
-            5<classLvl>, [ Complex("Dogs of War", "Can summon two Hounds at once.") ]
-            7<classLvl>, [ Power(FreeAction, AtWill, "Umbral Warp", "Warp to Heavily Obscured space.") ]
-            9<classLvl>, [ Complex("Dogs of Conquest", "Can summon three Hounds at once.") ]
-            11<classLvl>, [ Complex("Pitch Black", "Advantage on hits while Heavily Obscured.") ]
+            5<classLvl>, [ Complex("PassiveFeature_StrenghtOfTheGrave" <!!> "Dogs of War", "Can summon two Hounds at once.") ]
+            7<classLvl>, [ Power(FreeAction, AtWill, "Action_Monk_ShadowStep" <!!> "Umbral Warp", "Warp to Heavily Obscured space.") ]
+            9<classLvl>, [ Complex("PassiveFeature_StrenghtOfTheGrave" <!!> "Dogs of Conquest", "Can summon three Hounds at once.") ]
+            11<classLvl>, [ Complex("PassiveFeature_StrenghtOfTheGrave" <!!> "Pitch Black", "Advantage on hits while Heavily Obscured.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1407,12 +1407,12 @@ let rec frenziedTundra =
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Winter is Coming", "Deal additional Cold damage = Sorcerer level.") ]
-            3<classLvl>, [ Complex("Frigid Madness", "Potential Madness on hit.") ]
-            5<classLvl>, [ Complex("Winter Harvest", "Killing Maddened enemies restores Sorcery Points.") ]
-            7<classLvl>, [ Complex("Frenzied Blizzard", "Maddened enemies take 1d12 Cold damage per round.") ]
-            9<classLvl>, [ Complex("Murderous Delirium", "Maddened enemies deal maximum damage to allies.") ]
-            11<classLvl>, [ Complex("Frozen Soul", "Maddened enemies are high priority targets for their allies.") ]
+            1<classLvl>, [ Complex("Spell_2e_ImpeccableFlow" <!!> "Winter is Coming", "Deal additional Cold damage = Sorcerer level.") ]
+            3<classLvl>, [ Complex("Spell_2e_ImpeccableFlow" <!!> "Frigid Madness", "Potential Madness on hit.") ]
+            5<classLvl>, [ Complex("Spell_2e_ImpeccableFlow" <!!> "Winter Harvest", "Killing Maddened enemies restores Sorcery Points.") ]
+            7<classLvl>, [ Complex("Spell_2e_ImpeccableFlow" <!!> "Frenzied Blizzard", "Maddened enemies take 1d12 Cold damage per round.") ]
+            9<classLvl>, [ Complex("Spell_2e_ImpeccableFlow" <!!> "Murderous Delirium", "Maddened enemies deal maximum damage to allies.") ]
+            11<classLvl>, [ Complex("Spell_2e_ImpeccableFlow" <!!> "Frozen Soul", "Maddened enemies are high priority targets for their allies.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1428,12 +1428,12 @@ let rec volcanist =
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Magmatic", "Ignore Fire Resistance; generate Heat stacks on hit/turn.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Pyrrhic Retort" <?> "Pyric Retort", "Counter with Pyric Flare at cost of Heat.") ]
-            5<classLvl>, [ Complex("Singe Song", $"{TOGGLEABLE}: Fire Immunity; Fire damage shoots additional flares.") ]
-            7<classLvl>, [ Power(Action, OncePerCombat, "Volcanic Eruption", "Create lava pools inflicting Melting.") ]
-            9<classLvl>, [ Complex("Melting Pot", "Pyric Flares now inflict Melting.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Pyrebound", "Expend 10 Heat for Meteoric Burst (30d6).") ]
+            1<classLvl>, [ Complex("Skill_Druid_FlamingSphere_Move" <!!> "Magmatic", "Ignore Fire Resistance; generate Heat stacks on hit/turn.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Skill_Druid_FlamingSphere_Move" <!!> "Pyrrhic Retort" <?> "Pyric Retort", "Counter with Pyric Flare at cost of Heat.") ]
+            5<classLvl>, [ Complex("Skill_Druid_FlamingSphere_Move" <!!> "Singe Song", $"{TOGGLEABLE}: Fire Immunity; Fire damage shoots additional flares.") ]
+            7<classLvl>, [ Power(Action, OncePerCombat, "Skill_Druid_FlamingSphere_Move" <!!> "Volcanic Eruption", "Create lava pools inflicting Melting.") ]
+            9<classLvl>, [ Complex("Skill_Druid_FlamingSphere_Move" <!!> "Melting Pot", "Pyric Flares now inflict Melting.") ]
+            11<classLvl>, [ Power(Action, AtWill, "Skill_Druid_FlamingSphere_Move" <!!> "Pyrebound", "Expend 10 Heat for Meteoric Burst (30d6).") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1447,14 +1447,14 @@ let rec wildMagic =
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Wild Magic", "Potential positive surge on Spell cast.") ]
-            3<classLvl>, [ Complex("Tides of Chaos", $"{TOGGLEABLE}: Replace personal surges with enemy negative surges.") ]
+            1<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Wild Magic", "Potential positive surge on Spell cast.") ]
+            3<classLvl>, [ Complex("Action_BolsteringMagic_Boost" <!!> "Tides of Chaos", $"{TOGGLEABLE}: Replace personal surges with enemy negative surges.") ]
             5<classLvl>, [
-                Power(Reaction, AtWill, "Bend Luck", "Bonus (+1d4) to ally or Malus (-1d4) to enemy.")
+                Power(Reaction, AtWill, "Action_BolsteringMagic_Boost" <!!> "Bend Luck", "Bonus (+1d4) to ally or Malus (-1d4) to enemy.")
             ]
-            7<classLvl>, [ Complex("Wild Creation", "Targeting others with Sorcery/Spell Channeling triggers Wild Magic.") ]
+            7<classLvl>, [ Complex("Action_BolsteringMagic_Boost" <!!> "Wild Creation", "Targeting others with Sorcery/Spell Channeling triggers Wild Magic.") ]
             9<classLvl>, [ Complex("Wild Instinct", "Killing blows increase surge chance.") ]
-            11<classLvl>, [ Power(Reaction, AtWill, "Controlled Chaos", "Enemy spell triggers positive surge in you.") ]
+            11<classLvl>, [ Power(Reaction, AtWill, "Action_BolsteringMagic_Boost" <!!> "Controlled Chaos", "Enemy spell triggers positive surge in you.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1472,13 +1472,13 @@ let rec pactOfTheBlade =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(BonusAction, AtWill, "Pact Weapon", "Weapon uses Charisma.")
-                Complex("Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
+                Complex("PassiveFeature_HexWarrior" <!!> "Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
             ]
-            3<classLvl>, [ Complex("Dark One’s Blessing", "Kills grant Temporary HP = Charisma + Level.") ]
-            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
-            7<classLvl>, [ Complex("Hellblade Resonation", "Ignore Fire Resistance; Hellfire deals AOE Fire damage.") ]
-            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
-            11<classLvl>, [ Complex("Eldritch Inferno", "Erupt for 6d12 Fire damage every 3 turns.") ]
+            3<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Dark One’s Blessing", "Kills grant Temporary HP = Charisma + Level.") ]
+            5<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            7<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Hellblade Resonation", "Ignore Fire Resistance; Hellfire deals AOE Fire damage.") ]
+            9<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            11<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Eldritch Inferno", "Erupt for 6d12 Fire damage every 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1492,11 +1492,11 @@ let rec pactOfTheChain =
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Chained Companion", "Summon scaling fiendish familiar.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Spell_Conjuration_ConjureMinorElementals_IceMephit" <!!> "Chained Companion", "Summon scaling fiendish familiar.") ]
             3<classLvl>, [ Complex("Fiendish Growth I", "Companions gain an at-will spell.") ]
-            5<classLvl>, [ Complex("Broken Chains", "Companions gain Extra Attack and Inertia.") ]
+            5<classLvl>, [ Complex("Spell_Conjuration_ConjureMinorElementals_IceMephit" <!!> "Broken Chains", "Companions gain Extra Attack and Inertia.") ]
             7<classLvl>, [ Complex("Fiendish Growth II", "Companions gain second at-will spell.") ]
-            9<classLvl>, [ Complex("Fiendish Frenzy", "Companions gain Improved Extra Attack; summon Greater Companions.") ]
+            9<classLvl>, [ Complex("Spell_Conjuration_ConjureMinorElementals_IceMephit" <!!> "Fiendish Frenzy", "Companions gain Improved Extra Attack; summon Greater Companions.") ]
             11<classLvl>, [ Complex("Fiendish Growth III", "Companions reach ultimate power with third spell.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1513,13 +1513,13 @@ let rec pactOfPenumbra =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Penumbral Oscillation", "Automatically shift between Light (heal) and Darkness (Necrotic damage) each turn.")
-                Complex ("Necrotic/Radiant Eldritch Blast", "Cast Necrotic Eldritch Blast during Penumbral Darkness, or Radiant Eldritch Blast during Penumbral Light.")
+                Complex("Necrotic/Radiant Eldritch Blast", "Cast Necrotic Eldritch Blast during Penumbral Darkness, or Radiant Eldritch Blast during Penumbral Light.")
             ]
-            3<classLvl>, [ Complex("Dawnbreak of the Sunsetter", "Darkness raises Spectres; Light heals allies.") ]
-            5<classLvl>, [ Complex("Penumbral Guidance", "Eldritch Blast chains to a second target.") ]
-            7<classLvl>, [ Complex("Penumbral Accord", "Turn start: Darkness (Invisibility), Light (Globe of Resistance).") ]
-            9<classLvl>, [ Complex("Splintering Light", "Eldritch Blast chains to two additional targets.") ]
-            11<classLvl>, [ Complex("Forward Unto Dawn", "Infuse EB with slots to create Eldritch Bombs.") ]
+            3<classLvl>, [ Complex("PassiveFeature_WardingFlare" <!!> "Dawnbreak of the Sunsetter", "Darkness raises Spectres; Light heals allies.") ]
+            5<classLvl>, [ Complex("PassiveFeature_WardingFlare" <!!> "Penumbral Guidance", "Eldritch Blast chains to a second target.") ]
+            7<classLvl>, [ Complex("PassiveFeature_WardingFlare" <!!> "Penumbral Accord", "Turn start: Darkness (Invisibility), Light (Globe of Resistance).") ]
+            9<classLvl>, [ Complex("PassiveFeature_WardingFlare" <!!> "Splintering Light", "Eldritch Blast chains to two additional targets.") ]
+            11<classLvl>, [ Complex("PassiveFeature_WardingFlare" <!!> "Forward Unto Dawn", "Infuse EB with slots to create Eldritch Bombs.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1534,14 +1534,14 @@ let rec pactOfSeverance =
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
             1<classLvl>, [
-                Complex("Going Ghost", "Deal extra Cold damage = Warlock level.")
-                Complex ("Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force.")
+                Complex("Spell_2e_HydraulicPush" <!!> "Going Ghost", "Deal extra Cold damage = Warlock level.")
+                Complex("Spell_Evocation_SeveringEldritchBlast" <!!> "Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force.")
             ]
-            3<classLvl>, [ Complex("Curse of the Spectre", "Cold damage applies Encrusted with Frost.") ]
-            5<classLvl>, [ Complex("Severed Resolve", "Using Hematic Invocation restores Action.") ]
-            7<classLvl>, [ Complex("Bitter Cold", "Cold damage applies Frigidity.") ]
-            9<classLvl>, [ Complex("Absolute Zero", "Hematic Invocation maximizes next damage instance.") ]
-            11<classLvl>, [ Complex("Spectral Rebirth", "Survive lethal damage once with 1 HP.") ]
+            3<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Curse of the Spectre", "Cold damage applies Encrusted with Frost.") ]
+            5<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Severed Resolve", "Using Hematic Invocation restores Action.") ]
+            7<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Bitter Cold", "Cold damage applies Frigidity.") ]
+            9<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Absolute Zero", "Hematic Invocation maximizes next damage instance.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 HP.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1556,11 +1556,11 @@ let rec pactOfTheTome =
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Improved Eldritch Blast", $"{TOGGLEABLE}: EB adds Charisma; can be cast as Bonus Action.") ]
-            3<classLvl>, [ Complex("Projected Inertia", "Eldritch Blast applies Eldritch Inertia.") ]
-            5<classLvl>, [ Complex("Eldritch Overflow", $"{TOGGLEABLE}: Divide EB into two separate beams.") ]
-            7<classLvl>, [ Complex("Mystic Precision", "EB Critical Hit threshold reduced by 2.") ]
-            9<classLvl>, [ Complex("Eldritch Surge", $"{TOGGLEABLE}: Divide EB into three separate beams. (Replaces Overflow)") ]
-            11<classLvl>, [ Complex("Abyssal Desolation", "EB Critical Hits roll two additional damage dice.") ]
+            3<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Projected Inertia", "Eldritch Blast applies Eldritch Inertia.") ]
+            5<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Eldritch Overflow", $"{TOGGLEABLE}: Divide EB into two separate beams.") ]
+            7<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Mystic Precision", "EB Critical Hit threshold reduced by 2.") ]
+            9<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Eldritch Surge", $"{TOGGLEABLE}: Divide EB into three separate beams. (Replaces Overflow)") ]
+            11<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Abyssal Desolation", "EB Critical Hits roll two additional damage dice.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1574,12 +1574,12 @@ let rec pactOfThePrimordial =
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Pact of the Primordial", "33% chance to shift to Demonic Visage (Advantage, free spells) each turn.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Advocatus Diaboli", "Absorb corpses to remove Hematic Invocation stacks.") ]
-            5<classLvl>, [ Complex("Profane Metamorphosis", $"{TOGGLEABLE}: Use Collected Souls in place of health for invocations.") ]
-            7<classLvl>, [ Complex("Hematic Ascent", "Target enemies with Invocations (6d6 Necrotic); kills grant Souls.") ]
+            1<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Pact of the Primordial", "33% chance to shift to Demonic Visage (Advantage, free spells) each turn.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_AgonizingDespair" <!!> "Advocatus Diaboli", "Absorb corpses to remove Hematic Invocation stacks.") ]
+            5<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Profane Metamorphosis", $"{TOGGLEABLE}: Use Collected Souls in place of health for invocations.") ]
+            7<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Hematic Ascent", "Target enemies with Invocations (6d6 Necrotic); kills grant Souls.") ]
             9<classLvl>, [ Complex("Sacrificial Surrogate", "Killing while Demonic extends it and grants physical buffs.") ]
-            11<classLvl>, [ Complex("Demonic Apotheosis", "Shape into a Primordial Demon using 7 Souls.") ]
+            11<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Demonic Apotheosis", "Shape into a Primordial Demon using 7 Souls.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1597,16 +1597,16 @@ let rec arcblade =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage.") ]
+            1<classLvl>, [ Power(FreeAction, AtWill, "Spell_Abjuration_BanishingSmite_Container" <!!> "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage.") ]
             3<classLvl>, [
-                Power(BonusAction, AtWill, "Steel-Wind Storm", "Bonus AC and melee Advantage.")
+                Power(BonusAction, AtWill, "Spell_HarmonyOfFireAndWater" <!!> "Steel-Wind Storm", "Bonus AC and melee Advantage.")
                 Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip.")
-                Power(Action, AtWill, "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
+                Power(Action, AtWill, "Spell_Conjuration_SteelWindStrike" <!!> "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
             ]
-            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
-            7<classLvl>, [ Complex("Winds of the Arcblade" <?> "Aegis of Assault", "Killing blows grant a free Steel-Wind Strike.") ]
-            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
-            11<classLvl>, [ Complex("A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]
+            5<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            7<classLvl>, [ Complex("PassiveFeature_PactOfTheBlade" <!!> "Winds of the Arcblade" <?> "Aegis of Assault", "Killing blows grant a free Steel-Wind Strike.") ]
+            9<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            11<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1622,12 +1622,12 @@ let rec arcaneWarden =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Arcane Ward", "Maintain damage-absorbing ward; first spell cast adds charges.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Projected Ward", "Protect allies with your active Ward.") ]
-            5<classLvl>, [ Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
-            7<classLvl>, [ Complex("Aggressive Warding", "Dealing damage adds a Ward stack once per turn.") ]
-            9<classLvl>, [ Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
-            11<classLvl>, [ Complex("Retaliatory Ward", "Melee damage against you reflects Force damage.") ]
+            1<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Arcane Ward", "Maintain damage-absorbing ward; first spell cast adds charges.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_ArcaneWard" <!!> "Projected Ward", "Protect allies with your active Ward.") ]
+            5<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            7<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Aggressive Warding", "Dealing damage adds a Ward stack once per turn.") ]
+            9<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            11<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Retaliatory Ward", "Melee damage against you reflects Force damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1643,12 +1643,12 @@ let rec evoker =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Sculpt Spells", "Allies take no damage from your damaging spells.") ]
-            3<classLvl>, [ Complex("Eruptive Casting", "Advantage on spell Attack Rolls.") ]
-            5<classLvl>, [ Complex("Spellslinger’s Sublimity", "Casting spells restores an Arcane Recovery charge.") ]
-            7<classLvl>, [ Complex("Evoke the Weave", "Add Intelligence to spell damage rolls.") ]
-            9<classLvl>, [ Complex("Explosive Understanding", "Damaging with a spell deals bonus Force damage in 3m.") ]
-            11<classLvl>, [ Complex("Scholar’s Focus", "First spell each turn costs no Action/Bonus Action.") ]
+            1<classLvl>, [ Complex("PassiveFeature_SculptSpells" <!!> "Sculpt Spells", "Allies take no damage from your damaging spells.") ]
+            3<classLvl>, [ Complex("PassiveFeature_SculptSpells" <!!> "Eruptive Casting", "Advantage on spell Attack Rolls.") ]
+            5<classLvl>, [ Complex("PassiveFeature_SculptSpells" <!!> "Spellslinger’s Sublimity", "Casting spells restores an Arcane Recovery charge.") ]
+            7<classLvl>, [ Complex("PassiveFeature_SculptSpells" <!!> "Evoke the Weave", "Add Intelligence to spell damage rolls.") ]
+            9<classLvl>, [ Complex("PassiveFeature_SculptSpells" <!!> "Explosive Understanding", "Damaging with a spell deals bonus Force damage in 3m.") ]
+            11<classLvl>, [ Complex("PassiveFeature_SculptSpells" <!!> "Scholar’s Focus", "First spell each turn costs no Action/Bonus Action.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1664,12 +1664,12 @@ let rec luminalConfluence =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Elemental Concierge" <?> "Yrix's Sieve", "Elemental hits generate Stains; Stains empower next spell effects.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Luminal Conversion" <?> "Scribani's Distillation", "Generate choice Stain or teleport/swap places.") ]
-            5<classLvl>, [ Complex("Stained Imprint" <?> "Heroicus's Containment", "50% chance not to consume Stains on use.") ]
-            7<classLvl>, [ Power(Action, AtWill, "Luminal Mayhem" <?> "Darius's Channeling", "Consume all stains for high single-target damage.") ]
-            9<classLvl>, [ Complex("Weavewalker’s Expedition" <?> "Carvajal's Variation", "Generating a stain has chance to grant a second random one.") ]
-            11<classLvl>, [ Power(Action, AtWill, "Luminal Genesis" <?> "Arrias's Genesis", "Consume all stains for high AOE damage.") ]
+            1<classLvl>, [ Complex("ElementalStain" <!!> "Elemental Concierge" <?> "Yrix's Sieve", "Elemental hits generate Stains; Stains empower next spell effects.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "ElementalStain" <!!> "Luminal Conversion" <?> "Scribani's Distillation", "Generate choice Stain or teleport/swap places.") ]
+            5<classLvl>, [ Complex("ElementalStain" <!!> "Stained Imprint" <?> "Heroicus's Containment", "50% chance not to consume Stains on use.") ]
+            7<classLvl>, [ Power(Action, AtWill, "ElementalStain" <!!> "Luminal Mayhem" <?> "Darius's Channeling", "Consume all stains for high single-target damage.") ]
+            9<classLvl>, [ Complex("ElementalStain" <!!> "Weavewalker’s Expedition" <?> "Carvajal's Variation", "Generating a stain has chance to grant a second random one.") ]
+            11<classLvl>, [ Power(Action, AtWill, "ElementalStain" <!!> "Luminal Genesis" <?> "Arrias's Genesis", "Consume all stains for high AOE damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1685,12 +1685,12 @@ let rec necromancer =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Necromantic Apprentice", "Direct damage applies Crawling Gnaw; death raises as Newborn Zombie.") ]
-            3<classLvl>, [ Complex("Lifedrinker", "Spell damage heals you for half damage dealt.") ]
-            5<classLvl>, [ Complex("Preemptive Atrocity", "Start combat by summoning a Death Shepherd; gain Bind Undead.") ]
-            7<classLvl>, [ Complex("Raise Hell", "Start combat by raising all suitable nearby corpses.") ]
-            9<classLvl>, [ Complex("Apostle of the Risen Dead", "Nearby allied Undead gain Intelligence to Attack/Damage.") ]
-            11<classLvl>, [ Complex("Dominion Over Death", "Summoned Undead are immune to Decay.") ]
+            1<classLvl>, [ Complex("PassiveFeature_UndeadThralls_FreeSpell" <!!> "Necromantic Apprentice", "Direct damage applies Crawling Gnaw; death raises as Newborn Zombie.") ]
+            3<classLvl>, [ Complex("PassiveFeature_UndeadThralls_FreeSpell" <!!> "Lifedrinker", "Spell damage heals you for half damage dealt.") ]
+            5<classLvl>, [ Complex("PassiveFeature_UndeadThralls_FreeSpell" <!!> "Preemptive Atrocity", "Start combat by summoning a Death Shepherd; gain Bind Undead.") ]
+            7<classLvl>, [ Complex("PassiveFeature_UndeadThralls_FreeSpell" <!!> "Raise Hell", "Start combat by raising all suitable nearby corpses.") ]
+            9<classLvl>, [ Complex("PassiveFeature_UndeadThralls_FreeSpell" <!!> "Apostle of the Risen Dead", "Nearby allied Undead gain Intelligence to Attack/Damage.") ]
+            11<classLvl>, [ Complex("PassiveFeature_UndeadThralls_FreeSpell" <!!> "Dominion Over Death", "Summoned Undead are immune to Decay.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1706,12 +1706,12 @@ let rec elementalist =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Primal Bond" <?> "Calling the Janni", "Summon scaling Fire, Air, Earth, or Water Elemental.") ]
-            3<classLvl>, [ Complex("Rend Elements", "Ignore Resistances/Immunities matching your summoned Elemental.") ]
-            5<classLvl>, [ Complex("Channeled Infusion" <?> "Janni's Favour", "Deal extra 1d4 damage matching your summoned Elemental.") ]
-            7<classLvl>, [ Complex("Primordial Ward" <?> "Janni's Protection", "Gain Resistance matching your summoned Elemental.") ]
-            9<classLvl>, [ Complex("Parallel Echo" <?> "Janni's Revenge", "Matching damage type reflection as Force damage.") ]
-            11<classLvl>, [ Complex("Primal Convergence" <?> "Seal of Jafar the Incomparable", "Can summon all four Elementals at once.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_ResistEnergy" <!!> "Primal Bond" <?> "Calling the Janni", "Summon scaling Fire, Air, Earth, or Water Elemental.") ]
+            3<classLvl>, [ Complex("Spell_2e_ResistEnergy" <!!> "Rend Elements", "Ignore Resistances/Immunities matching your summoned Elemental.") ]
+            5<classLvl>, [ Complex("Spell_2e_ResistEnergy" <!!> "Channeled Infusion" <?> "Janni's Favour", "Deal extra 1d4 damage matching your summoned Elemental.") ]
+            7<classLvl>, [ Complex("Spell_2e_ResistEnergy" <!!> "Primordial Ward" <?> "Janni's Protection", "Gain Resistance matching your summoned Elemental.") ]
+            9<classLvl>, [ Complex("Spell_2e_ResistEnergy" <!!> "Parallel Echo" <?> "Janni's Revenge", "Matching damage type reflection as Force damage.") ]
+            11<classLvl>, [ Complex("Spell_2e_ResistEnergy" <!!> "Primal Convergence" <?> "Seal of Jafar the Incomparable", "Can summon all four Elementals at once.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
