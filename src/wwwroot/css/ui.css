@@ -1069,10 +1069,13 @@ html,body{
 }
  
 .lvlbox-h{
-  display:flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 2px;
   align-items:baseline;
   justify-content:space-between;
-  gap: 12px;
+    
   margin-bottom: 10px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--gold3);
@@ -1092,10 +1095,16 @@ html,body{
  
   & .col.right {
     text-align: right;
+    overflow:visible;
+  }
+  
+  & .lvlbox-subclass {
+    grid-column: 1 / -1;
+    text-align: right;
   }
 }
  
-.lvlbox-body,
+.lvlbois grx-body,
 .lvbox-body{
   display:flex;
   flex-direction:column;

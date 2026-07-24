@@ -315,19 +315,12 @@ let levelBoxes (model: Model) =
                     div { 
                         cl "col left"
                         div { cl "lvlbox-lvl"; $"Level {lvl0 + 1}"}
-                        cond lr' <| function
-                        | None -> empty()
-                        | Some lr -> 
-                            cond (UMX.untag lr.ClassLevel <> lvl0 + 1) <| function
-                            | false -> empty()
-                            | true -> 
-                                div { cl "lvlbox-clLvl"; $"Class level {lr.ClassLevel}"}
                     }
                     div { 
                         cl "col right"
-                        div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> (classBySubclassId lr.SubclassId).Name }
-                        div { cl "lvlbox-subclass"; match lr' with None -> "—" | Some lr -> (subclassById lr.SubclassId).Name.Display model.UseLoreNames }
+                        div { cl "lvlbox-class"; match lr' with None -> "—" | Some lr -> $"{(classBySubclassId lr.SubclassId).Name} {lr.ClassLevel}" }
                     }
+                    div { cl "lvlbox-subclass"; match lr' with None -> "—" | Some lr -> (subclassById lr.SubclassId).Name.Display model.UseLoreNames }
                 }
                 div { 
                     cl "lvbox-body"
