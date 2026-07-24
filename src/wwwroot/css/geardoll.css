@@ -35,14 +35,7 @@ body {
         "ringl feet ringr " 
         "melee1 . ranged1"
         "melee2 . ranged2";
-    gap: var(--gap);
-    padding: 28px;
-    background: var(--panel);
-    border: 2px solid #6b5432;
-    border-radius: 14px;
-    box-shadow:
-        0 0 0 3px rgba(255,220,140,.05),
-        0 12px 32px rgba(0,0,0,.45);
+    gap: var(--gap);        
     width:fit-content;
 }
 
