@@ -41,13 +41,17 @@
     *   Prefer using `Power`and `Buff` types if possible, then `Complex` whenever there is a valid name. Only use `Simple` if it is impossible to write a `Complex` power.
     *   Make descriptions shorter and concise where possible without losing substantial information. For example, if a description reads "Your maximum Hit Points increases by 4 for each level you have gained.", you can replace it with "+4 HP per level".    
     *   **Do** update entities' names to be in line with the documentation.
-    *   All strings preceded by '<?>' are LORE STRINGS that you must never touch.
+    *   **Do not** change the value of entities `Id` or `TypeId` property.
 
-4.  **Verification**:
+4.  **Specific rules**:
+    *   All strings preceded by '<?>' are LORE STRINGS that you must never touch.
+    *   Feats and passives marked in the documents with "*" also affect summons. To represent that, add "yield! alsoAffectsSummons <|" before each passive they grant. (See 'divineSense' in 'classPassives.fs' for reference.)
+
+5.  **Verification**:
     *   After making changes to a file, run `dotnet build src/Bg3HomebrewCCreator.Client.fsproj` to ensure that the strict typing is respected and there are no compile-time errors.
     
-5.  **PR Management**:
+6.  **PR Management**:
     *   **PR Summary**: The PR description (or the new commit message if updating an existing PR) must include a **plain-language summary** of the changes, specifically listing the names of the entities that were added, updated, or removed.
     *   **Human Guidance**: If you need clarification or human guidance on any task, do **NOT** ask questions in interactive chat. Instead, make your best effort to implement the changes, submit the code by opening a Pull Request (PR) from a new branch, and explain your questions or choices in the PR description or comments so that the human reviewer can provide feedback directly on the PR.
-    *   **No-Change PR**: If you did not find anything in need of update and thus your PR contains no changes, prefix the title of your PR with "(No Changes)
+    *   **No-Change scenario**: If you did not find anything in need of update and thus your PR contains no changes, abort and do not create any PR.
 
