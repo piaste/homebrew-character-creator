@@ -27,6 +27,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Delete unreferenced PNGs
+        shell: bash
+        env:
+          SEARCH_DIR: src
+        run: |
+          set -euo pipefail
+
+          if [[ ! -d "$SEARCH_DIR" ]]; then
+            echo "::error::Directory '$SEARCH_DIR' does not exist."
+            exit 1
+          fi
+
+          shopt -s nullglob
+
+          for file in src/wwwroot/assets/icons/unsorted_icons/*.png; do
+            [[ -f "$file" ]] || continue
+
+            # Remove only the last extension
+            base="${file%.*}"
+
+            if ! grep -RqiF -- "$base" "$SEARCH_DIR"; then
+              echo "Deleting: $file"
+              rm -- "$file"
+            else
+              echo "Keeping:  $file"
+            fi
+          done
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
