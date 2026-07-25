@@ -14,7 +14,7 @@ let rec artificer = {
 
         FixedAbilities = Map [
             1<classLvl>, [
-                Resource (3, "Passive_ArcaneFirearm", "Ammunition", OncePerShortRest)
+                Resource (3, "Passive_ArcaneFirearm" <!!> "Ammunition", OncePerShortRest)
                 Power(BonusAction, AtWill, "Action_Reload" <!!> "Reload", "Reload your Ammunition.")
             ]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
@@ -33,7 +33,7 @@ let rec barbarian = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Complex ("3 Rage Charges", "Barbarians have 3 rage charges that are replenished on a short rest or long rest. Rage charges are primarily used for entering a rage.")]
+            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Resource (3, "Action_Barbarian_Rage" <!!> "Rage Charge", OncePerShortRest)]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
         ]
@@ -52,7 +52,7 @@ let rec bard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Action_Bard_GrantBardicInspiration", "Bardic Inspiration", OncePerShortRest); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Complex ("Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
+            1<classLvl>, [Resource (3, "Action_Bard_GrantBardicInspiration" <!!> "Bardic Inspiration", OncePerShortRest); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Power (Action, OncePerLongRest, "Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
             5<classLvl>, [Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
             9<classLvl>, [Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]
@@ -69,7 +69,7 @@ let rec cleric = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Channel Divinity Charges", "Clerics have 3 Channel Divinity charges that are replenished on a short rest or long rest."); Complex ("Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Complex ("Divine Miracles", "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
+            1<classLvl>, [Resource (3, "Channel Divinity", OncePerShortRest); Power (Action, AtWill, "Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Power (FreeAction, OncePerTurn, "DivineIntervation" <!!> "Divine Miracles", "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
@@ -86,7 +86,7 @@ let rec druid = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Wild Shape Charges", "Druids have 3 Wild Shape charges that are replenished on a short rest or long rest."); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Skill_Druid_WildShape" <!!> "Wild Shape Charges", OncePerShortRest); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
@@ -101,13 +101,12 @@ let rec fighter = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{cl} Superiority Dice"
-            Simple $"{if cl >= 11<classLvl> then 6 elif cl >= 9<classLvl> then 5 elif cl >= 7<classLvl> then 4 elif cl >= 5<classLvl> then 3 elif cl >= 3<classLvl> then 2 else 1}d6 Superiority Die damage"
-            Complex ("Second Wind", $"Every 3 rounds of battle, you restore {cl/2}d12 fighter level in Hit Points and recover a Superiority Die at the end of your turn.")
+            Resource (UMX.untag cl,  $"Superiority Dice ({cl/2<classLvl> + 1}d6 each)", OncePerShortRest)            
+            Complex ("Second Wind", $"Every 3 rounds of battle, you restore {cl/2<classLvl> + 1}d12 fighter level in Hit Points and recover a Superiority Die at the end of your turn.")
         ])
 
         FixedAbilities = Map[            
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Action Surge", "Gain an additional Action and restore 3 superiority Dice once per Short Rest.")]
+            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Power (FreeAction, OncePerShortRest, "Action Surge", "Gain an additional Action and restore 3 superiority Dice once per Short Rest.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Indomitable", "Whenever you fail a Saving Throw, you can roll again, using the new result instead.")]
         ]
         CustomPicks = Map [
@@ -129,7 +128,7 @@ let rec monk = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Martial Arts", "Attacks with Monk Weapons (weapons without the two-handed or heavy property) and unarmed attacks deal 1d4 Bludgeoning damage, unless their normal damage is higher. These attacks may scale with either your Strength or Dexterity, whichever is higher. Additionally, you are able to make an additional unarmed strike as a Bonus Action."); Complex ("Flurry of Blows", "Punch twice in rapid succession, making two unarmed strikes against your target as a Bonus Action.")]
+            1<classLvl>, [Complex ("Martial Arts", "Attacks with Monk Weapons (weapons without the two-handed or heavy property) and unarmed attacks deal 1d4 Bludgeoning damage, unless their normal damage is higher. These attacks may scale with either your Strength or Dexterity, whichever is higher. Additionally, you are able to make an additional unarmed strike as a Bonus Action."); Power (BonusAction, AtWill, "Flurry of Blows", "Punch twice in rapid succession, making two unarmed strikes against your target as a Bonus Action.")]
             5<classLvl>, [Complex ("Martial Flux", "Gain an additional Bonus Action.")]
             9<classLvl>, [Complex ("Martial Mastery", "Gain an additional Action.")]
         ]
@@ -144,11 +143,12 @@ let rec paladin = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{int (cl/2<classLvl>) + 1}d12 Smite Damage"
+            Simple $"{cl/2<classLvl> + 1}d12 Smite Damage"
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Channel Oath Charges", "Paladins have 3 Channel Oath charges that are replenished on a short rest or long rest."); Complex ("3 Crusader's Smite Charges", "Paladins have 3 Crusader's Smite charges that are replenished on a short rest or long rest."); Complex ("Smites", "All Smites are melee or ranged weapon attacks that add an additional +1d12 damage determined by the Smite used.")]
+            1<classLvl>, [Resource (3, "Channel Oath", OncePerShortRest); Resource (3, "Crusader's Smite", OncePerShortRest)]
+            // the "smite" feature isn't encoded because it is represented by Special Picks
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Smitten", "When making an Attack Roll with one of your Smites, you make your roll with a +20 bonus.")]
         ]
@@ -168,7 +168,9 @@ let rec ranger = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Natural Focus Charges", "Rangers have 3 Natural Focus charges that are replenished on a short rest or long rest."); Complex ("Conjure Rangers Companion", "Summon one of five beasts to a target location within 18m. Ranger Companions have a duration of permanent and grow in power alongside Ranger class levels."); Complex ("Frontier Ballistics", "Learn special arrows to use with your ranged weapons by consuming Natural Focus."); Complex ("Natural Movement", "Gain the ability to Dash, Disengage, and Hide as a free action by consuming Natural Focus charges. This effect can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Natural Focus", OncePerShortRest); Power (BonusAction, AtWill, "Conjure Rangers Companion", "Summon one of five beasts to a target location within 18m. Ranger Companions have a duration of permanent and grow in power alongside Ranger class levels."); Complex ("Natural Movement", "Gain the ability to Dash, Disengage, and Hide as a free action by consuming Natural Focus charges. This effect can be toggled at any time.")]
+            // the "frontier ballistics" feature isn't encoded because it is represented by Special Picks
+
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Horde Breaker", "Make a basic attack with your main hand weapon. All creatures within 3m of your target receive the condition Horde Breaker that lasts 1 turn. You receive a temporary action, Horde Breaker Follow-Up.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Eagle Eyed", "When making an attack roll with advantage your damage roll will also roll with advantage.")]
         ]
@@ -186,11 +188,11 @@ let rec rogue = {
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{int (cl/2<classLvl>) + 1}d6 Sneak Attack Damage"
+            Simple $"{cl/2<classLvl> + 1}d6 Sneak Attack Damage"
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Luck Points", "Rogues have 3 Luck Points that are replenished on a short rest or long rest."); Complex ("Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Luck Points", OncePerShortRest); Power (FreeAction, AtWill, "Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
         ]
@@ -205,11 +207,12 @@ let rec sorcerer = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Resource(UMX.untag cl, "Sorcery Points", OncePerShortRest)
+            Resource(UMX.untag cl, "statIcons_WildMagic_SorceryPoints" <!!> "Sorcery Points", OncePerShortRest)
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Sorcery Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2."); Complex ("Spell Channeling", "Generate a single Spell Slot by consuming a number of Sorcery Points equal to the level of the Spell Slot multiplied by 2."); Complex ("Creationary", "When a Spell is cast within 18m of you, you may grant yourself a stack of Sorcerous Overflow. Upon reaching three stacks, gain a single Sorcery Point."); Complex ("Metamagic", "Twist your spells to suit your needs by expending Sorcery Points.")]
+            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "When a Spell is cast within 18m of you, you may grant yourself a stack of Sorcerous Overflow. Upon reaching three stacks, gain a single Sorcery Point.")
+            ]
             5<classLvl>, [Complex ("Morbid Creation", "While in combat, you gain one stack of Sorcerous Overflow per turn.")]
             9<classLvl>, [Complex ("Philosopher’s Stone", "Once per Short Rest, you may use Sorcery Channeling without consuming Sorcery Points or Spell Channeling without consuming a Spell Slot.")]
         ]
@@ -226,10 +229,10 @@ let rec warlock = {
 
         SpellcastingAbility = CHA
 
-        ScalingAbilities = (fun _ _ -> [])
+        ScalingAbilities = fun _ _ -> []
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Eldritch Blast", "Conjure a beam of crackling energy dealing 1d12 Force damage, scaling with level.")]
+            1<classLvl>, [Power (Action, AtWill, "Eldritch Blast", "Conjure a beam of crackling energy dealing 1d12 Force damage, scaling with level.")]
             5<classLvl>, [Complex ("Mystic Arcanum", "On your first turn of any combat encounter, restore one Warlock Spell Slot.")]
             9<classLvl>, [Complex ("Deepened Arcanum", "On your first turn of any combat encounter, restore two Warlock Spell Slots.")]
         ]
@@ -244,11 +247,11 @@ let rec wizard = {
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{cl} Arcane Recovery Charges"
+            Resource(UMX.untag cl, "Arcane Recovery Charges", OncePerShortRest)
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover one charge of Arcane Recovery."); Complex ("Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery.")]
+            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover one charge of Arcane Recovery."); Power (FreeAction, OncePerTurn, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery.")]
         ]
         CustomPicks = Map []
     }
