@@ -2877,7 +2877,7 @@ let rec leastExpected = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Unexpected Outcome", "While this weapn is equipped, dealing damage has a chance to cause your target to experience a negative surge of Wild Magic. Grants Blinding Shot Weapon action, Recharge: Short Rest, blinds target with CON save")
+            Complex("Unexpected Outcome", "While this weapon is equipped, dealing damage has a chance to cause your target to experience a negative surge of Wild Magic. Grants Blinding Shot Weapon action, Recharge: Short Rest, blinds target with CON save")
         ]
     }
     Type = Shortbow

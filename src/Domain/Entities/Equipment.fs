@@ -1427,7 +1427,7 @@ let rec darkJusticiarHalfPlate = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex ("Shar's Protection", "While the wearer has Shield of Faith active, reduce all incoming damage by 2 and reflect damage received back at the attacker, who takes 1d6 Necrotic damage.")
+            Complex ("Shar's Protection", "While the wearer has Shield of Faith active, reduce all incoming damage by 2 and reflect damage received back at the attacker, who takes 12 Necrotic damage. Additionally gain Advantage on Constitution Saving Throws Checks.")
         ]
     }
     Slot = Chest
@@ -4859,7 +4859,7 @@ let rec holySymbolOfLolth = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex ("Spider's Kiss", "Successfully damaging a poisoned creature with a melee attack guarantees a Critical Hit. Effect can only occur once per combat.")
+            Complex ("Spider's Kiss", "Successfully damaging a poisoned creature with a melee attack guarantees a Critical Hit. Effect can only occur once per combat per Creature.")
         ]
     }
     Slot = Trinket
