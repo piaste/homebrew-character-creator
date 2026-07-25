@@ -333,7 +333,7 @@ let levelBoxes (model: Model) =
                                 cl "sheet-attrs"
                                 forEach lr.SpecialPickIds <| fun s ->
                                     let sp = SpecialPicks.allSpecialPicks[s]
-                                    sheetAttr sp.Type.DisplayString sp.Name (Some (sp.Description.Display model.UseLoreNames)) None
+                                    sheetAttr sp.Type.DisplayString sp.Name (Some (sp.Description)) None
                                 forEach lr.ClassPassiveIds <| fun s ->
                                     let cp = ClassPassives.allClassPassives[s]
                                     sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames)) None
@@ -572,7 +572,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 let sps = SpecialPicks.allSpecialPicksOfType sp
                 ph (ClassSpecific sp) <| Picker.view sp.DisplayString
                     (sps.Values
-                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPicker tryGetAnyVanillaIconSubpath
                     )
                     c.PreviousHistory.AllSpecialPicks
                     (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp))

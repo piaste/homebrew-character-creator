@@ -165,6 +165,16 @@ let alsoAffectsSummons passive =
     | Summon _ | Resource _ -> [ passive ] // no change
     | p -> [passive; Summon p ] // adds a copy for the summoned creature
 
+let passiveListDescription (ps: Passive list) = 
+    let mutable hasSummons = false
+    let sb = System.Text.StringBuilder()
+    for p in ps do
+        match p with
+        | Summon _ -> hasSummons <- true
+        | x -> x.Description.DefaultText |> sb.AppendLine |> ignore
+    if hasSummons then "&lt;i&gt;(Also affects summons)&lt;/i&gt;" |> sb.Append |> ignore
+    sb.ToString()
+
 type [<Measure>] skillId
 
 type SkillDef =
@@ -221,12 +231,10 @@ type FeatDef = {
     Subpicks: Map<FeatSubpickType, int>
 } with
     member this.Description = 
-        this.ExplicitDescription 
+        this.ExplicitDescription        
         |> Option.defaultWith (fun () -> 
-            this.Grants |> List.map _.Description.DefaultText |> String.concat "\n"
+            passiveListDescription this.Grants
         )
-
-
 
 // Races
 type [<Measure>] baseRaceId
@@ -343,9 +351,7 @@ type ClassLevelUpPick =
         |> fun c -> Reflection.FSharpValue.MakeUnion(c, [||]) :?> 'T
 
     member this.Description = 
-        this.Grants
-        |> Seq.map _.Description
-        |> GameString.concat "\n" 
+        this.Grants |> passiveListDescription
 
 type [<Measure>] classId
 
