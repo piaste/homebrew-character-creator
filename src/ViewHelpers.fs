@@ -86,7 +86,7 @@ let rec tryGetVanillaIconSubpath =
         -> None
     | Power (_, _, title, _)
         -> Some $"unsorted_icons/Action_{englishToPascalCase (title.DefaultText)}"           
-    | Resource (_, name, _)
+    | Resource (_, _, name, _)
         -> Some $"cc_icons/Resource_{englishToPascalCase name}"    
     | Summon p ->
         tryGetVanillaIconSubpath p

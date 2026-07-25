@@ -13,7 +13,10 @@ let rec artificer = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("3 Ammunition", "Artificers have a pool of 3 ammunition that is refreshed on a Short or Long rest, or when you use the Reload Bonus Action.")]
+            1<classLvl>, [
+                Resource (3, "Passive_ArcaneFirearm", "Ammunition", OncePerShortRest)
+                Power(BonusAction, AtWill, "Action_Reload" <!!> "Reload", "Reload your Ammunition.")
+            ]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack.")]
         ]
@@ -49,7 +52,7 @@ let rec bard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Bardic Inspiration", OncePerShortRest); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Complex ("Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
+            1<classLvl>, [Resource (3, "Action_Bard_GrantBardicInspiration", "Bardic Inspiration", OncePerShortRest); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Complex ("Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
             5<classLvl>, [Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
             9<classLvl>, [Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]

@@ -132,7 +132,7 @@ type Passive =
     | Complex of title: GameString * description: string
     | Buff of StatModifiers
     | Power of ActionCost * Frequency * title: GameString * description: string
-    | Resource of quantity: int * name : string * refresh: Frequency
+    | Resource of quantity: int * icon : string * name : string * refresh: Frequency
     /// A passive that affects your summons
     | Summon of Passive
     with 
@@ -144,7 +144,7 @@ type Passive =
             | Complex (n, _) -> n
             | Buff sm -> sm.ToString()
             | Power (_, _, title, _) -> title
-            | Resource (_, n, _) -> n
+            | Resource (_, _, n, _) -> n
             | Summon p -> p.Name + " (S)"
         member this.Description = 
             match this with
@@ -152,7 +152,7 @@ type Passive =
             | Complex (_, d) -> d
             | Buff sm -> sm.ToString()
             | Power (cost, freq, title, txt) -> $"{cost}{freq}: {txt}"
-            | Resource (q, n, _) -> $"{q}x {n}"
+            | Resource (q, _, n, _) -> $"{q}x {n}"
             | Summon p -> p.Description
 
         member this.Effect = 
