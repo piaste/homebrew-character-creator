@@ -28,6 +28,15 @@ type Frequency =
         | OncePerCombat -> " [1/combat]"
         | OncePerShortRest -> " [1/short rest]"
         | OncePerLongRest -> " [1/long rest]"
+    
+    member this.LongForm() = 
+        match this with
+        | AtWill -> "With no limits"
+        | OncePerTurn -> "Once per turn"
+        | OncePerCombat -> "Once per combat"
+        | OncePerShortRest -> "Every short rest"
+        | OncePerLongRest -> "Every long rest"
+        
 
 type PhysicalDmg = Crushing | Slashing | Piercing
 type ElementalDmg = 
@@ -144,7 +153,7 @@ type Passive =
             | Complex (n, _) -> n
             | Buff sm -> sm.ToString()
             | Power (_, _, title, _) -> title
-            | Resource (_, n, _) -> n
+            | Resource (q, n, _) -> $"{q}x {n.DefaultText}"
             | Summon p -> p.Name + " (S)"
         member this.Description = 
             match this with
@@ -152,7 +161,7 @@ type Passive =
             | Complex (_, d) -> d
             | Buff sm -> sm.ToString()
             | Power (cost, freq, title, txt) -> $"{cost}{freq}: {txt}"
-            | Resource (q, n, _) -> $"{q}x {n}"
+            | Resource (q, n, r) -> $"{q} {n.DefaultText} charges. Refreshes {r.LongForm().ToLower()}."
             | Summon p -> p.Description
 
         member this.Effect = 
