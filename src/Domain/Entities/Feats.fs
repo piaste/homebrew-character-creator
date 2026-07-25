@@ -40,9 +40,9 @@ let rec alert : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Buff { StatModifiers.Zero with Initiative = 8 }
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Defiance", "While starting your turn Threatened, you Dash and Disengage.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Vigilance", "You cannot be Surprised.")
+        yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with Initiative = 8 }
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Defiance", "While starting your turn Threatened, you Dash and Disengage.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Vigilance", "You cannot be Surprised.")
     ]
 }
 
@@ -68,8 +68,8 @@ let rec athleticism : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("Athleticism: Action", "You gain an additional Bonus Action.")
-        Complex("Athleticism: Jump", "Your jump distance is doubled.")
+        yield! alsoAffectsSummons <| Complex("Athleticism: Action", "You gain an additional Bonus Action.")
+        yield! alsoAffectsSummons <| Complex("Athleticism: Jump", "Your jump distance is doubled.")
     ]
 }
 
@@ -154,9 +154,9 @@ let rec dunesis : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Careful", "Your AOE Spells don’t affect your allies.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Power", "Spells you cast and Conditions you apply have their Difficulty Class increased by 1.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Generation", "Generate Dunesis Charges upon casting spells to further increase DC (up to max 3).")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Careful", "Your AOE Spells don’t affect your allies.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Power", "Spells you cast and Conditions you apply have their Difficulty Class increased by 1.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Generation", "Generate Dunesis Charges upon casting spells to further increase DC (up to max 3).")
     ]
 }
 
@@ -166,8 +166,8 @@ let rec durable : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("Spell_Abjuration_Resistance" <!!> "Durable: Resistance", "You have Resistance to Physical damage.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Durable: Unstoppable", "You have Lockdown Immunity (immune to most Crowd Control effects).")
+        yield! alsoAffectsSummons <| Complex("Spell_Abjuration_Resistance" <!!> "Durable: Resistance", "You have Resistance to Physical damage.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Durable: Unstoppable", "You have Lockdown Immunity (immune to most Crowd Control effects).")
     ]
 }
 
@@ -202,7 +202,9 @@ let rec greaterImpact : FeatDef = {
     Name = "Greater Impact"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Power(FreeAction, OncePerTurn, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Greater Impact", "Make another attack after killing a target with a Weapon Attack.") ]
+    Grants = [
+        yield! alsoAffectsSummons <| Power(FreeAction, OncePerTurn, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Greater Impact", "Make another attack after killing a target with a Weapon Attack.")
+    ]
 }
 
 let rec intrinsicBulwark : FeatDef = {
@@ -221,7 +223,9 @@ let rec lucky : FeatDef = {
     Name = "Lucky"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Lucky", "Any time that you roll a 7 or less on an Attack Roll, Saving Throw, Ability Check, or Skill Check, the result is immediately rerolled.") ]
+    Grants = [
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Lucky", "Any time that you roll a 7 or less on an Attack Roll, Saving Throw, Ability Check, or Skill Check, the result is immediately rerolled.")
+    ]
 }
 
 let rec mageSlayer : FeatDef = {
@@ -230,8 +234,8 @@ let rec mageSlayer : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("Mage Slayer: Disruption", "Enemies you damage immediately lose Concentration.")
-        Complex("Mage Slayer: Silence", "Upon dealing damage, you silence the target for one turn.")
+        yield! alsoAffectsSummons <| Complex("Mage Slayer: Disruption", "Enemies you damage immediately lose Concentration.")
+        yield! alsoAffectsSummons <| Complex("Mage Slayer: Silence", "Upon dealing damage, you silence the target for one turn.")
     ]
 }
 
@@ -240,7 +244,9 @@ let rec martialAdept : FeatDef = {
     Name = "Martial Adept"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Buff { StatModifiers.Zero with ``Critical Range`` = 2 } ]
+    Grants = [
+        yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with ``Critical Range`` = 2 }
+    ]
 }
 
 let rec masonryOfChaos : FeatDef = {
@@ -248,7 +254,9 @@ let rec masonryOfChaos : FeatDef = {
     Name = "Masonry of Chaos"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Masonry of Chaos", "20% chance to experience a positive surge of Wild Magic at the beginning/end of combat, start of turn, and when dealing/taking damage.") ]
+    Grants = [
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Masonry of Chaos", "20% chance to experience a positive surge of Wild Magic at the beginning/end of combat, start of turn, and when dealing/taking damage.")
+    ]
 }
 
 let rec meleeExpertise : FeatDef = {
@@ -257,8 +265,8 @@ let rec meleeExpertise : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Melee Expertise: Damage", "Adds your Proficiency Bonus multiplied by 2 when dealing damage with your main-hand melee weapon.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Melee Expertise: Bypass", "Ignore all Physical Resistances and Immunities.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Melee Expertise: Damage", "Adds your Proficiency Bonus multiplied by 2 when dealing damage with your main-hand melee weapon.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Melee Expertise: Bypass", "Ignore all Physical Resistances and Immunities.")
     ]
 }
 
@@ -297,7 +305,9 @@ let rec reactiveAssault : FeatDef = {
     Name = "Reactive Assault"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Power(Reaction, AtWill, "PassiveAction_GreatWeaponMaster_AllIn" <!!> "Reactive Assault", "Make a basic weapon-based Attack Roll upon landing a Critical Hit.") ]
+    Grants = [
+        yield! alsoAffectsSummons <| Power(Reaction, AtWill, "PassiveAction_GreatWeaponMaster_AllIn" <!!> "Reactive Assault", "Make a basic weapon-based Attack Roll upon landing a Critical Hit.")
+    ]
 }
 
 let rec resilient : FeatDef = {
@@ -306,8 +316,8 @@ let rec resilient : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add your Proficiency Bonus to any Saving Throws that you make.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum amount when healed.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add your Proficiency Bonus to any Saving Throws that you make.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum amount when healed.")
     ]
 }
 
@@ -329,8 +339,8 @@ let rec savageAssault : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Advantage", "Roll all of your damage dice with Advantage.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Corrosive", "When you damage a target, you reduce its AC by 1 (stacking).")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Advantage", "Roll all of your damage dice with Advantage.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Corrosive", "When you damage a target, you reduce its AC by 1 (stacking).")
     ]
 }
 
@@ -376,7 +386,9 @@ let rec spellbreak : FeatDef = {
     Name = "Spellbreak"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Buff { StatModifiers.Zero with ``Magic Critical Range`` = 2 } ]
+    Grants = [
+        yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with ``Magic Critical Range`` = 2 }
+    ]
 }
 
 let rec tavernBrawler : FeatDef = {
@@ -385,9 +397,9 @@ let rec tavernBrawler : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "When making an unarmed attack or Throw, your Strength Modifier is added to all damage rolls.")
-        Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Your Dexterity Modifier is added to all Attack Rolls.")
-        Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Thrown", "Main-Hand melee weapons gain Thrown and Returning properties.")
+        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "When making an unarmed attack or Throw, your Strength Modifier is added to all damage rolls.")
+        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Your Dexterity Modifier is added to all Attack Rolls.")
+        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Thrown", "Main-Hand melee weapons gain Thrown and Returning properties.")
     ]
 }
 
@@ -396,7 +408,9 @@ let rec tormentor : FeatDef = {
     Name = "Tormentor"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("Tormentor", "Whenever you deal damage, you heal for 25% of that damage.") ]
+    Grants = [
+        yield! alsoAffectsSummons <| Complex("Tormentor", "Whenever you deal damage, you heal for 25% of that damage.")
+    ]
 }
 
 let rec tough : FeatDef = {
@@ -405,8 +419,8 @@ let rec tough : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Buff { StatModifiers.Zero with ``HP per level`` = 4 }
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Nullify", "Any damage dealt to you that totals 2 or less is nullified.")
+        yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with ``HP per level`` = 4 }
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Nullify", "Any damage dealt to you that totals 2 or less is nullified.")
     ]
 }
 
