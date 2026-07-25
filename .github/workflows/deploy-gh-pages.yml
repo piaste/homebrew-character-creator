@@ -29,25 +29,18 @@ jobs:
 
       - name: Delete unreferenced PNGs
         shell: bash
-        env:
-          SEARCH_DIR: src
         run: |
           set -euo pipefail
 
-          if [[ ! -d "$SEARCH_DIR" ]]; then
-            echo "::error::Directory '$SEARCH_DIR' does not exist."
-            exit 1
-          fi
-
           shopt -s nullglob
 
-          for file in src/wwwroot/assets/icons/unsorted_icons/*.png; do
+          for file in ./wwwroot/assets/icons/unsorted_icons/*.png; do
             [[ -f "$file" ]] || continue
 
             # Remove only the last extension
-            base="${file%.*}"
+            stem=$(basename "$file" .png)
 
-            if ! grep -RqiF -- "$base" "$SEARCH_DIR"; then
+            if ! grep -RqiF -- "$stem" "$SEARCH_DIR"; then
               echo "Deleting: $file"
               rm -- "$file"
             else
