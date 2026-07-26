@@ -49,8 +49,9 @@ let view
                 
                 cond (thingsPicked.Count = maxPicks) <| function
                 | false -> 
-                    div {
-                        cl "picker-header-command h2 error"
+                    button {
+                        cl "picker-header-command btn primary error"
+                        attr.disabled true
                         $"Pick {maxPicks} ({thingsPicked.Count}/{maxPicks})"
                     }
                 | true -> 
