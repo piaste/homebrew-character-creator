@@ -900,9 +900,8 @@ html,body{
   place-content: flex-start;
   gap: 10px;                     /* space between label and value */
   font-size: var(--small-text);
-  opacity: .95;
-  
-  
+  color: rgb(from var(--text) r g b / .8);
+    
   & span {
     flex: 4 1 0;    
     min-width: 25%;    
@@ -2018,31 +2017,33 @@ html,body{
   position: relative;
   display: inline-block;
   cursor: pointer;
-}
 
-.tooltip-text {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.5s linear;
+  & .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
 
-  position: fixed;
-  
-  position-area: block-start span-inline-end;
+    position: fixed;
+    
+    position-area: block-start span-inline-end;
 
-  position-try-fallbacks:
-    flip-block,
-    flip-inline;
+    position-try-fallbacks:
+      flip-block,
+      flip-inline;
 
-  margin-block: 8px;
+    margin-block: 8px;
 
-  background: rgba(20,14,12,1);
-  color: var(--bright);
-  padding: 6px 10px;
-  border-radius: 4px;
-  width: max-content;
-  max-width: 24em;
-  white-space: normal;
-  font-size: 14px;
+    background: rgba(20,14,12,1);
+    color: var(--bright);
+    padding: 6px 10px;   
+    border: 1px solid rgb(from var(--muted) r g b / 0.3);
+    z-index: 999;
+    border-radius: 4px;
+    width: max-content;
+    max-width: 24em;
+    white-space: normal;
+    font-size: 14px;
+  }
 }
 
 .tooltip-text::after {
