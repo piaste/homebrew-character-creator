@@ -1425,7 +1425,7 @@ let rec darkJusticiarHalfPlate = {
         Id = % nameof darkJusticiarHalfPlate
         Name = "Dark Justiciar Half-Plate"
         Icon = ""
-        Rarity = Rare
+        Rarity = Epic
         Grants = [
             Complex ("Shar's Protection", "While the wearer has Shield of Faith active, reduce all incoming damage by 2 and reflect damage received back at the attacker, who takes 12 Necrotic damage. Additionally gain Advantage on Constitution Saving Throws Checks.")
         ]
