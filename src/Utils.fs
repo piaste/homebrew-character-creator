@@ -149,3 +149,6 @@ let inline (<?>) (gs : GameString) loreText =
     match gs.Icon with | None -> GameString(gs.DefaultText, loreText) | Some i -> GameString(gs.DefaultText, loreText, i)
 let inline (<!!>) iconSubpath (gs : GameString) = 
     if gs.HasLoreText then GameString(gs.DefaultText, gs.Display true, iconSubpath) else GameString(gs.DefaultText, iconSubpath = iconSubpath)
+
+let halfRoundUp (lvl : int<'m>) = 
+    Math.Ceiling(float (UMX.untag lvl) / 2.) |> int
