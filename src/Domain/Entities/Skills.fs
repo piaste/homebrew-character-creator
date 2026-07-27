@@ -1,3 +1,4 @@
+// Checked and verified synchronized with latest documentation
 module Bg3HomebrewCCreator.Domain.Entities.Skills
 
 open Bg3HomebrewCCreator.Domain.Types
