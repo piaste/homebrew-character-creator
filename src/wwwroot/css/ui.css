@@ -865,6 +865,7 @@ html,body{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 22px;
+  place-items: start;
 }
  
 .summary-left{
@@ -1839,7 +1840,7 @@ html,body{
   }
   
   .summary-abilities-compact .ability-row{
-    grid-template-columns: 32px 32px 18px 14px 32px 16px 16px;
+    grid-template-columns: 32px 32px 18px 14px 32px 16px 16px 16px;
     column-gap: 5px;
   } 
 
