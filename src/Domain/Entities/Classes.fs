@@ -47,12 +47,17 @@ let rec bard = {
 
         SpellcastingAbility = CHA
 
-        ScalingAbilities = (fun _ cl -> [
-            Simple $"1d{if cl >= 9<classLvl> then 12 elif cl >= 5<classLvl> then 8 else 4} Bardic Inspiration Die"
+        ScalingAbilities = (fun _ cl -> [            
+            let inspirationDieSize = int(System.Math.Ceiling (float cl / 4.) * 4.)
+            Resource (3, "Action_Bard_GrantBardicInspiration" <!!> $"Bardic Inspiration (1d{inspirationDieSize})", OncePerShortRest)
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Action_Bard_GrantBardicInspiration" <!!> "Bardic Inspiration", OncePerShortRest); Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving."); Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect."); Power (Action, OncePerLongRest, "Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")]
+            1<classLvl>, [
+                Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving.")
+                Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect.")
+                Power (Action, OncePerLongRest, "Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")
+            ]
             5<classLvl>, [Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
             9<classLvl>, [Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]
