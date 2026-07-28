@@ -159,7 +159,7 @@ let rec ``Primal Savagery`` : CantripDef = {
 
 let rec ``Produce Flame`` : CantripDef = {
     Id = % nameof ``Produce Flame``
-    CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. You may hurl the flame as a ▢ Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
+    CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. You may hurl the flame as a Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
     Concentration = false
     ActionCost = BonusAction
 }
