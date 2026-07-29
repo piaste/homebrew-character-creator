@@ -96,7 +96,7 @@ let rec ``Guidance`` : CantripDef = {
 
 let rec ``Guiding Moonlight`` : CantripDef = {
     Id = % nameof ``Guiding Moonlight``
-    CantripDescription = "Infuse a weapon granting it a +2 bonus to both it's Attack Rolls and Damage. Weapons may benefit from only one enchantment from Spells or Cantrips. May only affect one weapon at a time. Duration: permanent. Offense: Buff."
+    CantripDescription = "Infuse a weapon granting it a +2 bonus to both it's Attack Rolls and Damage. Weapons may benefit from only one enchantment from Spells or Cantrips. May only affect one weapon at a time. Duration: permanent. Offense: Melee."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -152,14 +152,14 @@ let rec ``Prestidigitation`` : CantripDef = {
 
 let rec ``Primal Savagery`` : CantripDef = {
     Id = % nameof ``Primal Savagery``
-    CantripDescription = "Deal 1d12 Poison Damage and potentially poison your target. This Cantrip may be cast while Silenced or Muted. Duration: 1 turn. Offense: CON Save."
+    CantripDescription = "Deal 1d12 Poison Damage and potentially poison your target. This Cantrip may be cast while Silenced or Muted. Duration: 1 turn. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
 
 let rec ``Produce Flame`` : CantripDef = {
     Id = % nameof ``Produce Flame``
-    CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. You may hurl the flame as a ▢ Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
+    CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. You may hurl the flame as a Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
     Concentration = false
     ActionCost = BonusAction
 }
