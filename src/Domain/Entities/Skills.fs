@@ -1,4 +1,4 @@
-// Checked and verified synchronized with latest documentation
+// Checked and verified synchronized with latest 9.0+ starting guide documentation
 module Bg3HomebrewCCreator.Domain.Entities.Skills
 
 open Bg3HomebrewCCreator.Domain.Types

@@ -1,4 +1,4 @@
-// Checked and verified synchronized with latest documentation
+// Checked and verified synchronized with latest 9.0+ documentation
 module Bg3HomebrewCCreator.Domain.Entities.Feats
 
 open FSharp.UMX
@@ -19,7 +19,7 @@ let rec accordOfTheArcane : FeatDef = {
     Subpicks = Map [Cantrips, 2]
     Grants = [
         // handled by subpicks: Complex("PassiveFeature_BookOfAncientSecrets" <!!> "Accord of the Arcane: Cantrips", "Learn two Cantrips of your choice.")
-        Complex("PassiveFeature_BookOfAncientSecrets" <!!> "Accord of the Arcane: Speed", "Cantrips costing an Action may be cast as a Bonus Action (can be toggled).")
+        Complex("PassiveFeature_BookOfAncientSecrets" <!!> "Accord of the Arcane: Speed", "Cantrips which cost an Action may be cast as a Bonus Action instead. This may be toggled at any time.")
     ]
 }
 
@@ -29,9 +29,9 @@ let rec alchemist : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [ 
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Potions", "Consuming healing potions always restores maximum Hit Points.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Grenades", "Thrown grenades trigger an additional explosion, dealing 1d12 damage per 2 character levels in a 3m radius around the target.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Coatings", "Applied weapon coatings persist until your next Long Rest.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Potions", "Healing potions you consume always restore the maximum amount of Hit Points possible.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Grenades", "Thrown grenades will trigger an additional explosion, dealing 1d12 damage per 2 character levels to all creatures in a 3m radius around your original target.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Coatings", "Upon applying a coating to your weapon, it will persist until your next Long Rest.")
     ]
 }
 
@@ -42,8 +42,8 @@ let rec alert : FeatDef = {
     Subpicks = Map []
     Grants = [
         yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with Initiative = 8 }
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Defiance", "Gain Dash and Disengage when starting turn Threatened.")
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Vigilance", "You cannot be Surprised.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Defiance", "While starting your turn Threatened, you Dash and Disengage.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Vigilance", "Gain a +8 bonus to Initiative and you cannot be Surprised.")
     ]
 }
 
@@ -81,7 +81,7 @@ let rec blessingOfTheMoon : FeatDef = {
     Subpicks = Map []
     Grants = [
         Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Cantrips", "Gain 3 cantrips: Blessing of Moonfire, Lunar Flare, and Lunar Strike.")
-        Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Radiance", "Dealing damage to an enemy restores 1d4 HP to nearby allies.")
+        Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Radiance", "Dealing damage to an enemy restores 1d4 Hit Points to all nearby allies around your target.")
     ]
 }
 
@@ -109,7 +109,7 @@ let rec combatMedic : FeatDef = {
     Name = "Combat Medic"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Combat Medic", "Helping another creature restores extra HP equal to your current HP.") ]
+    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Combat Medic", "Helping another creature restores extra Hit Points equal to your current Hit Points.") ]
 }
 
 let rec composed : FeatDef = {
@@ -118,8 +118,8 @@ let rec composed : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Power(Reaction, AtWill, "Regain Composure", "Restore 1d6*Proficiency Bonus HP in a 3m radius when taking damage.")
-        Power(Reaction, AtWill, "Targeted Composure", "Restore 1d6*Proficiency Bonus HP in a 3m radius around the target when dealing damage.")
+        Power(Reaction, AtWill, "Regain Composure", "Restore 1d6*your Proficiency Bonus Hit Points in a 3m radius when taking damage.")
+        Power(Reaction, AtWill, "Targeted Composure", "Restore 1d6*your Proficiency Bonus Hit Points in a 3m radius around the target when dealing damage.")
     ]
 }
 
@@ -296,7 +296,7 @@ let rec psionicDominance : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Psionic Dominance: Psychic", "Deal +1d4 psychic damage and inflict 1 stack of Mental Fatigue.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Psionic Dominance: Psychic", "Deal an additional 1d4 psychic damage and inflict one stack of Mental Fatigue.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Psionic Dominance: Shield", "Illithid Powers no longer reduce your maximum Hit Points.")
     ]
 }
