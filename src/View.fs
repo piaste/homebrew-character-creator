@@ -95,13 +95,13 @@ let bigActionButtonWithClass (node: Node) abCl dispatch msg =
         on.click (fun _ -> dispatch msg)
         node
     }
-let actionButtonWithClass (text: string) abCl dispatch msg = 
+let actionButtonWithClass (text: Node) abCl dispatch msg = 
     button {
         cl $"btn action-btn {abCl}"
         on.click (fun _ -> dispatch msg)
         text        
     }
-let actionButton (text: string) dispatch msg = 
+let actionButton (text: Node) dispatch msg = 
     actionButtonWithClass text "" dispatch msg
 let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch = 
     let abB = chr.AbBuy
@@ -767,12 +767,12 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         actionButtonWithClass txt (if not show then "visibility-hidden" else "") dispatch msg
 
                     cond model.UndoStack.IsEmpty <| function 
-                        | false -> doBtn true "↶ UNDO" Undo
-                        | true -> doBtn false "↶ UNDO" Undo
+                        | false -> doBtn true !"↶ UNDO" Undo
+                        | true -> doBtn false !"↶ UNDO" Undo
                     
                     cond model.RedoStack.IsEmpty <| function 
-                        | false -> doBtn true "↷ REDO" Redo
-                        | true -> doBtn false "↷ REDO" Redo
+                        | false -> doBtn true !"↷ REDO" Redo
+                        | true -> doBtn false !"↷ REDO" Redo
                 }
                 
                 div {
@@ -780,7 +780,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cond (model.Character = defaultCharacter) <| function
                         | false ->                                 
                             concat { 
-                                actionButton "RESET CHARACTER" dispatch ResetCharacter
+                                actionButton !"RESET CHARACTER" dispatch ResetCharacter
                                 cond model.CopyButtonState <| function
                                 | Rest -> actionButton !"COPY BUILD LINK" dispatch CopyBuildLink
                                 | Success onClickJs -> 
@@ -801,7 +801,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cl "levelup-down"
                     
                     let inline levelup show = 
-                        actionButtonWithClass $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}""" dispatch (LevelUp None)
+                        actionButtonWithClass ! $"⬆️ Level {model.Character.CharacterLevel + 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}""" dispatch (LevelUp None)
 
                     cond model.Errors <| function
                         | [] when c.CharacterLevel >= 12<charLvl> -> levelup false
@@ -810,7 +810,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     
                     let inline leveldown show = 
 
-                        actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}"""   dispatch LevelDown
+                        actionButtonWithClass ! $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}"""   dispatch LevelDown
 
                     cond model.Character.PreviousLevelHistory.IsEmpty <| function
                         | false -> leveldown true
@@ -820,7 +820,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 div {
                     cl "lore-controls"
 
-                    actionButton $"""SHOW {if model.UseLoreNames then "DEFAULT" else "LORE"} NAMES""" 
+                    actionButton ! $"""SHOW {if model.UseLoreNames then "DEFAULT" else "LORE"} NAMES""" 
                         dispatch (ToggleLoreNames (not model.UseLoreNames))
                     
                     a { 
