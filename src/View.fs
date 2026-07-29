@@ -455,14 +455,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     cond (model.Character = defaultCharacter) <| function
                         | false -> 
                             concat { 
-                                actionButton "RESET" dispatch ResetCharacter
-                                actionButton "COPY BUILD LINK" dispatch CopyBuildLink
+                                actionButton !"RESET" dispatch ResetCharacter
+                                actionButton !"COPY BUILD LINK" dispatch CopyBuildLink
                             }
                         | true -> empty()
                     
                     cond model.Character.PreviousLevelHistory.IsEmpty <| function
                         | false -> 
-                            actionButtonWithClass $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
+                            actionButtonWithClass ! $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
                         | true -> empty()
 
                 }
