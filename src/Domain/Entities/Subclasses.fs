@@ -214,12 +214,12 @@ let rec lifeDomain =
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Virtuous Touch", "First heal each round regains extra HP = character level.") ]
+            1<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Virtuous Touch", "First heal each round regains extra Hit Points equal to character level.") ]
             3<classLvl>, [ Power(Action, AtWill, "PassiveFeature_DiscipleOfLife" <!!> "Preserve Life", "Heal target for 4x character level.") ]
             5<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Sanctity", "Healing applies Resistance for 3 turns.") ]
             7<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_DiscipleOfLife" <!!> "Dampen Elements", "Halve incoming elemental damage for self/ally.") ]
             9<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Benevolent Grace", "Healing applies Shield of Faith for 3 turns.") ]
-            11<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Divine Presence", "Preserve Life can resurrect fallen allies with full HP.") ]
+            11<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Divine Presence", "Preserve Life can resurrect fallen allies with full Hit Points.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -299,7 +299,7 @@ let rec circleOfTheLand =
                 Power(Action, AtWill, "Spell_Conjuration_ConjureWoodlandBeings" <!!> "Conjure Dryad", "Summon a scaling woodland companion.")
                 Complex("PassiveFeature_Land_Coast" <!!> "Ensnaring Presence", "Damaging enemies potentially Entangles them.")
             ]
-            3<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Nature's Grasp", "Entangled enemies have Disadvantage on saves against your spells.") ]
+            3<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Nature's Grasp", "Entangled enemies have Disadvantage on saving throws against your spells.") ]
             5<classLvl>, [ Power(FreeAction, OncePerCombat, "Spell_Conjuration_Entangled" <!!> "Vineburst", "Entangle: Cast Entangle at 3rd level.") ]
             7<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Untamed Freedom", "Self and nearby allies ignore Difficult Terrain.") ]
             9<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Verdant Aftermath", $"{TOGGLEABLE}: Kills create Entangling Vines.") ]
@@ -337,7 +337,7 @@ let rec circleOfTheShadows =
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness.") ]
-            3<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Veilstalker", "While obscured, recover HP and deal extra Psychic damage.") ]
+            3<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Veilstalker", "While obscured, recover Hit Points and deal extra Psychic damage.") ]
             5<classLvl>, [ Power(BonusAction, AtWill, "TadpoleSuperPower_DisplacerShape" <!!> "Predatory Communion", "Morph allies into Displacer Beasts.") ]
             7<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Distorted Visage", "Permanently Heavily Obscured beyond 3m.") ]
             9<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Nightspill", $"{TOGGLEABLE}: Leave magical darkness behind when moving.") ]
@@ -357,7 +357,7 @@ let rec circleOfTheSpores =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Reaction, AtWill, "Action_HaloOfSpores" <!!> "Halo of Spores", "Deal Necrotic damage as a reaction.")
-                Power(Action, AtWill, "Action_SymbioticEntity" <!!> "Symbiotic Entity", "Gain Temp HP and extra Necrotic damage.")
+                Power(Action, AtWill, "Action_SymbioticEntity" <!!> "Symbiotic Entity", "Gain Temporary Hit Points and extra Necrotic damage.")
             ]
             3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_SpreadingSpores" <!!> "Animating Spores", "Reanimate corpses as fungal servants.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Action_SpreadingSpores" <!!> "Spreading Spores", "Create area of DOT spores while Symbiotic.") ]
@@ -403,8 +403,8 @@ let rec champion =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Challenger", $"{TOGGLEABLE}: Gain Physical Resistance, but enemies have Advantage on Attack Rolls against you. Chance to Challenge on hit.") ]
             3<classLvl>, [
-                Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 HP * Proficiency Bonus.")
-                Power(BonusAction, AtWill, "Spell_2e_GirzanjesMarch" <!!> "Rallying Cry", "Grant 12 Temporary HP to all allies within 9m.")
+                Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 Hit Points multiplied by Proficiency Bonus.")
+                Power(BonusAction, AtWill, "Spell_2e_GirzanjesMarch" <!!> "Rallying Cry", "Grant 12 Temporary Hit Points to all allies within 9m.")
                 Power(BonusAction, AtWill, "Spell_2e_MageArmor" <!!> "Battalion's March", "Allies within 9m have Advantage on Saving Throws for 3 turns.")
             ]
             5<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MediumArmorMaster" <!!> "Challenger's Call", "Attempt to Challenge all enemies in a 9m area.") ]
@@ -576,10 +576,10 @@ let rec battleSynthetic =
                 Complex("Stabilizing Rounds", "Ranged attacks heal allies within 3m of the target for 1d4.")
                 Power(BonusAction, AtWill, "Summon Lil’G", "Summon a personal Automaton that grows with you.")
             ]
-            3<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 HP.") ]
+            3<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 Hit Points.") ]
             5<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Take Your Medicine", "Firearms can heal allies when targeting them directly.") ]
-            7<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Lil' Great Heal", "Allies within 9m of Lil' G regain HP every turn.") ]
-            9<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Rapid Recovery Reload", "Reloading maximizes HP gained from healing for allies within 18m.") ]
+            7<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Lil' Great Heal", "Allies within 9m of Lil' G regain Hit Points every turn.") ]
+            9<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Rapid Recovery Reload", "Reloading maximizes Hit Points gained from healing for allies within 18m.") ]
             11<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Bigby Grym", "Lil' G grows to enormous size and power.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -658,7 +658,7 @@ let rec collegeOfCaptivation =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Sound of Silence", $"{TOGGLEABLE}: Performances act in 9m radius but allow Bard to act freely.")
-                Complex("Chorus Healing", "Allies in performance regain HP = Proficiency Bonus.")
+                Complex("Chorus Healing", "Allies in performance regain Hit Points equal to Proficiency Bonus.")
             ]
             3<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Parade March", "Performance forces enemies to have Disadvantage unless attacking you.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Action_MantleOfInspiration" <!!> "Cover of Captivation", "Spend Inspiration to negate incoming damage.") ]
@@ -803,7 +803,7 @@ let rec wayOfTheGentleFist =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_ForcefulHand" <!!> "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_ForcefulHand" <!!> "Merciful Counter", "When an ally within 9m is damaged while above half of their total Hit Points, you may heal them for an amount equal to your unarmed dice.") ]
             5<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
             7<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Mending Blows", "Damaging enemies heals allies within 9m.") ]
             9<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
@@ -906,7 +906,7 @@ let rec wayOfTheTemperedSteel =
             5<classLvl>, [ Complex("TemperedSteel" <!!> "Macabre Patience", "Judgement Cut/Mirage Blade target additional enemies; Tempered Strike rolls with Advantage.") ]
             7<classLvl>, [ Complex("TemperedSteel" <!!> "Unanswered Angle", "Weapon damage ignores all physical Resistances.") ]
             9<classLvl>, [ Complex("TemperedSteel" <!!> "Concentration", "Ending turn without moving restores one Ki Point.") ]
-            11<classLvl>, [ Complex("TemperedSteel" <!!> "Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full HP.") ]
+            11<classLvl>, [ Complex("TemperedSteel" <!!> "Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full Hit Points.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -958,7 +958,7 @@ let rec crownedPhoenix =
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DivineGuardian" <!!> "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
             7<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Scorched Earth" <?> "Arcane Dominion", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
             9<classLvl>, [ Power(Action, AtWill, "Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Aura of Cinder" <?> "Aura of Spellfire", "Allies gain Warding Bond; enemies take Fire damage.") ]
-            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all HP and erupts in an explosion.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all Hit Points and erupts in an explosion.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1234,7 +1234,7 @@ let rec assassin =
             5<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Hidden Implement", "Stealth/Invisibility hits have a chance to Paralyze.") ]
             7<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Critical Shock", "All hits against Out-of-Combat targets are Critical Hits.") ]
             9<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Marked for Blood", "Stealth hits leave targets unable to be Alerted.") ]
-            11<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Execute", "Hits against targets < 10% HP kill instantly.") ]
+            11<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Execute", "Hits against targets below 10% Hit Points kill instantly.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1474,7 +1474,7 @@ let rec pactOfTheBlade =
                 Power(BonusAction, AtWill, "Pact Weapon", "Weapon uses Charisma.")
                 Complex("PassiveFeature_HexWarrior" <!!> "Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
             ]
-            3<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Dark One’s Blessing", "Kills grant Temporary HP = Charisma + Level.") ]
+            3<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Dark One’s Blessing", "Kills grant Temporary Hit Points = Charisma + Level.") ]
             5<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Hellblade Resonation", "Ignore Fire Resistance; Hellfire deals AOE Fire damage.") ]
             9<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
@@ -1541,7 +1541,7 @@ let rec pactOfSeverance =
             5<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Severed Resolve", "Using Hematic Invocation restores Action.") ]
             7<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Bitter Cold", "Cold damage applies Frigidity.") ]
             9<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Absolute Zero", "Hematic Invocation maximizes next damage instance.") ]
-            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 HP.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 Hit Point.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
