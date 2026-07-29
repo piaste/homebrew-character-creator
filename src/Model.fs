@@ -35,7 +35,7 @@ type FilterPassives =
 
 type CopyButtonState = 
     | Rest
-    | Success
+    | Success of onClickJs: string
     | Failure
 
 let defaultCharacter =

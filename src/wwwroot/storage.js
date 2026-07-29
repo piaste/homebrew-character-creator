@@ -8,10 +8,19 @@ window.characterStorage = {
   clear: function (key) {
     window.localStorage.removeItem(key);
   },
-  copyToClipboard: async function (version, text) {
-    let linkUrl = `${window.location.origin}?version=${version}&character=${encodeURIComponent(text)}`
-    await navigator.clipboard.writeText(linkUrl);
+
+  makeUrl: (version, text) => `${window.location.origin}?version=${version}&character=${encodeURIComponent(text)}`,
+
+  openUrlShortener: function(version, text) {
+    const longUrl = encodeURIComponent(`${window.location.origin}?version=0.5.0&character=${encodeURIComponent(this.makeUrl(version, text))}`);                                            
+    window.open(`https://tinyurl.com/api-create.php?url=${longUrl}`, '_blank', 'noopener,noreferrer');
   },
+
+  copyToClipboard: async function (version, text) {    
+    await navigator.clipboard.writeText(this.makeUrl(version, text));
+    return `window.characterStorage.openUrlShortener("${version}", "${text}")`;
+  },
+
   pasteFromClipboard: async function () {
     return await navigator.clipboard.readText();
   }

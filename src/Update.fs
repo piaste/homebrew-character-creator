@@ -112,7 +112,7 @@ let elementIdForStage (mss : MainStageSelection) =
 
 let update 
     (jsHelper : {| 
-        CopyCharacter: Character -> Task<unit>
+        CopyCharacter: Character -> Task<string>
         Load: unit -> Task<option<PersistedState>>
         Save: PersistedState -> Task<unit>
         ScrollIntoView: string -> Task<unit>
@@ -506,8 +506,8 @@ let update
         model, 
         Cmd.OfTask.either 
             jsHelper.CopyCharacter model.Character
-            (fun () -> SetCopyFeedback Success)
-            (fun ex -> SetCopyFeedback Failure)
+            (fun onClickJs -> SetCopyFeedback (Success onClickJs))
+            (fun ex -> debug ex; SetCopyFeedback Failure)
 
     | SetCopyFeedback s -> 
         match s with

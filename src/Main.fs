@@ -37,9 +37,8 @@ let buildStorage (getJsRuntime: unit -> IJSRuntime) =
 
     let copyCharacter (char: Character) = task {
         let jsRuntime = getJsRuntime ()
-        //let json = JsonSerializer.Serialize(char, serializerOptions)        
         let json = Model.encodeToUrl char
-        do! jsRuntime.InvokeVoidAsync("characterStorage.copyToClipboard", [| box (char.Version.ToString()); box json |]).AsTask()
+        return! jsRuntime.InvokeAsync<string>("characterStorage.copyToClipboard", [| box (char.Version.ToString()); box json |]).AsTask()
     }
 
     let scrollIntoView (elementId : string) = task {

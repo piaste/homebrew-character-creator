@@ -782,9 +782,16 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             concat { 
                                 actionButton "RESET CHARACTER" dispatch ResetCharacter
                                 cond model.CopyButtonState <| function
-                                | Rest -> actionButton "COPY BUILD LINK" dispatch CopyBuildLink
-                                | Success -> actionButton "<<LINK COPIED!>>" dispatch CopyBuildLink
-                                | Failure -> actionButtonWithClass "error" "<<ERROR>>" dispatch NoOp                                
+                                | Rest -> actionButton !"COPY BUILD LINK" dispatch CopyBuildLink
+                                | Success onClickJs -> 
+                                
+                                    button {
+                                        cl $"btn action-btn"
+                                        "onclick" => onClickJs                                             
+                                        p {"<<LINK COPIED!>>" }
+                                        p {"CLICK TO SHORTEN"}
+                                    }                   
+                                | Failure -> actionButtonWithClass !"error" "<<ERROR>>" dispatch NoOp                                
                             }
                         | true ->                            
                                 empty()

@@ -12,6 +12,8 @@ type OtherUi = Template<"wwwroot/main.html">
 
 let inline cl s = attr.``class`` s
 
+let inline (!) text = Node.Text text
+
 let inline clIf pairs s = 
     cl <| String.concat " " [yield s; for b, c in pairs -> if b then c else ""]
 

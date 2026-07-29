@@ -204,9 +204,24 @@ html,body{
     gap: 8px;
     max-width: min(56rem, 100%);
  
+    & .json-stuff {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: max-content;
+      height: min-content;
+      overflow: hidden;
+      
+      place-items: center;
+    }
+    
     & .action-btn{
       white-space: nowrap;
       padding-inline: 12px;
+            
+      & p {
+        font-size: 10px;
+        margin: -1px;
+      }
     }
   }
 }
@@ -1663,6 +1678,13 @@ html,body{
     & .topbar-actions{
       align-items: flex-start;
       justify-content: flex-start;
+
+     & .json-stuff {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        align-items: center;
+      }
     }
   }
  
