@@ -10,7 +10,7 @@ let rec enforcerShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Staunch Blessing", "When a creature misses the wielder of this shield with an attack, the wielder gains a +1d4 bonus to their next Attack Roll.")
+            Complex ("Staunch Blessing", "When a creature misses the wielder of this shield with an attack, the wielder gains a +1d4 bonus to their next Attack Roll.")
         ]
     }
     Type = Shield
@@ -24,7 +24,7 @@ let rec glowingShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Loving Protection", "Once per Short Rest, if you are below 50% of your maximum Hit Points and take damage, you become Rallied.")
+            Complex ("Loving Protection", "Once per Short Rest, if you are below 50% of your maximum Hit Points and take damage, you become Rallied.")
         ]
     }
     Type = Shield
@@ -38,7 +38,7 @@ let rec safeguardShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Safeguard", "Upon performing a Shield Bash, assume a defensive stance and gain Resistance to all forms of Physical damage until the start of your next turn.")
+            Complex ("Safeguard", "Upon performing a Shield Bash, assume a defensive stance and gain Resistance to all forms of Physical damage until the start of your next turn.")
         ]
     }
     Type = Shield
@@ -52,7 +52,7 @@ let rec woodWoadShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Vicious Seed", "Upon Entangling or Ensnaring an enemy in combat, a vicious seed sprouts within them. Upon being removed, a Grasping Vine erupts, potentially entangling them or other nearby enemies.")
+            Complex ("Vicious Seed", "Upon Entangling or Ensnaring an enemy in combat, a vicious seed sprouts within them. Upon being removed, a Grasping Vine erupts, potentially entangling them or other nearby enemies.")
         ]
     }
     Type = Shield
@@ -80,7 +80,7 @@ let rec gloomstrandShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("A Devil In Darkness", "While Heavily Obscured, you ignore all physical based Resistances.")
+            Complex ("A Devil In Darkness", "While Heavily Obscured, you ignore all physical based Resistances.")
         ]
     }
     Type = Shield
@@ -94,7 +94,7 @@ let rec ironvineShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Ironvine", "Upon successfully retaliating against an enemy with a Shield Bash, they become Ensnared for one turn.")
+            Complex ("Ironvine", "Upon successfully retaliating against an enemy with a Shield Bash, they become Ensnared for one turn.")
         ]
     }
     Type = Shield
@@ -108,7 +108,7 @@ let rec watchersShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Guard Duty", "You have Advantage on Attack Rolls when making an Opportunity Attack.")
+            Complex ("Guard Duty", "You have Advantage on Attack Rolls when making an Opportunity Attack.")
         ]
     }
     Type = Shield
@@ -122,7 +122,7 @@ let rec shieldOfShielding = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Enhanced Deflection", "Reduce damage taken by Ranged Weapon Attacks by an amount equal to your Proficiency Bonus.")
+            Complex ("Enhanced Deflection", "Reduce damage taken by Ranged Weapon Attacks by an amount equal to your Proficiency Bonus.")
         ]
     }
     Type = Shield
@@ -136,7 +136,7 @@ let rec absolutesWarboard = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Cleric Passive - Martyrdom", "Upon being Downed or killed, erupt as a raging inferno, uncontrollably scorching everything around you.")
+            Complex ("Cleric Passive - Martyrdom", "Upon being Downed or killed, erupt as a raging inferno, uncontrollably scorching everything around you.")
         ]
     }
     Type = Shield
@@ -164,7 +164,7 @@ let rec sentinelShield = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sentinel Crash", "Performing a Shield Bash creates a shockwave, applying the affects of your Shield Bash to all enemies within 3m of you.")
+            Complex ("Sentinel Crash", "Performing a Shield Bash creates a shockwave, applying the affects of your Shield Bash to all enemies within 3m of you.")
         ]
     }
     Type = Shield
@@ -179,7 +179,7 @@ let rec justiciarsGreatshield = {
         Rarity = Rare
         Grants = [
             Power(Action, OncePerShortRest, "Darkness Cloak", "Class action, Recharge: Short Rest, creates a cloud of magical darkness and immediately attempt to Hide");
-            Complex("Advantage on Perception Checks.", "Grants Advantage on Perception Checks.")
+            Complex ("Advantage on Perception Checks.", "Grants Advantage on Perception Checks.")
         ]
     }
     Type = Shield
@@ -193,7 +193,7 @@ let rec shieldOfDevotion = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Paladin Passive - Principle of Belief", "On any successful Attack Rolls against Aberrations, Fey, Fiends, or Undead, deal an additional +1d12 Radiant damage. This passive has no effect when targeting enemies with Radiant Retort.")
+            Complex ("Paladin Passive - Principle of Belief", "On any successful Attack Rolls against Aberrations, Fey, Fiends, or Undead, deal an additional +1d12 Radiant damage. This passive has no effect when targeting enemies with Radiant Retort.")
         ]
     }
     Type = Shield
@@ -235,8 +235,8 @@ let rec adamantineShield = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Feat - Shieldbearer", "Gain Advantage on Dexterity based Saving Throws while wearing a shield. Furthermore, gain three Shieldbearer Charges which can be used to negate an instance of incoming damage.");
-            Complex("Attackers can't land Critical Hits on the wearer.", "Attackers can't land Critical Hits on the wearer.")
+            Complex ("Feat - Shieldbearer", "Gain Advantage on Dexterity based Saving Throws while wearing a shield. Furthermore, gain three Shieldbearer Charges which can be used to negate an instance of incoming damage.");
+            Complex ("Attackers can't land Critical Hits on the wearer.", "Attackers can't land Critical Hits on the wearer.")
         ]
     }
     Type = Shield
@@ -251,7 +251,7 @@ let rec kethericsShield = {
         Rarity = Epic
         Grants = [
             Power(Action, AtWill, "Superior Arcane Enchantment", "Spells you cast receive a +2 bonus to their Difficulty Class and Attack Rolls.");
-            Complex("Commander's Footing", "You are unable to be forcibly moved.")
+            Complex ("Commander's Footing", "You are unable to be forcibly moved.")
         ]
     }
     Type = Shield
@@ -265,7 +265,7 @@ let rec abdelsTrustedShield = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Protection from Missiles", "Ranged Weapon Attacks that target the wearer have Disadvantage and have their damage reduced by half.")
+            Complex ("Protection from Missiles", "Ranged Weapon Attacks that target the wearer have Disadvantage and have their damage reduced by half.")
         ]
     }
     Type = Shield
@@ -309,7 +309,7 @@ let rec clubOfHillGiantStrength = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Barbarian Passive - Peak Physicality", "Gain Advantage on all Strength based Ability Checks and Saving Throws. In addition, your Strength is increased by 2.")
+            Complex ("Barbarian Passive - Peak Physicality", "Gain Advantage on all Strength based Ability Checks and Saving Throws. In addition, your Strength is increased by 2.")
         ]
     }
     Type = Club
@@ -323,7 +323,7 @@ let rec ironwoodClub = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Druid Passive - Primal Surge", "Deal additional damage while Wild Shaped equal to your Wisdom Modifier.")
+            Complex ("Druid Passive - Primal Surge", "Deal additional damage while Wild Shaped equal to your Wisdom Modifier.")
         ]
     }
     Type = Club
@@ -337,7 +337,7 @@ let rec shadowLantern = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Conjure Shadow Lantern Wraith", "level 6 spell, Recharge: Long Rest, summons undead from target corpse")
+            Complex ("Conjure Shadow Lantern Wraith", "level 6 spell, Recharge: Long Rest, summons undead from target corpse")
         ]
     }
     Type = Club
@@ -351,7 +351,7 @@ let rec torchOfRevocation = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("It's Been Revoked", "Damaging a creature with this weapon will Banish them until the end of the current round.")
+            Complex ("It's Been Revoked", "Damaging a creature with this weapon will Banish them until the end of the current round.")
         ]
     }
     Type = Club
@@ -365,7 +365,7 @@ let rec defenderFlail = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Defender Flail", "Armour Class +1")
+            Complex ("Defender Flail", "Armour Class +1")
         ]
     }
     Type = Flail
@@ -379,7 +379,7 @@ let rec corrosiveFlail = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Corrosive Strike", "Weapon action, Recharge: Per Battle, deal additional Acid damage equal to your proficiency bonus, on hit create a Pool of Acid around your Target which reduces AC by 2")
+            Complex ("Corrosive Strike", "Weapon action, Recharge: Per Battle, deal additional Acid damage equal to your proficiency bonus, on hit create a Pool of Acid around your Target which reduces AC by 2")
         ]
     }
     Type = Flail
@@ -393,7 +393,7 @@ let rec flailOfAges = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Elements of an Epoch", "This weapon may be imbued with five different elements. Depending on what kind of element this weapon is imbued with, it also inflicts Acid, Chilled, Burning, Shocked, or Reverberation upon your target.")
+            Complex ("Elements of an Epoch", "This weapon may be imbued with five different elements. Depending on what kind of element this weapon is imbued with, it also inflicts Acid, Chilled, Burning, Shocked, or Reverberation upon your target.")
         ]
     }
     Type = Flail
@@ -407,7 +407,7 @@ let rec shiningStaverOfSkulls = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Cleric Passive - Venerational Strikes", "After using one of your Miracles, receive Veneration for three turns.")
+            Complex ("Cleric Passive - Venerational Strikes", "After using one of your Miracles, receive Veneration for three turns.")
         ]
     }
     Type = LightHammer
@@ -421,7 +421,7 @@ let rec skybreaker = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Cleric Passive - Fell Repentance", "When an enemy makes an Attack Roll against an ally within 9m/30ft, you may use your Reaction in order to retaliate with Bone Chill, Sacred Flame ord Spark Surge.")
+            Complex ("Cleric Passive - Fell Repentance", "When an enemy makes an Attack Roll against an ally within 9m/30ft, you may use your Reaction in order to retaliate with Bone Chill, Sacred Flame ord Spark Surge.")
         ]
     }
     Type = LightHammer
@@ -435,7 +435,7 @@ let rec loviatarsScourge = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Willing Whip", "When dealing damage with this weapon deals an additional 1d4 Necrotic damage to all creatures within 3m/10ft of the wielder.")
+            Complex ("Willing Whip", "When dealing damage with this weapon deals an additional 1d4 Necrotic damage to all creatures within 3m/10ft of the wielder.")
         ]
     }
     Type = Mace
@@ -449,7 +449,7 @@ let rec shatteredFlail = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Yeenoghu's Gift", "Damaging an enemy with this weapon heals the wielder for 1d6 hit points. Damaging an enemy with a shield will also trigger the heal.")
+            Complex ("Yeenoghu's Gift", "Damaging an enemy with this weapon heals the wielder for 1d6 hit points. Damaging an enemy with a shield will also trigger the heal.")
         ]
     }
     Type = Mace
@@ -463,7 +463,7 @@ let rec xyanyde = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Xyanyde's Fire", "Once per turn, you encase a target in Faerie Fire for 3 turns if you miss an attack against it.")
+            Complex ("Xyanyde's Fire", "Once per turn, you encase a target in Faerie Fire for 3 turns if you miss an attack against it.")
         ]
     }
     Type = Mace
@@ -477,7 +477,7 @@ let rec handmaidensMace = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Infernal Weapon", "On each hit, deal an additional 4 poison damage and possibly Poison your target.")
+            Complex ("Infernal Weapon", "On each hit, deal an additional 4 poison damage and possibly Poison your target.")
         ]
     }
     Type = Mace
@@ -491,7 +491,7 @@ let rec infernalMace = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Infernal Weapon", "On each hit, deal an additional 4 poison damage and possibly Poison your target.")
+            Complex ("Infernal Weapon", "On each hit, deal an additional 4 poison damage and possibly Poison your target.")
         ]
     }
     Type = Mace
@@ -505,7 +505,7 @@ let rec adamantineMace = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Feat - Savage Assault", "Roll all of your damage dice with Advantage. Upon Damaging an enemy, apply one stack of Shredded Armour")
+            Complex ("Feat - Savage Assault", "Roll all of your damage dice with Advantage. Upon Damaging an enemy, apply one stack of Shredded Armour")
         ]
     }
     Type = Mace
@@ -519,7 +519,7 @@ let rec bloodOfLathander = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Lathander's Blessing", "Once per Long Rest, when your Hit Points are reduced to 0, you and all allies within 9m regain 12d12 hit points. Grants Sunbeam level 6 spell, Recharge: Short Rest")
+            Complex ("Lathander's Blessing", "Once per Long Rest, when your Hit Points are reduced to 0, you and all allies within 9m regain 12d12 hit points. Grants Sunbeam level 6 spell, Recharge: Short Rest")
         ]
     }
     Type = Mace
@@ -533,7 +533,7 @@ let rec twistOfFortune = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Twist of Fortune", "When you roll 4 or less with this weapon's damage die, reroll it and take the new result. Grants Blood Money Weapon action, Recharge: Short Rest, Strike out greedily, dealing 3 Damage per 100 gold that the target possesses. The Gold will be consumed.")
+            Complex ("Twist of Fortune", "When you roll 4 or less with this weapon's damage die, reroll it and take the new result. Grants Blood Money Weapon action, Recharge: Short Rest, Strike out greedily, dealing 3 Damage per 100 gold that the target possesses. The Gold will be consumed.")
         ]
     }
     Type = MorningStar
@@ -547,7 +547,7 @@ let rec ravengardsScourger = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Rallying Confidence", "At the start of each of your turns, you become Rallied.")
+            Complex ("Rallying Confidence", "At the start of each of your turns, you become Rallied.")
         ]
     }
     Type = MorningStar
@@ -561,7 +561,7 @@ let rec theSacredStar = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Dawnburst Strike", "Weapon action, Recharge: Per Battle, deal additional Radiant damage equal to twice your proficiency bonus, on hit blind enemies in 9m/30ft radius for 1 turn")
+            Complex ("Dawnburst Strike", "Weapon action, Recharge: Per Battle, deal additional Radiant damage equal to twice your proficiency bonus, on hit blind enemies in 9m/30ft radius for 1 turn")
         ]
     }
     Type = MorningStar
@@ -575,7 +575,7 @@ let rec faithbreaker = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Absolute Power", "Weapon action, Recharge: Per Battle, attack and deal additional 1d12 Radiant damage and possibly push target back 9m/30ft")
+            Complex ("Absolute Power", "Weapon action, Recharge: Per Battle, attack and deal additional 1d12 Radiant damage and possibly push target back 9m/30ft")
         ]
     }
     Type = Warhammer
@@ -589,7 +589,7 @@ let rec intransigentWarhammer = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Impulse Blast", "You knock any nearby foes Prone after killing a hostile target or landing a Critical Hit.")
+            Complex ("Impulse Blast", "You knock any nearby foes Prone after killing a hostile target or landing a Critical Hit.")
         ]
     }
     Type = Warhammer
@@ -603,7 +603,7 @@ let rec chargeBoundWarhammer = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Electric Blood", "When the wielder deals damage with a Spell or Cantrip, they gain 1 Lightning Charge.")
+            Complex ("Electric Blood", "When the wielder deals damage with a Spell or Cantrip, they gain 1 Lightning Charge.")
         ]
     }
     Type = Warhammer
@@ -617,7 +617,7 @@ let rec clownHammer = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Grim Irony", "Whenever this weapon lands a Critical Hit, your target falls into uncontrollable, Hideous Laughter for three turns.")
+            Complex ("Grim Irony", "Whenever this weapon lands a Critical Hit, your target falls into uncontrollable, Hideous Laughter for three turns.")
         ]
     }
     Type = Warhammer
@@ -631,7 +631,7 @@ let rec infernalWarhammer = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Infernal Weapon", "On a hit, the affected entity deals an additional 4 Poison damage and can possibly Poison its target.")
+            Complex ("Infernal Weapon", "On a hit, the affected entity deals an additional 4 Poison damage and can possibly Poison its target.")
         ]
     }
     Type = Warhammer
@@ -645,7 +645,7 @@ let rec hammerOfTheJust = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Paladin Passive - Repel the Damned", "All enemies within 9m/30ft of you take Radiant damage at the start of their turns equal to your Charisma Modifier.")
+            Complex ("Paladin Passive - Repel the Damned", "All enemies within 9m/30ft of you take Radiant damage at the start of their turns equal to your Charisma Modifier.")
         ]
     }
     Type = Warhammer
@@ -659,7 +659,7 @@ let rec kethericsWarhammer = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Blessing of Myrkul", "Dealing damage will apply Crawling Gnaw (as Necromancer) to your target for one turn.")
+            Complex ("Blessing of Myrkul", "Dealing damage will apply Crawling Gnaw (as Necromancer) to your target for one turn.")
         ]
     }
     Type = Warhammer
@@ -673,7 +673,7 @@ let rec dwarvenThrower = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Dwarven Thrower", "This weapon always returns to you when Thrown. While wielding this weapon, you may Throw creatures and objects as a Bonus Action. This can be toggled at any time.")
+            Complex ("Dwarven Thrower", "This weapon always returns to you when Thrown. While wielding this weapon, you may Throw creatures and objects as a Bonus Action. This can be toggled at any time.")
         ]
     }
     Type = Warhammer
@@ -687,7 +687,7 @@ let rec orphicHammer = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Spell Resistance", "You have Advantage on Saving Throws against Spells. Grants Unshackling Strike Class action, frees creature from Restrained, Paralysed, and Stunned")
+            Complex ("Spell Resistance", "You have Advantage on Saving Throws against Spells. Grants Unshackling Strike Class action, frees creature from Restrained, Paralysed, and Stunned")
         ]
     }
     Type = Warhammer
@@ -701,7 +701,7 @@ let rec caitiffStaff = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Caitiff's Restoration", "Class action, Recharge: Short Rest, replenish 1 expended Warlock Spell Slot")
+            Complex ("Caitiff's Restoration", "Class action, Recharge: Short Rest, replenish 1 expended Warlock Spell Slot")
         ]
     }
     Type = Quarterstaff
@@ -715,7 +715,7 @@ let rec corellonsGrace = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Unhampered Resistance", "Receive a +1 bonus to their Armour Class.")
+            Complex ("Unhampered Resistance", "Receive a +1 bonus to their Armour Class.")
         ]
     }
     Type = Quarterstaff
@@ -729,7 +729,7 @@ let rec naturesSnare = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Fly Trap", "Dealing damage with this weapon has a chance to Ensnare your target if it is not a plant or beast.")
+            Complex ("Fly Trap", "Dealing damage with this weapon has a chance to Ensnare your target if it is not a plant or beast.")
         ]
     }
     Type = Quarterstaff
@@ -743,7 +743,7 @@ let rec rainDancer = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Create Water", "level 3 spell, Recharge: Per Battle")
+            Complex ("Create Water", "level 3 spell, Recharge: Per Battle")
         ]
     }
     Type = Quarterstaff
@@ -757,7 +757,7 @@ let rec staffOfArcaneBlessing = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Mystra's Blessing", "Blessing a target has twice the effectiveness.")
+            Complex ("Mystra's Blessing", "Blessing a target has twice the effectiveness.")
         ]
     }
     Type = Quarterstaff
@@ -771,7 +771,7 @@ let rec goldWyrmlingStaff = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Wyrmling's Breath", "Dealing damage with this weapon has a chance to Burn your target for three turns.")
+            Complex ("Wyrmling's Breath", "Dealing damage with this weapon has a chance to Burn your target for three turns.")
         ]
     }
     Type = Quarterstaff
@@ -785,7 +785,7 @@ let rec staffOfAMumblingWizard = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Firebolt?", "Cantrip, as Firebolt but 5% chance to cast Fireball instead")
+            Complex ("Firebolt?", "Cantrip, as Firebolt but 5% chance to cast Fireball instead")
         ]
     }
     Type = Quarterstaff
@@ -799,7 +799,7 @@ let rec creationsEcho = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sorcerer Passive - Elemental Afterglow", "Using a Spell to deal elemental damage causes your target and enemies within 3m/10ft of them to suffer from a status effect dependant on the type of damage you dealt. This can be toggled at any time.")
+            Complex ("Sorcerer Passive - Elemental Afterglow", "Using a Spell to deal elemental damage causes your target and enemies within 3m/10ft of them to suffer from a status effect dependant on the type of damage you dealt. This can be toggled at any time.")
         ]
     }
     Type = Quarterstaff
@@ -813,7 +813,7 @@ let rec melfsFirstStaff = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Melf's Acid Arrow", "level 1 spell, Recharge: Per Turn")
+            Complex ("Melf's Acid Arrow", "level 1 spell, Recharge: Per Turn")
         ]
     }
     Type = Quarterstaff
@@ -827,7 +827,7 @@ let rec paleOak = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Withering Roots", "Cantrip, target creature is surrounded by difficult terrain for three turns")
+            Complex ("Withering Roots", "Cantrip, target creature is surrounded by difficult terrain for three turns")
         ]
     }
     Type = Quarterstaff
@@ -841,7 +841,7 @@ let rec staffOfCrones = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Ray of Sickness", "level 1 spell, Recharge: Per Turn")
+            Complex ("Ray of Sickness", "level 1 spell, Recharge: Per Turn")
         ]
     }
     Type = Quarterstaff
@@ -855,7 +855,7 @@ let rec theSpellsparkler = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Electric Veins", "When the wielder deals damage with a Spell or Cantrip, they gain 1 Lightning Charge.")
+            Complex ("Electric Veins", "When the wielder deals damage with a Spell or Cantrip, they gain 1 Lightning Charge.")
         ]
     }
     Type = Quarterstaff
@@ -869,7 +869,7 @@ let rec bigboysChewToy = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Giant Form", "Class action, enlarge until long rest, weapons deal +1d4 and gain advantage on Strength based Ability Checks and Saving Throws")
+            Complex ("Giant Form", "Class action, enlarge until long rest, weapons deal +1d4 and gain advantage on Strength based Ability Checks and Saving Throws")
         ]
     }
     Type = Quarterstaff
@@ -883,7 +883,7 @@ let rec cacophony = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Cacophonous Performance", "Gain the ability to Perform. While performing, dealing damage will cause additional effects based on what song you have selected. The Power - causes enemies to potentially take an additional 1d12 Thunder damage. Old Time Battle - causes enemies to potentially go Mad. Bard Dance - causes enemies to potentially Dance (Otto's Irresistable Dance) uncontrollably.")
+            Complex ("Cacophonous Performance", "Gain the ability to Perform. While performing, dealing damage will cause additional effects based on what song you have selected. The Power - causes enemies to potentially take an additional 1d12 Thunder damage. Old Time Battle - causes enemies to potentially go Mad. Bard Dance - causes enemies to potentially Dance (Otto's Irresistable Dance) uncontrollably.")
         ]
     }
     Type = Quarterstaff
@@ -897,7 +897,7 @@ let rec incandescentStaff = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Excessive Heat", "When dealing damage with a weapon, you deal an additional 1 Fire damage for each stack of Heat you currently have.")
+            Complex ("Excessive Heat", "When dealing damage with a weapon, you deal an additional 1 Fire damage for each stack of Heat you currently have.")
         ]
     }
     Type = Quarterstaff
@@ -911,7 +911,7 @@ let rec despairOfAthkatla = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sorcerer Passive - Mystic Empowerment", "When rolling with Advantage on your Spell based Attack Rolls or Saving Throws, roll the damage of your Spells with Advantage as well.")
+            Complex ("Sorcerer Passive - Mystic Empowerment", "When rolling with Advantage on your Spell based Attack Rolls or Saving Throws, roll the damage of your Spells with Advantage as well.")
         ]
     }
     Type = Quarterstaff
@@ -925,7 +925,7 @@ let rec harperSacredstriker = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Divine Favor", "Level 1 spell, Recharge: Per Turn")
+            Complex ("Divine Favor", "Level 1 spell, Recharge: Per Turn")
         ]
     }
     Type = Quarterstaff
@@ -939,7 +939,7 @@ let rec hollowsStaff = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Nectrotic Roots", "Dealing damage will apply Crawling Gnaw (as Necromancer) to your target for one turn.")
+            Complex ("Nectrotic Roots", "Dealing damage will apply Crawling Gnaw (as Necromancer) to your target for one turn.")
         ]
     }
     Type = Quarterstaff
@@ -953,7 +953,7 @@ let rec mourningFrost = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Heart of Ice", "When dealing Cold damage, the wielder deals an additional 1d8 Cold damage. All Cold based damage rolls are rolled with Advantage and ignore Resistance.")
+            Complex ("Heart of Ice", "When dealing Cold damage, the wielder deals an additional 1d8 Cold damage. All Cold based damage rolls are rolled with Advantage and ignore Resistance.")
         ]
     }
     Type = Quarterstaff
@@ -967,7 +967,7 @@ let rec staffOfTheEmperor = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Imperial Retaliation", "When the wielder succeeds a Saving Throw, the foe that caused the throw needs to make an Intelligence Saving Throw or be Stunned for 1 turn.")
+            Complex ("Imperial Retaliation", "When the wielder succeeds a Saving Throw, the foe that caused the throw needs to make an Intelligence Saving Throw or be Stunned for 1 turn.")
         ]
     }
     Type = Quarterstaff
@@ -981,7 +981,7 @@ let rec staffOfCherishedNecromancy = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Life Essence Absorption", "When the wearer lands a killing blow on a hostile creature, they greedily absorb its energy and gain Life Essence until their next Long Rest.")
+            Complex ("Life Essence Absorption", "When the wearer lands a killing blow on a hostile creature, they greedily absorb its energy and gain Life Essence until their next Long Rest.")
         ]
     }
     Type = Quarterstaff
@@ -995,7 +995,7 @@ let rec staffOfInterruption = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Counterspell", "level 1 spell")
+            Complex ("Counterspell", "level 1 spell")
         ]
     }
     Type = Quarterstaff
@@ -1009,7 +1009,7 @@ let rec staffOfSpellpower = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Innate Power", "When dealing damage with a Spell or Cantrip, you deal additional damage equal to your level.")
+            Complex ("Innate Power", "When dealing damage with a Spell or Cantrip, you deal additional damage equal to your level.")
         ]
     }
     Type = Quarterstaff
@@ -1023,7 +1023,7 @@ let rec staffOfTheRam = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Staff of the Ram", "The first successful Attack Roll you make with this weapon each turn forces your target back by 9m/30ft and Stuns them. This has no effect on Huge creatures.")
+            Complex ("Staff of the Ram", "The first successful Attack Roll you make with this weapon each turn forces your target back by 9m/30ft and Stuns them. This has no effect on Huge creatures.")
         ]
     }
     Type = Quarterstaff
@@ -1037,7 +1037,7 @@ let rec woe = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Arcane Vampirism", "When the creatures affected by your Spells fail any associated Saving Throws, you regain 12 hit points.")
+            Complex ("Arcane Vampirism", "When the creatures affected by your Spells fail any associated Saving Throws, you regain 12 hit points.")
         ]
     }
     Type = Quarterstaff
@@ -1051,7 +1051,7 @@ let rec markoheshkir = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Arcane Battery", "Alleviate the burden of Spellcasting with the power of this staff. The next Spell you cast doesn't cost a Spell Slot. Devout Spellcasting Spells you cast and Conditions you apply have their Difficulty Class increased by +2. Grants Kereska's Favour level 6 spell, imbue yourself with elemental energy sourced from the draconic goddes, Kereska")
+            Complex ("Arcane Battery", "Alleviate the burden of Spellcasting with the power of this staff. The next Spell you cast doesn't cost a Spell Slot. Devout Spellcasting Spells you cast and Conditions you apply have their Difficulty Class increased by +2. Grants Kereska's Favour level 6 spell, imbue yourself with elemental energy sourced from the draconic goddes, Kereska")
         ]
     }
     Type = Quarterstaff
@@ -1065,7 +1065,7 @@ let rec combinationAxe = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Critical Virtuoso", "When you score a Critical Hit you can spend a Bonus Action to make an additional Attack.")
+            Complex ("Critical Virtuoso", "When you score a Critical Hit you can spend a Bonus Action to make an additional Attack.")
         ]
     }
     Type = Battleaxe
@@ -1079,7 +1079,7 @@ let rec witchbreaker = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Break and Slay", "When a nearby caster casts a Spell, you may use your Reaction to make a Melee Weapon Attack against them. Grants Hush You Weapon action, Recharge: Per Battle, Slash and possibly Silence a target for 3 turns")
+            Complex ("Break and Slay", "When a nearby caster casts a Spell, you may use your Reaction to make a Melee Weapon Attack against them. Grants Hush You Weapon action, Recharge: Per Battle, Slash and possibly Silence a target for 3 turns")
         ]
     }
     Type = Battleaxe
@@ -1093,7 +1093,7 @@ let rec thermodynamoAxe = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Thermodynamo", "Whenever you deal damage with this weapon, you gain 3 stacks of Heat.")
+            Complex ("Thermodynamo", "Whenever you deal damage with this weapon, you gain 3 stacks of Heat.")
         ]
     }
     Type = Battleaxe
@@ -1107,7 +1107,7 @@ let rec viciousBattleaxe = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Vicious Critical", "When you land a Critical Hit with a weapon or unarmed attack, you roll your damage with Advantage.")
+            Complex ("Vicious Critical", "When you land a Critical Hit with a weapon or unarmed attack, you roll your damage with Advantage.")
         ]
     }
     Type = Battleaxe
@@ -1121,7 +1121,7 @@ let rec dragonsGrasp = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Homing Weapon", "This weapon will return to its owner when thrown.")
+            Complex ("Homing Weapon", "This weapon will return to its owner when thrown.")
         ]
     }
     Type = Handaxe
@@ -1135,7 +1135,7 @@ let rec ritualAxe = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("The Scourge Mistress' Bane", "Chance to inflict upon the target a 1d4 penalty to Attack Rolls and Saving Throws. If the attacker still has 50% or more Hit Points, they take 1d6 Piercing damage themselves.")
+            Complex ("The Scourge Mistress' Bane", "Chance to inflict upon the target a 1d4 penalty to Attack Rolls and Saving Throws. If the attacker still has 50% or more Hit Points, they take 1d6 Piercing damage themselves.")
         ]
     }
     Type = Handaxe
@@ -1149,7 +1149,7 @@ let rec comebackHandaxe = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Fighter Passive - Aspect of Defiance", "When damaged below 75% of your total Hit Points, gain Resistance to all forms of physical damage.")
+            Complex ("Fighter Passive - Aspect of Defiance", "When damaged below 75% of your total Hit Points, gain Resistance to all forms of physical damage.")
         ]
     }
     Type = Handaxe
@@ -1163,7 +1163,7 @@ let rec githyankiLongsword = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
+            Complex ("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
         ]
     }
     Type = Longsword
@@ -1177,7 +1177,7 @@ let rec bonesaw = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Bonesaw", "-")
+            Complex ("Bonesaw", "-")
         ]
     }
     Type = Longsword
@@ -1191,7 +1191,7 @@ let rec cruelSting = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Ensnaring Strike", "level 1 spell, Recharge: Short Rest")
+            Complex ("Ensnaring Strike", "level 1 spell, Recharge: Short Rest")
         ]
     }
     Type = Longsword
@@ -1205,7 +1205,7 @@ let rec larethiansWrath = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Razor Gale", "Weapon action, Recharge: Per Battle, attack all enemies in melee range")
+            Complex ("Razor Gale", "Weapon action, Recharge: Per Battle, attack all enemies in melee range")
         ]
     }
     Type = Longsword
@@ -1219,7 +1219,7 @@ let rec phalarAluve = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Phalar Aluve: Melody", "weapon action, Recharge: Short Rest, creates 9m/30ft aura for 3 turns to either grant allies Advantage on Attack Rolls or enemies Disadvantage on Attack Rolls")
+            Complex ("Phalar Aluve: Melody", "weapon action, Recharge: Short Rest, creates 9m/30ft aura for 3 turns to either grant allies Advantage on Attack Rolls or enemies Disadvantage on Attack Rolls")
         ]
     }
     Type = Longsword
@@ -1233,7 +1233,7 @@ let rec bladeOfOppressedSouls = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Maddening Oppression", "When damaging other creatures with this weapon, they have a chance of succumbing to Madness for one turn.")
+            Complex ("Maddening Oppression", "When damaging other creatures with this weapon, they have a chance of succumbing to Madness for one turn.")
         ]
     }
     Type = Longsword
@@ -1247,7 +1247,7 @@ let rec katana = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Glorious Edge", "When dealing damage with this weapon, your target is afflicted with both Bleeding and Gaping Wounds for one turn.")
+            Complex ("Glorious Edge", "When dealing damage with this weapon, your target is afflicted with both Bleeding and Gaping Wounds for one turn.")
         ]
     }
     Type = Longsword
@@ -1261,7 +1261,7 @@ let rec adamantineLongsword = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Feat - Restricted Territory", "Gain the ability to use your Reaction to make a Weapon Attack against an enemy who enters your weapons range. Additionally when you make an Opportunity Attack, it deals the maximum damage possible.")
+            Complex ("Feat - Restricted Territory", "Gain the ability to use your Reaction to make a Weapon Attack against an enemy who enters your weapons range. Additionally when you make an Opportunity Attack, it deals the maximum damage possible.")
         ]
     }
     Type = Longsword
@@ -1275,7 +1275,7 @@ let rec blackguardsSword = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Rotten Smites", "On a hit infused with one of your Smites, the target must succeed a Constitution based Saving Throw or become afflicted with Contangion fot three turns.")
+            Complex ("Rotten Smites", "On a hit infused with one of your Smites, the target must succeed a Constitution based Saving Throw or become afflicted with Contangion fot three turns.")
         ]
     }
     Type = Longsword
@@ -1289,7 +1289,7 @@ let rec dukeRavengardsLongsword = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Commander's Strike", "Weapon action, Recharge: Per Turn, as Fighter Maneuver as Bonus Action")
+            Complex ("Commander's Strike", "Weapon action, Recharge: Per Turn, as Fighter Maneuver as Bonus Action")
         ]
     }
     Type = Longsword
@@ -1303,7 +1303,7 @@ let rec swordOfTheEmperor = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Illithid Edge", "This weapon deals an additional point of damage for each Tadpole power you have taken, up to a Maximum of 8")
+            Complex ("Illithid Edge", "This weapon deals an additional point of damage for each Tadpole power you have taken, up to a Maximum of 8")
         ]
     }
     Type = Longsword
@@ -1317,7 +1317,7 @@ let rec vossSilverSword = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Interplanar Slayer", "This weapon grants a +1d4 bonus to Damage and Attack Rolls against Githyanki, Aberrations, Fiends, and Elementals.")
+            Complex ("Interplanar Slayer", "This weapon grants a +1d4 bonus to Damage and Attack Rolls against Githyanki, Aberrations, Fiends, and Elementals.")
         ]
     }
     Type = Longsword
@@ -1331,7 +1331,7 @@ let rec speedyReply = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Nimble Attack", "When the wielder hits an enemy with this weapon, they gain one stack of Momentum.")
+            Complex ("Nimble Attack", "When the wielder hits an enemy with this weapon, they gain one stack of Momentum.")
         ]
     }
     Type = Scimitar
@@ -1345,7 +1345,7 @@ let rec sylvanScimitar = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Druid Passive - Nature's Mercy", "Gain Resistance to Cold, Lightning and Poison damage.")
+            Complex ("Druid Passive - Nature's Mercy", "Gain Resistance to Cold, Lightning and Poison damage.")
         ]
     }
     Type = Scimitar
@@ -1359,7 +1359,7 @@ let rec thornBlade = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Poisonous Synergy", "While Concentrating, your Melee Weapon Attacks using this weapon deal an additional 1d8 Poison damage.")
+            Complex ("Poisonous Synergy", "While Concentrating, your Melee Weapon Attacks using this weapon deal an additional 1d8 Poison damage.")
         ]
     }
     Type = Scimitar
@@ -1373,7 +1373,7 @@ let rec kurwinsCauteriser = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Cauteriser", "Upon dealing damage, the target Burns for three turns.")
+            Complex ("Cauteriser", "Upon dealing damage, the target Burns for three turns.")
         ]
     }
     Type = Scimitar
@@ -1387,7 +1387,7 @@ let rec adamantineScimitar = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Feat - War Caster", "Gain Advantage on Concentration based Saving Throws. Additionally, you can cast Shocking Grasp against an enemy who enters into melee range as a free Reaction, as well as Bind your weapons. Furthermore, you may cast any ranged Spell or Cantrip as a melee Spell. This may be toggled at any time.")
+            Complex ("Feat - War Caster", "Gain Advantage on Concentration based Saving Throws. Additionally, you can cast Shocking Grasp against an enemy who enters into melee range as a free Reaction, as well as Bind your weapons. Furthermore, you may cast any ranged Spell or Cantrip as a melee Spell. This may be toggled at any time.")
         ]
     }
     Type = Scimitar
@@ -1401,7 +1401,7 @@ let rec justiciarsScimitar = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Shadowsoaked Blow", "Weapon action, Recharge: Per Turn, strike and add your Proficiency Bonus and +1d6 Psychic damage to the attack. Doesn't break concealment.")
+            Complex ("Shadowsoaked Blow", "Weapon action, Recharge: Per Turn, strike and add your Proficiency Bonus and +1d6 Psychic damage to the attack. Doesn't break concealment.")
         ]
     }
     Type = Scimitar
@@ -1415,7 +1415,7 @@ let rec belm = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Perfectly Balanced Strike", "Weapon action, Recharge: Per Turn, make a weapon attack as a bonus action")
+            Complex ("Perfectly Balanced Strike", "Weapon action, Recharge: Per Turn, make a weapon attack as a bonus action")
         ]
     }
     Type = Scimitar
@@ -1429,7 +1429,7 @@ let rec saltyScimitarRrr = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Command", "level 1 spell, Recharge: Per Turn")
+            Complex ("Command", "level 1 spell, Recharge: Per Turn")
         ]
     }
     Type = Scimitar
@@ -1443,7 +1443,7 @@ let rec githyankiShortsword = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
+            Complex ("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
         ]
     }
     Type = Shortsword
@@ -1457,7 +1457,7 @@ let rec swordOfFirstBlood = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Break the Unbroken", "Deals an additional 8 Piercing damage to targets that still have all their Hit Points.")
+            Complex ("Break the Unbroken", "Deals an additional 8 Piercing damage to targets that still have all their Hit Points.")
         ]
     }
     Type = Shortsword
@@ -1471,7 +1471,7 @@ let rec renderOfMindAndBody = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Psychic Steel Virtuoso", "When the wielder attacks with Advantage, they deal an additional 1d4 Psychic damage.")
+            Complex ("Psychic Steel Virtuoso", "When the wielder attacks with Advantage, they deal an additional 1d4 Psychic damage.")
         ]
     }
     Type = Shortsword
@@ -1485,7 +1485,7 @@ let rec ambusher = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Ambusher's Streak", "In combat, you deal an additional 1d8 Piercing damage against creatures that haven't taken a turn yet.")
+            Complex ("Ambusher's Streak", "In combat, you deal an additional 1d8 Piercing damage against creatures that haven't taken a turn yet.")
         ]
     }
     Type = Shortsword
@@ -1513,7 +1513,7 @@ let rec knifeOfTheUndermountainKing = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Organ Rearranger", "Reduce the number needed to roll a Critical Hit while attacking by 1. This effect can stack.")
+            Complex ("Organ Rearranger", "Reduce the number needed to roll a Critical Hit while attacking by 1. This effect can stack.")
         ]
     }
     Type = Shortsword
@@ -1527,7 +1527,7 @@ let rec theBaneful = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Baneful Bond", "On a hit, possible Bane your target.")
+            Complex ("Baneful Bond", "On a hit, possible Bane your target.")
         ]
     }
     Type = Shortsword
@@ -1541,7 +1541,7 @@ let rec assassinsShortsword = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Rogue Passive - Cutthroat", "When you roll a Critical Hit, roll an additional damage die.")
+            Complex ("Rogue Passive - Cutthroat", "When you roll a Critical Hit, roll an additional damage die.")
         ]
     }
     Type = Shortsword
@@ -1555,7 +1555,7 @@ let rec slicingShortsword = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Deepflesh Slice", "When the wielder attacks with Advantage, the attack inflicts Bleeding for three turns.")
+            Complex ("Deepflesh Slice", "When the wielder attacks with Advantage, the attack inflicts Bleeding for three turns.")
         ]
     }
     Type = Shortsword
@@ -1583,7 +1583,7 @@ let rec swordOfLifeStealing = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Life Stealing Critical", "On a Critical Hit, the target takes an extra 8 Necrotic damage as long as it isn't a construct or an undead. You also gain 8 Temporary Hit Points.")
+            Complex ("Life Stealing Critical", "On a Critical Hit, the target takes an extra 8 Necrotic damage as long as it isn't a construct or an undead. You also gain 8 Temporary Hit Points.")
         ]
     }
     Type = Shortsword
@@ -1597,8 +1597,8 @@ let rec crimsonMischief = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Stab Happy", "This weapon deals an additional 8 Piercing damage against targets with 50% of their Hit Points or fewer.");
-            Complex("Redvein Savagery", "When you make an attack with Advantage, the target takes an additional 8 Piercing damage.")
+            Complex ("Stab Happy", "This weapon deals an additional 8 Piercing damage against targets with 50% of their Hit Points or fewer.");
+            Complex ("Redvein Savagery", "When you make an attack with Advantage, the target takes an additional 8 Piercing damage.")
         ]
     }
     Type = Shortsword
@@ -1612,7 +1612,7 @@ let rec sickleOfBoooal = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Fighter Passive - Merciless", "When making a weapon based Attack Roll against an enemy with less than 25% of their total Hit Points remaining, deal additional damage equal to your levels in Fighter multiplied by two.")
+            Complex ("Fighter Passive - Merciless", "When making a weapon based Attack Roll against an enemy with less than 25% of their total Hit Points remaining, deal additional damage equal to your levels in Fighter multiplied by two.")
         ]
     }
     Type = Sickle
@@ -1626,7 +1626,7 @@ let rec sussurSickle = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sussur Sickle", "Silences targets on hit.")
+            Complex ("Sussur Sickle", "Silences targets on hit.")
         ]
     }
     Type = Sickle
@@ -1640,7 +1640,7 @@ let rec wavemothersSickle = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Watery Guidance", "This weapon makes both Attack Rolls and Damage with Advantage when targeting Wet creatures.")
+            Complex ("Watery Guidance", "This weapon makes both Attack Rolls and Damage with Advantage when targeting Wet creatures.")
         ]
     }
     Type = Sickle
@@ -1654,7 +1654,7 @@ let rec deepDelver = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Dig Deep", "Inflict one stack of Reverberation when dealing damage with this weapon.")
+            Complex ("Dig Deep", "Inflict one stack of Reverberation when dealing damage with this weapon.")
         ]
     }
     Type = WarPick
@@ -1668,7 +1668,7 @@ let rec hoppy = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Revitalising Strike", "Weapon action, Recharge: Per Turn, strike enemy and heal 1d6 hit points, deals additional Necrotic damage equal to Proficiency Bonus")
+            Complex ("Revitalising Strike", "Weapon action, Recharge: Per Turn, strike enemy and heal 1d6 hit points, deals additional Necrotic damage equal to Proficiency Bonus")
         ]
     }
     Type = WarPick
@@ -1682,7 +1682,7 @@ let rec rupturingBlade = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Resistance to Fire Damage", "Grants Resistance to Fire Damage");
+            Complex ("Resistance to Fire Damage", "Grants Resistance to Fire Damage");
             Power(Action, OncePerShortRest, "Searing Blood", "Weapon action, Recharge: Short Rest, deal +1d8 fire damage to a target and cause them to Burn")
         ]
     }
@@ -1697,7 +1697,7 @@ let rec swordOfScreams = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Screaming Edge", "Upon dealing Damage, you potentially inflict Mind Sliver for three tuns.")
+            Complex ("Screaming Edge", "Upon dealing Damage, you potentially inflict Mind Sliver for three tuns.")
         ]
     }
     Type = Rapier
@@ -1739,7 +1739,7 @@ let rec pelorsunBlade = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Undead Bane", "Attack Rolls with this weapon roll with Advantage against Undead creatures. Additionally, when damaging an Undead creature with this weapon, they may become Pacified.")
+            Complex ("Undead Bane", "Attack Rolls with this weapon roll with Advantage against Undead creatures. Additionally, when damaging an Undead creature with this weapon, they may become Pacified.")
         ]
     }
     Type = Rapier
@@ -1769,7 +1769,7 @@ let rec assassinsTouch = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Deathly Slumber", "This Weapon deals an additional 12 Piercing damage to creatures that are Incapacitazed, Paralyzed, or Sleeping.")
+            Complex ("Deathly Slumber", "This Weapon deals an additional 12 Piercing damage to creatures that are Incapacitazed, Paralyzed, or Sleeping.")
         ]
     }
     Type = Dagger
@@ -1783,7 +1783,7 @@ let rec huntersDagger = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Rupturing", "Dealing damage with this weapon causes your target to become Ruptured for three turns.")
+            Complex ("Rupturing", "Dealing damage with this weapon causes your target to become Ruptured for three turns.")
         ]
     }
     Type = Dagger
@@ -1797,7 +1797,7 @@ let rec ritualDagger = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("The Pain Maiden's Blessing", "After a successful attack with this dagger, the wielder receives a +1d4 bonus to Attack Rolls and Saving Throws until the end of their next turn.")
+            Complex ("The Pain Maiden's Blessing", "After a successful attack with this dagger, the wielder receives a +1d4 bonus to Attack Rolls and Saving Throws until the end of their next turn.")
         ]
     }
     Type = Dagger
@@ -1811,7 +1811,7 @@ let rec sharsSting = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("-", "-")
+            Complex ("-", "-")
         ]
     }
     Type = Dagger
@@ -1825,7 +1825,7 @@ let rec artificialLeech = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("-", "-")
+            Complex ("-", "-")
         ]
     }
     Type = Dagger
@@ -1839,7 +1839,7 @@ let rec gleamdanceDagger = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Armour Class +1", "Armour Class +1")
+            Complex ("Armour Class +1", "Armour Class +1")
         ]
     }
     Type = Dagger
@@ -1853,7 +1853,7 @@ let rec sussurDagger = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Silences targets on hit.", "Silences targets on hit.")
+            Complex ("Silences targets on hit.", "Silences targets on hit.")
         ]
     }
     Type = Dagger
@@ -1867,7 +1867,7 @@ let rec coldSnap = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Chilling Counter", "When a creature fails an attack roll against you, it becomes Chilled for 3 turns.")
+            Complex ("Chilling Counter", "When a creature fails an attack roll against you, it becomes Chilled for 3 turns.")
         ]
     }
     Type = Dagger
@@ -1881,7 +1881,7 @@ let rec dreadIronDagger = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Dread Iron Ambush", "While its wielder is hidden, this weapon deals an extra 1d12 Necrotic damage")
+            Complex ("Dread Iron Ambush", "While its wielder is hidden, this weapon deals an extra 1d12 Necrotic damage")
         ]
     }
     Type = Dagger
@@ -1895,7 +1895,7 @@ let rec murderousCut = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Stab Happy", "This weapon deals an additional 4 Piercing Damage against targets with 50% of their Hit Points or fewer.")
+            Complex ("Stab Happy", "This weapon deals an additional 4 Piercing Damage against targets with 50% of their Hit Points or fewer.")
         ]
     }
     Type = Dagger
@@ -1909,7 +1909,7 @@ let rec dolorAmarus = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Dolar Amarus", "Once per turn, when you land a Critical Hit with a weapon or unarmed attack, it deals an additional 12 damage.")
+            Complex ("Dolar Amarus", "Once per turn, when you land a Critical Hit with a weapon or unarmed attack, it deals an additional 12 damage.")
         ]
     }
     Type = Dagger
@@ -1924,7 +1924,7 @@ let rec arcaneAbsorptionDagger = {
         Rarity = Epic
         Grants = [
             Power(Action, AtWill, "Arcane Absorption", "When you kill an enemy with a melee attack, regain all of your spent 1st Level Spell Slots.");
-            Complex("Deals Force damage instead of Piercing", "Deals Force damage instead of Piercing")
+            Complex ("Deals Force damage instead of Piercing", "Deals Force damage instead of Piercing")
         ]
     }
     Type = Dagger
@@ -1952,7 +1952,7 @@ let rec stillmaker = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Stillmaker", "When dealing damage to a humanoid, you have a chance to Hold your target in place until the end of their next turn.")
+            Complex ("Stillmaker", "When dealing damage to a humanoid, you have a chance to Hold your target in place until the end of their next turn.")
         ]
     }
     Type = Dagger
@@ -1966,8 +1966,8 @@ let rec bladeOfTheFirstBlood = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 2. This effect can stack.");
-            Complex("Exploit Weakness", "Creatures hit with this weapon receive Vulnerability to Piercing Damage.")
+            Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 2. This effect can stack.");
+            Complex ("Exploit Weakness", "Creatures hit with this weapon receive Vulnerability to Piercing Damage.")
         ]
     }
     Type = Dagger
@@ -1981,7 +1981,7 @@ let rec jaggedSpear = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Torturous", "When dealing damage, your target potentially becomes Tortured.")
+            Complex ("Torturous", "When dealing damage, your target potentially becomes Tortured.")
         ]
     }
     Type = Spear
@@ -1995,7 +1995,7 @@ let rec lightningJabber = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Shocking Sting", "On a hit, possibly Shock your target.")
+            Complex ("Shocking Sting", "On a hit, possibly Shock your target.")
         ]
     }
     Type = Spear
@@ -2009,7 +2009,7 @@ let rec visionOfTheAbsolute = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Absolute Night", "Dealing damage with this weapon has the potential to Blind your target.")
+            Complex ("Absolute Night", "Dealing damage with this weapon has the potential to Blind your target.")
         ]
     }
     Type = Spear
@@ -2023,7 +2023,7 @@ let rec theWatchersGuide = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Death's Promise", "When this weapon misses its target, the target is afflicted with Bleeding for three turns.")
+            Complex ("Death's Promise", "When this weapon misses its target, the target is afflicted with Bleeding for three turns.")
         ]
     }
     Type = Spear
@@ -2037,7 +2037,7 @@ let rec infernalSpear = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Infernal Weapon", "On a hit, the affected entity deals an additional 4 Poison damage and can possibly Poison its target.")
+            Complex ("Infernal Weapon", "On a hit, the affected entity deals an additional 4 Poison damage and can possibly Poison its target.")
         ]
     }
     Type = Spear
@@ -2051,7 +2051,7 @@ let rec selNesSpearOfNight = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Moonbeam", "level 6 spell, Recharge: Long Rest Grants Moonmote Class action, illuminate 9m/30ft aura for three turns, movement difficult for enemies, allies deal additional 1d4 radiant damage, Concentration")
+            Complex ("Moonbeam", "level 6 spell, Recharge: Long Rest Grants Moonmote Class action, illuminate 9m/30ft aura for three turns, movement difficult for enemies, allies deal additional 1d4 radiant damage, Concentration")
         ]
     }
     Type = Spear
@@ -2065,7 +2065,7 @@ let rec sharsSpearOfTheEvening = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Shar's Blessing", "While Lightly or Heavily Obscured, you gain Advantage on all Saving Throws and deal an additional 1d8 Necrotic damage with weaponbased Attack Rolls. Shar's Blessing You can see normally in darkness, both magical and non-magical, to a distance of 18m/60ft. Grants Edge of Darkness Weapon action, Recharge: Per Turn, create cloud of darkness while you attack")
+            Complex ("Shar's Blessing", "While Lightly or Heavily Obscured, you gain Advantage on all Saving Throws and deal an additional 1d8 Necrotic damage with weaponbased Attack Rolls. Shar's Blessing You can see normally in darkness, both magical and non-magical, to a distance of 18m/60ft. Grants Edge of Darkness Weapon action, Recharge: Per Turn, create cloud of darkness while you attack")
         ]
     }
     Type = Spear
@@ -2079,7 +2079,7 @@ let rec spearOfNight = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Shar's Blessing", "If Shar allows it, use this spear to kill Nightsong.")
+            Complex ("Shar's Blessing", "If Shar allows it, use this spear to kill Nightsong.")
         ]
     }
     Type = Spear
@@ -2093,7 +2093,7 @@ let rec theSparkyPoints = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
+            Complex ("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
         ]
     }
     Type = Trident
@@ -2107,7 +2107,7 @@ let rec tridentOfTheWaves = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("The Water Caller", "This weapon always returns to you when Thrown. When dealing damage with this weapon, you create a 3m/10ft water surface centered around your target. Watery Guidance This weapon makes both Attack Rolls and Damage with Advantage when targeting Wet creatures.")
+            Complex ("The Water Caller", "This weapon always returns to you when Thrown. When dealing damage with this weapon, you create a 3m/10ft water surface centered around your target. Watery Guidance This weapon makes both Attack Rolls and Damage with Advantage when targeting Wet creatures.")
         ]
     }
     Type = Trident
@@ -2121,7 +2121,7 @@ let rec nyrulna = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Shockwave", "When the wielder deals damage with this weapon, they deal an additional 1d8 Thunder damage in a 3m/10ft radius. Once affected by the thunderous explosion, enemies cannot be affected again until the start of their next turn. This can be toggled at any time. Veil of the Wind This weapon always returns to you when Thrown. In addition, you gain a +3m/10ft bonus to Movement Speed and Jump distance. In addition, you are Immune to fall damage. Grants Zephyr Flash Weapon action, Recharge: Short Rest, rush forward potentially inflicting bleed and blasting foes away, deals 6d6 Thunder, doesn't provoke Opportunity Attacks")
+            Complex ("Shockwave", "When the wielder deals damage with this weapon, they deal an additional 1d8 Thunder damage in a 3m/10ft radius. Once affected by the thunderous explosion, enemies cannot be affected again until the start of their next turn. This can be toggled at any time. Veil of the Wind This weapon always returns to you when Thrown. In addition, you gain a +3m/10ft bonus to Movement Speed and Jump distance. In addition, you are Immune to fall damage. Grants Zephyr Flash Weapon action, Recharge: Short Rest, rush forward potentially inflicting bleed and blasting foes away, deals 6d6 Thunder, doesn't provoke Opportunity Attacks")
         ]
     }
     Type = Trident
@@ -2135,7 +2135,7 @@ let rec bloodsoakedGreataxe = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Bloodrend", "Weapon action, Recharge: Short Rest, adds Proficiency Bonus to damage, grants Bloodrender for three turns on successful hit")
+            Complex ("Bloodrend", "Weapon action, Recharge: Short Rest, adds Proficiency Bonus to damage, grants Bloodrender for three turns on successful hit")
         ]
     }
     Type = Greataxe
@@ -2149,7 +2149,7 @@ let rec exterminatorsAxe = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Exterminator", "Upon rolling a Critical Hit, you immediately become Enraged.")
+            Complex ("Exterminator", "Upon rolling a Critical Hit, you immediately become Enraged.")
         ]
     }
     Type = Greataxe
@@ -2163,7 +2163,7 @@ let rec veryHeavyGreataxe = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Gargantuan Cleave", "Weapon action, Recharge: Per Turn, as Cleave but become Off Balanced")
+            Complex ("Gargantuan Cleave", "Weapon action, Recharge: Per Turn, as Cleave but become Off Balanced")
         ]
     }
     Type = Greataxe
@@ -2177,7 +2177,7 @@ let rec defenderGreataxe = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Defender Greataxe", "Armour Class +1")
+            Complex ("Defender Greataxe", "Armour Class +1")
         ]
     }
     Type = Greataxe
@@ -2191,7 +2191,7 @@ let rec theUndeadBane = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Profane Scourge", "Weapon action, Recharge: Short Rest, adds 6d6 Radiant damage if target is Undead")
+            Complex ("Profane Scourge", "Weapon action, Recharge: Short Rest, adds 6d6 Radiant damage if target is Undead")
         ]
     }
     Type = Greataxe
@@ -2205,7 +2205,7 @@ let rec bloodedGreataxe = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Relentless Revenge", "When the wielder has 50% Hit Points or less, they deal an additional 1d12 Slashing damage.")
+            Complex ("Relentless Revenge", "When the wielder has 50% Hit Points or less, they deal an additional 1d12 Slashing damage.")
         ]
     }
     Type = Greataxe
@@ -2219,7 +2219,7 @@ let rec hellfireGreataxe = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Hellflame Cleave", "Weapon Action, Recharge: Per Battle, deals weapon damage +6d6 Fire damage, ignores resist/immunity")
+            Complex ("Hellflame Cleave", "Weapon Action, Recharge: Per Battle, deals weapon damage +6d6 Fire damage, ignores resist/immunity")
         ]
     }
     Type = Greataxe
@@ -2233,7 +2233,7 @@ let rec sethan = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Sethan: Spiritual Greataxe", "level 6 spell, Recharge: Long Rest, Concentration, summons 6 spiritual twins of Sethan at a point you can see")
+            Complex ("Sethan: Spiritual Greataxe", "level 6 spell, Recharge: Long Rest, Concentration, summons 6 spiritual twins of Sethan at a point you can see")
         ]
     }
     Type = Greataxe
@@ -2247,7 +2247,7 @@ let rec githyankiGreatsword = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
+            Complex ("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
         ]
     }
     Type = Greatsword
@@ -2261,7 +2261,7 @@ let rec svartlebeesWoundseeker = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Deepen the Wound", "The wielder gains a +1d4 bonus to Attack Rolls with this weapon when attacking creatures that have already taken damage.")
+            Complex ("Deepen the Wound", "The wielder gains a +1d4 bonus to Attack Rolls with this weapon when attacking creatures that have already taken damage.")
         ]
     }
     Type = Greatsword
@@ -2275,7 +2275,7 @@ let rec jorgoralsGreatsword = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Colossal Onslaught", "Weapon action, Recharge: Per Turn, strikes all creatures in a 3m/20ft line")
+            Complex ("Colossal Onslaught", "Weapon action, Recharge: Per Turn, strikes all creatures in a 3m/20ft line")
         ]
     }
     Type = Greatsword
@@ -2289,7 +2289,7 @@ let rec everburnBlade = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Everburn", "Dealing damage with this weapon causes your target to Burn for one turn.")
+            Complex ("Everburn", "Dealing damage with this weapon causes your target to Burn for one turn.")
         ]
     }
     Type = Greatsword
@@ -2303,7 +2303,7 @@ let rec soulbreakerGreatsword = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Soulbreake", "Weapon action, Recharge: Per Battle, deals weapon damage and possibly Stuns target")
+            Complex ("Soulbreake", "Weapon action, Recharge: Per Battle, deals weapon damage and possibly Stuns target")
         ]
     }
     Type = Greatsword
@@ -2317,7 +2317,7 @@ let rec sussurGreatsword = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sussur Greatsword", "Silences targets on hit.")
+            Complex ("Sussur Greatsword", "Silences targets on hit.")
         ]
     }
     Type = Greatsword
@@ -2331,7 +2331,7 @@ let rec swordOfJustice = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Paladin Passive - Death Sentence", "At the start if your turn, you have a 33% chance to recover a crusaders smite charge")
+            Complex ("Paladin Passive - Death Sentence", "At the start if your turn, you have a 33% chance to recover a crusaders smite charge")
         ]
     }
     Type = Greatsword
@@ -2345,7 +2345,7 @@ let rec swordOfChaos = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Chaotic Eruption", "Dealing damage with this weapon causes your target to potentially eperience a negative surge of Wild Magic.")
+            Complex ("Chaotic Eruption", "Dealing damage with this weapon causes your target to potentially eperience a negative surge of Wild Magic.")
         ]
     }
     Type = Greatsword
@@ -2359,7 +2359,7 @@ let rec balduransGiantslayer = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Giantslayer", "You gain Advantage on Attack Rolls made against Large, Huge, or Gargantuan creatures. Grants Colossal Visage Class action, Recharge: Long Rest, grow in size, gaining +4 damage, +24 hit points, roll with Advantage on Strength based Ability Checks and Saving Throws, lasts until Long Rest Grants Topple the Big Folks Weapon action, Recharge: Per Battle, deal additional damage equal to Proficiency Bonus, on hit Large, Huge, or Gargantuan creatures take additional 6d6 Slashing damage and must succeed a Strength based Saving Throw or fall Prone")
+            Complex ("Giantslayer", "You gain Advantage on Attack Rolls made against Large, Huge, or Gargantuan creatures. Grants Colossal Visage Class action, Recharge: Long Rest, grow in size, gaining +4 damage, +24 hit points, roll with Advantage on Strength based Ability Checks and Saving Throws, lasts until Long Rest Grants Topple the Big Folks Weapon action, Recharge: Per Battle, deal additional damage equal to Proficiency Bonus, on hit Large, Huge, or Gargantuan creatures take additional 6d6 Slashing damage and must succeed a Strength based Saving Throw or fall Prone")
         ]
     }
     Type = Greatsword
@@ -2373,7 +2373,7 @@ let rec silverSwordOfTheAstralPlane = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d8 Psychic damage. Githborn Psionic Resistance: A Githyanki holding this weapon has Advantage on Intelligence, WIsdom, and Charisma based Saving Throws, Resistance to Psychic damage, and cannot be Charmed. Grants Soulbreaker Weapon action, Recharge: Per Turn, deals weapon damage and possibly Stuns target")
+            Complex ("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d8 Psychic damage. Githborn Psionic Resistance: A Githyanki holding this weapon has Advantage on Intelligence, WIsdom, and Charisma based Saving Throws, Resistance to Psychic damage, and cannot be Charmed. Grants Soulbreaker Weapon action, Recharge: Per Turn, deals weapon damage and possibly Stuns target")
         ]
     }
     Type = Greatsword
@@ -2387,7 +2387,7 @@ let rec lightOfCreation = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
+            Complex ("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
         ]
     }
     Type = Halberd
@@ -2401,7 +2401,7 @@ let rec theSkinburster = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Skinburster Force", "When the wielder deals melee damage, they gain 3 turns of Force Conduit")
+            Complex ("Skinburster Force", "When the wielder deals melee damage, they gain 3 turns of Force Conduit")
         ]
     }
     Type = Halberd
@@ -2415,7 +2415,7 @@ let rec harmoniumHalberd = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Harmonium Halberd", "Strength +2 (up to 20)")
+            Complex ("Harmonium Halberd", "Strength +2 (up to 20)")
         ]
     }
     Type = Halberd
@@ -2429,7 +2429,7 @@ let rec hellbeardHalberd = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Infernal Weapon", "On each hit, deal an additional 4 Poison damage and possibly Poison your target.")
+            Complex ("Infernal Weapon", "On each hit, deal an additional 4 Poison damage and possibly Poison your target.")
         ]
     }
     Type = Halberd
@@ -2443,7 +2443,7 @@ let rec halberdOfVigilance = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Vigilant Defender", "When an enemy makes an Attack Roll against a nearby ally, you may use your Reaction to attack them.")
+            Complex ("Vigilant Defender", "When an enemy makes an Attack Roll against a nearby ally, you may use your Reaction to attack them.")
         ]
     }
     Type = Halberd
@@ -2457,7 +2457,7 @@ let rec monsterSlayerGlaive = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Monsterslayer", "This weapon deals an additional +1d12 damage against monstrosity type foes.")
+            Complex ("Monsterslayer", "This weapon deals an additional +1d12 damage against monstrosity type foes.")
         ]
     }
     Type = Glaive
@@ -2471,7 +2471,7 @@ let rec drakethroatGlaive = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Draconic Fury", "Draconic Breath Cantrips roll their Attack Rolls and damage with Advantage.")
+            Complex ("Draconic Fury", "Draconic Breath Cantrips roll their Attack Rolls and damage with Advantage.")
         ]
     }
     Type = Glaive
@@ -2485,7 +2485,7 @@ let rec sorrow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Silvanus' Reach", "Cantrip, as Thorn Whip within 18m")
+            Complex ("Silvanus' Reach", "Cantrip, as Thorn Whip within 18m")
         ]
     }
     Type = Glaive
@@ -2499,7 +2499,7 @@ let rec moonlightGlaive = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Wound Closure", "When healed below 25% of your total Hit Points, regain the maximum amount of HIt Points possible. Grants Moonlight Butterflies Weapon action, Recharge: Short Rest, strike foe and conjure illusory swarm of butterflies, deal additional Psychic damage equal to Proficiency Bonus, deal 1d6 Psychic damage when target moves away from illusion)")
+            Complex ("Wound Closure", "When healed below 25% of your total Hit Points, regain the maximum amount of HIt Points possible. Grants Moonlight Butterflies Weapon action, Recharge: Short Rest, strike foe and conjure illusory swarm of butterflies, deal additional Psychic damage equal to Proficiency Bonus, deal 1d6 Psychic damage when target moves away from illusion)")
         ]
     }
     Type = Glaive
@@ -2513,7 +2513,7 @@ let rec theDancingBreeze = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Bard Passive - Melodic Precision", "Once per turn, upon landing a Critical Hit, restore one charge of your Bardic Inspiration.")
+            Complex ("Bard Passive - Melodic Precision", "Once per turn, upon landing a Critical Hit, restore one charge of your Bardic Inspiration.")
         ]
     }
     Type = Glaive
@@ -2527,7 +2527,7 @@ let rec argumentSolver = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Argument Solved", "When dealing damage, potentially mute your target.")
+            Complex ("Argument Solved", "When dealing damage, potentially mute your target.")
         ]
     }
     Type = Greatclub
@@ -2541,7 +2541,7 @@ let rec punchDrunkBastard = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Barbarian Passive - Overwhelming Power", "When dealing damage while enraged, you ignore all physical Resistances.")
+            Complex ("Barbarian Passive - Overwhelming Power", "When dealing damage while enraged, you ignore all physical Resistances.")
         ]
     }
     Type = Greatclub
@@ -2555,7 +2555,7 @@ let rec ratBat = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Barbarian Passive - Terrifying Bellow", "Upon becoming enraged, potentially Intimidate all enemies within 9m/30ft.")
+            Complex ("Barbarian Passive - Terrifying Bellow", "Upon becoming enraged, potentially Intimidate all enemies within 9m/30ft.")
         ]
     }
     Type = Greatclub
@@ -2569,7 +2569,7 @@ let rec doomHammer = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Edge of Terror", "Each strike inflicts a malevolent chill upon a target, preventing it from regaining Hit Points. An Undead target will also receive Disadvantage on Attack Rolls.")
+            Complex ("Edge of Terror", "Each strike inflicts a malevolent chill upon a target, preventing it from regaining Hit Points. An Undead target will also receive Disadvantage on Attack Rolls.")
         ]
     }
     Type = Maul
@@ -2583,7 +2583,7 @@ let rec corpsegrinder = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Grand Slam", "Weapon action, Recharge: Short Rest, deal weapon damage to nearby foes and possibly push them back 9m/30ft")
+            Complex ("Grand Slam", "Weapon action, Recharge: Short Rest, deal weapon damage to nearby foes and possibly push them back 9m/30ft")
         ]
     }
     Type = Maul
@@ -2597,7 +2597,7 @@ let rec hamarhraft = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Shockwave", "When the wielder deals damage with this weapon, they deal an additional 1d8 Thunder damage in a 3m/10ft radius. Once affected by the thunderous explosion, enemies cannot be affected again until the start of their next turn. This can be toggled at any time.")
+            Complex ("Shockwave", "When the wielder deals damage with this weapon, they deal an additional 1d8 Thunder damage in a 3m/10ft radius. Once affected by the thunderous explosion, enemies cannot be affected again until the start of their next turn. This can be toggled at any time.")
         ]
     }
     Type = Maul
@@ -2611,7 +2611,7 @@ let rec foebreaker = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Fighter Passive - Heavy Assault", "While wielding a Two-Handed Weapon, your damage dice are rolled with Advantage.")
+            Complex ("Fighter Passive - Heavy Assault", "While wielding a Two-Handed Weapon, your damage dice are rolled with Advantage.")
         ]
     }
     Type = Maul
@@ -2625,7 +2625,7 @@ let rec returningPike = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Homing Weapon", "This weapon will return to its owner when thrown.")
+            Complex ("Homing Weapon", "This weapon will return to its owner when thrown.")
         ]
     }
     Type = Pike
@@ -2639,7 +2639,7 @@ let rec breachingPikestaff = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Explosive Thrust", "When dealing damage, potentially force your target back 9m/30ft. This can be toggled at any time.")
+            Complex ("Explosive Thrust", "When dealing damage, potentially force your target back 9m/30ft. This can be toggled at any time.")
         ]
     }
     Type = Pike
@@ -2653,7 +2653,7 @@ let rec unseenMenace = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Invisible Weapon", "This weapoin is Invisible (Can't be disarmed, Advantage on Attack Rolls, scores a Critical Hit on 19) while equipped. It loses this property for 3 rounds on a missed Attack Roll.")
+            Complex ("Invisible Weapon", "This weapoin is Invisible (Can't be disarmed, Advantage on Attack Rolls, scores a Critical Hit on 19) while equipped. It loses this property for 3 rounds on a missed Attack Roll.")
         ]
     }
     Type = Pike
@@ -2667,7 +2667,7 @@ let rec firestoker = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Burned Alive", "Dealing damage with this weapon has the potential to Burn enemies for three turns. This weapon deals an additional 1d4 Fire damage to Burning targets.")
+            Complex ("Burned Alive", "Dealing damage with this weapon has the potential to Burn enemies for three turns. This weapon deals an additional 1d4 Fire damage to Burning targets.")
         ]
     }
     Type = HandCrossbow
@@ -2681,7 +2681,7 @@ let rec neerMisser = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Ne'er Misser", "Deals Force damage instead of Piercing damage")
+            Complex ("Ne'er Misser", "Deals Force damage instead of Piercing damage")
         ]
     }
     Type = HandCrossbow
@@ -2695,7 +2695,7 @@ let rec hellfireHandCrossbow = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Hellstalker", "Inflict Burning for three turns when damaging a creature with this weapon.")
+            Complex ("Hellstalker", "Inflict Burning for three turns when damaging a creature with this weapon.")
         ]
     }
     Type = HandCrossbow
@@ -2709,7 +2709,7 @@ let rec crossbowOfArcaneForce = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Arcane Ammunition", "Weapon action, Recharge: Short Rest, ranged weapon attacks deal an additional 1d4 force damage for three turns")
+            Complex ("Arcane Ammunition", "Weapon action, Recharge: Short Rest, ranged weapon attacks deal an additional 1d4 force damage for three turns")
         ]
     }
     Type = HeavyCrossbow
@@ -2723,7 +2723,7 @@ let rec giantbreaker = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Heavy Hitter", "Your weapon hits hard enough to send your target flying backwards by 4.5m/15ft.")
+            Complex ("Heavy Hitter", "Your weapon hits hard enough to send your target flying backwards by 4.5m/15ft.")
         ]
     }
     Type = HeavyCrossbow
@@ -2737,7 +2737,7 @@ let rec githyankiCrossbow = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
+            Complex ("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d4 Psychic damage.")
         ]
     }
     Type = HeavyCrossbow
@@ -2751,7 +2751,7 @@ let rec undeadSlayerCrossbow = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Revenant Scourge", "When used against Undead creatures this weapon has +1d4 bonus to Attack Rolls and Damage.")
+            Complex ("Revenant Scourge", "When used against Undead creatures this weapon has +1d4 bonus to Attack Rolls and Damage.")
         ]
     }
     Type = HeavyCrossbow
@@ -2765,7 +2765,7 @@ let rec gandrelsAspiration = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Undead Bane", "Attack Rolls with this weapon roll with Advantage against Undead creatures. Additionally, when damaging an Undead creature with this weapon, they may become Pacified. Grants Sacred Munitions Weapon action, Recharge: Per Turn, your Ranged Weapon Attacks possibly inflict Turn Undead")
+            Complex ("Undead Bane", "Attack Rolls with this weapon roll with Advantage against Undead creatures. Additionally, when damaging an Undead creature with this weapon, they may become Pacified. Grants Sacred Munitions Weapon action, Recharge: Per Turn, your Ranged Weapon Attacks possibly inflict Turn Undead")
         ]
     }
     Type = HeavyCrossbow
@@ -2779,7 +2779,7 @@ let rec harold = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Ranger Passive - Ambush Breaker", "Gain a +2 bonus to your Initiative. You can no longer be Surprised.")
+            Complex ("Ranger Passive - Ambush Breaker", "Gain a +2 bonus to your Initiative. You can no longer be Surprised.")
         ]
     }
     Type = HeavyCrossbow
@@ -2793,7 +2793,7 @@ let rec hellfireEngineCrossbow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Get Over Here!", "Weapon action, pulls a targeted creature 9m/30ft closer to you")
+            Complex ("Get Over Here!", "Weapon action, pulls a targeted creature 9m/30ft closer to you")
         ]
     }
     Type = HeavyCrossbow
@@ -2807,7 +2807,7 @@ let rec fabricatedArbalest = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Illuminating Shot", "BA, Weapon action, deals 1d12 Radiant damage and inflict 1 turn of Radiating Orb")
+            Complex ("Illuminating Shot", "BA, Weapon action, deals 1d12 Radiant damage and inflict 1 turn of Radiating Orb")
         ]
     }
     Type = HeavyCrossbow
@@ -2821,7 +2821,7 @@ let rec bowOfAwareness = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Lookout", "Gain a +2 bonus to your Initiative.")
+            Complex ("Lookout", "Gain a +2 bonus to your Initiative.")
         ]
     }
     Type = Shortbow
@@ -2835,7 +2835,7 @@ let rec bowOfTheBanshee = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Blood-Curdling Emission", "When damaging a target, possibly Frighten them. Gain a +1d4 bonus to Attack Rolls and Damage against Frightened creatures.")
+            Complex ("Blood-Curdling Emission", "When damaging a target, possibly Frighten them. Gain a +1d4 bonus to Attack Rolls and Damage against Frightened creatures.")
         ]
     }
     Type = Shortbow
@@ -2849,7 +2849,7 @@ let rec darkfireShortbow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Warlock Passive - Curse of Hellfire", "When you make a successful melee based Attack Roll, you apply one Curse of Hellfire stack to your target.")
+            Complex ("Warlock Passive - Curse of Hellfire", "When you make a successful melee based Attack Roll, you apply one Curse of Hellfire stack to your target.")
         ]
     }
     Type = Shortbow
@@ -2863,7 +2863,7 @@ let rec huntingShortbow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Ranger Passive - Sniper", "When dealing damage to another creature, you deal an additional instance of 1 dmg for every  3m between you and your target, up to a maximum of 6.")
+            Complex ("Ranger Passive - Sniper", "When dealing damage to another creature, you deal an additional instance of 1 Damage for every 3m between you and your target, up to a maximum of 6.")
         ]
     }
     Type = Shortbow
@@ -2877,7 +2877,7 @@ let rec leastExpected = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Unexpected Outcome", "While this weapon is equipped, dealing damage has a chance to cause your target to experience a negative surge of Wild Magic. Grants Blinding Shot Weapon action, Recharge: Short Rest, blinds target with CON save")
+            Complex ("Unexpected Outcome", "While this weapon is equipped, dealing damage has a chance to cause your target to experience a negative surge of Wild Magic. Grants Blinding Shot Weapon action, Recharge: Short Rest, blinds target with CON save")
         ]
     }
     Type = Shortbow
@@ -2891,7 +2891,7 @@ let rec viciousShortbow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Vicious Aim", "Upon making a Ranged Weapon Attack against another creature, you may expend your Reaction in order to attempt to damage one of three of their body. Upon damaging a creature's head, they gain Disadvantage on all Saving Throws. Upon damaging their arms, they make all Attack Rolls with Disadvantage. Upon damaging their legs, you halve their Movement Speed and they take  when moving.")
+            Complex ("Vicious Aim", "Upon making a Ranged Weapon Attack against another creature, you may expend your Reaction in order to attempt to damage one of three of their body. Upon damaging a creature's head, they gain Disadvantage on all Saving Throws. Upon damaging their arms, they make all Attack Rolls with Disadvantage. Upon damaging their legs, you halve their Movement Speed and they take when moving.")
         ]
     }
     Type = Shortbow
@@ -2905,7 +2905,7 @@ let rec blightbringer = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Prey Decelerator", "When this weapon lands a Critical Hit, it also Slows the target creature for three turns.")
+            Complex ("Prey Decelerator", "When this weapon lands a Critical Hit, it also Slows the target creature for three turns.")
         ]
     }
     Type = Shortbow
@@ -2919,7 +2919,7 @@ let rec hellriderLongbow = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Hellrider", "Upon making a Ranged Weapon Attack against another creature, Melee Weapon Attacks are rolled with Advantage and deal an additional 1d12 damage. Upon making a Melee Weapon Attack against another creature, Ranged Weapon Attacks are rolled with Advantage and deal an additional 1d12 damage.")
+            Complex ("Hellrider", "Upon making a Ranged Weapon Attack against another creature, Melee Weapon Attacks are rolled with Advantage and deal an additional 1d12 damage. Upon making a Melee Weapon Attack against another creature, Ranged Weapon Attacks are rolled with Advantage and deal an additional 1d12 damage.")
         ]
     }
     Type = Longbow
@@ -2933,7 +2933,7 @@ let rec spellthief = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Arcane Vehemence", "Upon landing a killing blow with this weapon, immediately regain a Level 1 Spell Slot.")
+            Complex ("Arcane Vehemence", "Upon landing a killing blow with this weapon, immediately regain a Level 1 Spell Slot.")
         ]
     }
     Type = Longbow
@@ -2947,7 +2947,7 @@ let rec theJoltshooter = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
+            Complex ("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
         ]
     }
     Type = Longbow
@@ -2961,7 +2961,7 @@ let rec titanstringBow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Titan Weapon", "This weapon deals additional damage equal to your Strength Modifier, if positive. You also add your Strength Modifier to all Attack Rolls made with this weapon.")
+            Complex ("Titan Weapon", "This weapon deals additional damage equal to your Strength Modifier, if positive. You also add your Strength Modifier to all Attack Rolls made with this weapon.")
         ]
     }
     Type = Longbow
@@ -2975,7 +2975,7 @@ let rec theDeadShot = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Double Tap", "Your basic Ranged Weapon Attacks may be fired as a Bonus action. This effect can be toggled at any time.")
+            Complex ("Double Tap", "Your basic Ranged Weapon Attacks may be fired as a Bonus action. This effect can be toggled at any time.")
         ]
     }
     Type = Longbow
@@ -2989,7 +2989,7 @@ let rec gontrMael = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Promised Victory", "This weapon's range is doubled. On a hit, inflict Guiding Bolt  upon your target for one turn. Grants Dazzling Ray Weapon Action,  deals weapon damage + Proficiency as Radiant in a line and inflicts Blind")
+            Complex ("Promised Victory", "This weapon's range is doubled. On a hit, inflict Guiding Bolt upon your target for one turn. Grants Dazzling Ray Weapon Action, deals weapon damage + Proficiency as Radiant in a line and inflicts Blind")
         ]
     }
     Type = Longbow
@@ -3003,7 +3003,7 @@ let rec apprenticeWand = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Magic Dart", "Your Ranged Weapon Attacks fire a magical dart. The dart can change direction mid flight, allowing it to target any nearby creaure so long as they are within Range. It will alway hit your target. Mage Hand You gain the Mage Hand Cantrip")
+            Complex ("Magic Dart", "Your Ranged Weapon Attacks fire a magical dart. The dart can change direction mid flight, allowing it to target any nearby creaure so long as they are within Range. It will alway hit your target. Mage Hand You gain the Mage Hand Cantrip")
         ]
     }
     Type = Wand
@@ -3017,7 +3017,7 @@ let rec balancedWand = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Soothing Enchantments", "Your Ranged Weapon Attacks fire a sphere of radiant energy. If targeting an ally, they will recover Hit Points rather than taking Damage Guidance You gain the Guidance Cantrip")
+            Complex ("Soothing Enchantments", "Your Ranged Weapon Attacks fire a sphere of radiant energy. If targeting an ally, they will recover Hit Points rather than taking Damage Guidance You gain the Guidance Cantrip")
         ]
     }
     Type = Wand
@@ -3031,7 +3031,7 @@ let rec emblazonedScepter = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Scorched Heaven", "Your Ranged Weapon Attacks produce a tongue of Flame. The Tongue wreathes your target, causing them to Burn. Produce Flame You gain the Produce Flame Cantrip")
+            Complex ("Scorched Heaven", "Your Ranged Weapon Attacks produce a tongue of Flame. The Tongue wreathes your target, causing them to Burn. Produce Flame You gain the Produce Flame Cantrip")
         ]
     }
     Type = Wand
@@ -3045,7 +3045,7 @@ let rec boughOfTheEnsnared = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Barbed Poison", "Your Ranged Weapon Attacks conjure a poisonous barb. The barb induces a heavy dose of poison within your target, and will Dominate summoned creatures. Friends You gain the Friends Cantrip")
+            Complex ("Barbed Poison", "Your Ranged Weapon Attacks conjure a poisonous barb. The barb induces a heavy dose of poison within your target, and will Dominate summoned creatures. Friends You gain the Friends Cantrip")
         ]
     }
     Type = Wand
@@ -3059,7 +3059,7 @@ let rec necroticFlesh = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Siphoning Stream", "Your Ranged Weapon Attacks produce a stream of necrotic magic. The stream absorbs the Hit Points of your target. Bone Chill You gain the Bone Chill Cantrip")
+            Complex ("Siphoning Stream", "Your Ranged Weapon Attacks produce a stream of necrotic magic. The stream absorbs the Hit Points of your target. Bone Chill You gain the Bone Chill Cantrip")
         ]
     }
     Type = Wand
@@ -3073,7 +3073,7 @@ let rec arcWand = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Arcane Current", "Your Ranged Weapon Attacks fire a arcing current of electricity. The current chains to another enemy within 3m, dealing half damage to them. Shocking Grasp You gain the Shocking Grasp Cantrip")
+            Complex ("Arcane Current", "Your Ranged Weapon Attacks fire a arcing current of electricity. The current chains to another enemy within 3m, dealing half damage to them. Shocking Grasp You gain the Shocking Grasp Cantrip")
         ]
     }
     Type = Wand
@@ -3087,7 +3087,7 @@ let rec instrumentOfBinding = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Binding Guilt", "Your Ranged Weapon Attacks produce a psychological pain within your targets which can Frighten them. Mind Sliver You gain the Mind Sliver Cantrip")
+            Complex ("Binding Guilt", "Your Ranged Weapon Attacks produce a psychological pain within your targets which can Frighten them. Mind Sliver You gain the Mind Sliver Cantrip")
         ]
     }
     Type = Wand
@@ -3101,7 +3101,7 @@ let rec chaosRod = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Chaos Bolt", "Your Ranged Weapon Attacks fire a bolt of chaotic Wild Magic. The bolt causes your taregt to experience a Wild Magic surge which causes a random amount of elemental Damage True Strike You gain the True Strike Cantrip")
+            Complex ("Chaos Bolt", "Your Ranged Weapon Attacks fire a bolt of chaotic Wild Magic. The bolt causes your taregt to experience a Wild Magic surge which causes a random amount of elemental Damage True Strike You gain the True Strike Cantrip")
         ]
     }
     Type = Wand
@@ -3115,7 +3115,7 @@ let rec talismanOfTheSoulKeeper = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Soul Bite", "Your Ranged Weapon Attacks produce an orb of magical ice. Upon killing a creature with this wand, you may cast a Spell without expending a Spell Slot Frigid Touch You gain the Frigid Touch Cantrip")
+            Complex ("Soul Bite", "Your Ranged Weapon Attacks produce an orb of magical ice. Upon killing a creature with this wand, you may cast a Spell without expending a Spell Slot Frigid Touch You gain the Frigid Touch Cantrip")
         ]
     }
     Type = Wand
@@ -3129,7 +3129,7 @@ let rec splitFate = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex("Divided Outcome", "Your Ranged Weapon Attacks produce an unstable Wild Magic, dealing a random amount of Damage to Enemies, or restoring a random amount of health to allies. Unstable Threads When Targeting a creature with this wand while in Combat, your target to potentially expierences a sudden surge of Wild Magic. the surge will be either positive or negative, depending on who you Target. Unstable Threads Once per Turn, killing a creature will restore a Sixth Level Spell Slot. Spellbound Empowerment You gain the Spellbound Empowerment Cantrip")
+            Complex ("Divided Outcome", "Your Ranged Weapon Attacks produce an unstable Wild Magic, dealing a random amount of Damage to Enemies, or restoring a random amount of health to allies. Unstable Threads When Targeting a creature with this wand while in Combat, your target to potentially expierences a sudden surge of Wild Magic. the surge will be either positive or negative, depending on who you Target. Unstable Threads Once per Turn, killing a creature will restore a Sixth Level Spell Slot. Spellbound Empowerment You gain the Spellbound Empowerment Cantrip")
         ]
     }
     Type = Wand

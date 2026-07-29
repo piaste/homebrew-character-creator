@@ -309,7 +309,7 @@ let rec devilfoilMask = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Power(Action, AtWill, "Infernal Legion", "All creatures wearing Devilfoil Masks within 18m/60ft of each other increase their Strength by 2, but decrease their Intelligence, Wisdom, and Charisma by 2. This effect can stack.")
+            Power(Action, AtWill, "Devilish Bargain - Gain Infernal Legion", "All creatures wearing Devilfoil Masks within 18m/60ft of each other increase their Strength by 2, but decrease their Intelligence, Wisdom, and Charisma by 2. This effect can stack.")
         ]
     }
     Slot = Helmet
@@ -3078,7 +3078,7 @@ let rec sentientAmulet = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Power(Action, OncePerShortRest, "Talk to the Sentient Amulet (class action", "(after quest?) Grants Ki Restoration (class action, Recharge: Short Rest)")
+            Power(Action, OncePerShortRest, "Talk to the Sentient Amulet (class action)", "(after quest?) Grants Ki Restoration (class action, Recharge: Short Rest)")
         ]
     }
     Slot = Necklace
@@ -3832,7 +3832,7 @@ let rec spurredBand = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex ("Frantic Urgency", "During combat, when the wearer starts their turn with 50% HP or less, they gain three stacks of Momentum.")
+            Complex ("Frantic Urgency", "During combat, when the wearer starts their turn with 50% Hit Points or less, they gain three stacks of Momentum.")
         ]
     }
     Slot = Ring
@@ -5457,7 +5457,7 @@ let rec roseateIounStone = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Constitution +4 (up to 22", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
+            Complex ("Constitution +4 (up to 22)", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
         ]
     }
     Slot = Trinket
@@ -5470,7 +5470,7 @@ let rec scarletIounStone = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Strength +4 (up to 22", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
+            Complex ("Strength +4 (up to 22)", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
         ]
     }
     Slot = Trinket
@@ -5496,7 +5496,7 @@ let rec stormyIounStone = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Wisdom +4 (up to 22", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
+            Complex ("Wisdom +4 (up to 22)", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
         ]
     }
     Slot = Trinket
@@ -5522,7 +5522,7 @@ let rec umbralIounStone = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Intelligence +4 (up to 22", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
+            Complex ("Intelligence +4 (up to 22)", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
         ]
     }
     Slot = Trinket
@@ -5535,7 +5535,7 @@ let rec verdantIounStone = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Dexterity +4 (up to 22", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
+            Complex ("Dexterity +4 (up to 22)", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
         ]
     }
     Slot = Trinket
@@ -5548,7 +5548,7 @@ let rec radiantIounStone = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Charisma +4 (up to 22", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
+            Complex ("Charisma +4 (up to 22)", "Suffering a Critical Hit will temporarily render the Ioun Stone inert.")
         ]
     }
     Slot = Trinket
@@ -5561,7 +5561,7 @@ let rec beltOfForbiddenHarmony = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Complex ("Strength +4 (up to 22", "Dexterity +4 (up to 22) Constitution +4 (up to 22) Intelligence +4 (up to 22) Wisdom +4 (up to 22) Charisma +4 (up to 22)")
+            Complex ("Strength +4 (up to 22)", "Dexterity +4 (up to 22) Constitution +4 (up to 22) Intelligence +4 (up to 22) Wisdom +4 (up to 22) Charisma +4 (up to 22)")
         ]
     }
     Slot = Trinket
