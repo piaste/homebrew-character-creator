@@ -155,11 +155,31 @@ let checkErrors (character: Character) =
 
     ]
 
+type RichText = (string * string option) list
+
+
+type RadialCenterText = 
+    | Blank
+    | Plain of string
+    | Rich of RichText
+
+type RadialCenterTextData = 
+    {
+        
+        /// Simple text shown when an option is hovered over
+        Introduction: string
+
+        /// Detailed breakdown of features when an option is clicked the first time
+        /// Each one has text + optional tooltip
+        Details: RichText option
+    }   
+    static member Simple txt = { Introduction = txt; Details = None }
+
 type Model =
     {
         Page: Page
         MainStageSelection: MainStageSelection
-        RadialCenterText: string
+        RadialCenterText: RadialCenterText
         SearchQueries : Map<LevelUpPick, string>
         ClassSpecialistClass : string<classId> option
         YokebreakerClass: string<classId> option
@@ -179,7 +199,7 @@ type Model =
             {
                 Page = Forge None
                 MainStageSelection = Race
-                RadialCenterText = ""
+                RadialCenterText = Blank
                 SearchQueries = Map []
                 ClassSpecialistClass = None
                 YokebreakerClass = None

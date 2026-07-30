@@ -7,6 +7,7 @@ open FSharp.UMX
 open Bg3HomebrewCCreator.Domain.Entities
 open Utils
 open Bg3HomebrewCCreator.Domain.Types
+open Bg3HomebrewCCreator.Model
 
 type OtherUi = Template<"wwwroot/main.html">
 
@@ -150,3 +151,19 @@ let printRichText (text: string) =
     forEach (text.Split '\n') <| fun l -> 
         let withReplacedEm = l.Replace("&lt;i&gt;", "<em>").Replace("&lt;/i&gt;", "</em>")        
         p { rawHtml withReplacedEm }
+
+type RadialCenterText with
+    member this.Print() = 
+        cond this <| function
+            | Blank -> empty()
+            | Plain s -> printRichText s
+            | Rich lines -> 
+                forEach lines <| fun (text, tooltipText) -> 
+                    let anchorId = Guid.NewGuid().ToString()
+                    let withReplacedEm = text.Replace("&lt;i&gt;", "<em>").Replace("&lt;/i&gt;", "</em>")        
+                    p { cl "tooltip"
+                        rawHtml withReplacedEm
+                        cond tooltipText <| function
+                        | None -> empty()
+                        | Some tt -> span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; tt}
+                    }

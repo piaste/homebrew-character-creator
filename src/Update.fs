@@ -20,7 +20,7 @@ type Message =
     | SetMainStageSelection of MainStageSelection
 
     // radial controls
-    | SetRadialCenterText of string
+    | SetRadialCenterText of RadialCenterText
     | SetBaseClass of string<classId>
     | SetSubclass of string<subclassId>
     | SetClassSpecialistClass of string<classId> option
@@ -149,7 +149,7 @@ let update
                 { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
-        { model with MainStageSelection = mss; RadialCenterText = "" }
+        { model with MainStageSelection = mss; RadialCenterText = Blank }
         , Cmd.OfTask.perform jsHelper.ScrollIntoView (elementIdForStage mss) (fun _ -> NoOp)
 
     | SetRadialCenterText txt ->

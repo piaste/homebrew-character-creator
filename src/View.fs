@@ -49,11 +49,16 @@ let picksDockButton (title : string) (count: int) (max: int) dispatch selected s
             }
         }
 
-let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIcon msg = 
+
+type RctMap<[<Measure>] 'm, 'v 
+        when 'v : (member IconText: string)
+         and 'v : (member RadialCenterTextData : RadialCenterTextData)
+         > = Map<string<'m>, 'v>
+let inline radialStage (rct : RadialCenterText) dispatch (options : RctMap<_, _>) getIcon msg = 
 
     let radius = 220.0
 
-    let radialButton index total (text: string) iconSubpath action hoverAction = 
+    let radialButton index total (text: string) iconSubpath hoverAction action = 
         let angle = 1.5 * Math.PI + index * 2. * Math.PI / total
         let posX = radius * Math.Cos angle
         let posY = radius * Math.Sin angle
@@ -72,7 +77,7 @@ let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIco
 
     let centerText = 
         concat {
-            printRichText rct
+            rct.Print()
         }
 
     div {
@@ -82,12 +87,40 @@ let inline radialStage (rct : string) dispatch (options : KeyedMap<_, _>) getIco
               div { 
                 cl "radial-buttons"
                 forEachIndexed options (fun (i, count, KeyValue(k, v)) -> 
-                  radialButton i count v.Name (getIcon k) 
-                      (fun _ -> dispatch (msg k)) 
-                      (fun _ -> dispatch (SetRadialCenterText options[k].Description)))
+                  cond rct <| function
+                    | Rich d when v.RadialCenterTextData.Details = Some d ->
+                        // details already shown for the same entity, we always move on to selection
+                        radialButton i count v.IconText (getIcon k) 
+                            (fun _ -> ()) // nothing to change on hover
+                            (fun _ -> dispatch (msg k))
+
+                    | Blank | Plain _ | Rich _ ->
+                        // no selection or a different one was selected
+                        let onClickMsg = 
+                            match v.RadialCenterTextData.Details with
+                            | None -> msg k // select entity and proceed
+                            | Some d -> SetRadialCenterText (Rich d) // show details
+
+                        radialButton i count v.IconText (getIcon k) 
+                            (fun _ -> dispatch (SetRadialCenterText (Plain v.RadialCenterTextData.Introduction)))
+                            (fun _ -> dispatch onClickMsg) 
+                )
               }
         }
     }
+
+let classRadialStage useLoreNames rct dispatch msg (classes: Map<string<classId>, ClassDef>)= 
+    radialStage rct dispatch
+        (classes
+         |> Map.map (fun _ v -> 
+            {| IconText = v.Name
+               RadialCenterTextData = {
+                    Introduction = v.Description
+                    Details = Some <| getAllClassBenefits useLoreNames v.Id
+                }
+            |}))
+        baseclassIconPath
+        msg
 
 let bigActionButtonWithClass (node: Node) abCl dispatch msg = 
     button {
@@ -203,43 +236,57 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                             stat ["Best spell DC"; "Spell DC"] $"{dc.Value} ({dc.Key})"
 
                 }
+
+                let summonsPassives, mainCharPassives = 
+                    passives |> List.partition (snd >> function | Summon _ -> true | _ -> false)
+                
+                let resources, mainCharPassives = 
+                    mainCharPassives |> List.partition (snd >> _.IsResource)
+
+
+                div { cl "sheet-section-title"; "RESOURCES" }
                 let spellSlots = getRegularSpellSlots chr
                 let warlockSlots = getWarlockSpellSlots chr
-                cond (List.append spellSlots warlockSlots) <| function
-                | [] -> empty()
-                | _ -> 
-                    concat {
-                        div { cl "sheet-section-title"; "SPELL SLOTS" }
-                        div { 
-                            cl "sheet-attrs"
-                            forEach (List.indexed spellSlots) (fun (i, n) ->
-                                div { 
-                                    cl "sheet-attr"
-                                    span { cl "spell-slot-lvl"; toRoman (i + 1)}
-                                    forEach (List.init n (fun _ -> ())) (fun _ -> 
-                                        fakeCheckbox "rgba(3, 108, 161, 0.95)" true
-                                    )
-                                } 
-                            )
-                            forEach (List.indexed warlockSlots) (fun (i, n) ->
-                                div { 
-                                    cl "sheet-attr"
-                                    span { cl "spell-slot-lvl"; toRoman (i + 1)}
-                                    forEach (List.init n (fun _ -> ())) (fun _ -> 
-                                        fakeCheckbox "rgba(240, 49, 192, 0.95)" true
-                                    )
-                                } 
-                            )
+                
+                div { 
+                    cl "sheet-attrs"
+                    #nowarn FS0025
+                    forEach resources <| fun (_, resource) ->
+                    #warnon FS0025
+                        let anchorId = Guid.NewGuid().ToString()
+                        b { cl "summary-ability-points tooltip"
+                            resource.Name.DefaultText
+                            
+                            span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; resource.Description.DefaultText}
                         }
-                    }
+                    
+                    
+
+                    forEach (List.indexed spellSlots) (fun (i, n) ->
+                        div { 
+                            cl "sheet-attr"
+                            span { cl "spell-slot-lvl"; toRoman (i + 1)}
+                            forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                fakeCheckbox "rgba(3, 108, 161, 0.95)" true
+                            )
+                        } 
+                    )
+                    forEach (List.indexed warlockSlots) (fun (i, n) ->
+                        div { 
+                            cl "sheet-attr"
+                            span { cl "spell-slot-lvl"; toRoman (i + 1)}
+                            forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                fakeCheckbox "rgba(240, 49, 192, 0.95)" true
+                            )
+                        } 
+                    )
+                }
+        
 
                 div { cl "sheet-section-title"; "PASSIVES" }
 
-                let (mainCharPassives, summonsPassives) = 
-                    passives |> List.partition (snd >> function | Summon _ -> false | _ -> true)
-                
                 let filteredPassives = 
-                    match filterPassives with
+                    match filterPassives with                    
                     | Summons ->
                         summonsPassives
                     | fp -> 
@@ -254,7 +301,9 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                                 let bn = Classes.allClasses[sc.BaseClassId]
                                 fun source -> source = sc.Name.Display useLoreNames || source = bn.Name
 
-                        mainCharPassives |> List.filter (fst >> filter)
+                        mainCharPassives
+                        |> List.filter (fun (source, passive) -> filter source && not passive.IsResource)
+                        
 
                 let passiveDescs = 
                     filteredPassives
@@ -273,6 +322,10 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                             FromSubclass sc
                         if not <| List.isEmpty summonsPassives then Summons
                     ]
+
+                div {
+                    cl ""
+                }
                 
                 div {
                     cl "filter-passives"
@@ -468,19 +521,34 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 }
             | Race -> 
                 radialStage rct dispatch
-                    BaseRaces.allBaseRaces
+                    (BaseRaces.allBaseRaces
+                     |> Map.map (fun _ v -> 
+                        {| IconText = v.Name
+                           RadialCenterTextData = RadialCenterTextData.Simple v.Description
+                        |}))
                     baseraceIconPath
                     SetBaseRace
                     
             | Subrace -> 
                 radialStage rct dispatch
-                    Races.allSubracesByBaseRace[baseRaceIdBySubraceId c.RaceId]
+                    (Races.allSubracesByBaseRace[baseRaceIdBySubraceId c.RaceId]
+                     |> Map.map (fun _ v -> 
+                        {| IconText = v.Name
+                           RadialCenterTextData = RadialCenterTextData.Simple v.Description
+                        |}))
                     subraceIconPath
                     SetSubrace
                     
             | Class -> 
                 radialStage rct dispatch
-                    Classes.allClasses
+                    (Classes.allClasses
+                     |> Map.map (fun _ v -> 
+                        {| IconText = v.Name
+                           RadialCenterTextData = {
+                                Introduction = v.Description
+                                Details = Some <| getAllClassBenefits model.UseLoreNames v.Id
+                           }
+                        |}))
                     baseclassIconPath
                     SetBaseClass
 
@@ -489,9 +557,11 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 radialStage rct dispatch
                     (validSubclasses
                      |> Map.map (fun _ v -> 
-                        {| v with 
-                            Name = v.Name.Display model.UseLoreNames 
-                            Description = v.Description.Display model.UseLoreNames
+                        {| IconText = v.Name.Display model.UseLoreNames 
+                           RadialCenterTextData = {
+                                Introduction =  v.Description.Display model.UseLoreNames
+                                Details = Some <| getAllSubclassBenefits model.UseLoreNames v.Id
+                           }
                         |}))
                     subclassIconPath
                     SetSubclass
@@ -601,7 +671,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             )
 
                         radialStage rct dispatch
-                            validClassesForYB
+                            (validClassesForYB
+                             |> Map.map (fun _ v -> 
+                                    {| IconText = v.Name
+                                       RadialCenterTextData = {
+                                           Introduction = v.Description
+                                           Details = Some <| getAllClassBenefits model.UseLoreNames v.Id
+                                       }
+                                    |}))
                             baseclassIconPath
                             (Some >> SetYokebreakerClass)
 
@@ -624,9 +701,11 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         radialStage rct dispatch
                             (validSubclassesForYb
                             |> Map.map (fun _ v -> 
-                            {| v with 
-                                Name = v.Name.Display model.UseLoreNames 
-                                Description = v.Description.Display model.UseLoreNames
+                            {| IconText = v.Name.Display model.UseLoreNames 
+                               RadialCenterTextData = {
+                                    Introduction =  v.Description.Display model.UseLoreNames
+                                    Details = Some <| getAllSubclassBenefits model.UseLoreNames v.Id
+                            }
                             |}))
                             subclassIconPath
                             (fun scId -> TogglePick (FeatSubpick Yokebreaking, UMX.untag scId))
@@ -640,7 +719,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             |> Map.filter (fun cId _ -> not (sp |> Set.contains cId))
 
                         radialStage rct dispatch
-                            validClassesForSpecialist
+                            (validClassesForSpecialist
+                            |> Map.map (fun _ v -> 
+                                    {| IconText = v.Name
+                                       RadialCenterTextData = {
+                                           Introduction = v.Description
+                                           Details = Some <| getAllClassBenefits model.UseLoreNames v.Id
+                                       }
+                                    |}))
                             baseclassIconPath
                             (Some >> SetClassSpecialistClass)
 

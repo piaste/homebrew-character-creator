@@ -39,17 +39,21 @@ let getClassBenefits useLoreNames scid lvl charLvl =
             if lvl >= lvlReq then for fAb in ab do yield scDef.Name.Display useLoreNames, fAb      
     ]
 
+let getLevelDiff generator discriminator (lowerLvl : int<'m>) (upperLvl : int<'m>) = 
+    let curr = generator upperLvl
+    let prevFilter = generator lowerLvl |> List.map discriminator
+    [ for c in curr do
+        if prevFilter |> List.contains (discriminator c) then ()
+        else yield c
+    ]
 let getNewClassBenefitsAt useLoreNames scid lvl charLvl = 
     [
         // class benefits
         let clDef = classBySubclassId scid
-        yield! 
-            [for scAb in clDef.ScalingAbilities charLvl lvl do
-                yield clDef.Name, scAb
-            ] |> List.except 
-            [for scAb in clDef.ScalingAbilities charLvl (lvl - 1<classLvl>) do
-                yield clDef.Name, scAb
-            ]
+        
+        for scAb in getLevelDiff (clDef.ScalingAbilities charLvl) _.Name (lvl - 1<classLvl>) lvl do
+            yield clDef.Name, scAb
+
         for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
             if lvl = lvlReq then for fAb in ab do yield clDef.Name, fAb
         
@@ -65,6 +69,34 @@ let getNewClassBenefitsAt useLoreNames scid lvl charLvl =
         for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
             if lvl = lvlReq then for fAb in ab do yield scDef.Name.Display useLoreNames, fAb      
     ]
+
+let getAllClassBenefits useLoreNames cid = 
+    [
+        // subclass benefits
+        let scDef = allClasses[cid]
+        yield! 
+            [ for scAb in scDef.ScalingAbilities 12<charLvl> 12<classLvl> do
+                yield "Scaling", scAb
+            ]
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            for fAb in ab do yield $"[L{lvlReq}]", fAb      
+    ]
+    |> List.map (fun (l, p) -> $"{l}: {p.Name.Display useLoreNames}", Some <| p.Description.Display useLoreNames)
+
+let getAllSubclassBenefits useLoreNames scid = 
+    [
+        // subclass benefits
+        let scDef = allSubclasses[scid]
+        yield! 
+            [ for scAb in scDef.ScalingAbilities 12<charLvl> 12<classLvl> do
+                yield "Scaling", scAb
+            ]
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            for fAb in ab do yield $"[L{lvlReq}]", fAb      
+    ]
+    |> List.map (fun (l, p) -> $"{l}: {p.Name.Display useLoreNames}", Some <| p.Description.Display useLoreNames)
+
+
 let getAllPassives useLoreNames (character : Character) = 
     [ for t in allSubraces[character.RaceId].RacialPassives do
         yield "Race", t
