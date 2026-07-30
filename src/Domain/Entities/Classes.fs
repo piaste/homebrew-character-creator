@@ -106,7 +106,7 @@ let rec fighter = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Resource (UMX.untag cl,  $"Superiority Dice ({halfRoundUp cl}d6 each)", OncePerShortRest)            
+            Resource (UMX.untag cl,  $"Superiority Dice ({halfRoundUp cl}d6)", OncePerShortRest)            
             Complex ("Second Wind", $"Every 3 rounds of battle, you restore {halfRoundUp cl}d12 fighter level in Hit Points and recover a Superiority Die at the end of your turn.")
         ])
 

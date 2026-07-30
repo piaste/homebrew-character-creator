@@ -238,36 +238,38 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                 
                 div { 
                     cl "sheet-attrs"
-                    #nowarn FS0025
-                    forEach resources <| fun (_, resource) ->
-                    #warnon FS0025
-                        let anchorId = Guid.NewGuid().ToString()
-                        b { cl "summary-ability-points tooltip"
-                            resource.Name.DefaultText
-                            
-                            span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; resource.Description.DefaultText}
-                        }
-                    
-                    
-
-                    forEach (List.indexed spellSlots) (fun (i, n) ->
-                        div { 
-                            cl "sheet-attr"
-                            span { cl "spell-slot-lvl"; toRoman (i + 1)}
-                            forEach (List.init n (fun _ -> ())) (fun _ -> 
-                                fakeCheckbox "rgba(3, 108, 161, 0.95)" true
-                            )
-                        } 
-                    )
-                    forEach (List.indexed warlockSlots) (fun (i, n) ->
-                        div { 
-                            cl "sheet-attr"
-                            span { cl "spell-slot-lvl"; toRoman (i + 1)}
-                            forEach (List.init n (fun _ -> ())) (fun _ -> 
-                                fakeCheckbox "rgba(240, 49, 192, 0.95)" true
-                            )
-                        } 
-                    )
+                    div {
+                        cl "resources"
+                        forEach resources <| fun (_, resource) ->                    
+                            let anchorId = Guid.NewGuid().ToString()
+                            b { cl "summary-ability-points tooltip resource"
+                                attr.style $"anchor-name: --{anchorId}"
+                                resource.Name.DefaultText
+                                
+                                span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; resource.Description.DefaultText}
+                            }
+                    }                
+                    div {
+                        cl "spell-slots"
+                        forEach (List.indexed spellSlots) (fun (i, n) ->
+                            div { 
+                                cl "sheet-attr"
+                                span { cl "spell-slot-lvl"; toRoman (i + 1)}
+                                forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                    fakeCheckbox "rgba(3, 108, 161, 0.95)" true
+                                )
+                            } 
+                        )
+                        forEach (List.indexed warlockSlots) (fun (i, n) ->
+                            div { 
+                                cl "sheet-attr"
+                                span { cl "spell-slot-lvl"; toRoman (i + 1)}
+                                forEach (List.init n (fun _ -> ())) (fun _ -> 
+                                    fakeCheckbox "rgba(240, 49, 192, 0.95)" true
+                                )
+                            } 
+                        )
+                    }
                 }
         
 

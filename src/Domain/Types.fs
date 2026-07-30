@@ -153,7 +153,7 @@ type Passive =
             | Complex (n, _) -> n
             | Buff sm -> sm.ToString()
             | Power (_, _, title, _) -> title
-            | Resource (q, n, _) -> $"{q}x {n.DefaultText}"
+            | Resource (q, n, _) -> $"{q} {n.DefaultText}"
             | Summon p -> p.Name + " (S)"
         member this.Description = 
             match this with
