@@ -175,9 +175,9 @@ let rec lolthSwornDrow =
         Name = "Lolth-Sworn Drow"
         BaseRaceId = drow.Id
         RacialPassives = [
-            Complex ("Superior Darkvision", "You can see in magical darkness.")
-            Complex ("Darkness Advantage", "Make all Attack Rolls with Advantage while shrouded in total darkness.")
-            Power(Action, OncePerCombat, "Silence", "Create a 9m sphere of silence")
+            Complex ("Superior Darkvision", "Superior Darkvision, granting them the ability to see in magical darkness.")
+            Complex ("Darkness Advantage", "Additionally, while shrouded in total darkness they make all Attack Rolls with Advantage.")
+            Power(Action, OncePerCombat, "Silence", "Cast Silence as an Action once per combat.")
         ]
     }
 
@@ -187,9 +187,9 @@ let rec seldarineDrow =
         Name = "Seldarine Drow"
         BaseRaceId = drow.Id
         RacialPassives = [
-            Complex ("Superior Darkvision", "You can see in magical darkness.")
-            Complex ("Darkness Advantage", "Make all Attack Rolls with Advantage while shrouded in total darkness.")
-            Power(BonusAction, OncePerCombat, "Misty Step", "Teleport within 18m")
+            Complex ("Superior Darkvision", "Superior Darkvision, granting them the ability to see in magical darkness.")
+            Complex ("Darkness Advantage", "Additionally, while shrouded in total darkness they make all Attack Rolls with Advantage.")
+            Power(BonusAction, OncePerCombat, "Misty Step", "Cast Misty Step as a Bonus Action once per combat.")
         ]
     }
 
@@ -199,7 +199,7 @@ let rec goldDwarf =
         Name = "Gold Dwarf"
         BaseRaceId = dwarf.Id
         RacialPassives = [
-            Complex ("Gold Dwarf Weapon Mastery", "Gain a +2 bonus to all damage dealt with weapons (does not include unarmed attacks).")
+            Complex ("Gold Dwarf Weapon Mastery", "Gain a +2 bonus to all damage dealt with weapons. (Does not include unarmed attacks.)")
         ]
     }
 
@@ -219,9 +219,9 @@ let rec duergar =
         Name = "Duergar"
         BaseRaceId = dwarf.Id
         RacialPassives = [
-            Power(BonusAction, OncePerCombat, "Enlarge", "Increase by one size category")
-            Complex ("Superior Darkvision", "You can see in magical darkness.")
-            Complex ("Darkness Advantage", "Make all Attack Rolls with Advantage while shrouded in total darkness.")
+            Power(BonusAction, OncePerCombat, "Enlarge", "Cast Enlarge on yourself as a Bonus Action once per combat.")
+            Complex ("Superior Darkvision", "Superior Darkvision, granting them the ability to see in magical darkness.")
+            Complex ("Darkness Advantage", "Additionally, while shrouded in total darkness they make all Attack Rolls with Advantage.")
         ]
     }
 
@@ -273,7 +273,7 @@ let rec forestGnome =
         Name = "Forest Gnome"
         BaseRaceId = gnome.Id
         RacialPassives = [
-            Power (Action, OncePerTurn, "Dominate Beast", "Dominate a Beast. Creature breaks free the first time it takes dmg from you or your allies.")
+            Power (Action, OncePerTurn, "Dominate Beast", "Cast Dominate Beast as an Action once per round. Creature breaks free the first time it takes Damage from you or your allies.")
             Complex ("Speak With Animals", "You have the ability to Speak With Animals at all times.")
             Complex ("Restrained Immunity", "You are immune to effects that would Restrain you.")
         ]
@@ -285,9 +285,9 @@ let rec deepGnome =
         Name = "Deep Gnome"
         BaseRaceId = gnome.Id
         RacialPassives = [
-            Power(BonusAction, OncePerCombat, "Invisibility", "Become invisible until you attack or cast a spell")
-            Complex ("Superior Darkvision", "You can see in magical darkness.")
-            Complex ("Darkness Advantage", "Make all Attack Rolls with Advantage while shrouded in total darkness.")
+            Power(BonusAction, OncePerCombat, "Invisibility", "Cast Invisibility on yourself as a Bonus Action once per combat.")
+            Complex ("Superior Darkvision", "Superior Darkvision, granting them the ability to see in magical darkness.")
+            Complex ("Darkness Advantage", "Additionally, while shrouded in total darkness they make all Attack Rolls with Advantage.")
         ]
     }
 
@@ -320,8 +320,8 @@ let rec drowHalfElf =
         BaseRaceId = halfElf.Id
         RacialPassives = [
             Buff(StatModifiers.Create(initiative = +2))
-            Complex ("Superior Darkvision", "You can see in magical darkness.")
-            Complex ("Darkness Advantage", "Make all Attack Rolls with Advantage while shrouded in total darkness.")
+            Complex ("Superior Darkvision", "Superior Darkvision, granting them the ability to see in magical darkness.")
+            Complex ("Darkness Advantage", "Additionally, while shrouded in total darkness they make all Attack Rolls with Advantage.")
         ]
     }
 
