@@ -155,7 +155,7 @@ let checkErrors (character: Character) =
 
     ]
 
-type RichText = (string * string option) list
+type RichText = (string * string * string option) list
 
 
 type RadialCenterText = 

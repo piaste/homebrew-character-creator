@@ -5,6 +5,22 @@
   --ink: #2d2018;
 }
 
+@font-face {
+    font-family: "Alegreya";
+    src: url("../fonts/Alegreya/Alegreya-VariableFont_wght.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Alegreya";
+    src: url("../fonts/Alegreya/Alegreya-Italic-VariableFont_wght.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
 html,
 body {
   min-height: 100%;

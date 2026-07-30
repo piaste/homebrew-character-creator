@@ -74,27 +74,27 @@ let getAllClassBenefits useLoreNames cid =
     [
         // subclass benefits
         let scDef = allClasses[cid]
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            for fAb in ab do yield $"{lvlReq}", fAb      
         yield! 
             [ for scAb in scDef.ScalingAbilities 12<charLvl> 12<classLvl> do
-                yield "Scaling", scAb
+                yield "1 → 12", scAb
             ]
-        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            for fAb in ab do yield $"[L{lvlReq}]", fAb      
     ]
-    |> List.map (fun (l, p) -> $"{l}: {p.Name.Display useLoreNames}", Some <| p.Description.Display useLoreNames)
+    |> List.map (fun (l, p) -> l, p.Name.Display useLoreNames, Some <| p.Description.Display useLoreNames)
 
 let getAllSubclassBenefits useLoreNames scid = 
     [
         // subclass benefits
         let scDef = allSubclasses[scid]
+        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
+            for fAb in ab do yield $"{lvlReq}", fAb      
         yield! 
             [ for scAb in scDef.ScalingAbilities 12<charLvl> 12<classLvl> do
-                yield "Scaling", scAb
+                yield "1 → 12", scAb
             ]
-        for KeyValue(lvlReq, ab) in scDef.FixedAbilities do
-            for fAb in ab do yield $"[L{lvlReq}]", fAb      
     ]
-    |> List.map (fun (l, p) -> $"{l}: {p.Name.Display useLoreNames}", Some <| p.Description.Display useLoreNames)
+    |> List.map (fun (l, p) -> l, p.Name.Display useLoreNames, Some <| p.Description.Display useLoreNames)
 
 
 let getAllPassives useLoreNames (character : Character) = 

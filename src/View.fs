@@ -58,7 +58,7 @@ let inline radialStage (rct : RadialCenterText) dispatch (options : RctMap<_, _>
 
     let radius = 220.0
 
-    let radialButton index total (text: string) iconSubpath hoverAction action = 
+    let radialButton highlighted index total (text: string) iconSubpath hoverAction action = 
         let angle = 1.5 * Math.PI + index * 2. * Math.PI / total
         let posX = radius * Math.Cos angle
         let posY = radius * Math.Sin angle
@@ -69,7 +69,7 @@ let inline radialStage (rct : RadialCenterText) dispatch (options : RctMap<_, _>
             on.mouseover hoverAction
             attr.style $"--scale: 0.92; --x: {posX}px; --y: {posY}px;"
             div {
-                cl "radial-node-button"
+                clIf [highlighted, "radial-node-button-highlighted" ] "radial-node-button"
                 icon iconSubpath
             }
             div { cl "radial-node-label"; text}
@@ -90,7 +90,8 @@ let inline radialStage (rct : RadialCenterText) dispatch (options : RctMap<_, _>
                   cond rct <| function
                     | Rich d when v.RadialCenterTextData.Details = Some d ->
                         // details already shown for the same entity, we always move on to selection
-                        radialButton i count v.IconText (getIcon k) 
+                        // and also we highlight the selected button
+                        radialButton true i count v.IconText (getIcon k) 
                             (fun _ -> ()) // nothing to change on hover
                             (fun _ -> dispatch (msg k))
 
@@ -101,26 +102,13 @@ let inline radialStage (rct : RadialCenterText) dispatch (options : RctMap<_, _>
                             | None -> msg k // select entity and proceed
                             | Some d -> SetRadialCenterText (Rich d) // show details
 
-                        radialButton i count v.IconText (getIcon k) 
+                        radialButton false i count v.IconText (getIcon k) 
                             (fun _ -> dispatch (SetRadialCenterText (Plain v.RadialCenterTextData.Introduction)))
                             (fun _ -> dispatch onClickMsg) 
                 )
               }
         }
     }
-
-let classRadialStage useLoreNames rct dispatch msg (classes: Map<string<classId>, ClassDef>)= 
-    radialStage rct dispatch
-        (classes
-         |> Map.map (fun _ v -> 
-            {| IconText = v.Name
-               RadialCenterTextData = {
-                    Introduction = v.Description
-                    Details = Some <| getAllClassBenefits useLoreNames v.Id
-                }
-            |}))
-        baseclassIconPath
-        msg
 
 let bigActionButtonWithClass (node: Node) abCl dispatch msg = 
     button {

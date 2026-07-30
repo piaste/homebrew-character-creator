@@ -158,11 +158,13 @@ type RadialCenterText with
             | Blank -> empty()
             | Plain s -> printRichText s
             | Rich lines -> 
-                forEach lines <| fun (text, tooltipText) -> 
+                forEach lines <| fun (key, text, tooltipText) -> 
                     let anchorId = Guid.NewGuid().ToString()
                     let withReplacedEm = text.Replace("&lt;i&gt;", "<em>").Replace("&lt;/i&gt;", "</em>")        
-                    p { cl "tooltip"
-                        rawHtml withReplacedEm
+                    p { cl "rct-line tooltip"
+                        attr.style $"anchor-name: --{anchorId}"
+                        span { cl "rct-line-key"; key }
+                        span { cl "rct-line-text"; rawHtml withReplacedEm }
                         cond tooltipText <| function
                         | None -> empty()
                         | Some tt -> span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; tt}
