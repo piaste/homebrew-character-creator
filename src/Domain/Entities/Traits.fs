@@ -40,7 +40,7 @@ let rec borrowedTime : TraitDef = {
     Name = "Borrowed Time"
     Grants = [
         Complex ("Borrowed Time: Temporary", "At the beginning of any combat encounter, you receive Temporary Hit Points equal to your level multiplied by two.")
-        Complex ("Borrowed Time: Loss", "Upon ending combat, you lose the temporary HP and you take force damage equal to your level multiplied by 2.")
+        Complex ("Borrowed Time: Loss", "Upon ending combat, you lose the temporary Hit Points and you take force damage equal to your level multiplied by 2.")
     ]
 }
 
@@ -207,10 +207,10 @@ let rec letMeSoloThem : TraitDef = {
     Id = % nameof letMeSoloThem
     Name = "Let Me Solo Them*"
     Grants = [
-        Complex ("Let Me Solo Them*: Criticals", "You will always roll Critical Hits.")
-        Complex ("Let Me Solo Them*: Health", "Your Hit Points are doubled.")
-        Complex ("Let Me Solo Them*: Attunement", "You are unable to utilize Attunement.")
-        Complex ("Let Me Solo Them*: Warning", "Warning: Taking this trait will drastically impact intended game balance.")
+        yield! alsoAffectsSummons <| Complex ("Let Me Solo Them*: Criticals", "You will always roll Critical Hits.")
+        yield! alsoAffectsSummons <| Complex ("Let Me Solo Them*: Health", "Your Hit Points are doubled.")
+        yield! alsoAffectsSummons <| Complex ("Let Me Solo Them*: Attunement", "You are unable to utilize Attunement.")
+        yield! alsoAffectsSummons <| Complex ("Let Me Solo Them*: Warning", "Warning: Taking this trait will drastically impact intended game balance.")
     ]
 }
 
@@ -218,9 +218,9 @@ let rec loneWolf : TraitDef = {
     Id = % nameof loneWolf
     Name = "Lone Wolf*"
     Grants = [
-        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action, and your maximum Hit Points are doubled.")
-        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain three additional Actions, and your maximum Hit Points are quadrupled.")
-        Complex ("Lone Wolf*: Warning", "Warning: Taking this trait will drastically impact intended game balance, and is made for solo or dual runs.")
+        yield! alsoAffectsSummons <| Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action, and your maximum Hit Points are doubled.")
+        yield! alsoAffectsSummons <| Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain three additional Actions, and your maximum Hit Points are quadrupled.")
+        yield! alsoAffectsSummons <| Complex ("Lone Wolf*: Warning", "Warning: Taking this trait will drastically impact intended game balance, and is made for solo or dual runs.")
     ]
 }
 
@@ -357,7 +357,7 @@ let rec waningImmortality : TraitDef = {
     Name = "Waning Immortality"
     Grants = [
         Buff { StatModifiers.Zero with ``HP per level`` = 6 }
-        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6.")
+        Complex ("Waning Immortality", "Your maximum Hit Points increase by 6 per level. However, each time that you go down, your maximum Hit Points are permanently reduced by 6. This reduction in Hit Points cannot be undone.")
     ]
 }
 
@@ -365,8 +365,8 @@ let rec wretch : TraitDef = {
     Id = % nameof wretch
     Name = "Wretch*"
     Grants = [
-        Complex ("Wretch*: Disadvantage", "You make all Attack Rolls, Ability Checks, and Saving Throws with Disadvantage.")
-        Complex ("Wretch*: Warning", "Warning: Taking this trait will drastically impact intended game balance.")
+        yield! alsoAffectsSummons <| Complex ("Wretch*: Disadvantage", "You make all Attack Rolls, Ability Checks, and Saving Throws with Disadvantage.")
+        yield! alsoAffectsSummons <| Complex ("Wretch*: Warning", "Warning: Taking this trait will drastically impact intended game balance.")
     ]
 }
 
