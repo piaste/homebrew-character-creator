@@ -81,7 +81,7 @@ let rec blessingOfTheMoon : FeatDef = {
     Subpicks = Map []
     Grants = [
         Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Cantrips", "Gain 3 cantrips: Blessing of Moonfire, Lunar Flare, and Lunar Strike.")
-        Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Radiance", "Dealing damage to an enemy restores 1d4 HP to nearby allies.")
+        Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Radiance", "Dealing damage to an enemy restores 1d4 Hit Points to nearby allies.")
     ]
 }
 
@@ -109,7 +109,7 @@ let rec combatMedic : FeatDef = {
     Name = "Combat Medic"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Combat Medic", "Helping another creature restores extra HP equal to your current HP.") ]
+    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Combat Medic", "Helping another creature restores extra Hit Points equal to your current Hit Points.") ]
 }
 
 let rec composed : FeatDef = {
@@ -118,8 +118,8 @@ let rec composed : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Power(Reaction, AtWill, "Regain Composure", "Restore 1d6*Proficiency Bonus HP in a 3m radius when taking damage.")
-        Power(Reaction, AtWill, "Targeted Composure", "Restore 1d6*Proficiency Bonus HP in a 3m radius around the target when dealing damage.")
+        Power(Reaction, AtWill, "Regain Composure", "Restore 1d6*Proficiency Bonus Hit Points in a 3m radius when taking damage.")
+        Power(Reaction, AtWill, "Targeted Composure", "Restore 1d6*Proficiency Bonus Hit Points in a 3m radius around the target when dealing damage.")
     ]
 }
 
@@ -129,7 +129,7 @@ let rec defensiveDuellist : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Power(FreeAction, AtWill, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Defensive Duelist", "Gain AC equal to your Proficiency Bonus when attacked.")
+        Power(FreeAction, AtWill, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Defensive Duelist", "Gain Armor Class equal to your Proficiency Bonus when attacked.")
         Power(Reaction, AtWill, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Defensive Duelist", "Counterattack with a Melee or Ranged attack.")
         Complex("PassiveFeature_MediumArmorMaster" <!!> "Defensive Duellist: Extra Reaction", "Gain an additional Reaction.")
     ]
@@ -145,7 +145,7 @@ let rec duellistsInstinct : FeatDef = {
         Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Charges", "Gain 3 Duellist Charges per Short Rest. Spend to gain Advantage or force Disadvantage.")
         Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Recovery", "Killing blow or Critical hit restores 1 Duellist Charge (once per turn).")
         Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Opportunity", "Opportunity Attacks strike with both weapons while dual-wielding.")
-        Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Strength", "Add global STR bonus to main-hand attacks while dual-wielding.")
+        Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Strength", "Add global Strength bonus to main-hand attacks while dual-wielding.")
     ]
 }
 
@@ -341,7 +341,7 @@ let rec savageAssault : FeatDef = {
     Subpicks = Map []
     Grants = [
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Advantage", "Roll all damage dice with Advantage.")
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Corrosive", "Damaging a target reduces its AC by 1 (stacking).")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Corrosive", "Damaging a target reduces its Armor Class by 1 (stacking).")
     ]
 }
 
@@ -398,8 +398,8 @@ let rec tavernBrawler : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "Add STR modifier to unarmed attack and Throw damage rolls.")
-        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Add DEX modifier to all Attack Rolls.")
+        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "Add Strength modifier to unarmed attack and Throw damage rolls.")
+        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Add Dexterity modifier to all Attack Rolls.")
         yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Thrown", "Main-hand melee weapons gain Thrown and Returning.")
     ]
 }
@@ -441,7 +441,7 @@ let rec warCaster : FeatDef = {
     Grants = [
         Complex("PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster: Focus", "Gain Advantage on Concentration Saving Throws.")
         Power(FreeAction, AtWill, "PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster", "Cast Shocking Grasp as a Reaction against an enemy entering melee range.")
-        Power(BonusAction, AtWill, "Bind Weapons", "Bind Weapons: use Spellcasting Ability for Melee Attack/Damage. Kill/Crit restores a lvl 1 slot.")
+        Power(BonusAction, AtWill, "Bind Weapons", "Bind Weapons: use Spellcasting Ability for Melee Attack/Damage. Kill/Crit restores a level one slot.")
         Complex("PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster: Melee Spell", "Toggled: cast any ranged Spell or Cantrip as a melee Spell.")
     ]
 }
