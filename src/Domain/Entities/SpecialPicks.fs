@@ -73,7 +73,7 @@ let rec emergencyPlating : ClassLevelUpPick = {
     TypeId = nameof emergencyPlating
     Name = "Emergency Plating"
     Grants = [
-        Simple "Optimization Matrix grants Temporary HP (Level x 2)"
+        Simple "Optimization Matrix grants Temporary Hit Points (Level x 2)"
     ]
 }
 
@@ -914,7 +914,7 @@ let rec wildShapeBadger : ClassLevelUpPick = {
     TypeId = nameof wildShapeBadger
     Name = "Badger"
     Grants = [
-        Simple "Wild Shape: Badger. High HP, Bite/Claws, and Burrow."
+        Simple "Wild Shape: Badger. High Hit Points, Bite/Claws, and Burrow."
     ]
 }
 
@@ -1032,7 +1032,7 @@ let rec staggeringSmite : ClassLevelUpPick = {
     TypeId = nameof staggeringSmite
     Name = "Staggering Smite"
     Grants = [
-        Power(Action, AtWill, "Staggering Smite", "Psychic damage, target has Disadvantage on Saves")
+        Power(Action, AtWill, "Staggering Smite", "Psychic damage, target has Disadvantage on Saving Throws")
     ]
 }
 

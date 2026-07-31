@@ -11,7 +11,7 @@ let rec beastheart =
         Id = % nameof beastheart
         Name = "Beastheart"
                <?> "Uthgardt Telhut"
-        Description = "Attunement with nature and its beasts inspires your rage."
+        Description = "Your attunement with nature and its beasts inspires your rage, empowering you with supernatural might."
                       <?> "You completed a Runehunt and were initiated into one of the barbarian tribes of the North. Totemic spirits now answer your rage and grant you their bestial strength."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -32,7 +32,7 @@ let rec berserker =
         Id = % nameof berserker
         Name = "Berserker"
                <?> "Berserker Trance"
-        Description = "Follow a path of untrammelled fury, slick with blood."
+        Description = "Violence is both a means and an end. You follow a path of untrammelled fury, slick with blood, as you thrill in the chaos of battle, heedless of your own well-being."
                        <?> "You are capable of entering a mindless state of pure battle fury. Whether you learnt the technique in a Rashemi lodge or deep within your soul, it makes you no less terrifying."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -56,7 +56,7 @@ let rec frostbreaker =
         Id = % nameof frostbreaker
         Name = "Frostbreaker"
                <?> "Frostmaiden's Kiss"
-        Description = "Honed rage, controlled and enduring amidst frigid peaks."
+        Description = "Amidst frigid hilltops and glacial peaks, you have honed your rage, now controlled and enduring."
                       <?> "You wandered the icy glaciers beyond the Spine of the World and were touched by Auril's capricious influence. A shard of the Cold Goddess's fury now manifests with your rage."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -80,7 +80,7 @@ let rec giantsBlood =
         Id = % nameof giantsBlood
         Name = "Giant's Blood"
                <?> "Kostchtchie's Aura"
-        Description = "Invoking the might and staggering size of Giants."
+        Description = "You carry the blood of Giants, invoking their might and staggering size alike by drawing strength from the same primordial forces that fuel them."
                       <?> "You have been in the presence of one of the brutish giant lord's &lt;i&gt;hortha&lt;/i&gt;. An unnatural rage now swells in you, channeling the Prince of Wrath's size and fury."
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -107,7 +107,7 @@ let rec rosemourn =
         Id = % nameof rosemourn
         Name = "Rosemourn"
                <?> "Black-Barbed Curse"
-        Description = "Fury resting in scars of the past, forged into thorns."
+        Description = "Your fury runs unconscionably deep, resting soundly in scars of the past. The briars of that past help you to forge both strength and resilience."
                       <?> "&lt;i&gt;You who a-scaped my maze and carried my thorns into the wide world, did the black-briar madness twine kindly in your blood? Or does it yet a-bite, like a jealous lover in the dark?&lt;/i&gt;"
         BaseClassId = barbarian.Id
         CasterType = Martial
@@ -131,7 +131,7 @@ let rec wildSoul =
         Id = % nameof wildSoul
         Name = "Wild Soul"
                <?> "Wild Weave's Thread"
-        Description = "Arcane power churns within, waiting to be released."
+        Description = "The wild influence of magic has transformed you, suffusing you with an arcane power that churns within you, waiting to be released."
                       <?> "You walked through an ancient scar of the Time of Troubles, a &lt;i&gt;wild magic&lt;/i&gt; zone. The raw Weave bound itself to your essence and now echoes in your rage."
         BaseClassId = barbarian.Id
         CasterType = HalfCaster Innate
@@ -153,7 +153,7 @@ let rec deathDomain =
     {
         Id = % nameof deathDomain
         Name = "Death Domain"
-        Description = "Nourish faith on forces that make dealings in death."
+        Description = "You nourish your faith on forces that make dealings in death, giving rise to desolate plague and putrid necrosis alike."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
@@ -172,7 +172,7 @@ let rec forgeDomain =
     {
         Id = % nameof forgeDomain
         Name = "Forge Domain"
-        Description = "Faith sparks divine fire smelted in holy ambition."
+        Description = "Your faith sparks divine fire lit with the firmament of your belief, smelted in an act of holy ambition. A raging inferno held in hand to strike true and just."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
@@ -210,16 +210,16 @@ let rec lifeDomain =
     {
         Id = % nameof lifeDomain
         Name = "Life Domain"
-        Description = "Preserving body, mind, and soul with plethora of healing."
+        Description = "Tasked with the holy edict of preserving the body, mind, and soul, your god grants you a plethora of healing magics."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Virtuous Touch", "First heal each round regains extra HP = character level.") ]
+            1<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Virtuous Touch", "First heal each round regains extra Hit Points = character level.") ]
             3<classLvl>, [ Power(Action, AtWill, "PassiveFeature_DiscipleOfLife" <!!> "Preserve Life", "Heal target for 4x character level.") ]
             5<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Sanctity", "Healing applies Resistance for 3 turns.") ]
             7<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_DiscipleOfLife" <!!> "Dampen Elements", "Halve incoming elemental damage for self/ally.") ]
             9<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Benevolent Grace", "Healing applies Shield of Faith for 3 turns.") ]
-            11<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Divine Presence", "Preserve Life can resurrect fallen allies with full HP.") ]
+            11<classLvl>, [ Complex("PassiveFeature_DiscipleOfLife" <!!> "Divine Presence", "Preserve Life can resurrect fallen allies with full Hit Points.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -229,7 +229,7 @@ let rec tempestDomain =
     {
         Id = % nameof tempestDomain
         Name = "Tempest Domain"
-        Description = "Faith made of thunder and lightning of a terrible storm."
+        Description = "Your faith has made you the very thunder that quakes the black firmament, the lightning that courses through the veins of a terrible storm."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
@@ -251,7 +251,7 @@ let rec warDomain =
     {
         Id = % nameof warDomain
         Name = "War Domain"
-        Description = "Arsenal of sacramental savagery against the unrighteous."
+        Description = "Fortified by holy zeal, you brandish an arsenal of sacramental savagery to use against those you deem unrighteous."
         BaseClassId = cleric.Id
         CasterType = FullCaster Divine
         FixedAbilities = Map [
@@ -272,7 +272,7 @@ let rec circleOfTheElements =
     {
         Id = % nameof circleOfTheElements
         Name = "Circle of the Elements"
-        Description = "Channel natural arcana through the earth and creatures."
+        Description = "You channel the natural arcana flowing through the earth and creatures atop it to cast powerful druidic magic."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
@@ -291,7 +291,7 @@ let rec circleOfTheLand =
     {
         Id = % nameof circleOfTheLand
         Name = "Circle of the Land"
-        Description = "Druidic magic through earth and its creatures."
+        Description = "You channel the natural arcana flowing through the earth and creatures atop it to cast powerful druidic magic."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
@@ -299,7 +299,7 @@ let rec circleOfTheLand =
                 Power(Action, AtWill, "Spell_Conjuration_ConjureWoodlandBeings" <!!> "Conjure Dryad", "Summon a scaling woodland companion.")
                 Complex("PassiveFeature_Land_Coast" <!!> "Ensnaring Presence", "Damaging enemies potentially Entangles them.")
             ]
-            3<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Nature's Grasp", "Entangled enemies have Disadvantage on saves against your spells.") ]
+            3<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Nature's Grasp", "Entangled enemies have Disadvantage on saving throws against your spells.") ]
             5<classLvl>, [ Power(FreeAction, OncePerCombat, "Spell_Conjuration_Entangled" <!!> "Vineburst", "Entangle: Cast Entangle at 3rd level.") ]
             7<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Untamed Freedom", "Self and nearby allies ignore Difficult Terrain.") ]
             9<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Verdant Aftermath", $"{TOGGLEABLE}: Kills create Entangling Vines.") ]
@@ -313,7 +313,7 @@ let rec circleOfTheMoon =
     {
         Id = % nameof circleOfTheMoon
         Name = "Circle of the Moon"
-        Description = "Form is mutable as the mercurial moon."
+        Description = "Your form is mutable as the mercurial moon, letting you shift your form into massive beasts and even primal elementals."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
@@ -332,12 +332,12 @@ let rec circleOfTheShadows =
     {
         Id = % nameof circleOfTheShadows
         Name = "Circle of the Shadows"
-        Description = "Death is the most natural occurrence within nature."
+        Description = "Death is the most natural occurrence within nature. From within the shadows, you observe this fact in the truest of form, and guide others to a more intimate understanding."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness.") ]
-            3<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Veilstalker", "While obscured, recover HP and deal extra Psychic damage.") ]
+            3<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Veilstalker", "While obscured, recover Hit Points and deal extra Psychic damage.") ]
             5<classLvl>, [ Power(BonusAction, AtWill, "TadpoleSuperPower_DisplacerShape" <!!> "Predatory Communion", "Morph allies into Displacer Beasts.") ]
             7<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Distorted Visage", "Permanently Heavily Obscured beyond 3m.") ]
             9<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Nightspill", $"{TOGGLEABLE}: Leave magical darkness behind when moving.") ]
@@ -351,13 +351,13 @@ let rec circleOfTheSpores =
     {
         Id = % nameof circleOfTheSpores
         Name = "Circle of the Spores"
-        Description = "Manipulation of spores to augment self and harm foes."
+        Description = "Viewing death, necrosis, fungal growth, and sporulation as just another part of life, you can manipulate such spores to augment yourself and harm your foes."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Reaction, AtWill, "Action_HaloOfSpores" <!!> "Halo of Spores", "Deal Necrotic damage as a reaction.")
-                Power(Action, AtWill, "Action_SymbioticEntity" <!!> "Symbiotic Entity", "Gain Temp HP and extra Necrotic damage.")
+                Power(Action, AtWill, "Action_SymbioticEntity" <!!> "Symbiotic Entity", "Gain Temporary Hit Points and extra Necrotic damage.")
             ]
             3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_SpreadingSpores" <!!> "Animating Spores", "Reanimate corpses as fungal servants.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Action_SpreadingSpores" <!!> "Spreading Spores", "Create area of DOT spores while Symbiotic.") ]
@@ -373,7 +373,7 @@ let rec circleOfTheStars =
     {
         Id = % nameof circleOfTheStars
         Name = "Circle of the Stars"
-        Description = "Guided by the infinite mysteries of the cosmos."
+        Description = "You are guided by the infinite mysteries of the cosmos. It is through your understanding of the stars that your druidic magic gains its potency."
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
@@ -397,14 +397,14 @@ let rec champion =
     {
         Id = % nameof champion
         Name = "Champion"
-        Description = "The ultimate tank and taunter."
+        Description = "You approach the complex problems posed by combat with one distinctly effective solution - you will take anything they can throw at you, and protect your allies while doing so."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Challenger", $"{TOGGLEABLE}: Gain Physical Resistance, but enemies have Advantage on Attack Rolls against you. Chance to Challenge on hit.") ]
             3<classLvl>, [
-                Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 HP * Proficiency Bonus.")
-                Power(BonusAction, AtWill, "Spell_2e_GirzanjesMarch" <!!> "Rallying Cry", "Grant 12 Temporary HP to all allies within 9m.")
+                Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 Hit Points * Proficiency Bonus.")
+                Power(BonusAction, AtWill, "Spell_2e_GirzanjesMarch" <!!> "Rallying Cry", "Grant 12 Temporary Hit Points to all allies within 9m.")
                 Power(BonusAction, AtWill, "Spell_2e_MageArmor" <!!> "Battalion's March", "Allies within 9m have Advantage on Saving Throws for 3 turns.")
             ]
             5<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MediumArmorMaster" <!!> "Challenger's Call", "Attempt to Challenge all enemies in a 9m area.") ]
@@ -421,7 +421,7 @@ let rec frontierKnight =
         Id = % nameof frontierKnight
         Name = "Frontier Knight"
                <?> "Weapon Master"
-        Description = "Paragon of tactical superiority, employing a wide array of combat techniques."
+        Description = "As a paragon of tactical superiority, you employ a wide array of combat techniques to dominate every foe."
                       <?> "You have mastered a wide array of combat techniques, every fight an opportunity to display your skills or to unleash the powers of legendary weapons."
         BaseClassId = fighter.Id
         CasterType = Martial
@@ -445,7 +445,7 @@ let rec arcaneArcher =
     {
         Id = % nameof arcaneArcher
         Name = "Arcane Archer"
-        Description = "Infuse the Weave into your arrows for supernatural quality and devastating effects."
+        Description = "You are capable of infusing the weave into your attacks, providing your archery with a supernatural quality - and your foes with something to fear."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -470,7 +470,7 @@ let rec dragoon =
         Id = % nameof dragoon
         Name = "Dragoon"
                <?> "Blazing Cavalier"
-        Description = "Wield the power of wizened beasts to leap and charge through the battlefield."
+        Description = "Draconic strength begets its own crucible - the wingbeats of wizened beasts who now lend you their power drum a march of war ever closer toward your victories."
                       <?> "You charge valiantly into the heart of danger, imbuing your weapon strikes with devastating power."
         BaseClassId = fighter.Id
         CasterType = Martial
@@ -490,7 +490,7 @@ let rec eldritchKnight =
     {
         Id = % nameof eldritchKnight
         Name = "Eldritch Knight"
-        Description = "A warrior of spell and sword, weaving Warlock incantations into martial expertise."
+        Description = "You are a warrior of Spell and sword, weaving incantations that supplement your extensive martial expertise."
         BaseClassId = fighter.Id
         CasterType = HalfCaster Bargained
         FixedAbilities = Map [
@@ -509,7 +509,7 @@ let rec palisade =
     {
         Id = % nameof palisade
         Name = "Palisade"
-        Description = "A shield-bearing juggernaut who bashes enemies into fine mist."
+        Description = "The best offense is a good defense, and you’ve taken the adage to heart. Shield in hand, you march forward, ready to bash any who challenge you into a fine mist."
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -548,7 +548,7 @@ let rec artillerist =
     {
         Id = % nameof artillerist
         Name = "Artillerist"
-        Description = "Specialists in hurled projectiles and devastating explosions."
+        Description = "Artillerists specialise in hurling projectiles down range and creating various types of explosions on the battlefield. This destructive power is valid by armies across many different worlds."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -568,7 +568,7 @@ let rec battleSynthetic =
         Id = % nameof battleSynthetic
         Name = "Battle Synthetic"
                <?> "Battlesmith"
-        Description = "Experts at defending others and field repairs, accompanied by an Automaton."
+        Description = "Armies require protection, and someone has to put things back together if defences fall. A Battle Synthetic is an expert at defending others and repairs on the field. To aid in their work, Battlesmiths are accompanied by an Automaton."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -576,10 +576,10 @@ let rec battleSynthetic =
                 Complex("Stabilizing Rounds", "Ranged attacks heal allies within 3m of the target for 1d4.")
                 Power(BonusAction, AtWill, "Summon Lil’G", "Summon a personal Automaton that grows with you.")
             ]
-            3<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 HP.") ]
+            3<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Targeted Repair Cycle", "Damaging enemies Marks them; allies damaging them recover 1d4 Hit Points.") ]
             5<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Take Your Medicine", "Firearms can heal allies when targeting them directly.") ]
-            7<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Lil' Great Heal", "Allies within 9m of Lil' G regain HP every turn.") ]
-            9<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Rapid Recovery Reload", "Reloading maximizes HP gained from healing for allies within 18m.") ]
+            7<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Lil' Great Heal", "Allies within 9m of Lil' G regain Hit Points every turn.") ]
+            9<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Rapid Recovery Reload", "Reloading maximizes Hit Points gained from healing for allies within 18m.") ]
             11<classLvl>, [ Complex("Skill_RightToolForTheJob" <!!> "Bigby Grym", "Lil' G grows to enormous size and power.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -590,7 +590,7 @@ let rec grenadier =
     {
         Id = % nameof grenadier
         Name = "Grenadier"
-        Description = "Expert at blowing things up with guns and random explosives."
+        Description = "Guns, explosions, and ample destructive tendencies make you a force to be reckoned with - not because of any magic or nuance, but because you know exactly how to blow shit up."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -609,7 +609,7 @@ let rec infusedArcsmith =
     {
         Id = % nameof infusedArcsmith
         Name = "Infused Arcsmith"
-        Description = "Hone bodies through magic and bonding to unleash potent infusions."
+        Description = "To an Infused Arcsmith, bodies are but a malleable canvas. Enhanced and honed through magic to unleash their potency, an Arcsmith’s power only grows over time as experimentation and bonding further refines their work."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -631,7 +631,7 @@ let rec striker =
     {
         Id = % nameof striker
         Name = "Striker"
-        Description = "Manipulate victory through lead-based tactical snowballing."
+        Description = "A fight is won not only through brute strength, but through tactics. Your expertise is one of manipulation - to tactically snowball through a grounded, lead based argument."
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
@@ -652,13 +652,13 @@ let rec collegeOfCaptivation =
     {
         Id = % nameof collegeOfCaptivation
         Name = "College of Captivation"
-        Description = "Music that draws enemies' attention and gives respite to allies."
+        Description = "Under the tutelage of fey creatures, you’ve mastered the craft of captivation - both positive and negative. A presence that simply cannot be ignored."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Sound of Silence", $"{TOGGLEABLE}: Performances act in 9m radius but allow Bard to act freely.")
-                Complex("Chorus Healing", "Allies in performance regain HP = Proficiency Bonus.")
+                Complex("Chorus Healing", "Allies in performance regain Hit Points = Proficiency Bonus.")
             ]
             3<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Parade March", "Performance forces enemies to have Disadvantage unless attacking you.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Action_MantleOfInspiration" <!!> "Cover of Captivation", "Spend Inspiration to negate incoming damage.") ]
@@ -674,7 +674,7 @@ let rec collegeOfLore =
     {
         Id = % nameof collegeOfLore
         Name = "College of Lore"
-        Description = "A natural segue to bardic performance where spells are harder to resist."
+        Description = "You pursue beauty and truth, collecting knowledge from scholarly tomes to peasants’ tales, and use your gifts to hold both audiences and enemies Spellbound."
         BaseClassId = bard.Id
         CasterType = FullCaster DoubleVersatile
         FixedAbilities = Map [
@@ -692,7 +692,7 @@ let rec collegeOfMoriendi =
     {
         Id = % nameof collegeOfMoriendi
         Name = "College of Moriendi"
-        Description = "Death Knells drum your approach; your song is one of savage necromancy."
+        Description = "Death Knells drum rhythmic your approach, commanding the grave to falter. Your song is one of savage necromancy, a metallic warning to those who dare listen closely."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
@@ -711,7 +711,7 @@ let rec collegeOfNostalgia =
     {
         Id = % nameof collegeOfNostalgia
         Name = "College of Nostalgia"
-        Description = "Displays of raw intensity that only music can convey."
+        Description = "Within Music lies the beating heart of nostalgia. And within that nostalgia, power is cultivated through a lifetime of experience. You manifest that experience in displays of raw intensity that only music can convey."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
@@ -730,7 +730,7 @@ let rec collegeOfSteel =
     {
         Id = % nameof collegeOfSteel
         Name = "College of Steel"               
-        Description = "Strike a crescendo of attacks and leave enemies off-beat."
+        Description = "A highly trained and skilled warrior, you use your prowess with words and weapons to fight and entertain in equal measure."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
@@ -749,7 +749,7 @@ let rec collegeOfValour =
     {
         Id = % nameof collegeOfValour
         Name = "College of Valour"
-        Description = "Inspire allies to greater feats and energize them for quests."
+        Description = "Under the tutelage of fey creatures, you’ve mastered the craft of captivation - both positive and negative. A presence that simply cannot be ignored."
         BaseClassId = bard.Id
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
@@ -771,7 +771,7 @@ let rec wayOfTheArcane =
         Id = % nameof wayOfTheArcane
         Name = "Way of the Arcane"
                <?> "Shining Hand Training"
-        Description = "Focus ki to bend the elements to your will as an extension of your body."
+        Description = "You focus your ki to bend the elements to your will, using them as an extension of your own body."
                       <?> "You trained in Amn with the time-honoured Azuthian monks of the Shining Hand, who mix wizardry with monastic discipline in devotion to the Lord of Spells."
         BaseClassId = monk.Id
         CasterType = HalfCaster Versatile
@@ -797,13 +797,13 @@ let rec wayOfTheGentleFist =
         Id = % nameof wayOfTheGentleFist
         Name = "Way of the Gentle Fist"
                <?> "Broken Ones Training"
-        Description = "Harmony and practiced inner peace providing relief to those around you."
+        Description = "Through harmony, your guiding hands provide relief. Though practiced inner peace, those around you are blessed with a calming sense of solidarity."
                       <?> "You trained in the Dalelands with the wandering Ilmatari monks called the Broken Ones, who pursue the path of healers and protectors of the meek."
         BaseClassId = monk.Id
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Serenity", $"{TOGGLEABLE}: Preferred target; heal each turn for an amount equal to unarmed dice.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_ForcefulHand" <!!> "Merciful Counter", "When an ally within 9m is damaged while above half of their total HP, you may heal them for an amount equal to your unarmed dice.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_ForcefulHand" <!!> "Merciful Counter", "When an ally within 9m is damaged while above half of their total Hit Points, you may heal them for an amount equal to your unarmed dice.") ]
             5<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Fists of Equilibrium", "Healing allies Calms them (Immunity to Confusion, Madness, etc.).") ]
             7<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Mending Blows", "Damaging enemies heals allies within 9m.") ]
             9<classLvl>, [ Complex("Spell_2e_ForcefulHand" <!!> "Cleansing Guidance", "Healing allies provides Latent Restoration and Great Cleanse.") ]
@@ -818,7 +818,7 @@ let rec wayOfTheDrunkenMaster =
         Id = % nameof wayOfTheDrunkenMaster
         Name = "Way of the Drunken Master"
                <?> "St. Dionysus Training"
-        Description = "Lurch through battle with deceptive movements and unpredictable sways."
+        Description = "With the unpredictable lurches of a tippler, you sway through every battle, frustrating foes with carefully executed movements concealed beneath a facade of incompetence."
                       <?> "You trained in Damara with the eccentric Ilmatari monks of the Order of St. Dionysus, who revere their founder as the patron saint of alcohol and wine."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -843,7 +843,7 @@ let rec wayOfTheOpenHand =
         Id = % nameof wayOfTheOpenHand
         Name = "Way of the Open Hand"
                <?> "White Rod Training"
-        Description = "Control ki to heal or inflict grievous hurt with specialized strikes."
+        Description = "You specialize in unarmed combat, using your hands and your control of ki to heal or inflict grievous hurt."
                       <?> "You trained in Calimshan with the renowned Loviatan monks of the White Rod, who know a thousand and one ways to inflict pain with their bare hands."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -867,7 +867,7 @@ let rec wayOfTheShadowArts =
         Id = % nameof wayOfTheShadowArts
         Name = "Way of the Shadow Arts"
                <?> "Dark Moon Training"
-        Description = "Stealth and subterfuge, bending shadows to strike without warning."
+        Description = "You value the arts of stealth and subterfuge, bending the shadows to your will to strike without warning."
                       <?> "You trained in the Cloud Peaks with the secretive Sharran monks of the Dark Moon, who wrap themselves in the very shadows to hunt down the enemies of their faith."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -892,7 +892,7 @@ let rec wayOfTheTemperedSteel =
         Id = % nameof wayOfTheTemperedSteel
         Name = "Way of the Tempered Steel"
                <?> "Soaring Way Training"
-        Description = "Rest your hand on the hilt of a summoned Katana in subtle anticipation."
+        Description = "A stillness within the air around you gives pause to the most reckless of foes. You overwhelm within a cascading aura of unnerving calm - your hand resting soundly on the hilt of your weapon in subtle anticipation."
                       <?> "You trained in Telflamm with the exotic Shou monks of Xiang Temple, who hone their blades no less than their own bodies."
         BaseClassId = monk.Id
         CasterType = Martial
@@ -906,7 +906,7 @@ let rec wayOfTheTemperedSteel =
             5<classLvl>, [ Complex("TemperedSteel" <!!> "Macabre Patience", "Judgement Cut/Mirage Blade target additional enemies; Tempered Strike rolls with Advantage.") ]
             7<classLvl>, [ Complex("TemperedSteel" <!!> "Unanswered Angle", "Weapon damage ignores all physical Resistances.") ]
             9<classLvl>, [ Complex("TemperedSteel" <!!> "Concentration", "Ending turn without moving restores one Ki Point.") ]
-            11<classLvl>, [ Complex("TemperedSteel" <!!> "Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full HP.") ]
+            11<classLvl>, [ Complex("TemperedSteel" <!!> "Strike of the Yamato" <?> "Strike of the Daito", "Special techniques always Critical Strike targets with full Hit Points.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -919,7 +919,7 @@ let rec ancientWarden =
         Id = % nameof ancientWarden
         Name = "Ancient Warden"
                <?> "Sibling of the Ruby Rose"
-        Description = "Preserve the sanctity of life and the beauty of nature."
+        Description = "You fight on the side of light in the cosmic struggle against darkness to preserve the sanctity of life and the beauty of nature."
                       <?> "You served with the legendary Sisters and Brothers of the Ruby Rose, an order of paladins devoted to the defence of beauty, truth, and purity."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -944,7 +944,7 @@ let rec crownedPhoenix =
         Id = % nameof crownedPhoenix
         Name = "Crowned Phoenix"
                <?> "Mystic Fire Knight"
-        Description = "Ensuring civilization is reborn from the ashes of mistakes."
+        Description = "You have sworn yourself to the ideals of civilisation and law, serving society to ensure it is reborn from the ashes of our mistakes."
                       <?> "You served with Mystra's paladins or with their non-religious allies, the Knights of the Weave. You have learned to channel the power of &lt;i&gt;spellfire&lt;/i&gt; in service of your holy mission."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -958,7 +958,7 @@ let rec crownedPhoenix =
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DivineGuardian" <!!> "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
             7<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Scorched Earth" <?> "Arcane Dominion", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
             9<classLvl>, [ Power(Action, AtWill, "Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Aura of Cinder" <?> "Aura of Spellfire", "Allies gain Warding Bond; enemies take Fire damage.") ]
-            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all HP and erupts in an explosion.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Rebirth" <?> "Vessel of the Weave", "Downing for the first time restores all Hit Points and erupts in an explosion.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -969,7 +969,7 @@ let rec devoutParagon =
         Id = % nameof devoutParagon
         Name = "Devout Paragon"
                <?> "Radiant Heart Auxiliary"
-        Description = "Act with honour and virtue to protect the weak." <?> "You served in the junior ranks of the Most Noble Order of the Radiant Heart, a fraternal organization that preserves peace and protects the weak across the Realms."
+        Description = "Following the ideal of the knight in shining armour, you act with honour and virtue to protect the weak and pursue the greater good."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
@@ -993,7 +993,7 @@ let rec oathboundCrusader =
         Id = % nameof oathboundCrusader
         Name = "Oathbound Crusader"
                <?> "Gilded Eye Inquisitor"
-        Description = "Righting wrongs and delivering justice to grievous sinners."
+        Description = "You have set aside even your own purity to right wrongs and deliver justice to those who have committed the most grievous sins."
                       <?> "You served with the fanatic Order of the Gilded Eye, knights of Helm who mercilessly hunt down corruption and evil in the North."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -1017,7 +1017,7 @@ let rec oathbreaker =
     {
         Id = % nameof oathbreaker
         Name = "Oathbreaker"
-        Description = "In pursuit of power and ambition, only darkness remains."
+        Description = "You have broken your sacred Oath in pursuit of power and ambition. Only darkness remains to fuel you now."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
@@ -1041,7 +1041,7 @@ let rec tyrant =
         Id = % nameof tyrant
         Name = "Tyrant"
                <?> "Black Gauntlet Crusader"
-        Description = "Secure obedience through fear and absolute authority."
+        Description = "Through fear, obedience is secured. Through absolute authority, the weak are broken and even the defiant learn their place."
                       <?> "You served with the Banite knights of the Black Gauntlet, a ruthless brotherhood from Mintar intent on imposing absolute order and fealty to the Black Hand."
         BaseClassId = paladin.Id
         CasterType = HalfCaster Divine
@@ -1068,7 +1068,7 @@ let rec beastMaster =
         Id = % nameof beastMaster
         Name = "Beast Master"
                <?> "High Forest Trail"
-        Description = "Cultivate the bond with a bestial companion that grows with you."
+        Description = "You’ve chosen to cultivate the bond with your bestial companion, a choice that strengthens both of you in equal measure."
                       <?> "You explored the endless paths of the Great Everwood and learned to befriend the many beasts that call it home."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1089,7 +1089,7 @@ let rec gloomStalker =
         Id = % nameof gloomStalker
         Name = "Gloom Stalker"
                <?> "Underdark Trail"
-        Description = "Ambush and put down foes from the envelope of darkness."
+        Description = "Emerging like a horrible gift from the envelope of darkness and shadow, you ambush and put down your foes before they can even scream."
                       <?> "You explored the treacherous caverns of the Realms Below and learned their merciless ways - ambush and kill, before you are ambushed and killed."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1110,7 +1110,7 @@ let rec hunter =
         Id = % nameof hunter
         Name = "Hunter"
                <?> "Greypeaks Trails"
-        Description = "Excel at slaying Faerun’s most dangerous prey."
+        Description = "You seek the most dangerous prey in Faerun, from ancient dragons to massive hordes of undead, and excel at slaying them all."
                       <?> "You explored the fearsome mountains of the Savage Frontier and learned to hunt the many great monsters that inhabit their ridges."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1134,7 +1134,7 @@ let rec mireMist =
         Id = % nameof mireMist
         Name = "Mire Mist"
                <?> "Merdelain Trail"
-        Description = "Through stagnant waters and drifting vapors, decay takes root."
+        Description = "Through stagnant waters, decay takes root. Through drifting vapors and creeping corrosion, the wilderness slowly consumes all who trespass within it."
                       <?> "You explored the tainted ruins of the Mere of Dead Men and learned the power of the dreadful acid breathed by its black dragons."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1155,7 +1155,7 @@ let rec swarmkeeper =
         Id = % nameof swarmkeeper
         Name = "Swarmkeeper"
                <?> "Neverwinter Woods Trail"
-        Description = "Forged deep connections with swarms of nature spirits."
+        Description = "You have forged a deep connection with your natural surroundings, forming magical bonds with swarms of nature spirits."
                       <?> "You explored the fey-touched meadows of the old Llewyrrwood and learned to bond with swarms of tiny nature spirits."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1176,7 +1176,7 @@ let rec twinfang =
         Id = % nameof twinfang
         Name = "Twinfang"
                <?> "Evermoors Trail"
-        Description = "A second shadow moves at your side; together you descend upon quarry."
+        Description = "At your side moves a second shadow--silent, patient, and lethal. When you strike, your companion answers, and together you descend upon your quarry with the certainty of twin fangs closing around their throat."
                       <?> "You explored the giants-infested swamps of the Trollmoors and learned that a ranger and his companion can fell far bigger prey when fighting together."
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
@@ -1224,7 +1224,7 @@ let rec assassin =
         Id = % nameof assassin
         Name = "Assassin"
                <?> "Galenas Paths"
-        Description = "Sublime punishment to a single foe at a time."
+        Description = "You prefer to deal sublime punishment to a single foe at a time - not in a duel, mind, because a duel implies chivalry, and you’re too busy getting the job done for honour."
                       <?> "You apprenticed with the legendary Assassins of the Galenas Mountains, slaying your targets with a single strike."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1234,7 +1234,7 @@ let rec assassin =
             5<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Hidden Implement", "Stealth/Invisibility hits have a chance to Paralyze.") ]
             7<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Critical Shock", "All hits against Out-of-Combat targets are Critical Hits.") ]
             9<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Marked for Blood", "Stealth hits leave targets unable to be Alerted.") ]
-            11<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Execute", "Hits against targets < 10% HP kill instantly.") ]
+            11<classLvl>, [ Complex("Action_InfiltrationExpertise" <!!> "Execute", "Hits against targets < 10% Hit Points kill instantly.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1245,7 +1245,7 @@ let rec hiddenToxicant =
         Id = % nameof hiddenToxicant
         Name = "Hidden Toxicant"
                <?> "Westgate Docks"
-        Description = "Measured tinctures and precise brews turn flesh into a vessel for ruin."
+        Description = "You have learned to turn flesh into a vessel for ruin. With measured tinctures and precise brews, you mark vital points and allow your toxins to do the rest."
         <?> "You apprenticed with the ruthless Night Masks, acquiring a collection of deadly recipes from all over Faerûn."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1266,7 +1266,7 @@ let rec mercenary =
         Id = % nameof mercenary
         Name = "Mercenary"
                <?> "Skullport Caves"
-        Description = "Talk your way through anything, and let the blades speak when that fails."
+        Description = "Equally as intelligent as you are cunning, you can talk your way through any situation. And when blades are drawn, you can speak that language, too."
         <?> "You apprenticed with the chaotic Xanathar Guild, making a name for yourself by wit and weapon in the lawless Port of Shadows under Waterdeep."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1292,7 +1292,7 @@ let rec thief =
         Id = % nameof thief
         Name = "Thief"
                <?> "Amnian Roads"
-        Description = "Larcenous arts and quick hands for third floor windows or forgotten ruins."
+        Description = "Your quick hands and mastery of the larcenous arts make stealing second nature - be it from a third floor window or a forgotten ruin."
         <?> "You apprenticed with the powerful Shadow Thieves, pursuing coin and adventure wherever luck took you."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1315,7 +1315,7 @@ let rec virulence =
         Id = % nameof virulence
         Name = "Virulence"
                <?> "Cormyr Hallways"
-        Description = "A scratch soon festers into ruin through virulent corruption."
+        Description = "A single wound is all you require. What begins as a scratch soon festers into ruin as virulent corruption courses through your victim."
                       <?> "You apprenticed with the aristocratic Fire Knives, coating your blades in substance lethal enough to pierce armour and slay kings."
         BaseClassId = rogue.Id
         CasterType = Martial
@@ -1337,7 +1337,7 @@ let rec draconicBloodline =
     {
         Id = % nameof draconicBloodline
         Name = "Draconic Bloodline"
-        Description = "Blade and breath empowered by draconic ancestors."
+        Description = "Your veins carry draconic magic, the result of a powerful dragon ancestor."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
@@ -1360,7 +1360,7 @@ let rec radiantBloom =
         Id = % nameof radiantBloom
         Name = "Radiant Bloom"
                <?> "Spellfire Wielder"
-        Description = "Illuminated brilliance healing allies and frightening foes."
+        Description = "Power flows visibly through you in cascading waves of illuminated brilliance. Radiant and pure, yet effortlessly frightening to those who behold it. A reincarnation of the \"Ever Brilliant Mako\"."
                       <?> "You are gifted with the rare and wild talent of spellfire, the raw energy of the Weave itself, at once all-consuming flame and rejuvenating touch."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1380,7 +1380,7 @@ let rec shadeWalker =
     {
         Id = % nameof shadeWalker
         Name = "Shade Walker"
-        Description = "Siphon power from the Shadowfell and its unsettling darkness."
+        Description = "You siphon your powers from the Shadowfell itself, the light in your soul snuffed out by an unsettling darkness."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
@@ -1403,7 +1403,7 @@ let rec frenziedTundra =
     {
         Id = % nameof frenziedTundra
         Name = "Soul of the Frenzied Tundra"
-        Description = "Frozen power driving foes into a maddened frenzy."
+        Description = "Within your blood rages an endless winter. Those touched by your frozen power are driven into a maddened frenzy beneath the tundra’s merciless chill."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
@@ -1423,7 +1423,7 @@ let rec volcanist =
         Id = % nameof volcanist
         Name = "Volcanist"
                <?> "Volcanic Heart"
-        Description = "Ancient flame as uncontrollable as it is uncontrollable."
+        Description = "Searing heat broils within you, an ancient and irrevocable flame as unpredictable as it is uncontrollable."
                       <?> "You burn with an inner link to the Undying Pyre, its heat arduous to control and impossible to quench."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
@@ -1443,7 +1443,7 @@ let rec wildMagic =
     {
         Id = % nameof wildMagic
         Name = "Wild Magic"
-        Description = "Forces of chaos churning within you, waiting to burst."
+        Description = "Your powers come from ancient forces of chaos. They churn within you- waiting to burst free at any time."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
@@ -1466,7 +1466,7 @@ let rec pactOfTheBlade =
     {
         Id = % nameof pactOfTheBlade
         Name = "Pact of the Blade"
-        Description = "Bind your soul to a weapon and cut through enemies in flames."
+        Description = "You pledged something unthinkable to an unspeakably ancient entity - which in return furnished you with power, raw and tangible."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
@@ -1474,7 +1474,7 @@ let rec pactOfTheBlade =
                 Power(BonusAction, AtWill, "Pact Weapon", "Weapon uses Charisma.")
                 Complex("PassiveFeature_HexWarrior" <!!> "Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
             ]
-            3<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Dark One’s Blessing", "Kills grant Temporary HP = Charisma + Level.") ]
+            3<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Dark One’s Blessing", "Kills grant Temporary Hit Points = Charisma + Level.") ]
             5<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Hellblade Resonation", "Ignore Fire Resistance; Hellfire deals AOE Fire damage.") ]
             9<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
@@ -1488,7 +1488,7 @@ let rec pactOfTheChain =
     {
         Id = % nameof pactOfTheChain
         Name = "Pact of the Chain"
-        Description = "Fiendish companions grow in power as you gain levels."
+        Description = "You have pledged your soul to the Hells or Abyss in return for a deadly arsenal of fiendish arcana."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
@@ -1507,7 +1507,7 @@ let rec pactOfPenumbra =
     {
         Id = % nameof pactOfPenumbra
         Name = "Pact of Penumbra"
-        Description = "Penumbral blend of light and dark working in tandem."
+        Description = "You’ve pledged yourself to a maddened celestial to borrow their chaotic power. Bound to the concept itself, a penumbral blend of light and dark working as an affront in tandem."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
@@ -1529,7 +1529,7 @@ let rec pactOfSeverance =
     {
         Id = % nameof pactOfSeverance
         Name = "Pact of Severance"
-        Description = "Walk the boundary between life and death."
+        Description = "You have bargained with forces that dwell beyond the veil. By surrendering flesh and certainty alike, you walk the boundary between life and death."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
@@ -1541,7 +1541,7 @@ let rec pactOfSeverance =
             5<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Severed Resolve", "Using Hematic Invocation restores Action.") ]
             7<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Bitter Cold", "Cold damage applies Frigidity.") ]
             9<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Absolute Zero", "Hematic Invocation maximizes next damage instance.") ]
-            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 HP.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 Hit Points.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1551,7 +1551,7 @@ let rec pactOfTheTome =
     {
         Id = % nameof pactOfTheTome
         Name = "Pact of the Tome"
-        Description = "Peerless master of Eldritch Blast, reshaping it as you desire."
+        Description = "You’ve bound your soul to something eldritch and ancient for powers obscure. Within the corners of your mind, you feel it clawing, begging to be let out. And thus begins your journey to feed it…."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
@@ -1570,7 +1570,7 @@ let rec pactOfThePrimordial =
     {
         Id = % nameof pactOfThePrimordial
         Name = "Pact of the Primordial"
-        Description = "Adopt the form of a primordial demon."
+        Description = "Graced by a lady or lord of the fey, you are imbued with all the sumptuous and scary qualities of your patron’s extraordinary realm."
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
@@ -1592,7 +1592,7 @@ let rec arcblade =
         Id = % nameof arcblade
         Name = "Arcblade"
                <?> "Anarchs of Shyr Tradition"
-        Description = "A mobile spellsword storming with steel and magic."
+        Description = "The arcane and swordplay have always gone hand in hand for you. Over time, you have become a veritable storm of steel and magic alike."
                       <?> "You studied magic with adventuring swordmages, familiar with the magical bladework spread by the stormsoul genasi of Shyr and Akanûl."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1617,7 +1617,7 @@ let rec arcaneWarden =
         Id = % nameof arcaneWarden
         Name = "Arcane Warden"
                <?> "Coronal Guards Tradition"
-        Description = "Blend martial skill with hardening the Weave into Arcane Wards."
+        Description = "Amidst a blend of steel and magic, you twist and harden the Weave into Arcane Wards to protect yourself and others."
                       <?> "You studied magic with professional spellguards, familiar with the defensive techniques developed by the elite elvish armathors of Myth Drannor."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1638,7 +1638,7 @@ let rec evoker =
         Id = % nameof evoker
         Name = "Evoker"
                <?> "Cormyr War Wizard Tradition"
-        Description = "Master of offensive magic with precision and control."
+        Description = "As an Evoker, you stride unharmed through the unfettered chaos you call, a storm of mysticism contained only by the flick of your wrist."
                       <?> "You studied magic with hardened battlemages, familiar with the finest tactics and doctrines of the College of War Wizards in Suzail."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1659,7 +1659,7 @@ let rec luminalConfluence =
         Id = % nameof luminalConfluence
         Name = "Luminal Confluence"
                <?> "Netherese Variator Tradition"
-        Description = "Distill elemental stains to boost your magic."
+        Description = "A lifetime of study has granted you mastery over the elements. As they manifest, disperse, and converge at your fingertips, each leaves behind a residual stain - malleable, mutable, and awaiting your command.t."
                       <?> "You studied magic with erudite teachers, familiar with the surviving writings of the Netherese elementalist Yrix Alquinnar and the Variators of Eileanar."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1680,7 +1680,7 @@ let rec necromancer =
         Id = % nameof necromancer
         Name = "Necromancer"
                <?> "Thayan Necromancer Tradition"
-        Description = "Wounds inflict the curse of undeath, raising zombie minions."
+        Description = "Amidst depraved conjurations, you walk comfortably within the shadow of death, making your home there in spite of the living."
                       <?> "You studied magic with unscrupulous occultists, familiar with the dark arts of undeath taught in the secretive enclaves of the Red Wizards."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
@@ -1701,7 +1701,7 @@ let rec elementalist =
         Id = % nameof elementalist
         Name = "Elementalist"
                <?> "Zakharan Sha'ir Tradition"
-        Description = "Elements answer your call as loyal companions."
+        Description = "The elements answer your call as loyal companions. Whether flame, storm, stone, or tide, each serves as an extension of your arcane mastery."
                       <?> "You studied magic with far-travelling wizards, familiar with the elemental summoning rituals practiced in the deserts of the remote Land of Fate."
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
