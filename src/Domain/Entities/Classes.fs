@@ -148,7 +148,7 @@ let rec paladin = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{halfRoundUp cl}d12 Smite Damage"
+            Simple $"{halfRoundUp cl}d20 Smite Damage"
         ])
 
         FixedAbilities = Map [
