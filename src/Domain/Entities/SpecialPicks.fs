@@ -1054,24 +1054,6 @@ let rec wrathfulSmite : ClassLevelUpPick = {
     ]
 }
 
-let rec oathbrokenSmite : ClassLevelUpPick = {
-    Type = PaladinSmite
-    TypeId = nameof oathbrokenSmite
-    Name = "Oathbroken Smite"
-    Grants = [
-        Power(Action, AtWill, "Oathbroken Smite", "Necrotic damage, inflicts Subjugation")
-    ]
-}
-
-let rec tyrannicalSmite : ClassLevelUpPick = {
-    Type = PaladinSmite
-    TypeId = nameof tyrannicalSmite
-    Name = "Tyrannical Smite"
-    Grants = [
-        Power(Action, AtWill, "Tyrannical Smite", "Force damage, inflicts Grovel")
-    ]
-}
-
 // Ranger: Frontier Ballistics
 let rec arrowOfWeakening : ClassLevelUpPick = {
     Type = RangerArrow

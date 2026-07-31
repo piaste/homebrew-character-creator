@@ -928,6 +928,7 @@ let rec ancientWarden =
                 Power(Action, AtWill, "Action_Paladin_HealingRadiance" <!!> "Healing Radiance", "AOE heal that repeats after 3 turns.")
                 Power(BonusAction, AtWill, "Binding Radiance" <?> "Gilded Chains", "Restrain an enemy for 3 turns.")
                 Complex("Spell_Enchantment_Bane" <!!> "Ancient Judgement" <?> "Bane of the Wretched", "Advantage against Fey; killing Fey restores a Smite charge.")
+                Power(Action, AtWill, "Divine Smite", "Radiant damage, inflicts Divine Judgement for 1 turn (all Attack Rolls are made with Advantage against the target)")
             ]
             3<classLvl>, [ Complex("Soothing Radiance", "Healing Radiance cures conditions; Binding Radiance is harder to save against.") ]
             5<classLvl>, [ Power(Action, AtWill, "Action_FeyPresence" <!!> "Turn the Faithless" <?> "Turn the Wretched", "Terrify and damage creatures in a 9m radius.") ]
@@ -953,6 +954,7 @@ let rec crownedPhoenix =
                 Power(BonusAction, AtWill, "Spell_Transmutation_AshardalonsStride" <!!> "Phoenix Landing" <?> "Spellfire Vortex", "Teleport dealing Fire damage in an area.")
                 Power(Reaction, AtWill, "Spell_Evocation_AganazzarsScorcher" <!!> "Searing Protection" <?> "Spellfire Ward", "Swap places and heal ally by taking damage.")
                 Complex("Spell_Enchantment_Bane" <!!> "Crowned Judgement" <?> "Bane of the Warped", "Advantage against Aberrations; killing them restores a Smite charge.")
+                Power(Action, AtWill, "Divine Smite", "Radiant damage, inflicts Divine Judgement for 1 turn (all Attack Rolls are made with Advantage against the target)")
             ]
             3<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "To the Sun" <?> "Arcane Ignition", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DivineGuardian" <!!> "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
@@ -977,6 +979,7 @@ let rec devoutParagon =
                 Power(Action, AtWill, "GenericIcon_DamageType_Radiant" <!!> "Holy Rebuke", "Grant aura that inflicts Radiating Orb to melee attackers.")
                 Power(BonusAction, AtWill, "Action_Paladin_SacredWeapon" <!!> "Sacred Weapon", "Add Charisma to Attack Rolls for 3 turns.")
                 Complex("Spell_Enchantment_Bane" <!!> "Divine Judgement" <?> "Bane of the Wicked", "Advantage against Fiends; killing them restores a Smite charge.")
+                Power(Action, AtWill, "Divine Smite", "Radiant damage, inflicts Divine Judgement for 1 turn (all Attack Rolls are made with Advantage against the target)")
             ]
             3<classLvl>, [ Complex("Sacred Oath", "Holy Rebuke hits additional targets; Sacred Weapon damage heals you.") ]
             5<classLvl>, [ Power(Action, AtWill, "Action_Fighter_KnowYourEnemy" <!!> "Turn the Unholy" <?> "Turn the Wicked", "Terrify and damage Fiends in a 9m radius.") ]
@@ -1002,6 +1005,7 @@ let rec oathboundCrusader =
                 Power(Action, AtWill, "Action_Paladin_AbjureEnemy" <!!> "Abjure Enemy", "Frighten or Slow an enemy.")
                 Power(BonusAction, AtWill, "Action_Paladin_InquisitorsMight" <!!> "Inquisitor’s Might", "Bonus Radiant damage and potential Daze.")
                 Complex("Spell_Enchantment_Bane" <!!> "Righteous Judgement" <?> "Bane of the Damned", "Advantage against Undead; killing them restores a Smite charge.")
+                Power(Action, AtWill, "Divine Smite", "Radiant damage, inflicts Divine Judgement for 1 turn (all Attack Rolls are made with Advantage against the target)")
             ]
             3<classLvl>, [ Complex("Sanctified Commands", "Abjure Enemy/Inquisitor's Might can be cast as Free Action once per combat.") ]
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_TurnTheUnholy" <!!> "Turn the Damned", "Terrify and damage Undead in a 9m radius.") ]
@@ -1025,6 +1029,7 @@ let rec oathbreaker =
                 Power(Action, AtWill, "Subjugate Creature", "Claimed creature attacks its allies.")
                 Power(BonusAction, AtWill, "Action_Paladin_SpitefulSuffering" <!!> "Spiteful Suffering", "Target fills with dread (Advantage for all); spawns Shadow on death.")
                 Complex("Action_Legendary_Offensive" <!!> "Righteous Judgement", "Advantage against Undead; killing them restores a Smite charge.")
+                Power(Action, AtWill, "Oathbroken Smite", "Necrotic damage, inflicts Subjugation")
             ]
             3<classLvl>, [ Complex("PassiveFeature_Hex" <!!> "Vicious Condemnation", "Killing targets traps soul fragments in weapon for bonus Psychic damage.") ]
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DreadfulAspect" <!!> "Turn the Living", "Raise corpses as Shadow Servants until end of combat.") ]
@@ -1050,6 +1055,7 @@ let rec tyrant =
                 Power(Action, AtWill, "Spell_Enchantment_CommandDrop" <!!> "Commanding Grasp", "WIS save or Command enemy.")
                 Power(BonusAction, AtWill, "Spell_2e_Agitate" <!!> "Reign of Fear", "Frighten all enemies in 18m.")
                 Complex("Spell_2e_BloodVendetta" <!!> "Tyrant’s Judgement", "Advantage against targets with Lockdown Immunity; killing them restores Smite.")
+                Power(Action, AtWill, "Tyrannical Smite", "Force damage, inflicts Grovel")
             ]
             3<classLvl>, [ Complex("Spell_2e_BloodVendetta" <!!> "Grovel Beneath Me", "Tyrannical Smite causes Frightened enemies within 9m to potentially Grovel.") ]
             5<classLvl>, [ Power(Action, AtWill, "Spell_2e_Heroism" <!!> "Turn the Defiant", "Terrify/damage targets; double to Lockdown Immune.") ]
