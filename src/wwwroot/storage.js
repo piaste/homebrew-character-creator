@@ -12,8 +12,8 @@ window.characterStorage = {
   makeUrl: (version, text) => `${window.location.origin}?version=${version}&character=${encodeURIComponent(text)}`,
 
   openUrlShortener: function(version, text) {
-    const longUrl = encodeURIComponent(`${window.location.origin}?version=0.5.0&character=${encodeURIComponent(this.makeUrl(version, text))}`);                                            
-    window.open(`https://tinyurl.com/api-create.php?url=${longUrl}`, '_blank', 'noopener,noreferrer');
+    const longUrl = this.makeUrl(version, text);                                            
+    window.open(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`, '_blank', 'noopener,noreferrer');
   },
 
   copyToClipboard: async function (version, text) {    
