@@ -1125,13 +1125,6 @@ let rec arrowOfFire : ClassLevelUpPick = {
     Grants = [ Simple "Rolls an additional 1d6 fire damage and creates fire surface" ]
 }
 
-let rec arrowOfHumanoidSlaying : ClassLevelUpPick = {
-    Type = RangerArrow
-    TypeId = nameof arrowOfHumanoidSlaying
-    Name = "Arrow of Humanoid Slaying"
-    Grants = [ Simple "Rolls an additional damage die against Humanoids" ]
-}
-
 let rec arrowOfIce : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfIce
