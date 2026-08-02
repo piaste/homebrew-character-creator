@@ -40,7 +40,7 @@ let rec borrowedTime : TraitDef = {
     Name = "Borrowed Time"
     Grants = [
         Complex ("Borrowed Time: Temporary", "At the beginning of any combat encounter, you receive Temporary Hit Points equal to your level multiplied by two.")
-        Complex ("Borrowed Time: Loss", "Upon ending combat, you lose the temporary HP and you take force damage equal to your level multiplied by 2.")
+        Complex ("Borrowed Time: Loss", "Upon ending combat, you lose the temporary Hit Points and you take force damage equal to your level multiplied by 2.")
     ]
 }
 
@@ -357,7 +357,7 @@ let rec waningImmortality : TraitDef = {
     Name = "Waning Immortality"
     Grants = [
         Buff { StatModifiers.Zero with ``HP per level`` = 6 }
-        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6.")
+        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6. This reduction in Hit Points cannot be undone.")
     ]
 }
 

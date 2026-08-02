@@ -97,7 +97,7 @@ let rec reactiveRetribution : ArchetypeDef = {
 let rec restorativeTouch : ArchetypeDef = {
     Id = % nameof restorativeTouch
     Name = "Restorative Touch"
-    Grants = [ Complex ("Restorative Touch", "When healing another creature, restore an additional HP equal to your proficiency bonus x 2.") ]
+    Grants = [ Complex ("Restorative Touch", "When healing another creature, restore an additional Hit Points equal to your proficiency bonus x 2.") ]
 }
 
 let rec temperedBody : ArchetypeDef = {
