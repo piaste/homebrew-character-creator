@@ -96,7 +96,7 @@ let rec ``Guidance`` : CantripDef = {
 
 let rec ``Guiding Moonlight`` : CantripDef = {
     Id = % nameof ``Guiding Moonlight``
-    CantripDescription = "Infuse a weapon granting it a +2 bonus to both it's Attack Rolls and Damage. Weapons may benefit from only one enchantment from Spells or Cantrips. May only affect one weapon at a time. Duration: permanent. Offense: Buff."
+    CantripDescription = "Infuse a weapon granting it a +2 bonus to both it's Attack Rolls and Damage. Weapons may benefit from only one enchantment from Spells or Cantrips. May only affect one weapon at a time. Duration: permanent. Offense: Melee."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -138,7 +138,7 @@ let rec ``Mud Mantle`` : CantripDef = {
 
 let rec ``Poison Spray`` : CantripDef = {
     Id = % nameof ``Poison Spray``
-    CantripDescription = "Deal 1d8 Poison Damage to target creature. Additional damage will occur to any Poisoned enemies. Duration: 1 turn. Offense: CON Save. Level 5: Deal 2d12 poison damage. Level 9: Deal 3d12 poison damage."
+    CantripDescription = "Deal 1d8 Poison Damage to target creature. Additional damage will occur to any Poisoned enemies. Duration: 1 turn. Offense: CON Save."
     Concentration = false
     ActionCost = Action
 }
@@ -152,7 +152,7 @@ let rec ``Prestidigitation`` : CantripDef = {
 
 let rec ``Primal Savagery`` : CantripDef = {
     Id = % nameof ``Primal Savagery``
-    CantripDescription = "Deal 1d12 Poison Damage and potentially poison your target. This Cantrip may be cast while Silenced or Muted. Duration: 1 turn. Offense: CON Save."
+    CantripDescription = "Deal 1d12 Poison Damage and potentially poison your target. This Cantrip may be cast while Silenced or Muted. Duration: 1 turn. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
