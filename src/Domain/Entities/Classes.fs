@@ -14,8 +14,8 @@ let rec artificer = {
 
         FixedAbilities = Map [
             1<classLvl>, [
-                Resource (3, "Passive_ArcaneFirearm" <!!> "Ammunition", OncePerShortRest)
-                Power(BonusAction, AtWill, "Action_Reload" <!!> "Reload", "Reload your Ammunition.")
+                Resource (3, ("Passive_ArcaneFirearm" <!!> "Ammunition"), OncePerShortRest)
+                Power(BonusAction, AtWill, ("Action_Reload" <!!> "Reload"), "Reload your Ammunition.")
             ]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack.")]
@@ -33,7 +33,7 @@ let rec barbarian = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Resource (3, "Action_Barbarian_Rage" <!!> "Rage Charge", OncePerShortRest)]
+            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Resource (3, ("Action_Barbarian_Rage" <!!> "Rage Charge"), OncePerShortRest)]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
         ]
@@ -49,7 +49,7 @@ let rec bard = {
 
         ScalingAbilities = (fun _ cl -> [            
             let inspirationDieSize = int(System.Math.Ceiling (float cl / 4.) * 4.)
-            Resource (3, "Action_Bard_GrantBardicInspiration" <!!> $"Bardic Inspiration (1d{inspirationDieSize})", OncePerShortRest)
+            Resource (3, ("Action_Bard_GrantBardicInspiration" <!!> $"Bardic Inspiration (1d{inspirationDieSize})"), OncePerShortRest)
         ])
 
         FixedAbilities = Map [
@@ -74,7 +74,7 @@ let rec cleric = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Channel Divinity", OncePerShortRest); Power (Action, AtWill, "Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Power (FreeAction, OncePerTurn, "DivineIntervation" <!!> "Divine Miracles", "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
+            1<classLvl>, [Resource (3, "Channel Divinity", OncePerShortRest); Power (Action, AtWill, "Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Power (FreeAction, OncePerTurn, ("DivineIntervation" <!!> "Divine Miracles"), "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
@@ -91,7 +91,7 @@ let rec druid = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Skill_Druid_WildShape" <!!> "Wild Shape Charges", OncePerShortRest); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
+            1<classLvl>, [Resource (3, ("Skill_Druid_WildShape" <!!> "Wild Shape Charges"), OncePerShortRest); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
@@ -212,7 +212,7 @@ let rec sorcerer = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Resource(UMX.untag cl, "statIcons_WildMagic_SorceryPoints" <!!> "Sorcery Points", OncePerShortRest)
+            Resource(UMX.untag cl, ("statIcons_WildMagic_SorceryPoints" <!!> "Sorcery Points"), OncePerShortRest)
         ])
 
         FixedAbilities = Map [

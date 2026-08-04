@@ -20,7 +20,7 @@ let rec beastheart =
             3<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Bestial Dominance", "When entering into a rage, you Dominate all Beasts and Monstrosities within 9m with no save.") ]
             5<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Howl of the Wild", "Your Bestial Heart actions are now available to every rage.") ]
             7<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Beast Blood", "While enraged, all damage taken is reduced by 2.") ]
-            9<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Bestial Growth", "While raging under your Bestial Hearts, killing blows and Critical Hits increase your Strength by 2 (stacks up to 30 STR) until the end of battle.") ]
+            9<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Bestial Growth", "While raging under your Bestial Hearts, killing blows and Critical Hits increase your Strength by 2 (stacks up to 30 Strength) until the end of battle.") ]
             11<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Totemic Beast", "While enraged, nearby allies within 9m benefit from your active Bestial Heart passive features.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -534,7 +534,7 @@ let rec arcanist =
         BaseClassId = artificer.Id
         CasterType = FullCaster DoubleVersatile
         FixedAbilities = Map [
-            3<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Mystic Reload", "Killing blows with Ranged Weapon Attacks restore a Spell Slot (level = Artificer Lvl / 2).") ]
+            3<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Mystic Reload", "Killing blows with Ranged Weapon Attacks restore a Spell Slot (level = Artificer level / 2).") ]
             5<classLvl>, [ Power(BonusAction, AtWill, "Passive_AlchemicalSavant" <!!> "Arcane Ballistics", "Casting a spell allows a Ranged Weapon Attack.") ]
             7<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Ballistic Ricochet", "Ranged damage creates an Arcane Missile targeting another enemy.") ]
             9<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Runic Reload Module", "Reloading grants Advantage on next Spell Attack and Damage Rolls.") ]
@@ -1215,7 +1215,7 @@ let rec arcaneTrickster =
                 Complex("Arcane Sneak Attack", "Once per turn bonus damage; Spells/Cantrips deal Force damage.")
                 Complex("PassiveFeature_IllusorySelf" <!!> "Arcane Trickery", "Spells/Cantrips from Stealth do not break it.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Action_Cleric_BlessingOfTheTrickster" <!!> "Blessing of the Trickster", "Grant Invisibility and DEX Advantage.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_Cleric_BlessingOfTheTrickster" <!!> "Blessing of the Trickster", "Grant Invisibility and Dexterity Advantage.") ]
             5<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Trick of the Light", "Attacks against you have Disadvantage (until damaged).") ]
             7<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Ethereal Caster", "Casting a spell while Invisible doesn't consume a slot (once per turn).") ]
             9<classLvl>, [ Power(FreeAction, OncePerTurn, "PassiveFeature_IllusorySelf" <!!> "Magical Ambush", "Teleport up to 18m.") ]
@@ -1284,7 +1284,7 @@ let rec mercenary =
                 Power(Reaction, AtWill, "Mocking Tone", "Inflict Vicious Mockery.")
                 Power(BonusAction, AtWill, "Provocative Challenge", "Persuasion contest to Beguile/Provoke.")
             ]
-            5<classLvl>, [ Complex("statIcons_Steady" <!!> "Steady Footwork", "Immunity to Prone; always succeed DEX saving throws.") ]
+            5<classLvl>, [ Complex("statIcons_Steady" <!!> "Steady Footwork", "Immunity to Prone; always succeed Dexterity saving throws.") ]
             7<classLvl>, [ Power(Action, AtWill, "Improvised Explosives", "Grenade dealing Force and Fire damage.") ]
             9<classLvl>, [ Complex("Specialist", "Abilities target additional creatures; Challenge radius increased.") ]
             11<classLvl>, [ Power(Action, AtWill, "GenericIcon_Intent_Damage" <!!> "Cannon Fire", "Blanket 9m area with 16 explosions.") ]
@@ -1351,7 +1351,7 @@ let rec draconicBloodline =
                 Complex("Dragon Ancestor", "Gain Elemental Breath and bonus elemental damage = Sorcerer level.")
                 Power(Action, AtWill, "Elemental Breath", "Cone attack inflicting element and condition.")
             ]
-            3<classLvl>, [ Complex("Draconic Form", "Gain +2 AC and Fly.") ]
+            3<classLvl>, [ Complex("Draconic Form", "Gain +2 Armour Class and Fly.") ]
             5<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
             7<classLvl>, [ Complex("PassiveFeature_DraconicResilience" <!!> "Draconic Affinity", "Elemental Immunity; add Charisma to associated elemental damage.") ]
             9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
@@ -1605,7 +1605,7 @@ let rec arcblade =
         FixedAbilities = Map [
             1<classLvl>, [ Power(FreeAction, AtWill, "Spell_Abjuration_BanishingSmite_Container" <!!> "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage.") ]
             3<classLvl>, [
-                Power(BonusAction, AtWill, "Spell_HarmonyOfFireAndWater" <!!> "Steel-Wind Storm", "Bonus AC and melee Advantage.")
+                Power(BonusAction, AtWill, "Spell_HarmonyOfFireAndWater" <!!> "Steel-Wind Storm", "Bonus Armour Class and melee Advantage.")
                 Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip.")
                 Power(Action, AtWill, "Spell_Conjuration_SteelWindStrike" <!!> "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
             ]
