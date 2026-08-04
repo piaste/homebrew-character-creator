@@ -1,3 +1,4 @@
+// Synchronized with latest documentation
 module Bg3HomebrewCCreator.Domain.Entities.Cantrips
 
 open FSharp.UMX
