@@ -40,14 +40,20 @@
     *   Only modify the values and instances of the objects. Only touch files under `src/Domain/Entities`.
     *   Preserve the existing order and formatting of entities in each file. Do not reorder, re-indent, or reformat code outside the specific lines being changed.
     *   Use existing constants and patterns (e.g., `Simple "Ability"`, `ACTION`, `BONUS_ACTION`) as seen in the current files.
-    *   Prefer using `Power`and `Buff` types if possible, then `Complex` whenever the passive being described has a proper name in the documentatikn. Only use `Simple` if it is impossible to write a `Complex` power.
-    *   Make descriptions shorter and concise where possible without losing substantial information. For example, if a description reads "Your maximum Hit Points increases by 4 for each level you have gained.", you can replace it with "+4 HP per level". This conciseness rule applies only when writing a new or changed description to match updated documentation. Do not proactively edit descriptions that are unchanged from the documentation just to make them shorter.
-    *   **Do** update entities' names to be in line with the documentation.
+    *   Prefer using `Power`and `Buff` types if possible, otherwise `Complex` whenever the passive being described has a proper name in the documentation. `Resource` power are appropriate to represent unique charges or points to spend. Do not create new `Simple` powers.
     *   **Do not** change the value of entities `Id` or `TypeId` property.
+    *   **Do not** update a description if it is mechanically correct and up to date, even if the style and formatting does not match expectations.
 
 4.  **Specific rules**:
+    *   All strings preceded by '<!!>' are ICON NAMES that you must never touch.
     *   All strings preceded by '<?>' are LORE STRINGS that you must never touch.
-    *   Feats and passives marked in the documents with "*" also affect summons. To represent that, add "yield! alsoAffectsSummons <|" before each passive they grant. (See 'divineSense' in 'classPassives.fs' for reference.)
+    *   Feats and passives marked in the documents with "*" also affect summons. To represent that, add "yield! alsoAffectsSummons <|" before each passive they grant. This rule does not apply to Traits and Archetypes.
+
+5.  **Style Rules**:
+    *   **Do** update entities' names to be in line with the documentation.
+    *   **Do not** update descriptions **unless** there is a mechanical difference with the documentation.
+    *   If you need to update a description, try to make it shorter and concise without losing substantial information. For example, if a description reads "Your maximum Hit Points increases by 4 for each level you have gained.", you can replace it with "+4 HP/lvl".
+    *   Abbreviations such as "dmg", "lvl", "AC", "save" are allowed.
 
 5.  **Verification**:
     *   After making changes to a file, run `dotnet build src/Bg3HomebrewCCreator.Client.fsproj` to ensure that the strict typing is respected and there are no compile-time errors.
