@@ -1206,7 +1206,7 @@ let rec arcaneTrickster =
         Name = "Arcane Trickster"
                <?> "Telflamm Streets"
         Description = 
-                "Illusions and enchantments keep opponents on the back foot."
+                "As quick with a Spell as you are with a lockpick, your illusions and enchantments keep opponents on the back foot."
                 <?> "You apprenticed with the mysterious Shadowmasters of the East, picking up some of their signature magic tricks."
         BaseClassId = rogue.Id
         CasterType = HalfCaster Arcane
