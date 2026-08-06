@@ -273,7 +273,7 @@ let rec forestGnome =
         Name = "Forest Gnome"
         BaseRaceId = gnome.Id
         RacialPassives = [
-            Power (Action, OncePerTurn, "Dominate Beast", "Dominate a Beast. Creature breaks free the first time it takes dmg from you or your allies.")
+            Power (Action, OncePerTurn, "Dominate Beast", "Dominate a Beast. Creature breaks free the first time it takes damage from you or your allies.")
             Complex ("Speak With Animals", "You have the ability to Speak With Animals at all times.")
             Complex ("Restrained Immunity", "You are immune to effects that would Restrain you.")
         ]
