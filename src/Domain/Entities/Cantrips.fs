@@ -12,14 +12,14 @@ let rec ``Acid Burst`` : CantripDef = {
 
 let rec ``Blade Surge`` : CantripDef = {
     Id = % nameof ``Blade Surge``
-    CantripDescription = "Deal 1d12 Force Damage in a 3 m area around you. On save targets still take half damage. Duration: 1 turn. Offense: DEX Save."
+    CantripDescription = "Deal 1d12 Force Damage in a 3 m area around you. On Saving Throw targets still take half Damage. Duration: 1 turn. Offense: DEX Save."
     Concentration = false
     ActionCost = Action
 }
 
 let rec ``Blade Ward`` : CantripDef = {
     Id = % nameof ``Blade Ward``
-    CantripDescription = "Gain Resistance to your next instance of physical damage. Duration: 3 turns. Offense: Buff."
+    CantripDescription = "Gain Resistance to your next instance of physical Damage. Duration: 3 turns. Offense: Buff."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -75,14 +75,14 @@ let rec ``Friends`` : CantripDef = {
 
 let rec ``Frostbite`` : CantripDef = {
     Id = % nameof ``Frostbite``
-    CantripDescription = "Deal 1d12 Cold Damage and apply Frigid, imposing Disadvantage on the creature's Attack Rolls until they deal damage. Duration: 1 turn. Offense: Melee."
+    CantripDescription = "Deal 1d12 Cold Damage and apply Frigid, imposing Disadvantage on the creature's Attack Rolls until they deal Damage. Duration: 1 turn. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
 
 let rec ``Green Flame-Blade`` : CantripDef = {
     Id = % nameof ``Green Flame-Blade``
-    CantripDescription = "Deal 1d8 Fire Damage alongside your weapon damage and ricochet a spark of flame into another enemy within 9m who takes 1d8 Fire Damage. This Cantrip may be cast while Silenced or Muted. Offense: Melee."
+    CantripDescription = "Deal 1d8 Fire Damage alongside your weapon Damage and ricochet a spark of flame into another enemy within 9m who takes 1d8 Fire Damage. This Cantrip may be cast while Silenced or Muted. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
@@ -131,14 +131,14 @@ let rec ``Minor Illusion`` : CantripDef = {
 
 let rec ``Mud Mantle`` : CantripDef = {
     Id = % nameof ``Mud Mantle``
-    CantripDescription = "Gain Resistance to the next instance of elemental damage you would take and you cannot Burn. Condition removed upon taking damage. This Cantrip may be cast while Silenced or Muted. Duration: 3 turns. Offense: Buff."
+    CantripDescription = "Gain Resistance to the next instance of elemental Damage you would take and you cannot Burn. Condition removed upon taking Damage. This Cantrip may be cast while Silenced or Muted. Duration: 3 turns. Offense: Buff."
     Concentration = false
     ActionCost = BonusAction
 }
 
 let rec ``Poison Spray`` : CantripDef = {
     Id = % nameof ``Poison Spray``
-    CantripDescription = "Deal 1d8 Poison Damage to target creature. Additional damage will occur to any Poisoned enemies. Duration: 1 turn. Offense: CON Save."
+    CantripDescription = "Deal 1d8 Poison Damage to target creature. Additional Damage will occur to any Poisoned enemies. Duration: 1 turn. Offense: CON Save."
     Concentration = false
     ActionCost = Action
 }
@@ -180,7 +180,7 @@ let rec ``Resistance`` : CantripDef = {
 
 let rec ``Sacred Flame`` : CantripDef = {
     Id = % nameof ``Sacred Flame``
-    CantripDescription = "Deal 1d8 Radiant Damage to a target. Deals double damage to Aberrations, Fey, Fiends and Undead. Offense: Ranged 18m."
+    CantripDescription = "Deal 1d8 Radiant Damage to a target. Deals double Damage to Aberrations, Fey, Fiends and Undead. Offense: Ranged 18m."
     Concentration = false
     ActionCost = Action
 }
@@ -222,14 +222,14 @@ let rec ``Thorn Whip`` : CantripDef = {
 
 let rec ``Thunderclap`` : CantripDef = {
     Id = % nameof ``Thunderclap``
-    CantripDescription = "Deal 1d12 Thunder Damage in an area around you. On Save, targets still take half the damage. Duration: 1 turn. Offense: CON Save."
+    CantripDescription = "Deal 1d12 Thunder Damage in an area around you. On Saving Throw, targets still take half the Damage. Duration: 1 turn. Offense: CON Save."
     Concentration = false
     ActionCost = Action
 }
 
 let rec ``Thunderous Strike`` : CantripDef = {
     Id = % nameof ``Thunderous Strike``
-    CantripDescription = "Deal 1d8 Thunder Damage alongside your weapon damage and inflict a condition that causes the target to take an additional 1d8 Thunder Damage if they move. This Cantrip may be cast while Silenced or Muted. Duration: 1 turn. Offense: Melee."
+    CantripDescription = "Deal 1d8 Thunder Damage alongside your weapon Damage and inflict a condition that causes the target to take an additional 1d8 Thunder Damage if they move. This Cantrip may be cast while Silenced or Muted. Duration: 1 turn. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
@@ -243,7 +243,7 @@ let rec ``Titan's Boon`` : CantripDef = {
 
 let rec ``Toll the Dead`` : CantripDef = {
     Id = % nameof ``Toll the Dead``
-    CantripDescription = "Deal 1d8 Necrotic Damage to a target. If the target is below half of their total Hit Points this Cantrip deals double damage. On Save, the target still takes half the damage. Offense: WIS Save."
+    CantripDescription = "Deal 1d8 Necrotic Damage to a target. If the target is below half of their total Hit Points this Cantrip deals double Damage. On Saving Throw, the target still takes half the Damage. Offense: WIS Save."
     Concentration = false
     ActionCost = Action
 }
@@ -257,7 +257,7 @@ let rec ``Torrent`` : CantripDef = {
 
 let rec ``True Strike`` : CantripDef = {
     Id = % nameof ``True Strike``
-    CantripDescription = "Target yourself or an allied creature to give them a condition that allows them to ignore Resistances to all damage types when dealing damage to an enemy or item. This includes Damage Reduction granted by your targets armour. This Cantrip may be cast while Silenced or Muted and will not break Stealth. Duration: 1 turn. Offense: Buff."
+    CantripDescription = "Target yourself or an allied creature to give them a condition that allows them to ignore Resistances to all Damage types when dealing Damage to an enemy or item. This includes Damage Reduction granted by your targets armour. This Cantrip may be cast while Silenced or Muted and will not break Stealth. Duration: 1 turn. Offense: Buff."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -278,7 +278,7 @@ let rec ``Warpstone`` : CantripDef = {
 
 let rec ``Word of Radiance`` : CantripDef = {
     Id = % nameof ``Word of Radiance``
-    CantripDescription = "Deal 1d12 Radiant Damage in an area around you. Deals double damage to Aberrations, Fey, Fiends and Undead. On save, targets still take half the damage. Offense: CON Save."
+    CantripDescription = "Deal 1d12 Radiant Damage in an area around you. Deals double Damage to Aberrations, Fey, Fiends and Undead. On Saving Throw, targets still take half the Damage. Offense: CON Save."
     Concentration = false
     ActionCost = Action
 }
