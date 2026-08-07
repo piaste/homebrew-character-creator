@@ -119,7 +119,10 @@ let rec rosemourn =
             3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Bloodvine Grasp", "Pull target 18m closer; potential Bleed.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Barbed Protection", "Use Bloodvine Grasp on ally's aggressor.") ]
             7<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Thornfall", "Enemies taking fall damage also take Piercing damage in area.") ]
-            9<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.") ]
+            9<classLvl>, [
+                Complex("Spell_2e_BloodSprayCurse" <!!> "Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.")
+                Power(Action, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Bloodvine Eruption", "Potentially pull all targets within an 18m radius closer to you, dealing 1d12/2d12/3d12 (cantrip scaling) Piercing damage and causing them to potentially Bleed for 1 turn (This is a Strength-based manoeuvre. Half damage on saving throw).")
+            ]
             11<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Heart of Thorns", "Deal Piercing damage to all nearby enemies at turn end.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -138,10 +141,10 @@ let rec wildSoul =
         FixedAbilities = Map [
             1<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_Rage_WildMagic" <!!> "Rage", "Wild Magic: Spells cast during rage trigger surges.") ]
             3<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Chaotic Roar", "Enraging immediately triggers a positive Wild Magic surge.") ]
-            5<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Unstable Backlash", "Attackers may experience negative Wild Magic surges.") ]
+            5<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Unstable Recovery", "Upon killing an enemy, you restore a Spell Slot of the highest level you could cast based on your levels in Barbarian.") ]
             7<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Chance Surge", "Critical Hits trigger negative surges on targets.") ]
-            9<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Wild Bloodlust", "Landing a killing blow triggers a positive surge.") ]
-            11<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Tenacious Chaos", "Enraging triggers positive surges for all allies.") ]
+            9<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Tenacious Chaos", "Upon Enraging, all allies within 9m/30ft immediately experience a positive surge of Wild Magic.") ]
+            11<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Wild Bloodlust", "When you land a Critical Hit or a Killing Blow, you may cast a spell without using a spell slot as a free action.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -158,7 +161,7 @@ let rec deathDomain =
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Spell_Necromancy_BurstingSinew" <!!> "Bursting Sinew", "Detonate corpses/undead to apply Plague of Rot.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Curse of Undeath", "Afflict target to be considered Undead.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Proclaimed Undeath", "Target creature within 18m/60ft is considered to be Undead for the purposes of spells and abilities, and gain immunity to Necrotic and Poison damage. Proclaimed Undeath lasts until Long Rest.") ]
             5<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Insurmountable Suffering", "Ignore all forms of Resistance and Immunity to Necrotic.") ]
             7<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Harvest", $"{TOGGLEABLE}: Corpses deal Necrotic damage and apply Rot to nearby enemies.") ]
             9<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "True Pestilence", "Plague of Rot spreads to nearby allies of the target.") ]
@@ -428,7 +431,9 @@ let rec frontierKnight =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Hunger for Knowledge", "Consume magical weapons to learn their unique weapon actions.") ]
             3<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Steadfast Onslaught", "Spend a Superiority Die to increase damage when using a Combat Technique.") ]
+            5<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Improved Frontier Recovery", "Your Combat Techniques now recharge after two turns.") ]
             7<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Critical Breakthrough", "Landing a Killing Blow or Critical Hit refreshes all Combat Techniques.") ]
+            9<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Mastered Frontier Recovery", "Your Combat Techniques now recharge after one turn.") ]
             11<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Frontier Mastery" <?> "Weapon Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
         ]
         ScalingAbilities = fun _  cl -> [
@@ -450,18 +455,19 @@ let rec arcaneArcher =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Focused Weave", $"{TOGGLEABLE}: Ranged attacks become cantrips dealing 1d12 Force damage (scaling), cannot miss or crit, but enable Focused Fletchings.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MagicArrow" <!!> "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
-            5<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
-            7<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
+            3<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Elemental Fletchings", "You learn 3 Elemental Infusions. Each infusion has a standard version and a focused version that can be used while Focused Weave is toggled on. Focused infusions are stronger and consume a Superiority Die to activate. All elemental infusions are considered weapon cantrips, and thus benefit from any bonuses relevant to weapon attack rolls or cantrips. Infusions that deal damage start at 1d6 elemental damage, and then increase to 2d6 at level 5 and 3d6 at level 9. They deal normal arrow damage on top of that.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MagicArrow" <!!> "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
+            7<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
+            9<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
             11<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Eye of the Arcana", "Action cantrips can be cast as a Bonus Action. Learn 3 more infusions.") ]
         ]
         ScalingAbilities = fun _  cl -> [
-            Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}"
+            Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 7<classLvl> then 6 elif cl >= 3<classLvl> then 3 else 0}"
         ]
         CustomPicks = Map [
-            1<classLvl>, [ArcaneArcherInfusion, 3]
-            5<classLvl>, [ArcaneArcherInfusion, 3]
-            9<classLvl>, [ArcaneArcherInfusion, 3]
+            3<classLvl>, [ArcaneArcherInfusion, 3]
+            7<classLvl>, [ArcaneArcherInfusion, 3]
+            11<classLvl>, [ArcaneArcherInfusion, 3]
         ]
     }
 
