@@ -455,19 +455,18 @@ let rec arcaneArcher =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Focused Weave", $"{TOGGLEABLE}: Ranged attacks become cantrips dealing 1d12 Force damage (scaling), cannot miss or crit, but enable Focused Fletchings.") ]
-            3<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Elemental Fletchings", "You learn 3 Elemental Infusions. Each infusion has a standard version and a focused version that can be used while Focused Weave is toggled on. Focused infusions are stronger and consume a Superiority Die to activate. All elemental infusions are considered weapon cantrips, and thus benefit from any bonuses relevant to weapon attack rolls or cantrips. Infusions that deal damage start at 1d6 elemental damage, and then increase to 2d6 at level 5 and 3d6 at level 9. They deal normal arrow damage on top of that.") ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MagicArrow" <!!> "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
-            7<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
-            9<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_MagicArrow" <!!> "Arcane Finesse", "Teleportation-based manoeuvres (Gateway, Quiver Port, Wrong Warp) consuming Superiority Dice.") ]
+            5<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Improved Fletchings", $"{TOGGLEABLE}: Reduce Critical Hit threshold by 1 for cantrips. Learn 3 more infusions.") ]
+            7<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Greater Focus", "While Focused Weave is active, basic shots ricochet to two other creatures.") ]
             11<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Eye of the Arcana", "Action cantrips can be cast as a Bonus Action. Learn 3 more infusions.") ]
         ]
         ScalingAbilities = fun _  cl -> [
-            Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 7<classLvl> then 6 elif cl >= 3<classLvl> then 3 else 0}"
+            Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}"
         ]
         CustomPicks = Map [
-            3<classLvl>, [ArcaneArcherInfusion, 3]
-            7<classLvl>, [ArcaneArcherInfusion, 3]
-            11<classLvl>, [ArcaneArcherInfusion, 3]
+            1<classLvl>, [ArcaneArcherInfusion, 3]
+            5<classLvl>, [ArcaneArcherInfusion, 3]
+            9<classLvl>, [ArcaneArcherInfusion, 3]
         ]
     }
 
