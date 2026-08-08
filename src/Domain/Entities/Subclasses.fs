@@ -119,7 +119,10 @@ let rec rosemourn =
             3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Bloodvine Grasp", "Pull target 18m closer; potential Bleed.") ]
             5<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Barbed Protection", "Use Bloodvine Grasp on ally's aggressor.") ]
             7<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Thornfall", "Enemies taking fall damage also take Piercing damage in area.") ]
-            9<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.") ]
+            9<classLvl>, [
+                Complex("Spell_2e_BloodSprayCurse" <!!> "Bloodvine Thicket", "Enraging creates 9m area of Spike Growth.")
+                Power(Action, AtWill, "Spell_2e_BloodSprayCurse" <!!> "Bloodvine Eruption", "Potentially pull all targets within an 18m radius closer to you, dealing 1d12/2d12/3d12 (cantrip scaling) Piercing damage and causing them to potentially Bleed for 1 turn (This is a Strength-based manoeuvre. Half damage on saving throw).")
+            ]
             11<classLvl>, [ Complex("Spell_2e_BloodSprayCurse" <!!> "Heart of Thorns", "Deal Piercing damage to all nearby enemies at turn end.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -138,10 +141,10 @@ let rec wildSoul =
         FixedAbilities = Map [
             1<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_Rage_WildMagic" <!!> "Rage", "Wild Magic: Spells cast during rage trigger surges.") ]
             3<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Chaotic Roar", "Enraging immediately triggers a positive Wild Magic surge.") ]
-            5<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Unstable Backlash", "Attackers may experience negative Wild Magic surges.") ]
+            5<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Unstable Recovery", "Upon killing an enemy, you restore a Spell Slot of the highest level you could cast based on your levels in Barbarian.") ]
             7<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Chance Surge", "Critical Hits trigger negative surges on targets.") ]
-            9<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Wild Bloodlust", "Landing a killing blow triggers a positive surge.") ]
-            11<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Tenacious Chaos", "Enraging triggers positive surges for all allies.") ]
+            9<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Tenacious Chaos", "Upon Enraging, all allies within 9m/30ft immediately experience a positive surge of Wild Magic.") ]
+            11<classLvl>, [ Complex("Action_Barbarian_Rage_WildMagic" <!!> "Wild Bloodlust", "When you land a Critical Hit or a Killing Blow, you may cast a spell without using a spell slot as a free action.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -158,7 +161,7 @@ let rec deathDomain =
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Spell_Necromancy_BurstingSinew" <!!> "Bursting Sinew", "Detonate corpses/undead to apply Plague of Rot.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Curse of Undeath", "Afflict target to be considered Undead.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Proclaimed Undeath", "Target creature within 18m/60ft is considered to be Undead for the purposes of spells and abilities, and gain immunity to Necrotic and Poison damage. Proclaimed Undeath lasts until Long Rest.") ]
             5<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Insurmountable Suffering", "Ignore all forms of Resistance and Immunity to Necrotic.") ]
             7<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Harvest", $"{TOGGLEABLE}: Corpses deal Necrotic damage and apply Rot to nearby enemies.") ]
             9<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "True Pestilence", "Plague of Rot spreads to nearby allies of the target.") ]
