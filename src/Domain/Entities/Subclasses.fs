@@ -431,9 +431,7 @@ let rec frontierKnight =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Hunger for Knowledge", "Consume magical weapons to learn their unique weapon actions.") ]
             3<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Steadfast Onslaught", "Spend a Superiority Die to increase damage when using a Combat Technique.") ]
-            5<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Improved Frontier Recovery", "Your Combat Techniques now recharge after two turns.") ]
             7<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Critical Breakthrough", "Landing a Killing Blow or Critical Hit refreshes all Combat Techniques.") ]
-            9<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Mastered Frontier Recovery", "Your Combat Techniques now recharge after one turn.") ]
             11<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Frontier Mastery" <?> "Weapon Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
         ]
         ScalingAbilities = fun _  cl -> [
