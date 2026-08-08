@@ -193,8 +193,8 @@ let rec galvanizedStormsoul : FeatDef = {
     Subpicks = Map []
     Grants = [
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Resistance", "Gain Resistance to Lightning and Thunder damage.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Charging", "Gain 1 Lightning Charge upon dealing or taking damage.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Strike", "Gain Galvanized Storm Strike melee cantrip (weapon damage + 1d8/2d8/3d8; casts Witch Bolt at all enemies within 9m).")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Charging", "Gain 1 Lightning Charge upon starting your turn, first time you deal damage, and first time you take damage per turn.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Strike", "Gain Galvanized Storm Strike melee cantrip (weapon damage + 1d8/2d8/3d8; inflicts Galvanized. Damaging a Galvanized target arcs Chain Lightning to enemies within 18m).")
     ]
 }
 
@@ -317,8 +317,8 @@ let rec resilient : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add Proficiency Bonus to all Saving Throws.")
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum possible amount when healed.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add Proficiency Bonus to all Saving Throws.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum possible amount when healed.")
     ]
 }
 
@@ -441,7 +441,7 @@ let rec warCaster : FeatDef = {
     Grants = [
         Complex("PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster: Focus", "Gain Advantage on Concentration Saving Throws.")
         Power(FreeAction, AtWill, "PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster", "Cast Shocking Grasp as a Reaction against an enemy entering melee range.")
-        Power(BonusAction, AtWill, "Bind Weapons", "Bind Weapons: use Spellcasting Ability for Melee Attack/Damage. Kill/Crit restores a lvl 1 slot.")
+        Power(BonusAction, AtWill, "Bind Weapons", "Bind Weapons: use Spellcasting Ability for Attack Rolls and Damage. Once per turn, Kill/Crit restores a lvl 1 Spell Slot.")
         Complex("PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster: Melee Spell", "Toggled: cast any ranged Spell or Cantrip as a melee Spell.")
     ]
 }
