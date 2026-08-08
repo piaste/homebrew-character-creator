@@ -30,14 +30,14 @@ let rec intimidate = {
             Name = "Intimidate"
             KeyAbility = CHA
             SkillDescription = "Intimidation is used when attempting to frighten or coerce others."
-            Grants = Simple "Advantage vs. Frightened"
+            Grants = Simple "You have +1 to your Attack Rolls."
         }
 let rec nature = {
             Id = % nameof nature
             Name = "Nature"
             KeyAbility = INT
             SkillDescription = "Nature is used when attempting to remember facts about nature."
-            Grants = Simple "You have Advantage against being Poisoned."
+            Grants = Simple "You have a +1 bonus to Saving Throws."
         }
 let rec history = {
             Id = % nameof history
@@ -65,7 +65,7 @@ let rec persuasion = {
             Name = "Persuasion"
             KeyAbility = CHA
             SkillDescription = "Persuasion is used when attempting to negotiate with or convince others. It affects the price that traders give a character when buying or selling items."
-            Grants = Simple "You have Advantage against Charm effects."
+            Grants = Simple "Reduce merchant price (like vanilla)."
         }
 let rec deception = {
             Id = % nameof deception
@@ -93,7 +93,7 @@ let rec animalHandling = {
             Name = "Animal Handling"
             KeyAbility = WIS
             SkillDescription = "Animal Handling is used when interacting with animals."
-            Grants = Simple "You have permanent Speak with Animals."
+            Grants = Simple "You have permanent Darkvision."
         }
 
 let rec survival = {
@@ -109,7 +109,7 @@ let rec stealth = {
             Name = "Stealth"
             KeyAbility = DEX
             SkillDescription = "Stealth is used to Hide from other characters and when attempting to remain undetected with Greater Invisibility."
-            Grants = Simple "You can move and shoot through other characters."
+            Grants = Simple "All creatures within 1.5m of you are permeable, and able to be walked through."
         }
 
 let rec investigation = {
