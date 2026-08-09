@@ -19,7 +19,7 @@ let rec armourReinforcement : ClassLevelUpPick = {
     TypeId = nameof armourReinforcement
     Name = "Armour Reinforcement"
     Grants = [ 
-        Simple "Optimization Matrix grants +2 to AC"
+        Simple "Optimization Matrix grants +2 to Armour Class"
     ]
 }
 
@@ -191,7 +191,7 @@ let rec armourCompromise : ClassLevelUpPick = {
     TypeId = nameof armourCompromise
     Name = "Armour Compromise"
     Grants = [ 
-        Simple "Sabotage Matrix inflicts -2 to AC"
+        Simple "Sabotage Matrix inflicts -2 to Armour Class"
     ]
 }
 let rec concentrationBreach : ClassLevelUpPick = {
@@ -434,7 +434,7 @@ let rec evasiveFootwork : ClassLevelUpPick = {
     TypeId = nameof evasiveFootwork
     Name = "Evasive Footwork"
     Grants = [
-        Power(BonusAction, AtWill, "Evasive Footwork", "Gain +2 AC for 3 turns")
+        Power(BonusAction, AtWill, "Evasive Footwork", "Gain +2 Armour Class for 3 turns")
     ]
 }
 
@@ -479,7 +479,7 @@ let rec parryingStance : ClassLevelUpPick = {
     TypeId = nameof parryingStance
     Name = "Parrying Stance"
     Grants = [
-        Power(BonusAction, AtWill, "Parrying Stance", "Gain +10 AC until the next incoming attack roll")
+        Power(BonusAction, AtWill, "Parrying Stance", "Gain +10 Armour Class until the next incoming attack roll")
     ]
 }
 
@@ -733,7 +733,7 @@ let rec javelinToss : ClassLevelUpPick = {
     TypeId = nameof javelinToss
     Name = "Javelin Toss"
     Grants = [
-        Power(BonusAction, AtWill, "Javelin Toss", "Summon and throw a javelin (1d8+STR)")
+        Power(BonusAction, AtWill, "Javelin Toss", "Summon and throw a javelin (1d8+Strength)")
     ]
 }
 
@@ -787,7 +787,7 @@ let rec prepare : ClassLevelUpPick = {
     TypeId = nameof prepare
     Name = "Prepare"
     Grants = [
-        Power(BonusAction, AtWill, "Prepare", "Extra melee damage equal to STR Modifier")
+        Power(BonusAction, AtWill, "Prepare", "Extra melee damage equal to Strength Modifier")
     ]
 }
 
@@ -832,7 +832,7 @@ let rec unarmedStrike : ClassLevelUpPick = {
     TypeId = nameof unarmedStrike
     Name = "Unarmed Strike"
     Grants = [
-        Power(BonusAction, AtWill, "Unarmed Strike", "1+STR Modifier damage")
+        Power(BonusAction, AtWill, "Unarmed Strike", "1+Strength Modifier damage")
     ]
 }
 
@@ -1277,14 +1277,14 @@ let rec quickenedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof quickenedSpell
     Name = "Quickened Spell"
-    Grants = [ Simple "Metamagic (2*lvl): Spell/Cantrip that costs an Action now costs Bonus Action" ]
+    Grants = [ Simple "Metamagic (2*level): Spell/Cantrip that costs an Action now costs Bonus Action" ]
 }
 
 let rec regenerativeSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof regenerativeSpell
     Name = "Regenerative Spell"
-    Grants = [ Simple "Metamagic (1*lvl): Damage dealing Spell/Cantrip heals you for half damage" ]
+    Grants = [ Simple "Metamagic (1*level): Damage dealing Spell/Cantrip heals you for half damage" ]
 }
 
 let rec restorativeSpell : ClassLevelUpPick = {
@@ -1319,14 +1319,14 @@ let rec tripledSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tripledSpell
     Name = "Tripled Spell"
-    Grants = [ Simple "Metamagic (3*lvl): Single target Spell/Cantrip now targets 3 creatures" ]
+    Grants = [ Simple "Metamagic (3*level): Single target Spell/Cantrip now targets 3 creatures" ]
 }
 
 let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Simple "Metamagic (2*lvl): Single target Spell/Cantrip now targets 2 creatures" ]
+    Grants = [ Simple "Metamagic (2*level): Single target Spell/Cantrip now targets 2 creatures" ]
 }
 
 type private Placeholder = class end
