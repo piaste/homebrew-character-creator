@@ -27,7 +27,7 @@ let rec arcana = {
         }
 let rec intimidate = {
             Id = % nameof intimidate
-            Name = "Intimidate"
+            Name = "Intimidation"
             KeyAbility = CHA
             SkillDescription = "Intimidation is used when attempting to frighten or coerce others."
             Grants = Simple "You have +1 to your Attack Rolls."

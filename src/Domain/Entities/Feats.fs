@@ -52,7 +52,7 @@ let rec anchoredFocus : FeatDef = {
     Name = "Anchored Focus"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("Spell_Enchantment_SynapticStatic" <!!> "Anchored Focus", "Cannot lose Concentration.") ]
+    Grants = [ Complex("Spell_Enchantment_SynapticStatic" <!!> "Anchored Focus", "You can't lose Concentration.") ]
 }
 
 let rec arcaneEchoes : FeatDef = {
@@ -109,7 +109,7 @@ let rec combatMedic : FeatDef = {
     Name = "Combat Medic"
     ExplicitDescription = None
     Subpicks = Map []
-    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Combat Medic", "Helping another creature restores extra HP equal to your current HP.") ]
+    Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Combat Medic", "Upon Helping another creature, they regain additional HP equal to the amount you currently have.") ]
 }
 
 let rec composed : FeatDef = {
@@ -167,8 +167,8 @@ let rec durable : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Spell_Abjuration_Resistance" <!!> "Durable: Resistance", "Gain Resistance to Physical damage.")
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Durable: Unstoppable", "Gain Lockdown Immunity (immune to most Crowd Control).")
+        yield! alsoAffectsSummons <| Complex("Spell_Abjuration_Resistance" <!!> "Durable: Resistance", "You have Resistance to Physical damage.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Durable: Unstoppable", "Lockdown Immunity (immune to most Crowd Control effects).")
     ]
 }
 
@@ -214,8 +214,8 @@ let rec intrinsicBulwark : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("Spell_Abjuration_Resistance" <!!> "Intrinsic Bulwark: Resistance", "Gain Resistance to Elemental damage.")
-        Complex("Intrinsic Bulwark: Immunity", "Immune to damage-over-time effects (burning, shocked, bleeding, etc.).")
+        Complex("Spell_Abjuration_Resistance" <!!> "Intrinsic Bulwark: Resistance", "You have Resistance to Elemental damage.")
+        Complex("Intrinsic Bulwark: Immunity", "Immune to effects which deal damage over time (burning, shocked, bleeding, etc.).")
     ]
 }
 
@@ -225,7 +225,7 @@ let rec lucky : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Lucky", "Immediately reroll any Attack Roll, Saving Throw, Ability Check, or Skill Check of 7 or less.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Lucky", "Any time you roll a 7 or less on an Attack Roll, Saving Throw, Ability Check, or Skill Check, the result is immediately rerolled.")
     ]
 }
 
@@ -235,8 +235,8 @@ let rec mageSlayer : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Mage Slayer: Disruption", "Damaged enemies immediately lose Concentration.")
-        yield! alsoAffectsSummons <| Complex("Mage Slayer: Silence", "Damaging an enemy silences them for 1 turn.")
+        yield! alsoAffectsSummons <| Complex("Mage Slayer: Disruption", "Enemies you damage immediately lose Concentration on any Spells they were maintaining.")
+        yield! alsoAffectsSummons <| Complex("Mage Slayer: Silence", "Upon dealing damage, silence the target for one turn.")
     ]
 }
 
@@ -307,7 +307,7 @@ let rec reactiveAssault : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Power(Reaction, AtWill, "PassiveAction_GreatWeaponMaster_AllIn" <!!> "Reactive Assault", "Make a basic weapon Attack as a Reaction upon landing a Critical Hit.")
+        yield! alsoAffectsSummons <| Power(Reaction, AtWill, "PassiveAction_GreatWeaponMaster_AllIn" <!!> "Reactive Assault", "Upon landing a Critical Hit, make a basic weapon Attack as a Reaction.")
     ]
 }
 
@@ -317,8 +317,8 @@ let rec resilient : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add Proficiency Bonus to all Saving Throws.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum possible amount when healed.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add your Proficiency Bonus to any Saving Throws you make.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum amount when healed.")
     ]
 }
 
