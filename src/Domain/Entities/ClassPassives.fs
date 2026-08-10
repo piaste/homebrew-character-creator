@@ -159,7 +159,7 @@ let rec adaptivePlating = {
     ClassId = artificer.Id
     Id = % nameof adaptivePlating
     Name = "Adaptive Plating"
-    Grants = [ Complex("Passive_SoulOfArtefice" <!!> "Adaptive Plating", "When you are damaged, gain Temporary HP equal to your proficiency bonus*2.") ]
+    Grants = [ Complex("Passive_SoulOfArtefice" <!!> "Adaptive Plating", "When you are damaged, gain Temporary Hit Points equal to your proficiency bonus*2.") ]
 }
 
 let rec arcaneCalibrationMatrix = {
@@ -208,7 +208,7 @@ let rec failsafeInjection = {
     ClassId = artificer.Id
     Id = % nameof failsafeInjection
     Name = "Failsafe Injection"
-    Grants = [ Power(FreeAction, OncePerCombat, "Passive_SoulOfArtefice" <!!> "Failsafe Injection", "Once per combat, when you start your turn below 75% HP, you consume a synthetic potion.") ]
+    Grants = [ Power(FreeAction, OncePerCombat, "Passive_SoulOfArtefice" <!!> "Failsafe Injection", "Once per combat, when you start your turn below 75% Hit Points, you consume a synthetic potion.") ]
 }
 
 let rec incendiaryRounds = {
@@ -236,7 +236,7 @@ let rec modularAugmentation = {
     ClassId = artificer.Id
     Id = % nameof modularAugmentation
     Name = "Modular Augmentation"
-    Grants = [ Power(BonusAction, AtWill, "Skill_Infusion_ResistantArmor_Lightning" <!!> "Modular Augmentation", "Grant an ally a +2 bonus to their AC, Attack Rolls, Damage Rolls, or their DC. Each effect may only be applied to one ally at a time.") ]
+    Grants = [ Power(BonusAction, AtWill, "Skill_Infusion_ResistantArmor_Lightning" <!!> "Modular Augmentation", "Grant an ally a +2 bonus to their Armour Class, Attack Rolls, Damage Rolls, or their DC. Each effect may only be applied to one ally at a time.") ]
 }
 
 let rec naniteDispersionField = {
@@ -948,7 +948,7 @@ let rec layOnHands = {
     ClassId = paladin.Id
     Id = % nameof layOnHands
     Name = "Lay on Hands"
-    Grants = [ Power(FreeAction, AtWill, "PassiveFeature_Generic_Tactical" <!!> "Lay on Hands", "Use a Crusader Smite charge and a Channel Oath charge to heal yourself or allies (1d12 HP/2 lvl), or to cure poisons and most conditions.") ]
+    Grants = [ Power(FreeAction, AtWill, "PassiveFeature_Generic_Tactical" <!!> "Lay on Hands", "Use a Crusader Smite charge and a Channel Oath charge to heal yourself or allies (1d12 Hit Points/2 level), or to cure poisons and most conditions.") ]
 }
 
 let rec oathboundRenewal = {
