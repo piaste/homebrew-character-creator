@@ -8,6 +8,7 @@ let rec artificer = {
         Name = "Artificer"
         Description = "Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects."
 
+        IsCaster = false
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ _ -> [])
@@ -28,6 +29,7 @@ let rec barbarian = {
         Name = "Barbarian"
         Description = "For some, there is only rage. In the violence of combat, there is only the roar and the red mist of fury."
 
+        IsCaster = false
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ _ -> [])
@@ -45,6 +47,7 @@ let rec bard = {
         Name = "Bard"
         Description = "Masters of song, speech, and the magic they contain, bards use their artistic talents to inspire allies and manipulate enemies."
 
+        IsCaster = true
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [            
@@ -69,6 +72,7 @@ let rec cleric = {
         Name = "Cleric"
         Description = "Divine representatives who wield the power of their gods to heal, protect, or destroy."
 
+        IsCaster = true
         SpellcastingAbility = WIS
 
         ScalingAbilities = (fun _ _ -> [])
@@ -86,6 +90,7 @@ let rec druid = {
         Name = "Druid"
         Description = "Wielders of the primal forces of nature, Druids can assume the forms of beasts and command the elements to protect the natural balance."
 
+        IsCaster = true
         SpellcastingAbility = WIS
 
         ScalingAbilities = (fun _ _ -> [])
@@ -103,6 +108,7 @@ let rec fighter = {
         Name = "Fighter"
         Description = "Paragons of martial excellence, fighters are unmatched in their mastery of weapons and combat techniques."
 
+        IsCaster = false
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
@@ -125,6 +131,7 @@ let rec monk = {
         Name = "Monk"
         Description = "Masters of the martial arts, monks harness the energy of ki within their own bodies to perform incredible physical and magical feats."
 
+        IsCaster = false
         SpellcastingAbility = WIS
 
         ScalingAbilities = (fun _ cl -> [
@@ -145,6 +152,7 @@ let rec paladin = {
         Name = "Paladin"
         Description = "Holy warriors bound by sacred oaths, paladins use their divine power to smite enemies and protect the innocent."
 
+        IsCaster = true
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
@@ -168,6 +176,7 @@ let rec ranger = {
         Name = "Ranger"
         Description = "Skilled hunters and trackers, rangers use their knowledge of the wilderness and martial prowess to protect the frontiers."
 
+        IsCaster = true
         SpellcastingAbility = WIS
 
         ScalingAbilities = (fun _ _ -> [])
@@ -190,6 +199,7 @@ let rec rogue = {
         Name = "Rogue"
         Description = "Masters of stealth, skill, and precision, rogues use their cunning to outwit enemies and strike where they are most vulnerable."
 
+        IsCaster = false
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ cl -> [
@@ -209,6 +219,7 @@ let rec sorcerer = {
         Name = "Sorcerer"
         Description = "Innate spellcasters whose magic comes from within, sorcerers use their unique bloodlines to channel the power of the Weave."
 
+        IsCaster = true
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
@@ -232,6 +243,7 @@ let rec warlock = {
         Name = "Warlock"
         Description = "Seekers of forbidden knowledge who have made pacts with powerful entities, warlocks use their granted power to cast potent spells."
 
+        IsCaster = true
         SpellcastingAbility = CHA
 
         ScalingAbilities = fun _ _ -> []
@@ -249,6 +261,7 @@ let rec wizard = {
         Name = "Wizard"
         Description = "Masters of the arcane, wizards study ancient tomes and practice complex rituals to cast powerful spells."
 
+        IsCaster = true
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ cl -> [

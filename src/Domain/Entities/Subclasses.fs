@@ -479,11 +479,11 @@ let rec dragoon =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Draconic Dive" <?> "Chivalric Hunt", "Leap from afar dealing Weapon + Fire damage.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "DraconicSentinel" <!!> "Wyrmcall Eruption" <?> "Cataphract Shock", "Expend a Superiority Die on Draconic ability damage to deal Force damage and potentially knock Prone in an area.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "DraconicSentinel" <!!> "Wyrmcall Eruption" <?> "Cataphract Shock", "Expend a Superiority Die on subclass ability damage to deal Force damage and potentially knock Prone in an area.") ]
             5<classLvl>, [ Power(Action, AtWill, "Spell_2e_FlameWisp_Ranged" <!!> "Draconic Blitz" <?> "Chivalric Spearhead", "Charge through enemies dealing Weapon + Fire damage.") ]
-            7<classLvl>, [ Complex("DraconicSentinel" <!!> "Wyrmcall Resonance" <?> "Zealous Pursuit", "Killing blows allow Draconic abilities as Bonus Actions and double melee reach.") ]
+            7<classLvl>, [ Complex("DraconicSentinel" <!!> "Wyrmcall Resonance" <?> "Zealous Pursuit", "Killing blows allow subclass abilities as Bonus Actions and double melee reach.") ]
             9<classLvl>, [ Power(Action, AtWill, "Spell_2e_FlameWisp" <!!> "Draconic Maul" <?> "Chivalric Breach", "Single target strike dealing Weapon + 3d12 Fire damage.") ]
-            11<classLvl>, [ Complex("DraconicSentinel" <!!> "Wyrmcall Breakpoint" <?> "Slaying the Dragon", "Draconic abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
+            11<classLvl>, [ Complex("DraconicSentinel" <!!> "Wyrmcall Breakpoint" <?> "Slaying the Dragon", "Subclass abilities cause shockwaves. Killing Prone targets maximizes next Draconic damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -959,7 +959,7 @@ let rec crownedPhoenix =
                 Complex("Spell_Enchantment_Bane" <!!> "Crowned Judgement" <?> "Bane of the Warped", "Advantage against Aberrations; killing them restores a Smite charge.")
                 Power(Action, AtWill, "Divine Smite", "Radiant damage, inflicts Divine Judgement for 1 turn (all Attack Rolls are made with Advantage against the target)")
             ]
-            3<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "To the Sun" <?> "Arcane Ignition", "Phoenix Landing/Protection grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
+            3<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "To the Sun" <?> "Arcane Ignition", "Subclass abilities grants Sun Scorched (bonus Fire damage) and Fire Resistance.") ]
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_DivineGuardian" <!!> "Turn the Aberrant" <?> "Turn the Warped", "Terrify and damage Aberrations in a 9m radius.") ]
             7<classLvl>, [ Complex("Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Scorched Earth" <?> "Arcane Dominion", "Fly and have Advantage against Burning targets while Sun Scorched; Fire Immunity.") ]
             9<classLvl>, [ Power(Action, AtWill, "Action_Monster_GortashMachine_ActivateFlameTiles" <!!> "Aura of Cinder" <?> "Aura of Spellfire", "Allies gain Warding Bond; enemies take Fire damage.") ]
@@ -1376,7 +1376,7 @@ let rec radiantBloom =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Spark" <?> "Spellfire Spark", "Casting spells emits aura healing allies/damaging enemies for 1d6.") ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_ConsecratedFlesh" <!!> "Radiance in Bloom" <?> "Whirlflame", "3m AOE heal/radiant damage.") ]
-            5<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Ignition" <?> "Spellfire Ignition", "Soulfire aura damage/heal increased to 1d12.") ]
+            5<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Ignition" <?> "Spellfire Ignition", "Aura damage/heal increased to 1d12.") ]
             7<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Immeasurable Light" <?> "Crown of Fire", "Aura grants Divine Favour; Radiant damage inflicts Radiating Orb.") ]
             9<classLvl>, [ Complex("Spell_2e_ConsecratedFlesh" <!!> "Soulfire Inferno" <?> "Spellfire Hierophant", "Aura triggers at both start and end of turns.") ]
             11<classLvl>, [ Power(Action, AtWill, "Spell_2e_ElementalCounter" <!!> "Radiance Unhinged" <?> "Maelstrom of Fire", "9m area heal/damage.") ]

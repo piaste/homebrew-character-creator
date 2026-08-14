@@ -96,16 +96,31 @@ type Character =
         NextLevelUp: LevelRecord
     }
 
-type CharacterHistory = {
-    Levels : LevelRecord list
-    AllCantripIds : Set<string<cantripId>>
-    AllSpellIds: Set<string<spellId>>
-    AllFeatIds: Set<string<featId>>
-    AllFeatSubPicks: Map<FeatSubpickType, Set<string>>
-    AllSpecialPicks: Set<string<specialPickId>>
-    AllClassPassiveIdsByClass: Map<string<classId>,Set<string<classPassiveId>>>
-    LevelsBySubclass: Map<string<subclassId>,int<classLvl>>
-}
+type CharacterHistory = 
+    {
+        Levels : LevelRecord list
+        AllCantripIds : Set<string<cantripId>>
+        AllSpellIds: Set<string<spellId>>
+        AllFeatIds: Set<string<featId>>
+        AllFeatSubPicks: Map<FeatSubpickType, Set<string>>
+        AllSpecialPicks: Set<string<specialPickId>>
+        AllClassPassiveIdsByClass: Map<string<classId>,Set<string<classPassiveId>>>
+        LevelsBySubclass: Map<string<subclassId>,int<classLvl>>
+    }
+    member this.LevelsBySubclassPlusYB() = 
+        let ybSubclassIds = 
+            this.AllFeatSubPicks.GetOrElse (YB, Set.empty)
+            |> Seq.map UMX.tag<subclassId>
+        Seq.fold (fun m ybScid -> Map.add ybScid 3<classLvl> m) this.LevelsBySubclass ybSubclassIds
+
+    member this.LevelsBySubclassForSpellSlots() = 
+        let ybSubclassIds = 
+            this.AllFeatSubPicks.GetOrElse (YB, Set.empty)
+            |> Seq.map UMX.tag<subclassId>
+            // only non-caster classes get spell slots from YB
+            |> Seq.filter (fun scId -> allClasses[allSubclasses[scId].BaseClassId].IsCaster = false)
+        Seq.fold (fun m ybScid -> Map.add ybScid 3<classLvl> m) this.LevelsBySubclass ybSubclassIds
+
 let prevHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
 let currHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
 
@@ -121,13 +136,26 @@ type Character with
 
                 AllCantripIds = 
                     levelHistory
-                    |> Seq.collect (fun l -> Set.union l.CantripIds (l.FeatSubPicks.GetOrElse(Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>))
-                    |> Set.ofSeq
+                    |> Seq.collect (fun l -> 
+                        [ l.CantripIds;
+                          l.FeatSubPicks.GetOrElse(Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>
+                          l.FeatSubPicks.GetOrElse(YBCantrips, Set.empty) |> Set.map UMX.tag<cantripId>
+                        ]
+                    )
+                    |> Set.unionMany
 
                 AllSpellIds = 
                     levelHistory
-                    |> Seq.collect _.SpellIds 
-                    |> Set.ofSeq
+                    |> Seq.collect (fun l -> 
+                        [ l.SpellIds;
+                          for fsp in l.FeatSubPicks.Keys do
+                            match fsp with
+                            | YBSpells _ -> 
+                                l.FeatSubPicks[fsp] |> Set.map UMX.tag<spellId>
+                            | _ -> Set.empty
+                        ]
+                    )
+                    |> Set.unionMany
 
                 AllFeatIds = 
                     levelHistory
@@ -145,8 +173,16 @@ type Character with
 
                 AllSpecialPicks = 
                     levelHistory
-                    |> Seq.collect _.SpecialPickIds
-                    |> Set.ofSeq
+                    |> Seq.collect (fun l -> 
+                        [ l.SpecialPickIds;
+                          for fsp in l.FeatSubPicks.Keys do
+                            match fsp with
+                            | YBClassSpecific _ -> 
+                                l.FeatSubPicks[fsp] |> Set.map UMX.tag<specialPickId>
+                            | _ -> Set.empty
+                        ]
+                    )
+                    |> Set.unionMany
                     
                 AllClassPassiveIdsByClass = 
                     levelHistory

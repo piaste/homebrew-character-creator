@@ -22,15 +22,17 @@ let classIdBySubclassId =
 let classBySubclassId = 
     classIdBySubclassId >> classById
 
-let getClassBenefits useLoreNames scid lvl charLvl = 
+let getClassBenefits (clDef : ClassDef) lvl charLvl = 
     [
         // class benefits
-        let clDef = classBySubclassId scid
         for scAb in clDef.ScalingAbilities charLvl lvl do
             yield clDef.Name, scAb
         for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
             if lvl >= lvlReq then for fAb in ab do yield clDef.Name, fAb
-        
+    ]
+
+let getSubclassBenefits useLoreNames scid lvl charLvl = 
+    [
         // subclass benefits
         let scDef = allSubclasses[scid]
         for scAb in scDef.ScalingAbilities charLvl lvl do
@@ -81,7 +83,7 @@ let getAllClassBenefits useLoreNames cid =
                 yield "1 → 12", scAb
             ]
     ]
-    |> List.map (fun (l, p) -> l, p.Name.Display useLoreNames, Some <| p.Description.Display useLoreNames)
+    |> List.map (fun (l, p) -> l, p.Name.Display useLoreNames, Some <| p.Description)
 
 let getAllSubclassBenefits useLoreNames scid = 
     [
@@ -94,7 +96,7 @@ let getAllSubclassBenefits useLoreNames scid =
                 yield "1 → 12", scAb
             ]
     ]
-    |> List.map (fun (l, p) -> l, p.Name.Display useLoreNames, Some <| p.Description.Display useLoreNames)
+    |> List.map (fun (l, p) -> l, p.Name.Display useLoreNames, Some <| p.Description)
 
 
 let getAllPassives useLoreNames (character : Character) = 
@@ -111,7 +113,7 @@ let getAllPassives useLoreNames (character : Character) =
         let skill = Skills.allSkills[s]
         yield "Skill", skill.Grants
 
-      let mutable classLevelsForBenefits = character.CurrentHistory.LevelsBySubclass
+      let mutable subclassLevelsForBenefits = character.CurrentHistory.LevelsBySubclassPlusYB()
 
       for lr in character.CurrentHistory.Levels do
         match lr.FeatId with
@@ -126,8 +128,7 @@ let getAllPassives useLoreNames (character : Character) =
 
         | Some f when f = Feats.yokebreaker.Id -> 
             
-            for scId in lr.FeatSubPicks.GetOrElse(Yokebreaking, Set.empty) do
-                classLevelsForBenefits <- Map.add (UMX.tag<subclassId> scId) 3<classLvl> classLevelsForBenefits 
+            () // handled above
                     
         | Some f when f = Feats.elementalAdept.Id ->
 
@@ -145,18 +146,23 @@ let getAllPassives useLoreNames (character : Character) =
                 yield "Feat", g
 
 
-      for KeyValue(scid, lvl) in classLevelsForBenefits do        
+      for clId, subclLevels in subclassLevelsForBenefits |> Seq.groupBy (_.Key >> classIdBySubclassId) do   
 
-        for n, p in getClassBenefits useLoreNames scid lvl character.CharacterLevel do
-            yield n, p
+            let maxClassLvl = subclLevels |> Seq.map _.Value |> Seq.max
+            let clDef = allClasses[clId]
 
-        // class passives
-        let clDef = classBySubclassId scid
-        for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
-            let cpDef = ClassPassives.allClassPassives[cpId]
-            for g in cpDef.Grants do
-                yield clDef.Name, g
+            for n, p in getClassBenefits clDef maxClassLvl character.CharacterLevel do
+                yield n, p
 
+            // class passives
+            for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
+                let cpDef = ClassPassives.allClassPassives[cpId]
+                for g in cpDef.Grants do
+                    yield clDef.Name, g
+
+      for KeyValue(scid, lvl) in subclassLevelsForBenefits do        
+            for n, p in getSubclassBenefits useLoreNames scid lvl character.CharacterLevel do
+                yield n, p
     ]
     
 let levelUpDefault scId' (character : Character) =     
@@ -211,7 +217,7 @@ let levelDownFor scId (character : Character) =
 
 let getRegularSpellSlots (character: Character) = 
     [
-        for KeyValue(subclass, lvl) in character.CurrentHistory.LevelsBySubclass do
+        for KeyValue(subclass, lvl) in character.CurrentHistory.LevelsBySubclassForSpellSlots() do
             match (subclassById subclass).CasterType with
             | Martial | FullCaster Bargained | HalfCaster Bargained 
                 -> ()
@@ -252,7 +258,7 @@ let getRegularSpellSlots (character: Character) =
 
 let getWarlockSpellSlots (character: Character) = 
     [
-        for KeyValue(subclass, lvl) in character.CurrentHistory.LevelsBySubclass do
+        for KeyValue(subclass, lvl) in character.CurrentHistory.LevelsBySubclassForSpellSlots() do
             match (subclassById subclass).CasterType with            
             | FullCaster Bargained ->
                 match lvl with

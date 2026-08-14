@@ -213,19 +213,3 @@ type Model =
                 SystemErrors = []
                 UseLoreNames = false
             }
-
-let statusText (model: Model) =
-    let character = model.Character
-    match model.Errors with    
-    | [] -> 
-        let race = raceById character.RaceId
-        let clLevels = character.CurrentHistory.LevelsBySubclass
-        let classNames = 
-            character.CurrentHistory.Levels
-            |> List.map (_.SubclassId >> subclassById >> fun sc -> sc.Name.Display model.UseLoreNames)
-            |> List.distinct
-            |> String.concat "/"
-        $"{character.CharName} is a level {character.CharacterLevel} {race.Name} {classNames}. Use level up to extend the build, or undo to roll back changes."
-    | errs -> String.concat "\n" errs
-
-        

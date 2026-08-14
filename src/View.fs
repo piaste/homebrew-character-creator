@@ -246,7 +246,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                                 attr.style $"anchor-name: --{anchorId}"
                                 resource.Name.DefaultText
                                 
-                                span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; resource.Description.DefaultText}
+                                span { cl "tooltip-text"; attr.style $"position-anchor: --{anchorId}"; resource.Description}
                             }
                     }                
                     div {
@@ -300,7 +300,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     |> List.map (fun (source, p) -> 
                         source, 
                         p.Name.Display useLoreNames,
-                        p.Description.Display useLoreNames, 
+                        p.Description, 
                         p.Icon
                     )
 
@@ -308,8 +308,11 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     [   All
                         Starting
                         if not chr.CurrentHistory.AllFeatIds.IsEmpty then FromFeats
-                        for sc in chr.CurrentHistory.LevelsBySubclass.Keys do 
-                            FromSubclass sc
+                        for scId in chr.CurrentHistory.LevelsBySubclass.Keys do 
+                            FromSubclass scId
+                        if chr.CurrentHistory.AllFeatIds |> Set.contains Feats.yokebreaker.Id then
+                            for scId in chr.CurrentHistory.AllFeatSubPicks.GetOrElse(YB, Set.empty) do
+                                FromSubclass (UMX.tag<subclassId> scId)
                         if not <| List.isEmpty summonsPassives then Summons
                     ]
 
@@ -379,7 +382,7 @@ let levelBoxes (model: Model) =
                                     sheetAttr sp.Type.DisplayString sp.Name (Some (sp.Description)) None
                                 forEach lr.ClassPassiveIds <| fun s ->
                                     let cp = ClassPassives.allClassPassives[s]
-                                    sheetAttr "Passive" cp.Name (Some (cp.Description.Display model.UseLoreNames)) None
+                                    sheetAttr "Passive" cp.Name (Some cp.Description) None
                                 forEach lr.CantripIds <| fun s ->
                                     let c = Cantrips.allCantrips[s]  in
                                     sheetAttr "Cantrip" $"{c.ActionCost} {c.Name}" (Some c.Description) None
@@ -392,10 +395,10 @@ let levelBoxes (model: Model) =
                                     let f = Feats.allFeats[fId]
                                     let featName = 
                                         if Map.isEmpty lr.FeatSubPicks then f.Name else
-                                        lr.FeatSubPicks.Values
-                                        |> Set.unionMany
-                                        |> Seq.map camelCaseToEnglish
-                                        |> String.concat ","
+                                        [ for KeyValue(k, v) in lr.FeatSubPicks do
+                                            yield k.DisplayValues v
+                                        ]
+                                        |> String.concat ", "
                                         |> fun p -> $"{f.Name} [{p}]"
 
                                     sheetAttr "Feat" featName (Some f.Description) None
@@ -455,7 +458,7 @@ let levelUpOptions useLoreNames (c: Character) dispatch =
                 concat {
                     p { $"⬆️ {cName} {nextLvl}" }
                     forEach nextLvlBenefits <| (fun (n, d) ->
-                        sheetAttr n (d.Name.Display useLoreNames) (Some <| d.Description.Display useLoreNames) d.Icon
+                        sheetAttr n (d.Name.Display useLoreNames) (Some <| d.Description) d.Icon
                     )
                 }) "primary" dispatch (LevelUp (Some scId))
         )
@@ -580,7 +583,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Archetypes ->
                 ph Archetypes <| Picker.view "Archetype"                    
                     (Archetypes.allArchetypes.Values
-                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPicker tryGetAnyVanillaIconSubpath
                     )
                     Set.empty
                     (Set.singleton c.ArchetypeId)
@@ -588,7 +591,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Traits ->
                 ph Traits <| Picker.view "Trait"
                     (Traits.allTraits.Values
-                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPicker tryGetAnyVanillaIconSubpath
                     )
                     Set.empty
                     (Set.singleton c.TraitId)
@@ -636,7 +639,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick ClassPassives ->
                 ph ClassPassives <| Picker.view "Passives"
                     (ClassPassives.allPassivesByClass[classIdBySubclassId l.SubclassId].Values
-                     |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
+                     |> toPicker tryGetAnyVanillaIconSubpath
                     )
                     (c.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(classIdBySubclassId l.SubclassId, Set.empty))
                     l.ClassPassiveIds
@@ -670,7 +673,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         c.PreviousHistory.AllCantripIds
                         (l.FeatSubPicks.GetOrElse(FeatSubpickType.Cantrips, Set.empty) |> Set.map UMX.tag<cantripId>)
 
-                | FeatSubpickType.Yokebreaking ->
+                | YB ->
                     cond model.YokebreakerClass <| function
                     | None -> 
                         let validClassesForYB = 
@@ -698,7 +701,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             Subclasses.allSubclassesByClass[ybClassId]
                             |> Map.filter (fun scId _ -> 
                                 // exclude if already picked for YB
-                                if c.PreviousHistory.AllFeatSubPicks.GetOrElse(Yokebreaking, Set.empty) 
+                                if c.PreviousHistory.AllFeatSubPicks.GetOrElse(YB, Set.empty) 
                                    |> Set.contains (UMX.untag scId)
                                         then false else
                                 
@@ -719,7 +722,35 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             }
                             |}))
                             subclassIconPath
-                            (fun scId -> TogglePick (FeatSubpick Yokebreaking, UMX.untag scId))
+                            (fun scId -> TogglePick (FeatSubpick YB, UMX.untag scId))
+
+                | YBCantrips ->                    
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (allCantripsWithIcons
+                        |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.toList
+                        )
+                        // We can cheat a bit because we know that cantrips are never picked at the same level as feats
+                        c.PreviousHistory.AllCantripIds
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<cantripId>)
+
+                | YBSpells sl->                                                    
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (allSpellsWithIconsIn sl
+                        |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.toList
+                        )
+                        c.PreviousHistory.AllSpellIds
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<spellId>)
+
+                | YBClassSpecific sp ->
+                    let sps = SpecialPicks.allSpecialPicksOfType sp
+                    ph (FeatSubpick f) <| Picker.view f.DisplayString
+                        (sps.Values
+                        |> toPicker tryGetAnyVanillaIconSubpath
+                        )
+                        c.PreviousHistory.AllSpecialPicks
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<specialPickId> |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp))
 
                 | FeatSubpickType.ClassPassives ->
                     cond model.ClassSpecialistClass <| function
@@ -745,8 +776,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         let className = Classes.allClasses[classSpecialistId].Name
                         ph (FeatSubpick f) <| Picker.view $"{className} Specialist"
                             (ClassPassives.allPassivesByClass[classSpecialistId].Values
-                            |> Seq.map<_, Picker.Thing<classPassiveId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description.Display model.UseLoreNames; Icon = tryGetAnyVanillaIconSubpath c})
-                            |> Seq.toList
+                            |> toPicker<classPassiveId, ClassPassiveDef> tryGetAnyVanillaIconSubpath
                             )
                             (c.PreviousHistory.AllClassPassiveIdsByClass.GetOrElse(classSpecialistId, Set.empty))
                             (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<classPassiveId>)
@@ -754,7 +784,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | FeatSubpickType.Archetypes ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Archetypes.allArchetypes.Values
-                        |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
+                        |> toPicker tryGetAnyVanillaIconSubpath
                         )
                         Set.empty
                         (Set.singleton c.ArchetypeId)
@@ -762,12 +792,12 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | FeatSubpickType.Traits ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Traits.allTraits.Values
-                        |> toPickerLore model.UseLoreNames tryGetAnyVanillaIconSubpath
+                        |> toPicker tryGetAnyVanillaIconSubpath
                         )
                         Set.empty
                         (Set.singleton c.TraitId)
 
-                | FeatSubpickType.SkillProficiencies ->
+                | SkillProficiencies ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Skills.allSkills.Values
                         |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
@@ -776,7 +806,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         Set.empty
                         c.SkillIds
 
-                | FeatSubpickType.ElementalTypes ->
+                | ElementalTypes ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (elementalDmgTypes
                         |> Seq.map<_, Picker.Thing<element>> (fun c -> { 

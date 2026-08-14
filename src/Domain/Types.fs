@@ -157,10 +157,10 @@ type Passive =
             | Summon p -> p.Name + " (S)"
         member this.Description = 
             match this with
-            | Simple txt -> txt
+            | Simple txt -> txt.DefaultText
             | Complex (_, d) -> d
             | Buff sm -> sm.ToString()
-            | Power (cost, freq, title, txt) -> $"{cost}{freq}: {txt}"
+            | Power (cost, freq, _title, txt) -> $"{cost}{freq}: {txt}"
             | Resource (q, n, r) -> $"{q} {n.DefaultText} charges. Refreshes {r.LongForm().ToLower()}."
             | Summon p -> p.Description
 
@@ -180,7 +180,7 @@ let passiveListDescription (ps: Passive list) =
     for p in ps do
         match p with
         | Summon _ -> hasSummons <- true
-        | x -> x.Description.DefaultText |> sb.AppendLine |> ignore
+        | x -> x.Description |> sb.AppendLine |> ignore
     if hasSummons then "&lt;i&gt;(Also affects summons)&lt;/i&gt;" |> sb.Append |> ignore
     sb.ToString()
 
@@ -195,7 +195,7 @@ type SkillDef =
         Grants: Passive
     }
     member this.Description = 
-        $"({this.KeyAbility}) {this.SkillDescription}\n&lt;i&gt;Proficiency grants:&lt;/i&gt; {this.Grants.Description.DefaultText}"
+        $"({this.KeyAbility}) {this.SkillDescription}\n&lt;i&gt;Proficiency grants:&lt;/i&gt; {this.Grants.Description}"
 
 
 type [<Measure>] archetypeId
@@ -208,7 +208,7 @@ type GrantsPassives<[<Measure>] 'm> = {
     Grants: Passive list
 } with
     member this.Description = 
-        this.Grants |> List.map _.Description |> GameString.concat "\n"
+        this.Grants |> List.map _.Description |> String.concat "\n"
 
 type ArchetypeDef = GrantsPassives<archetypeId>
 type TraitDef = GrantsPassives<traitId>
@@ -236,7 +236,7 @@ type SubraceDef =
     member this.Description = 
         this.RacialPassives
         // racial passives aren't lored
-        |> List.map (fun p -> p.Description.DefaultText)
+        |> List.map (fun p -> p.Description)
         |> String.concat "\n"
 
 
@@ -339,6 +339,7 @@ type ClassDef =
         Id: string<classId>
         Name: string
         Description: string
+        IsCaster: bool
         SpellcastingAbility: Ability
         ScalingAbilities: int<charLvl> -> int<classLvl> -> Passive list
         FixedAbilities: Map<int<classLvl>, Passive list>
@@ -374,14 +375,14 @@ type ClassPassiveDef = {
     Grants: Passive list
 } with    
     member this.Description = 
-        this.Grants |> List.map _.Description |> GameString.concat "\n"
+        this.Grants |> List.map _.Description |> String.concat "\n"
 
 // Feats
 
 type FeatSubpickType = 
-    | Yokebreaking
+    | YB
     | YBCantrips
-    | YBSpells
+    | YBSpells of SpellList
     | YBClassSpecific of ClassLevelUpPickType
     | ClassPassives
     | Cantrips
@@ -391,9 +392,9 @@ type FeatSubpickType =
     | ElementalTypes
     member this.DisplayString = 
         match this with
-        | Yokebreaking -> "Yokebreaker"
+        | YB -> "Yokebreaker"
         | YBCantrips -> "YB: Cantrip"
-        | YBSpells -> "YB: Spells"
+        | YBSpells sl -> $"YB: {sl}  Spells"
         | YBClassSpecific x -> $"YB: {x.DisplayString}"
         | ClassPassives -> "Class Specialist"
         | Cantrips -> "Accord of the Arcane"
@@ -401,6 +402,15 @@ type FeatSubpickType =
         | Archetypes -> "Multifaceted Archetype"
         | SkillProficiencies -> "Multifaceted Skills"
         | ElementalTypes -> "Elemental Adept"
+
+    member this.DisplayValue v = 
+        match this with        
+        | YBSpells _ -> v |> kebabCaseToCamelCase
+        | YBClassSpecific _ -> v.Split("-")[1]
+        | _ -> v
+        |> camelCaseToEnglish
+    member this.DisplayValues vs = 
+        vs |> Seq.map this.DisplayValue |> String.concat ", "
 
 type FeatDef = {
     Id : string<featId>

@@ -450,7 +450,7 @@ let rec yokebreaker : FeatDef = {
     Id = % nameof yokebreaker
     Name = "Yokebreaker"
     ExplicitDescription = Some "Pick another subclass from one of your core classes. You gain all abilities from the first 3 levels of that subclass."
-    Subpicks = Map [ Yokebreaking, 1]
+    Subpicks = Map [ YB, 1]
     Grants = [] // this feat is manually implemented
 }
 

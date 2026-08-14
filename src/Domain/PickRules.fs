@@ -86,6 +86,36 @@ type Character.Character with
                 | Some fId ->
                     for KeyValue(fspt, q) in Entities.Feats.allFeats[fId].Subpicks do
                         yield FeatSubpick fspt, q
+
+                    if fId = Entities.Feats.yokebreaker.Id then
+                        // possible YB spells selection
+                        match l.FeatSubPicks.TryFind YB with
+                        | None -> ()
+                        | Some yb when Set.isEmpty yb -> ()
+                        | Some yb ->
+                            let ybScid = UMX.tag<subclassId> (Set.minElement yb)
+                            let ybSc = allSubclasses[ybScid]
+                            let ybLrs = 
+                                [ 1<classLvl> .. +1<classLvl> .. 3<classLvl> ]
+                                |> List.map (LevelRecord.Blank ybScid)
+
+                            let mutable ybPicks = Map []
+
+                            for ybLr in ybLrs do
+                                // only non-caster classes may get cantrips and spells via yokebreaking
+                                if cl.IsCaster = false then
+                                    ybPicks <- Map.accumulate (FeatSubpick YBCantrips) (nCantripPicks ybLr) ybPicks
+
+                                    match getSpellListSelectionFor ybLr with
+                                    | None -> ()
+                                    | Some sl -> 
+                                        ybPicks <- Map.accumulate (FeatSubpick (YBSpells sl)) (nSpellPicks (subclassById ybScid).CasterType) ybPicks
+
+                                // custom SUBCLASS-SPECIFIC stuff like arcane archer picks
+                                for pick, q in ybSc.CustomPicks.GetOrElse(ybLr.ClassLevel, []) do
+                                    ybPicks <- Map.accumulate (FeatSubpick (YBClassSpecific pick)) q ybPicks
+                            
+                            yield! Map.toSeq ybPicks
             ]
             |> Map.filter (fun _ n -> n > 0)
         )

@@ -7,9 +7,9 @@ open System.Text.Json
 open System.Text.Json.Serialization
 open Microsoft.FSharp.Reflection
 
-let debug x = 
+let debug msg x = 
 #if DEBUG
-    System.Console.WriteLine(sprintf "%A" x)
+    System.Console.WriteLine(sprintf "%s: %A" msg x)
 #endif
     ()
 
@@ -26,7 +26,7 @@ let inline getAll<'P, 't, [<Measure>]'m when 't : (member Id : string<'m>) > () 
             yield value.Id, value
     ]
 
-let withDebug x = debug x; x
+let withDebug msg x = debug msg x; x
 
 let serializerOptions =
     let options = JsonSerializerOptions(JsonSerializerDefaults.Web)
@@ -74,6 +74,11 @@ module Map =
 
     let inline findIn m k = Map.find k m
 
+    let inline accumulate k v (m : Map<_, _>) =
+        match Map.tryFind k m with
+        | None -> Map.add k v m
+        | Some v' -> Map.add k (v + v') m
+
 module Option = 
     let inline either fSome fNone option = 
         match option with | Some v -> fSome v | None -> fNone ()
@@ -96,13 +101,27 @@ type KeyedMap<[<Measure>] 'm, 'v
 let camelCaseToKebabCase (entityName : string) = 
     entityName.ToLower().Replace(' ', '-')
 
+let kebabCaseToCamelCase (text : string) =     
+    if String.IsNullOrWhiteSpace text then text else
+    let sb = Text.StringBuilder()
+    let mutable upperCaseNext = false
+    sb.Append(Char.ToUpper text[0]) |> ignore
+    for c in text[1..] do
+        if c = '-' then
+            upperCaseNext <- true        
+        elif upperCaseNext && Char.IsLetter c then
+            sb.Append (Char.ToUpper c) |> ignore
+            upperCaseNext <- false
+        else
+            sb.Append c |> ignore
+    sb.ToString()
 let camelCaseToEnglish (text : string) =
     if String.IsNullOrWhiteSpace text then text else
     let sb = Text.StringBuilder()
     sb.Append(Char.ToUpper text[0]) |> ignore
     for c in text[1..] do
         if Char.IsAsciiLetterUpper c then 
-            sb.Append " " |> ignore            
+            sb.Append " " |> ignore   
         sb.Append c |> ignore
     sb.ToString()
 

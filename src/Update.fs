@@ -397,7 +397,7 @@ let update
                         character.NextLevelUp.SpecialPickIds.Toggle spId
                 }
 
-        | FeatSubpick Yokebreaking ->
+        | FeatSubpick YB ->
 
             // since yokebreaking uses a radial selector instead of a picker,
             // it needs to advance to the next step
@@ -406,7 +406,7 @@ let update
                 {
                     character with
                         NextLevelUp.FeatSubPicks = 
-                            Map [Yokebreaking, Set.singleton id]
+                            Map [YB, Set.singleton id]
                 }    
         | FeatSubpick fsp -> 
                         
@@ -416,9 +416,13 @@ let update
                 {
                     character with
                         NextLevelUp.FeatSubPicks = 
-                            match currFsp.TryFind fsp with
-                            | None -> Map [fsp, Set.singleton id]
-                            | Some s -> currFsp |> Map.add fsp (s.Toggle id)
+                            debug "BEFORE" character.NextLevelUp.FeatSubPicks
+                            withDebug "AFTER" <| 
+                            let newSubpicks = 
+                                match currFsp.TryFind fsp with
+                                | None -> Set.singleton id
+                                | Some s -> s.Toggle id
+                            currFsp |> Map.add fsp newSubpicks
                 }        
  
     | ClearPicks pick -> 
@@ -522,7 +526,7 @@ let update
         Cmd.OfTask.either 
             jsHelper.CopyCharacter model.Character
             (fun onClickJs -> SetCopyFeedback (Success onClickJs))
-            (fun ex -> debug ex; SetCopyFeedback Failure)
+            (fun ex -> debug "Copy link failed" ex; SetCopyFeedback Failure)
 
     | SetCopyFeedback s -> 
         match s with
