@@ -256,7 +256,7 @@ let rec wizard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover one charge of Arcane Recovery."); Power (FreeAction, OncePerTurn, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery.")]
+            1<classLvl>, [Complex ("Scribing", "You can consume scrolls to permanently learn Spells or Cantrips, including those not on the Wizard's list."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover one charge of Arcane Recovery."); Power (FreeAction, OncePerTurn, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery.")]
         ]
         CustomPicks = Map []
     }
