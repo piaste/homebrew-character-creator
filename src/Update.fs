@@ -18,6 +18,7 @@ type Message =
     | SetPage of Page
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
+    | OpenGearSelector of CharacterGearSlot
 
     // radial controls
     | SetRadialCenterText of RadialCenterText
@@ -43,8 +44,8 @@ type Message =
     | FilterPassives of FilterPassives
 
     // gear
-    | SetEquipment of CharacterEquipmentSlot * string<equipmentId>
-    | SetWeapon of CharacterWeaponSlot * string<weaponId>
+    | SetEquipment of CharacterEquipmentSlot * (string<equipmentId> option)
+    | SetWeapon of CharacterWeaponSlot * (string<weaponId> option)
 
     // page head controls
     | Undo
@@ -158,13 +159,20 @@ let update
         { model with MainStageSelection = mss; RadialCenterText = Blank }
         , Cmd.OfTask.perform jsHelper.ScrollIntoView (elementIdForStage mss) (fun _ -> NoOp)
 
+    | OpenGearSelector slot ->
+        { model with MainStageSelection = Pick (Gear slot); RadialCenterText = Blank }
+        , Cmd.none
+
     | SetRadialCenterText txt ->
         { model with RadialCenterText = txt }, Cmd.none
 
     | FilterPassives fp ->
         { model with FilterPassives = fp }, Cmd.none
 
-    | SetEquipment (slot, itemId) ->
+    | SetEquipment (slot, None) ->
+        apply <| fun c -> { c with Equipment = Map.remove slot c.Equipment }
+
+    | SetEquipment (slot, Some itemId) ->
         let item = Domain.Entities.Equipment.allEquipment[itemId]
 
         let modify = 
@@ -190,7 +198,10 @@ let update
         apply <| fun c -> { c with Equipment = modify c.Equipment }
 
 
-    | SetWeapon (slot, itemId) ->
+    | SetWeapon (slot, None) ->
+        apply <| fun c -> { c with Weapons = Map.remove slot c.Weapons }
+
+    | SetWeapon (slot, Some itemId) ->
         let item = Domain.Entities.Weapons.allWeapons[itemId]
         let weaponSlot = item.Type |> weaponSlotForType   
         
@@ -245,12 +256,15 @@ let update
                     firstPick
             | Subclass -> 
                 firstPick
+            | Pick (Gear _) ->
+                // not part of character flow
+                firstPick
             | Pick p ->                                        
                 match picks |> List.tryFindIndex ((=) p) with
                 | Some i when List.length picks > i + 1 -> Pick (picks[i + 1])
                 | _ -> Proceed
             | Proceed -> 
-                firstPick
+                firstPick            
 
         model, Cmd.ofMsg (SetMainStageSelection newStage)
 
@@ -380,6 +394,11 @@ let update
 
     | TogglePick (pick, id) ->        
         match pick with
+        | Gear (CharacterEquipmentSlot s) ->
+            model, Cmd.ofMsg (SetEquipment (s, Some (UMX.tag<equipmentId> id)))
+        | Gear (CharacterWeaponSlot s) ->
+            model, Cmd.ofMsg (SetWeapon (s, Some (UMX.tag<weaponId> id)))
+
         | Archetypes -> 
             let atId = UMX.tag<archetypeId> id
 
@@ -501,6 +520,10 @@ let update
     | ClearPicks pick -> 
         apply <| fun character ->
             match pick with
+            | Gear (CharacterEquipmentSlot s) ->
+                { character with Equipment = Map.remove s character.Equipment}
+            | Gear (CharacterWeaponSlot s) ->
+                { character with Weapons = Map.remove s character.Weapons}
             | Archetypes -> character
             | Traits -> { character with TraitId = Traits.none.Id }
             | Skills -> 

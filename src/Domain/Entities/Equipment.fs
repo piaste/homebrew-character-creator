@@ -306,7 +306,7 @@ let rec devilfoilMask = {
     Item = {
         Id = % nameof devilfoilMask
         Name = "Devilfoil Mask"
-        Icon = ""
+        Icon = "23"
         Rarity = Rare
         Grants = [
             Power(Action, AtWill, "Infernal Legion", "All creatures wearing Devilfoil Masks within 18m/60ft of each other increase their Strength by 2, but decrease their Intelligence, Wisdom, and Charisma by 2. This effect can stack.")
@@ -5725,3 +5725,6 @@ let rec skeletonKey = {
 
 type private Placeholder = class end
 let allEquipment = getAll<Placeholder, EquipmentDef, equipmentId>()
+
+let allEquipmentForSlot slot = allEquipment |> Map.filter (fun _ v -> v.Slot = slot)
+let allEquipmentForCSlot cslot = allEquipment |> Map.filter (fun _ v -> v.Slot = equipmentSlotForCESlot cslot)

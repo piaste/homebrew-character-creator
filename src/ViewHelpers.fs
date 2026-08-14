@@ -80,6 +80,11 @@ let allSpellsWithIconsIn spellList =
                 $"""abilities_sheet/spells2/spell2_{(i - 144).ToString "000"}"""
     )
     |> Seq.filter (fst >> Spells.filterSpellsByList spellList)
+let tryGetWeaponIconSubpath (w : WeaponDef) = 
+    Some $"gear/cellImage_927643169_{w.Item.Icon}"
+
+let tryGetEquipmentIconSubpath (e : EquipmentDef) = 
+    Some $"gear/cellImage_1410471305_{e.Item.Icon}"
 let rec tryGetVanillaIconSubpath = 
     function
     | Simple s

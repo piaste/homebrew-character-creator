@@ -126,20 +126,46 @@ let actionButton (text: Node) dispatch msg =
     actionButtonWithClass text "" dispatch msg
 
 
-let gearDoll() = 
+let gearDoll chr dispatch = 
+
+    let inline eqSlot lbl slot =
+        button { 
+            cl $"slot {lbl}"
+            on.click (fun _ -> dispatch (OpenGearSelector (CharacterEquipmentSlot slot)))
+            "data-label"=> slot.DisplayString
+            cond (chr.Equipment.TryFind slot) <| function
+                | None -> empty()
+                | Some e -> 
+                    let eDef = Equipment.allEquipment[e]
+                    div {
+                        maybeIcon (tryGetEquipmentIconSubpath eDef)
+                        p { eDef.Name }
+                    }
+        }
+
+    let inline wpnSlot lbl slot =
+        button { 
+            cl $"slot {lbl}"
+            on.click (fun _ -> dispatch (OpenGearSelector (CharacterWeaponSlot slot)))
+            "data-label"=> slot.DisplayString
+            cond (chr.Weapons.TryFind slot) <| function
+                | None -> empty()
+                | Some w -> p { Weapons.allWeapons[w].Name }
+        }
+
     div {
         cl "equipment"        
-        button { cl "slot head"; "data-label"=>"Head" }
-        button { cl "slot neck"; "data-label"=>"Neck" }
-        button { cl "slot chest"; "data-label"=>"Chest" }
-        button { cl "slot arms"; "data-label"=>"Arms" }
-        button { cl "slot ringl"; "data-label"=>"Left Ring" }
-        button { cl "slot ringr"; "data-label"=>"Right Ring" }
-        button { cl "slot feet"; "data-label"=>"Feet" }
-        button { cl "slot melee1"; "data-label"=>"Melee 1" }
-        button { cl "slot melee2"; "data-label"=>"Melee 2" }
-        button { cl "slot ranged1"; "data-label"=>"Ranged 1" }
-        button { cl "slot ranged2"; "data-label"=>"Ranged 2" }
+        eqSlot "head" CHelmet
+        eqSlot "neck" CNecklace
+        eqSlot "chest" CChest
+        eqSlot "arms" CArms
+        eqSlot "ringLeft" CRingLeft
+        eqSlot "ringRight" CRingRight
+        eqSlot "feet" CFeet
+        wpnSlot "meleeMain" (Melee Main)
+        wpnSlot "meleeOffhand" (Melee Offhand)
+        wpnSlot "rangedMain" (Ranged Main)
+        wpnSlot "rangedOffhand" (Ranged Offhand)
     }
 let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch = 
     let abB = chr.AbBuy
@@ -196,7 +222,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                 }
             )
 
-            gearDoll()
+            gearDoll chr dispatch
 
             div {
                 cl "summary-under-abilities"
@@ -553,6 +579,32 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         levelDownButtons
                     }
                 }
+
+            | Pick (Gear (CharacterEquipmentSlot slot)) ->
+                Picker.view slot.DisplayString
+                    ((Equipment.allEquipmentForCSlot slot).Values
+                     |> toPicker tryGetEquipmentIconSubpath
+                    )
+                    Set.empty
+                    (Map.tryFind slot c.Equipment |> Option.toSet)
+                    1
+                    (Gear (CharacterEquipmentSlot slot))
+                    model
+                    dispatch
+
+
+            | Pick (Gear (CharacterWeaponSlot slot)) ->
+                Picker.view slot.DisplayString
+                    ((Weapons.allWeaponsForCslot slot).Values
+                     |> toPicker tryGetWeaponIconSubpath
+                    )
+                    Set.empty
+                    (Map.tryFind slot c.Weapons |> Option.toSet)
+                    1
+                    (Gear (CharacterWeaponSlot slot))
+                    model
+                    dispatch
+
             | Race -> 
                 radialStage rct dispatch
                     (BaseRaces.allBaseRaces
@@ -873,6 +925,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
                 | FeatSubpick fsp ->
                     picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
+                | Gear _ ->
+                    fun _ _ _ _ -> empty() // not used in character picks
             
                 <| p.Value
                 <| dispatch

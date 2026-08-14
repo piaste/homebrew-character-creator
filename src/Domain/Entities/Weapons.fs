@@ -3138,3 +3138,5 @@ let rec splitFate = {
 
 type private Placeholder = class end
 let allWeapons = getAll<Placeholder, WeaponDef, weaponId>()
+
+let allWeaponsForCslot cslot = allWeapons |> Map.filter (fun _ v -> List.contains cslot <| characterSlotForWeaponSlot (weaponSlotForType v.Type))
