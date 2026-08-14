@@ -477,10 +477,25 @@ type EquipmentSlot =
 type CharacterEquipmentSlot = 
     | CHelmet | CChest | CFeet | CArms
     | CNecklace | CRingLeft | CRingRight | CTrinket
+    member this.DisplayString = 
+        match this with
+        | CHelmet -> "Head" | CChest -> "Chest" | CFeet -> "Feet" | CArms -> "Arms"
+        | CNecklace -> "Neck" | CRingLeft -> "Left Ring" | CRingRight -> "Right Ring" | CTrinket -> "Trinket"
+
+let equipmentSlotForCESlot = function
+    | CHelmet -> Helmet
+    | CChest -> Chest
+    | CFeet -> Feet
+    | CArms -> Arms
+    | CNecklace -> Necklace
+    | CTrinket -> Trinket
+    | CRingLeft | CRingRight -> Ring
+    
 
 type WeaponSlot = 
     | MeleeOneHand | MeleeTwoHands | Shield
     | RangedOneHand | RangedTwoHands
+
 
 type CharacterWeaponHand = Main | Offhand
 type CharacterWeaponSlot = 
@@ -488,6 +503,12 @@ type CharacterWeaponSlot =
     | Ranged of CharacterWeaponHand
     member this.Family = 
          match this with | Melee _ -> Melee | Ranged _ -> Ranged     
+    member this.DisplayString = 
+        this.ToString()
+
+type CharacterGearSlot = 
+    | CharacterEquipmentSlot of CharacterEquipmentSlot 
+    | CharacterWeaponSlot of CharacterWeaponSlot
 
 type Item<[<Measure>] 'm> = {
     Id : string<'m>
@@ -546,6 +567,9 @@ type WeaponDef = {
     member this.Id = this.Item.Id
     member this.Name = this.Item.Name
 
+    member this.Description = 
+        $"""{this.Item.Rarity}. {this.Item.Grants |> List.map _.Description |> String.concat ". "}"""        
+
 
 type EquipmentDef = {
     Item : Item<equipmentId>
@@ -553,6 +577,10 @@ type EquipmentDef = {
 } with
     member this.Id = this.Item.Id
     member this.Name = this.Item.Name
+
+    member this.Description = 
+        $"""{this.Item.Rarity}. {this.Item.Grants |> List.map _.Description |> String.concat ". "}"""
+
 
 
 let cantripDmgDice (lvl: int<charLvl>) = 

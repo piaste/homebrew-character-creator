@@ -9,34 +9,17 @@
     --ghost: rgba(232,221,198,.8);
 }
 
-* {
-    box-sizing: border-box;
-    font-family: "Alegreya", serif !important;
-}
-
-body {
-    margin: 0;
-    background:
-        radial-gradient(circle at top,#2c241a,#16120f 70%);
-    
-    color: var(--text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
 .equipment {
     display: grid;
     grid-template-columns: repeat(3, var(--slot-size));
     grid-template-areas:
         ". head . "
         "neck chest arms"
-        "ringl feet ringr " 
-        "melee1 . ranged1"
-        "melee2 . ranged2";
+        "ringLeft feet ringRight" 
+        "meleeMain . rangedMain"
+        "meleeOffhand . rangedOffhand";
     gap: var(--gap);        
-    width:fit-content;
+    width:fit-content;    
 }
 
 .slot {
@@ -52,6 +35,8 @@ body {
 
     cursor: pointer;
     transition: .18s;
+    
+    
 }
 
 .slot:hover {
@@ -71,18 +56,23 @@ body {
 
     display: flex;
     justify-content: center;
-    align-items: center;
-
+    align-items: center;   
+    
     text-align: center;
-    padding: 4px;
+    padding: 2px;
 
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0;
 
     color: var(--muted2);
     text-shadow: none;
 
     pointer-events: none;
+}
+
+/* hides text if there is a child element */
+.slot:has(> *)::after {
+    content: none;
 }
 
 /* Larger chest slot */
@@ -93,13 +83,13 @@ body {
 .chest   { grid-area: chest; }
 .arms    { grid-area: arms; }
 
-.ringl   { grid-area: ringl; }
-.ringr   { grid-area: ringr; }
+.ringLeft   { grid-area: ringLeft; }
+.ringRight   { grid-area: ringRight; }
 
 .feet    { grid-area: feet; justify-self:center; }
 
-.melee1  { grid-area: melee1; }
-.melee2  { grid-area: melee2; }
+.meleeMain  { grid-area: meleeMain; }
+.meleeOffhand  { grid-area: meleeOffhand; }
 
-.ranged1 { grid-area: ranged1; }
-.ranged2 { grid-area: ranged2; }
+.rangedMain { grid-area: rangedMain; }
+.rangedOffhand { grid-area: rangedOffhand; }
