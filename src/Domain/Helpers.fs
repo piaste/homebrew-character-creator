@@ -113,8 +113,6 @@ let getAllPassives useLoreNames (character : Character) =
         let skill = Skills.allSkills[s]
         yield "Skill", skill.Grants
 
-      let mutable subclassLevelsForBenefits = character.CurrentHistory.LevelsBySubclassPlusYB()
-
       for lr in character.CurrentHistory.Levels do
         match lr.FeatId with
         | None -> ()
@@ -126,9 +124,33 @@ let getAllPassives useLoreNames (character : Character) =
                 for g in cpDef.Grants do
                     yield $"CS: {allClasses[cpDef.ClassId].Name}", g
 
+        | Some f when f = Feats.multifaceted.Id -> 
+            
+            for fsp in Feats.multifaceted.Subpicks.Keys do
+                for fspId in lr.FeatSubPicks.GetOrElse(fsp, Set.empty) do
+                    let passives = 
+                        [ match fsp with
+                          | Traits -> 
+                            let t = Traits.allTraits[UMX.tag<traitId> fspId]
+                            yield t.Name, t.Grants
+                          | Archetypes ->
+                            let t = Archetypes.allArchetypes[UMX.tag<archetypeId> fspId]
+                            yield t.Name, t.Grants
+                          | SkillProficiencies -> 
+                            let t = Skills.allSkills[UMX.tag<skillId> fspId]
+                            yield t.Name, [t.Grants]
+                          | _ -> ()
+                        ]
+                    
+                    for n, gs in passives do
+                        for g in gs do 
+                            yield $"MF: {n}", g
+
         | Some f when f = Feats.yokebreaker.Id -> 
             
-            () // handled above
+            for scId in lr.FeatSubPicks.GetOrElse(YB, Set.empty) do
+                for n, p in getSubclassBenefits useLoreNames (UMX.tag<subclassId> scId) 3<classLvl> character.CharacterLevel do
+                    yield $"YB: {n}", p
                     
         | Some f when f = Feats.elementalAdept.Id ->
 
@@ -146,23 +168,23 @@ let getAllPassives useLoreNames (character : Character) =
                 yield "Feat", g
 
 
-      for clId, subclLevels in subclassLevelsForBenefits |> Seq.groupBy (_.Key >> classIdBySubclassId) do   
+      for KeyValue(scId, lvl) in character.CurrentHistory.LevelsBySubclass do   
 
-            let maxClassLvl = subclLevels |> Seq.map _.Value |> Seq.max
-            let clDef = allClasses[clId]
+            let clId = classIdBySubclassId scId
+            let clDef = classById clId
 
-            for n, p in getClassBenefits clDef maxClassLvl character.CharacterLevel do
+            for n, p in getClassBenefits clDef lvl character.CharacterLevel do
+                yield n, p
+
+            for n, p in getSubclassBenefits useLoreNames scId lvl character.CharacterLevel do
                 yield n, p
 
             // class passives
-            for cpId in Map.getOrElse Set.empty clDef.Id character.CurrentHistory.AllClassPassiveIdsByClass do
+            for cpId in Map.getOrElse Set.empty clId character.CurrentHistory.AllClassPassiveIdsByClass do
                 let cpDef = ClassPassives.allClassPassives[cpId]
                 for g in cpDef.Grants do
                     yield clDef.Name, g
-
-      for KeyValue(scid, lvl) in subclassLevelsForBenefits do        
-            for n, p in getSubclassBenefits useLoreNames scid lvl character.CharacterLevel do
-                yield n, p
+  
     ]
     
 let levelUpDefault scId' (character : Character) =     

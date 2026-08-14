@@ -284,8 +284,8 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                             match fp with
                             | Summons -> failwith "impossibru"
                             | All -> fun _ -> true
-                            | Starting -> fun source -> List.contains source ["Race"; "Archetype"; "Trait"; "Skill"]
-                            | FromFeats -> fun source -> source.StartsWith "Feat"
+                            | Starting -> fun source -> ["Race"; "Archetype"; "Trait"; "Skill"] |> List.contains source 
+                            | FromFeats -> fun source ->  ["Feat"; "CS:"; "MF:" ] |> List.exists source.StartsWith
                             | FromSubclass scId -> 
                                 let sc = Subclasses.allSubclasses[scId]
                                 let bn = Classes.allClasses[sc.BaseClassId]
@@ -786,16 +786,16 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         (Archetypes.allArchetypes.Values
                         |> toPicker tryGetAnyVanillaIconSubpath
                         )
-                        Set.empty
                         (Set.singleton c.ArchetypeId)
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<archetypeId>)
 
                 | FeatSubpickType.Traits ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Traits.allTraits.Values
                         |> toPicker tryGetAnyVanillaIconSubpath
                         )
-                        Set.empty
                         (Set.singleton c.TraitId)
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<traitId>)
 
                 | SkillProficiencies ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
@@ -803,8 +803,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                         |> Seq.toList
                         )
-                        Set.empty
                         c.SkillIds
+                        (l.FeatSubPicks.GetOrElse(f, Set.empty) |> Set.map UMX.tag<skillId>)
 
                 | ElementalTypes ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
