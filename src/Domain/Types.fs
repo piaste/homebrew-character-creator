@@ -214,36 +214,6 @@ type ArchetypeDef = GrantsPassives<archetypeId>
 type TraitDef = GrantsPassives<traitId>
 
 
-type FeatSubpickType = 
-    | Yokebreaking
-    | ClassPassives
-    | Cantrips
-    | Traits
-    | Archetypes
-    | SkillProficiencies
-    | ElementalTypes
-    member this.DisplayString = 
-        match this with
-        | Yokebreaking -> "Yokebreaker"
-        | ClassPassives -> "Class Specialist"
-        | Cantrips -> "Accord of the Arcane"
-        | Traits -> "Multifaceted Trait"
-        | Archetypes -> "Multifaceted Archetype"
-        | SkillProficiencies -> "Multifaceted Skills"
-        | ElementalTypes -> "Elemental Adept"
-
-type FeatDef = {
-    Id : string<featId>
-    Name : string
-    ExplicitDescription : string option
-    Grants: Passive list
-    Subpicks: Map<FeatSubpickType, int>
-} with
-    member this.Description = 
-        this.ExplicitDescription        
-        |> Option.defaultWith (fun () -> 
-            passiveListDescription this.Grants
-        )
 
 // Races
 type [<Measure>] baseRaceId
@@ -405,6 +375,47 @@ type ClassPassiveDef = {
 } with    
     member this.Description = 
         this.Grants |> List.map _.Description |> GameString.concat "\n"
+
+// Feats
+
+type FeatSubpickType = 
+    | Yokebreaking
+    | YBCantrips
+    | YBSpells
+    | YBClassSpecific of ClassLevelUpPickType
+    | ClassPassives
+    | Cantrips
+    | Traits
+    | Archetypes
+    | SkillProficiencies
+    | ElementalTypes
+    member this.DisplayString = 
+        match this with
+        | Yokebreaking -> "Yokebreaker"
+        | YBCantrips -> "YB: Cantrip"
+        | YBSpells -> "YB: Spells"
+        | YBClassSpecific x -> $"YB: {x.DisplayString}"
+        | ClassPassives -> "Class Specialist"
+        | Cantrips -> "Accord of the Arcane"
+        | Traits -> "Multifaceted Trait"
+        | Archetypes -> "Multifaceted Archetype"
+        | SkillProficiencies -> "Multifaceted Skills"
+        | ElementalTypes -> "Elemental Adept"
+
+type FeatDef = {
+    Id : string<featId>
+    Name : string
+    ExplicitDescription : string option
+    Grants: Passive list
+    Subpicks: Map<FeatSubpickType, int>
+} with
+    member this.Description = 
+        this.ExplicitDescription        
+        |> Option.defaultWith (fun () -> 
+            passiveListDescription this.Grants
+        )
+
+// Gear
 
 type [<Measure>] itemId
 type [<Measure>] attunement

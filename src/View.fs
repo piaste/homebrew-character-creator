@@ -449,15 +449,21 @@ let levelUpOptions useLoreNames (c: Character) dispatch =
         forEach c.CurrentHistory.LevelsBySubclass <| (fun (KeyValue(scId, lvl)) ->
             let nextLvl = lvl + 1<classLvl>
             let nextLvlBenefits = getNewClassBenefitsAt useLoreNames scId nextLvl c.CharacterLevel
+            let cName = Classes.allClasses[classIdBySubclassId scId].Name
 
             bigActionButtonWithClass (
                 concat {
-                    p { $"⬆️ {Subclasses.allSubclasses[scId].Name.Display useLoreNames} {nextLvl}" }
+                    p { $"⬆️ {cName} {nextLvl}" }
                     forEach nextLvlBenefits <| (fun (n, d) ->
                         sheetAttr n (d.Name.Display useLoreNames) (Some <| d.Description.Display useLoreNames) d.Icon
                     )
                 }) "primary" dispatch (LevelUp (Some scId))
         )
+
+        bigActionButtonWithClass (
+                concat {
+                    p { $"⬆️ Add new class" }                    
+                }) "primary" dispatch (LevelUp None)
     }
 
 let otherView (model: Model) (dispatch : Message -> unit) = 
@@ -477,6 +483,22 @@ let otherView (model: Model) (dispatch : Message -> unit) =
     let validSubclasses =
         getValidSubclassesFor c   
                 
+    let levelDownButtons = 
+        cond model.Character.PreviousLevelHistory.IsEmpty <| function
+        | false -> 
+            forEach model.Character.CurrentHistory.LevelsBySubclass <| fun (KeyValue(scId, lvl)) ->
+                let cName = Classes.allClasses[classIdBySubclassId scId].Name
+                let text = 
+                    if lvl = 1<classLvl> then
+                        span { "⬇️ "; del { cName } }
+                    else
+                        ! $"⬇️ {cName} {lvl - 1<classLvl>}" 
+                actionButtonWithClass 
+                    text
+                    "primary"
+                    dispatch (LevelDown (Some scId))
+        | true -> empty()
+
     OtherUi()
         .RadialStage(
             match model.MainStageSelection with
@@ -503,11 +525,10 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             }
                         | true -> empty()
                     
-                    cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                        | false -> 
-                            actionButtonWithClass ! $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" "primary"  dispatch LevelDown
-                        | true -> empty()
-
+                    div {
+                        cl "main-stage-levelup-leveldown"
+                        levelDownButtons
+                    }
                 }
             | Race -> 
                 radialStage rct dispatch
@@ -884,13 +905,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | [] -> levelup true
                         | _ -> levelup false
                     
-                    let inline leveldown show = 
-
-                        actionButtonWithClass ! $"⬇️ Level {model.Character.CharacterLevel - 1<charLvl>}" $"""primary {if not show then "visibility-hidden" else ""}"""   dispatch LevelDown
-
-                    cond model.Character.PreviousLevelHistory.IsEmpty <| function
-                        | false -> leveldown true
-                        | true -> leveldown false
+                    levelDownButtons
                 }
 
                 div {

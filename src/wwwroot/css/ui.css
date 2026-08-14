@@ -763,6 +763,14 @@ html,body{
     padding-block: 15px;
     padding-inline: 25px;
   }
+
+  & .main-stage-levelup-leveldown {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+  }
 }
 
 .character-name-input {
@@ -2130,7 +2138,7 @@ html,body{
   & .tooltip-text {
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.5s linear;
+    transition: opacity 0.4s linear;
 
     position: fixed;
     

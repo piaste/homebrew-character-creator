@@ -193,6 +193,22 @@ let levelDown character =
                 PreviousLevelHistory = ls
         }
 
+let levelDownFor scId (character : Character) = 
+    if character.NextLevelUp.SubclassId = scId then
+        levelDown character
+    else
+        let classLvl = 
+            character.PreviousHistory.LevelsBySubclass 
+            |> Map.getOrDefault scId            
+        if classLvl <= 0<classLvl> then None
+        else
+            Some { 
+                character with                    
+                    PreviousLevelHistory = 
+                        character.PreviousLevelHistory 
+                        |> List.where (fun l -> not (l.SubclassId = scId && l.ClassLevel = classLvl))
+            }
+
 let getRegularSpellSlots (character: Character) = 
     [
         for KeyValue(subclass, lvl) in character.CurrentHistory.LevelsBySubclass do

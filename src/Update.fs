@@ -46,7 +46,7 @@ type Message =
     | Undo
     | Redo
     | LevelUp of string<subclassId> option
-    | LevelDown    
+    | LevelDown of string<subclassId> option
     | ToggleLoreNames of bool
     
     // data load/reload
@@ -464,17 +464,32 @@ let update
     | SetSearchQuery (pick, q) ->
         { model with SearchQueries = Map.add pick q model.SearchQueries }, Cmd.none
 
-    | LevelUp scId' ->
+    | LevelUp (Some scId) ->
         if model.Errors.IsEmpty then
-            applyAnd NextMainStageSelection  <| levelUpDefault scId'
+            applyAnd NextMainStageSelection  <| levelUpDefault (Some scId)
         else
             model, Cmd.none
 
-    | LevelDown ->
-        if model.Character.CharacterLevel > 1<charLvl> then
-            apply (levelDown >> Option.get)
+    | LevelUp None ->
+        if model.Errors.IsEmpty then
+            applyAnd (SetMainStageSelection Class)  <| levelUpDefault None
         else
             model, Cmd.none
+
+    | LevelDown (Some scId)->
+        match levelDownFor scId model.Character with
+        | Some _ ->
+            apply (levelDownFor scId >> Option.get)
+        | None ->
+            model, Cmd.none
+
+    | LevelDown None->
+        match levelDown model.Character with
+        | Some _ ->
+            apply (levelDown >> Option.get)
+        | None ->
+            model, Cmd.none
+
     | Undo ->
         match model.UndoStack with
         | [] ->
