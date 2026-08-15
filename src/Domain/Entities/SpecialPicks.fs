@@ -1193,14 +1193,14 @@ let rec absorbingSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof absorbingSpell
     Name = "Absorbing Spell"
-    Grants = [ Simple "Metamagic (2): Damage dealing Spell/Cantrip grants Resistance to Elemental damage for 3 turns" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip grants Resistance to Elemental damage for 3 turns" ]
 }
 
 let rec bloodiedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof bloodiedSpell
     Name = "Bloodied Spell"
-    Grants = [ Simple "Metamagic (2): Damaging Spell/Cantrip inflicts Bleeding for 3 turns" ]
+    Grants = [ Simple "Metamagic (1): Damaging Spell/Cantrip inflicts Bleeding for 3 turns" ]
 }
 
 let rec carefulSpell : ClassLevelUpPick = {
@@ -1214,7 +1214,7 @@ let rec defensiveSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof defensiveSpell
     Name = "Defensive Spell"
-    Grants = [ Simple "Metamagic (2): Damage dealing Spell/Cantrip grants Resistance to Physical damage for 3 turns" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip grants Resistance to Physical damage for 3 turns" ]
 }
 
 let rec distanceSpell : ClassLevelUpPick = {
@@ -1228,63 +1228,63 @@ let rec dreadfulSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof dreadfulSpell
     Name = "Dreadful Spell"
-    Grants = [ Simple "Metamagic (2): Damage dealing Spell/Cantrip inflicts Terrified for 1 turn" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip inflicts Terrified for 1 turn" ]
 }
 
 let rec empoweredSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof empoweredSpell
     Name = "Empowered Spell"
-    Grants = [ Simple "Metamagic (2): Damage dealing Spell/Cantrip rolls damage with Advantage" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip rolls damage with Advantage" ]
 }
 
 let rec extendedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof extendedSpell
     Name = "Extended Spell"
-    Grants = [ Simple "Metamagic (2): Double duration of conditions, summons, and surfaces" ]
+    Grants = [ Simple "Metamagic (1): Double duration of conditions, summons, and surfaces" ]
 }
 
 let rec favoredSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof favoredSpell
     Name = "Favored Spell"
-    Grants = [ Simple "Metamagic (2): Damage dealing Spell/Cantrip gains a +10 bonus to the Attack Roll" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip gains a +10 bonus to the Attack Roll" ]
 }
 
 let rec heightenedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof heightenedSpell
     Name = "Heightened Spell"
-    Grants = [ Simple "Metamagic (2): Targets of Spell/Cantrip roll Saving Throw with Disadvantage" ]
+    Grants = [ Simple "Metamagic (1): Targets of Spell/Cantrip roll Saving Throw with Disadvantage" ]
 }
 
 let rec maximizedMagic : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof maximizedMagic
     Name = "Maximized Magic"
-    Grants = [ Simple "Metamagic (3): Spell and Cantrip deals maximum amount of damage possible" ]
+    Grants = [ Simple "Metamagic (1): Spell and Cantrip deals maximum amount of damage possible" ]
 }
 
 let rec piercingSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof piercingSpell
     Name = "Piercing Spell"
-    Grants = [ Simple "Metamagic (2): Damage dealing Spell/Cantrip ignores all Resistances" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip ignores all Resistances" ]
 }
 
 let rec quickenedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof quickenedSpell
     Name = "Quickened Spell"
-    Grants = [ Simple "Metamagic (2*lvl): Spell/Cantrip that costs an Action now costs Bonus Action" ]
+    Grants = [ Simple "Metamagic (1): Spell/Cantrip that costs an Action now costs Bonus Action" ]
 }
 
 let rec regenerativeSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof regenerativeSpell
     Name = "Regenerative Spell"
-    Grants = [ Simple "Metamagic (1*lvl): Damage dealing Spell/Cantrip heals you for half damage" ]
+    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip heals you for half damage" ]
 }
 
 let rec restorativeSpell : ClassLevelUpPick = {
@@ -1312,21 +1312,21 @@ let rec tempestuousSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tempestuousSpell
     Name = "Tempestuous Spell"
-    Grants = [ Simple "Metamagic (2): Spell/Cantrip pushes targets back 9m and inflicts Prone" ]
+    Grants = [ Simple "Metamagic (1): Spell/Cantrip pushes targets back 9m and inflicts Prone" ]
 }
 
 let rec tripledSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tripledSpell
     Name = "Tripled Spell"
-    Grants = [ Simple "Metamagic (3*lvl): Single target Spell/Cantrip now targets 3 creatures" ]
+    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip now targets 3 creatures" ]
 }
 
 let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Simple "Metamagic (2*lvl): Single target Spell/Cantrip now targets 2 creatures" ]
+    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures" ]
 }
 
 type private Placeholder = class end

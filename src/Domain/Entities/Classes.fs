@@ -233,7 +233,7 @@ let rec sorcerer = {
             9<classLvl>, [Complex ("Philosopher’s Stone", "Once per Short Rest, you may use Sorcery Channeling without consuming Sorcery Points or Spell Channeling without consuming a Spell Slot.")]
         ]
         CustomPicks = Map [
-            for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
+            for lvl in [ 1<classLvl> .. 1<classLvl> .. 12<classLvl>] do
                 yield lvl, [(SorcererMetamagic, 1)]
         ]
     }
