@@ -227,9 +227,9 @@ let rec sorcerer = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "When a Spell is cast within 18m of you, you may grant yourself a stack of Sorcerous Overflow. Upon reaching three stacks, gain a single Sorcery Point.")
+            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "When a Spell is cast within 18m of you, you immediately gain a Sorcery Point.")
             ]
-            5<classLvl>, [Complex ("Morbid Creation", "While in combat, you gain one stack of Sorcerous Overflow per turn.")]
+            5<classLvl>, [Complex ("Morbid Creation", "While in combat, you gain 1 Sorcery Point per turn.")]
             9<classLvl>, [Complex ("Philosopher’s Stone", "Once per Short Rest, you may use Sorcery Channeling without consuming Sorcery Points or Spell Channeling without consuming a Spell Slot.")]
         ]
         CustomPicks = Map [

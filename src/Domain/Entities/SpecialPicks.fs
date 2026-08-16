@@ -172,7 +172,7 @@ let rec spellSlotBypass : ClassLevelUpPick = {
     TypeId = nameof spellSlotBypass
     Name = "Spell Slot Bypass"
     Grants = [
-        Simple "Optimization Matrix allows casting one spell without a slot"
+        Complex ("Spell Slot Bypass", "Restores a Spell Slot to your target equal to half your Artificer level, rounded up.")
     ]
 }
 
@@ -1291,7 +1291,7 @@ let rec restorativeSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof restorativeSpell
     Name = "Restorative Spell"
-    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip also provides Latent Restoration" ]
+    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip also provides Latent Restoration and Great Cleanse" ]
 }
 
 let rec seekingSpell : ClassLevelUpPick = {
@@ -1326,7 +1326,7 @@ let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures" ]
+    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures (or the same creature twice)" ]
 }
 
 type private Placeholder = class end

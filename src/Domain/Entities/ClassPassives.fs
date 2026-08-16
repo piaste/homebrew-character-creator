@@ -1316,7 +1316,7 @@ let rec arcaneOverflow = {
     ClassId = sorcerer.Id
     Id = % nameof arcaneOverflow
     Name = "Arcane Overflow"
-    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Arcane Overflow", "Upon landing a killing blow or Critical hit, you create one Sorcery Point. This effect can trigger once per turn.") ]
+    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Arcane Overflow", "While in combat, landing a killing blow generates 1 Sorcery Point per turn.") ]
 }
 
 let rec arcaneOppression = {
@@ -1330,7 +1330,7 @@ let rec arcaneReservoir = {
     ClassId = sorcerer.Id
     Id = % nameof arcaneReservoir
     Name = "Arcane Reservoir"
-    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Arcane Reservoir", "Once per turn, casting a Spell creates one Sorcery Point.") ]
+    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Arcane Reservoir", "Casting a Spell generates 1 Sorcery Point per turn.") ]
 }
 
 let rec charismaticInfusion = {
@@ -1414,7 +1414,7 @@ let rec naturalVortex = {
     ClassId = sorcerer.Id
     Id = % nameof naturalVortex
     Name = "Natural Vortex"
-    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Natural Vortex", "When a creature within 18m/60ft of you casts a Spell, you generate two stacks of Sorcerous Overflow, rather than one.") ]
+    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Natural Vortex", "Landing a Critical Hit generates 1 Sorcery Point per turn.") ]
 }
 
 let rec reactiveBlood = {
