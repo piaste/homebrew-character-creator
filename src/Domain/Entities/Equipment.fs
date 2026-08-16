@@ -3032,6 +3032,19 @@ let rec amuletOfBranding = {
     Slot = Necklace
 }
 
+let rec wakefulAmulet = {
+    Item = {
+        Id = % nameof wakefulAmulet
+        Name = "Wakeful Amulet"
+        Icon = ""
+        Rarity = Uncommon
+        Grants = [
+            Complex ("Wakeful", "You cannot be put to Sleep.")
+        ]
+    }
+    Slot = Necklace
+}
+
 let rec amuletOfSelNeSChosen = {
     Item = {
         Id = % nameof amuletOfSelNeSChosen
