@@ -10,7 +10,7 @@ let rec adaptiveShield : ClassLevelUpPick = {
     TypeId = nameof adaptiveShield
     Name = "Adaptive Shielding"
     Grants = [ 
-        Simple "Optimization Matrix grants Resistance to elemental damage"
+        Complex ("Adaptive Shielding", "Optimization Matrix grants Resistance to elemental damage")
     ]
 }
 
@@ -19,7 +19,7 @@ let rec armourReinforcement : ClassLevelUpPick = {
     TypeId = nameof armourReinforcement
     Name = "Armour Reinforcement"
     Grants = [ 
-        Simple "Optimization Matrix grants +2 to AC"
+        Complex ("Armour Reinforcement", "Optimization Matrix grants +2 to AC")
     ]
 }
 
@@ -28,7 +28,7 @@ let rec calmingSubroutine : ClassLevelUpPick = {
     TypeId = nameof calmingSubroutine
     Name = "Calming Subroutine"
     Grants = [
-        Simple "Optimization Matrix Calms Allies"
+        Complex ("Calming Subroutine", "Optimization Matrix Calms Allies")
     ]
 }
 
@@ -37,7 +37,7 @@ let rec concentrationLock : ClassLevelUpPick = {
     TypeId = nameof concentrationLock
     Name = "Concentration Lock"
     Grants = [
-        Simple "Optimization Matrix prevents losing concentration"
+        Complex ("Concentration Lock", "Optimization Matrix prevents losing concentration")
     ]
 }
 
@@ -46,7 +46,7 @@ let rec criticalDampener : ClassLevelUpPick = {
     TypeId = nameof criticalDampener
     Name = "Critical Dampener"
     Grants = [
-        Simple "Optimization Matrix lowers Critical Hit threshold by 1"
+        Complex ("Critical Dampener", "Optimization Matrix lowers Critical Hit threshold by 1")
     ]
 }
 
@@ -55,7 +55,7 @@ let rec damageAmplifier : ClassLevelUpPick = {
     TypeId = nameof damageAmplifier
     Name = "Damage Amplifier"
     Grants = [
-        Simple "Optimization Matrix grants damage bonus equal to proficiency bonus"
+        Complex ("Damage Amplifier", "Optimization Matrix grants damage bonus equal to proficiency bonus")
     ]
 }
 
@@ -64,7 +64,7 @@ let rec defensiveCalibration : ClassLevelUpPick = {
     TypeId = nameof defensiveCalibration
     Name = "Defensive Calibration"
     Grants = [
-        Simple "Optimization Matrix grants +2 to Saving Throws"
+        Complex ("Defensive Calibration", "Optimization Matrix grants +2 to Saving Throws")
     ]
 }
 
@@ -73,7 +73,7 @@ let rec emergencyPlating : ClassLevelUpPick = {
     TypeId = nameof emergencyPlating
     Name = "Emergency Plating"
     Grants = [
-        Simple "Optimization Matrix grants Temporary Hit Points (Level x 2)"
+        Complex ("Emergency Plating", "Optimization Matrix grants Temporary Hit Points (Level x 2)")
     ]
 }
 
@@ -82,7 +82,7 @@ let rec evasiveProtocol : ClassLevelUpPick = {
     TypeId = nameof evasiveProtocol
     Name = "Evasive Protocol"
     Grants = [
-        Simple "Optimization Matrix grants Dash and Disengage"
+        Complex ("Evasive Protocol", "Optimization Matrix grants Dash and Disengage")
     ]
 }
 
@@ -91,7 +91,7 @@ let rec healingOverride : ClassLevelUpPick = {
     TypeId = nameof healingOverride
     Name = "Healing Override"
     Grants = [
-        Simple "Optimization Matrix maximizes healing received"
+        Complex ("Healing Override", "Optimization Matrix maximizes healing received")
     ]
 }
 
@@ -100,7 +100,7 @@ let rec kineticRepulsorField : ClassLevelUpPick = {
     TypeId = nameof kineticRepulsorField
     Name = "Kinetic Repulsor Field"
     Grants = [
-        Simple "Optimization Matrix allows pushing enemies 9m on damage"
+        Complex ("Kinetic Repulsor Field", "Optimization Matrix allows pushing enemies 9m on damage")
     ]
 }
 
@@ -109,7 +109,7 @@ let rec maximumYield : ClassLevelUpPick = {
     TypeId = nameof maximumYield
     Name = "Maximum Yield"
     Grants = [
-        Simple "Optimization Matrix increases weapon damage dice to d20"
+        Complex ("Maximum Yield", "Optimization Matrix increases weapon damage dice to d20")
     ]
 }
 
@@ -118,7 +118,7 @@ let rec outputContingency : ClassLevelUpPick = {
     TypeId = nameof outputContingency
     Name = "Output Contingency"
     Grants = [
-        Simple "Optimization Matrix ensures minimum damage roll of 4"
+        Complex ("Output Contingency", "Optimization Matrix ensures minimum damage roll of 4")
     ]
 }
 
@@ -127,7 +127,7 @@ let rec precisionBoost : ClassLevelUpPick = {
     TypeId = nameof precisionBoost
     Name = "Precision Boost"
     Grants = [
-        Simple "Optimization Matrix grants +4 to Attack Rolls"
+        Complex ("Precision Boost", "Optimization Matrix grants +4 to Attack Rolls")
     ]
 }
 
@@ -136,7 +136,7 @@ let rec predictiveTargetingModule : ClassLevelUpPick = {
     TypeId = nameof predictiveTargetingModule
     Name = "Predictive Targeting Module"
     Grants = [
-        Simple "Optimization Matrix grants Advantage on all Attack Rolls"
+        Complex ("Predictive Targeting Module", "Optimization Matrix grants Advantage on all Attack Rolls")
     ]
 }
 
@@ -145,7 +145,7 @@ let rec proactiveOverload : ClassLevelUpPick = {
     TypeId = nameof proactiveOverload
     Name = "Proactive Overload"
     Grants = [
-        Simple "Optimization Matrix hastens your target"
+        Complex ("Proactive Overload", "Optimization Matrix hastens your target")
     ]
 }
 
@@ -154,7 +154,7 @@ let rec resistanceOverride : ClassLevelUpPick = {
     TypeId = nameof resistanceOverride
     Name = "Resistance Override"
     Grants = [
-        Simple "Optimization Matrix ignores damage resistance"
+        Complex ("Resistance Override", "Optimization Matrix ignores damage resistance")
     ]
 }
 
@@ -163,7 +163,7 @@ let rec spellCalibrationSequence : ClassLevelUpPick = {
     TypeId = nameof spellCalibrationSequence
     Name = "Spell Calibration Sequence"
     Grants = [
-        Simple "Optimization Matrix grants +1 to DC"
+        Complex ("Spell Calibration Sequence", "Optimization Matrix grants +1 to DC")
     ]
 }
 
@@ -181,7 +181,7 @@ let rec stabilityMatrix : ClassLevelUpPick = {
     TypeId = nameof stabilityMatrix
     Name = "Stability Matrix"
     Grants = [
-        Simple "Optimization Matrix grants Advantage on all Saving Throws"
+        Complex ("Stability Matrix", "Optimization Matrix grants Advantage on all Saving Throws")
     ]
 }
 
@@ -191,7 +191,7 @@ let rec armourCompromise : ClassLevelUpPick = {
     TypeId = nameof armourCompromise
     Name = "Armour Compromise"
     Grants = [ 
-        Simple "Sabotage Matrix inflicts -2 to AC"
+        Complex ("Armour Compromise", "Sabotage Matrix inflicts -2 to AC")
     ]
 }
 let rec concentrationBreach : ClassLevelUpPick = {
@@ -199,7 +199,7 @@ let rec concentrationBreach : ClassLevelUpPick = {
     TypeId = nameof concentrationBreach
     Name = "Concentration Breach"
     Grants = [ 
-        Simple "Sabotage Matrix breaks Concentration"
+        Complex ("Concentration Breach", "Sabotage Matrix breaks Concentration")
     ]
 }
 
@@ -208,7 +208,7 @@ let rec criticalLockout : ClassLevelUpPick = {
     TypeId = nameof criticalLockout
     Name = "Critical Lockout"
     Grants = [
-        Simple "Sabotage Matrix prevents landing Critical Hits"
+        Complex ("Critical Lockout", "Sabotage Matrix prevents landing Critical Hits")
     ]
 }
 
@@ -217,7 +217,7 @@ let rec cyberneticPsychosis : ClassLevelUpPick = {
     TypeId = nameof cyberneticPsychosis
     Name = "Cybernetic Psychosis"
     Grants = [
-        Simple "Sabotage Matrix inflicts Madness"
+        Complex ("Cybernetic Psychosis", "Sabotage Matrix inflicts Madness")
     ]
 }
 
@@ -226,7 +226,7 @@ let rec defensiveDegradation : ClassLevelUpPick = {
     TypeId = nameof defensiveDegradation
     Name = "Defensive Degradation"
     Grants = [
-        Simple "Sabotage Matrix inflicts -2 to Saving Throws"
+        Complex ("Defensive Degradation", "Sabotage Matrix inflicts -2 to Saving Throws")
     ]
 }
 
@@ -235,7 +235,7 @@ let rec directSystemDamage : ClassLevelUpPick = {
     TypeId = nameof directSystemDamage
     Name = "Direct System Damage"
     Grants = [
-        Simple "Sabotage Matrix deals 1d8 Force Damage * proficiency bonus"
+        Complex ("Direct System Damage", "Sabotage Matrix deals 1d8 Force Damage * proficiency bonus")
     ]
 }
 
@@ -244,7 +244,7 @@ let rec exposedSystemInfo : ClassLevelUpPick = {
     TypeId = nameof exposedSystemInfo
     Name = "Exposed System Info"
     Grants = [
-        Simple "Sabotage Matrix grants Advantage on Attack Rolls against target"
+        Complex ("Exposed System Info", "Sabotage Matrix grants Advantage on Attack Rolls against target")
     ]
 }
 
@@ -253,7 +253,7 @@ let rec greaterSoporific : ClassLevelUpPick = {
     TypeId = nameof greaterSoporific
     Name = "Greater Soporific"
     Grants = [
-        Simple "Sabotage Matrix puts enemy to Sleep at turn start"
+        Complex ("Greater Soporific", "Sabotage Matrix puts enemy to Sleep at turn start")
     ]
 }
 
@@ -262,7 +262,7 @@ let rec healingLockout : ClassLevelUpPick = {
     TypeId = nameof healingLockout
     Name = "Healing Lockout"
     Grants = [
-        Simple "Sabotage Matrix prevents Hit Point recovery"
+        Complex ("Healing Lockout", "Sabotage Matrix prevents Hit Point recovery")
     ]
 }
 
@@ -271,7 +271,7 @@ let rec minimumYield : ClassLevelUpPick = {
     TypeId = nameof minimumYield
     Name = "Minimum Yield"
     Grants = [
-        Simple "Sabotage Matrix reduces weapon damage dice to 1d4"
+        Complex ("Minimum Yield", "Sabotage Matrix reduces weapon damage dice to 1d4")
     ]
 }
 
@@ -280,7 +280,7 @@ let rec mobilityLock : ClassLevelUpPick = {
     TypeId = nameof mobilityLock
     Name = "Mobility Lock"
     Grants = [
-        Simple "Sabotage Matrix prevents movement"
+        Complex ("Mobility Lock", "Sabotage Matrix prevents movement")
     ]
 }
 
@@ -289,7 +289,7 @@ let rec outputLimiter : ClassLevelUpPick = {
     TypeId = nameof outputLimiter
     Name = "Output Limiter"
     Grants = [
-        Simple "Sabotage Matrix Reduces target"
+        Complex ("Output Limiter", "Sabotage Matrix Reduces target")
     ]
 }
 
@@ -298,7 +298,7 @@ let rec precisionDegradation : ClassLevelUpPick = {
     TypeId = nameof precisionDegradation
     Name = "Precision Degradation"
     Grants = [
-        Simple "Sabotage Matrix inflicts -4 to Attack Rolls"
+        Complex ("Precision Degradation", "Sabotage Matrix inflicts -4 to Attack Rolls")
     ]
 }
 
@@ -307,7 +307,7 @@ let rec reactionSuppression : ClassLevelUpPick = {
     TypeId = nameof reactionSuppression
     Name = "Reaction Suppression"
     Grants = [
-        Simple $"Sabotage Matrix prevents using {REACTION}s"
+        Complex ("Reaction Suppression", $"Sabotage Matrix prevents using {REACTION}s")
     ]
 }
 
@@ -316,7 +316,7 @@ let rec saveDestabilisation : ClassLevelUpPick = {
     TypeId = nameof saveDestabilisation
     Name = "Save Destabilisation"
     Grants = [
-        Simple "Sabotage Matrix inflicts Disadvantage on Saving Throws"
+        Complex ("Save Destabilisation", "Sabotage Matrix inflicts Disadvantage on Saving Throws")
     ]
 }
 
@@ -325,7 +325,7 @@ let rec shieldCollapse : ClassLevelUpPick = {
     TypeId = nameof shieldCollapse
     Name = "Shield Collapse"
     Grants = [
-        Simple "Sabotage Matrix removes all Temporary Hit Points"
+        Complex ("Shield Collapse", "Sabotage Matrix removes all Temporary Hit Points")
     ]
 }
 
@@ -334,7 +334,7 @@ let rec signalSilence : ClassLevelUpPick = {
     TypeId = nameof signalSilence
     Name = "Signal Silence"
     Grants = [
-        Simple "Sabotage Matrix Mutes target"
+        Complex ("Signal Silence", "Sabotage Matrix Mutes target")
     ]
 }
 
@@ -343,7 +343,7 @@ let rec spellInterference : ClassLevelUpPick = {
     TypeId = nameof spellInterference
     Name = "Spell Interference"
     Grants = [
-        Simple "Sabotage Matrix inflicts -1 to DC"
+        Complex ("Spell Interference", "Sabotage Matrix inflicts -1 to DC")
     ]
 }
 
@@ -352,7 +352,7 @@ let rec targetingDisruption : ClassLevelUpPick = {
     TypeId = nameof targetingDisruption
     Name = "Targeting Disruption"
     Grants = [
-        Simple "Sabotage Matrix inflicts Disadvantage on Attack Rolls"
+        Complex ("Targeting Disruption", "Sabotage Matrix inflicts Disadvantage on Attack Rolls")
     ]
 }
 
@@ -361,7 +361,7 @@ let rec weaponDampening : ClassLevelUpPick = {
     TypeId = nameof weaponDampening
     Name = "Weapon Dampening"
     Grants = [
-        Simple "Sabotage Matrix causes Strength-based weapons to deal half damage"
+        Complex ("Weapon Dampening", "Sabotage Matrix causes Strength-based weapons to deal half damage")
     ]
 }
 
@@ -552,7 +552,7 @@ let rec acidicInfusion : ClassLevelUpPick = {
     TypeId = nameof acidicInfusion
     Name = "Acidic Infusion"
     Grants = [
-        Simple "Acidic Infusion: Deals Acid damage and leaves Acid Surface. Focused: Inflicts Corrosion."
+        Complex ("Acidic Infusion", "Acidic Infusion: Deals Acid damage and leaves Acid Surface. Focused: Inflicts Corrosion.")
     ]
 }
 
@@ -561,7 +561,7 @@ let rec frostInfusion : ClassLevelUpPick = {
     TypeId = nameof frostInfusion
     Name = "Frost Infusion"
     Grants = [
-        Simple "Frost Infusion: Summons ice block. Focused: Shoots rays of frost."
+        Complex ("Frost Infusion", "Frost Infusion: Summons ice block. Focused: Shoots rays of frost.")
     ]
 }
 
@@ -570,7 +570,7 @@ let rec searingInfusion : ClassLevelUpPick = {
     TypeId = nameof searingInfusion
     Name = "Searing Infusion"
     Grants = [
-        Simple "Searing Infusion: Deals Fire damage and grants Heat. Focused: Explodes and Burns."
+        Complex ("Searing Infusion", "Searing Infusion: Deals Fire damage and grants Heat. Focused: Explodes and Burns.")
     ]
 }
 
@@ -579,7 +579,7 @@ let rec lightningInfusion : ClassLevelUpPick = {
     TypeId = nameof lightningInfusion
     Name = "Lightning Infusion"
     Grants = [
-        Simple "Lightning Infusion: Deals Lightning damage in line. Focused: Forks to other targets."
+        Complex ("Lightning Infusion", "Lightning Infusion: Deals Lightning damage in line. Focused: Forks to other targets.")
     ]
 }
 
@@ -588,7 +588,7 @@ let rec necroticInfusion : ClassLevelUpPick = {
     TypeId = nameof necroticInfusion
     Name = "Necrotic Infusion"
     Grants = [
-        Simple "Necrotic Infusion: Heals target. Focused: Grants Death Ward."
+        Complex ("Necrotic Infusion", "Necrotic Infusion: Heals target. Focused: Grants Death Ward.")
     ]
 }
 
@@ -597,7 +597,7 @@ let rec poisonousInfusion : ClassLevelUpPick = {
     TypeId = nameof poisonousInfusion
     Name = "Poisonous Infusion"
     Grants = [
-        Simple "Poisonous Infusion: Deals Poison damage. Focused: Inflicts Contagion."
+        Complex ("Poisonous Infusion", "Poisonous Infusion: Deals Poison damage. Focused: Inflicts Contagion.")
     ]
 }
 
@@ -606,7 +606,7 @@ let rec psychicInfusion : ClassLevelUpPick = {
     TypeId = nameof psychicInfusion
     Name = "Psychic Infusion"
     Grants = [
-        Simple "Psychic Infusion: Deals Psychic damage and Dazes. Focused: AOE Psychic cone."
+        Complex ("Psychic Infusion", "Psychic Infusion: Deals Psychic damage and Dazes. Focused: AOE Psychic cone.")
     ]
 }
 
@@ -615,7 +615,7 @@ let rec radiantInfusion : ClassLevelUpPick = {
     TypeId = nameof radiantInfusion
     Name = "Radiant Infusion"
     Grants = [
-        Simple "Radiant Infusion: Deals Radiant damage (Double to specific types). Focused: Grants Sanctuary."
+        Complex ("Radiant Infusion", "Radiant Infusion: Deals Radiant damage (Double to specific types). Focused: Grants Sanctuary.")
     ]
 }
 
@@ -624,7 +624,7 @@ let rec thunderousInfusion : ClassLevelUpPick = {
     TypeId = nameof thunderousInfusion
     Name = "Thunderous Infusion"
     Grants = [
-        Simple "Thunderous Infusion: Deals Thunder damage and pulls. Focused: Deals Thunder damage and pushes."
+        Complex ("Thunderous Infusion", "Thunderous Infusion: Deals Thunder damage and pulls. Focused: Deals Thunder damage and pushes.")
     ]
 }
 
@@ -914,7 +914,7 @@ let rec wildShapeBadger : ClassLevelUpPick = {
     TypeId = nameof wildShapeBadger
     Name = "Badger"
     Grants = [
-        Simple "Wild Shape: Badger. High Hit Points, Bite/Claws, and Burrow."
+        Complex ("Badger", "Wild Shape: Badger. High Hit Points, Bite/Claws, and Burrow.")
     ]
 }
 
@@ -923,7 +923,7 @@ let rec wildShapeBear : ClassLevelUpPick = {
     TypeId = nameof wildShapeBear
     Name = "Bear"
     Grants = [
-        Simple "Wild Shape: Bear. Tanky, Claws, Ursine Shielding, and Goading Roar."
+        Complex ("Bear", "Wild Shape: Bear. Tanky, Claws, Ursine Shielding, and Goading Roar.")
     ]
 }
 
@@ -932,7 +932,7 @@ let rec wildShapeCat : ClassLevelUpPick = {
     TypeId = nameof wildShapeCat
     Name = "Cat"
     Grants = [
-        Simple "Wild Shape: Cat. Stealthy, Feline Grace, Meow, and Luck Points."
+        Complex ("Cat", "Wild Shape: Cat. Stealthy, Feline Grace, Meow, and Luck Points.")
     ]
 }
 
@@ -941,7 +941,7 @@ let rec wildShapeDeepRothe : ClassLevelUpPick = {
     TypeId = nameof wildShapeDeepRothe
     Name = "Deep Rothé"
     Grants = [
-        Simple "Wild Shape: Deep Rothé. High Strength, Gore, and Charge."
+        Complex ("Deep Rothé", "Wild Shape: Deep Rothé. High Strength, Gore, and Charge.")
     ]
 }
 
@@ -950,7 +950,7 @@ let rec wildShapeDilophosaurus : ClassLevelUpPick = {
     TypeId = nameof wildShapeDilophosaurus
     Name = "Dilophosaurus"
     Grants = [
-        Simple "Wild Shape: Dilophosaurus. Bite and Corrosive Spit."
+        Complex ("Dilophosaurus", "Wild Shape: Dilophosaurus. Bite and Corrosive Spit.")
     ]
 }
 
@@ -959,7 +959,7 @@ let rec wildShapeDireRaven : ClassLevelUpPick = {
     TypeId = nameof wildShapeDireRaven
     Name = "Dire Raven"
     Grants = [
-        Simple "Wild Shape: Dire Raven. Flight, Rend Vision, and Nimble Movement."
+        Complex ("Dire Raven", "Wild Shape: Dire Raven. Flight, Rend Vision, and Nimble Movement.")
     ]
 }
 
@@ -968,7 +968,7 @@ let rec wildShapeDireWolf : ClassLevelUpPick = {
     TypeId = nameof wildShapeDireWolf
     Name = "Dire Wolf"
     Grants = [
-        Simple "Wild Shape: Dire Wolf. Bite, Exposing Bite, and Pack Tactics."
+        Complex ("Dire Wolf", "Wild Shape: Dire Wolf. Bite, Exposing Bite, and Pack Tactics.")
     ]
 }
 
@@ -977,7 +977,7 @@ let rec wildShapeGiantSpider : ClassLevelUpPick = {
     TypeId = nameof wildShapeGiantSpider
     Name = "Giant Spider"
     Grants = [
-        Simple "Wild Shape: Giant Spider. Venomous Bite, Web, and Infested."
+        Complex ("Giant Spider", "Wild Shape: Giant Spider. Venomous Bite, Web, and Infested.")
     ]
 }
 
@@ -986,7 +986,7 @@ let rec wildShapeOwlbear : ClassLevelUpPick = {
     TypeId = nameof wildShapeOwlbear
     Name = "Owlbear"
     Grants = [
-        Simple "Wild Shape: Owlbear. Claws, Animalist Rage, and Crushing Flight."
+        Complex ("Owlbear", "Wild Shape: Owlbear. Claws, Animalist Rage, and Crushing Flight.")
     ]
 }
 
@@ -995,7 +995,7 @@ let rec wildShapePanther : ClassLevelUpPick = {
     TypeId = nameof wildShapePanther
     Name = "Panther"
     Grants = [
-        Simple "Wild Shape: Panther. Bite, Pounce, and Prowl."
+        Complex ("Panther", "Wild Shape: Panther. Bite, Pounce, and Prowl.")
     ]
 }
 
@@ -1059,133 +1059,133 @@ let rec arrowOfWeakening : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfWeakening
     Name = "Arrow of Weakening"
-    Grants = [ Simple "Applies Bane for three turns" ]
+    Grants = [ Complex ("Arrow of Weakening", "Applies Bane for three turns") ]
 }
 
 let rec arrowOfAcid : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfAcid
     Name = "Arrow of Acid"
-    Grants = [ Simple "Rolls an additional 1d6 acid damage and creates acid surface" ]
+    Grants = [ Complex ("Arrow of Acid", "Rolls an additional 1d6 acid damage and creates acid surface") ]
 }
 
 let rec arrowOfArcaneInterference : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfArcaneInterference
     Name = "Arrow of Arcane Interference"
-    Grants = [ Simple "Breaks target’s Concentration and inflicts Silence" ]
+    Grants = [ Complex ("Arrow of Arcane Interference", "Breaks target’s Concentration and inflicts Silence") ]
 }
 
 let rec arrowOfTracking : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfTracking
     Name = "Arrow of Tracking"
-    Grants = [ Simple "Cannot miss and applies Faerie Fire" ]
+    Grants = [ Complex ("Arrow of Tracking", "Cannot miss and applies Faerie Fire") ]
 }
 
 let rec arrowOfSlaying : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfSlaying
     Name = "Arrow of Slaying"
-    Grants = [ Simple "Deals an additional 1-12 damage to non-humanoid target" ]
+    Grants = [ Complex ("Arrow of Slaying", "Deals an additional 1-12 damage to non-humanoid target") ]
 }
 
 let rec arrowOfDarkness : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfDarkness
     Name = "Arrow of Darkness"
-    Grants = [ Simple "Creates 3m/10ft radius Darkness for 3 turns" ]
+    Grants = [ Complex ("Arrow of Darkness", "Creates 3m/10ft radius Darkness for 3 turns") ]
 }
 
 let rec arrowOfAleviation : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfAleviation
     Name = "Arrow of Aleviation"
-    Grants = [ Simple "Shoot an arrow that heals your target." ]
+    Grants = [ Complex ("Arrow of Aleviation", "Shoot an arrow that heals your target.") ]
 }
 
 let rec arrowOfHordeShuttling : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfHordeShuttling
     Name = "Arrow of Horde Shuttling"
-    Grants = [ Simple "Pulls all enemies within 9m towards your target." ]
+    Grants = [ Complex ("Arrow of Horde Shuttling", "Pulls all enemies within 9m towards your target.") ]
 }
 
 let rec arrowOfChaos : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfChaos
     Name = "Arrow of Chaos"
-    Grants = [ Simple "Your target experiences a negative surge of Wild Magic." ]
+    Grants = [ Complex ("Arrow of Chaos", "Your target experiences a negative surge of Wild Magic.") ]
 }
 
 let rec arrowOfFire : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfFire
     Name = "Arrow of Fire"
-    Grants = [ Simple "Rolls an additional 1d6 fire damage and creates fire surface" ]
+    Grants = [ Complex ("Arrow of Fire", "Rolls an additional 1d6 fire damage and creates fire surface") ]
 }
 
 let rec arrowOfIce : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfIce
     Name = "Arrow of Ice"
-    Grants = [ Simple "Rolls an additional 1d6 ice damage and creates ice surface" ]
+    Grants = [ Complex ("Arrow of Ice", "Rolls an additional 1d6 ice damage and creates ice surface") ]
 }
 
 let rec arrowOfIlmater : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfIlmater
     Name = "Arrow of Ilmater"
-    Grants = [ Simple "Rolls an additional 1d6 necrotic damage and prevents healing" ]
+    Grants = [ Complex ("Arrow of Ilmater", "Rolls an additional 1d6 necrotic damage and prevents healing") ]
 }
 
 let rec arrowOfLightning : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfLightning
     Name = "Arrow of Lightning"
-    Grants = [ Simple "Rolls an additional 1d6 lightning damage" ]
+    Grants = [ Complex ("Arrow of Lightning", "Rolls an additional 1d6 lightning damage") ]
 }
 
 let rec arrowOfManyTargets : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfManyTargets
     Name = "Arrow of Many Targets"
-    Grants = [ Simple "Arrow can strike up to two targets within 3m/10ft" ]
+    Grants = [ Complex ("Arrow of Many Targets", "Arrow can strike up to two targets within 3m/10ft") ]
 }
 
 let rec arrowOfBoxing : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfBoxing
     Name = "Arrow of Boxing"
-    Grants = [ Simple "Deals additional bludgeoning damage and knocks your target Prone." ]
+    Grants = [ Complex ("Arrow of Boxing", "Deals additional bludgeoning damage and knocks your target Prone.") ]
 }
 
 let rec arrowOfPiercing : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfPiercing
     Name = "Arrow of Piercing"
-    Grants = [ Simple "Deals damage to creatures in a 9m line." ]
+    Grants = [ Complex ("Arrow of Piercing", "Deals damage to creatures in a 9m line.") ]
 }
 
 let rec arrowOfRoaringThunder : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfRoaringThunder
     Name = "Arrow of Roaring Thunder"
-    Grants = [ Simple "Pushes target back 9m/30ft" ]
+    Grants = [ Complex ("Arrow of Roaring Thunder", "Pushes target back 9m/30ft") ]
 }
 
 let rec arrowOfTeleportation : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfTeleportation
     Name = "Arrow of Teleportation"
-    Grants = [ Simple "Teleport to wherever arrow lands" ]
+    Grants = [ Complex ("Arrow of Teleportation", "Teleport to wherever arrow lands") ]
 }
 
 let rec arrowOfMalediction : ClassLevelUpPick = {
     Type = RangerArrow
     TypeId = nameof arrowOfMalediction
     Name = "Arrow of Malediction"
-    Grants = [ Simple "Your target bleeds permanently." ]
+    Grants = [ Complex ("Arrow of Malediction", "Your target bleeds permanently.") ]
 }
 
 // Sorcerer: Metamagic
@@ -1193,140 +1193,140 @@ let rec absorbingSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof absorbingSpell
     Name = "Absorbing Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip grants Resistance to Elemental damage for 3 turns" ]
+    Grants = [ Complex ("Absorbing Spell", "Metamagic (1): Damage dealing Spell/Cantrip grants Resistance to Elemental damage for 3 turns") ]
 }
 
 let rec bloodiedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof bloodiedSpell
     Name = "Bloodied Spell"
-    Grants = [ Simple "Metamagic (1): Damaging Spell/Cantrip inflicts Bleeding for 3 turns" ]
+    Grants = [ Complex ("Bloodied Spell", "Metamagic (1): Damaging Spell/Cantrip inflicts Bleeding for 3 turns") ]
 }
 
 let rec carefulSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof carefulSpell
     Name = "Careful Spell"
-    Grants = [ Simple "Metamagic (1): Allies automatically succeed Saving Throws against Spell/Cantrip" ]
+    Grants = [ Complex ("Careful Spell", "Metamagic (1): Allies automatically succeed Saving Throws against Spell/Cantrip") ]
 }
 
 let rec defensiveSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof defensiveSpell
     Name = "Defensive Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip grants Resistance to Physical damage for 3 turns" ]
+    Grants = [ Complex ("Defensive Spell", "Metamagic (1): Damage dealing Spell/Cantrip grants Resistance to Physical damage for 3 turns") ]
 }
 
 let rec distanceSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof distanceSpell
     Name = "Distance Spell"
-    Grants = [ Simple "Metamagic (1): Increase range of targeted Spell/Cantrip by 50%" ]
+    Grants = [ Complex ("Distance Spell", "Metamagic (1): Increase range of targeted Spell/Cantrip by 50%") ]
 }
 
 let rec dreadfulSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof dreadfulSpell
     Name = "Dreadful Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip inflicts Terrified for 1 turn" ]
+    Grants = [ Complex ("Dreadful Spell", "Metamagic (1): Damage dealing Spell/Cantrip inflicts Terrified for 1 turn") ]
 }
 
 let rec empoweredSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof empoweredSpell
     Name = "Empowered Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip rolls damage with Advantage" ]
+    Grants = [ Complex ("Empowered Spell", "Metamagic (1): Damage dealing Spell/Cantrip rolls damage with Advantage") ]
 }
 
 let rec extendedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof extendedSpell
     Name = "Extended Spell"
-    Grants = [ Simple "Metamagic (1): Double duration of conditions, summons, and surfaces" ]
+    Grants = [ Complex ("Extended Spell", "Metamagic (1): Double duration of conditions, summons, and surfaces") ]
 }
 
 let rec favoredSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof favoredSpell
     Name = "Favored Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip gains a +10 bonus to the Attack Roll" ]
+    Grants = [ Complex ("Favored Spell", "Metamagic (1): Damage dealing Spell/Cantrip gains a +10 bonus to the Attack Roll") ]
 }
 
 let rec heightenedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof heightenedSpell
     Name = "Heightened Spell"
-    Grants = [ Simple "Metamagic (1): Targets of Spell/Cantrip roll Saving Throw with Disadvantage" ]
+    Grants = [ Complex ("Heightened Spell", "Metamagic (1): Targets of Spell/Cantrip roll Saving Throw with Disadvantage") ]
 }
 
 let rec maximizedMagic : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof maximizedMagic
     Name = "Maximized Magic"
-    Grants = [ Simple "Metamagic (1): Spell and Cantrip deals maximum amount of damage possible" ]
+    Grants = [ Complex ("Maximized Magic", "Metamagic (1): Spell and Cantrip deals maximum amount of damage possible") ]
 }
 
 let rec piercingSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof piercingSpell
     Name = "Piercing Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip ignores all Resistances" ]
+    Grants = [ Complex ("Piercing Spell", "Metamagic (1): Damage dealing Spell/Cantrip ignores all Resistances") ]
 }
 
 let rec quickenedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof quickenedSpell
     Name = "Quickened Spell"
-    Grants = [ Simple "Metamagic (1): Spell/Cantrip that costs an Action now costs Bonus Action" ]
+    Grants = [ Complex ("Quickened Spell", "Metamagic (1): Spell/Cantrip that costs an Action now costs Bonus Action") ]
 }
 
 let rec regenerativeSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof regenerativeSpell
     Name = "Regenerative Spell"
-    Grants = [ Simple "Metamagic (1): Damage dealing Spell/Cantrip heals you for half damage" ]
+    Grants = [ Complex ("Regenerative Spell", "Metamagic (1): Damage dealing Spell/Cantrip heals you for half damage") ]
 }
 
 let rec restorativeSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof restorativeSpell
     Name = "Restorative Spell"
-    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip also provides Latent Restoration and Great Cleanse" ]
+    Grants = [ Complex ("Restorative Spell", "Metamagic (1): Single target Spell/Cantrip also provides Latent Restoration and Great Cleanse") ]
 }
 
 let rec seekingSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof seekingSpell
     Name = "Seeking Spell"
-    Grants = [ Simple "Metamagic (1): Spell/Cantrip rolls Attack Roll with Advantage" ]
+    Grants = [ Complex ("Seeking Spell", "Metamagic (1): Spell/Cantrip rolls Attack Roll with Advantage") ]
 }
 
 let rec subtleSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof subtleSpell
     Name = "Subtle Spell"
-    Grants = [ Simple "Metamagic (1): Spell/Cantrip may be cast while Silenced" ]
+    Grants = [ Complex ("Subtle Spell", "Metamagic (1): Spell/Cantrip may be cast while Silenced") ]
 }
 
 let rec tempestuousSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tempestuousSpell
     Name = "Tempestuous Spell"
-    Grants = [ Simple "Metamagic (1): Spell/Cantrip pushes targets back 9m and inflicts Prone" ]
+    Grants = [ Complex ("Tempestuous Spell", "Metamagic (1): Spell/Cantrip pushes targets back 9m and inflicts Prone") ]
 }
 
 let rec tripledSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tripledSpell
     Name = "Tripled Spell"
-    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip now targets 3 creatures" ]
+    Grants = [ Complex ("Tripled Spell", "Metamagic (1): Single target Spell/Cantrip now targets 3 creatures") ]
 }
 
 let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Simple "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures (or the same creature twice)" ]
+    Grants = [ Complex ("Twinned Spell", "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures (or the same creature twice)") ]
 }
 
 type private Placeholder = class end
