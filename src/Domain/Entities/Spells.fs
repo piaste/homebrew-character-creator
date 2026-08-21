@@ -1061,7 +1061,7 @@ let iceStorm =
       Name = "Ice Storm"
       SpellDescription = "Deal 1d6+4 cold damage in a 3m AOE. Create an icy surface and apply 3 turns of Frigid. On Save: half damage. Every subsequent turn while you maintain concentration, you can recast the spell as a free action."
       SpellLists = [ Bargained; Arcane ]
-      Concentration = true
+      Concentration = false
       Upcastable = true
       ActionCost = Action }
 
