@@ -1070,6 +1070,34 @@ let rec tyrant =
         CustomPicks = Map []
     }
 
+let rec runicMystflame =
+    {
+        Id = % nameof runicMystflame
+        Name = "Runic Mystflame"
+        Description = "When sworn oaths and divine protection failed you, you instead chose to look to the arcane to keep the flame of your conviction kindled."
+        BaseClassId = paladin.Id
+        CasterType = HalfCaster Divine
+        FixedAbilities = Map [
+            1<classLvl>, [
+                Power(Action, AtWill, "Spellshatter Smite", "Force damage, your target and all enemies within 3m of them must roll an INT save or be muted for three turns.")
+                Power(BonusAction, AtWill, "Oathcast", "Expand one Channel Oath and Spell Slots to create Spell Slots of a higher level that you would otherwise be able to create.")
+            ]
+            3<classLvl>, [ Complex("Divine Onto Arcane", "Attack and Damage Rolls against muted enemies are made with advantage. When landing a killing blow against a Muted or Silenced enemy, restore one Crusader’s Smite charge.") ]
+            5<classLvl>, [
+                Power(Action, AtWill, "Turn the Voiceless", "Deal 1d6 Force Damage in a 9m radius. For each Muted enemy hit, restore one Channel Oath charge.")
+                Complex("Anointed Oathcast", "Expand a level two spell slot to gain a level four spell slot until the end of your current combat encounter.")
+            ]
+            7<classLvl>, [ Complex("Arcane Glory", "Once per turn, upon landing a killing blow on a Muted enemy, the next Spell or Cantrip will not consume an Action, Bonus Action or Reaction.") ]
+            9<classLvl>, [
+                Power(BonusAction, AtWill, "Aura of the Arcane", "Your presence may invoke Wild Magic Surge whenever a Spell or Cantrip is cast within 9m of you. It can be positive if an ally casts the spell, or negative if the enemy casts the spell.")
+                Complex("Exalted Oathcast", "Expand a Channel Oath charge and a level three Spell Slot to gain a level six Spell Slot until the end of the current combat encounter.")
+            ]
+            11<classLvl>, [ Complex("Karsus’ Avatar", "Your Spells and Cantrips that only select one target may target two additional targets.") ]
+        ]
+        ScalingAbilities = fun _ _ -> []
+        CustomPicks = Map []
+    }
+
 // --- RANGER ---
 
 let rec beastMaster =
