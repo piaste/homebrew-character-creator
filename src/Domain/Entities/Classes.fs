@@ -136,7 +136,7 @@ let rec monk = {
 
         ScalingAbilities = (fun _ cl -> [
             Resource (UMX.untag cl, $"Ki Points", OncePerShortRest)
-            Simple $"1d{if cl >= 9<classLvl> then 8 elif cl >= 5<classLvl> then 6 else 4} Unarmed Damage Die"
+            Complex ("Unarmed Damage Die", $"1d{if cl >= 9<classLvl> then 8 elif cl >= 5<classLvl> then 6 else 4}")
         ])
 
         FixedAbilities = Map [
@@ -156,7 +156,7 @@ let rec paladin = {
         SpellcastingAbility = CHA
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{halfRoundUp cl}d20 Smite Damage"
+            Complex ("Smite Damage", $"{halfRoundUp cl}d20")
         ])
 
         FixedAbilities = Map [
@@ -203,7 +203,7 @@ let rec rogue = {
         SpellcastingAbility = INT
 
         ScalingAbilities = (fun _ cl -> [
-            Simple $"{halfRoundUp cl}d6 Sneak Attack Damage"
+            Complex ("Sneak Attack Damage", $"{halfRoundUp cl}d6")
         ])
 
         FixedAbilities = Map [

@@ -435,8 +435,8 @@ let rec frontierKnight =
             11<classLvl>, [ Complex("PassiveFeature_MartialAdept" <!!> "Frontier Mastery" <?> "Weapon Mastery", $"{TOGGLEABLE}: Combat Techniques can be used as a Bonus Action.") ]
         ]
         ScalingAbilities = fun _  cl -> [
-            Simple $"{cl} Combat Techniques Known"
-            Simple $"Technique Cooldown: {if cl >= 9<classLvl> then 1 elif cl >= 5<classLvl> then 2 else 3} turns"
+            Complex ("Combat Techniques Known", $"{cl}")
+            Complex ("Technique Cooldown", $"{if cl >= 9<classLvl> then 1 elif cl >= 5<classLvl> then 2 else 3} turns")
         ]
         CustomPicks = Map [
             for lvl in [ 1<classLvl> .. 1<classLvl> .. 12<classLvl> ] do
@@ -459,7 +459,7 @@ let rec arcaneArcher =
             11<classLvl>, [ Complex("PassiveFeature_MagicArrow" <!!> "Eye of the Arcana", "Action cantrips can be cast as a Bonus Action. Learn 3 more infusions.") ]
         ]
         ScalingAbilities = fun _  cl -> [
-            Simple $"Elemental Infusions: {if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}"
+            Complex ("Elemental Infusions", $"{if cl >= 11<classLvl> then 9 elif cl >= 5<classLvl> then 6 else 3}")
         ]
         CustomPicks = Map [
             1<classLvl>, [ArcaneArcherInfusion, 3]
