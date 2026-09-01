@@ -70,7 +70,7 @@ let rec ``Friends`` : CantripDef = {
     Id = % nameof ``Friends``
     CantripDescription = "The Spellcaster who inflicted this Charm will have Advantage on Charisma based Ability Checks against this non-hostile creature. May be cast while Silenced or Muted and will not break Stealth. Duration: permanent. Offense: Debuff."
     Concentration = false
-    ActionCost = BonusAction
+    ActionCost = FreeAction
 }
 
 let rec ``Frostbite`` : CantripDef = {
@@ -91,7 +91,7 @@ let rec ``Guidance`` : CantripDef = {
     Id = % nameof ``Guidance``
     CantripDescription = "Grant affected creature a bonus 1d4 to Ability Checks. May only affect one target at a time. Duration: permanent. Offense: Buff."
     Concentration = false
-    ActionCost = BonusAction
+    ActionCost = FreeAction
 }
 
 let rec ``Guiding Moonlight (Light)`` : CantripDef = {
@@ -175,7 +175,7 @@ let rec ``Resistance`` : CantripDef = {
     Id = % nameof ``Resistance``
     CantripDescription = "Grant affected creature a bonus 1d4 to Saving Throws. May only affect one target at a time. Duration: permanent. Offense: Buff."
     Concentration = false
-    ActionCost = BonusAction
+    ActionCost = FreeAction
 }
 
 let rec ``Sacred Flame`` : CantripDef = {
