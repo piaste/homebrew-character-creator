@@ -1427,7 +1427,7 @@ let rec darkJusticiarHalfPlate = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex ("Shar's Protection", "While the wearer has Shield of Faith active, reduce all incoming damage by 2 and reflect damage received back at the attacker, who takes 12 Necrotic damage. Additionally gain Advantage on Constitution Saving Throws Checks.")
+            Complex ("Shar's Protection", "While the wearer has Shield of Faith active, reduce all incoming damage by 2 and reflect damage received back at the attacker, who takes 1d6 Necrotic damage.")
         ]
     }
     Slot = Chest
