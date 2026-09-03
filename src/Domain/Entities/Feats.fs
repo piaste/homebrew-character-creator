@@ -422,6 +422,7 @@ let rec tough : FeatDef = {
     Grants = [
         yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with ``HP per level`` = 4 }
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Nullify", "Nullify any damage instance of 2 or less.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Critical Immunity", "You can’t be critically hit.")
     ]
 }
 
