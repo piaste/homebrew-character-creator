@@ -117,7 +117,7 @@ let rec glassCannon : TraitDef = {
     Name = "Glass Cannon"
     Grants = [
         Buff { StatModifiers.Zero with AC = -10 }
-        Complex ("Glass Cannon: Action", "Gain an additional Action.")
+        Complex ("Glass Cannon: Advantage", "Roll your damage rolls and attack rolls with Advantage.")
         Complex ("Glass Cannon: Health", "Your maximum Hit Points are halved.")
         Complex ("Glass Cannon: Disadvantage", "You make all your Saving Throws with Disadvantage.")
     ]
@@ -218,8 +218,9 @@ let rec loneWolf : TraitDef = {
     Id = % nameof loneWolf
     Name = "Lone Wolf*"
     Grants = [
-        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action, and your maximum Hit Points are doubled.")
-        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain three additional Actions, and your maximum Hit Points are quadrupled.")
+        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action and Bonus Action, and your maximum Hit Points are doubled.")
+        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain two additional Actions and Bonus Actions, and your maximum Hit Points are quadrupled.")
+        Complex ("Lone Wolf*: Summons", "Everything also applies to your summons.")
         Complex ("Lone Wolf*: Warning", "Warning: Taking this trait will drastically impact intended game balance, and is made for solo or dual runs.")
     ]
 }
@@ -228,8 +229,8 @@ let rec narcoleptic : TraitDef = {
     Id = % nameof narcoleptic
     Name = "Narcoleptic"
     Grants = [
-        Complex ("Narcoleptic: Sleep", "Upon starting your turn, you have a 33% chance to fall Asleep.")
-        Complex ("Narcoleptic: Awakening", "Upon waking from a sleep-based Condition, you receive Temporary Hit Points equal to your level multiplied by 4 and you deal only Critical Hits for one turn.")
+        Complex ("Narcoleptic: Drowsiness", "Upon starting your turn, you have a 50% chance to gain a stack of Drowsiness. Upon reaching 3 stacks, you fall Asleep.")
+        Complex ("Narcoleptic: Awakening", "Upon waking from a sleep-based Condition, you deal only Critical Hits until the end of your turn.")
     ]
 }
 
@@ -292,7 +293,7 @@ let rec reckless : TraitDef = {
     Id = % nameof reckless
     Name = "Reckless"
     Grants = [
-        Complex ("Reckless: Advantage", "Gain Advantage on all Attack Rolls and damage rolls.")
+        Complex ("Reckless: Ignore Resistance", "Ignore all damage Resistance and Immunities.")
         Complex ("Reckless: Vulnerability", "You also become Vulnerable to physical damage.")
     ]
 }
@@ -357,7 +358,7 @@ let rec waningImmortality : TraitDef = {
     Name = "Waning Immortality"
     Grants = [
         Buff { StatModifiers.Zero with ``HP per level`` = 6 }
-        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 6.")
+        Complex ("Waning Immortality", "Each time that you go down, your maximum Hit Points are permanently reduced by 4.")
     ]
 }
 
