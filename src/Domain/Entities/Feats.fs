@@ -63,14 +63,14 @@ let rec arcaneEchoes : FeatDef = {
     Grants = [ Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Arcane Echoes", "At the start of your turn, gain 1d6 Arcane Echoes. You can use these echoes to recover a spell slot of a level equal to the number of Arcane Echoes you have.") ]
 }
 
-let rec athleticism : FeatDef = {
-    Id = % nameof athleticism
-    Name = "Athleticism"
+let rec ascendedSummoner : FeatDef = {
+    Id = % nameof ascendedSummoner
+    Name = "Ascended Summoner"
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Athleticism: Action", "Gain an additional Bonus Action.")
-        yield! alsoAffectsSummons <| Complex("Athleticism: Jump", "Double your jump distance.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Ascended Summoner: Action", "Grant an additional Action.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Ascended Summoner: Bonus Action", "Grant an additional Bonus Action.")
     ]
 }
 
@@ -422,6 +422,7 @@ let rec tough : FeatDef = {
     Grants = [
         yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with ``HP per level`` = 4 }
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Nullify", "Nullify any damage instance of 2 or less.")
+        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Immunity", "You can't be critically hit.")
     ]
 }
 
