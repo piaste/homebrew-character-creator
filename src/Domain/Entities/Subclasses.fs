@@ -1439,7 +1439,7 @@ let rec shadeWalker =
 let rec frenziedTundra =
     {
         Id = % nameof frenziedTundra
-        Name = "Soul of the Frenzied Tundra"
+        Name = "Soul of the Tundral"
         Description = "Within your blood rages an endless winter. Those touched by your frozen power are driven into a maddened frenzy beneath the tundra’s merciless chill."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
