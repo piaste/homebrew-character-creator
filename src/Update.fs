@@ -233,7 +233,7 @@ let update
                     |> _.Type 
                     |> weaponSlotForType
                     |> function
-                        | MeleeOneHand -> Map.add (slot.Family Offhand) itemId
+                        | MeleeOneHand | RangedOneHand -> Map.add (slot.Family Offhand) itemId
                         | _ -> Map.remove (slot.Family Main) 
                                >> Map.add targetSlotIfMainHandFree itemId   
             | _ 

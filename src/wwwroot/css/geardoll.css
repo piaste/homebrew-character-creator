@@ -1,11 +1,10 @@
 :root {
-    --slot-size: 78px;
-    --gap: 14px;
+    --slot-size: 50px;
+    --gap: 10px;
     --bg: #1a1713;
     --panel: #27211b;
     --border: #8d7344;
     --border-hover: #d8b55b;
-    --text: #e8ddc6;
     --ghost: rgba(232,221,198,.8);
 }
 
@@ -27,7 +26,8 @@
     height: var(--slot-size);
     position: relative;
 
-    border: 2px solid var(--border);
+    border: 2px solid;
+    border-color: var(--muted);
     border-radius: 10px;
 
     background:
@@ -36,20 +36,40 @@
     cursor: pointer;
     transition: .18s;
     
-    
+    &:has(> [data-rarity="Common"]) {
+        border-color: lightgrey;
+    }
+    &:has(> [data-rarity="Uncommon"]) {
+        border-color: rgb(6, 100, 6);
+    }
+    &:has(> [data-rarity="Rare"]) {
+        border-color: rgb(24, 159, 213);
+    }
+    &:has(> [data-rarity="Epic"]) {
+        border-color: purple;
+    }
+    &:has(> [data-rarity="Legendary"]) {
+        border-color: gold;
+    }    
 }
 
-.slot:hover {
+.sxxxxlot:hover {
     border-color: var(--border-hover);
     transform: translateY(-2px);
     box-shadow: 0 0 12px rgba(216,181,91,.35);
+}
+
+.slot:hover {
+    border-color: rgba(255,215,128,0.38);
+  box-shadow: 0 0 8px #ffd700, 0 0 16px rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 4px #ffd700, 0 0 8px #ffd700;
 }
 
 .slot:active {
     transform: scale(.97);
 }
 
-.slot::after {
+.slot::after, .slot > div > p {
     content: attr(data-label);
     position: absolute;
     inset: 0;
@@ -66,13 +86,19 @@
 
     color: var(--muted2);
     text-shadow: none;
+    font-size: x-small;
 
     pointer-events: none;
 }
 
-/* hides text if there is a child element */
+/* hides slot text if there is a child element */
 .slot:has(> *)::after {
     content: none;
+}
+
+/* hides item name if the icon is not empty */
+div:has(> img:not([style*="display: none"])) > p {
+  display: none;
 }
 
 /* Larger chest slot */

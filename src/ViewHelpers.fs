@@ -81,10 +81,16 @@ let allSpellsWithIconsIn spellList =
     )
     |> Seq.filter (fst >> Spells.filterSpellsByList spellList)
 let tryGetWeaponIconSubpath (w : WeaponDef) = 
-    Some $"gear/cellImage_927643169_{w.Item.Icon}"
+    let filename = 
+        if not <| String.IsNullOrEmpty w.Item.Icon then w.Item.Icon else
+        w.Item.Name |> englishToCamelCase 
+    Some $"weapon_icons/{filename}"
 
 let tryGetEquipmentIconSubpath (e : EquipmentDef) = 
-    Some $"gear/cellImage_1410471305_{e.Item.Icon}"
+    let filename = 
+        if not <| String.IsNullOrEmpty e.Item.Icon then e.Item.Icon else
+        e.Item.Name |> englishToCamelCase 
+    Some $"equipment_icons/{filename}"
 let rec tryGetVanillaIconSubpath = 
     function
     | Simple s

@@ -146,6 +146,8 @@ type CharacterHistory =
 let prevHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
 let currHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
 
+let currGearCache = ConditionalWeakTable<Character, Item<unspecified> list>()
+
 type Character with
         member private this.BuildHistory includeCurrentLevel = 
             let levelHistory =
@@ -305,6 +307,25 @@ type Character with
 
         member this.HasAbilityImprovement = 
             this.CurrentHistory.AllFeatIds.Contains Feats.abilityImprovement.Id
+
+        member this.Gear = 
+            currGearCache.GetValue(this, fun c -> 
+                [
+                    for e in c.Equipment do
+                        let eDef = Entities.Equipment.allEquipment[e.Value]
+                        yield toGenericItem eDef.Item
+                    for w in c.Weapons do
+                        let wDef = Entities.Weapons.allWeapons[w.Value]
+                        yield toGenericItem wDef.Item
+                ]
+            )
+        
+        member this.AttumentMax = 
+            12<attunement> + (this.CharacterLevel |> UMX.cast<charLvl, attunement>)
+
+        member this.AttunementUsed = 
+            this.Gear |> List.sumBy (fun g -> g.Rarity.AttunementCost)
+
 
 type PersistedState =
     {

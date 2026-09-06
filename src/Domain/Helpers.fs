@@ -112,6 +112,14 @@ let getAllPassives useLoreNames (character : Character) =
       for s in character.SkillIds do
         let skill = Skills.allSkills[s]
         yield "Skill", skill.Grants
+    
+      for e in character.Equipment do
+        for g in Equipment.allEquipment[e.Value].Item.Grants do
+            yield "Gear", g
+
+      for w in character.Weapons do
+        for g in Weapons.allWeapons[w.Value].Item.Grants do
+            yield "Gear", g
 
       for lr in character.CurrentHistory.Levels do
         match lr.FeatId with

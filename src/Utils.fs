@@ -142,6 +142,11 @@ let englishToPascalCase (text: string) =
             newWord <- true
     sb.ToString()
 
+let englishToCamelCase text = 
+    if String.IsNullOrWhiteSpace text then text else
+    let p = englishToPascalCase text
+    $"{Char.ToLower p[0]}{p[1..]}"
+
 type GameString(defaultText: string, ?loreText : string, ?iconSubpath : string) =
     
     member _.Icon = iconSubpath
