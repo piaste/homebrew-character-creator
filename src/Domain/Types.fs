@@ -2,6 +2,7 @@ module Bg3HomebrewCCreator.Domain.Types
 open FSharp.UMX
 
 // Basics
+type [<Measure>] unspecified = 1 // for strings with no specific ID
 
 type ActionCost =
     | Action
@@ -518,6 +519,15 @@ type Item<[<Measure>] 'm> = {
     Grants: Passive list
 }
 
+let toGenericItem (x : Item<'m>) = {
+    Id = UMX.untag x.Id |> UMX.tag<1>
+    Name = x.Name
+    Icon = x.Icon
+    Rarity = x.Rarity
+    Grants = x.Grants
+}
+
+
 type WeaponType = 
     | Shield | Dagger | Shortsword | Rapier
     | Club | Flail | LightHammer | Mace | MorningStar | Warhammer | Quarterstaff
@@ -538,10 +548,10 @@ let weaponSlotForType = function
     | Greatclub | Maul | Pike 
         -> MeleeTwoHands
 
-    | HandCrossbow | Wand
+    | HandCrossbow
         -> RangedOneHand
 
-    | LightCrossbow | HeavyCrossbow | Shortbow | Longbow
+    | LightCrossbow | HeavyCrossbow | Shortbow | Longbow | Wand
         -> RangedTwoHands
 let characterSlotForWeaponSlot = function
     | MeleeOneHand -> [Melee Main; Melee Offhand]

@@ -26,10 +26,11 @@ type FilterPassives =
     | Starting
     | FromSubclass of string<subclassId>
     | FromFeats
+    | FromGear
     | Summons
     member this.Display useLoreNames = 
         match this with
-        | All -> "All" | Starting -> "Starting" | FromFeats -> "Feats" | Summons -> "Summons"
+        | All -> "All" | Starting -> "Starting" | FromFeats -> "Feats" | FromGear -> "Gear" | Summons -> "Summons"
         | FromSubclass scId ->
             Subclasses.allSubclasses[scId].Name.Display useLoreNames
 
