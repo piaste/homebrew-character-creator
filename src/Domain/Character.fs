@@ -118,6 +118,12 @@ type Character =
         Weapons: Map<CharacterWeaponSlot, string<weaponId>>
     }
 
+type WeaponAttack = {
+    AttackBonus: int
+    Damage: (DamageValue * DamageType) list
+    CriticalRange: int
+}
+
 type CharacterHistory = 
     {
         Levels : LevelRecord list
@@ -146,7 +152,8 @@ type CharacterHistory =
 let prevHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
 let currHistoryCache = ConditionalWeakTable<Character, CharacterHistory>()
 
-let currGearCache = ConditionalWeakTable<Character, Item<unspecified> list>()
+let currEquipmentCache = ConditionalWeakTable<Character, Map<CharacterEquipmentSlot, EquipmentDef>>()
+let currWeaponsCache = ConditionalWeakTable<Character, Map<CharacterWeaponSlot, WeaponDef>>()
 
 type Character with
         member private this.BuildHistory includeCurrentLevel = 
@@ -232,8 +239,8 @@ type Character with
             if this.CharacterLevel <= 0<charLvl> then 2 
             else 2 + (this.CharacterLevel - 1<charLvl>) / 4<charLvl>
 
-        member this.SpellDCByClass = 
-            Map [
+        member this.SpellcastingAbilities = 
+            [
                 for scId in this.CurrentHistory.LevelsBySubclass.Keys do                    
                     let sc = allSubclasses[scId]
                     
@@ -244,8 +251,16 @@ type Character with
                               |> _.BaseClassId
                               |> Map.findIn allClasses
                               |> _.SpellcastingAbility
-                              |> fun scAb -> 
-                                scAb, 8 + this.AbilityModifier scAb + this.ProficiencyBonus
+            ]
+        member this.HighestSpellcastingAbility =
+            match this.SpellcastingAbilities with
+            | [] -> CHA
+            | x -> x |> List.maxBy this.AbilityModifier
+
+        member this.SpellDCByClass = 
+            Map [
+                for scAb in this.SpellcastingAbilities ->
+                    scAb, 8 + this.AbilityModifier scAb + this.ProficiencyBonus
             ]
 
         member this.HighestAttackBonus = 
@@ -277,18 +292,6 @@ type Character with
             this.AbilityModifier DEX 
             + this.AbilityModifier WIS
             + this.StatModifiers.Initiative
-
-        member this.BaseAC = 
-            14
-            + this.AbilityModifier DEX
-            + this.StatModifiers.AC
-
-        member this.HitPoints = 
-            let hpPerLvl = 8 + this.AbilityModifier CON 
-                             + this.StatModifiers.``HP per level``
-            in 
-                4 + this.StatModifiers.``Base HP`` 
-                  + hpPerLvl * (this.CharacterLevel / 1<charLvl>)
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives
@@ -308,23 +311,165 @@ type Character with
         member this.HasAbilityImprovement = 
             this.CurrentHistory.AllFeatIds.Contains Feats.abilityImprovement.Id
 
-        member this.Gear = 
-            currGearCache.GetValue(this, fun c -> 
-                [
-                    for e in c.Equipment do
-                        let eDef = Entities.Equipment.allEquipment[e.Value]
-                        yield toGenericItem eDef.Item
-                    for w in c.Weapons do
-                        let wDef = Entities.Weapons.allWeapons[w.Value]
-                        yield toGenericItem wDef.Item
-                ]
+
+        member this.EquipmentInfo = 
+            currEquipmentCache.GetValue(this, fun c ->
+                c.Equipment |> Map.map (fun _ v -> Equipment.allEquipment[v])
             )
-        
-        member this.AttumentMax = 
+
+        member this.WeaponsInfo = 
+            currWeaponsCache.GetValue(this, fun c ->
+                c.Weapons |> Map.map (fun _ v -> Weapons.allWeapons[v])
+            )
+        member this.AttunementMax = 
             12<attunement> + (this.CharacterLevel |> UMX.cast<charLvl, attunement>)
 
         member this.AttunementUsed = 
-            this.Gear |> List.sumBy (fun g -> g.Rarity.AttunementCost)
+            (this.EquipmentInfo.Values |> Seq.sumBy (fun g -> g.Item.Rarity.AttunementCost))
+            +
+            (this.WeaponsInfo.Values |> Seq.sumBy (fun g -> g.Item.Rarity.AttunementCost))
+
+
+        member this.ArmourType = 
+            Map.tryFind CChest this.EquipmentInfo 
+            |> Option.map _.ArmourType
+        member this.BaseAC =
+            let maxDexBonus = 
+                match this.ArmourType with
+                | None | Some Light -> 99
+                | Some Medium -> 2 | Some Heavy -> 0
+
+            14
+            + clamp (-1 * maxDexBonus) maxDexBonus (this.AbilityModifier DEX)
+            + this.StatModifiers.AC
+
+        member this.HitPoints = 
+            let hpPerLvl = 8 + this.AbilityModifier CON 
+                             + this.StatModifiers.``HP per level``
+                             + if this.ArmourType = Some Medium then 2 else 0
+            in 
+                4 + this.StatModifiers.``Base HP`` 
+                  + hpPerLvl * (this.CharacterLevel / 1<charLvl>)
+
+        member this.PhysicalDR = 
+            let maxConBonus = 
+                match this.ArmourType with
+                | None | Some Light -> 0
+                | Some Medium -> 2 | Some Heavy -> 99
+            
+            clamp (-1 * maxConBonus) maxConBonus (this.AbilityModifier CON)
+            + this.StatModifiers.DR
+
+        member this.ElementalDR = 
+            let maxChaBonus = 
+                match this.ArmourType with
+                | None | Some Light -> 0
+                | Some Medium -> 2 | Some Heavy -> 99
+            
+            clamp (-1 * maxChaBonus) maxChaBonus (this.AbilityModifier CHA)
+            + this.StatModifiers.DR
+
+        member this.FullMetalStacks = 
+            this.AbilityModifier CON + this.AbilityModifier CHA
+
+        member this.WeaponAttacks = Map [
+
+
+            let hasFreeHandling = 
+                not (this.WeaponsInfo.ContainsKey (Melee Offhand))
+                && not (this.WeaponsInfo.ContainsKey (Ranged Offhand))
+
+            let freeHandlingBonus = if hasFreeHandling then 4 else 0
+
+            let hasGlobalStrength = 
+                match Map.tryFind (Melee Offhand) this.WeaponsInfo with
+                | None | Some { Type = Shield } -> true
+                | _ -> false
+
+            let atkBonus weaponDef = 
+                this.AbilityModifier 
+                    (if weaponDef.Type = Wand then this.HighestSpellcastingAbility 
+                    elif isFinesse weaponDef.Type && this.AbilityModifier DEX > this.AbilityModifier STR then DEX 
+                    else STR)
+                + weaponEnhancement weaponDef.Item.Rarity
+                + freeHandlingBonus
+
+            let dmgBonus weaponDef = 
+                this.AbilityModifier 
+                    (if weaponDef.Type = Wand then this.HighestSpellcastingAbility 
+                    elif isFinesse weaponDef.Type && this.AbilityModifier DEX > this.AbilityModifier STR then DEX 
+                    else STR)
+                
+                + if hasGlobalStrength then clamp 0 99 (this.AbilityModifier STR) else 0
+                + weaponEnhancement weaponDef.Item.Rarity
+                
+                |> toDmg
+            
+            let rangedDmgBonus weaponDef = 
+                this.AbilityModifier DEX                
+                + if weaponDef.Type = Longbow then this.AbilityModifier STR else 0
+                + weaponEnhancement weaponDef.Item.Rarity
+                
+                |> toDmg
+
+            let basicUnarmedAttack = {
+                AttackBonus = this.ProficiencyBonus + this.AbilityModifier STR
+                Damage = [ Dice (1, 4), Physical Crushing; toDmg (2 * this.AbilityModifier STR), Physical Crushing ]
+                CriticalRange = 20
+            }
+
+            // main hand
+            match Map.tryFind (Melee Main) this.WeaponsInfo with
+            | None -> yield Melee Main, basicUnarmedAttack
+            | Some mainMelee ->
+                let dmgType = baseDamageType mainMelee.Type
+                let dieSize = if Map.containsKey (Melee Offhand) this.WeaponsInfo then 8 else 12
+                yield Melee Main, {
+                    AttackBonus = atkBonus mainMelee
+                    Damage = [ Dice(1, dieSize), dmgType; dmgBonus mainMelee, dmgType; yield! mainMelee.DamageBonus]
+                    CriticalRange = 20
+                }
+            
+            // offhand
+            match Map.tryFind (Melee Offhand) this.WeaponsInfo with
+            | None -> ()
+            | Some offhandMelee ->
+                let dmgType = baseDamageType offhandMelee.Type
+                let dieSize = 8
+                yield Melee Offhand,{
+                    AttackBonus = atkBonus offhandMelee
+                    Damage = [ Dice(1, dieSize), dmgType; toDmg(weaponEnhancement offhandMelee.Item.Rarity), dmgType; yield! offhandMelee.DamageBonus]
+                    CriticalRange = 20
+                }
+
+            // ranged
+            match Map.tryFind (Ranged Main) this.WeaponsInfo with
+            | None -> ()
+            | Some mainRanged->
+                let dmgType = baseDamageType mainRanged.Type
+                let dieSize = if mainRanged.Type = HandCrossbow then 8 else 12
+                yield Ranged Main, {
+                    AttackBonus = 
+                        this.AbilityModifier DEX
+                        + weaponEnhancement mainRanged.Item.Rarity
+                        + freeHandlingBonus
+                    Damage = [ Dice(1, dieSize), dmgType; rangedDmgBonus mainRanged, dmgType; yield! mainRanged.DamageBonus]
+                    CriticalRange = 20
+                }
+                
+            match Map.tryFind (Ranged Offhand) this.WeaponsInfo with
+            | None -> ()
+            | Some offhandRanged->
+                let dmgType = baseDamageType offhandRanged.Type
+                let dieSize = 8
+                yield Ranged Offhand, {
+                    AttackBonus = 
+                        this.AbilityModifier DEX
+                        + weaponEnhancement offhandRanged.Item.Rarity
+                    Damage = [ Dice(1, dieSize), dmgType; toDmg(weaponEnhancement offhandRanged.Item.Rarity), dmgType; yield! offhandRanged.DamageBonus]
+                    CriticalRange = 20
+                }
+        ]
 
 
 type PersistedState =

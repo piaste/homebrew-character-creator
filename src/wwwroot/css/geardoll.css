@@ -12,9 +12,9 @@
     display: grid;
     grid-template-columns: repeat(3, var(--slot-size));
     grid-template-areas:
-        ". head . "
-        "neck chest arms"
-        "ringLeft feet ringRight" 
+        "head . note"
+        "arms chest neck"
+        "feet ringLeft ringRight" 
         "meleeMain . rangedMain"
         "meleeOffhand . rangedOffhand";
     gap: var(--gap);        
@@ -53,14 +53,8 @@
     }    
 }
 
-.sxxxxlot:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 0 12px rgba(216,181,91,.35);
-}
-
 .slot:hover {
-    border-color: rgba(255,215,128,0.38);
+  border-color: rgba(255,215,128,0.38);
   box-shadow: 0 0 8px #ffd700, 0 0 16px rgba(255, 215, 0, 0.6);
   text-shadow: 0 0 4px #ffd700, 0 0 8px #ffd700;
 }
@@ -104,7 +98,8 @@ div:has(> img:not([style*="display: none"])) > p {
 /* Larger chest slot */
 
 /* Grid placement */
-.head    { grid-area: head; justify-self:center; }
+.attunement-budget { grid-area: note }
+.head    { grid-area: head; justify-self:start; }
 .neck    { grid-area: neck; }
 .chest   { grid-area: chest; }
 .arms    { grid-area: arms; }

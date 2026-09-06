@@ -14,7 +14,7 @@ let rec enforcerShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec glowingShield = {
@@ -28,7 +28,7 @@ let rec glowingShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec safeguardShield = {
@@ -42,7 +42,7 @@ let rec safeguardShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec woodWoadShield = {
@@ -56,7 +56,7 @@ let rec woodWoadShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec absolutesProtector = {
@@ -70,7 +70,7 @@ let rec absolutesProtector = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec gloomstrandShield = {
@@ -84,7 +84,7 @@ let rec gloomstrandShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec ironvineShield = {
@@ -98,7 +98,7 @@ let rec ironvineShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec watchersShield = {
@@ -112,7 +112,7 @@ let rec watchersShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec shieldOfShielding = {
@@ -126,7 +126,7 @@ let rec shieldOfShielding = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec absolutesWarboard = {
@@ -140,7 +140,7 @@ let rec absolutesWarboard = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec theRealSparkySparkswall = {
@@ -154,7 +154,7 @@ let rec theRealSparkySparkswall = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec sentinelShield = {
@@ -168,7 +168,7 @@ let rec sentinelShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec justiciarsGreatshield = {
@@ -183,7 +183,7 @@ let rec justiciarsGreatshield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec shieldOfDevotion = {
@@ -197,7 +197,7 @@ let rec shieldOfDevotion = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec shieldOfScorchingReprisal = {
@@ -211,7 +211,7 @@ let rec shieldOfScorchingReprisal = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec swiresSledboard = {
@@ -225,7 +225,7 @@ let rec swiresSledboard = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec adamantineShield = {
@@ -240,7 +240,7 @@ let rec adamantineShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec kethericsShield = {
@@ -255,7 +255,7 @@ let rec kethericsShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec abdelsTrustedShield = {
@@ -269,7 +269,7 @@ let rec abdelsTrustedShield = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec shieldOfTheUndevout = {
@@ -283,7 +283,7 @@ let rec shieldOfTheUndevout = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec viconiasWalkingFortress = {
@@ -299,7 +299,7 @@ let rec viconiasWalkingFortress = {
         ]
     }
     Type = Shield
-    DamageBonus = Dice (1, 4), Physical Crushing
+    DamageBonus = [ Dice (1, 4), Physical Crushing ]
 }
 
 let rec clubOfHillGiantStrength = {
@@ -313,7 +313,7 @@ let rec clubOfHillGiantStrength = {
         ]
     }
     Type = Club
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec ironwoodClub = {
@@ -327,7 +327,7 @@ let rec ironwoodClub = {
         ]
     }
     Type = Club
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec shadowLantern = {
@@ -341,7 +341,7 @@ let rec shadowLantern = {
         ]
     }
     Type = Club
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec torchOfRevocation = {
@@ -355,7 +355,7 @@ let rec torchOfRevocation = {
         ]
     }
     Type = Club
-    DamageBonus = Dice (1, 4), Elemental Radiant
+    DamageBonus = [ Dice (1, 4), Elemental Radiant ]
 }
 
 let rec defenderFlail = {
@@ -369,7 +369,7 @@ let rec defenderFlail = {
         ]
     }
     Type = Flail
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec corrosiveFlail = {
@@ -383,7 +383,7 @@ let rec corrosiveFlail = {
         ]
     }
     Type = Flail
-    DamageBonus = Dice (1, 6), Elemental Acid
+    DamageBonus = [ Dice (1, 6), Elemental Acid ]
 }
 
 let rec flailOfAges = {
@@ -397,7 +397,7 @@ let rec flailOfAges = {
         ]
     }
     Type = Flail
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec shiningStaverOfSkulls = {
@@ -411,7 +411,7 @@ let rec shiningStaverOfSkulls = {
         ]
     }
     Type = LightHammer
-    DamageBonus = Dice (1, 4), Elemental Radiant
+    DamageBonus = [ Dice (1, 4), Elemental Radiant ]
 }
 
 let rec skybreaker = {
@@ -425,7 +425,7 @@ let rec skybreaker = {
         ]
     }
     Type = LightHammer
-    DamageBonus = Dice (1, 6), Elemental Radiant
+    DamageBonus = [ Dice (1, 6), Elemental Radiant ]
 }
 
 let rec loviatarsScourge = {
@@ -439,7 +439,7 @@ let rec loviatarsScourge = {
         ]
     }
     Type = Mace
-    DamageBonus = Dice (1, 4), Elemental Necrotic
+    DamageBonus = [ Dice (1, 4), Elemental Necrotic ]
 }
 
 let rec shatteredFlail = {
@@ -453,7 +453,7 @@ let rec shatteredFlail = {
         ]
     }
     Type = Mace
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec xyanyde = {
@@ -467,7 +467,7 @@ let rec xyanyde = {
         ]
     }
     Type = Mace
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec handmaidensMace = {
@@ -481,7 +481,7 @@ let rec handmaidensMace = {
         ]
     }
     Type = Mace
-    DamageBonus = Static 4<dmg>, Elemental Poison
+    DamageBonus = [ Static 4<dmg>, Elemental Poison ]
 }
 
 let rec infernalMace = {
@@ -495,7 +495,7 @@ let rec infernalMace = {
         ]
     }
     Type = Mace
-    DamageBonus = Static 4<dmg>, Elemental Poison
+    DamageBonus = [ Static 4<dmg>, Elemental Poison ]
 }
 
 let rec adamantineMace = {
@@ -509,7 +509,7 @@ let rec adamantineMace = {
         ]
     }
     Type = Mace
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec bloodOfLathander = {
@@ -523,7 +523,7 @@ let rec bloodOfLathander = {
         ]
     }
     Type = Mace
-    DamageBonus = Dice (1, 8), Elemental Radiant
+    DamageBonus = [ Dice (1, 8), Elemental Radiant ]
 }
 
 let rec twistOfFortune = {
@@ -537,7 +537,7 @@ let rec twistOfFortune = {
         ]
     }
     Type = MorningStar
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec ravengardsScourger = {
@@ -551,7 +551,7 @@ let rec ravengardsScourger = {
         ]
     }
     Type = MorningStar
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec theSacredStar = {
@@ -565,7 +565,7 @@ let rec theSacredStar = {
         ]
     }
     Type = MorningStar
-    DamageBonus = Dice (1, 8), Elemental Radiant
+    DamageBonus = [ Dice (1, 8), Elemental Radiant ]
 }
 
 let rec faithbreaker = {
@@ -579,7 +579,7 @@ let rec faithbreaker = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 4), Elemental Radiant
+    DamageBonus = [ Dice (1, 4), Elemental Radiant ]
 }
 
 let rec intransigentWarhammer = {
@@ -593,7 +593,7 @@ let rec intransigentWarhammer = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec chargeBoundWarhammer = {
@@ -607,7 +607,7 @@ let rec chargeBoundWarhammer = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 4), Elemental Lightning
+    DamageBonus = [ Dice (1, 4), Elemental Lightning ]
 }
 
 let rec clownHammer = {
@@ -621,7 +621,7 @@ let rec clownHammer = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec infernalWarhammer = {
@@ -635,7 +635,7 @@ let rec infernalWarhammer = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Static 4<dmg>, Elemental Poison
+    DamageBonus = [ Static 4<dmg>, Elemental Poison ]
 }
 
 let rec hammerOfTheJust = {
@@ -649,7 +649,7 @@ let rec hammerOfTheJust = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 4), Elemental Radiant
+    DamageBonus = [ Dice (1, 4), Elemental Radiant ]
 }
 
 let rec kethericsWarhammer = {
@@ -663,7 +663,7 @@ let rec kethericsWarhammer = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec dwarvenThrower = {
@@ -677,7 +677,7 @@ let rec dwarvenThrower = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec orphicHammer = {
@@ -691,7 +691,7 @@ let rec orphicHammer = {
         ]
     }
     Type = Warhammer
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec caitiffStaff = {
@@ -705,7 +705,7 @@ let rec caitiffStaff = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec corellonsGrace = {
@@ -719,7 +719,7 @@ let rec corellonsGrace = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec naturesSnare = {
@@ -733,7 +733,7 @@ let rec naturesSnare = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec rainDancer = {
@@ -747,7 +747,7 @@ let rec rainDancer = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec staffOfArcaneBlessing = {
@@ -761,7 +761,7 @@ let rec staffOfArcaneBlessing = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec goldWyrmlingStaff = {
@@ -775,7 +775,7 @@ let rec goldWyrmlingStaff = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 4), Elemental Fire
+    DamageBonus = [ Dice (1, 4), Elemental Fire ]
 }
 
 let rec staffOfAMumblingWizard = {
@@ -789,7 +789,7 @@ let rec staffOfAMumblingWizard = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec creationsEcho = {
@@ -803,7 +803,7 @@ let rec creationsEcho = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec melfsFirstStaff = {
@@ -817,7 +817,7 @@ let rec melfsFirstStaff = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 6), Elemental Acid
+    DamageBonus = [ Dice (1, 6), Elemental Acid ]
 }
 
 let rec paleOak = {
@@ -831,7 +831,7 @@ let rec paleOak = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec staffOfCrones = {
@@ -845,7 +845,7 @@ let rec staffOfCrones = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 6), Elemental Poison
+    DamageBonus = [ Dice (1, 6), Elemental Poison ]
 }
 
 let rec theSpellsparkler = {
@@ -859,7 +859,7 @@ let rec theSpellsparkler = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 6), Elemental Lightning
+    DamageBonus = [ Dice (1, 6), Elemental Lightning ]
 }
 
 let rec bigboysChewToy = {
@@ -873,7 +873,7 @@ let rec bigboysChewToy = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec cacophony = {
@@ -887,7 +887,7 @@ let rec cacophony = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec incandescentStaff = {
@@ -901,7 +901,7 @@ let rec incandescentStaff = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Static 10<dmg>, Elemental Fire
+    DamageBonus = [ Static 10<dmg>, Elemental Fire ]
 }
 
 let rec despairOfAthkatla = {
@@ -915,7 +915,7 @@ let rec despairOfAthkatla = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec harperSacredstriker = {
@@ -929,7 +929,7 @@ let rec harperSacredstriker = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 6), Elemental Radiant
+    DamageBonus = [ Dice (1, 6), Elemental Radiant ]
 }
 
 let rec hollowsStaff = {
@@ -943,7 +943,7 @@ let rec hollowsStaff = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 6), Elemental Necrotic
+    DamageBonus = [ Dice (1, 6), Elemental Necrotic ]
 }
 
 let rec mourningFrost = {
@@ -957,7 +957,7 @@ let rec mourningFrost = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec staffOfTheEmperor = {
@@ -971,7 +971,7 @@ let rec staffOfTheEmperor = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 let rec staffOfCherishedNecromancy = {
@@ -985,7 +985,7 @@ let rec staffOfCherishedNecromancy = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec staffOfInterruption = {
@@ -999,7 +999,7 @@ let rec staffOfInterruption = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec staffOfSpellpower = {
@@ -1013,7 +1013,7 @@ let rec staffOfSpellpower = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec staffOfTheRam = {
@@ -1027,7 +1027,7 @@ let rec staffOfTheRam = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec woe = {
@@ -1041,7 +1041,7 @@ let rec woe = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec markoheshkir = {
@@ -1055,7 +1055,7 @@ let rec markoheshkir = {
         ]
     }
     Type = Quarterstaff
-    DamageBonus = Dice (1, 8), Physical Crushing
+    DamageBonus = [ Dice (1, 8), Physical Crushing ]
 }
 
 let rec combinationAxe = {
@@ -1069,7 +1069,7 @@ let rec combinationAxe = {
         ]
     }
     Type = Battleaxe
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec witchbreaker = {
@@ -1083,7 +1083,7 @@ let rec witchbreaker = {
         ]
     }
     Type = Battleaxe
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec thermodynamoAxe = {
@@ -1097,7 +1097,7 @@ let rec thermodynamoAxe = {
         ]
     }
     Type = Battleaxe
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec viciousBattleaxe = {
@@ -1111,7 +1111,7 @@ let rec viciousBattleaxe = {
         ]
     }
     Type = Battleaxe
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec dragonsGrasp = {
@@ -1125,7 +1125,7 @@ let rec dragonsGrasp = {
         ]
     }
     Type = Handaxe
-    DamageBonus = Dice (1, 4), Elemental Fire
+    DamageBonus = [ Dice (1, 4), Elemental Fire ]
 }
 
 let rec ritualAxe = {
@@ -1139,7 +1139,7 @@ let rec ritualAxe = {
         ]
     }
     Type = Handaxe
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec comebackHandaxe = {
@@ -1153,7 +1153,7 @@ let rec comebackHandaxe = {
         ]
     }
     Type = Handaxe
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec githyankiLongsword = {
@@ -1167,7 +1167,7 @@ let rec githyankiLongsword = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 4), Elemental Psychic
+    DamageBonus = [ Dice (1, 4), Elemental Psychic ]
 }
 
 let rec bonesaw = {
@@ -1181,7 +1181,7 @@ let rec bonesaw = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 6), Elemental Necrotic
+    DamageBonus = [ Dice (1, 6), Elemental Necrotic ]
 }
 
 let rec cruelSting = {
@@ -1195,7 +1195,7 @@ let rec cruelSting = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 4), Elemental Poison
+    DamageBonus = [ Dice (1, 4), Elemental Poison ]
 }
 
 let rec larethiansWrath = {
@@ -1209,7 +1209,7 @@ let rec larethiansWrath = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 6), Elemental Cold
+    DamageBonus = [ Dice (1, 6), Elemental Cold ]
 }
 
 let rec phalarAluve = {
@@ -1223,7 +1223,7 @@ let rec phalarAluve = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec bladeOfOppressedSouls = {
@@ -1237,7 +1237,7 @@ let rec bladeOfOppressedSouls = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 6), Elemental Psychic
+    DamageBonus = [ Dice (1, 6), Elemental Psychic ]
 }
 
 let rec katana = {
@@ -1251,7 +1251,7 @@ let rec katana = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec adamantineLongsword = {
@@ -1265,7 +1265,7 @@ let rec adamantineLongsword = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec blackguardsSword = {
@@ -1279,7 +1279,7 @@ let rec blackguardsSword = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec dukeRavengardsLongsword = {
@@ -1293,7 +1293,7 @@ let rec dukeRavengardsLongsword = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec swordOfTheEmperor = {
@@ -1307,7 +1307,7 @@ let rec swordOfTheEmperor = {
         ]
     }
     Type = Longsword
-    DamageBonus = Static 8<dmg>, Physical Slashing
+    DamageBonus = [ Static 8<dmg>, Physical Slashing ]
 }
 
 let rec vossSilverSword = {
@@ -1321,7 +1321,7 @@ let rec vossSilverSword = {
         ]
     }
     Type = Longsword
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 let rec speedyReply = {
@@ -1335,7 +1335,7 @@ let rec speedyReply = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec sylvanScimitar = {
@@ -1349,7 +1349,7 @@ let rec sylvanScimitar = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec thornBlade = {
@@ -1363,7 +1363,7 @@ let rec thornBlade = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Elemental Poison
+    DamageBonus = [ Dice (1, 8), Elemental Poison ]
 }
 
 let rec kurwinsCauteriser = {
@@ -1377,7 +1377,7 @@ let rec kurwinsCauteriser = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 6), Elemental Fire
+    DamageBonus = [ Dice (1, 6), Elemental Fire ]
 }
 
 let rec adamantineScimitar = {
@@ -1391,7 +1391,7 @@ let rec adamantineScimitar = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec justiciarsScimitar = {
@@ -1405,7 +1405,7 @@ let rec justiciarsScimitar = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 let rec belm = {
@@ -1419,7 +1419,7 @@ let rec belm = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec saltyScimitarRrr = {
@@ -1433,7 +1433,7 @@ let rec saltyScimitarRrr = {
         ]
     }
     Type = Scimitar
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec githyankiShortsword = {
@@ -1447,7 +1447,7 @@ let rec githyankiShortsword = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 4), Elemental Psychic
+    DamageBonus = [ Dice (1, 4), Elemental Psychic ]
 }
 
 let rec swordOfFirstBlood = {
@@ -1461,7 +1461,7 @@ let rec swordOfFirstBlood = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Static 8<dmg>, Physical Piercing
+    DamageBonus = [ Static 8<dmg>, Physical Piercing ]
 }
 
 let rec renderOfMindAndBody = {
@@ -1475,7 +1475,7 @@ let rec renderOfMindAndBody = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 4), Elemental Psychic
+    DamageBonus = [ Dice (1, 4), Elemental Psychic ]
 }
 
 let rec ambusher = {
@@ -1489,7 +1489,7 @@ let rec ambusher = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec fleshrender = {
@@ -1503,7 +1503,7 @@ let rec fleshrender = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 4), Elemental Necrotic
+    DamageBonus = [ Dice (1, 4), Elemental Necrotic ]
 }
 
 let rec knifeOfTheUndermountainKing = {
@@ -1517,7 +1517,7 @@ let rec knifeOfTheUndermountainKing = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec theBaneful = {
@@ -1531,7 +1531,7 @@ let rec theBaneful = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 6), Elemental Psychic
+    DamageBonus = [ Dice (1, 6), Elemental Psychic ]
 }
 
 let rec assassinsShortsword = {
@@ -1545,7 +1545,7 @@ let rec assassinsShortsword = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec slicingShortsword = {
@@ -1559,7 +1559,7 @@ let rec slicingShortsword = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec swordOfClutchingUmbra = {
@@ -1573,7 +1573,7 @@ let rec swordOfClutchingUmbra = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec swordOfLifeStealing = {
@@ -1587,7 +1587,7 @@ let rec swordOfLifeStealing = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec crimsonMischief = {
@@ -1602,7 +1602,7 @@ let rec crimsonMischief = {
         ]
     }
     Type = Shortsword
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec sickleOfBoooal = {
@@ -1616,7 +1616,7 @@ let rec sickleOfBoooal = {
         ]
     }
     Type = Sickle
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec sussurSickle = {
@@ -1630,7 +1630,7 @@ let rec sussurSickle = {
         ]
     }
     Type = Sickle
-    DamageBonus = Dice (1, 8), Physical Slashing
+    DamageBonus = [ Dice (1, 8), Physical Slashing ]
 }
 
 let rec wavemothersSickle = {
@@ -1644,7 +1644,7 @@ let rec wavemothersSickle = {
         ]
     }
     Type = Sickle
-    DamageBonus = Dice (1, 6), Elemental Cold
+    DamageBonus = [ Dice (1, 6), Elemental Cold ]
 }
 
 let rec deepDelver = {
@@ -1658,7 +1658,7 @@ let rec deepDelver = {
         ]
     }
     Type = WarPick
-    DamageBonus = Dice (1, 4), Elemental Thunder
+    DamageBonus = [ Dice (1, 4), Elemental Thunder ]
 }
 
 let rec hoppy = {
@@ -1672,7 +1672,7 @@ let rec hoppy = {
         ]
     }
     Type = WarPick
-    DamageBonus = Dice (1, 4), Elemental Necrotic
+    DamageBonus = [ Dice (1, 4), Elemental Necrotic ]
 }
 
 let rec rupturingBlade = {
@@ -1687,7 +1687,7 @@ let rec rupturingBlade = {
         ]
     }
     Type = Rapier
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec swordOfScreams = {
@@ -1701,7 +1701,7 @@ let rec swordOfScreams = {
         ]
     }
     Type = Rapier
-    DamageBonus = Dice (1, 4), Elemental Psychic
+    DamageBonus = [ Dice (1, 4), Elemental Psychic ]
 }
 
 let rec harmonicDueller = {
@@ -1715,7 +1715,7 @@ let rec harmonicDueller = {
         ]
     }
     Type = Rapier
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec infernalRapier = {
@@ -1729,7 +1729,7 @@ let rec infernalRapier = {
         ]
     }
     Type = Rapier
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec pelorsunBlade = {
@@ -1743,7 +1743,7 @@ let rec pelorsunBlade = {
         ]
     }
     Type = Rapier
-    DamageBonus = Dice (1, 8), Elemental Radiant
+    DamageBonus = [ Dice (1, 8), Elemental Radiant ]
 }
 
 let rec duellistsPrerogative = {
@@ -1759,7 +1759,7 @@ let rec duellistsPrerogative = {
         ]
     }
     Type = Rapier
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec assassinsTouch = {
@@ -1773,7 +1773,7 @@ let rec assassinsTouch = {
         ]
     }
     Type = Dagger
-    DamageBonus = Static 12<dmg>, Physical Piercing
+    DamageBonus = [ Static 12<dmg>, Physical Piercing ]
 }
 
 let rec huntersDagger = {
@@ -1787,7 +1787,7 @@ let rec huntersDagger = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec ritualDagger = {
@@ -1801,7 +1801,7 @@ let rec ritualDagger = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec sharsSting = {
@@ -1815,7 +1815,7 @@ let rec sharsSting = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 4), Elemental Necrotic
+    DamageBonus = [ Dice (1, 4), Elemental Necrotic ]
 }
 
 let rec artificialLeech = {
@@ -1829,7 +1829,7 @@ let rec artificialLeech = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 6), Elemental Necrotic
+    DamageBonus = [ Dice (1, 6), Elemental Necrotic ]
 }
 
 let rec gleamdanceDagger = {
@@ -1843,7 +1843,7 @@ let rec gleamdanceDagger = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec sussurDagger = {
@@ -1857,7 +1857,7 @@ let rec sussurDagger = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec coldSnap = {
@@ -1871,7 +1871,7 @@ let rec coldSnap = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 6), Elemental Cold
+    DamageBonus = [ Dice (1, 6), Elemental Cold ]
 }
 
 let rec dreadIronDagger = {
@@ -1885,7 +1885,7 @@ let rec dreadIronDagger = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 12), Elemental Necrotic
+    DamageBonus = [ Dice (1, 12), Elemental Necrotic ]
 }
 
 let rec murderousCut = {
@@ -1899,7 +1899,7 @@ let rec murderousCut = {
         ]
     }
     Type = Dagger
-    DamageBonus = Static 4<dmg>, Physical Piercing
+    DamageBonus = [ Static 4<dmg>, Physical Piercing ]
 }
 
 let rec dolorAmarus = {
@@ -1913,7 +1913,7 @@ let rec dolorAmarus = {
         ]
     }
     Type = Dagger
-    DamageBonus = Static 12<dmg>, Physical Piercing
+    DamageBonus = [ Static 12<dmg>, Physical Piercing ]
 }
 
 let rec arcaneAbsorptionDagger = {
@@ -1928,7 +1928,7 @@ let rec arcaneAbsorptionDagger = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Elemental Force
+    DamageBonus = [ Dice (1, 8), Elemental Force ]
 }
 
 let rec rhapsody = {
@@ -1942,7 +1942,7 @@ let rec rhapsody = {
         ]
     }
     Type = Dagger
-    DamageBonus = Static 3<dmg>, Physical Piercing
+    DamageBonus = [ Static 3<dmg>, Physical Piercing ]
 }
 
 let rec stillmaker = {
@@ -1956,7 +1956,7 @@ let rec stillmaker = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec bladeOfTheFirstBlood = {
@@ -1971,7 +1971,7 @@ let rec bladeOfTheFirstBlood = {
         ]
     }
     Type = Dagger
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec jaggedSpear = {
@@ -1985,7 +1985,7 @@ let rec jaggedSpear = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec lightningJabber = {
@@ -1999,7 +1999,7 @@ let rec lightningJabber = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 4), Elemental Lightning
+    DamageBonus = [ Dice (1, 4), Elemental Lightning ]
 }
 
 let rec visionOfTheAbsolute = {
@@ -2013,7 +2013,7 @@ let rec visionOfTheAbsolute = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 6), Elemental Psychic
+    DamageBonus = [ Dice (1, 6), Elemental Psychic ]
 }
 
 let rec theWatchersGuide = {
@@ -2027,7 +2027,7 @@ let rec theWatchersGuide = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec infernalSpear = {
@@ -2041,7 +2041,7 @@ let rec infernalSpear = {
         ]
     }
     Type = Spear
-    DamageBonus = Static 4<dmg>, Elemental Poison
+    DamageBonus = [ Static 4<dmg>, Elemental Poison ]
 }
 
 let rec selNesSpearOfNight = {
@@ -2055,7 +2055,7 @@ let rec selNesSpearOfNight = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 8), Elemental Radiant
+    DamageBonus = [ Dice (1, 8), Elemental Radiant ]
 }
 
 let rec sharsSpearOfTheEvening = {
@@ -2069,7 +2069,7 @@ let rec sharsSpearOfTheEvening = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec spearOfNight = {
@@ -2083,7 +2083,7 @@ let rec spearOfNight = {
         ]
     }
     Type = Spear
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec theSparkyPoints = {
@@ -2097,7 +2097,7 @@ let rec theSparkyPoints = {
         ]
     }
     Type = Trident
-    DamageBonus = Dice (1, 6), Elemental Lightning
+    DamageBonus = [ Dice (1, 6), Elemental Lightning ]
 }
 
 let rec tridentOfTheWaves = {
@@ -2111,7 +2111,7 @@ let rec tridentOfTheWaves = {
         ]
     }
     Type = Trident
-    DamageBonus = Dice (1, 8), Elemental Cold
+    DamageBonus = [ Dice (1, 8), Elemental Cold ]
 }
 
 let rec nyrulna = {
@@ -2125,7 +2125,7 @@ let rec nyrulna = {
         ]
     }
     Type = Trident
-    DamageBonus = Dice (1, 8), Elemental Thunder
+    DamageBonus = [ Dice (1, 8), Elemental Thunder ]
 }
 
 let rec bloodsoakedGreataxe = {
@@ -2139,7 +2139,7 @@ let rec bloodsoakedGreataxe = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec exterminatorsAxe = {
@@ -2153,7 +2153,7 @@ let rec exterminatorsAxe = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec veryHeavyGreataxe = {
@@ -2167,7 +2167,7 @@ let rec veryHeavyGreataxe = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec defenderGreataxe = {
@@ -2181,7 +2181,7 @@ let rec defenderGreataxe = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec theUndeadBane = {
@@ -2195,7 +2195,7 @@ let rec theUndeadBane = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 4), Elemental Radiant
+    DamageBonus = [ Dice (1, 4), Elemental Radiant ]
 }
 
 let rec bloodedGreataxe = {
@@ -2209,7 +2209,7 @@ let rec bloodedGreataxe = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec hellfireGreataxe = {
@@ -2223,7 +2223,7 @@ let rec hellfireGreataxe = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 6), Elemental Fire
+    DamageBonus = [ Dice (1, 6), Elemental Fire ]
 }
 
 let rec sethan = {
@@ -2237,7 +2237,7 @@ let rec sethan = {
         ]
     }
     Type = Greataxe
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec githyankiGreatsword = {
@@ -2251,7 +2251,7 @@ let rec githyankiGreatsword = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 4), Elemental Psychic
+    DamageBonus = [ Dice (1, 4), Elemental Psychic ]
 }
 
 let rec svartlebeesWoundseeker = {
@@ -2265,7 +2265,7 @@ let rec svartlebeesWoundseeker = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec jorgoralsGreatsword = {
@@ -2279,7 +2279,7 @@ let rec jorgoralsGreatsword = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec everburnBlade = {
@@ -2293,7 +2293,7 @@ let rec everburnBlade = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 4), Elemental Fire
+    DamageBonus = [ Dice (1, 4), Elemental Fire ]
 }
 
 let rec soulbreakerGreatsword = {
@@ -2307,7 +2307,7 @@ let rec soulbreakerGreatsword = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 6), Elemental Psychic
+    DamageBonus = [ Dice (1, 6), Elemental Psychic ]
 }
 
 let rec sussurGreatsword = {
@@ -2321,7 +2321,7 @@ let rec sussurGreatsword = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec swordOfJustice = {
@@ -2335,7 +2335,7 @@ let rec swordOfJustice = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec swordOfChaos = {
@@ -2349,7 +2349,7 @@ let rec swordOfChaos = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec balduransGiantslayer = {
@@ -2363,7 +2363,7 @@ let rec balduransGiantslayer = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Static 9<dmg>, Physical Slashing
+    DamageBonus = [ Static 9<dmg>, Physical Slashing ]
 }
 
 let rec silverSwordOfTheAstralPlane = {
@@ -2377,7 +2377,7 @@ let rec silverSwordOfTheAstralPlane = {
         ]
     }
     Type = Greatsword
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 let rec lightOfCreation = {
@@ -2391,7 +2391,7 @@ let rec lightOfCreation = {
         ]
     }
     Type = Halberd
-    DamageBonus = Dice (1, 4), Elemental Lightning
+    DamageBonus = [ Dice (1, 4), Elemental Lightning ]
 }
 
 let rec theSkinburster = {
@@ -2405,7 +2405,7 @@ let rec theSkinburster = {
         ]
     }
     Type = Halberd
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec harmoniumHalberd = {
@@ -2419,7 +2419,7 @@ let rec harmoniumHalberd = {
         ]
     }
     Type = Halberd
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec hellbeardHalberd = {
@@ -2433,7 +2433,7 @@ let rec hellbeardHalberd = {
         ]
     }
     Type = Halberd
-    DamageBonus = Static 4<dmg>, Elemental Poison
+    DamageBonus = [ Static 4<dmg>, Elemental Poison ]
 }
 
 let rec halberdOfVigilance = {
@@ -2447,7 +2447,7 @@ let rec halberdOfVigilance = {
         ]
     }
     Type = Halberd
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec monsterSlayerGlaive = {
@@ -2461,7 +2461,7 @@ let rec monsterSlayerGlaive = {
         ]
     }
     Type = Glaive
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec drakethroatGlaive = {
@@ -2475,7 +2475,7 @@ let rec drakethroatGlaive = {
         ]
     }
     Type = Glaive
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec sorrow = {
@@ -2489,7 +2489,7 @@ let rec sorrow = {
         ]
     }
     Type = Glaive
-    DamageBonus = Dice (1, 6), Physical Piercing
+    DamageBonus = [ Dice (1, 6), Physical Piercing ]
 }
 
 let rec moonlightGlaive = {
@@ -2503,7 +2503,7 @@ let rec moonlightGlaive = {
         ]
     }
     Type = Glaive
-    DamageBonus = Dice (1, 6), Elemental Radiant
+    DamageBonus = [ Dice (1, 6), Elemental Radiant ]
 }
 
 let rec theDancingBreeze = {
@@ -2517,7 +2517,7 @@ let rec theDancingBreeze = {
         ]
     }
     Type = Glaive
-    DamageBonus = Dice (1, 12), Physical Slashing
+    DamageBonus = [ Dice (1, 12), Physical Slashing ]
 }
 
 let rec argumentSolver = {
@@ -2531,7 +2531,7 @@ let rec argumentSolver = {
         ]
     }
     Type = Greatclub
-    DamageBonus = Dice (1, 12), Physical Crushing
+    DamageBonus = [ Dice (1, 12), Physical Crushing ]
 }
 
 let rec punchDrunkBastard = {
@@ -2545,7 +2545,7 @@ let rec punchDrunkBastard = {
         ]
     }
     Type = Greatclub
-    DamageBonus = Dice (1, 12), Physical Crushing
+    DamageBonus = [ Dice (1, 12), Physical Crushing ]
 }
 
 let rec ratBat = {
@@ -2559,7 +2559,7 @@ let rec ratBat = {
         ]
     }
     Type = Greatclub
-    DamageBonus = Dice (1, 12), Physical Crushing
+    DamageBonus = [ Dice (1, 12), Physical Crushing ]
 }
 
 let rec doomHammer = {
@@ -2573,7 +2573,7 @@ let rec doomHammer = {
         ]
     }
     Type = Maul
-    DamageBonus = Dice (1, 4), Elemental Necrotic
+    DamageBonus = [ Dice (1, 4), Elemental Necrotic ]
 }
 
 let rec corpsegrinder = {
@@ -2587,7 +2587,7 @@ let rec corpsegrinder = {
         ]
     }
     Type = Maul
-    DamageBonus = Dice (1, 4), Elemental Thunder
+    DamageBonus = [ Dice (1, 4), Elemental Thunder ]
 }
 
 let rec hamarhraft = {
@@ -2601,7 +2601,7 @@ let rec hamarhraft = {
         ]
     }
     Type = Maul
-    DamageBonus = Dice (1, 12), Physical Crushing
+    DamageBonus = [ Dice (1, 12), Physical Crushing ]
 }
 
 let rec foebreaker = {
@@ -2615,7 +2615,7 @@ let rec foebreaker = {
         ]
     }
     Type = Maul
-    DamageBonus = Dice (1, 12), Physical Crushing
+    DamageBonus = [ Dice (1, 12), Physical Crushing ]
 }
 
 let rec returningPike = {
@@ -2629,7 +2629,7 @@ let rec returningPike = {
         ]
     }
     Type = Pike
-    DamageBonus = Dice (1, 4), Elemental Force
+    DamageBonus = [ Dice (1, 4), Elemental Force ]
 }
 
 let rec breachingPikestaff = {
@@ -2643,7 +2643,7 @@ let rec breachingPikestaff = {
         ]
     }
     Type = Pike
-    DamageBonus = Dice (1, 4), Elemental Force
+    DamageBonus = [ Dice (1, 4), Elemental Force ]
 }
 
 let rec unseenMenace = {
@@ -2657,7 +2657,7 @@ let rec unseenMenace = {
         ]
     }
     Type = Pike
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec firestoker = {
@@ -2671,7 +2671,7 @@ let rec firestoker = {
         ]
     }
     Type = HandCrossbow
-    DamageBonus = Dice (1, 4), Elemental Fire
+    DamageBonus = [ Dice (1, 4), Elemental Fire ]
 }
 
 let rec neerMisser = {
@@ -2685,7 +2685,7 @@ let rec neerMisser = {
         ]
     }
     Type = HandCrossbow
-    DamageBonus = Dice (1, 8), Physical Piercing
+    DamageBonus = [ Dice (1, 8), Physical Piercing ]
 }
 
 let rec hellfireHandCrossbow = {
@@ -2699,7 +2699,7 @@ let rec hellfireHandCrossbow = {
         ]
     }
     Type = HandCrossbow
-    DamageBonus = Dice (1, 8), Elemental Fire
+    DamageBonus = [ Dice (1, 8), Elemental Fire ]
 }
 
 let rec crossbowOfArcaneForce = {
@@ -2713,7 +2713,7 @@ let rec crossbowOfArcaneForce = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 4), Elemental Force
+    DamageBonus = [ Dice (1, 4), Elemental Force ]
 }
 
 let rec giantbreaker = {
@@ -2727,7 +2727,7 @@ let rec giantbreaker = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec githyankiCrossbow = {
@@ -2741,7 +2741,7 @@ let rec githyankiCrossbow = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 4), Elemental Psychic
+    DamageBonus = [ Dice (1, 4), Elemental Psychic ]
 }
 
 let rec undeadSlayerCrossbow = {
@@ -2755,7 +2755,7 @@ let rec undeadSlayerCrossbow = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 4), Elemental Radiant
+    DamageBonus = [ Dice (1, 4), Elemental Radiant ]
 }
 
 let rec gandrelsAspiration = {
@@ -2769,7 +2769,7 @@ let rec gandrelsAspiration = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec harold = {
@@ -2783,7 +2783,7 @@ let rec harold = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec hellfireEngineCrossbow = {
@@ -2797,7 +2797,7 @@ let rec hellfireEngineCrossbow = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 6), Elemental Fire
+    DamageBonus = [ Dice (1, 6), Elemental Fire ]
 }
 
 let rec fabricatedArbalest = {
@@ -2811,7 +2811,7 @@ let rec fabricatedArbalest = {
         ]
     }
     Type = HeavyCrossbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec bowOfAwareness = {
@@ -2825,7 +2825,7 @@ let rec bowOfAwareness = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec bowOfTheBanshee = {
@@ -2839,7 +2839,7 @@ let rec bowOfTheBanshee = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec darkfireShortbow = {
@@ -2853,7 +2853,7 @@ let rec darkfireShortbow = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 4), Elemental Fire
+    DamageBonus = [ Dice (1, 4), Elemental Fire ]
 }
 
 let rec huntingShortbow = {
@@ -2867,7 +2867,7 @@ let rec huntingShortbow = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec leastExpected = {
@@ -2881,7 +2881,7 @@ let rec leastExpected = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec viciousShortbow = {
@@ -2895,7 +2895,7 @@ let rec viciousShortbow = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec blightbringer = {
@@ -2909,7 +2909,7 @@ let rec blightbringer = {
         ]
     }
     Type = Shortbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec hellriderLongbow = {
@@ -2923,7 +2923,7 @@ let rec hellriderLongbow = {
         ]
     }
     Type = Longbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec spellthief = {
@@ -2937,7 +2937,7 @@ let rec spellthief = {
         ]
     }
     Type = Longbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec theJoltshooter = {
@@ -2951,7 +2951,7 @@ let rec theJoltshooter = {
         ]
     }
     Type = Longbow
-    DamageBonus = Dice (1, 6), Elemental Lightning
+    DamageBonus = [ Dice (1, 6), Elemental Lightning ]
 }
 
 let rec titanstringBow = {
@@ -2965,7 +2965,7 @@ let rec titanstringBow = {
         ]
     }
     Type = Longbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec theDeadShot = {
@@ -2979,7 +2979,7 @@ let rec theDeadShot = {
         ]
     }
     Type = Longbow
-    DamageBonus = Dice (1, 12), Physical Piercing
+    DamageBonus = [ Dice (1, 12), Physical Piercing ]
 }
 
 let rec gontrMael = {
@@ -2993,7 +2993,7 @@ let rec gontrMael = {
         ]
     }
     Type = Longbow
-    DamageBonus = Dice (1, 8), Elemental Radiant
+    DamageBonus = [ Dice (1, 8), Elemental Radiant ]
 }
 
 let rec apprenticeWand = {
@@ -3007,7 +3007,7 @@ let rec apprenticeWand = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Force
+    DamageBonus = [ Dice (1, 8), Elemental Force ]
 }
 
 let rec balancedWand = {
@@ -3021,7 +3021,7 @@ let rec balancedWand = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Radiant
+    DamageBonus = [ Dice (1, 8), Elemental Radiant ]
 }
 
 let rec emblazonedScepter = {
@@ -3035,7 +3035,7 @@ let rec emblazonedScepter = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Fire
+    DamageBonus = [ Dice (1, 8), Elemental Fire ]
 }
 
 let rec boughOfTheEnsnared = {
@@ -3049,7 +3049,7 @@ let rec boughOfTheEnsnared = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Poison
+    DamageBonus = [ Dice (1, 8), Elemental Poison ]
 }
 
 let rec necroticFlesh = {
@@ -3063,7 +3063,7 @@ let rec necroticFlesh = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Necrotic
+    DamageBonus = [ Dice (1, 8), Elemental Necrotic ]
 }
 
 let rec arcWand = {
@@ -3077,7 +3077,7 @@ let rec arcWand = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Lightning
+    DamageBonus = [ Dice (1, 8), Elemental Lightning ]
 }
 
 let rec instrumentOfBinding = {
@@ -3091,7 +3091,7 @@ let rec instrumentOfBinding = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 let rec chaosRod = {
@@ -3105,7 +3105,7 @@ let rec chaosRod = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 let rec talismanOfTheSoulKeeper = {
@@ -3119,7 +3119,7 @@ let rec talismanOfTheSoulKeeper = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Cold
+    DamageBonus = [ Dice (1, 8), Elemental Cold ]
 }
 
 let rec splitFate = {
@@ -3133,7 +3133,7 @@ let rec splitFate = {
         ]
     }
     Type = Wand
-    DamageBonus = Dice (1, 8), Elemental Psychic
+    DamageBonus = [ Dice (1, 8), Elemental Psychic ]
 }
 
 type private Placeholder = class end

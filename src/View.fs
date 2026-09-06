@@ -126,19 +126,19 @@ let actionButton (text: Node) dispatch msg =
     actionButtonWithClass text "" dispatch msg
 
 
-let tabContainer (children: Map<string, Node>) = 
+let tabContainer (children: Map<string, Node * Message >) tabToShow dispatch = 
     div {
         cl "tabs"
         forEach children.Keys <| fun k -> 
             input {
                 attr.``type`` "radio"; attr.name "tabs"; attr.id $"tab-{k}"
-                attr.``checked`` (k = (children.Keys |> Seq.sort |> Seq.head))
+                attr.``checked`` (k = tabToShow)
             }
 
         div {
             cl "tab-buttons"
-            forEach children.Keys <| fun k -> 
-                label { attr.``for`` $"tab-{k}"; k}
+            forEach children <| fun kv -> 
+                label { attr.``for`` $"tab-{kv.Key}"; on.click (fun _ -> dispatch (snd kv.Value)) ; kv.Key}
         }
 
         div {
@@ -146,9 +146,16 @@ let tabContainer (children: Map<string, Node>) =
             forEach children <| fun kv -> 
                 div {
                     cl $"tab-panel tab-panel-{kv.Key}"
-                    kv.Value
+                    fst kv.Value
                 }
         }
+    }
+
+let budget dataclass title used max =
+    div { 
+        cl (dataclass + if used <> max then " error" else "")
+        attr.title "Point Buy"
+        $"{title}: {used} / {max}"
     }
 
 let abilityScores chr dispatch = 
@@ -158,11 +165,7 @@ let abilityScores chr dispatch =
         cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
         div {
             cl "ability-row ability-row--head"; attr.aria "hidden" "true"
-            div { 
-                cl ("summary-ability-points" + if abB.SpentPoints <> POINT_BUDGET then " error" else "")
-                attr.title "Point Buy"
-                $"Ability points: {abB.SpentPoints} / {POINT_BUDGET}"
-            }
+            budget "summary-ability-points" "Ability points" abB.SpentPoints POINT_BUDGET
             div { cl "ability-bonus-h"; "+3" }
             div { cl "ability-bonus-h"; "+1" }
             cond chr.HasAbilityImprovement <| function
@@ -241,7 +244,8 @@ let gearDoll chr dispatch =
         }
 
     div {
-        cl "equipment"        
+        cl "equipment"
+        budget "attunement-budget" "Attunement"  chr.AttunementUsed chr.AttunementMax
         eqSlot "head" CHelmet
         eqSlot "neck" CNecklace
         eqSlot "chest" CChest
@@ -254,15 +258,17 @@ let gearDoll chr dispatch =
         wpnSlot "rangedMain" (Ranged Main)
         wpnSlot "rangedOffhand" (Ranged Offhand)
     }
-let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch = 
+let summaryAbilities useLoreNames (chr: Character) filterPassives showGear dispatch = 
     concat {
         
         div {
            
             tabContainer <| Map [
-                "Abilities", abilityScores chr dispatch
-                "Gear", gearDoll chr dispatch
+                "Abilities", (abilityScores chr dispatch, ShowGearTab false)
+                "Gear", (gearDoll chr dispatch, ShowGearTab true)
             ]
+            <| if showGear then "Gear" else "Abilities" 
+            <| dispatch
 
             div {
                 cl "summary-under-abilities"
@@ -298,16 +304,20 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     stat ["Hit Points"; "Base HP"; "HP per level"] chr.HitPoints
                     stat ["Initiative"] (modifierText chr.Initiative)
                     
-                    stat ["Base AC"; "AC"] chr.BaseAC
-                    condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
+                    stat ["Armour Class"; "AC"] chr.BaseAC
+                    condStat 0 ["Physical DR"] (-1 * chr.PhysicalDR)
+                    condStat 0 ["Elemental DR"] (-1 * chr.ElementalDR)                    
+                    condStat 0 ["DR layers"] chr.FullMetalStacks
                     
-                    let (attackAb, score) = chr.HighestAttackBonus in
-                    stat ["Best attack bonus"; "Attack rolls"] $"{modifierText score} ({attackAb})"
-                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
                     cond chr.HighestSpellDC <| function
                         | None -> empty()
                         | Some dc -> 
                             stat ["Best spell DC"; "Spell DC"] $"{dc.Value} ({dc.Key})"
+
+                    forEach chr.WeaponAttacks <| fun (KeyValue(slot, atk)) ->
+                        stat [ slot.DisplayString ] $"""+{atk.AttackBonus}, {String.concat " + " [ for d, v in atk.Damage -> $"{d} {v}"]}"""
+
+                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
 
                 }
 
@@ -1067,7 +1077,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 }
             }
         )
-        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives dispatch)
+        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives model.GearTabOpen dispatch)
         .LevelBoxes(levelBoxes model)
         .Error(
             concat {

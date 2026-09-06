@@ -58,6 +58,10 @@ let elementalDmgTypes =
 type DamageType = 
     | Physical of PhysicalDmg
     | Elemental of ElementalDmg
+    override this.ToString (): string = 
+        match this with
+        | Physical x -> x.ToString()
+        | Elemental x -> x.ToString()
 
 type Ability =
     | STR
@@ -515,6 +519,36 @@ type WeaponType =
     | Shortbow | Longbow | Wand
 
 
+let isFinesse = function
+    | Dagger | Shortsword | Rapier | Quarterstaff
+    | Longsword | Scimitar | Javelin | Spear | Trident
+    | Glaive 
+        -> true
+    | _ -> false
+
+let baseDamageType = function
+    | Shield 
+    | Club | Flail | LightHammer | Mace 
+    | MorningStar | Warhammer | Quarterstaff
+    | Greatclub | Maul | Pike 
+        -> Physical Crushing
+     
+    | Longsword | Scimitar | Sickle | Battleaxe | Handaxe 
+    | Greataxe | Greatsword | Halberd | Glaive
+        -> Physical Slashing
+    
+    | Dagger | Shortsword | Rapier | WarPick | Javelin | Spear | Trident
+    | HandCrossbow | LightCrossbow | HeavyCrossbow | Shortbow | Longbow
+        -> Physical Piercing
+
+    | Wand
+        // Placeholder
+        -> Elemental Force
+
+let weaponEnhancement = function
+    | Common | Uncommon -> 0
+    | Rare -> 1 | Epic -> 2 | Legendary -> 3
+
 let weaponSlotForType = function
     | Shield -> WeaponSlot.Shield
     | Dagger | Shortsword | Rapier | Club | Flail | LightHammer | Mace 
@@ -546,11 +580,17 @@ type DamageValue =
         match this with
         | Static x -> x, x
         | Dice (number, size) -> number * 1<dmg>, number * size * 1<dmg>
+    override this.ToString() = 
+        match this with
+        | Static x -> x.ToString()
+        | Dice (n, s) -> $"{n}d{s}"
+
+let toDmg (x: int) = Static (UMX.tag<dmg> x)
 
 type WeaponDef = {
     Item : Item<weaponId>
     Type: WeaponType
-    DamageBonus: DamageValue * DamageType
+    DamageBonus: (DamageValue * DamageType) list
 } with
     member this.Id = this.Item.Id
     member this.Name = this.Item.Name
@@ -558,6 +598,7 @@ type WeaponDef = {
     member this.Description = 
         $"""{this.Item.Rarity}. {this.Item.Grants |> List.map _.Description |> String.concat ". "}"""        
 
+type ArmourType = Light | Medium | Heavy
 
 type EquipmentDef = {
     Item : Item<equipmentId>
@@ -568,3 +609,6 @@ type EquipmentDef = {
 
     member this.Description = 
         $"""{this.Item.Rarity}. {this.Item.Grants |> List.map _.Description |> String.concat ". "}"""
+
+    // placeholder
+    member this.ArmourType = Light
