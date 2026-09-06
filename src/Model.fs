@@ -189,6 +189,7 @@ type Model =
         ClassSpecialistClass : string<classId> option
         YokebreakerClass: string<classId> option
         FilterPassives : FilterPassives
+        GearTabOpen: bool
         
         CopyButtonState : CopyButtonState
 
@@ -209,6 +210,7 @@ type Model =
                 ClassSpecialistClass = None
                 YokebreakerClass = None
                 FilterPassives = All
+                GearTabOpen = false
                 CopyButtonState = Rest
 
                 Character = defaultCharacter

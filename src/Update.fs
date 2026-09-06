@@ -18,6 +18,7 @@ type Message =
     | SetPage of Page
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
+    | ShowGearTab of bool
     | OpenGearSelector of CharacterGearSlot
 
     // radial controls
@@ -159,6 +160,9 @@ let update
         { model with MainStageSelection = mss; RadialCenterText = Blank }
         , Cmd.OfTask.perform jsHelper.ScrollIntoView (elementIdForStage mss) (fun _ -> NoOp)
 
+    | ShowGearTab b ->
+        { model with GearTabOpen = b }, Cmd.none
+        
     | OpenGearSelector slot ->
         { model with MainStageSelection = Pick (Gear slot); RadialCenterText = Blank }
         , Cmd.none
