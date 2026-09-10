@@ -26,10 +26,11 @@ type FilterPassives =
     | Starting
     | FromSubclass of string<subclassId>
     | FromFeats
+    | FromGear
     | Summons
     member this.Display useLoreNames = 
         match this with
-        | All -> "All" | Starting -> "Starting" | FromFeats -> "Feats" | Summons -> "Summons"
+        | All -> "All" | Starting -> "Starting" | FromFeats -> "Feats" | FromGear -> "Gear" | Summons -> "Summons"
         | FromSubclass scId ->
             Subclasses.allSubclasses[scId].Name.Display useLoreNames
 
@@ -40,7 +41,7 @@ type CopyButtonState =
 
 let defaultCharacter =
     {
-        Version = Version(0, 5, 0)
+        Version = Version(0, 6, 0)
 
         CharName = "John Baldur"
         RaceId = Domain.Entities.Races.human.Id
@@ -73,11 +74,14 @@ let defaultCharacter =
             CantripIds = Set.empty
 
             FeatId = None
-            FeatSubPicks = Map []
+            FeatSubPicks = Map.empty
             ClassPassiveIds = Set.empty            
 
             SpecialPickIds = Set.empty
         }
+
+        Equipment = Map.empty
+        Weapons = Map.empty
     }
 
 
@@ -184,6 +188,7 @@ type Model =
         ClassSpecialistClass : string<classId> option
         YokebreakerClass: string<classId> option
         FilterPassives : FilterPassives
+        GearTabOpen: bool
         
         CopyButtonState : CopyButtonState
 
@@ -204,6 +209,7 @@ type Model =
                 ClassSpecialistClass = None
                 YokebreakerClass = None
                 FilterPassives = All
+                GearTabOpen = false
                 CopyButtonState = Rest
 
                 Character = defaultCharacter

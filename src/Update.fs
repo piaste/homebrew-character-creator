@@ -18,6 +18,8 @@ type Message =
     | SetPage of Page
     | NextMainStageSelection
     | SetMainStageSelection of MainStageSelection
+    | ShowGearTab of bool
+    | OpenGearSelector of CharacterGearSlot
 
     // radial controls
     | SetRadialCenterText of RadialCenterText
@@ -41,6 +43,10 @@ type Message =
     | SetBonusPlusOne of Ability
     | SetAbilityImprovement of Ability
     | FilterPassives of FilterPassives
+
+    // gear
+    | SetEquipment of CharacterEquipmentSlot * (string<equipmentId> option)
+    | SetWeapon of CharacterWeaponSlot * (string<weaponId> option)
 
     // page head controls
     | Undo
@@ -137,26 +143,108 @@ let update
         | Forge None -> 
             { model with Page = page }, Cmd.none
         | Forge (Some encodedCharacter) ->
+
             match decodeFromBase64 encodedCharacter with
             | Ok character ->
                 { model with Page = page }, Cmd.ofMsg (LoadCharacter character)
-            // | Ok character when character.Version < defaultCharacter.Version -> 
-            //     { model with Page = page; SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none
-            // | Ok character -> 
-            //     { model with Page = page; Character = character }, Cmd.none
             | Error e ->
-                System.Console.WriteLine e;
-                { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
+                // outdated character?
+                match decodeFromBase64<CharacterV05> encodedCharacter with
+                | Ok character ->
+                    { model with Page = page }, Cmd.ofMsg (LoadCharacter (migrateFromV5 character))
+                | Error e ->
+                    System.Console.WriteLine e;
+                    { model with Page = page; SystemErrors = [ e.Message ]}, Cmd.none
     
     | SetMainStageSelection mss ->
         { model with MainStageSelection = mss; RadialCenterText = Blank }
         , Cmd.OfTask.perform jsHelper.ScrollIntoView (elementIdForStage mss) (fun _ -> NoOp)
+
+    | ShowGearTab b ->
+        { model with GearTabOpen = b }, Cmd.none
+
+    | OpenGearSelector slot ->
+        { model with MainStageSelection = Pick (Gear slot); RadialCenterText = Blank }
+        , Cmd.none
 
     | SetRadialCenterText txt ->
         { model with RadialCenterText = txt }, Cmd.none
 
     | FilterPassives fp ->
         { model with FilterPassives = fp }, Cmd.none
+
+    | SetEquipment (slot, None) ->
+        apply <| fun c -> { c with Equipment = Map.remove slot c.Equipment }
+
+    | SetEquipment (slot, Some itemId) ->
+        let item = Domain.Entities.Equipment.allEquipment[itemId]
+
+        let modify =
+            match slot, item.Slot with
+            | CHelmet, Helmet
+            | CNecklace, Necklace
+            | CChest, Chest
+            | CFeet, Feet
+            | CArms, Arms
+            | CTrinket, Trinket
+                -> Map.add slot itemId
+
+            | CRingLeft, Ring when model.Character.Equipment.TryFind CRingRight = Some itemId
+                -> Map.remove CRingRight >> Map.add slot itemId
+            | CRingRight, Ring when model.Character.Equipment.TryFind CRingLeft = Some itemId
+                -> Map.remove CRingLeft >> Map.add slot itemId
+
+            | CRingLeft, Ring | CRingRight, Ring
+                -> Map.add slot itemId
+            | _
+                -> id // rejected
+
+        apply <| fun c -> { c with Equipment = modify c.Equipment }
+
+
+    | SetWeapon (slot, None) ->
+        apply <| fun c -> { c with Weapons = Map.remove slot c.Weapons }
+
+    | SetWeapon (slot, Some itemId) ->
+        let item = Domain.Entities.Weapons.allWeapons[itemId]
+        let weaponSlot = item.Type |> weaponSlotForType
+
+        let modify =
+            match slot, weaponSlot with
+            | Melee Main, MeleeOneHand
+            | Ranged Main, RangedOneHand ->
+                Map.add slot itemId
+
+            | Melee _, MeleeTwoHands
+            | Ranged _, RangedTwoHands ->
+                Map.remove (slot.Family Offhand)
+                >> Map.add (slot.Family Main) itemId
+
+            | Melee Offhand, WeaponSlot.Shield
+            | Melee Offhand, MeleeOneHand
+            | Ranged Offhand, RangedOneHand ->
+                let targetSlotIfMainHandFree =
+                    if weaponSlot = WeaponSlot.Shield
+                        then Melee Offhand
+                        else slot.Family Main
+
+                match Map.tryFind (slot.Family Main) model.Character.Weapons with
+                | None ->
+                    Map.add targetSlotIfMainHandFree itemId
+                | Some mainHandItemId ->
+                    mainHandItemId
+                    |> Map.findIn Domain.Entities.Weapons.allWeapons
+                    |> _.Type
+                    |> weaponSlotForType
+                    |> function
+                        | MeleeOneHand | RangedOneHand -> Map.add (slot.Family Offhand) itemId
+                        | _ -> Map.remove (slot.Family Main)
+                               >> Map.add targetSlotIfMainHandFree itemId
+            | _
+                -> id // rejected
+
+        apply <| fun c -> { c with Weapons = modify c.Weapons }
+
 
     | NextMainStageSelection ->
         let newStage = 
@@ -171,6 +259,9 @@ let update
                 else
                     firstPick
             | Subclass -> 
+                firstPick
+            | Pick (Gear _) ->
+                // not part of character flow
                 firstPick
             | Pick p ->                                        
                 match picks |> List.tryFindIndex ((=) p) with
@@ -307,6 +398,11 @@ let update
 
     | TogglePick (pick, id) ->        
         match pick with
+        | Gear (CharacterEquipmentSlot s) ->
+            model, Cmd.ofMsg (SetEquipment (s, Some (UMX.tag<equipmentId> id)))
+        | Gear (CharacterWeaponSlot s) ->
+            model, Cmd.ofMsg (SetWeapon (s, Some (UMX.tag<weaponId> id)))
+
         | Archetypes -> 
             let atId = UMX.tag<archetypeId> id
 
@@ -366,7 +462,7 @@ let update
                         if character.NextLevelUp.FeatId = Some featId then None
                         else Some featId
 
-                    NextLevelUp.FeatSubPicks = Map []                
+                    NextLevelUp.FeatSubPicks = Map.empty
 
                     AbilityImprovement = 
                         let ai = Feats.abilityImprovement.Id
@@ -428,6 +524,10 @@ let update
     | ClearPicks pick -> 
         apply <| fun character ->
             match pick with
+            | Gear (CharacterEquipmentSlot s) ->
+                { character with Equipment = Map.remove s character.Equipment}
+            | Gear (CharacterWeaponSlot s) ->
+                { character with Weapons = Map.remove s character.Weapons}
             | Archetypes -> character
             | Traits -> { character with TraitId = Traits.none.Id }
             | Skills -> 
@@ -450,7 +550,7 @@ let update
             | Feats -> 
                     { character with 
                         NextLevelUp.FeatId = None
-                        NextLevelUp.FeatSubPicks = Map []
+                        NextLevelUp.FeatSubPicks = Map.empty
                     } 
             | ClassPassives ->
                     { character with 
@@ -540,19 +640,8 @@ let update
         if character = defaultCharacter then
             apply <| fun _ -> character
         else
+            applyAnds [SetMainStageSelection Subclass; NextMainStageSelection] <| fun _ -> character
 
-            match character.Version with
-            | v when v = defaultCharacter.Version ->
-                // when you load a non-default character, go to the first unmade pick
-                applyAnds [SetMainStageSelection Subclass; NextMainStageSelection] <| fun _ -> character
-
-            // handle 
-            | v ->
-                match tryMigrate character with
-                | None -> 
-                    { model with SystemErrors = [ "This character is from an unsupported version!" ] }, Cmd.none            
-                | Some updatedCharacter -> 
-                    model, Cmd.ofMsg (LoadCharacter updatedCharacter)
 
     | ResetCharacter -> 
         model, Cmd.ofMsg (LoadCharacter Model.Initial.Character)
