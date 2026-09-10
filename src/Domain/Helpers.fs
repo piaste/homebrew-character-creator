@@ -113,6 +113,14 @@ let getAllPassives useLoreNames (character : Character) =
         let skill = Skills.allSkills[s]
         yield "Skill", skill.Grants
 
+      for e in character.Equipment do
+        for g in Equipment.allEquipment[e.Value].Item.Grants do
+            yield "Gear", g
+
+      for w in character.Weapons do
+        for g in Weapons.allWeapons[w.Value].Item.Grants do
+            yield "Gear", g
+
       for lr in character.CurrentHistory.Levels do
         match lr.FeatId with
         | None -> ()
@@ -333,5 +341,22 @@ let hasClassSpecialistFor (c: Character) =
     |> Set.map (fun cpId -> ClassPassives.allClassPassives[UMX.tag<classPassiveId> cpId].ClassId)        
     
 
-let tryMigrate (c: Character) =
-    None // no migrations supported yet
+let migrateFromV5 (c: CharacterV05) =
+    {
+        Version = System.Version(0, 6, 0)
+
+        CharName = c.CharName
+        RaceId = c.RaceId
+        AbBuy = c.AbBuy
+        AbilityImprovement = c.AbilityImprovement
+        SkillIds = c.SkillIds
+        SkillExpIds = c.SkillExpIds
+        ArchetypeId = c.ArchetypeId
+        TraitId = c.TraitId
+
+        PreviousLevelHistory = c.PreviousLevelHistory
+        NextLevelUp = c.NextLevelUp
+
+        Equipment = Map.empty
+        Weapons = Map.empty
+    }

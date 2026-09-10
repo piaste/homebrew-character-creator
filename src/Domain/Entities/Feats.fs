@@ -8,7 +8,7 @@ let rec abilityImprovement : FeatDef = {
     Id = % nameof abilityImprovement
     Name = "Ability Improvement"
     ExplicitDescription = Some "Select two Abilities. These abilities increase by an amount equal to your Proficiency Bonus."
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [] // this feat has special coding
 }
 
@@ -27,7 +27,7 @@ let rec alchemist : FeatDef = {
     Id = % nameof alchemist
     Name = "Alchemist"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [ 
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Potions", "Consuming healing potions always restores maximum Hit Points.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alchemist: Grenades", "Thrown grenades trigger an additional explosion, dealing 1d12 damage per 2 character levels in a 3m radius around the target.")
@@ -39,7 +39,7 @@ let rec alert : FeatDef = {
     Id = % nameof alert
     Name = "Alert"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with Initiative = 8 }
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Alert: Defiance", "Gain Dash and Disengage when starting turn Threatened.")
@@ -67,7 +67,7 @@ let rec ascendedSummoner : FeatDef = {
     Id = % nameof ascendedSummoner
     Name = "Ascended Summoner"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Ascended Summoner: Action", "Grant an additional Action.")
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Ascended Summoner: Bonus Action", "Grant an additional Bonus Action.")
@@ -78,7 +78,7 @@ let rec blessingOfTheMoon : FeatDef = {
     Id = % nameof blessingOfTheMoon
     Name = "Blessing of the Moon"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Cantrips", "Gain 3 cantrips: Blessing of Moonfire, Lunar Flare, and Lunar Strike.")
         Complex("Spell_Enchantment_Bless" <!!> "Blessing of the Moon: Radiance", "Dealing damage to an enemy restores 1d4 HP to nearby allies.")
@@ -89,7 +89,7 @@ let rec charger : FeatDef = {
     Id = % nameof charger
     Name = "Charger"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [ 
         Power(BonusAction, OncePerTurn, "GenericIcon_DamageType_Lightning" <!!> "Charge", "Charge and attack a nearby enemy.")
         Power(BonusAction, OncePerTurn, "GenericIcon_DamageType_Lightning" <!!> "Charge", "Charge and shove (9m) a nearby enemy.")
@@ -116,7 +116,7 @@ let rec composed : FeatDef = {
     Id = % nameof composed
     Name = "Composed"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Power(Reaction, AtWill, "Regain Composure", "Restore 1d6*Proficiency Bonus HP in a 3m radius when taking damage.")
         Power(Reaction, AtWill, "Targeted Composure", "Restore 1d6*Proficiency Bonus HP in a 3m radius around the target when dealing damage.")
@@ -127,7 +127,7 @@ let rec defensiveDuellist : FeatDef = {
     Id = % nameof defensiveDuellist
     Name = "Defensive Duellist"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Power(FreeAction, AtWill, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Defensive Duelist", "Gain AC equal to your Proficiency Bonus when attacked.")
         Power(Reaction, AtWill, "PassiveFeature_Banite_TacticalDiscipline" <!!> "Defensive Duelist", "Counterattack with a Melee or Ranged attack.")
@@ -139,7 +139,7 @@ let rec duellistsInstinct : FeatDef = {
     Id = % nameof duellistsInstinct
     Name = "Duellist’s Instinct"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Off-hand", "Make an off-hand attack as a Bonus Action while dual-wielding (Melee or Ranged).")
         Complex("PassiveFeature_MediumArmorMaster" <!!> "Duellist’s Instinct: Charges", "Gain 3 Duellist Charges per Short Rest. Spend to gain Advantage or force Disadvantage.")
@@ -153,7 +153,7 @@ let rec dunesis : FeatDef = {
     Id = % nameof dunesis
     Name = "Dunesis"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Careful", "Your area-of-effect Spells do not affect allies.")
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Dunesis: Power", "+1 Spell and Condition Difficulty Class.")
@@ -165,7 +165,7 @@ let rec durable : FeatDef = {
     Id = % nameof durable
     Name = "Durable"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("Spell_Abjuration_Resistance" <!!> "Durable: Resistance", "Gain Resistance to Physical damage.")
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Durable: Unstoppable", "Gain Lockdown Immunity (immune to most Crowd Control).")
@@ -190,7 +190,7 @@ let rec galvanizedStormsoul : FeatDef = {
     Id = % nameof galvanizedStormsoul
     Name = "Galvanized Stormsoul"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Resistance", "Gain Resistance to Lightning and Thunder damage.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Galvanized Stormsoul: Charging", "Gain 1 Lightning Charge upon starting your turn, first time you deal damage, and first time you take damage per turn.")
@@ -212,7 +212,7 @@ let rec intrinsicBulwark : FeatDef = {
     Id = % nameof intrinsicBulwark
     Name = "Intrinsic Bulwark"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("Spell_Abjuration_Resistance" <!!> "Intrinsic Bulwark: Resistance", "Gain Resistance to Elemental damage.")
         Complex("Intrinsic Bulwark: Immunity", "Immune to damage-over-time effects (burning, shocked, bleeding, etc.).")
@@ -233,7 +233,7 @@ let rec mageSlayer : FeatDef = {
     Id = % nameof mageSlayer
     Name = "Mage Slayer"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("Mage Slayer: Disruption", "Damaged enemies immediately lose Concentration.")
         yield! alsoAffectsSummons <| Complex("Mage Slayer: Silence", "Damaging an enemy silences them for 1 turn.")
@@ -264,7 +264,7 @@ let rec meleeExpertise : FeatDef = {
     Id = % nameof meleeExpertise
     Name = "Melee Expertise"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Melee Expertise: Damage", "+2*Proficiency Bonus to main-hand Melee Weapon damage.")
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Melee Expertise: Bypass", "Ignore all Physical Resistances and Immunities.")
@@ -283,7 +283,7 @@ let rec performer : FeatDef = {
     Id = % nameof performer
     Name = "Performer"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("Performer: Instrument", "Gain Musical Instrument Proficiency.")
         Power(Action, OncePerLongRest, "Performative Presence", "Buff party with +1d4 to Attack Rolls, Ability Checks, or Saving Throws. Lasts until long rest.")
@@ -294,7 +294,7 @@ let rec psionicDominance : FeatDef = {
     Id = % nameof psionicDominance
     Name = "Psionic Dominance"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Psionic Dominance: Psychic", "Deal +1d4 psychic damage and inflict 1 stack of Mental Fatigue.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Psionic Dominance: Shield", "Illithid Powers no longer reduce your maximum Hit Points.")
@@ -315,7 +315,7 @@ let rec resilient : FeatDef = {
     Id = % nameof resilient
     Name = "Resilient"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Saves", "Add Proficiency Bonus to all Saving Throws.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Resilient: Healing", "Heal for the maximum possible amount when healed.")
@@ -326,7 +326,7 @@ let rec restrictedTerritory : FeatDef = {
     Id = % nameof restrictedTerritory
     Name = "Restricted Territory"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Power(Reaction, AtWill, "Target_MainHandAttack" <!!> "Restricted Territory", "Make a Melee Weapon Attack against an enemy entering your weapon's range.")
         Complex("Restricted Territory: Knockback", "Enemies entering your range are knocked back if they take damage.")
@@ -338,7 +338,7 @@ let rec savageAssault : FeatDef = {
     Id = % nameof savageAssault
     Name = "Savage Assault"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Advantage", "Roll all damage dice with Advantage.")
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Savage Assault: Corrosive", "Damaging a target reduces its AC by 1 (stacking).")
@@ -349,7 +349,7 @@ let rec sentinel : FeatDef = {
     Id = % nameof sentinel
     Name = "Sentinel"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Power(Reaction, AtWill, "PassiveFeature_Sentinel_ZeroSpeed" <!!> "Sentinel", "Make a Weapon Attack against an enemy who attacks an ally.")
         Complex("PassiveFeature_Sentinel_ZeroSpeed" <!!> "Sentinel: Opportunity", "Gain Advantage on Opportunity Attacks.")
@@ -362,7 +362,7 @@ let rec sharpshooter : FeatDef = {
     Id = % nameof sharpshooter
     Name = "Sharpshooter"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Sharpshooter: High Ground", "Ranged attacks ignore High Ground penalties.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Sharpshooter: Aim", "Toggled: -Proficiency to Attack Rolls, +2*Proficiency to Damage Rolls.")
@@ -374,7 +374,7 @@ let rec shieldbearer : FeatDef = {
     Id = % nameof shieldbearer
     Name = "Shieldbearer"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_MultiattackDefense" <!!> "Shieldbearer: Saves", "Gain Advantage on Dexterity Saving Throws while wielding a shield.")
         Complex("PassiveFeature_MultiattackDefense" <!!> "Shieldbearer: Charges", "Gain 3 Shieldbearer Charges to negate damage instances (recharge on Short Rest/Kill/Crit).")
@@ -396,7 +396,7 @@ let rec tavernBrawler : FeatDef = {
     Id = % nameof tavernBrawler
     Name = "Tavern Brawler"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "Add STR modifier to unarmed attack and Throw damage rolls.")
         yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Add DEX modifier to all Attack Rolls.")
@@ -418,7 +418,7 @@ let rec tough : FeatDef = {
     Id = % nameof tough
     Name = "Tough"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         yield! alsoAffectsSummons <| Buff { StatModifiers.Zero with ``HP per level`` = 4 }
         yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Tough: Nullify", "Nullify any damage instance of 2 or less.")
@@ -438,7 +438,7 @@ let rec warCaster : FeatDef = {
     Id = % nameof warCaster
     Name = "War Caster"
     ExplicitDescription = None
-    Subpicks = Map []
+    Subpicks = Map.empty
     Grants = [
         Complex("PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster: Focus", "Gain Advantage on Concentration Saving Throws.")
         Power(FreeAction, AtWill, "PassiveFeature_WarCaster_OpportunitySpell" <!!> "War Caster", "Cast Shocking Grasp as a Reaction against an enemy entering melee range.")

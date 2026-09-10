@@ -21,7 +21,7 @@ let rec artificer = {
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec barbarian = {
@@ -39,7 +39,7 @@ let rec barbarian = {
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec bard = {
@@ -64,7 +64,7 @@ let rec bard = {
             5<classLvl>, [Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
             9<classLvl>, [Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec cleric = {
@@ -82,7 +82,7 @@ let rec cleric = {
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec druid = {
@@ -100,7 +100,7 @@ let rec druid = {
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
             9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec fighter = {
@@ -144,7 +144,7 @@ let rec monk = {
             5<classLvl>, [Complex ("Martial Flux", "Gain an additional Bonus Action.")]
             9<classLvl>, [Complex ("Martial Mastery", "Gain an additional Action.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec paladin = {
@@ -211,7 +211,7 @@ let rec rogue = {
             5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
             9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec sorcerer = {
@@ -253,7 +253,7 @@ let rec warlock = {
             5<classLvl>, [Complex ("Mystic Arcanum", "On your first turn of any combat encounter, restore one Warlock Spell Slot.")]
             9<classLvl>, [Complex ("Deepened Arcanum", "On your first turn of any combat encounter, restore two Warlock Spell Slots.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 let rec wizard = {
@@ -271,7 +271,7 @@ let rec wizard = {
         FixedAbilities = Map [
             1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover one charge of Arcane Recovery."); Power (FreeAction, OncePerTurn, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery.")]
         ]
-        CustomPicks = Map []
+        CustomPicks = Map.empty
     }
 
 type Placeholder = class end

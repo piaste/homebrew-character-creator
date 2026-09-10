@@ -124,60 +124,152 @@ let actionButtonWithClass (text: Node) abCl dispatch msg =
     }
 let actionButton (text: Node) dispatch msg = 
     actionButtonWithClass text "" dispatch msg
-let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch = 
-    let abB = chr.AbBuy
-    concat {
-        
-        div { 
-            cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
-            div {
-                cl "ability-row ability-row--head"; attr.aria "hidden" "true"
-                div { 
-                    cl ("summary-ability-points" + if abB.SpentPoints <> POINT_BUDGET then " error" else "")
-                    attr.title "Point Buy"
-                    $"Ability points: {abB.SpentPoints} / {POINT_BUDGET}"
-                }
-                div { cl "ability-bonus-h"; "+3" }
-                div { cl "ability-bonus-h"; "+1" }
-                cond chr.HasAbilityImprovement <| function
-                    | false -> empty()
-                    | true -> div { cl "ability-bonus-h"; "FEAT" }
+
+
+let tabContainer (children: Map<string, Node * Message >) tabToShow dispatch =
+    div {
+        cl "tabs"
+        forEach children.Keys <| fun k ->
+            input {
+                attr.``type`` "radio"; attr.name "tabs"; attr.id $"tab-{k}"
+                attr.``checked`` (k = tabToShow)
             }
-        
-            forEach allAbilities (fun ab -> 
-                div { 
-                    cl "ability-row"
-                    div { cl "ability-k"; string ab }
-                    button {
-                        let enabled = abB.BoughtAbilityBeforeBonuses ab > 8 in 
-                        attr.disabled (not enabled)
-                        clIf [not enabled, "disabled"] "ability-face-btn ability-minus-btn"
-                        on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
-                        //img { attr.src "/assets/ui/ability-minus.png"}
-                    }
-                    div { cl "ability-v"; string <| chr.Ability ab}
-                    div { cl "ability-m"; modifierText <| abB.BoughtAbilityModifier ab}
-                    button {
-                        let enabled = abB.BoughtAbilityBeforeBonuses ab < 15 in 
-                        attr.disabled (not enabled)
-                        clIf [not enabled, "disabled"] "ability-face-btn ability-plus-btn"
-                        on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
-                        //img { attr.src "/assets/ui/ability-plus.png"}
-                    }
-                    checkbox 
-                        (chr.AbBuy.BonusPlusThree = ab) 
-                        dispatch (SetBonusPlusThree ab)
-                    checkbox 
-                        (chr.AbBuy.BonusPlusOne = ab) 
-                        dispatch (SetBonusPlusOne ab)
-                    cond chr.AbilityImprovement <| function
-                    | None -> empty()
-                    | Some (x, y) -> 
-                        checkbox 
-                            (x = ab || y = ab) 
-                            dispatch (SetAbilityImprovement ab)
+
+        div {
+            cl "tab-buttons"
+            forEach children <| fun kv ->
+                label { attr.``for`` $"tab-{kv.Key}"; on.click (fun _ -> dispatch (snd kv.Value)) ; kv.Key}
+        }
+
+        div {
+            cl "tab-panels"
+            forEach children <| fun kv ->
+                div {
+                    cl $"tab-panel tab-panel-{kv.Key}"
+                    fst kv.Value
                 }
-            )
+        }
+    }
+
+let budget dataclass title used max =
+    div {
+        cl (dataclass + if used <> max then " error" else "")
+        attr.title "Point Buy"
+        $"{title}: {used} / {max}"
+    }
+
+let abilityScores chr dispatch =
+    let abB = chr.AbBuy
+    div {
+
+        cl "summary-abilities-compact"; attr.aria "label" "Ability scores"
+        div {
+            cl "ability-row ability-row--head"; attr.aria "hidden" "true"
+            budget "summary-ability-points" "Ability points" abB.SpentPoints POINT_BUDGET
+            div { cl "ability-bonus-h"; "+3" }
+            div { cl "ability-bonus-h"; "+1" }
+            cond chr.HasAbilityImprovement <| function
+                | false -> empty()
+                | true -> div { cl "ability-bonus-h"; "FEAT" }
+        }
+
+        forEach allAbilities (fun ab ->
+            div {
+                cl "ability-row"
+                div { cl "ability-k"; string ab }
+                button {
+                    let enabled = abB.BoughtAbilityBeforeBonuses ab > 8 in
+                    attr.disabled (not enabled)
+                    clIf [not enabled, "disabled"] "ability-face-btn ability-minus-btn"
+                    on.click (fun _ -> dispatch (ModifyAbilityScore (ab, -1)))
+                    //img { attr.src "/assets/ui/ability-minus.png"}
+                }
+                div { cl "ability-v"; string <| chr.Ability ab}
+                div { cl "ability-m"; modifierText <| abB.BoughtAbilityModifier ab}
+                button {
+                    let enabled = abB.BoughtAbilityBeforeBonuses ab < 15 in
+                    attr.disabled (not enabled)
+                    clIf [not enabled, "disabled"] "ability-face-btn ability-plus-btn"
+                    on.click (fun _ -> dispatch (ModifyAbilityScore (ab, +1)))
+                    //img { attr.src "/assets/ui/ability-plus.png"}
+                }
+                checkbox
+                    (chr.AbBuy.BonusPlusThree = ab)
+                    dispatch (SetBonusPlusThree ab)
+                checkbox
+                    (chr.AbBuy.BonusPlusOne = ab)
+                    dispatch (SetBonusPlusOne ab)
+                cond chr.AbilityImprovement <| function
+                | None -> empty()
+                | Some (x, y) ->
+                    checkbox
+                        (x = ab || y = ab)
+                        dispatch (SetAbilityImprovement ab)
+            }
+        )
+    }
+
+let gearDoll chr dispatch =
+
+    let inline eqSlot lbl slot =
+        button {
+            cl $"slot {lbl}"
+            on.click (fun _ -> dispatch (OpenGearSelector (CharacterEquipmentSlot slot)))
+            "data-label"=> slot.DisplayString
+            cond (chr.Equipment.TryFind slot) <| function
+                | None -> empty()
+                | Some e ->
+                    let eDef = Equipment.allEquipment[e]
+                    div {
+                        "data-rarity" => eDef.Item.Rarity
+                        maybeIcon (tryGetEquipmentIconSubpath eDef)
+                        p { eDef.Name }
+                    }
+        }
+
+    let inline wpnSlot lbl slot =
+        button {
+            cl $"slot {lbl}"
+            on.click (fun _ -> dispatch (OpenGearSelector (CharacterWeaponSlot slot)))
+            "data-label"=> slot.DisplayString
+            cond (chr.Weapons.TryFind slot) <| function
+                | None -> empty()
+                | Some w ->
+                    let wDef = Weapons.allWeapons[w]
+                    div {
+                        "data-rarity" => wDef.Item.Rarity
+                        maybeIcon (tryGetWeaponIconSubpath wDef)
+                        p { wDef.Name }
+                    }
+        }
+
+    div {
+        cl "equipment"
+        budget "attunement-budget" "Attunement"  chr.AttunementUsed chr.AttunementMax
+        eqSlot "head" CHelmet
+        eqSlot "neck" CNecklace
+        eqSlot "chest" CChest
+        eqSlot "arms" CArms
+        eqSlot "ringLeft" CRingLeft
+        eqSlot "ringRight" CRingRight
+        eqSlot "feet" CFeet
+        wpnSlot "meleeMain" (Melee Main)
+        wpnSlot "meleeOffhand" (Melee Offhand)
+        wpnSlot "rangedMain" (Ranged Main)
+        wpnSlot "rangedOffhand" (Ranged Offhand)
+    }
+let summaryAbilities useLoreNames (chr: Character) filterPassives showGear dispatch =
+    concat {
+
+        div {
+
+            tabContainer <| Map [
+                "Abilities", (abilityScores chr dispatch, ShowGearTab false)
+                "Gear", (gearDoll chr dispatch, ShowGearTab true)
+            ]
+            <| if showGear then "Gear" else "Abilities"
+            <| dispatch
+
             div {
                 cl "summary-under-abilities"
 
@@ -212,16 +304,20 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     stat ["Hit Points"; "Base HP"; "HP per level"] chr.HitPoints
                     stat ["Initiative"] (modifierText chr.Initiative)
                     
-                    stat ["Base AC"; "AC"] chr.BaseAC
-                    condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
+                    stat ["Armour Class"; "AC"] chr.BaseAC
+                    condStat 0 ["Physical DR"] (-1 * chr.PhysicalDR)
+                    condStat 0 ["Elemental DR"] (-1 * chr.ElementalDR)
+                    condStat 0 ["DR layers"] chr.FullMetalStacks
                     
-                    let (attackAb, score) = chr.HighestAttackBonus in
-                    stat ["Best attack bonus"; "Attack rolls"] $"{modifierText score} ({attackAb})"
-                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
                     cond chr.HighestSpellDC <| function
                         | None -> empty()
                         | Some dc -> 
                             stat ["Best spell DC"; "Spell DC"] $"{dc.Value} ({dc.Key})"
+
+                    forEach chr.WeaponAttacks <| fun (KeyValue(slot, atk)) ->
+                        stat [ slot.DisplayString ] $"""+{atk.AttackBonus}, {String.concat " + " [ for d, v in atk.Damage -> $"{d} {v}"]}"""
+
+                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
 
                 }
 
@@ -286,6 +382,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                             | All -> fun _ -> true
                             | Starting -> fun source -> ["Race"; "Archetype"; "Trait"; "Skill"] |> List.contains source 
                             | FromFeats -> fun source ->  ["Feat"; "CS:"; "MF:" ] |> List.exists source.StartsWith
+                            | FromGear -> (=) "Gear"
                             | FromSubclass scId -> 
                                 let sc = Subclasses.allSubclasses[scId]
                                 let bn = Classes.allClasses[sc.BaseClassId]
@@ -313,6 +410,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                         if chr.CurrentHistory.AllFeatIds |> Set.contains Feats.yokebreaker.Id then
                             for scId in chr.CurrentHistory.AllFeatSubPicks.GetOrElse(YB, Set.empty) do
                                 FromSubclass (UMX.tag<subclassId> scId)
+                        FromGear
                         if not <| List.isEmpty summonsPassives then Summons
                     ]
 
@@ -533,6 +631,32 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         levelDownButtons
                     }
                 }
+
+            | Pick (Gear (CharacterEquipmentSlot slot)) ->
+                Picker.view slot.DisplayString
+                    ((Equipment.allEquipmentForCSlot slot).Values
+                     |> toPicker tryGetEquipmentIconSubpath
+                    )
+                    Set.empty
+                    (Map.tryFind slot c.Equipment |> Option.toSet)
+                    1
+                    (Gear (CharacterEquipmentSlot slot))
+                    model
+                    dispatch
+
+
+            | Pick (Gear (CharacterWeaponSlot slot)) ->
+                Picker.view slot.DisplayString
+                    ((Weapons.allWeaponsForCslot slot).Values
+                     |> toPicker tryGetWeaponIconSubpath
+                    )
+                    Set.empty
+                    (Map.tryFind slot c.Weapons |> Option.toSet)
+                    1
+                    (Gear (CharacterWeaponSlot slot))
+                    model
+                    dispatch
+
             | Race -> 
                 radialStage rct dispatch
                     (BaseRaces.allBaseRaces
@@ -853,6 +977,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     picksDockButton sp.DisplayString (l.SpecialPickIds |> Set.filter (ClassLevelUpPick.typeFromId >> (=) sp)).Count
                 | FeatSubpick fsp ->
                     picksDockButton fsp.DisplayString (l.FeatSubPicks.GetOrElse(fsp, Set.empty)).Count
+                | Gear _ ->
+                    fun _ _ _ _ -> empty() // not used in character picks
             
                 <| p.Value
                 <| dispatch
@@ -951,7 +1077,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 }
             }
         )
-        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives dispatch)
+        .CharacterSummary(summaryAbilities model.UseLoreNames model.Character model.FilterPassives model.GearTabOpen dispatch)
         .LevelBoxes(levelBoxes model)
         .Error(
             concat {

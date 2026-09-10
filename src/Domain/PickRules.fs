@@ -14,6 +14,7 @@ type LevelUpPick =
     | Cantrips | Spells
     | Feats
     | FeatSubpick of FeatSubpickType
+    | Gear of CharacterGearSlot
     
 let nSkillProfPicks = 4
 let nSkillExpPicks = 2
