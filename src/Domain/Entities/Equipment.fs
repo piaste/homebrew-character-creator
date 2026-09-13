@@ -1425,7 +1425,7 @@ let rec darkJusticiarHalfPlate = {
         Id = % nameof darkJusticiarHalfPlate
         Name = "Dark Justiciar Half-Plate"
         Icon = ""
-        Rarity = Rare
+        Rarity = Epic
         Grants = [
             Complex ("Shar's Protection", "While the wearer has Shield of Faith active, reduce all incoming damage by 2 and reflect damage received back at the attacker, who takes 1d6 Necrotic damage.")
         ]
@@ -5663,7 +5663,7 @@ let rec empoweredGuardianEmblem = {
         Id = % nameof empoweredGuardianEmblem
         Name = "Empowered Guardian Emblem"
         Icon = ""
-        Rarity = Legendary
+        Rarity = Epic
         Grants = [
             Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 2. This effect can stack.")
         ]
