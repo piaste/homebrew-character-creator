@@ -5663,7 +5663,7 @@ let rec empoweredGuardianEmblem = {
         Id = % nameof empoweredGuardianEmblem
         Name = "Empowered Guardian Emblem"
         Icon = ""
-        Rarity = Legendary
+        Rarity = Epic
         Grants = [
             Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 2. This effect can stack.")
         ]
