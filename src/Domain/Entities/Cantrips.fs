@@ -215,7 +215,7 @@ let rec ``Spellbound Empowerment`` : CantripDef = {
 
 let rec ``Thorn Whip`` : CantripDef = {
     Id = % nameof ``Thorn Whip``
-    CantripDescription = "Deal 1d8 Piercing Damage and potentially pull a creature 9 m closer to you. Cannot pull targets if their size is classified as Huge. Offense: STR Save."
+    CantripDescription = "Deal 1d8 Piercing Damage and potentially pull a creature 9 m closer to you. Cannot pull targets if their size is classified as Huge. Offense: Attack roll w/ STR Save."
     Concentration = false
     ActionCost = Action
 }
