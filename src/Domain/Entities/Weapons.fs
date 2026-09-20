@@ -573,7 +573,7 @@ let rec faithbreaker = {
         Id = % nameof faithbreaker
         Name = "Faithbreaker"
         Icon = ""
-        Rarity = Uncommon
+        Rarity = Rare
         Grants = [
             Complex("Absolute Power", "Weapon action, Recharge: Per Battle, attack and deal additional 1d12 Radiant damage and possibly push target back 9m/30ft")
         ]
@@ -1511,7 +1511,7 @@ let rec knifeOfTheUndermountainKing = {
         Id = % nameof knifeOfTheUndermountainKing
         Name = "Knife of the Undermountain King"
         Icon = ""
-        Rarity = Rare
+        Rarity = Epic
         Grants = [
             Complex("Organ Rearranger", "Reduce the number needed to roll a Critical Hit while attacking by 1. This effect can stack.")
         ]
@@ -1695,7 +1695,7 @@ let rec swordOfScreams = {
         Id = % nameof swordOfScreams
         Name = "Sword of Screams"
         Icon = ""
-        Rarity = Uncommon
+        Rarity = Rare
         Grants = [
             Complex("Screaming Edge", "Upon dealing Damage, you potentially inflict Mind Sliver for three tuns.")
         ]

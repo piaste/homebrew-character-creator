@@ -3572,7 +3572,7 @@ let rec dauntlessAmulet = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Dragonslayer", "The number you need to roll a Critical Hit while attacking a Dangerous creature is reduced by 1. When attacking a Fatal creature, it is reduced by 2.")
+            Complex ("Dragonslayer", "Attack Rolls made against Dangerous or Fatal creatures are rolled with Advantage.")
         ]
     }
     Slot = Necklace
@@ -5663,9 +5663,9 @@ let rec empoweredGuardianEmblem = {
         Id = % nameof empoweredGuardianEmblem
         Name = "Empowered Guardian Emblem"
         Icon = ""
-        Rarity = Legendary
+        Rarity = Epic
         Grants = [
-            Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 2. This effect can stack.")
+            Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 1.")
         ]
     }
     Slot = Trinket
