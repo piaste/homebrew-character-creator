@@ -573,7 +573,7 @@ let rec faithbreaker = {
         Id = % nameof faithbreaker
         Name = "Faithbreaker"
         Icon = ""
-        Rarity = Uncommon
+        Rarity = Rare
         Grants = [
             Complex("Absolute Power", "Weapon action, Recharge: Per Battle, attack and deal additional 1d12 Radiant damage and possibly push target back 9m/30ft")
         ]
@@ -1511,7 +1511,7 @@ let rec knifeOfTheUndermountainKing = {
         Id = % nameof knifeOfTheUndermountainKing
         Name = "Knife of the Undermountain King"
         Icon = ""
-        Rarity = Rare
+        Rarity = Epic
         Grants = [
             Complex("Organ Rearranger", "Reduce the number needed to roll a Critical Hit while attacking by 1. This effect can stack.")
         ]
@@ -1695,7 +1695,7 @@ let rec swordOfScreams = {
         Id = % nameof swordOfScreams
         Name = "Sword of Screams"
         Icon = ""
-        Rarity = Uncommon
+        Rarity = Rare
         Grants = [
             Complex("Screaming Edge", "Upon dealing Damage, you potentially inflict Mind Sliver for three tuns.")
         ]
@@ -1753,7 +1753,7 @@ let rec duellistsPrerogative = {
         Icon = ""
         Rarity = Legendary
         Grants = [
-            Power(Reaction, AtWill, "Elegant Duellist", "While your off-hand is empty, reduce the number needed to roll a Critical hit by 2. Additionally, you gain an additional Reaction.");
+            Power(Reaction, AtWill, "Elegant Duellist", "While your off-hand is empty, reduce the number needed to roll a Critical hit by 1.");
             Power(Reaction, AtWill, "Withering Cut", "On a hit with a melee weapon, use a Reaction to deal Necrotic damage equal to your Proficiency Bonus.");
             Power(BonusAction, OncePerTurn, "Dueller's Enthusiasm", "Weapon action, Recharge: Per Turn, while not dual-wielding, you can make an additional melee attack as a bonus action")
         ]
@@ -1867,7 +1867,7 @@ let rec coldSnap = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Chilling Counter", "When a creature fails an attack roll against you, it becomes Chilled for 3 turns.")
+            Complex("Chilling Counter", "When a creature fails an attack roll against you, it gains one stack of Frostbite.")
         ]
     }
     Type = Dagger
@@ -2289,7 +2289,7 @@ let rec everburnBlade = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Everburn", "Dealing damage with this weapon causes your target to Burn for one turn.")
+            Complex("Everburn", "Dealing damage with this weapon causes your target to potentially gain Curse of Hellfire for one Turn.")
         ]
     }
     Type = Greatsword
