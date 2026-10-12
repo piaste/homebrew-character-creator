@@ -1207,7 +1207,7 @@ let rec carefulSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof carefulSpell
     Name = "Careful Spell"
-    Grants = [ Complex ("Careful Spell", "Metamagic (1): Allies automatically succeed Saving Throws against Spell/Cantrip") ]
+    Grants = [ Complex ("Careful Spell", "Metamagic (1): Allies automatically succeed Saving Throws against Spell/Cantrip. AOE spells don't affect allies") ]
 }
 
 let rec defensiveSpell : ClassLevelUpPick = {
@@ -1221,7 +1221,7 @@ let rec distanceSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof distanceSpell
     Name = "Distance Spell"
-    Grants = [ Complex ("Distance Spell", "Metamagic (1): Increase range of targeted Spell/Cantrip by 50%") ]
+    Grants = [ Complex ("Distance Spell", "Metamagic (1): Increase range of targeted Spell/Cantrip by 50%, or increase melee Spell/Cantrip range to 9m/30ft") ]
 }
 
 let rec dreadfulSpell : ClassLevelUpPick = {
@@ -1263,7 +1263,7 @@ let rec maximizedMagic : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof maximizedMagic
     Name = "Maximized Magic"
-    Grants = [ Complex ("Maximized Magic", "Metamagic (1): Spell and Cantrip deals maximum amount of damage possible") ]
+    Grants = [ Complex ("Maximized Magic", "Metamagic (1): Target rolls saving throw with -10 penalty") ]
 }
 
 let rec piercingSpell : ClassLevelUpPick = {
@@ -1312,7 +1312,7 @@ let rec tempestuousSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tempestuousSpell
     Name = "Tempestuous Spell"
-    Grants = [ Complex ("Tempestuous Spell", "Metamagic (1): Spell/Cantrip pushes targets back 9m and inflicts Prone") ]
+    Grants = [ Complex ("Tempestuous Spell", "Metamagic (1): Spell/Cantrip pushes targets back 9m and inflicts Prone on failed Strength Save") ]
 }
 
 let rec tripledSpell : ClassLevelUpPick = {
@@ -1326,7 +1326,7 @@ let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Complex ("Twinned Spell", "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures (or the same creature twice)") ]
+    Grants = [ Complex ("Twinned Spell", "Metamagic (1): Your next single target Spell automatically crits") ]
 }
 
 type private Placeholder = class end
