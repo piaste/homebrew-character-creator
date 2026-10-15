@@ -43,7 +43,7 @@ let rec empoweredSummon : ArchetypeDef = {
 let rec fortifiedArmour : ArchetypeDef = {
     Id = % nameof fortifiedArmour
     Name = "Fortified Armour"
-    Grants = [ Complex ("Fortified Armour", "While not wearing Light Armour, your armour class is increased by 2. While not wearing Heavy Armour, your Damage Reduction is increase by 2.") ]
+    Grants = [ Complex ("Fortified Armour", "While not wearing Light Armour, your armour class is increased by 2. While not wearing Heavy Armour, your Damage Reduction is increased by 2.") ]
 }
 
 let rec imposingWill : ArchetypeDef = {
