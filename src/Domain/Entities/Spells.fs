@@ -1502,7 +1502,7 @@ let sleetStorm =
       Name = "Sleet Storm"
       SpellDescription = "Disrupt concentration on failed save in huge area. Douses fires"
       SpellLists = [ Primal; Innate ]
-      Concentration = true
+      Concentration = false
       Upcastable = false
       ActionCost = Action }
 
