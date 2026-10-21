@@ -235,8 +235,8 @@ let rec mageSlayer : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Mage Slayer: Disruption", "Damaged enemies immediately lose Concentration.")
-        yield! alsoAffectsSummons <| Complex("Mage Slayer: Silence", "Damaging an enemy silences them for 1 turn.")
+        Complex("Mage Slayer: Disruption", "Enemies you damage immediately lose Concentration.")
+        Complex("Mage Slayer: Silence", "Damaging an enemy silences them for 1 turn.")
     ]
 }
 
