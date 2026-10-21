@@ -1,0 +1,116 @@
+:root {
+    --slot-size: 50px;
+    --gap: 10px;
+    --bg: #1a1713;
+    --panel: #27211b;
+    --border: #8d7344;
+    --border-hover: #d8b55b;
+    --ghost: rgba(232,221,198,.8);
+}
+
+.equipment {
+    display: grid;
+    grid-template-columns: repeat(3, var(--slot-size));
+    grid-template-areas:
+        "head . note"
+        "arms chest neck"
+        "feet ringLeft ringRight"
+        "meleeMain . rangedMain"
+        "meleeOffhand . rangedOffhand";
+    gap: var(--gap);
+    width:fit-content;
+}
+
+.slot {
+    width: var(--slot-size);
+    height: var(--slot-size);
+    position: relative;
+
+    border: 2px solid;
+    border-color: var(--muted);
+    border-radius: 10px;
+
+    background:
+        linear-gradient(145deg,#3a3026,#241d17);
+
+    cursor: pointer;
+    transition: .18s;
+
+    &:has(> [data-rarity="Common"]) {
+        border-color: lightgrey;
+    }
+    &:has(> [data-rarity="Uncommon"]) {
+        border-color: rgb(6, 100, 6);
+    }
+    &:has(> [data-rarity="Rare"]) {
+        border-color: rgb(24, 159, 213);
+    }
+    &:has(> [data-rarity="Epic"]) {
+        border-color: purple;
+    }
+    &:has(> [data-rarity="Legendary"]) {
+        border-color: gold;
+    }
+}
+
+.slot:hover {
+  border-color: rgba(255,215,128,0.38);
+  box-shadow: 0 0 8px #ffd700, 0 0 16px rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 4px #ffd700, 0 0 8px #ffd700;
+}
+
+.slot:active {
+    transform: scale(.97);
+}
+
+.slot::after, .slot > div > p {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 2px;
+
+    text-transform: uppercase;
+    letter-spacing: 0;
+
+    color: var(--muted2);
+    text-shadow: none;
+    font-size: x-small;
+
+    pointer-events: none;
+}
+
+/* hides slot text if there is a child element */
+.slot:has(> *)::after {
+    content: none;
+}
+
+/* hides item name if the icon is not empty */
+div:has(> img:not([style*="display: none"])) > p {
+  display: none;
+}
+
+/* Larger chest slot */
+
+/* Grid placement */
+.attunement-budget { grid-area: note }
+.head    { grid-area: head; justify-self:start; }
+.neck    { grid-area: neck; }
+.chest   { grid-area: chest; }
+.arms    { grid-area: arms; }
+
+.ringLeft   { grid-area: ringLeft; }
+.ringRight   { grid-area: ringRight; }
+
+.feet    { grid-area: feet; justify-self:center; }
+
+.meleeMain  { grid-area: meleeMain; }
+.meleeOffhand  { grid-area: meleeOffhand; }
+
+.rangedMain { grid-area: rangedMain; }
+.rangedOffhand { grid-area: rangedOffhand; }

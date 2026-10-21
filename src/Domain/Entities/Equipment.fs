@@ -5724,4 +5724,7 @@ let rec skeletonKey = {
 }
 
 type private Placeholder = class end
-let allTraits = getAll<Placeholder, EquipmentDef, itemId>()
+let allEquipment = getAll<Placeholder, EquipmentDef, equipmentId>()
+
+let allEquipmentForSlot slot = allEquipment |> Map.filter (fun _ v -> v.Slot = slot)
+let allEquipmentForCSlot cslot = allEquipment |> Map.filter (fun _ v -> v.Slot = equipmentSlotForCESlot cslot)

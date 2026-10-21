@@ -2,6 +2,7 @@ module Bg3HomebrewCCreator.Domain.Types
 open FSharp.UMX
 
 // Basics
+type [<Measure>] unspecified = 1 // for strings with no specific ID
 
 type ActionCost =
     | Action
@@ -57,6 +58,10 @@ let elementalDmgTypes =
 type DamageType = 
     | Physical of PhysicalDmg
     | Elemental of ElementalDmg
+    override this.ToString (): string =
+        match this with
+        | Physical x -> x.ToString()
+        | Elemental x -> x.ToString()
 
 type Ability =
     | STR
@@ -80,7 +85,7 @@ type StatModifiers = {
     ``HP per level`` : int
     ``Base HP`` : int
 } with 
-    static member Zero = { Abilities = Map []; ``Attack rolls`` = 0; Speed = 0.; 
+    static member Zero = { Abilities = Map.empty; ``Attack rolls`` = 0; Speed = 0.;
     ``Critical Range`` = 0; ``Magic Critical Range`` = 0; 
     AC = 0; DR = 0; Initiative = 0; ``HP per level`` = 0; ``Base HP`` = 0 }
     
@@ -427,7 +432,8 @@ type FeatDef = {
 
 // Gear
 
-type [<Measure>] itemId
+type [<Measure>] equipmentId
+type [<Measure>] weaponId
 type [<Measure>] attunement
 
 type ItemRarity = 
@@ -451,17 +457,58 @@ type EquipmentSlot =
     | Helmet | Chest | Feet | Arms
     | Necklace | Ring | Trinket
 
+type CharacterEquipmentSlot =
+    | CHelmet | CChest | CFeet | CArms
+    | CNecklace | CRingLeft | CRingRight | CTrinket
+    member this.DisplayString =
+        match this with
+        | CHelmet -> "Head" | CChest -> "Chest" | CFeet -> "Feet" | CArms -> "Arms"
+        | CNecklace -> "Neck" | CRingLeft -> "Left Ring" | CRingRight -> "Right Ring" | CTrinket -> "Trinket"
+
+let equipmentSlotForCESlot = function
+    | CHelmet -> Helmet
+    | CChest -> Chest
+    | CFeet -> Feet
+    | CArms -> Arms
+    | CNecklace -> Necklace
+    | CTrinket -> Trinket
+    | CRingLeft | CRingRight -> Ring
+
+
 type WeaponSlot = 
     | MeleeOneHand | MeleeTwoHands | Shield
     | RangedOneHand | RangedTwoHands
 
-type Item = {
-    Id : string<itemId>
+
+type CharacterWeaponHand = Main | Offhand
+type CharacterWeaponSlot =
+    | Melee of CharacterWeaponHand
+    | Ranged of CharacterWeaponHand
+    member this.Family =
+         match this with | Melee _ -> Melee | Ranged _ -> Ranged
+    member this.DisplayString =
+        this.ToString()
+
+type CharacterGearSlot =
+    | CharacterEquipmentSlot of CharacterEquipmentSlot
+    | CharacterWeaponSlot of CharacterWeaponSlot
+
+type Item<[<Measure>] 'm> = {
+    Id : string<'m>
     Name : string
     Icon: string
     Rarity : ItemRarity
     Grants: Passive list
 }
+
+let toGenericItem (x : Item<'m>) = {
+    Id = UMX.untag x.Id |> UMX.tag<1>
+    Name = x.Name
+    Icon = x.Icon
+    Rarity = x.Rarity
+    Grants = x.Grants
+}
+
 
 type WeaponType = 
     | Shield | Dagger | Shortsword | Rapier
@@ -471,6 +518,60 @@ type WeaponType =
     | Greatclub | Maul | Pike | HandCrossbow | LightCrossbow | HeavyCrossbow
     | Shortbow | Longbow | Wand
 
+
+let isFinesse = function
+    | Dagger | Shortsword | Rapier | Quarterstaff
+    | Longsword | Scimitar | Javelin | Spear | Trident
+    | Glaive
+        -> true
+    | _ -> false
+
+let baseDamageType = function
+    | Shield
+    | Club | Flail | LightHammer | Mace
+    | MorningStar | Warhammer | Quarterstaff
+    | Greatclub | Maul | Pike
+        -> Physical Crushing
+
+    | Longsword | Scimitar | Sickle | Battleaxe | Handaxe
+    | Greataxe | Greatsword | Halberd | Glaive
+        -> Physical Slashing
+
+    | Dagger | Shortsword | Rapier | WarPick | Javelin | Spear | Trident
+    | HandCrossbow | LightCrossbow | HeavyCrossbow | Shortbow | Longbow
+        -> Physical Piercing
+
+    | Wand
+        // Placeholder
+        -> Elemental Force
+
+let weaponEnhancement = function
+    | Common | Uncommon -> 0
+    | Rare -> 1 | Epic -> 2 | Legendary -> 3
+
+let weaponSlotForType = function
+    | Shield -> WeaponSlot.Shield
+    | Dagger | Shortsword | Rapier | Club | Flail | LightHammer | Mace
+    | MorningStar | Warhammer | Quarterstaff | Battleaxe | Handaxe
+    | Longsword | Scimitar | Sickle | WarPick | Javelin | Spear | Trident
+        -> MeleeOneHand
+
+    | Greataxe | Greatsword | Halberd | Glaive
+    | Greatclub | Maul | Pike
+        -> MeleeTwoHands
+
+    | HandCrossbow
+        -> RangedOneHand
+
+    | LightCrossbow | HeavyCrossbow | Shortbow | Longbow | Wand
+        -> RangedTwoHands
+let characterSlotForWeaponSlot = function
+    | MeleeOneHand -> [Melee Main; Melee Offhand]
+    | MeleeTwoHands -> [Melee Main ]
+    | WeaponSlot.Shield -> [Melee Offhand]
+    | RangedOneHand -> [Ranged Main; Ranged Offhand]
+    | RangedTwoHands -> [Ranged Main ]
+
 type [<Measure>] dmg
 type DamageValue = 
     | Static of int<dmg>
@@ -479,19 +580,35 @@ type DamageValue =
         match this with
         | Static x -> x, x
         | Dice (number, size) -> number * 1<dmg>, number * size * 1<dmg>
+    override this.ToString() =
+        match this with
+        | Static x -> x.ToString()
+        | Dice (n, s) -> $"{n}d{s}"
+
+let toDmg (x: int) = Static (UMX.tag<dmg> x)
 
 type WeaponDef = {
-    Item : Item
+    Item : Item<weaponId>
     Type: WeaponType
-    DamageBonus: DamageValue * DamageType
+    DamageBonus: (DamageValue * DamageType) list
 } with
     member this.Id = this.Item.Id
     member this.Name = this.Item.Name
 
+    member this.Description =
+        $"""{this.Item.Rarity}. {this.Item.Grants |> List.map _.Description |> String.concat ". "}"""
+
+type ArmourType = Light | Medium | Heavy
 
 type EquipmentDef = {
-    Item : Item
+    Item : Item<equipmentId>
     Slot : EquipmentSlot
 } with
     member this.Id = this.Item.Id
     member this.Name = this.Item.Name
+
+    member this.Description =
+        $"""{this.Item.Rarity}. {this.Item.Grants |> List.map _.Description |> String.concat ". "}"""
+
+    // placeholder
+    member this.ArmourType = Light

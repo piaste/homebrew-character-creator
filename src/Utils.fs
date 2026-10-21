@@ -83,6 +83,8 @@ module Option =
     let inline either fSome fNone option = 
         match option with | Some v -> fSome v | None -> fNone ()
 
+    let toSet = function | None -> Set.empty | Some v -> Set.singleton v
+
 type Set<'T when 'T : comparison> with
     member this.Toggle value = 
         if this.Contains value then this.Remove value else this.Add value
@@ -139,6 +141,11 @@ let englishToPascalCase (text: string) =
         else 
             newWord <- true
     sb.ToString()
+
+let englishToCamelCase text =
+    if String.IsNullOrWhiteSpace text then text else
+    let p = englishToPascalCase text
+    $"{Char.ToLower p[0]}{p[1..]}"
 
 type GameString(defaultText: string, ?loreText : string, ?iconSubpath : string) =
     
