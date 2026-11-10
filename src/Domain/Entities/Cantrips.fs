@@ -10,6 +10,20 @@ let rec ``Acid Burst`` : CantripDef = {
     ActionCost = Action
 }
 
+let rec ``Arcane Barrage`` : CantripDef = {
+    Id = % nameof ``Arcane Barrage``
+    CantripDescription = "Fire a barrage of three arcane bolts. Offense: Ranged 18m."
+    Concentration = false
+    ActionCost = Action
+}
+
+let rec ``Arcane Spheres`` : CantripDef = {
+    Id = % nameof ``Arcane Spheres``
+    CantripDescription = "Target an ally to restore Hit Points, or make a ranged spell attack against an enemy to deal Necrotic damage. The effect uses D4 cantrip scaling and is multiplied by the number of Arcane Spheres you hold (1× normally, then 2×, 3×, or 4×). Damaging an enemy builds Arcane Spheres up to three. Duration: until combat ends. Offense: Ranged 18m."
+    Concentration = false
+    ActionCost = Action
+}
+
 let rec ``Blade Surge`` : CantripDef = {
     Id = % nameof ``Blade Surge``
     CantripDescription = "Deal 1d12 Force Damage in a 3 m area around you. On save targets still take half damage. Duration: 1 turn. Offense: DEX Save."
@@ -17,9 +31,9 @@ let rec ``Blade Surge`` : CantripDef = {
     ActionCost = Action
 }
 
-let rec ``Blade Ward`` : CantripDef = {
-    Id = % nameof ``Blade Ward``
-    CantripDescription = "Gain Resistance to your next instance of physical damage. Duration: 3 turns. Offense: Buff."
+let rec ``Blessed Ward`` : CantripDef = {
+    Id = % nameof ``Blessed Ward``
+    CantripDescription = "Gain Resistance to the next instance of damage that you suffer. Duration: 3 turns. Offense: Buff."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -31,16 +45,23 @@ let rec ``Bone Chill`` : CantripDef = {
     ActionCost = Action
 }
 
-let rec ``Create or Extinguish Flames`` : CantripDef = {
-    Id = % nameof ``Create or Extinguish Flames``
-    CantripDescription = "Create a 3 m flame surface or extinguish fire from a creature, object or surface. Duration: 3 turns. Offense: Surface."
+let rec ``Cragrain`` : CantripDef = {
+    Id = % nameof ``Cragrain``
+    CantripDescription = "Cause three boulders to rain down on targets of your choice, potentially Dazing them. Duration: 1 turn. Offense: CON Save."
+    Concentration = false
+    ActionCost = Action
+}
+
+let rec ``Create or Destroy Water`` : CantripDef = {
+    Id = % nameof ``Create or Destroy Water``
+    CantripDescription = "Call forth rain within a 3 m area or destroy a water-based surface. This Cantrip may be cast while Silenced or Muted and will not break Stealth. Duration: 3 turns. Offense: Utility."
     Concentration = false
     ActionCost = BonusAction
 }
 
-let rec ``Dancing Lights`` : CantripDef = {
-    Id = % nameof ``Dancing Lights``
-    CantripDescription = "Create glowing wisps illuminating a 9 m radius, sneaking or invisible enemies within the radius are revealed. You may also choose to instead cause a creature or item to glow brightly, illuminating a 9 m radius. Duration: until long rest. Offense: Light."
+let rec ``Create or Extinguish Flames`` : CantripDef = {
+    Id = % nameof ``Create or Extinguish Flames``
+    CantripDescription = "Create a 3 m flame surface or extinguish fire from a creature, object or surface. Duration: 3 turns. Offense: Surface."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -73,9 +94,9 @@ let rec ``Friends`` : CantripDef = {
     ActionCost = BonusAction
 }
 
-let rec ``Frostbite`` : CantripDef = {
-    Id = % nameof ``Frostbite``
-    CantripDescription = "Deal 1d12 Cold Damage and apply Frigid, imposing Disadvantage on the creature's Attack Rolls until they deal damage. Duration: 1 turn. Offense: Melee."
+let rec ``Frigid Touch`` : CantripDef = {
+    Id = % nameof ``Frigid Touch``
+    CantripDescription = "Touch a creature, causing a numbing frost to form around them, imposing Disadvantage on their next Attack Roll. Duration: 1 turn. Offense: Melee."
     Concentration = false
     ActionCost = Action
 }
@@ -94,16 +115,9 @@ let rec ``Guidance`` : CantripDef = {
     ActionCost = BonusAction
 }
 
-let rec ``Guiding Moonlight (Light)`` : CantripDef = {
-    Id = % nameof ``Guiding Moonlight (Light)``
-    CantripDescription = "Infuse a weapon granting it a +2 bonus to both it's Attack Rolls and Damage. Weapons may benefit from only one enchantment from Spells or Cantrips. May only affect one weapon at a time. Duration: permanent. Offense: Melee."
-    Concentration = false
-    ActionCost = BonusAction
-}
-
-let rec ``Gust Bellow`` : CantripDef = {
-    Id = % nameof ``Gust Bellow``
-    CantripDescription = "Expel a blast of wind around yourself removing any nearby surfaces and potentially forcing creatures back by 9 m. Offense: STR Save."
+let rec ``Guiding Moonlight`` : CantripDef = {
+    Id = % nameof ``Guiding Moonlight``
+    CantripDescription = "Infuse a creature's weapon with a faint glow of guiding moonlight. It gains a +2 bonus to both Attack Rolls and damage. Duration: permanent. Offense: Melee."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -122,18 +136,11 @@ let rec ``Mind Sliver`` : CantripDef = {
     ActionCost = Action
 }
 
-let rec ``Minor Illusion`` : CantripDef = {
-    Id = % nameof ``Minor Illusion``
-    CantripDescription = "Create an illusion to distract nearby creatures, causing the next Attack Roll made against them to be rolled with Advantage. Should all affected creatures fail their Investigation Skill Check they will become Critically Distracted instead, causing all Attack Rolls to be made with advantage until the end of their turn. This Cantrip may be cast while Silenced or Muted and will not break Stealth. Duration: 1 turn. Offense: Skill Check."
+let rec ``Piercing Torrent`` : CantripDef = {
+    Id = % nameof ``Piercing Torrent``
+    CantripDescription = "Fire a piercing stream of concentrated water. The torrent will chain to one other creature who is Wet within 9 m of your original target. Duration: 1 turn. Offense: Ranged 18m."
     Concentration = false
-    ActionCost = BonusAction
-}
-
-let rec ``Mud Mantle`` : CantripDef = {
-    Id = % nameof ``Mud Mantle``
-    CantripDescription = "Gain Resistance to the next instance of elemental damage you would take and you cannot Burn. Condition removed upon taking damage. This Cantrip may be cast while Silenced or Muted. Duration: 3 turns. Offense: Buff."
-    Concentration = false
-    ActionCost = BonusAction
+    ActionCost = Action
 }
 
 let rec ``Poison Spray`` : CantripDef = {
@@ -160,6 +167,13 @@ let rec ``Primal Savagery`` : CantripDef = {
 let rec ``Produce Flame`` : CantripDef = {
     Id = % nameof ``Produce Flame``
     CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. You may hurl the flame as a ▢ Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
+    Concentration = false
+    ActionCost = BonusAction
+}
+
+let rec ``Psionic Rush`` : CantripDef = {
+    Id = % nameof ``Psionic Rush``
+    CantripDescription = "Conjure a psionic shield and rush forward like a battering ram, potentially knocking creatures in your path Prone. Duration: 1 turn. Offense: STR Save."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -213,6 +227,13 @@ let rec ``Spellbound Empowerment`` : CantripDef = {
     ActionCost = BonusAction
 }
 
+let rec ``Telekinetic Hurl`` : CantripDef = {
+    Id = % nameof ``Telekinetic Hurl``
+    CantripDescription = "Telekinetically throw a nearby creature or object. Duration: 1 turn. Offense: INT Save."
+    Concentration = false
+    ActionCost = BonusAction
+}
+
 let rec ``Thorn Whip`` : CantripDef = {
     Id = % nameof ``Thorn Whip``
     CantripDescription = "Deal 1d8 Piercing Damage and potentially pull a creature 9 m closer to you. Cannot pull targets if their size is classified as Huge. Offense: Attack roll w/ STR Save."
@@ -234,13 +255,6 @@ let rec ``Thunderous Strike`` : CantripDef = {
     ActionCost = Action
 }
 
-let rec ``Titan's Boon`` : CantripDef = {
-    Id = % nameof ``Titan's Boon``
-    CantripDescription = "Enlarge yourself, improving the majority of your physical capabilities and causing you to deal an additional 1d4 Damage with all Melee Weapon and Unarmed attacks. Duration: permanent. Offense: Concentration Buff."
-    Concentration = true
-    ActionCost = BonusAction
-}
-
 let rec ``Toll the Dead`` : CantripDef = {
     Id = % nameof ``Toll the Dead``
     CantripDescription = "Deal 1d8 Necrotic Damage to a target. If the target is below half of their total Hit Points this Cantrip deals double damage. On Save, the target still takes half the damage. Offense: WIS Save."
@@ -248,23 +262,9 @@ let rec ``Toll the Dead`` : CantripDef = {
     ActionCost = Action
 }
 
-let rec ``Torrent`` : CantripDef = {
-    Id = % nameof ``Torrent``
-    CantripDescription = "Target a creature and cause them to become Wet. This Cantrip may be cast while Silenced or Muted and will not break Stealth. Duration: 3 turns. Offense: Debuff."
-    Concentration = false
-    ActionCost = BonusAction
-}
-
 let rec ``True Strike`` : CantripDef = {
     Id = % nameof ``True Strike``
     CantripDescription = "Target yourself or an allied creature to give them a condition that allows them to ignore Resistances to all damage types when dealing damage to an enemy or item. This includes Damage Reduction granted by your targets armour. This Cantrip may be cast while Silenced or Muted and will not break Stealth. Duration: 1 turn. Offense: Buff."
-    Concentration = false
-    ActionCost = BonusAction
-}
-
-let rec ``Vicious Mockery`` : CantripDef = {
-    Id = % nameof ``Vicious Mockery``
-    CantripDescription = "Target an enemy to potentially cause their Attack Rolls to be made with Disadvantage until the end of their turn. Duration: 1 turn. Offense: WIS Save."
     Concentration = false
     ActionCost = BonusAction
 }
