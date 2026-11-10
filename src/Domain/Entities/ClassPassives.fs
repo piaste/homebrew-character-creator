@@ -201,7 +201,7 @@ let rec emergencyPowerCell = {
     ClassId = artificer.Id
     Id = % nameof emergencyPowerCell
     Name = "Emergency Power Cell"
-    Grants = [ Complex("Passive_SoulOfArtefice" <!!> "Emergency Power Cell", "Once per turn, missing an Attack Roll will refund your Action.") ]
+    Grants = [ Complex("Passive_SoulOfArtefice" <!!> "Emergency Power Cell", "Once per turn, missing an Attack Roll will refund your Action. Will not trigger on AoE or Multi-Hit attacks.") ]
 }
 
 let rec failsafeInjection = {
@@ -640,10 +640,9 @@ let rec killerInstinct = {
 let rec mantraOfRestoration = {
     ClassId = druid.Id
     Id = % nameof mantraOfRestoration
-    Name = "Mantra of Restoration"
+    Name = "Mother Nature's Restoration"
     Grants = [
-        Power(FreeAction, AtWill, "Solar Mend", "Expend Wild Shape charges to restore Spell Slots while not Wild Shaped.")
-        Simple ("Lunar Mend: Heal yourself while in the form of a Wild Shape.")
+        Simple ("Lunar Mend: Heal yourself through Spell Slots while in the form of a Wild Shape.")
     ]
 }
 
@@ -1660,7 +1659,7 @@ let rec eldritchLanceBoon = {
     ClassId = warlock.Id
     Id = % nameof eldritchLanceBoon
     Name = "Eldritch Lance Boon"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lance", "Concentrated variant of Eldritch Blast that pierces enemies and deals 1d12 Force damage/spell level at the cost of one Spell Slot.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lance", "Concentrated variant of Eldritch Blast modified by Eldritch Boons that pierces enemies and deals 1d12 Force damage/spell level at the cost of one Spell Slot.") ]
 }
 
 let rec eldritchStrikeBoon = {

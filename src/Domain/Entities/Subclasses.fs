@@ -87,10 +87,10 @@ let rec giantsBlood =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(BonusAction, AtWill, "Action_GiantsRage" <!!> "Rage", "Giant’s Blood: Drastic size increase, reach, and damage.")
-                Power(BonusAction, AtWill, "Stormheel", "Kick creatures away for Strength modifier damage.")
+                Power(BonusAction, AtWill, "Stormheel", "Kick creatures away for Strength modifier Unarmed damage.")
             ]
             3<classLvl>, [ Power(Action, AtWill, "Action_MightyImpel" <!!> "Mighty Impel", "Pick up and throw heavy creatures or objects.") ]
-            5<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Poisebreaker", $"{TOGGLEABLE}: Melee attacks deal Strength modifier damage in 3m area.") ]
+            5<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Poisebreaker", $"{TOGGLEABLE}: Melee attacks deal Strength modifier Force damage in 3m area.") ]
             7<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Titanic Strength", "Dual-wield Two-Handed weapons.") ]
             9<classLvl>, [ Complex("PassiveFeature_GiantsRage" <!!> "Towering Blows", "Advantage on damage rolls against Large or smaller creatures.") ]
             11<classLvl>, [
@@ -284,7 +284,7 @@ let rec circleOfTheElements =
             5<classLvl>, [ Power(FreeAction, AtWill, "Spell_2e_ElementalCounter" <!!> "Tempestuous Seasons", "Advance seasons by expending Wild Shape for AOE damage.") ]
             7<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Natural Desolation", "Ignore seasonal damage Resistances and Immunities.") ]
             9<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Maelstrom", "Kills/Crits trigger AOE seasonal damage without advancing.") ]
-            11<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Avatar of Gaia", "Recover all Wild Shape charges every turn.") ]
+            11<classLvl>, [ Complex("Spell_2e_ElementalCounter" <!!> "Avatar of Gaia", "Causes Mantra of Rebirth to restore two Wildshape Charges per turn.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map [ 1<classLvl>, [(DruidWildshape, 1)]; 5<classLvl>, [(DruidWildshape, 1)]; 9<classLvl>, [(DruidWildshape, 1)] ]
@@ -359,7 +359,7 @@ let rec circleOfTheSpores =
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Reaction, AtWill, "Action_HaloOfSpores" <!!> "Halo of Spores", "Deal Necrotic damage as a reaction.")
+                Power(BonusAction, AtWill, "Action_HaloOfSpores" <!!> "Halo of Spores", "Deal Necrotic damage as a bonus action.")
                 Power(Action, AtWill, "Action_SymbioticEntity" <!!> "Symbiotic Entity", "Gain Temporary Hit Points and extra Necrotic damage.")
             ]
             3<classLvl>, [ Power(BonusAction, AtWill, "PassiveFeature_SpreadingSpores" <!!> "Animating Spores", "Reanimate corpses as fungal servants.") ]
@@ -387,7 +387,7 @@ let rec circleOfTheStars =
             3<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Singularity", "Restore Star Map upon landing a killing blow or Critical Hit, in addition to every 3 turns in combat.") ]
             5<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Guidance of the Stars", "Cosmos cantrips upgraded to stronger versions.") ]
             7<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_StarMap" <!!> "Cosmic Omens", "Weal/Woe to buff allies or debuff enemies.") ]
-            9<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Twinkling Constellations", "Shapes grant passive bonuses; cantrips max out.") ]
+            9<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Twinkling Constellations", "Shapes grant passive bonuses; cantrips max out. Dragon Form allows you to ignore all Concentration based Saving Throws.") ]
             11<classLvl>, [ Complex("PassiveFeature_StarMap" <!!> "Eyes of the Cosmos", "All three constellation forms active at all times.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -539,7 +539,7 @@ let rec arcanist =
         FixedAbilities = Map [
             3<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Mystic Reload", "Killing blows with Ranged Weapon Attacks restore a Spell Slot (level = Artificer Lvl / 2).") ]
             5<classLvl>, [ Power(BonusAction, AtWill, "Passive_AlchemicalSavant" <!!> "Arcane Ballistics", "Casting a spell allows a Ranged Weapon Attack.") ]
-            7<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Ballistic Ricochet", "Ranged damage creates an Arcane Missile targeting another enemy.") ]
+            7<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Ballistic Ricochet", "Ranged damage creates an Arcane Missile targeting another enemy. Can trigger multiple times per turn.") ]
             9<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Runic Reload Module", "Reloading grants Advantage on next Spell Attack and Damage Rolls.") ]
             11<classLvl>, [ Complex("Passive_AlchemicalSavant" <!!> "Arcane Aim", "Critical Hits with Ranged attacks allow casting a spell without a slot.") ]
         ]
@@ -739,9 +739,9 @@ let rec collegeOfSteel =
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Steelforged Flourish", "Defensive, Mobile, or Slashing weapon techniques.") ]
             3<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Melodic Steel", "Killing blow or Critical Hit restores Inspiration.") ]
-            5<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            5<classLvl>, [ Complex("Inspirational Blows", "When dealing damage with a weapon, you deal additional damage equal to your Bardic Inspiration.") ]
             7<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Performative Edge", "Advantage on weapon Attack and Damage Rolls while Performing.") ]
-            9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Upon landing a killing blow with one of your Steelforged Flourishes, you may cast a Spell without expending an Action, Bonus Action, or Reaction.") ]
             11<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Climactic Strikes", "Weapon killing blow while Performing puts you in Performative Chorus.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -758,7 +758,7 @@ let rec collegeOfValour =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Action_Bard_RestoreBardicInspiration" <!!> "Refined Bardic Inspiration", "Inspiration can now add to Damage Rolls or Armour Class.") ]
             3<classLvl>, [ Power(Action, AtWill, "PassiveFeature_BardicInspiration_Damage" <!!> "Song of Valor", "Revitalize as a Long Rest once per day. (Replaces Song of Rest)") ]
-            5<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Valorous Camaraderie", "Inspiration hits two additional targets and deals Thunder damage to nearby enemies.") ]
+            5<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Valorous Camaraderie", "Inspiration hits two additional targets and deals Thunder damage (d8 Cantrip scaling) to nearby enemies.") ]
             7<classLvl>, [ Complex("PassiveFeature_FontOfInspiration" <!!> "Font of Valor", "Recover Inspiration every 3 turns in combat. (Replaces Font of Inspiration)") ]
             9<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Valiance Supreme", "Inspiration targets deal maximum damage on their next attack.") ]
             11<classLvl>, [ Complex("PassiveFeature_BardicInspiration_Damage" <!!> "Reliable Valor", "Cannot fail Ability Checks with Proficient Skills. (Replaces Reliable Talent)") ]
@@ -954,7 +954,7 @@ let rec crownedPhoenix =
         CasterType = HalfCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(BonusAction, AtWill, "Spell_Transmutation_AshardalonsStride" <!!> "Phoenix Landing" <?> "Spellfire Vortex", "Teleport dealing Fire damage in an area.")
+                Power(BonusAction, AtWill, "Spell_Transmutation_AshardalonsStride" <!!> "Phoenix Landing" <?> "Spellfire Vortex", "Teleport dealing Fire damage (Smite scaling) in an area.")
                 Power(Reaction, AtWill, "Spell_Evocation_AganazzarsScorcher" <!!> "Searing Protection" <?> "Spellfire Ward", "Swap places and heal ally by taking damage.")
                 Complex("Spell_Enchantment_Bane" <!!> "Crowned Judgement" <?> "Bane of the Warped", "Advantage against Aberrations; killing them restores a Smite charge.")
                 Power(Action, AtWill, "Divine Smite", "Radiant damage, inflicts Divine Judgement for 1 turn (all Attack Rolls are made with Advantage against the target)")
@@ -1014,7 +1014,7 @@ let rec oathboundCrusader =
             5<classLvl>, [ Power(Action, AtWill, "Action_Paladin_TurnTheUnholy" <!!> "Turn the Damned", "Terrify and damage Undead in a 9m radius.") ]
             7<classLvl>, [ Complex("Abjure the Weak" <?> "Abjure the Guilty", "Advantage against Abjured targets; Inquisitor's Might grants Advantage.") ]
             9<classLvl>, [ Power(Action, AtWill, "Action_Paladin_AuraOfWarding" <!!> "Aura of Warding" <?> "Aura of Perseverance", "Allies gain Resistance to spell damage.") ]
-            11<classLvl>, [ Complex("I Am Vengeance" <?> "Vengeance Incarnate", "Erupt in radiant fury: +20 Radiant damage bonus and Advantage for 3 turns.") ]
+            11<classLvl>, [ Complex("I Am Vengeance" <?> "Vengeance Incarnate", "Erupt in radiant fury: +20 Radiant damage bonus and Advantage for 3 turns. Upon casting, allows Condemned to be triggered again.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1153,7 +1153,7 @@ let rec hunter =
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [ Complex("PassiveFeature_ColossusSlayer" <!!> "Natural Hunter", "Weapon hits apply Hunted stacks, reducing enemy speed.") ]
-            3<classLvl>, [ Power(Reaction, AtWill, "Opportune Strike", "Attack enemy who attacks an ally within 9m.") ]
+            3<classLvl>, [ Power(Reaction, AtWill, "Opportune Shot" <?> "Opportune Strike", "Attack enemy who attacks an ally within 9m. Costs a Reaction.") ]
             5<classLvl>, [
                 Power(BonusAction, AtWill, "PassiveFeature_ColossusSlayer" <!!> "Volley", "Attack all enemies in 3m area (Ranged).")
                 Power(BonusAction, AtWill, "Action_Multiattack_WhirlwindAttack" <!!> "Whirlwind", "Attack all enemies in 3m area (Melee).")
@@ -1382,10 +1382,10 @@ let rec draconicBloodline =
                 Complex("Dragon Ancestor", "Gain Elemental Breath and bonus elemental damage = Sorcerer level.")
                 Power(Action, AtWill, "Elemental Breath", "Cone attack inflicting element and condition.")
             ]
-            3<classLvl>, [ Complex("Draconic Form", "Gain +2 AC and Fly.") ]
-            5<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            3<classLvl>, [ Complex("Draconic Form", "Gain AC equal to your Proficiency Bonus and Fly.") ]
+            5<classLvl>, [ Complex("Drakethroat", "When dealing damage associated with your Draconic Ancestry, you ignore all damage Resistances and Immunities.") ]
             7<classLvl>, [ Complex("PassiveFeature_DraconicResilience" <!!> "Draconic Affinity", "Elemental Immunity; add Charisma to associated elemental damage.") ]
-            9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            9<classLvl>, [ Complex("Drakeblood Kinship", "When dealing damage with your breath attacks, the number needed to roll a Critical Hit on subsequent Attack Rolls is reduced by 1. Stacks and removed upon starting your turn.") ]
             11<classLvl>, [ Complex("PassiveFeature_DraconicResilience" <!!> "Dragontongue", "Elemental Breath always deals maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1424,9 +1424,9 @@ let rec shadeWalker =
             1<classLvl>, [
                 Power(BonusAction, AtWill, "Spell_Evocation_Darkness" <!!> "Darkness", "Cast 3-turn Darkness without slot.")
                 Complex("PassiveFeature_DevilsSight" <!!> "Devil’s Sight", "You can see normally in darkness, both magical and non-magical, to a distance of 18m.")
-                Power(BonusAction, AtWill, "Spell_HoundOfIllOmen" <!!> "Hound of Ill Omen", "Summon scaling companion.")
+                Power(BonusAction, AtWill, "Spell_HoundOfIllOmen" <!!> "Hound of Ill Omen", "Summon scaling companion (deals 1d8 scaling damage with bite; considered preferred target).")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Soul Siphon", "Kill summon to deal AOE Necrotic damage and heal.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Soul Siphon", "Kill summon to deal AOE Necrotic damage and heal. Can target an additional creature at levels 5 and 9.") ]
             5<classLvl>, [ Complex("PassiveFeature_StrenghtOfTheGrave" <!!> "Dogs of War", "Can summon two Hounds at once.") ]
             7<classLvl>, [ Power(FreeAction, AtWill, "Action_Monk_ShadowStep" <!!> "Umbral Warp", "Warp to Heavily Obscured space.") ]
             9<classLvl>, [ Complex("PassiveFeature_StrenghtOfTheGrave" <!!> "Dogs of Conquest", "Can summon three Hounds at once.") ]
@@ -1512,9 +1512,9 @@ let rec pactOfTheBlade =
                 Complex("PassiveFeature_HexWarrior" <!!> "Hellfire", "Hits deal extra Fire damage (scaling) for 3 turns.")
             ]
             3<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Dark One’s Blessing", "Kills grant Temporary Hit Points = Charisma + Level.") ]
-            5<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            5<classLvl>, [ Power(Action, AtWill, "Highway to Hell", "Teleport to an area of your choice, dealing Fire damage to all nearby creatures.") ]
             7<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Hellblade Resonation", "Ignore Fire Resistance; Hellfire deals AOE Fire damage.") ]
-            9<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            9<classLvl>, [ Complex("Through the Fire and Flames", "Hellblade Resonation causes targets to Burn for one turn. When dealing damage to a Burning target, you roll your damage with Advantage.") ]
             11<classLvl>, [ Complex("PassiveFeature_HexWarrior" <!!> "Eldritch Inferno", "Erupt for 6d12 Fire damage every 3 turns.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -1572,7 +1572,7 @@ let rec pactOfSeverance =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Spell_2e_HydraulicPush" <!!> "Going Ghost", "Deal extra Cold damage = Warlock level.")
-                Complex("Spell_Evocation_SeveringEldritchBlast" <!!> "Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force.")
+                Complex("Spell_Evocation_SeveringEldritchBlast" <!!> "Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force in a 3m/10ft AoE.")
             ]
             3<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Curse of the Spectre", "Cold damage applies Encrusted with Frost.") ]
             5<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Severed Resolve", "Using Hematic Invocation restores Action.") ]
@@ -1634,16 +1634,21 @@ let rec arcblade =
         BaseClassId = wizard.Id
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
-            1<classLvl>, [ Power(FreeAction, AtWill, "Spell_Abjuration_BanishingSmite_Container" <!!> "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage; weapon scales with Spellcasting modifier.") ]
+            1<classLvl>, [
+                Power(FreeAction, AtWill, "Spell_Abjuration_BanishingSmite_Container" <!!> "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage; weapon scales with Spellcasting modifier.")
+                Power(Action, AtWill, "Spell_Conjuration_SteelWindStrike" <!!> "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes and creates Cloaks of Daggers by default upon use.")
+            ]
             3<classLvl>, [
                 Power(BonusAction, AtWill, "Spell_HarmonyOfFireAndWater" <!!> "Steel-Wind Storm", "Bonus AC and melee Advantage.")
                 Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip.")
-                Power(Action, AtWill, "Spell_Conjuration_SteelWindStrike" <!!> "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes.")
             ]
-            5<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            5<classLvl>, [ Complex("A Storm of Serration", "Your Cloaks of Daggers now cause enemies to Bleed for three turns.") ]
             7<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]
-            9<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
-            11<classLvl>, [ Complex("PassiveFeature_PactOfTheBlade" <!!> "Wings of the Arcblade" <?> "Aegis of Assault", "Killing blows or Critical Hits grant a free Steel-Wind Strike.") ]
+            9<classLvl>, [ Complex("Bloodstorm Serration", "Upon damaging a Bleeding creature, you gain a stack of Force Serration. Stacks of Force Serration increase the damage you deal with all weapons by 1 Force damage.") ]
+            11<classLvl>, [
+                Complex("PassiveFeature_PactOfTheBlade" <!!> "Wings of the Arcblade" <?> "Aegis of Assault", "Killing blows or Critical Hits grant a free Steel-Wind Strike.")
+                Complex("Razor Wind Sortilege", "While Winds of the Arcblade is active, Steel-Wind Strike will always roll as a Critical Hit.")
+            ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1664,9 +1669,9 @@ let rec arcaneWarden =
                 Power(Reaction, AtWill, "PassiveFeature_ArcaneWard" <!!> "Projected Ward", "Protect allies with your active Ward.")
             ]
             3<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Retaliatory Reckoning", "Deals Force damage equal to Ward charges * 2 when damaged; 50% chance to not lose Ward charge.") ]
-            5<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.") ]
+            5<classLvl>, [ Complex("Critical Warding", "While you have Arcane Ward stacks, you cannot be Critically Hit.") ]
             7<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Aggressive Warding", "Dealing damage adds a Ward stack once per turn.") ]
-            9<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.") ]
+            9<classLvl>, [ Complex("Eruptive Warding", "Upon gaining a charge of Arcane Ward, all enemies within 9m/30ft take Force damage equal to your Intelligence Modifier.") ]
             11<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Arcane Sentinel", "Gain Resistance to all forms of damage and Lockdown Immunity.") ]
         ]
         ScalingAbilities = fun _ _ -> []

@@ -715,7 +715,7 @@ let rec corellonsGrace = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Unhampered Resistance", "Receive a +1 bonus to their Armour Class.")
+            Complex("Unhampered Resistance", "Receive a +1 bonus to their Armour Class while off-hand is empty.")
         ]
     }
     Type = Quarterstaff
@@ -1569,7 +1569,7 @@ let rec swordOfClutchingUmbra = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Power(Action, OncePerTurn, "Shadowsoaked Blow", "Weapon action, Recharge: Per Turn, strike and add your Proficiency Bonus and +1d6 Psychic damage to the attack. Doesn't break concealment.")
+            Power(Action, OncePerTurn, "Shadowsoaked Blow", "Weapon action, Recharge: Per Turn (during combat), strike and add your Proficiency Bonus and +1d6 Psychic damage to the attack. Doesn't break concealment.")
         ]
     }
     Type = Shortsword

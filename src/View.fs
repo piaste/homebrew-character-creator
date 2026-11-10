@@ -704,10 +704,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                                 if c.PreviousHistory.AllFeatSubPicks.GetOrElse(YB, Set.empty) 
                                    |> Set.contains (UMX.untag scId)
                                         then false else
-                                
-                                // exclude if level >= 3
-                                // wtf is this allowed???
-                                //if c.CurrentHistory.LevelsBySubclass.GetOrDefault scId >= 3<classLvl> then false else
+                                // exclude if dipping into the same subclass
+                                if c.CurrentHistory.LevelsBySubclass.ContainsKey scId then false else
 
                                 true                                                   
                             )
