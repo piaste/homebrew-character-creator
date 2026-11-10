@@ -10,7 +10,8 @@ let rec enforcerShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Staunch Blessing", "When a creature misses the wielder of this shield with an attack, the wielder gains a +1d4 bonus to their next Attack Roll.")
+            Complex("Staunch Blessing", "When a creature misses the wielder of this shield with an attack, the wielder gains a +1d4 bonus to their next Attack Roll.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -24,7 +25,8 @@ let rec glowingShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Loving Protection", "Once per Short Rest, if you are below 50% of your maximum Hit Points and take damage, you become Rallied.")
+            Complex("Loving Protection", "Once per Short Rest, if you are below 50% of your maximum Hit Points and take damage, you become Rallied.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -38,7 +40,8 @@ let rec safeguardShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Safeguard", "Upon performing a Shield Bash, assume a defensive stance and gain Resistance to all forms of Physical damage until the start of your next turn.")
+            Complex("Safeguard", "Upon performing a Shield Bash, assume a defensive stance and gain Resistance to all forms of Physical damage until the start of your next turn.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -52,7 +55,8 @@ let rec woodWoadShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Vicious Seed", "Upon Entangling or Ensnaring an enemy in combat, a vicious seed sprouts within them. Upon being removed, a Grasping Vine erupts, potentially entangling them or other nearby enemies.")
+            Complex("Vicious Seed", "Upon Entangling or Ensnaring an enemy in combat, a vicious seed sprouts within them. Upon being removed, a Grasping Vine erupts, potentially entangling them or other nearby enemies.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -66,7 +70,8 @@ let rec absolutesProtector = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Power(Action, AtWill, "Absolute's Aegis", "All damage received from Spells and Cantrips is reduced by an amount equal to your Proficiency Bonus.")
+            Power(Action, AtWill, "Absolute's Aegis", "All damage received from Spells and Cantrips is reduced by an amount equal to your Proficiency Bonus.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -80,7 +85,8 @@ let rec gloomstrandShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("A Devil In Darkness", "While Heavily Obscured, you ignore all physical based Resistances.")
+            Complex("A Devil In Darkness", "While Heavily Obscured, you ignore all physical based Resistances.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -94,7 +100,8 @@ let rec ironvineShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Ironvine", "Upon successfully retaliating against an enemy with a Shield Bash, they become Ensnared for one turn.")
+            Complex("Ironvine", "Upon successfully retaliating against an enemy with a Shield Bash, they become Ensnared for one turn.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -108,7 +115,8 @@ let rec watchersShield = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Guard Duty", "You have Advantage on Attack Rolls when making an Opportunity Attack.")
+            Complex("Guard Duty", "You have Advantage on Attack Rolls when making an Opportunity Attack.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -122,7 +130,8 @@ let rec shieldOfShielding = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Enhanced Deflection", "Reduce damage taken by Ranged Weapon Attacks by an amount equal to your Proficiency Bonus.")
+            Complex("Enhanced Deflection", "Reduce damage taken by Ranged Weapon Attacks by an amount equal to your Proficiency Bonus.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -136,7 +145,8 @@ let rec absolutesWarboard = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Cleric Passive - Martyrdom", "Upon being Downed or killed, erupt as a raging inferno, uncontrollably scorching everything around you.")
+            Complex("Cleric Passive - Martyrdom", "Upon being Downed or killed, erupt as a raging inferno, uncontrollably scorching everything around you.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -150,7 +160,8 @@ let rec theRealSparkySparkswall = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Power(Action, OncePerTurn, "Lightning Aura", "Class action, Recharge: Once per Turn, consume 3 Lightning Charges to generate lightning aura for 3 turns, Jolting nearby enemies")
+            Power(Action, OncePerTurn, "Lightning Aura", "Class action, Recharge: Once per Turn, consume 3 Lightning Charges to generate lightning aura for 3 turns, Jolting nearby enemies");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -164,7 +175,8 @@ let rec sentinelShield = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sentinel Crash", "Performing a Shield Bash creates a shockwave, applying the affects of your Shield Bash to all enemies within 3m of you.")
+            Complex("Sentinel Crash", "Performing a Shield Bash creates a shockwave, applying the affects of your Shield Bash to all enemies within 3m of you.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -179,7 +191,8 @@ let rec justiciarsGreatshield = {
         Rarity = Rare
         Grants = [
             Power(Action, OncePerShortRest, "Darkness Cloak", "Class action, Recharge: Short Rest, creates a cloud of magical darkness and immediately attempt to Hide");
-            Complex("Advantage on Perception Checks.", "Grants Advantage on Perception Checks.")
+            Complex("Advantage on Perception Checks.", "Grants Advantage on Perception Checks.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -193,7 +206,8 @@ let rec shieldOfDevotion = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Paladin Passive - Principle of Belief", "On any successful Attack Rolls against Aberrations, Fey, Fiends, or Undead, deal an additional +1d12 Radiant damage. This passive has no effect when targeting enemies with Radiant Retort.")
+            Complex("Paladin Passive - Principle of Belief", "On any successful Attack Rolls against Aberrations, Fey, Fiends, or Undead, deal an additional +1d12 Radiant damage. This passive has no effect when targeting enemies with Radiant Retort.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -207,7 +221,8 @@ let rec shieldOfScorchingReprisal = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Power(Action, OncePerTurn, "Blazing Retaliation", "Class action, Recharge: Once per Turn, increase Armour Class by 1 and inflict 1d6 fire damage to attackers who miss with a melee attack for 3 turns")
+            Power(Action, OncePerTurn, "Blazing Retaliation", "Class action, Recharge: Once per Turn, increase Armour Class by 1 and inflict 1d6 fire damage to attackers who miss with a melee attack for 3 turns");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -221,7 +236,8 @@ let rec swiresSledboard = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Power(BonusAction, AtWill, "Sledfast", "weapon action, rush forward 9m/30ft as bonus action damaging anyone caught in the way for 1d12 cold damage, leaving behind a patch of ice and potentially leaving enemies Chilled. Doesn't provoke Opportunity Attacks.")
+            Power(BonusAction, AtWill, "Sledfast", "weapon action, rush forward 9m/30ft as bonus action damaging anyone caught in the way for 1d12 cold damage, leaving behind a patch of ice and potentially leaving enemies Chilled on a failed Constitution based Saving Throw. Doesn't provoke Opportunity Attacks.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -251,7 +267,8 @@ let rec kethericsShield = {
         Rarity = Epic
         Grants = [
             Power(Action, AtWill, "Superior Arcane Enchantment", "Spells you cast receive a +2 bonus to their Difficulty Class and Attack Rolls.");
-            Complex("Commander's Footing", "You are unable to be forcibly moved.")
+            Complex("Commander's Footing", "You are unable to be forcibly moved.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -265,7 +282,8 @@ let rec abdelsTrustedShield = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Protection from Missiles", "Ranged Weapon Attacks that target the wearer have Disadvantage and have their damage reduced by half.")
+            Complex("Protection from Missiles", "Ranged Weapon Attacks that target the wearer have Disadvantage and have their damage reduced by half.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -279,7 +297,8 @@ let rec shieldOfTheUndevout = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Power(Action, AtWill, "Dreadful Hewer", "Your foes have Disadvantage on Saving Throws to resist your Spells or actions that inflict Fear.")
+            Power(Action, AtWill, "Dreadful Hewer", "Your foes have Disadvantage on Saving Throws to resist your Spells or actions that inflict Fear.");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -295,7 +314,8 @@ let rec viconiasWalkingFortress = {
         Grants = [
             Power(Reaction, AtWill, "Rebuke the Mighty", "When a foe hits you with a melee attack, you can use your Reaction to deal 1d12 Force damage to your aggressor, additionally knocking them Prone unless they succed a Strength based Saving Throw.");
             Power(Action, AtWill, "Spellguard", "You gain Advantage on Saving Throws against Spells. Spell Attack Rolls against you have Disadvantage.");
-            Power(Action, OncePerShortRest, "Reflective Shell", "Class action, Recharge: Short Rest, reflect any projectiles back to their point of origin for three turns")
+            Power(Action, OncePerShortRest, "Reflective Shell", "Class action, Recharge: Short Rest, reflect any projectiles back to their point of origin for three turns");
+            Complex("Shield: Critical Immunity", "Attackers can't land Critical Hits on the wearer while both you and your aggressor do not have a condition which allows the bypassing of your armours physical damage resistances.")
         ]
     }
     Type = Shield
@@ -393,7 +413,7 @@ let rec flailOfAges = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex("Elements of an Epoch", "This weapon may be imbued with five different elements. Depending on what kind of element this weapon is imbued with, it also inflicts Acid, Chilled, Burning, Shocked, or Reverberation upon your target.")
+            Complex("Elements of an Epoch", "This weapon may be imbued with five different elements. Depending on what kind of element this weapon is imbued with, it also inflicts Acid, Frostbite, Burning, Shocked, or Reverberation upon your target.")
         ]
     }
     Type = Flail
@@ -715,7 +735,7 @@ let rec corellonsGrace = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex("Unhampered Resistance", "Receive a +1 bonus to their Armour Class.")
+            Complex("Unhampered Resistance", "Receive a +1 bonus to their Armour Class while off-hand is empty.")
         ]
     }
     Type = Quarterstaff
@@ -799,7 +819,7 @@ let rec creationsEcho = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Sorcerer Passive - Elemental Afterglow", "Using a Spell to deal elemental damage causes your target and enemies within 3m/10ft of them to suffer from a status effect dependant on the type of damage you dealt. This can be toggled at any time.")
+            Complex("Sorcerer Passive - Elemental Afterglow", "Using a Spell or Cantrip to deal elemental damage causes your target and enemies within 9m/30ft of them to suffer from a status effect dependant on the type of damage you dealt.")
         ]
     }
     Type = Quarterstaff
@@ -1569,7 +1589,7 @@ let rec swordOfClutchingUmbra = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Power(Action, OncePerTurn, "Shadowsoaked Blow", "Weapon action, Recharge: Per Turn, strike and add your Proficiency Bonus and +1d6 Psychic damage to the attack. Doesn't break concealment.")
+            Power(Action, OncePerTurn, "Shadowsoaked Blow", "Weapon action, Recharge: Per Turn (during combat), strike and add your Proficiency Bonus and +1d6 Psychic damage to the attack. Doesn't break concealment.")
         ]
     }
     Type = Shortsword
@@ -2849,7 +2869,7 @@ let rec darkfireShortbow = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex("Warlock Passive - Curse of Hellfire", "When you make a successful melee based Attack Roll, you apply one Curse of Hellfire stack to your target.")
+            Complex("Warlock Passive - Curse of Hellfire", "When you deal damage, you apply one Curse of Hellfire stack to your target.")
         ]
     }
     Type = Shortbow

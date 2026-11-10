@@ -18,8 +18,8 @@ let rec artificer = {
                 Resource (3, "Passive_ArcaneFirearm" <!!> "Ammunition", OncePerShortRest)
                 Power(BonusAction, AtWill, "Action_Reload" <!!> "Reload", "Reload your Ammunition.")
             ]
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
-            9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once.")]
         ]
         CustomPicks = Map []
     }
@@ -32,12 +32,14 @@ let rec barbarian = {
         IsCaster = false
         SpellcastingAbility = CHA
 
-        ScalingAbilities = (fun _ _ -> [])
+        ScalingAbilities = (fun charLvl _ -> [
+            Simple $"1d{if charLvl >= 9<charLvl> then 8 elif charLvl >= 5<charLvl> then 6 else 4} Unarmed Damage Die while Raging"
+        ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time."); Resource (3, "Action_Barbarian_Rage" <!!> "Rage Charge", OncePerShortRest)]
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
-            9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. However, enemies will also have Advantage when making Attack Rolls against you. This effect can be toggled at any time.")]
+            1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. This effect can be toggled at any time."); Resource (3, "Action_Barbarian_Rage" <!!> "Rage Charge", OncePerShortRest)]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ($"{TOGGLEABLE} Reckless Assault", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one. This effect can be toggled at any time.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ($"{TOGGLEABLE} Reckless Rampage", "Make all Melee and Throw based Attack Rolls with Advantage. Additionally, reduce the number needed to roll a Critical Hit by one, and when rolling a Critical Hit, roll an additional damage die. This effect can be toggled at any time.")]
         ]
         CustomPicks = Map []
     }
@@ -58,11 +60,11 @@ let rec bard = {
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving.")
-                Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect.")
+                Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect. You recover a Spell Slot each time you climax.")
                 Power (Action, OncePerLongRest, "Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")
             ]
-            5<classLvl>, [Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
-            9<classLvl>, [Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Reliable Talent", "When you make an Ability Check with a Skill you are Proficient in, the lowest you can roll is 8.")]
         ]
         CustomPicks = Map []
     }
@@ -79,8 +81,8 @@ let rec cleric = {
 
         FixedAbilities = Map [
             1<classLvl>, [Resource (3, "Channel Divinity", OncePerShortRest); Power (Action, AtWill, "Pacify Undead", "All undead within 9m are Pacified for 1 turn on a failed Will Save. Pacified undead cannot act, and attacks made against them while within 3m are always Critical Hits."); Power (FreeAction, OncePerTurn, "DivineIntervation" <!!> "Divine Miracles", "Expend a Divine Intervention charge to perform powerful miracles as a free action.")]
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
-            9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Divination", "Upon starting combat, you immediately experience Divine Intervention.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("True Belief", "Upon starting combat, you regain one Channel Divinity charge.")]
         ]
         CustomPicks = Map []
     }
@@ -96,9 +98,9 @@ let rec druid = {
         ScalingAbilities = (fun _ _ -> [])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Skill_Druid_WildShape" <!!> "Wild Shape Charges", OncePerShortRest); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time.")]
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
-            9<classLvl>, [Complex ("Steel Cast", "Grants a free action Weapon or Unarmed attack when you use your Action to cast a Spell or Cantrip.")]
+            1<classLvl>, [Resource (3, "Skill_Druid_WildShape" <!!> "Wild Shape Charges", OncePerShortRest); Complex ("Beastcraft", "This passive allows you to use your Wild Shape as an Action or Bonus Action. This may be toggled at any time."); Complex ("Return to Form", "At the end of combat, immediately return to your natural form and refund one Wild Shape charge. This can be toggled at any time."); Power (FreeAction, AtWill, "Mantra of Recovery", "Expend Wild Shape charges to regain Spell Slots. May be used multiple times per turn.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Mantle of Concentration", "Upon using Mantra of Recovery, you cannot lose Concentration for 3 turns.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Mantra of Rebirth", "You regain one Wildshape Charge per turn.")]
         ]
         CustomPicks = Map []
     }
@@ -117,8 +119,8 @@ let rec fighter = {
         ])
 
         FixedAbilities = Map[            
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Power (FreeAction, OncePerShortRest, "Action Surge", "Gain an additional Action and restore 3 superiority Dice once per Short Rest.")]
-            9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Indomitable", "Whenever you fail a Saving Throw, you can roll again, using the new result instead.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Power (FreeAction, OncePerShortRest, "Action Surge", "Gain an additional Action and restore 3 superiority Dice once per Short Rest.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Indomitable", "Whenever you fail a Saving Throw, you can roll again, using the new result instead.")]
         ]
         CustomPicks = Map [
             for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
@@ -134,15 +136,15 @@ let rec monk = {
         IsCaster = false
         SpellcastingAbility = WIS
 
-        ScalingAbilities = (fun _ cl -> [
+        ScalingAbilities = (fun charLvl cl -> [
             Resource (UMX.untag cl, $"Ki Points", OncePerShortRest)
-            Simple $"1d{if cl >= 9<classLvl> then 8 elif cl >= 5<classLvl> then 6 else 4} Unarmed Damage Die"
+            Simple $"1d{if charLvl >= 9<charLvl> then 8 elif charLvl >= 5<charLvl> then 6 else 4} Unarmed Damage Die"
         ])
 
         FixedAbilities = Map [
             1<classLvl>, [Complex ("Martial Arts", "Attacks with Monk Weapons (weapons without the two-handed or heavy property) and unarmed attacks deal 1d4 Bludgeoning damage, unless their normal damage is higher. These attacks may scale with either your Strength or Dexterity, whichever is higher. Additionally, you are able to make an additional unarmed strike as a Bonus Action."); Power (BonusAction, AtWill, "Flurry of Blows", "Punch twice in rapid succession, making two unarmed strikes against your target as a Bonus Action.")]
-            5<classLvl>, [Complex ("Martial Flux", "Gain an additional Bonus Action.")]
-            9<classLvl>, [Complex ("Martial Mastery", "Gain an additional Action.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Martial Flux", "You regain one Ki Point per turn. Additionally, when you expend a Ki Point to make an Attack Roll, the number needed to roll a Critical Hit is reduced by 1.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Ki Resonance", "When using a Ki Point to deal damage, the lowest number you can roll per die is an 8.")]
         ]
         CustomPicks = Map []
     }
@@ -162,8 +164,8 @@ let rec paladin = {
         FixedAbilities = Map [
             1<classLvl>, [Resource (3, "Channel Oath", OncePerShortRest); Resource (3, "Crusader's Smite", OncePerShortRest)]
             // the "smite" feature isn't encoded because it is represented by Special Picks
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free.")]
-            9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Smitten", "When making an Attack Roll with one of your Smites, you make your roll with a +20 bonus.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Smitten", "When making an Attack Roll with one of your Smites, you make your roll with a +20 bonus.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Condemned", "The first Smite you cast in any given combat encounter will deal the maximum damage possible.")]
         ]
         CustomPicks = Map [
             for lvl in [ 1<classLvl> .. +2<classLvl> .. 11<classLvl>] do
@@ -185,8 +187,8 @@ let rec ranger = {
             1<classLvl>, [Resource (3, "Natural Focus", OncePerShortRest); Power (BonusAction, AtWill, "Conjure Rangers Companion", "Summon one of five beasts to a target location within 18m. Ranger Companions have a duration of permanent and grow in power alongside Ranger class levels."); Complex ("Natural Movement", "Gain the ability to Dash, Disengage, and Hide as a free action by consuming Natural Focus charges. This effect can be toggled at any time.")]
             // the "frontier ballistics" feature isn't encoded because it is represented by Special Picks
 
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Horde Breaker", "Make a basic attack with your main hand weapon. All creatures within 3m of your target receive the condition Horde Breaker that lasts 1 turn. You receive a temporary action, Horde Breaker Follow-Up.")]
-            9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Eagle Eyed", "When making an attack roll with advantage your damage roll will also roll with advantage.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Horde Breaker", "Make a basic attack with your main hand weapon. All creatures within 3m of your target receive the condition Horde Breaker that lasts 1 turn. You receive a temporary action, Horde Breaker Follow-Up.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Eagle Eyed", "When making an attack roll with advantage your damage roll will also roll with advantage.")]
         ]
         CustomPicks = Map [
             for lvl in [ 1<classLvl> .. 1<classLvl> .. 12<classLvl>] do
@@ -208,8 +210,8 @@ let rec rogue = {
 
         FixedAbilities = Map [
             1<classLvl>, [Resource (3, "Luck Points", OncePerShortRest); Power (FreeAction, AtWill, "Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.")]
-            5<classLvl>, [Complex ("Extra Attack", "When you use your Action to make an unarmed or weapon-based Attack Roll with your main hand, you may make an additional attack for free."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
-            9<classLvl>, [Complex ("Improved Extra Attack", "Extra Attack now provides an additional Action at all times, rather than a free attack."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
         ]
         CustomPicks = Map []
     }
@@ -227,10 +229,10 @@ let rec sorcerer = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "When a Spell is cast within 18m of you, you immediately gain a Sorcery Point.")
+            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "May only be cast during combat. Can be used multiple times per turn. Can be cast after having cast a leveled Spell, but only if you have not yet cast a leveled Spell during your current turn before it. When a Spell is cast within 18m of you, you immediately gain a Sorcery Point. Upon targeting another creature with Creationary, you will be unable to use it again for the rest of your turn. Upon ending combat, all created resources are removed and exchanged resources are refunded.")
             ]
-            5<classLvl>, [Complex ("Morbid Creation", "While in combat, you gain 1 Sorcery Point per turn.")]
-            9<classLvl>, [Complex ("Philosopher’s Stone", "Once per Short Rest, you may use Sorcery Channeling without consuming Sorcery Points or Spell Channeling without consuming a Spell Slot.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Morbid Creation", "While in combat, you gain 1 Sorcery Point per turn.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Philosopher’s Stone", "Triggers automatically when combat starts and grants Sorcery Points equal to your level.")]
         ]
         CustomPicks = Map [
             for lvl in [ 1<classLvl> .. 1<classLvl> .. 12<classLvl>] do
@@ -250,8 +252,8 @@ let rec warlock = {
 
         FixedAbilities = Map [
             1<classLvl>, [Power (Action, AtWill, "Eldritch Blast", "Conjure a beam of crackling energy dealing 1d12 Force damage, scaling with level.")]
-            5<classLvl>, [Complex ("Mystic Arcanum", "On your first turn of any combat encounter, restore one Warlock Spell Slot.")]
-            9<classLvl>, [Complex ("Deepened Arcanum", "On your first turn of any combat encounter, restore two Warlock Spell Slots.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Mystic Arcanum", "On your first turn of any combat encounter, restore one Warlock Spell Slot.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Deepened Arcanum", "On your first turn of any combat encounter, restore two Warlock Spell Slots.")]
         ]
         CustomPicks = Map []
     }
@@ -269,7 +271,9 @@ let rec wizard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover one charge of Arcane Recovery."); Power (FreeAction, OncePerTurn, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery.")]
+            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover Arcane Recovery charges equal to your Proficiency Bonus minus one."); Power (FreeAction, AtWill, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery. May be used multiple times per turn.")]
+            5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Studious Results", "Fulfilling a Scholarly Acumen will immediately roll for a new one during your same turn.")]
+            9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Acumen Supreme", "Once per turn, upon fulfilling your Scholarly Acumen, your next Spell or Cantrip during your turn will automatically roll as a Critical Hit.")]
         ]
         CustomPicks = Map []
     }

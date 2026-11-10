@@ -534,7 +534,7 @@ let update
             { model with CopyButtonState = Rest }, Cmd.none
         | x -> 
             { model with CopyButtonState = x }, 
-                Cmd.delayThen (System.TimeSpan.FromSeconds 5) (SetCopyFeedback Rest)
+                Cmd.delayThen (System.TimeSpan.FromSeconds 5.0) (SetCopyFeedback Rest)
 
     | LoadCharacter character ->
         if character = defaultCharacter then

@@ -109,7 +109,7 @@ let rec maximumYield : ClassLevelUpPick = {
     TypeId = nameof maximumYield
     Name = "Maximum Yield"
     Grants = [
-        Complex ("Maximum Yield", "Optimization Matrix increases weapon damage dice to d20")
+        Complex ("Maximum Yield", "Optimization Matrix increases weapon damage dice to d20, but no longer allows for Critical Hits to be rolled while active")
     ]
 }
 
@@ -145,7 +145,7 @@ let rec proactiveOverload : ClassLevelUpPick = {
     TypeId = nameof proactiveOverload
     Name = "Proactive Overload"
     Grants = [
-        Complex ("Proactive Overload", "Optimization Matrix hastens your target")
+        Complex ("Proactive Overload", "Optimization Matrix grants Advantage on Damage Rolls to your target")
     ]
 }
 
@@ -434,7 +434,7 @@ let rec evasiveFootwork : ClassLevelUpPick = {
     TypeId = nameof evasiveFootwork
     Name = "Evasive Footwork"
     Grants = [
-        Power(BonusAction, AtWill, "Evasive Footwork", "Gain +2 AC for 3 turns")
+        Power(BonusAction, AtWill, "Evasive Footwork", "Gain +4 AC for 3 turns")
     ]
 }
 
@@ -479,7 +479,7 @@ let rec parryingStance : ClassLevelUpPick = {
     TypeId = nameof parryingStance
     Name = "Parrying Stance"
     Grants = [
-        Power(BonusAction, AtWill, "Parrying Stance", "Gain +10 AC until the next incoming attack roll")
+        Power(BonusAction, AtWill, "Parrying Stance", "Gain +20 AC until the next incoming attack roll")
     ]
 }
 
@@ -488,7 +488,7 @@ let rec precisionAttacks : ClassLevelUpPick = {
     TypeId = nameof precisionAttacks
     Name = "Precision Attacks"
     Grants = [
-        Power(BonusAction, AtWill, "Precision Attacks", "Gain +2 bonus to Attack Rolls for 3 turns")
+        Power(BonusAction, AtWill, "Precision Attacks", "Gain +4 bonus to Attack Rolls for 3 turns")
     ]
 }
 
@@ -1235,14 +1235,14 @@ let rec empoweredSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof empoweredSpell
     Name = "Empowered Spell"
-    Grants = [ Complex ("Empowered Spell", "Metamagic (1): Damage dealing Spell/Cantrip rolls damage with Advantage") ]
+    Grants = [ Complex ("Empowered Spell", "Metamagic (2): Damage dealing Spell/Cantrip rolls damage with Advantage. May be toggled alongside other Metamagic options.") ]
 }
 
 let rec extendedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof extendedSpell
     Name = "Extended Spell"
-    Grants = [ Complex ("Extended Spell", "Metamagic (1): Double duration of conditions, summons, and surfaces") ]
+    Grants = [ Complex ("Extended Spell", "Metamagic (2): Double duration of conditions, summons, and surfaces") ]
 }
 
 let rec favoredSpell : ClassLevelUpPick = {
@@ -1263,21 +1263,21 @@ let rec maximizedMagic : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof maximizedMagic
     Name = "Maximized Magic"
-    Grants = [ Complex ("Maximized Magic", "Metamagic (1): Spell and Cantrip deals maximum amount of damage possible") ]
+    Grants = [ Complex ("Maximized Magic", "Greater Metamagic (1): Target rolls saving throw against Spell with -10. Cannot be utilized with Cantrips. No longer allows you to roll a Critical Hit while active.") ]
 }
 
 let rec piercingSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof piercingSpell
     Name = "Piercing Spell"
-    Grants = [ Complex ("Piercing Spell", "Metamagic (1): Damage dealing Spell/Cantrip ignores all Resistances") ]
+    Grants = [ Complex ("Piercing Spell", "Metamagic (2): Damage dealing Spell/Cantrip ignores all Resistances. May be toggled alongside other Metamagic options.") ]
 }
 
 let rec quickenedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof quickenedSpell
     Name = "Quickened Spell"
-    Grants = [ Complex ("Quickened Spell", "Metamagic (1): Spell/Cantrip that costs an Action now costs Bonus Action") ]
+    Grants = [ Complex ("Quickened Spell", "Greater Metamagic (1 per level): Spell that costs an Action now costs Bonus Action. Cannot be utilized with Cantrips.") ]
 }
 
 let rec regenerativeSpell : ClassLevelUpPick = {
@@ -1319,14 +1319,14 @@ let rec tripledSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof tripledSpell
     Name = "Tripled Spell"
-    Grants = [ Complex ("Tripled Spell", "Metamagic (1): Single target Spell/Cantrip now targets 3 creatures") ]
+    Grants = [ Complex ("Tripled Spell", "Greater Metamagic (1 per level): Single target Spell now targets 3 different creatures. Cannot be utilized with Cantrips.") ]
 }
 
 let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Complex ("Twinned Spell", "Metamagic (1): Single target Spell/Cantrip now targets 2 creatures (or the same creature twice)") ]
+    Grants = [ Complex ("Twinned Spell", "Greater Metamagic (1 per level): Single target Spell now targets 2 creatures, or causes your next Spells Attack Roll to automatically roll as a Critical Hit. Cannot be utilized with Cantrips.") ]
 }
 
 type private Placeholder = class end

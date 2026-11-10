@@ -1492,7 +1492,7 @@ let rec adamantineScaleMail = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Feat - Intrinsic Bulwark", "Gain Resistance to elemental damage and status based immunity to all conditions which deal damage over time. Attackers can't land Critical Hits on the wearer.")
+            Complex ("Feat - Intrinsic Bulwark", "Gain Resistance to elemental damage and status based immunity to all conditions which deal damage over time.")
         ]
     }
     Slot = Chest
@@ -1609,7 +1609,7 @@ let rec adamantineSplintArmour = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Feat - Durable", "Gain Resistance to physical damage and permanent Lockdown Immunity. Also applies to any creatures that you summon. Attackers can't land Critical Hits on the wearer.")
+            Complex ("Feat - Durable", "Gain Resistance to physical damage and permanent Lockdown Immunity. Also applies to any creatures that you summon.")
         ]
     }
     Slot = Chest

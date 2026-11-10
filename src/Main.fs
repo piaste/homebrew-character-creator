@@ -4,7 +4,6 @@ open System
 open System.Text.Json
 open Elmish
 open Bolero
-open Bolero.Templating.Client
 open Microsoft.AspNetCore.Components
 open Microsoft.JSInterop
 open Utils

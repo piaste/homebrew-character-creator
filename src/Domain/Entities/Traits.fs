@@ -218,8 +218,8 @@ let rec loneWolf : TraitDef = {
     Id = % nameof loneWolf
     Name = "Lone Wolf*"
     Grants = [
-        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action and Bonus Action, and your maximum Hit Points are doubled.")
-        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain two additional Actions and Bonus Actions, and your maximum Hit Points are quadrupled.")
+        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action, Bonus Action, and Reaction, and your maximum Hit Points are doubled.")
+        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain two additional Actions, Bonus Actions, and Reactions, status immunity to Arcane Blowback, and your maximum Hit Points are quadrupled.")
         Complex ("Lone Wolf*: Summons", "Everything also applies to your summons.")
         Complex ("Lone Wolf*: Warning", "Warning: Taking this trait will drastically impact intended game balance, and is made for solo or dual runs.")
     ]
@@ -229,8 +229,8 @@ let rec narcoleptic : TraitDef = {
     Id = % nameof narcoleptic
     Name = "Narcoleptic"
     Grants = [
-        Complex ("Narcoleptic: Drowsiness", "Upon starting your turn, you have a 50% chance to gain a stack of Drowsiness. Upon reaching 3 stacks, you fall Asleep.")
-        Complex ("Narcoleptic: Awakening", "Upon waking from a sleep-based Condition, you deal only Critical Hits until the end of your turn.")
+        Complex ("Narcoleptic: Drowsiness", "You have a 50% chance to incur a stack of Drowsiness every turn. Upon reaching three stacks, you fall asleep.")
+        Complex ("Narcoleptic: Awakening", "Upon waking up, you will only roll Critical Hits for the rest of your turn.")
     ]
 }
 
@@ -293,8 +293,8 @@ let rec reckless : TraitDef = {
     Id = % nameof reckless
     Name = "Reckless"
     Grants = [
-        Complex ("Reckless: Ignore Resistances", "Ignore all damage Resistance and Immunities.")
-        Complex ("Reckless: Vulnerability", "You also become Vulnerable to physical damage.")
+        Complex ("Reckless: Ignore Resistances", "Ignore all damage Resistances and Immunities.")
+        Complex ("Reckless: Vulnerability", "You become Vulnerable to all damage.")
     ]
 }
 

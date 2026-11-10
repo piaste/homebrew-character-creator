@@ -213,6 +213,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     stat ["Initiative"] (modifierText chr.Initiative)
                     
                     stat ["Base AC"; "AC"] chr.BaseAC
+                    stat ["DR Layers"] chr.DRLayers
                     condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
                     
                     let (attackAb, score) = chr.HighestAttackBonus in
@@ -704,10 +705,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                                 if c.PreviousHistory.AllFeatSubPicks.GetOrElse(YB, Set.empty) 
                                    |> Set.contains (UMX.untag scId)
                                         then false else
-                                
-                                // exclude if level >= 3
-                                // wtf is this allowed???
-                                //if c.CurrentHistory.LevelsBySubclass.GetOrDefault scId >= 3<classLvl> then false else
+                                // exclude if dipping into the same subclass
+                                if c.CurrentHistory.LevelsBySubclass.ContainsKey scId then false else
 
                                 true                                                   
                             )
@@ -964,6 +963,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             .Elt()   
             }
         )
-        .ModVersion("9.0.5")
+        .ModVersion("9.1.5")
         .Version($"{defaultCharacter.Version.ToString()}-bolero")   
         .Elt()
