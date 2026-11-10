@@ -213,6 +213,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     stat ["Initiative"] (modifierText chr.Initiative)
                     
                     stat ["Base AC"; "AC"] chr.BaseAC
+                    stat ["DR Layers"] chr.DRLayers
                     condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
                     
                     let (attackAb, score) = chr.HighestAttackBonus in

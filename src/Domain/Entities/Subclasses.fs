@@ -68,7 +68,7 @@ let rec frostbreaker =
             3<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Frigid Omen", "Melee hits while enraged fire a Ray of Frost at another enemy.") ]
             5<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Frostfields", "Apply Encrusted with Frost on hit.") ]
             7<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Glacial Bellow", "Dealing damage with a melee Attack Roll emits an aura dealing Cold damage equal to Charisma modifier.") ]
-            9<classLvl>, [ Power(Reaction, AtWill, "Action_Barbarian_Rage_Bifrost" <!!> "Tundral Strike", "Retaliate with a line of Cold damage.") ]
+            9<classLvl>, [ Power(Reaction, AtWill, "Action_Barbarian_Rage_Bifrost" <!!> "Tundral Strike", "Retaliate with a line of Cold damage; enemies must fail a Constitution saving throw to be inflicted with Chilled.") ]
             11<classLvl>, [ Complex("Action_Barbarian_Rage_Bifrost" <!!> "Frozen Hellscape", "Critical Hits immediately Freeze targets.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -161,7 +161,7 @@ let rec deathDomain =
         CasterType = FullCaster Divine
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Spell_Necromancy_BurstingSinew" <!!> "Bursting Sinew", "Detonate corpses/undead to apply Plague of Rot.") ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Proclaimed Undeath", "Target creature within 18m/60ft is considered to be Undead for the purposes of spells and abilities, and gain immunity to Necrotic and Poison damage. Proclaimed Undeath lasts until Long Rest.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_AccursedSpecter_SoulDevour" <!!> "Proclaimed Undeath", "Target creature within 18m/60ft is considered to be Undead for the purposes of spells and abilities, and gain immunity to Necrotic damage. Proclaimed Undeath lasts until Long Rest.") ]
             5<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Insurmountable Suffering", "Ignore all forms of Resistance and Immunity to Necrotic.") ]
             7<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "Harvest", $"{TOGGLEABLE}: Corpses deal Necrotic damage and apply Rot to nearby enemies.") ]
             9<classLvl>, [ Complex("PassiveFeature_InescapableDestruction" <!!> "True Pestilence", "Plague of Rot spreads to nearby allies of the target.") ]
@@ -299,7 +299,7 @@ let rec circleOfTheLand =
         CasterType = FullCaster Primal
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(Action, AtWill, "Spell_Conjuration_ConjureWoodlandBeings" <!!> "Conjure Dryad", "Summon a scaling woodland companion.")
+                Power(Action, AtWill, "Spell_Conjuration_ConjureWoodlandBeings" <!!> "Conjure Dryad", "Summon a scaling woodland companion (starts with Spare the Dying and Lesser Restoration; gains Resistance at level 5).")
                 Complex("PassiveFeature_Land_Coast" <!!> "Ensnaring Presence", "Damaging enemies potentially Entangles them.")
             ]
             3<classLvl>, [ Complex("PassiveFeature_Land_Coast" <!!> "Nature's Grasp", "Entangled enemies have Disadvantage on saving throws against your spells.") ]
@@ -339,9 +339,9 @@ let rec circleOfTheShadows =
         BaseClassId = druid.Id
         CasterType = FullCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness.") ]
+            1<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Displaced Nature", "Wild Shape into Displacer Beast; see in magical darkness. Displacer Beast Illusory Copies are AI controlled, last for 1 turn, and die upon taking damage.") ]
             3<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Veilstalker", "While obscured, recover Hit Points and deal extra Psychic damage.") ]
-            5<classLvl>, [ Power(BonusAction, AtWill, "TadpoleSuperPower_DisplacerShape" <!!> "Predatory Communion", "Morph allies into Displacer Beasts.") ]
+            5<classLvl>, [ Power(BonusAction, AtWill, "TadpoleSuperPower_DisplacerShape" <!!> "Predatory Communion", "Morph allies into Displacer Beasts; immune to being Cursed (including the Shadow Curse).") ]
             7<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Distorted Visage", "Permanently Heavily Obscured beyond 3m.") ]
             9<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Nightspill", $"{TOGGLEABLE}: Leave magical darkness behind when moving.") ]
             11<classLvl>, [ Complex("TadpoleSuperPower_DisplacerShape" <!!> "Hallucinatory Horror", "Maddened enemies are Vulnerable to Psychic damage.") ]
@@ -518,9 +518,9 @@ let rec palisade =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Reinforced Strikes", "Shield damage (Shield Bash/Dazing Bash) deals additional damage equal to Superiority Dice.") ]
             3<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Projected Bulwark", "Dazing Bash can target creatures within 9m.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_Shield" <!!> "Sentinel’s Rebuke", "Use Dazing Bash as a Reaction when an ally within 9m is damaged.") ]
+            5<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Cascading Iron", "Shield damage ricochets to another enemy within 9m.") ]
             7<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Iron Avalanche", "Shield kills cause an eruption of Force damage.") ]
-            9<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Cascading Iron", "Shield damage ricochets to another enemy within 9m.") ]
+            9<classLvl>, [ Power(Reaction, AtWill, "Spell_2e_Shield" <!!> "Sentinel’s Rebuke", "Use Dazing Bash as a Reaction when an ally within 9m is damaged.") ]
             11<classLvl>, [ Complex("Spell_2e_Shield" <!!> "Superior Impact", "Expend a Superiority Die on shield hit to deal maximum damage.") ]
         ]
         ScalingAbilities = fun _ _ -> []
@@ -739,7 +739,7 @@ let rec collegeOfSteel =
         FixedAbilities = Map [
             1<classLvl>, [ Power(Action, AtWill, "Steelforged Flourish", "Defensive, Mobile, or Slashing weapon techniques.") ]
             3<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Melodic Steel", "Killing blow or Critical Hit restores Inspiration.") ]
-            5<classLvl>, [ Complex("Inspirational Blows", "When dealing damage with a weapon, you deal additional damage equal to your Bardic Inspiration.") ]
+            5<classLvl>, [ Complex("Inspirational Blows", "When dealing damage with a weapon, you deal additional damage equal to your Bardic Inspiration. Does not apply to your off-hand.") ]
             7<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Performative Edge", "Advantage on weapon Attack and Damage Rolls while Performing.") ]
             9<classLvl>, [ Complex("PassiveFeature_ExtraAttack" <!!> "Steel Cast", "Upon landing a killing blow with one of your Steelforged Flourishes, you may cast a Spell without expending an Action, Bonus Action, or Reaction.") ]
             11<classLvl>, [ Complex("PassiveFeature_FightingStyle_Duelling" <!!> "Climactic Strikes", "Weapon killing blow while Performing puts you in Performative Chorus.") ]
@@ -783,7 +783,7 @@ let rec wayOfTheArcane =
             3<classLvl>, [
                 Power(Action, AtWill, "Action_Monk_FangsOfTheFireSnake" <!!> "Fangs of the Fire Snake", "Ranged Fire damage and bonus fire to melee.")
                 Power(Action, AtWill, "Action_Monk_FistOfUnbrokenAir" <!!> "Fist of Unbroken Air", "Ranged Bludgeoning damage + knockback.")
-                Power(BonusAction, AtWill, "Action_Monk_IceCube" <!!> "Ice Block", "Summon climbable ice that slows/chills enemies.")
+                Power(BonusAction, AtWill, "Action_Monk_IceCube" <!!> "Ice Block", "Summon climbable ice for 3 turns that slows/chills enemies.")
                 Power(Action, AtWill, "Action_Monk_WaterWhip" <!!> "Water Whip", "Ranged Cold damage + pull.")
             ]
             5<classLvl>, [ Complex("Skill_Druid_NaturalRecovery" <!!> "Martial Elements", "Spells/Cantrips infuse spirit with element, dealing extra Wisdom damage on next hit.") ]
@@ -1081,7 +1081,7 @@ let rec runicMystflame =
             1<classLvl>, [
                 Power(Action, AtWill, "Spellshatter Smite", "Force damage, your target and all enemies within 3m of them must roll an INT save or be muted for three turns.")
                 Power(BonusAction, AtWill, "Oathcast", "Expand one Channel Oath and Spell Slots to create Spell Slots of a higher level that you would otherwise be able to create. May be used multiple times per turn.")
-                Power(BonusAction, AtWill, "Arcane Righteousness", "Deals 1d12 Force damage (2d12 at level 5, 3d12 at level 9) to all targets in a 3m radius (18m range), and potentially Mute them.")
+                Power(BonusAction, AtWill, "Arcane Righteousness", "Costs a Channel Oath charge. Deals 1d12 Force damage (2d12 at level 5, 3d12 at level 9) to all targets in a 3m radius (18m range), and potentially Mute them.")
             ]
             3<classLvl>, [ Complex("Divine Onto Arcane", "Attack and Damage Rolls against muted enemies are made with advantage. When landing a killing blow against a Muted or Silenced enemy, restore one Crusader’s Smite charge.") ]
             5<classLvl>, [
@@ -1134,7 +1134,7 @@ let rec gloomStalker =
         FixedAbilities = Map [
             1<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Initiative" <?> "Upperdark Adventurer", "Gain +4 to Initiative and 18m Darkvision.") ]
             3<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Dread Shot", "Once per combat, guarantee a Critical Hit.") ]
-            5<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Deceit" <?> "Middledark Survivor", "Turn a failed Attack Roll into a success and refresh once-per-combat actions on kill; Killer's Alacrity causes Dread Shot to deal maximum damage.") ]
+            5<classLvl>, [ Power(Reaction, AtWill, "PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Deceit" <?> "Middledark Survivor", "Turn a failed Attack Roll into a success and refresh once-per-combat actions on kill (just once per turn); Killer's Alacrity causes Dread Shot to deal maximum damage.") ]
             7<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Dread Fletched", "Critical Hits forcibly inflict Terrified.") ]
             9<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Gloom Stalker’s Cruelty" <?> "Dread Tormentor", "Attacks against Terrified targets are always Critical Hits and cannot miss.") ]
             11<classLvl>, [ Complex("PassiveFeature_FavoredEnemy_MageBreaker" <!!> "Dread Ambusher" <?> "Lowerdark Predator", "Every successful Attack Roll on the first turn is a Critical Hit and cannot miss.") ]
@@ -1573,7 +1573,7 @@ let rec pactOfSeverance =
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex("Spell_2e_HydraulicPush" <!!> "Going Ghost", "Deal extra Cold damage = Warlock level.")
-                Complex("Spell_Evocation_SeveringEldritchBlast" <!!> "Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force in a 3m/10ft AoE.")
+                Complex("Spell_Evocation_SeveringEldritchBlast" <!!> "Severing Eldritch Blast", "Your Eldritch Blast deals Cold damage instead of Force. At level 5, deals damage in a 3m AoE around your target.")
             ]
             3<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Curse of the Spectre", "Cold damage applies Encrusted with Frost.") ]
             5<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Severed Resolve", "Using Hematic Invocation restores Action.") ]
@@ -1593,7 +1593,10 @@ let rec pactOfTheTome =
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Improved Eldritch Blast", $"{TOGGLEABLE}: EB adds Charisma; can be cast as Bonus Action.") ]
+            1<classLvl>, [
+                Complex("Improved Eldritch Blast", $"{TOGGLEABLE}: EB adds Charisma; can be cast as Bonus Action.")
+                Complex("Eldritch Hematic Invocation", "Sacrifice 10% max HP to restore a Warlock Spell Slot; reduces number needed to roll a Critical Hit on next Eldritch Blast by 2.")
+            ]
             3<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Projected Inertia", "Eldritch Blast applies Eldritch Inertia.") ]
             5<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Eldritch Overflow", $"{TOGGLEABLE}: Divide EB into two separate beams.") ]
             7<classLvl>, [ Complex("Spell_Abjuration_MagicCircle_Elemental" <!!> "Mystic Precision", "EB Critical Hit threshold reduced by 2.") ]
@@ -1666,7 +1669,7 @@ let rec arcaneWarden =
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
             1<classLvl>, [
-                Complex("PassiveFeature_ArcaneWard" <!!> "Arcane Ward", "Maintain damage-absorbing ward; first spell cast adds charges.")
+                Complex("PassiveFeature_ArcaneWard" <!!> "Arcane Ward", "Maintain damage-absorbing ward; grants Resistance to physical damage while active; first spell cast adds charges.")
                 Power(Reaction, AtWill, "PassiveFeature_ArcaneWard" <!!> "Projected Ward", "Protect allies with your active Ward.")
             ]
             3<classLvl>, [ Complex("PassiveFeature_ArcaneWard" <!!> "Retaliatory Reckoning", "Deals Force damage equal to Ward charges * 2 when damaged; 50% chance to not lose Ward charge.") ]

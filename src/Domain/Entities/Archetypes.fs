@@ -25,7 +25,7 @@ let rec chaoticFortune : ArchetypeDef = {
 let rec controlledAggro : ArchetypeDef = {
     Id = % nameof controlledAggro
     Name = "Controlled Aggro"
-    Grants = [ Complex ("Controlled Aggro", "While in combat, enemies will see you as a priority target.") ]
+    Grants = [ Complex ("Controlled Aggro", "While in combat, enemies will see you as a priority target, and you gain Immunity to being Critically Hit.") ]
 }
 
 let rec deepenedResolve : ArchetypeDef = {

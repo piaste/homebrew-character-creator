@@ -285,7 +285,7 @@ let rec syntheticActionEconomy = {
     ClassId = artificer.Id
     Id = % nameof syntheticActionEconomy
     Name = "Synthetic Action Economy"
-    Grants = [ Power(BonusAction, OncePerCombat, "Skill_Infusion_ReturningWeapon" <!!> "Synthetic Action Economy", "Once per combat, you may expend your Bonus Action in order to regain a single Action.") ]
+    Grants = [ Power(Action, AtWill, "Skill_Infusion_ReturningWeapon" <!!> "Synthetic Action Economy", "You may expend your Action in order to regain a single Action. May be used more than once per combat.") ]
 }
 
 let rec vitalAim = {
@@ -1707,7 +1707,7 @@ let rec oneWithShadowsBoon = {
     ClassId = warlock.Id
     Id = % nameof oneWithShadowsBoon
     Name = "One With Shadows Boon"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "One With Shadows", "Upon killing a target, you and all Chained Companions visible within 18m/60ft of you become Invisible for three turns.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "One With Shadows", "Upon killing a target or landing a Critical Hit, you and all Chained Companions visible within 18m/60ft of you become Invisible for three turns if not Revealed.") ]
 }
 
 let rec onusHematic = {
@@ -1721,7 +1721,7 @@ let rec pactStricken = {
     ClassId = warlock.Id
     Id = % nameof pactStricken
     Name = "Pact Stricken"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Pact Stricken", "Whenever you deal damage, you apply one stack of Eldritch Inertia.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Pact Stricken", "Whenever you deal damage, you apply one turn of Eldritch Inertia (target has Disadvantage on their next Saving Throw). Does not stack and is removed when the creature begins their turn.") ]
 }
 
 let rec repellingBlastBoon = {

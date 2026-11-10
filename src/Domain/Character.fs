@@ -259,6 +259,10 @@ type Character with
             + this.AbilityModifier DEX
             + this.StatModifiers.AC
 
+        member this.DRLayers =
+            this.AbilityModifier CON
+            + this.AbilityModifier CHA
+
         member this.HitPoints = 
             let hpPerLvl = 6 + this.AbilityModifier CON
                              + this.StatModifiers.``HP per level``

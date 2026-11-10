@@ -109,7 +109,7 @@ let rec maximumYield : ClassLevelUpPick = {
     TypeId = nameof maximumYield
     Name = "Maximum Yield"
     Grants = [
-        Complex ("Maximum Yield", "Optimization Matrix increases weapon damage dice to d20")
+        Complex ("Maximum Yield", "Optimization Matrix increases weapon damage dice to d20, but no longer allows for Critical Hits to be rolled while active")
     ]
 }
 
@@ -145,7 +145,7 @@ let rec proactiveOverload : ClassLevelUpPick = {
     TypeId = nameof proactiveOverload
     Name = "Proactive Overload"
     Grants = [
-        Complex ("Proactive Overload", "Optimization Matrix hastens your target")
+        Complex ("Proactive Overload", "Optimization Matrix grants Advantage on Damage Rolls to your target")
     ]
 }
 
@@ -434,7 +434,7 @@ let rec evasiveFootwork : ClassLevelUpPick = {
     TypeId = nameof evasiveFootwork
     Name = "Evasive Footwork"
     Grants = [
-        Power(BonusAction, AtWill, "Evasive Footwork", "Gain +2 AC for 3 turns")
+        Power(BonusAction, AtWill, "Evasive Footwork", "Gain +4 AC for 3 turns")
     ]
 }
 
@@ -479,7 +479,7 @@ let rec parryingStance : ClassLevelUpPick = {
     TypeId = nameof parryingStance
     Name = "Parrying Stance"
     Grants = [
-        Power(BonusAction, AtWill, "Parrying Stance", "Gain +10 AC until the next incoming attack roll")
+        Power(BonusAction, AtWill, "Parrying Stance", "Gain +20 AC until the next incoming attack roll")
     ]
 }
 
@@ -488,7 +488,7 @@ let rec precisionAttacks : ClassLevelUpPick = {
     TypeId = nameof precisionAttacks
     Name = "Precision Attacks"
     Grants = [
-        Power(BonusAction, AtWill, "Precision Attacks", "Gain +2 bonus to Attack Rolls for 3 turns")
+        Power(BonusAction, AtWill, "Precision Attacks", "Gain +4 bonus to Attack Rolls for 3 turns")
     ]
 }
 
@@ -1263,7 +1263,7 @@ let rec maximizedMagic : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof maximizedMagic
     Name = "Maximized Magic"
-    Grants = [ Complex ("Maximized Magic", "Greater Metamagic (1): Target rolls saving throw against Spell with -10. Cannot be utilized with Cantrips.") ]
+    Grants = [ Complex ("Maximized Magic", "Greater Metamagic (1): Target rolls saving throw against Spell with -10. Cannot be utilized with Cantrips. No longer allows you to roll a Critical Hit while active.") ]
 }
 
 let rec piercingSpell : ClassLevelUpPick = {
