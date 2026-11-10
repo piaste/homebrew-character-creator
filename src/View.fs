@@ -208,19 +208,19 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     stat ["Initiative"] (modifierText chr.Initiative)
                     
                     stat ["Base AC"; "AC"] chr.BaseAC
-                    cond chr.StatModifiers.DR <| function
-                        | 0 -> empty()
-                        | dr -> 
+                    cond (chr.StatModifiers.DR > 0) <| function
+                        | false -> empty()
+                        | true -> 
                             concat {
                                 stat ["DR Layers"] chr.DRLayers
-                                stat ["Damage reduction"; "DR"] (-1 * dr)
+                                stat ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
                             }
                     
                     let attackAb, score = chr.HighestAttackBonus in
                     stat ["Best attack bonus"; "Attack rolls"] $"{modifierText score} ({attackAb})"
-                    cond chr.CriticalThreshold <| function
-                        | 20 -> empty()
-                        | ct -> stat ["Critical Threshold"] ct
+                    cond (chr.CriticalThreshold < 20) <| function
+                        | false -> empty()
+                        | true -> stat ["Critical Threshold"] chr.CriticalThreshold
 
                     cond chr.HighestSpellDC <| function
                         | None -> empty()
