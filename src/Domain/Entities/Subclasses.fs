@@ -404,7 +404,7 @@ let rec champion =
         BaseClassId = fighter.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Challenger", $"{TOGGLEABLE}: Gain Physical Resistance, but enemies have Advantage on Attack Rolls against you. Chance to Challenge on hit.") ]
+            1<classLvl>, [ Complex("Passive_CommandingPresence" <!!> "Challenger", $"{TOGGLEABLE}: Gain Physical Resistance. Chance to Challenge on hit.") ]
             3<classLvl>, [
                 Power(BonusAction, AtWill, "Champion's Windstorm", "Restore 1d12 Hit Points * Proficiency Bonus.")
                 Power(BonusAction, AtWill, "Spell_2e_GirzanjesMarch" <!!> "Rallying Cry", "Grant 12 Temporary Hit Points to all allies within 9m.")
@@ -616,7 +616,7 @@ let rec infusedArcsmith =
         BaseClassId = artificer.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies.") ]
+            1<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies. Reloading restores 3 Matrix Charges.") ]
             3<classLvl>, [ Power(FreeAction, AtWill, "Skill_ArcaneJolt_Damage" <!!> "Adaptive Intervention", "Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
             5<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Distributed Subroutine", "Infuse two creatures at once (or one for 2 rounds) per charge.") ]
             7<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Wanton Processing", "Killing blow or Critical Hit restores a Matrix Charge.") ]
@@ -660,7 +660,7 @@ let rec collegeOfCaptivation =
         CasterType = FullCaster Versatile
         FixedAbilities = Map [
             1<classLvl>, [
-                Complex("Sound of Silence", $"{TOGGLEABLE}: Performances act in 9m radius but allow Bard to act freely.")
+                Complex("Sound of Silence", $"{TOGGLEABLE}: Performances act in 9m radius but allow Bard to act freely. Recover a Spell Slot scaling with your level in Bard upon applying your Bardic Inspiration.")
                 Complex("Chorus Healing", "Allies in performance regain Hit Points = Proficiency Bonus.")
             ]
             3<classLvl>, [ Complex("Action_MantleOfInspiration" <!!> "Parade March", "Performance forces enemies to have Disadvantage unless attacking you.") ]
@@ -681,7 +681,7 @@ let rec collegeOfLore =
         BaseClassId = bard.Id
         CasterType = FullCaster DoubleVersatile
         FixedAbilities = Map [
-            3<classLvl>, [ Complex("Secrets of the Lore", "Casting Inspiration makes your next spell not consume a slot.") ]
+            3<classLvl>, [ Complex("Secrets of the Lore", "Casting Inspiration makes your next non-damaging spell not consume a slot.") ]
             5<classLvl>, [ Complex("PassiveFeature_ArcaneBattery" <!!> "Mystic Echoes", "Recover Inspiration when an enemy fails a Saving Throw.") ]
             7<classLvl>, [ Complex("PassiveFeature_ArcaneBattery" <!!> "Binding Vows", "Spells increase DC by 2.") ]
             9<classLvl>, [ Complex("PassiveFeature_ArcaneBattery" <!!> "Macabre Secrets", "Killing blow with Spell/Cantrip restores Inspiration.") ]
@@ -1080,7 +1080,8 @@ let rec runicMystflame =
         FixedAbilities = Map [
             1<classLvl>, [
                 Power(Action, AtWill, "Spellshatter Smite", "Force damage, your target and all enemies within 3m of them must roll an INT save or be muted for three turns.")
-                Power(BonusAction, AtWill, "Oathcast", "Expand one Channel Oath and Spell Slots to create Spell Slots of a higher level that you would otherwise be able to create.")
+                Power(BonusAction, AtWill, "Oathcast", "Expand one Channel Oath and Spell Slots to create Spell Slots of a higher level that you would otherwise be able to create. May be used multiple times per turn.")
+                Power(BonusAction, AtWill, "Arcane Righteousness", "Deals 1d12 Force damage (2d12 at level 5, 3d12 at level 9) to all targets in a 3m radius (18m range), and potentially Mute them.")
             ]
             3<classLvl>, [ Complex("Divine Onto Arcane", "Attack and Damage Rolls against muted enemies are made with advantage. When landing a killing blow against a Muted or Silenced enemy, restore one Crusader’s Smite charge.") ]
             5<classLvl>, [
@@ -1110,7 +1111,7 @@ let rec beastMaster =
         BaseClassId = ranger.Id
         CasterType = HalfCaster Primal
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Spear of the Wildfront", "Companion damage rolls with Advantage, but attackers have Advantage against it.") ]
+            1<classLvl>, [ Complex("Spear of the Wildfront", "Companion damage rolls with Advantage. Ranger Companions are considered to be a priority target.") ]
             3<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Woodland Synergy", "Bonus +1d4 to all rolls for self and companion when within 18m.") ]
             5<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Bestial Fury", "Ranger Companions gain Extra Attack.") ]
             7<classLvl>, [ Complex("PassiveFeature_BestialFury" <!!> "Critical Bonds", "Killing blows grant the other (Ranger/Companion) a Critical Hit.") ]
@@ -1246,7 +1247,7 @@ let rec arcaneTrickster =
                 Complex("Arcane Sneak Attack", "Once per turn bonus damage; Spells/Cantrips deal Force damage.")
                 Complex("PassiveFeature_IllusorySelf" <!!> "Arcane Trickery", "Spells/Cantrips from Stealth do not break it.")
             ]
-            3<classLvl>, [ Power(BonusAction, AtWill, "Action_Cleric_BlessingOfTheTrickster" <!!> "Blessing of the Trickster", "Grant Invisibility and DEX Advantage.") ]
+            3<classLvl>, [ Power(BonusAction, AtWill, "Action_Cleric_BlessingOfTheTrickster" <!!> "Blessing of the Trickster", "Makes creatures Invisible each turn if in combat and not already Invisible. May still become Invisible outside of combat if you start your turn while Sneaking.") ]
             5<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Trick of the Light", "Attacks against you have Disadvantage (until damaged).") ]
             7<classLvl>, [ Complex("PassiveFeature_IllusorySelf" <!!> "Ethereal Caster", "Casting a spell while Invisible doesn't consume a slot (once per turn).") ]
             9<classLvl>, [ Power(FreeAction, OncePerTurn, "PassiveFeature_IllusorySelf" <!!> "Magical Ambush", "Teleport up to 18m.") ]
@@ -1578,7 +1579,7 @@ let rec pactOfSeverance =
             5<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Severed Resolve", "Using Hematic Invocation restores Action.") ]
             7<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Bitter Cold", "Cold damage applies Frigidity.") ]
             9<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Absolute Zero", "Hematic Invocation maximizes next damage instance.") ]
-            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 Hit Points.") ]
+            11<classLvl>, [ Complex("Spell_2e_HydraulicPush" <!!> "Spectral Rebirth", "Survive lethal damage once with 1 Hit Points. Blocks stress and boss kills on Mythic difficulty.") ]
         ]
         ScalingAbilities = fun _ _ -> []
         CustomPicks = Map []
@@ -1611,7 +1612,7 @@ let rec pactOfThePrimordial =
         BaseClassId = warlock.Id
         CasterType = FullCaster Bargained
         FixedAbilities = Map [
-            1<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Pact of the Primordial", "33% chance to shift to Demonic Visage (Advantage, free spells) each turn.") ]
+            1<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Pact of the Primordial", "33% chance to shift to Demonic Visage (Advantage, free cast using Warlock Spell Slots) each turn.") ]
             3<classLvl>, [ Power(BonusAction, AtWill, "Spell_2e_AgonizingDespair" <!!> "Advocatus Diaboli", "Absorb corpses to remove Hematic Invocation stacks.") ]
             5<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Profane Metamorphosis", $"{TOGGLEABLE}: Use Collected Souls in place of health for invocations.") ]
             7<classLvl>, [ Complex("Spell_2e_AgonizingDespair" <!!> "Hematic Ascent", "Target enemies with Invocations (6d6 Necrotic); kills grant Souls.") ]
@@ -1635,12 +1636,12 @@ let rec arcblade =
         CasterType = FullCaster Arcane
         FixedAbilities = Map [
             1<classLvl>, [
-                Power(FreeAction, AtWill, "Spell_Abjuration_BanishingSmite_Container" <!!> "Siphon Arcana", "Destroy corpses for Recovery Charges and bonus weapon damage; weapon scales with Spellcasting modifier.")
+                Power(FreeAction, AtWill, "Spell_Abjuration_BanishingSmite_Container" <!!> "Siphon Arcana", "May be used multiple times per turn at any time to buff weapon damage/scaling with Spellcasting modifier. Can target corpses to restore Arcane Recovery.")
                 Power(Action, AtWill, "Spell_Conjuration_SteelWindStrike" <!!> "Steel-Wind Strike", "Teleport-strike spell targeting multiple foes and creates Cloaks of Daggers by default upon use.")
             ]
             3<classLvl>, [
                 Power(BonusAction, AtWill, "Spell_HarmonyOfFireAndWater" <!!> "Steel-Wind Storm", "Bonus AC and melee Advantage.")
-                Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip.")
+                Power(Action, AtWill, "Steel-Wind Burst", "Weapon-based Ranged Cantrip (Action, does not teleport).")
             ]
             5<classLvl>, [ Complex("A Storm of Serration", "Your Cloaks of Daggers now cause enemies to Bleed for three turns.") ]
             7<classLvl>, [ Complex("Action_Bladesong_Dismiss" <!!> "A Storm of Swords", "Steel-Wind Strike leaves Cloak of Daggers under targets.") ]

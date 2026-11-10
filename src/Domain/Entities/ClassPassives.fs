@@ -592,7 +592,10 @@ let rec combatsHarvest = {
     ClassId = druid.Id
     Id = % nameof combatsHarvest
     Name = "Combat’s Harvest"
-    Grants = [ Simple ("On your first turn of any combat encounter, cast Goodberry. Your goodberries from all sources restore significantly more heal points.") ]
+    Grants = [
+        Complex ("Combat’s Harvest: Goodberry", "At the beginning of any combat encounter, cast Goodberry.")
+        Complex ("Combat’s Harvest: Potion Share", "When you drink a healing potion, the effect is shared to all allies within 9m.")
+    ]
 }
 
 let rec earthenSentinel = {
@@ -1357,7 +1360,7 @@ let rec elementalAfterglow = {
     ClassId = sorcerer.Id
     Id = % nameof elementalAfterglow
     Name = "Elemental Afterglow"
-    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Elemental Afterglow", $"{TOGGLEABLE}: Using a Spell to deal elemental damage causes your target and enemies within 9m/30ft of them to suffer from a status effect dependant on the type of damage you dealt.") ]
+    Grants = [ Complex("PassiveFeature_MagicInitiateSorcerer" <!!> "Elemental Afterglow", $"{TOGGLEABLE}: Using a Spell or Cantrip to deal elemental damage causes your target and enemies within 9m/30ft of them to suffer from a status effect dependant on the type of damage you dealt.") ]
 }
 
 let rec enchantingInfluence = {
@@ -1587,8 +1590,11 @@ let rec unrelentingRampage = {
 let rec unfetteredBeast = {
     ClassId = barbarian.Id
     Id = % nameof unfetteredBeast
-    Name = "Unfettered Beast"
-    Grants = [ Buff <| StatModifiers.Create(hpPerLvl = 2) ]
+    Name = "Unstoppable Beast"
+    Grants = [
+        Buff <| StatModifiers.Create(hpPerLvl = 2)
+        Complex ("Unstoppable Beast: Immunity", "You can't be critically hit.")
+    ]
 }
 
 let rec unstoppableForce = {
@@ -1624,14 +1630,14 @@ let rec boundCompulsion = {
     ClassId = warlock.Id
     Id = % nameof boundCompulsion
     Name = "Bound Compulsion"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Bound Compulsion", "Once per turn, upon landing a killing blow or Critical Hit, all enemies within 9m/30ft must succeed a Wisdom based Saving Throw or become Compelled to duel you.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Bound Compulsion", "Once per turn, upon landing a killing blow or Critical Hit, all enemies within 9m/30ft must succeed a Wisdom based Saving Throw or become Compelled to duel you for 3 turns.") ]
 }
 
 let rec curseOfHellfire = {
     ClassId = warlock.Id
     Id = % nameof curseOfHellfire
     Name = "Curse Of Hellfire"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Curse Of Hellfire", "When you make a successful melee based Attack Roll, you apply one Curse of Hellfire stack to your target.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Curse Of Hellfire", "When you deal damage, you apply one Curse of Hellfire stack to your target.") ]
 }
 
 let rec darkRetaliation = {
@@ -1659,7 +1665,7 @@ let rec eldritchLanceBoon = {
     ClassId = warlock.Id
     Id = % nameof eldritchLanceBoon
     Name = "Eldritch Lance Boon"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lance", "Concentrated variant of Eldritch Blast modified by Eldritch Boons that pierces enemies and deals 1d12 Force damage/spell level at the cost of one Spell Slot.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lance", "Concentrated variant of Eldritch Blast modified by all Eldritch Blast passives (except ones which increase target count) that pierces enemies and deals 1d12 Force damage/spell level at the cost of one Spell Slot.") ]
 }
 
 let rec eldritchStrikeBoon = {
@@ -1673,7 +1679,7 @@ let rec hellishRebuttalBoon = {
     ClassId = warlock.Id
     Id = % nameof hellishRebuttalBoon
     Name = "Hellish Rebuttal Boon"
-    Grants = [ Power(FreeAction, AtWill, "PassiveFeature_PactOfTheTome" <!!> "Hellish Rebuttal Boon", "When an enemy fails an Attack Roll against you with a Melee Weapon Attack, gain True Strike.") ]
+    Grants = [ Power(FreeAction, AtWill, "PassiveFeature_PactOfTheTome" <!!> "Hellish Rebuttal Boon", "When an enemy fails an Attack Roll against you with a Melee or Ranged Attack, gain True Strike.") ]
 }
 
 let rec hellboundVision = {
@@ -1715,7 +1721,7 @@ let rec pactStricken = {
     ClassId = warlock.Id
     Id = % nameof pactStricken
     Name = "Pact Stricken"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Pact Stricken", "Upon a successful Melee Weapon Attack, you apply one stack of Eldtritch Inertia.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Pact Stricken", "Whenever you deal damage, you apply one stack of Eldritch Inertia.") ]
 }
 
 let rec repellingBlastBoon = {

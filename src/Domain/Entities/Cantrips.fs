@@ -47,7 +47,7 @@ let rec ``Dancing Lights`` : CantripDef = {
 
 let rec ``Disguise Self`` : CantripDef = {
     Id = % nameof ``Disguise Self``
-    CantripDescription = "Turn yourself invisible until the end of your current turn or magically change all aspects of your appearance until long rest, so long as you can cast the Cantrip. Duration: 1 turn. Offense: Buff."
+    CantripDescription = "Turn yourself invisible until the end of your current turn or change how other creatures perceive you until long rest, so long as you can cast the Cantrip. Duration: 1 turn. Offense: Buff."
     Concentration = false
     ActionCost = BonusAction
 }
@@ -159,7 +159,7 @@ let rec ``Primal Savagery`` : CantripDef = {
 
 let rec ``Produce Flame`` : CantripDef = {
     Id = % nameof ``Produce Flame``
-    CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. You may hurl the flame as a ▢ Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
+    CantripDescription = "Create a holy flame in your hand that lights the surrounding area in a 9 m radius. This flame may be hurled at a target to inflict them with Eternal Flames, causing them to take 1d12 Radiant Damage at the start of their turns permanently. Project Flame no longer removes Produce Flame. You may hurl the flame as a ▢ Free Action on the same turn it was produced. Duration: permanent. Offense: CON Save."
     Concentration = false
     ActionCost = BonusAction
 }
