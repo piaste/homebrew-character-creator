@@ -260,11 +260,11 @@ type Character with
             + this.StatModifiers.AC
 
         member this.HitPoints = 
-            let hpPerLvl = 8 + this.AbilityModifier CON 
+            let hpPerLvl = 6 + this.AbilityModifier CON
                              + this.StatModifiers.``HP per level``
             in 
-                4 + this.StatModifiers.``Base HP`` 
-                  + hpPerLvl * (this.CharacterLevel / 1<charLvl>)
+                28 + this.StatModifiers.``Base HP``
+                   + hpPerLvl * (this.CharacterLevel / 1<charLvl>)
             
         member this.StatModifiers = 
             [ yield! Races.allSubraces[this.RaceId].RacialPassives

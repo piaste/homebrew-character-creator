@@ -229,8 +229,8 @@ let rec narcoleptic : TraitDef = {
     Id = % nameof narcoleptic
     Name = "Narcoleptic"
     Grants = [
-        Complex ("Narcoleptic: Drowsiness", "Upon starting your turn, you have a 50% chance to gain a stack of Drowsiness. Upon reaching 3 stacks, you fall Asleep.")
-        Complex ("Narcoleptic: Awakening", "Upon waking from a sleep-based Condition, you deal only Critical Hits until the end of your turn.")
+        Complex ("Narcoleptic: Drowsiness", "You have a 50% chance to incur a stack of Drowsiness every turn. Upon reaching three stacks, you fall asleep.")
+        Complex ("Narcoleptic: Awakening", "Upon waking up, you will only roll Critical Hits for the rest of your turn.")
     ]
 }
 
@@ -293,8 +293,8 @@ let rec reckless : TraitDef = {
     Id = % nameof reckless
     Name = "Reckless"
     Grants = [
-        Complex ("Reckless: Ignore Resistances", "Ignore all damage Resistance and Immunities.")
-        Complex ("Reckless: Vulnerability", "You also become Vulnerable to physical damage.")
+        Complex ("Reckless: Ignore Resistances", "Ignore all damage Resistances and Immunities.")
+        Complex ("Reckless: Vulnerability", "You become Vulnerable to all damage.")
     ]
 }
 

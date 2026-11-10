@@ -1326,7 +1326,7 @@ let rec twinnedSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof twinnedSpell
     Name = "Twinned Spell"
-    Grants = [ Complex ("Twinned Spell", "Greater Metamagic (1 per level): Single target Spell now targets 2 creatures. Cannot be utilized with Cantrips.") ]
+    Grants = [ Complex ("Twinned Spell", "Greater Metamagic (1 per level): Single target Spell now targets 2 creatures, or causes your next Spells Attack Roll to automatically roll as a Critical Hit. Cannot be utilized with Cantrips.") ]
 }
 
 type private Placeholder = class end
