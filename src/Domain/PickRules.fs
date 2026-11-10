@@ -94,28 +94,30 @@ type Character.Character with
                         | Some yb when Set.isEmpty yb -> ()
                         | Some yb ->
                             let ybScid = UMX.tag<subclassId> (Set.minElement yb)
-                            let ybSc = allSubclasses[ybScid]
-                            let ybLrs = 
-                                [ 1<classLvl> .. +1<classLvl> .. 3<classLvl> ]
-                                |> List.map (LevelRecord.Blank ybScid)
+                            // Yokebreaker should no longer grant bonuses if dipping into the same subclass
+                            if ybScid <> l.SubclassId && not (c.PreviousHistory.LevelsBySubclass.ContainsKey ybScid) then
+                                let ybSc = allSubclasses[ybScid]
+                                let ybLrs =
+                                    [ 1<classLvl> .. +1<classLvl> .. 3<classLvl> ]
+                                    |> List.map (LevelRecord.Blank ybScid)
 
-                            let mutable ybPicks = Map []
+                                let mutable ybPicks = Map []
 
-                            for ybLr in ybLrs do
-                                // only non-caster classes may get cantrips and spells via yokebreaking
-                                if cl.IsCaster = false then
-                                    ybPicks <- Map.accumulate (FeatSubpick YBCantrips) (nCantripPicks ybLr) ybPicks
+                                for ybLr in ybLrs do
+                                    // only non-caster classes may get cantrips and spells via yokebreaking
+                                    if cl.IsCaster = false then
+                                        ybPicks <- Map.accumulate (FeatSubpick YBCantrips) (nCantripPicks ybLr) ybPicks
 
-                                    match getSpellListSelectionFor ybLr with
-                                    | None -> ()
-                                    | Some sl -> 
-                                        ybPicks <- Map.accumulate (FeatSubpick (YBSpells sl)) (nSpellPicks (subclassById ybScid).CasterType) ybPicks
+                                        match getSpellListSelectionFor ybLr with
+                                        | None -> ()
+                                        | Some sl ->
+                                            ybPicks <- Map.accumulate (FeatSubpick (YBSpells sl)) (nSpellPicks (subclassById ybScid).CasterType) ybPicks
 
-                                // custom SUBCLASS-SPECIFIC stuff like arcane archer picks
-                                for pick, q in ybSc.CustomPicks.GetOrElse(ybLr.ClassLevel, []) do
-                                    ybPicks <- Map.accumulate (FeatSubpick (YBClassSpecific pick)) q ybPicks
-                            
-                            yield! Map.toSeq ybPicks
+                                    // custom SUBCLASS-SPECIFIC stuff like arcane archer picks
+                                    for pick, q in ybSc.CustomPicks.GetOrElse(ybLr.ClassLevel, []) do
+                                        ybPicks <- Map.accumulate (FeatSubpick (YBClassSpecific pick)) q ybPicks
+
+                                yield! Map.toSeq ybPicks
             ]
             |> Map.filter (fun _ n -> n > 0)
         )
