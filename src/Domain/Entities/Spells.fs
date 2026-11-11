@@ -558,7 +558,7 @@ let elementalWalls =
       SpellDescription = "Conjure a Fire, Ice, or Stone wall for 3 turns. The Fire wall deals 1d12 Fire damage to creatures affected by its aura; the Ice wall can trigger a 6d6 Cold explosion when applied; the Stone wall provides a physical barrier."
       SpellLists = [ Primal; Innate ]
       Concentration = false
-      Upcastable = false
+      Upcastable = true
       ActionCost = BonusAction }
 
 let elementalWeapon =
@@ -893,7 +893,6 @@ let harm =
       Concentration = false
       Upcastable = true
       ActionCost = Action }
-
 
 
 let healingGlyph =
