@@ -13,7 +13,10 @@ let rec arcanePrecision : ArchetypeDef = {
 let rec combatMastery : ArchetypeDef = {
     Id = % nameof combatMastery
     Name = "Combat Mastery"
-    Grants = [ Buff { StatModifiers.Zero with ``Attack rolls`` = 4 } ]
+    Grants = [
+        Buff { StatModifiers.Zero with ``Attack rolls`` = 4 }
+        Complex ("Combat Mastery: Attunement", "Gain +6 Attunement.")
+    ]
 }
 
 let rec chaoticFortune : ArchetypeDef = {
@@ -91,7 +94,7 @@ let rec quickReflexes : ArchetypeDef = {
 let rec reactiveRetribution : ArchetypeDef = {
     Id = % nameof reactiveRetribution
     Name = "Reactive Retribution"
-    Grants = [ Complex ("Reactive Retribution", "When an ally is damaged, you may expand your reaction to make a melee-based Attack Roll against their aggressor.") ]
+    Grants = [ Complex ("Reactive Retribution", "Gain +1 Reaction. When an ally is damaged, you may expand your reaction to make an Attack Roll (melee or ranged) against their aggressor.") ]
 }
 
 let rec restorativeTouch : ArchetypeDef = {

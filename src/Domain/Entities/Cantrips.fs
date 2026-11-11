@@ -40,7 +40,7 @@ let rec ``Blessed Ward`` : CantripDef = {
 
 let rec ``Bone Chill`` : CantripDef = {
     Id = % nameof ``Bone Chill``
-    CantripDescription = "Deal 1d8 Necrotic Damage. Undead creatures roll with Disadvantage on all Attack Rolls. Duration: 1 turn. Offense: Ranged 18m."
+    CantripDescription = "Deal 1d8 Necrotic Damage. Undead creatures roll with Disadvantage on all Attack Rolls. Duration: 3 turns. Offense: Ranged 18m."
     Concentration = false
     ActionCost = Action
 }

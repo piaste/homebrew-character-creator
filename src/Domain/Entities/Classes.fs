@@ -5,7 +5,7 @@ open Bg3HomebrewCCreator.Domain.Types
 
 let rec artificer = {
         Id = % nameof artificer
-        Name = "Artificer"
+        Name = "Zetherist"
         Description = "Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects."
 
         IsCaster = false
@@ -142,7 +142,7 @@ let rec monk = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Martial Arts", "Attacks with Monk Weapons (weapons without the two-handed or heavy property) and unarmed attacks deal 1d4 Bludgeoning damage, unless their normal damage is higher. These attacks may scale with either your Strength or Dexterity, whichever is higher. Additionally, you are able to make an additional unarmed strike as a Bonus Action."); Power (BonusAction, AtWill, "Flurry of Blows", "Punch twice in rapid succession, making two unarmed strikes against your target as a Bonus Action.")]
+            1<classLvl>, [Complex ("Martial Arts", "Attacks with Monk Weapons (weapons without the two-handed or heavy property) and unarmed attacks deal 1d4 Bludgeoning damage, unless their normal damage is higher. These attacks may scale with either your Strength or Dexterity, whichever is higher. Additionally, you are able to make an additional unarmed strike as a Bonus Action."); Power (BonusAction, AtWill, "Flurry of Blows", "Punch twice in rapid succession, making two unarmed strikes against your target as a Bonus Action."); Complex ("Ki Regeneration", "Monks now regenerate Ki Points each turn equal to your Proficiency Bonus minus one. This is part of their level one passive.")]
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Martial Flux", "You regain one Ki Point per turn. Additionally, when you expend a Ki Point to make an Attack Roll, the number needed to roll a Critical Hit is reduced by 1.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Ki Resonance", "When using a Ki Point to deal damage, the lowest number you can roll per die is an 8.")]
         ]
@@ -209,7 +209,7 @@ let rec rogue = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Resource (3, "Luck Points", OncePerShortRest); Power (FreeAction, AtWill, "Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time.")]
+            1<classLvl>, [Resource (3, "Luck Points", OncePerShortRest); Power (FreeAction, AtWill, "Lucky Odds", "Spend one of your Lucky dice to gain Advantage on Attack Rolls, Ability Checks, or force enemies to Attack you with Disadvantage."); Complex ("Nimble Movement", "Gain the ability to Dash, Disengage, and Hide as a Bonus Action. This effect can be toggled at any time."); Power (BonusAction, OncePerCombat, "Smoke Bomb", "Toss a Smoke Bomb as a Bonus Action at level one, creating an obscuring cloud.")]
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Lucky Toss", "While in combat, you have a 50% chance to restore one Luck Point at the beginning of your turns."); Complex ("Greater Sneak Attack", "You may now utilize your Sneak Attack two times per turn. Sneak Attack is still limited to once per target per turn.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Uncanny Dodge", "When an enemy makes a successful Attack Roll against you, use your Reaction in order to transform the roll into a Critical Miss."); Complex ("Superior Sneak Attack", "You may now utilize your Sneak Attack three times per turn. Sneak Attack is still limited to once per target per turn.")]
         ]

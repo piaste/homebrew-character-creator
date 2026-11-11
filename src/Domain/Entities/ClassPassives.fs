@@ -292,7 +292,7 @@ let rec vitalAim = {
     ClassId = artificer.Id
     Id = % nameof vitalAim
     Name = "Vital Aim"
-    Grants = [ Complex("Passive_SoulOfArtefice" <!!> "Vital Aim", "Landing a Critical Hit with a Ranged Weapon Attack inflicts Gaping Wounds on your target.") ]
+    Grants = [ Complex("Passive_SoulOfArtefice" <!!> "Vital Aim", "Landing a Critical Hit with a Ranged Weapon Attack inflicts three stacks of Gaping Wounds on your target.") ]
 }
 
 // BARD
@@ -609,7 +609,7 @@ let rec feralPrecision = {
     ClassId = druid.Id
     Id = % nameof feralPrecision
     Name = "Feral Precision"
-    Grants = [ Simple ("Action_SymbioticEntity" <!!> "Gain a +2 bonus to all Attack Rolls. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active.") ]
+    Grants = [ Complex ("Action_SymbioticEntity" <!!> "Feral Precision", "Gain a +2 bonus to all Attack Rolls. This bonus is doubled while assuming a Wild Shape, a Shape of the Cosmos, while Communed, or while Symbiotic Entity is active.") ]
 }
 
 let rec feralResilience = {
@@ -674,7 +674,7 @@ let rec naturesWrath = {
     ClassId = druid.Id
     Id = % nameof naturesWrath
     Name = "Nature’s Wrath"
-    Grants = [ Simple ("Spell_Evocation_Light" <!!> "Use your Wild Shape charges to deal an additional +1d12 Cold, Lightning, or Poison damage on any successful Attack Roll made with a weapon.") ]
+    Grants = [ Simple ("Spell_Evocation_Light" <!!> "Free Reaction to deal an additional +1d4 Cold, Lightning, or Poison damage on any successful Attack Roll made with a weapon.") ]
 }
 
 let rec packLeader = {
@@ -688,7 +688,7 @@ let rec primalBloodletter = {
     ClassId = druid.Id
     Id = % nameof primalBloodletter
     Name = "Primal Bloodletter"
-    Grants = [ Simple ("Action_SymbioticEntity" <!!> "While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to inflict Gaping Wounds on your target when you make a successful Attack Roll.") ]
+    Grants = [ Complex ("Action_SymbioticEntity" <!!> "Primal Bloodletter", "While assuming the form of a Wild Shape, a Shape of the Cosmos, while Communed, or while Symbiotic Entity is active, you have a chance to inflict Bleeding and Gaping Wounds on your target when you deal any damage.") ]
 }
 
 let rec primalSurge = {
@@ -702,7 +702,7 @@ let rec primalTakedown = {
     ClassId = druid.Id
     Id = % nameof primalTakedown
     Name = "Primal Takedown"
-    Grants = [ Simple ("Action_SymbioticEntity" <!!> "While assuming the form of a Wild Shape, a Shape of the Cosmos, or while Symbiotic Entity is active, you have a chance to knock your target Prone when you make a successful Attack Roll.") ]
+    Grants = [ Complex ("Action_SymbioticEntity" <!!> "Primal Takedown", "While assuming the form of a Wild Shape, a Shape of the Cosmos, while Communed, or while Symbiotic Entity is active, you have a chance to knock your target Prone when you deal any damage.") ]
 }
 
 let rec shapechangersVersatility = {
@@ -1665,7 +1665,21 @@ let rec eldritchLanceBoon = {
     ClassId = warlock.Id
     Id = % nameof eldritchLanceBoon
     Name = "Eldritch Lance Boon"
-    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lance", "Concentrated variant of Eldritch Blast modified by all Eldritch Blast passives (except ones which increase target count) that pierces enemies and deals 1d12 Force damage/spell level at the cost of one Spell Slot.") ]
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lance", "Concentrated variant of Eldritch Blast modified by all Eldritch Blast passives (except ones which increase target count) that pierces enemies and deals 1d12+4 Force damage/spell level at the cost of one Warlock Spell Slot.") ]
+}
+
+let rec eldritchLethargy = {
+    ClassId = warlock.Id
+    Id = % nameof eldritchLethargy
+    Name = "Eldritch Lethargy"
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Lethargy", "When dealing damage with your Eldritch Blast, reduce the enemy movement speed by 50% for a round.") ]
+}
+
+let rec eldritchPull = {
+    ClassId = warlock.Id
+    Id = % nameof eldritchPull
+    Name = "Eldritch Pull"
+    Grants = [ Complex("PassiveFeature_PactOfTheTome" <!!> "Eldritch Pull", "When dealing damage with your Eldritch Blast, you can pull the target 9m closer to you.") ]
 }
 
 let rec eldritchStrikeBoon = {

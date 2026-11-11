@@ -7,9 +7,9 @@ open Bg3HomebrewCCreator.Domain.Types
 let rec abilityImprovement : FeatDef = {
     Id = % nameof abilityImprovement
     Name = "Ability Improvement"
-    ExplicitDescription = Some "Select two Abilities. These abilities increase by an amount equal to your Proficiency Bonus."
+    ExplicitDescription = Some "Select two Abilities. These abilities increase by an amount equal to your Proficiency Bonus. Also grants +6 Attunement."
     Subpicks = Map []
-    Grants = [] // this feat has special coding
+    Grants = [ Complex ("Ability Improvement: Attunement", "Grants +6 Attunement.") ] // this feat has special coding
 }
 
 let rec accordOfTheArcane : FeatDef = {
@@ -235,8 +235,8 @@ let rec mageSlayer : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Mage Slayer: Disruption", "Damaged enemies immediately lose Concentration.")
-        yield! alsoAffectsSummons <| Complex("Mage Slayer: Silence", "Damaging an enemy silences them for 1 turn.")
+        Complex("Mage Slayer: Disruption", "Damaged enemies immediately lose Concentration.")
+        Complex("Mage Slayer: Silence", "Damaging an enemy silences them for 1 turn.")
     ]
 }
 
@@ -256,7 +256,7 @@ let rec masonryOfChaos : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Masonry of Chaos", "20% chance for a positive Wild Magic surge at combat start/end, turn start, and when dealing/taking damage.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Masonry of Chaos", "20% chance for a positive Wild Magic surge at combat start/end, turn start, and when dealing/taking damage.")
     ]
 }
 
@@ -307,7 +307,7 @@ let rec reactiveAssault : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Power(Reaction, AtWill, "PassiveAction_GreatWeaponMaster_AllIn" <!!> "Reactive Assault", "Make a basic weapon Attack as a Reaction upon landing a Critical Hit.")
+        yield! alsoAffectsSummons <| Power(Reaction, OncePerTurn, "PassiveAction_GreatWeaponMaster_AllIn" <!!> "Reactive Assault", "Make a basic weapon Attack as a Reaction upon landing a Critical Hit (once per turn).")
     ]
 }
 
@@ -365,7 +365,7 @@ let rec sharpshooter : FeatDef = {
     Subpicks = Map []
     Grants = [
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Sharpshooter: High Ground", "Ranged attacks ignore High Ground penalties.")
-        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Sharpshooter: Aim", "Toggled: -Proficiency to Attack Rolls, +2*Proficiency to Damage Rolls.")
+        Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Sharpshooter: Aim", "Toggled: -Proficiency to Attack Rolls, +2*Proficiency to Damage Rolls on ranged attacks and ranged Spells.")
         Complex("PassiveFeature_Banite_TacticalDiscipline" <!!> "Sharpshooter: Bypass", "Ignore Physical Resistances and Immunities.")
     ]
 }
@@ -398,9 +398,9 @@ let rec tavernBrawler : FeatDef = {
     ExplicitDescription = None
     Subpicks = Map []
     Grants = [
-        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "Add STR modifier to unarmed attack and Throw damage rolls.")
-        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Add DEX modifier to all Attack Rolls.")
-        yield! alsoAffectsSummons <| Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Thrown", "Main-hand melee weapons gain Thrown and Returning.")
+        Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Unarmed", "Add STR modifier to unarmed attack and Throw damage rolls.")
+        Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Dexterous", "Add DEX modifier to all Attack Rolls.")
+        Complex("Spell_Transmutation_Catapult" <!!> "Tavern Brawler: Thrown", "Main-hand melee weapons gain Thrown and Returning.")
     ]
 }
 

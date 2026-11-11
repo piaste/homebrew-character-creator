@@ -13,7 +13,7 @@ let rec adrenalineSurge : TraitDef = {
     Id = % nameof adrenalineSurge
     Name = "Adrenaline Surge"
     Grants = [ 
-        Complex ("Adrenaline Surge", "While below 50% of your maximum Hit Points, you gain a +prof bonus to all damage dealt.")
+        Complex ("Adrenaline Surge", "Adrenaline Surge is now always active, but reduces your total Attunement by -6. Gain a +prof bonus to all damage dealt.")
     ]
 }
 
@@ -218,8 +218,8 @@ let rec loneWolf : TraitDef = {
     Id = % nameof loneWolf
     Name = "Lone Wolf*"
     Grants = [
-        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action, Bonus Action, and Reaction, and your maximum Hit Points are doubled.")
-        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain two additional Actions, Bonus Actions, and Reactions, status immunity to Arcane Blowback, and your maximum Hit Points are quadrupled.")
+        Complex ("Lone Wolf*: Companion", "While travelling with just one other companion, you gain an additional Action, Bonus Action, and Reaction, your maximum Hit Points are doubled, and you gain +6 Attunement.")
+        Complex ("Lone Wolf*: Solo", "While travelling completely alone, you gain two additional Actions, Bonus Actions, and Reactions, status immunity to Arcane Blowback, your maximum Hit Points are quadrupled, you gain a +10 bonus to Initiative, all incoming healing is maximized, and you gain +6 additional points of Attunement.")
         Complex ("Lone Wolf*: Summons", "Everything also applies to your summons.")
         Complex ("Lone Wolf*: Warning", "Warning: Taking this trait will drastically impact intended game balance, and is made for solo or dual runs.")
     ]

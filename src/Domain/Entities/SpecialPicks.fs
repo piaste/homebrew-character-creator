@@ -479,7 +479,7 @@ let rec parryingStance : ClassLevelUpPick = {
     TypeId = nameof parryingStance
     Name = "Parrying Stance"
     Grants = [
-        Power(BonusAction, AtWill, "Parrying Stance", "Gain +20 AC until the next incoming attack roll")
+        Power(Reaction, AtWill, "Parrying Stance", "Gain +20 AC until the next incoming attack roll (Reaction)")
     ]
 }
 
@@ -914,7 +914,7 @@ let rec wildShapeBadger : ClassLevelUpPick = {
     TypeId = nameof wildShapeBadger
     Name = "Badger"
     Grants = [
-        Complex ("Badger", "Wild Shape: Badger. High Hit Points, Bite/Claws, and Burrow.")
+        Complex ("Badger", "Wild Shape: Badger. High Hit Points, Bite/Claws, and Burrow (costs a Bonus Action and Movement).")
     ]
 }
 
@@ -1305,7 +1305,7 @@ let rec subtleSpell : ClassLevelUpPick = {
     Type = SorcererMetamagic
     TypeId = nameof subtleSpell
     Name = "Subtle Spell"
-    Grants = [ Complex ("Subtle Spell", "Metamagic (1): Spell/Cantrip may be cast while Silenced") ]
+    Grants = [ Complex ("Subtle Spell", "Metamagic (1): Spell/Cantrip may be cast while Silenced. Prevents Counterspell.") ]
 }
 
 let rec tempestuousSpell : ClassLevelUpPick = {

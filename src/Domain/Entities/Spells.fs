@@ -315,7 +315,7 @@ let cloudkill =
       SpellDescription = "Deal 1d6 Poison Damage. Conjure a 3 m cloud of noxious cloud that Poisons and Heavily Obscures any creature within. The cloud will reset a creatures amount of Poison stacks to one."
       SpellLists = [ Divine; Primal ]
       Concentration = true
-      Upcastable = true
+      Upcastable = false
       ActionCost = Action }
 
 let cloudOfDaggers =
@@ -465,7 +465,7 @@ let darkvision =
 let deathWard =
     { Id = % "death-ward"
       Name = "Death Ward"
-      SpellDescription = "Protect a non-summoned creature from death. The next time damage would reduce it to 0 Hit Points, it will immediately regain 1 Hit Point and remain conscious. Effects which trigger on killing blows can still trigger if Death Ward is active."
+      SpellDescription = "Protect a non-summoned creature from death. The next time damage would reduce it to 0 Hit Points, it will immediately regain 1 Hit Point and remain conscious. Effects which trigger on killing blows can still trigger if Death Ward is active. Upon triggering Death Ward, you cannot benefit from it again until the start of your next turn."
       SpellLists = [ Divine; Arcane ]
       Concentration = false
       Upcastable = true
@@ -894,14 +894,7 @@ let harm =
       Upcastable = true
       ActionCost = Action }
 
-let heartSeekersBoon =
-    { Id = % "heart-seekers-boon"
-      Name = "Heart-Seeker's Boon"
-      SpellDescription = "Target creature gains Advantage on Attack Rolls and Damage for 3 turns."
-      SpellLists = [ Divine; Primal ]
-      Concentration = false
-      Upcastable = true
-      ActionCost = BonusAction }
+
 
 let healingGlyph =
     { Id = % "healing-glyph"

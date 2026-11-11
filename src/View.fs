@@ -966,6 +966,6 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                             .Elt()   
             }
         )
-        .ModVersion("9.1.5")
+        .ModVersion("9.2.7")
         .Version($"{defaultCharacter.Version.ToString()}-bolero")   
         .Elt()

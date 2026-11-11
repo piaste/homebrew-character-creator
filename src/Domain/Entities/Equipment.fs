@@ -764,6 +764,7 @@ let rec helmOfBalduran = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex ("Feat - Tough", "Requires Greater Attunement. Grants the Tough feat.");
             Complex ("Balduran's Vitality", "Heal 1d12 Hit Points at the beginning of each of your turns. Balduran's Favour You gain a +2 bonus to Armour Class and Saving Throws. Attackers can't land Critical Hits on the wearer.")
         ]
     }
@@ -803,6 +804,7 @@ let rec viconiaSPriestessRobe = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
+            Complex ("Feat - Resilient", "Requires Greater Attunement. Grants the Resilient feat.");
             Complex ("Sharran Veil", "Shield of Faith also grants you a +2 bonus to all Saving Throws.")
         ]
     }
@@ -1089,6 +1091,7 @@ let rec infernalRobe = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex ("Feat - Accord of the Arcane", "Requires Greater Attunement. Grants the Accord of the Arcane feat.");
             Complex ("Infernal Robe", "Immunity to Fire damage.")
         ]
     }
@@ -1102,6 +1105,7 @@ let rec potentRobe = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex ("Feat - Arcane Echoes", "Requires Greater Attunement. Grants the Arcane Echoes feat.");
             Complex ("Gregarious Caster", "Your Cantrips deal additional damage equal to your Charisma Modifier.")
         ]
     }
@@ -1492,7 +1496,7 @@ let rec adamantineScaleMail = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Feat - Intrinsic Bulwark", "Gain Resistance to elemental damage and status based immunity to all conditions which deal damage over time.")
+            Complex ("Feat - Intrinsic Bulwark", "Gain Resistance to elemental damage and status based immunity to all conditions which deal damage over time.");
         ]
     }
     Slot = Chest
@@ -1596,6 +1600,7 @@ let rec sarevokSWretchedArmour = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex ("Feat - Sentinel", "Requires Greater Attunement. Grants the Sentinel feat.");
             Complex ("Withering Barrier", "When you deal Necrotic damage, you gain 1d6 Temporary Hit Points. If a melee attack hits you while you still have Temporary Hit Points, you deal 1d6 Piercing damage to all creatures within 3m/10ft.")
         ]
     }
@@ -1609,7 +1614,7 @@ let rec adamantineSplintArmour = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Feat - Durable", "Gain Resistance to physical damage and permanent Lockdown Immunity. Also applies to any creatures that you summon.")
+            Complex ("Feat - Durable", "Gain Resistance to physical damage and permanent Lockdown Immunity. Also applies to any creatures that you summon.");
         ]
     }
     Slot = Chest
@@ -2545,6 +2550,7 @@ let rec glovesOfSoulCatching = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex ("Feat - Tempered Brawler", "Requires Greater Attunement. Grants the Tempered Brawler feat.");
             Complex ("Soul Fist", "Your unarmed attacks deal an additional 1d8 Force damage. Soul Catching Once per turn, on an unarmed hit, you regain 12 hit points. Alternatively, you may forego healing to gain Advantage on Attack Rolls and Saving Throws until the end of your next turn. Wisdom +4 (up to 22)")
         ]
     }

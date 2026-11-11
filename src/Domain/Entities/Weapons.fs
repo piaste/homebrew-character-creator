@@ -357,6 +357,7 @@ let rec shadowLantern = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex("Feat - Ascended Summons", "Requires Greater Attunement. Grants the Ascended Summons feat.");
             Complex("Conjure Shadow Lantern Wraith", "level 6 spell, Recharge: Long Rest, summons undead from target corpse")
         ]
     }
@@ -539,6 +540,7 @@ let rec bloodOfLathander = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Composed", "Requires Greater Attunement. Grants the Composed feat.");
             Complex("Lathander's Blessing", "Once per Long Rest, when your Hit Points are reduced to 0, you and all allies within 9m regain 12d12 hit points. Grants Sunbeam level 6 spell, Recharge: Short Rest")
         ]
     }
@@ -553,6 +555,7 @@ let rec twistOfFortune = {
         Icon = ""
         Rarity = Rare
         Grants = [
+            Complex("Feat - Lucky", "Requires Greater Attunement. Grants the Lucky feat.");
             Complex("Twist of Fortune", "When you roll 4 or less with this weapon's damage die, reroll it and take the new result. Grants Blood Money Weapon action, Recharge: Short Rest, Strike out greedily, dealing 3 Damage per 100 gold that the target possesses. The Gold will be consumed.")
         ]
     }
@@ -679,6 +682,7 @@ let rec kethericsWarhammer = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex("Feat - Tormented Recovery", "Requires Greater Attunement. Grants the Tormented Recovery feat.");
             Complex("Blessing of Myrkul", "Dealing damage will apply Crawling Gnaw (as Necromancer) to your target for one turn.")
         ]
     }
@@ -707,6 +711,7 @@ let rec orphicHammer = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Visage of Reflection", "Requires Greater Attunement. Grants the Visage of Reflection feat.");
             Complex("Spell Resistance", "You have Advantage on Saving Throws against Spells. Grants Unshackling Strike Class action, frees creature from Restrained, Paralysed, and Stunned")
         ]
     }
@@ -861,6 +866,7 @@ let rec staffOfCrones = {
         Icon = ""
         Rarity = Rare
         Grants = [
+            Complex("Feat - Elemental Adept Necrotic/Poison", "Requires Greater Attunement. Grants the Elemental Adept Necrotic/Poison feat.");
             Complex("Ray of Sickness", "level 1 spell, Recharge: Per Turn")
         ]
     }
@@ -1057,6 +1063,7 @@ let rec woe = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex("Feat - Dunesis", "Requires Greater Attunement. Grants the Dunesis feat.");
             Complex("Arcane Vampirism", "When the creatures affected by your Spells fail any associated Saving Throws, you regain 12 hit points.")
         ]
     }
@@ -1071,6 +1078,7 @@ let rec markoheshkir = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Spellbreak", "Requires Greater Attunement. Grants the Spellbreak feat.");
             Complex("Arcane Battery", "Alleviate the burden of Spellcasting with the power of this staff. The next Spell you cast doesn't cost a Spell Slot. Devout Spellcasting Spells you cast and Conditions you apply have their Difficulty Class increased by +2. Grants Kereska's Favour level 6 spell, imbue yourself with elemental energy sourced from the draconic goddes, Kereska")
         ]
     }
@@ -1211,6 +1219,7 @@ let rec cruelSting = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
+            Complex("Feat - Dual Wielder", "Requires Greater Attunement. Grants the Dual Wielder feat.");
             Complex("Ensnaring Strike", "level 1 spell, Recharge: Short Rest")
         ]
     }
@@ -1239,6 +1248,7 @@ let rec phalarAluve = {
         Icon = ""
         Rarity = Rare
         Grants = [
+            Complex("Feat - Performer", "Requires Greater Attunement. Grants the Performer feat.");
             Complex("Phalar Aluve: Melody", "weapon action, Recharge: Short Rest, creates 9m/30ft aura for 3 turns to either grant allies Advantage on Attack Rolls or enemies Disadvantage on Attack Rolls")
         ]
     }
@@ -1435,6 +1445,7 @@ let rec belm = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex("Feat - Duellist's Instinct", "Requires Greater Attunement. Grants the Duellist's Instinct feat.");
             Complex("Perfectly Balanced Strike", "Weapon action, Recharge: Per Turn, make a weapon attack as a bonus action")
         ]
     }
@@ -1477,6 +1488,7 @@ let rec swordOfFirstBlood = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
+            Complex("Feat - Martial Adept", "Requires Greater Attunement. Grants the Martial Adept feat.");
             Complex("Break the Unbroken", "Deals an additional 8 Piercing damage to targets that still have all their Hit Points.")
         ]
     }
@@ -1617,6 +1629,7 @@ let rec crimsonMischief = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Melee Expertise", "Requires Greater Attunement. Grants the Melee Expertise feat.");
             Complex("Stab Happy", "This weapon deals an additional 8 Piercing damage against targets with 50% of their Hit Points or fewer.");
             Complex("Redvein Savagery", "When you make an attack with Advantage, the target takes an additional 8 Piercing damage.")
         ]
@@ -1646,6 +1659,7 @@ let rec sussurSickle = {
         Icon = ""
         Rarity = Rare
         Grants = [
+            Complex("Feat - Mage Slayer", "Requires Greater Attunement. Grants the Mage Slayer feat.");
             Complex("Sussur Sickle", "Silences targets on hit.")
         ]
     }
@@ -1773,6 +1787,7 @@ let rec duellistsPrerogative = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Defensive Duellist", "Requires Greater Attunement. Grants the Defensive Duellist feat.");
             Power(Reaction, AtWill, "Elegant Duellist", "While your off-hand is empty, reduce the number needed to roll a Critical hit by 1.");
             Power(Reaction, AtWill, "Withering Cut", "On a hit with a melee weapon, use a Reaction to deal Necrotic damage equal to your Proficiency Bonus.");
             Power(BonusAction, OncePerTurn, "Dueller's Enthusiasm", "Weapon action, Recharge: Per Turn, while not dual-wielding, you can make an additional melee attack as a bonus action")
@@ -1873,6 +1888,7 @@ let rec sussurDagger = {
         Icon = ""
         Rarity = Rare
         Grants = [
+            Complex("Feat - Mage Slayer", "Requires Greater Attunement. Grants the Mage Slayer feat.");
             Complex("Silences targets on hit.", "Silences targets on hit.")
         ]
     }
@@ -2071,6 +2087,7 @@ let rec selNesSpearOfNight = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Blessing of the Moon", "Requires Greater Attunement. Grants the Blessing of the Moon feat.");
             Complex("Moonbeam", "level 6 spell, Recharge: Long Rest Grants Moonmote Class action, illuminate 9m/30ft aura for three turns, movement difficult for enemies, allies deal additional 1d4 radiant damage, Concentration")
         ]
     }
@@ -2085,6 +2102,7 @@ let rec sharsSpearOfTheEvening = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Psionic Dominance", "Requires Greater Attunement. Grants the Psionic Dominance feat.");
             Complex("Shar's Blessing", "While Lightly or Heavily Obscured, you gain Advantage on all Saving Throws and deal an additional 1d8 Necrotic damage with weaponbased Attack Rolls. Shar's Blessing You can see normally in darkness, both magical and non-magical, to a distance of 18m/60ft. Grants Edge of Darkness Weapon action, Recharge: Per Turn, create cloud of darkness while you attack")
         ]
     }
@@ -2141,6 +2159,7 @@ let rec nyrulna = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Charger", "Requires Greater Attunement. Grants the Charger feat.");
             Complex("Shockwave", "When the wielder deals damage with this weapon, they deal an additional 1d8 Thunder damage in a 3m/10ft radius. Once affected by the thunderous explosion, enemies cannot be affected again until the start of their next turn. This can be toggled at any time. Veil of the Wind This weapon always returns to you when Thrown. In addition, you gain a +3m/10ft bonus to Movement Speed and Jump distance. In addition, you are Immune to fall damage. Grants Zephyr Flash Weapon action, Recharge: Short Rest, rush forward potentially inflicting bleed and blasting foes away, deals 6d6 Thunder, doesn't provoke Opportunity Attacks")
         ]
     }
@@ -2337,6 +2356,7 @@ let rec sussurGreatsword = {
         Icon = ""
         Rarity = Rare
         Grants = [
+            Complex("Feat - Mage Slayer", "Requires Greater Attunement. Grants the Mage Slayer feat.");
             Complex("Sussur Greatsword", "Silences targets on hit.")
         ]
     }
@@ -2365,6 +2385,7 @@ let rec swordOfChaos = {
         Icon = ""
         Rarity = Epic
         Grants = [
+            Complex("Feat - Masonry of Chaos", "Requires Greater Attunement. Grants the Masonry of Chaos feat.");
             Complex("Chaotic Eruption", "Dealing damage with this weapon causes your target to potentially eperience a negative surge of Wild Magic.")
         ]
     }
@@ -2379,6 +2400,7 @@ let rec balduransGiantslayer = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Greater Impact", "Requires Greater Attunement. Grants the Greater Impact feat.");
             Complex("Giantslayer", "You gain Advantage on Attack Rolls made against Large, Huge, or Gargantuan creatures. Grants Colossal Visage Class action, Recharge: Long Rest, grow in size, gaining +4 damage, +24 hit points, roll with Advantage on Strength based Ability Checks and Saving Throws, lasts until Long Rest Grants Topple the Big Folks Weapon action, Recharge: Per Battle, deal additional damage equal to Proficiency Bonus, on hit Large, Huge, or Gargantuan creatures take additional 6d6 Slashing damage and must succeed a Strength based Saving Throw or fall Prone")
         ]
     }
@@ -2393,6 +2415,7 @@ let rec silverSwordOfTheAstralPlane = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Reactive Assault", "Requires Greater Attunement. Grants the Reactive Assault feat.");
             Complex("Githborn Psionic Weapon", "When wielded by a githyanki this weapon deals an additional 1d8 Psychic damage. Githborn Psionic Resistance: A Githyanki holding this weapon has Advantage on Intelligence, WIsdom, and Charisma based Saving Throws, Resistance to Psychic damage, and cannot be Charmed. Grants Soulbreaker Weapon action, Recharge: Per Turn, deals weapon damage and possibly Stuns target")
         ]
     }
@@ -2407,6 +2430,7 @@ let rec lightOfCreation = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
+            Complex("Feat - Galvanized Stormsoul", "Requires Greater Attunement. Grants the Galvanized Stormsoul feat.");
             Complex("Electric Blood", "When the wielder deals damage using this weapon, they gain 1 Lightning Charge.")
         ]
     }
@@ -3009,6 +3033,7 @@ let rec gontrMael = {
         Icon = ""
         Rarity = Legendary
         Grants = [
+            Complex("Feat - Sharpshooter", "Requires Greater Attunement. Grants the Sharpshooter feat.");
             Complex("Promised Victory", "This weapon's range is doubled. On a hit, inflict Guiding Bolt  upon your target for one turn. Grants Dazzling Ray Weapon Action,  deals weapon damage + Proficiency as Radiant in a line and inflicts Blind")
         ]
     }

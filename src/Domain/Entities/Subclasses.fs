@@ -16,7 +16,7 @@ let rec beastheart =
         BaseClassId = barbarian.Id
         CasterType = Martial
         FixedAbilities = Map [
-            1<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_MagicAwareness" <!!> "Rage", "Bestial Heart: Gain resistance and unique heart benefits.") ]
+            1<classLvl>, [ Power(BonusAction, AtWill, "Action_Barbarian_MagicAwareness" <!!> "Rage", "Bestial Heart: Gain resistance, unique heart benefits, and can use hands as claws while enraged.") ]
             3<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Bestial Dominance", "When entering into a rage, you Dominate all Beasts and Monstrosities within 9m with no save, and can swap Bestial Hearts without expending a Rage charge.") ]
             5<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Howl of the Wild", "Your Bestial Heart actions are now available to every rage.") ]
             7<classLvl>, [ Complex("Action_Barbarian_MagicAwareness" <!!> "Beast Blood", "While enraged and wearing Light Armour, all damage taken is reduced by your Strength modifier.") ]
@@ -617,7 +617,7 @@ let rec infusedArcsmith =
         CasterType = Martial
         FixedAbilities = Map [
             1<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Infusion Matrix", "Use Matrix Charges (3) to apply Optimization or Sabotage matrices to allies/enemies. Reloading restores 3 Matrix Charges.") ]
-            3<classLvl>, [ Power(FreeAction, AtWill, "Skill_ArcaneJolt_Damage" <!!> "Adaptive Intervention", "Expend Matrix Charge for Advantage on checks or to Infuse when damaged.") ]
+            3<classLvl>, [ Power(FreeAction, AtWill, "Skill_ArcaneJolt_Damage" <!!> "Adaptive Intervention", "Expend Matrix Charge to grant +1d4 to Ability Checks until Long Rest, or to Infuse when damaged.") ]
             5<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Distributed Subroutine", "Infuse two creatures at once (or one for 2 rounds) per charge.") ]
             7<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Wanton Processing", "Killing blow or Critical Hit restores a Matrix Charge.") ]
             9<classLvl>, [ Complex("Skill_ArcaneJolt_Damage" <!!> "Overclocked Subroutine", "Infuse three creatures at once per charge.") ]
