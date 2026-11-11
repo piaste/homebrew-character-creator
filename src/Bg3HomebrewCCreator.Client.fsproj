@@ -5,6 +5,8 @@
     <NoWarn>FS1240</NoWarn>
     <!-- type tests ignore UoMs -->
     <NoWarn>FS3391</NoWarn>
+    <!-- single tuples in lists -->
+    <NoWarn>FS3386</NoWarn>
     <!-- don't warn for automatic implicit conversions -->
 <!-- 
     <RunAOTCompilation>true</RunAOTCompilation>

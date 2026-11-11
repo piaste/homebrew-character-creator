@@ -204,21 +204,24 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                         let name = Seq.head names
                         sheetAttr name (data.ToString()) (tooltipsFor names) None
 
-                    let inline condStat defaultValue name data = 
-                        cond (data = defaultValue) <| function
-                            | true -> empty()
-                            | false -> stat name data
-
                     stat ["Hit Points"; "Base HP"; "HP per level"] chr.HitPoints
                     stat ["Initiative"] (modifierText chr.Initiative)
                     
                     stat ["Base AC"; "AC"] chr.BaseAC
-                    stat ["DR Layers"] chr.DRLayers
-                    condStat 0 ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
+                    cond (chr.StatModifiers.DR > 0) <| function
+                        | false -> empty()
+                        | true -> 
+                            concat {
+                                stat ["DR Layers"] chr.DRLayers
+                                stat ["Damage reduction"; "DR"] (-1 * chr.StatModifiers.DR)
+                            }
                     
-                    let (attackAb, score) = chr.HighestAttackBonus in
+                    let attackAb, score = chr.HighestAttackBonus in
                     stat ["Best attack bonus"; "Attack rolls"] $"{modifierText score} ({attackAb})"
-                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
+                    cond (chr.CriticalThreshold < 20) <| function
+                        | false -> empty()
+                        | true -> stat ["Critical Threshold"] chr.CriticalThreshold
+
                     cond chr.HighestSpellDC <| function
                         | None -> empty()
                         | Some dc -> 

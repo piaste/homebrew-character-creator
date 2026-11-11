@@ -1479,7 +1479,7 @@ let rec unwantedMasterworkScalemail = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex ("Warlock Passive - Luck of the Devil", "Once per turn, upon rolling a Critical Hit on an enemy, restore one Warlock Spell Slot.")
+            Complex ("Warlock Passive - Bound Elements", "Gain the ability to use a Free Reaction after casting a Spell in order to become Resistant to all damage for one turn.")
         ]
     }
     Slot = Chest
@@ -2948,7 +2948,7 @@ let rec unwantedMasterworkGreaves = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex ("Warlock Passive - Eldritch Lance", "Gain the ability to fire a concentrated variant of your Eldritch Blast, which pierces enemies and deals 2d12 Force damage at the cost of one Warlock Spell Slot. Passives which modify your Eldritch Blast also modify your Eldritch Lance.")
+            Complex ("Warlock Passive - Shade Walker", "Gain the ability to teleport to 9m at will by casting Shade Walker as a ▲ Bonus Action.")
         ]
     }
     Slot = Feet
@@ -3416,7 +3416,7 @@ let rec psychicSpark = {
         Icon = ""
         Rarity = Rare
         Grants = [
-            Complex ("Psychic Missiles", "Shoot an additional dart whenever you cast Magic Missile.")
+            Complex ("Emergency Power Cell", "Once per turn, missing a single-target Attack Roll will refund your Action.")
         ]
     }
     Slot = Necklace
@@ -3572,7 +3572,7 @@ let rec dauntlessAmulet = {
         Icon = ""
         Rarity = Epic
         Grants = [
-            Complex ("Dragonslayer", "The number you need to roll a Critical Hit while attacking a Dangerous creature is reduced by 1. When attacking a Fatal creature, it is reduced by 2.")
+            Complex ("Dragonslayer", "Attack Rolls made against Dangerous or Fatal creatures are rolled with Advantage.")
         ]
     }
     Slot = Necklace
@@ -3936,7 +3936,7 @@ let rec ringOfMentalInhibition = {
         Icon = ""
         Rarity = Uncommon
         Grants = [
-            Complex ("Mental Inhibition", "When a foe fails a Saving Throw against one of your Spells or Actions, they gain Mental Fatigue for 3 turns")
+            Complex ("Mental Inhibition", "When a foe fails a Saving Throw against one of your Spells or Actions, they gain Mental Fatigue for 3 turns if they do not already have the Condition")
         ]
     }
     Slot = Ring
@@ -5663,9 +5663,9 @@ let rec empoweredGuardianEmblem = {
         Id = % nameof empoweredGuardianEmblem
         Name = "Empowered Guardian Emblem"
         Icon = ""
-        Rarity = Legendary
+        Rarity = Epic
         Grants = [
-            Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 2. This effect can stack.")
+            Complex ("Critical Bloodthirst", "The number you need to roll a Critical Hit while attacking is reduced by 1.")
         ]
     }
     Slot = Trinket
