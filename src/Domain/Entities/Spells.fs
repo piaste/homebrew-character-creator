@@ -564,7 +564,7 @@ let elementalWalls =
 let elementalWeapon =
     { Id = % "elemental-weapon"
       Name = "Elemental Weapon"
-      SpellDescription = "Imbue a weapon with an elemental infusion. It's damage type will change to the selected element and it will potentially inflict a condition, dependent on the element chosen."
+      SpellDescription = "Enchant an ally's weapon (and off-hand if dual wielding) causing it to change its damage type to an element of your choice. You may choose from any Element upon casting. On hit, you potentially inflict a condition based on the element chosen."
       SpellLists = [ Primal; Innate ]
       Concentration = false
       Upcastable = true
@@ -893,6 +893,15 @@ let harm =
       Concentration = false
       Upcastable = true
       ActionCost = Action }
+
+let heartSeekersBoon =
+    { Id = % "heart-seekers-boon"
+      Name = "Heart-Seeker's Boon"
+      SpellDescription = "Target creature gains Advantage on Attack Rolls and Damage for 3 turns."
+      SpellLists = [ Divine; Primal ]
+      Concentration = false
+      Upcastable = true
+      ActionCost = BonusAction }
 
 let healingGlyph =
     { Id = % "healing-glyph"
