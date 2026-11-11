@@ -47,7 +47,7 @@ let rec ``Dancing Lights`` : CantripDef = {
 
 let rec ``Disguise Self`` : CantripDef = {
     Id = % nameof ``Disguise Self``
-    CantripDescription = "Turn yourself invisible until the end of your current turn or change how other creatures perceive you until long rest, so long as you can cast the Cantrip. Duration: 1 turn. Offense: Buff."
+    CantripDescription = "Magically change all aspects of your appearance until long rest, so long as you can cast the Cantrip. Cannot be cast during combat. Your original racial passive is disabled while active. Includes interactive tooltips showing the exact passive you will receive. Duration: Until Long Rest. Offense: Buff."
     Concentration = false
     ActionCost = BonusAction
 }

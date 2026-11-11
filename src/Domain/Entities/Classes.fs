@@ -32,7 +32,9 @@ let rec barbarian = {
         IsCaster = false
         SpellcastingAbility = CHA
 
-        ScalingAbilities = (fun _ _ -> [])
+        ScalingAbilities = (fun charLvl _ -> [
+            Simple $"1d{if charLvl >= 9<charLvl> then 8 elif charLvl >= 5<charLvl> then 6 else 4} Unarmed Damage Die while Raging"
+        ])
 
         FixedAbilities = Map [
             1<classLvl>, [Complex ($"{TOGGLEABLE} Reckless Attack", "Make all Attack Rolls with Advantage. This effect can be toggled at any time."); Resource (3, "Action_Barbarian_Rage" <!!> "Rage Charge", OncePerShortRest)]
@@ -58,7 +60,7 @@ let rec bard = {
         FixedAbilities = Map [
             1<classLvl>, [
                 Complex ("Perform", "While in combat, begin a performance that reaches all creatures within 18m of you. Performing is broken when taking damage, and prevents the Bard from acting or moving.")
-                Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect.")
+                Complex ("Climax", "When your performance reaches Performative Chorus, you may trigger your subclass climax effect. You recover a Spell Slot each time you climax.")
                 Power (Action, OncePerLongRest, "Song of Rest", "You and your allies are revitalized as though you would have taken a Short Rest.")
             ]
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Font of Inspiration", "Upon entering combat, restore all three Bardic Inspiration charges.")]
@@ -134,9 +136,9 @@ let rec monk = {
         IsCaster = false
         SpellcastingAbility = WIS
 
-        ScalingAbilities = (fun _ cl -> [
+        ScalingAbilities = (fun charLvl cl -> [
             Resource (UMX.untag cl, $"Ki Points", OncePerShortRest)
-            Simple $"1d{if cl >= 9<classLvl> then 8 elif cl >= 5<classLvl> then 6 else 4} Unarmed Damage Die"
+            Simple $"1d{if charLvl >= 9<charLvl> then 8 elif charLvl >= 5<charLvl> then 6 else 4} Unarmed Damage Die"
         ])
 
         FixedAbilities = Map [
@@ -227,7 +229,7 @@ let rec sorcerer = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "May only be cast during combat. Can be used multiple times per turn. When a Spell is cast within 18m of you, you immediately gain a Sorcery Point. Upon targeting another creature with Creationary, you will be unable to use it again for the rest of your turn. Upon ending combat, all created resources are removed and exchanged resources are refunded.")
+            1<classLvl>, [Power (FreeAction, OncePerTurn, "Sorcery/Spell Channeling", "Consume a Spell Slot to create Sorcery Points equal to the level of the Spell Slot multiplied by 2, or vice versa."); Complex ("Creationary", "May only be cast during combat. Can be used multiple times per turn. Can be cast after having cast a leveled Spell, but only if you have not yet cast a leveled Spell during your current turn before it. When a Spell is cast within 18m of you, you immediately gain a Sorcery Point. Upon targeting another creature with Creationary, you will be unable to use it again for the rest of your turn. Upon ending combat, all created resources are removed and exchanged resources are refunded.")
             ]
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Morbid Creation", "While in combat, you gain 1 Sorcery Point per turn.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Philosopher’s Stone", "Triggers automatically when combat starts and grants Sorcery Points equal to your level.")]
@@ -269,7 +271,7 @@ let rec wizard = {
         ])
 
         FixedAbilities = Map [
-            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover Arcane Recovery charges equal to your Proficiency Bonus."); Power (FreeAction, AtWill, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery. May be used multiple times per turn.")]
+            1<classLvl>, [Complex ("Scroll Scribing", "You can permanently learn Spells or Cantrips from scrolls."); Complex ("Scholarly Acumen", "Each turn in combat, complete a directive of a random element or school of magic to recover Arcane Recovery charges equal to your Proficiency Bonus minus one."); Power (FreeAction, AtWill, "Arcane Channeling", "Recover an expended Spell Slot by expending a charge of your Arcane Recovery. May be used multiple times per turn.")]
             5<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Studious Results", "Fulfilling a Scholarly Acumen will immediately roll for a new one during your same turn.")]
             9<classLvl>, [Complex ("Extra Resource", "At level 5 and 9, you can pick an additional resource : Gain an additional Action; OR Gain an additional Bonus Action; OR Gain an additional Reaction. You can only pick every resource once."); Complex ("Acumen Supreme", "Once per turn, upon fulfilling your Scholarly Acumen, your next Spell or Cantrip during your turn will automatically roll as a Critical Hit.")]
         ]
