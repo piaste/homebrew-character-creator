@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <NoWarn>FS1240</NoWarn>
-    <!-- type tests ignore UoMs -->
-    <NoWarn>FS3391</NoWarn>
-    <!-- single tuples in lists -->
-    <NoWarn>FS3386</NoWarn>
-    <!-- don't warn for automatic implicit conversions -->
-<!-- 
+    <TargetFramework>net11.0</TargetFramework>
+    <!-- 
+      Warnings off:
+          - type tests ignore UoMs
+          - single tuples in lists 
+          - don't warn for automatic implicit conversions 
+    -->
+    <NoWarn>FS1240;FS3391;FS3386</NoWarn>
+    
     <RunAOTCompilation>true</RunAOTCompilation>
     <PublishTrimmed>true</PublishTrimmed>
     <TrimMode>full</TrimMode>
--->
 
     <InvariantGlobalization>true</InvariantGlobalization>
     <InvariantTimezone>true</InvariantTimezone>
@@ -54,6 +54,6 @@
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
     <PackageReference Include="Bolero.HotReload" Version="0.25.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="11.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.*" />
   </ItemGroup>
 </Project>
