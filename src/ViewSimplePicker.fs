@@ -1,0 +1,132 @@
+module Bg3HomebrewCCreator.OtherView.SimplePicker
+
+open FSharp.UMX
+open System
+open Bolero.Html
+
+open Helpers
+open Bg3HomebrewCCreator.Model
+open Bg3HomebrewCCreator.Update
+
+let view 
+        (title: string) 
+        sourceList 
+        (thingsUnpickable: Set<string<'m>>) 
+        (thingsPicked: Set<string<'m>>) 
+        maxPicks 
+        pick 
+        (model : Model) 
+        dispatch =
+
+    let sq = model.SearchQueries.GetOrDefault pick
+
+    let filtered =
+        sourceList
+        |> List.filter (fun c ->
+            String.IsNullOrWhiteSpace sq
+            || c.Name.Contains(sq, StringComparison.CurrentCultureIgnoreCase)
+            || c.Description.Contains(sq, StringComparison.CurrentCultureIgnoreCase))
+
+    div {
+        cl "picker-drawer"
+        attr.aria "label" "Picker"
+
+        div {
+            cl "screen picker-screen"
+
+            div {
+                cl "picker-header"
+                div {
+                    cl "h1"
+                    title
+                }
+                
+                cond (thingsPicked.Count = maxPicks) <| function
+                | false -> 
+                    button {
+                        cl "picker-header-command btn primary error"
+                        attr.disabled true
+                        $"Pick {maxPicks} ({thingsPicked.Count}/{maxPicks})"
+                    }
+                | true -> 
+                    button {
+                        cl "picker-header-command btn primary picker-done"
+                        on.click (fun _ -> dispatch NextMainStageSelection)
+                        "Done"
+                    }
+ 
+                button {
+                    cl "picker-header-command btn primary picker-done"
+                    on.click (fun _ -> dispatch (ClearPicks pick))
+                    "Clear"
+                }
+                div {
+                    cl "filter-panel compact"
+
+                    input {
+                        cl "search"
+                        attr.placeholder "Search name or description…"
+                        attr.value sq
+
+                        on.input (fun e -> dispatch (SetSearchQuery(pick, unbox e.Value)))
+                    }
+                }
+
+                div {
+                    cl "filter-panel-summary mini-muted"
+                    $"Showing {filtered.Length}/{sourceList.Length}"
+                }
+            }
+
+            div {
+                cl "grid grid-rows"
+
+                for c in filtered do
+
+                    button {
+                        attr.disabled (thingsUnpickable.Contains c.Id)
+                        cl (
+                            if thingsPicked.Contains c.Id then
+                                "card compact-row selected"
+                            else
+                                "card compact-row"
+                        )
+
+                        on.click (fun _ -> dispatch <| TogglePick (pick, UMX.untag<'m> c.Id))
+
+                        div {
+                            cl "card-top compact-row-top"
+
+                            cond c.Icon <| function
+                            | None -> empty()
+                            | Some iconPath -> 
+                                div {
+                                    cl "icon sm"
+
+                                    img {
+                                        cl "icon-img"
+                                        attr.src $"/assets/icons/{iconPath}.png"
+                                        attr.alt ""
+                                        // must hide the 'icon sm' div if icon is missing
+                                        "onerror" => "this.parentElement.style.display='none'"
+                                    }
+                                }
+
+                            div {
+                                cl "card-copy"
+
+                                div {
+                                    cl "label"
+                                    c.Name
+                                }
+
+                                div {
+                                    cl "desc"
+                                    printRichText c.Description
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+    }

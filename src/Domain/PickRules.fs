@@ -9,7 +9,8 @@ open System.Runtime.CompilerServices
 
 type LevelUpPick = 
     // this is also the display order!
-    | Archetypes | Traits | Skills | SkillExps     
+    | Archetypes | Traits | Skills | SkillExps
+    | ExtraResources     
     | ClassSpecific of ClassLevelUpPickType | ClassPassives
     | Cantrips | Spells
     | Feats
@@ -55,6 +56,11 @@ let nFeatPicks lr =
     | 4 | 8 | 12 -> 1
     | _ -> 0
 
+let nExtraResourcesPicks lr = 
+    match UMX.untag lr.ClassLevel with
+    | 5 | 9 -> 1 
+    | _ -> 0
+
 let private pickCache = ConditionalWeakTable<Character.Character, Map<LevelUpPick, int>>()
 
 type Character.Character with
@@ -73,7 +79,8 @@ type Character.Character with
                 yield Cantrips, nCantripPicks l 
                 yield Spells, nSpellPicks (subclassById l.SubclassId).CasterType
                 yield ClassPassives, nPassivePicks l 
-                yield Feats, nFeatPicks l 
+                yield Feats, nFeatPicks l
+                yield ExtraResources, nExtraResourcesPicks l
 
                 for pick, q in cl.CustomPicks.GetOrElse(l.ClassLevel, []) do
                     yield ClassSpecific pick, q 

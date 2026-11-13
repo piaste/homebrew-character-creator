@@ -91,6 +91,7 @@ let [<Literal>] ACTION = "🟢"
 let [<Literal>] BONUS_ACTION = "🔺" 
 let [<Literal>] REACTION = "♦️" 
 let [<Literal>] TOGGLEABLE = "🔄"
+let [<Literal>] FREE_ACTION = "♾️"
 
 type KeyedMap<[<Measure>] 'm, 'v 
         when 'v : (member Id: string<'m>) 
@@ -171,3 +172,7 @@ let inline (<!!>) iconSubpath (gs : GameString) =
 
 let halfRoundUp (lvl : int<'m>) = 
     Math.Ceiling(float (UMX.untag lvl) / 2.) |> int
+
+let getAllCases<'t> = 
+    FSharpType.GetUnionCases typeof<'t>
+    |> Array.map (fun uci -> FSharpValue.MakeUnion(uci, [||]) :?> 't)

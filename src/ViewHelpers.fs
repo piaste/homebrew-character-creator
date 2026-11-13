@@ -11,6 +11,26 @@ open Bg3HomebrewCCreator.Model
 
 type OtherUi = Template<"wwwroot/main.html">
 
+
+type Pickable<[<Measure>] 'm> =
+    { Id: string<'m>
+      Name: string
+      Description: string
+      Icon: string option }
+    
+    static member inline FromList x =
+        x
+        |> Seq.map<_, Pickable<'t>> (fun (c, iconPath) -> 
+            { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath}
+        )
+        |> Seq.toList 
+        
+type P2<[<Measure>] 'm> =
+    { ...Pickable<'m>
+      Foo: int
+    }
+
+
 let inline cl s = attr.``class`` s
 
 let inline (!) text = Node.Text text

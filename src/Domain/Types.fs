@@ -13,7 +13,12 @@ type ActionCost =
         | Action -> ACTION
         | BonusAction -> BONUS_ACTION
         | Reaction -> REACTION
-        | FreeAction -> "♾️"
+        | FreeAction -> FREE_ACTION
+
+type ExtraResource = 
+    | ExtraAction
+    | ExtraBonusAction
+    | ExtraReaction
 
 type Frequency = 
     | AtWill
@@ -258,6 +263,8 @@ type CantripDef =
     member this.Name = UMX.untag this.Id
     member this.Description = 
         $"""{this.ActionCost}{this.Concentration.IfThen" (C)"}: {this.CantripDescription}"""
+
+type P = { ...CantripDef; x : int }
 
 type [<Measure>] spellId
 

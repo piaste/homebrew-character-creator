@@ -8,11 +8,6 @@ open Helpers
 open Bg3HomebrewCCreator.Model
 open Bg3HomebrewCCreator.Update
 
-type Thing<[<Measure>] 'm> =
-    { Id: string<'m>
-      Name: string
-      Description: string
-      Icon: string option }
 
 let view 
         (title: string) 

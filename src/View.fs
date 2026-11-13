@@ -423,7 +423,7 @@ let inline toPickerLore<
     (s : 't seq)
      =
     s
-    |> Seq.map<'t, Picker.Thing<'m>> (fun (c : 't) -> { 
+    |> Seq.map<'t, Pickable<'m>> (fun (c : 't) -> { 
         Id = c.Id
         Name = c.Name
         Description = c.Description.Display useLoreNames
@@ -442,7 +442,7 @@ let inline toPicker<
     (s : 't seq)
      =
     s
-    |> Seq.map<'t, Picker.Thing<'m>> (fun (c : 't) -> { 
+    |> Seq.map<'t, Pickable<'m>> (fun (c : 't) -> { 
         Id = c.Id
         Name = c.Name
         Description = c.Description
@@ -603,7 +603,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick Skills ->
                 ph Skills <| Picker.view "Skill Proficiences"
                     (Skills.allSkills.Values
-                     |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Pickable<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     Set.empty
@@ -613,16 +613,25 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 ph SkillExps <| Picker.view "Skill Expertises"
                     (Skills.allSkills.Values
                      |> Seq.filter (fun s -> c.SkillIds.Contains s.Id)
-                     |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                     |> Seq.map<_, Pickable<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                      |> Seq.toList
                     )
                     Set.empty
                     c.SkillExpIds
 
+            | Pick ExtraResources ->
+                ph ExtraResources <| Picker.view "Extra Resources"
+                    (getAllCases<ExtraResource>()
+                     |> Seq.map<_, Pickable<ExtraResource>> (fun c -> { Id = c; Name = c.Name; Description = c.Description; Icon = None }
+                     ) 
+                    )
+                    Set.empty
+                    c.ExtraResources
+
             | Pick Cantrips ->
                 ph Cantrips <| Picker.view "Cantrips"
                     (allCantripsWithIcons
-                     |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                     |> Seq.map<_, Pickable<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                      |> Seq.toList
                     )
                     c.PreviousHistory.AllCantripIds
@@ -634,7 +643,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | Some sl -> 
                     ph Spells <| Picker.view "Spells"
                         (allSpellsWithIconsIn sl
-                        |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.map<_, Pickable<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
                         c.PreviousHistory.AllSpellIds
@@ -670,7 +679,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | FeatSubpickType.Cantrips ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (allCantripsWithIcons
-                        |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.map<_, Pickable<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
                         // We can cheat a bit because we know that cantrips are never picked at the same level as feats
@@ -729,7 +738,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | YBCantrips ->                    
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (allCantripsWithIcons
-                        |> Seq.map<_, Picker.Thing<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.map<_, Pickable<cantripId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
                         // We can cheat a bit because we know that cantrips are never picked at the same level as feats
@@ -739,7 +748,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | YBSpells sl->                                                    
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (allSpellsWithIconsIn sl
-                        |> Seq.map<_, Picker.Thing<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
+                        |> Seq.map<_, Pickable<spellId>> (fun (c, iconPath) -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = Some iconPath})
                         |> Seq.toList
                         )
                         c.PreviousHistory.AllSpellIds
@@ -802,7 +811,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | SkillProficiencies ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (Skills.allSkills.Values
-                        |> Seq.map<_, Picker.Thing<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
+                        |> Seq.map<_, Pickable<skillId>> (fun c -> { Id = c.Id; Name = c.Name; Description = c.Description; Icon = None})
                         |> Seq.toList
                         )
                         c.SkillIds
@@ -811,7 +820,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | ElementalTypes ->
                     ph (FeatSubpick f) <| Picker.view f.DisplayString
                         (elementalDmgTypes
-                        |> Seq.map<_, Picker.Thing<element>> (fun c -> { 
+                        |> Seq.map<_, Pickable<element>> (fun c -> { 
                             Id = UMX.tag<element> (c.ToString())
                             Name = c.ToString()
                             Description = $"Damage from {c} sources"
@@ -843,6 +852,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     picksDockButton "Skills" c.SkillIds.Count
                 | SkillExps ->
                     picksDockButton "Expertises" c.SkillExpIds.Count
+                | ExtraResources ->
+                    picksDockButton "Extra Resources" 1
                 | Cantrips -> 
                     picksDockButton "Cantrips" l.CantripIds.Count
                 | Spells -> 
