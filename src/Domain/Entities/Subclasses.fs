@@ -1393,6 +1393,43 @@ let rec draconicBloodline =
         CustomPicks = Map []
     }
 
+let rec hematicMonarch =
+    {
+        Id = % nameof hematicMonarch
+        Name = "Hematic Monarch"
+        Description = "Power flows visibly through you in cascading waves of illuminated brilliance. Radiant and pure, yet effortlessly frightening to those who behold it. A reincarnation of the \"Ever Brilliant Mako\"."
+                      <?> "You are gifted with the rare and wild talent of spellfire, the raw energy of the Weave itself, at once all-consuming flame and rejuvenating touch."
+        BaseClassId = sorcerer.Id
+        CasterType = FullCaster Innate
+        FixedAbilities = Map [
+            1<classLvl>, [ 
+                Power(BonusAction, AtWill, "Spell_2e_ConsecratedFlesh" <!!> "Bloodborne", "+1d4 Slashing damage and use spellcasting modifiers for your weapons.")
+                Power(Action, AtWill, "Spell_2e_ConsecratedFlesh" <!!> "Piercing Blood", "1d12+4 Slashing dmg / spell slot level, CON save halves. 3 turns Gaping Wounds on a failed save. ")
+            
+             ]
+            3<classLvl>, [ 
+                Complex("A Symphony of Red", "Dealing Physical damage to a target affects them with Effigy of Blood (Curse, affected creature loses 5% of their total HP at the start of each turn and has Disadvantage on Constitution Saving Throws). Effigy of Blood stack with Bleed. Affects creatures immune to bleeding.")
+             ]
+            5<classLvl>, [ 
+                Complex("Bleed It Out", "When casting Spells, you may expend Hit Points instead of Spell Slots. You expend 5% of your maximum Hit Points per level of the spell you attempt to cast. This can kill you and is considered True Damage (can't be reduced by any kind of Resistance or Damage Reduction). Temporary HP can still shield you from this damage.")
+            ]
+            7<classLvl>, [ 
+                Complex("Raining Blood", "At the start of each of your turns, bolts of blood rain from the sky across a 9m area, dealing 2d12 Piercing damage (3d12 at lvl 9) to all enemies in the area.") 
+            ]
+            9<classLvl>, [ 
+                Complex("Sanguine, My Brother", "At the start of your turn, you recover 10% of your max HP. You have advantage on Constitution Saving Throws in battle.") 
+            ]
+            11<classLvl>, [ 
+                Power(Action, AtWill, "Hematic Exultation", "You float to the sky with a fucking cool VFX. Every round for the next 3 rounds, each enemy in a 9m area around you erupts in blood, halving their movement speed and taking 1d12 Piercing damage/spell slot level at the beginning of each of their turns.")
+            ]
+        ]
+        ScalingAbilities = fun chrLvl _ -> [
+            
+            Power(Action, AtWill, "Spell_2e_ConsecratedFlesh" <!!> "Hematic Withdrawal", $"{cantripDmgDice chrLvl}d12 Piercing damage + 3 turns Bleed, 18m range. If target can Bleed, you heal by the same amount.")
+            
+        ]
+        CustomPicks = Map []
+    }
 let rec radiantBloom =
     {
         Id = % nameof radiantBloom

@@ -332,6 +332,5 @@ let hasClassSpecialistFor (c: Character) =
     c.CurrentHistory.AllFeatSubPicks.GetOrElse(FeatSubpickType.ClassPassives, Set.empty)        
     |> Set.map (fun cpId -> ClassPassives.allClassPassives[UMX.tag<classPassiveId> cpId].ClassId)        
     
-
 let tryMigrate (c: Character) =
     None // no migrations supported yet

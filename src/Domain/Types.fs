@@ -517,3 +517,8 @@ type EquipmentDef = {
 } with
     member this.Id = this.Item.Id
     member this.Name = this.Item.Name
+
+
+let cantripDmgDice (lvl: int<charLvl>) = 
+    2 + if lvl >= 5<charLvl> then 1 else 0 
+      + if lvl >= 9<charLvl> then 1 else 0 
