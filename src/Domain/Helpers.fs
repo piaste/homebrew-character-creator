@@ -54,10 +54,10 @@ let getNewClassBenefitsAt useLoreNames scid lvl charLvl =
         let clDef = classBySubclassId scid
         
         for scAb in getLevelDiff (clDef.ScalingAbilities charLvl) _.Name (lvl - 1<classLvl>) lvl do
-            yield clDef.Name, scAb
+            yield clDef.Name.Display useLoreNames, scAb
 
         for KeyValue(lvlReq, ab) in clDef.FixedAbilities do
-            if lvl = lvlReq then for fAb in ab do yield clDef.Name, fAb
+            if lvl = lvlReq then for fAb in ab do yield clDef.Name.Display useLoreNames, fAb
         
         // subclass benefits
         let scDef = allSubclasses[scid]
@@ -174,7 +174,7 @@ let getAllPassives useLoreNames (character : Character) =
             let clDef = classById clId
 
             for n, p in getClassBenefits clDef lvl character.CharacterLevel do
-                yield n, p
+                yield n.Display useLoreNames, p
 
             for n, p in getSubclassBenefits useLoreNames scId lvl character.CharacterLevel do
                 yield n, p
@@ -183,7 +183,7 @@ let getAllPassives useLoreNames (character : Character) =
             for cpId in Map.getOrElse Set.empty clId character.CurrentHistory.AllClassPassiveIdsByClass do
                 let cpDef = ClassPassives.allClassPassives[cpId]
                 for g in cpDef.Grants do
-                    yield clDef.Name, g
+                    yield clDef.Name.Display useLoreNames, g
   
     ]
     

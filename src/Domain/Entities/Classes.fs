@@ -5,7 +5,7 @@ open Bg3HomebrewCCreator.Domain.Types
 
 let rec artificer = {
         Id = % nameof artificer
-        Name = "Zetherist"
+        Name = "Zetherist" <?> "Wright"
         Description = "Masters of invention, artificers use ingenuity and magic to unlock extraordinary capabilities in objects."
 
         IsCaster = false

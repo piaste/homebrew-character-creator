@@ -359,7 +359,7 @@ type [<Measure>] classId
 type ClassDef =
     {
         Id: string<classId>
-        Name: string
+        Name: GameString
         Description: string
         IsCaster: bool
         SpellcastingAbility: Ability

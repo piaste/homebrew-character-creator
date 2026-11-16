@@ -299,7 +299,7 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                             | FromSubclass scId -> 
                                 let sc = Subclasses.allSubclasses[scId]
                                 let bn = Classes.allClasses[sc.BaseClassId]
-                                fun source -> source = sc.Name.Display useLoreNames || source = bn.Name
+                                fun source -> source = sc.Name.Display useLoreNames || source = bn.Name.Display useLoreNames
 
                         mainCharPassives
                         |> List.filter (fun (source, passive) -> filter source && not passive.IsResource)
@@ -496,14 +496,14 @@ let otherView (model: Model) (dispatch : Message -> unit) =
     let validSubclasses =
         getValidSubclassesFor c   
                 
-    let levelDownButtons = 
+    let levelDownButtons useLoreNames = 
         cond model.Character.PreviousLevelHistory.IsEmpty <| function
         | false -> 
             forEach model.Character.CurrentHistory.LevelsBySubclass <| fun (KeyValue(scId, lvl)) ->
                 let cName = Classes.allClasses[classIdBySubclassId scId].Name
                 let text = 
                     if lvl = 1<classLvl> then
-                        span { "⬇️ "; del { cName } }
+                        span { "⬇️ "; del { cName.Display useLoreNames } }
                     else
                         ! $"⬇️ {cName} {lvl - 1<classLvl>}" 
                 actionButtonWithClass 
@@ -540,7 +540,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                     
                     div {
                         cl "main-stage-levelup-leveldown"
-                        levelDownButtons
+                        levelDownButtons model.UseLoreNames
                     }
                 }
             | Race -> 
@@ -567,7 +567,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 radialStage rct dispatch
                     (Classes.allClasses
                      |> Map.map (fun _ v -> 
-                        {| IconText = v.Name
+                        {| IconText = v.Name.Display model.UseLoreNames
                            RadialCenterTextData = {
                                 Introduction = v.Description
                                 Details = Some <| getAllClassBenefits model.UseLoreNames v.Id
@@ -706,7 +706,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         radialStage rct dispatch
                             (validClassesForYB
                              |> Map.map (fun _ v -> 
-                                    {| IconText = v.Name
+                                    {| IconText = v.Name.Display model.UseLoreNames
                                        RadialCenterTextData = {
                                            Introduction = v.Description
                                            Details = Some <| getAllClassBenefits model.UseLoreNames v.Id
@@ -780,7 +780,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         radialStage rct dispatch
                             (validClassesForSpecialist
                             |> Map.map (fun _ v -> 
-                                    {| IconText = v.Name
+                                    {| IconText = v.Name.Display model.UseLoreNames
                                        RadialCenterTextData = {
                                            Introduction = v.Description
                                            Details = Some <| getAllClassBenefits model.UseLoreNames v.Id
@@ -954,7 +954,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                         | [] -> levelup true
                         | _ -> levelup false
                     
-                    levelDownButtons
+                    levelDownButtons model.UseLoreNames
                 }
 
                 div {
