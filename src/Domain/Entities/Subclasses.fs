@@ -1397,8 +1397,8 @@ let rec hematicMonarch =
     {
         Id = % nameof hematicMonarch
         Name = "Hematic Monarch"
-        Description = "Power flows visibly through you in cascading waves of illuminated brilliance. Radiant and pure, yet effortlessly frightening to those who behold it. A reincarnation of the \"Ever Brilliant Mako\"."
-                      <?> "You are gifted with the rare and wild talent of spellfire, the raw energy of the Weave itself, at once all-consuming flame and rejuvenating touch."
+        Description = "Hematic Monarch wields blood as both weapon and birthright. Their art is said to descend from Kiku, Vampiric Lord of Terror, who once taught that agony and rapture are but two pulses of the same beating heart."
+                      <?> "You were chosen by the Domains of Dread to become a Darklord of crimson tyranny. Though you fled the Mists, your marked soul inexorably calls all blood to heel."
         BaseClassId = sorcerer.Id
         CasterType = FullCaster Innate
         FixedAbilities = Map [
