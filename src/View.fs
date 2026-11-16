@@ -316,8 +316,6 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives showGear dispa
                     cond (chr.CriticalThreshold < 20) <| function
                         | false -> empty()
                         | true -> stat ["Critical Threshold"] chr.CriticalThreshold
-
-
                     
                     cond chr.HighestSpellDC <| function
                         | None -> empty()
@@ -326,8 +324,6 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives showGear dispa
 
                     forEach chr.WeaponAttacks <| fun (KeyValue(slot, atk)) ->
                         stat [ slot.DisplayString ] $"""+{atk.AttackBonus}, {String.concat " + " [ for d, v in atk.Damage -> $"{d} {v}"]}"""
-
-                    condStat 20 ["Critical Threshold"] chr.CriticalThreshold
 
                 }
 
