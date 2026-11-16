@@ -25,12 +25,6 @@ type Pickable<[<Measure>] 'm> =
         )
         |> Seq.toList 
         
-type P2<[<Measure>] 'm> =
-    { ...Pickable<'m>
-      Foo: int
-    }
-
-
 let inline cl s = attr.``class`` s
 
 let inline (!) text = Node.Text text

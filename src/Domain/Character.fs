@@ -87,7 +87,7 @@ type Character =
 
         SkillIds: Set<string<skillId>>
         SkillExpIds: Set<string<skillId>>
-        ExtraResources: Set<ExtraResource>
+        ExtraResources: Set<string<extraResourceId>>
         
         ArchetypeId: string<archetypeId>
         TraitId: string<traitId>

@@ -15,10 +15,27 @@ type ActionCost =
         | Reaction -> REACTION
         | FreeAction -> FREE_ACTION
 
+type [<Measure>] extraResourceId
 type ExtraResource = 
     | ExtraAction
     | ExtraBonusAction
     | ExtraReaction
+    member this.Id : string<extraResourceId> = 
+        match this with
+        | ExtraAction -> % "extra-action"
+        | ExtraBonusAction -> % "extra-bonus-action"
+        | ExtraReaction -> % "extra-reaction"
+    member this.Logo = 
+        match this with
+        | ExtraAction -> ACTION
+        | ExtraBonusAction -> BONUS_ACTION
+        | ExtraReaction -> REACTION        
+    member this.Description = 
+        match this with
+        | ExtraAction -> % "Gain an additional Action"
+        | ExtraBonusAction -> % "Gain an additional Bonus Action"
+        | ExtraReaction -> % "Gain an additional Reaction"
+
 
 type Frequency = 
     | AtWill
@@ -263,8 +280,6 @@ type CantripDef =
     member this.Name = UMX.untag this.Id
     member this.Description = 
         $"""{this.ActionCost}{this.Concentration.IfThen" (C)"}: {this.CantripDescription}"""
-
-type P = { ...CantripDef; x : int }
 
 type [<Measure>] spellId
 

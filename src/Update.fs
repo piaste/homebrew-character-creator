@@ -333,6 +333,14 @@ let update
                     SkillExpIds = 
                         character.SkillExpIds.Toggle skillId
                 } 
+
+        | ExtraResources ->
+
+            apply <| fun character ->
+                { character with 
+                    ExtraResources = 
+                        character.ExtraResources.Toggle (UMX.tag<extraResourceId> id)
+                } 
         | Cantrips -> 
             let cantripId = UMX.tag<cantripId> id
 
@@ -438,6 +446,10 @@ let update
             | SkillExps -> 
                     { character with 
                         SkillExpIds = Set.empty
+                    } 
+            | ExtraResources -> 
+                    { character with 
+                        ExtraResources = Set.empty
                     } 
             | Cantrips -> 
                     { character with 

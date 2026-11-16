@@ -87,6 +87,10 @@ type Set<'T when 'T : comparison> with
     member this.Toggle value = 
         if this.Contains value then this.Remove value else this.Add value
 
+module Seq = 
+    let inline countInstances v s = 
+        s |> Seq.where ((==) v) |> Seq.length
+
 let [<Literal>] ACTION = "🟢" 
 let [<Literal>] BONUS_ACTION = "🔺" 
 let [<Literal>] REACTION = "♦️" 
@@ -173,6 +177,6 @@ let inline (<!!>) iconSubpath (gs : GameString) =
 let halfRoundUp (lvl : int<'m>) = 
     Math.Ceiling(float (UMX.untag lvl) / 2.) |> int
 
-let getAllCases<'t> = 
+let getAllCases<'t>() = 
     FSharpType.GetUnionCases typeof<'t>
     |> Array.map (fun uci -> FSharpValue.MakeUnion(uci, [||]) :?> 't)

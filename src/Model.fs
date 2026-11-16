@@ -62,6 +62,7 @@ let defaultCharacter =
         SkillExpIds = Set.empty
         ArchetypeId = Archetypes.arcanePrecision.Id
         TraitId = Traits.none.Id
+        ExtraResources = Set.empty
 
 
         PreviousLevelHistory = []

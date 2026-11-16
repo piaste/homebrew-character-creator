@@ -6,10 +6,12 @@
     <!-- 
       Warnings off:
           - type tests ignore UoMs
-          - single tuples in lists 
-          - don't warn for automatic implicit conversions 
+          - 3886: single tuples in lists 
+          - 3391: don't warn for automatic implicit conversions 
+
+          1240;3391;
     -->
-    <NoWarn>FS1240;FS3391;FS3386</NoWarn>
+    <NoWarn>$(NoWarn);3886;3391</NoWarn>
     
     <RunAOTCompilation>true</RunAOTCompilation>
     <PublishTrimmed>true</PublishTrimmed>
@@ -42,6 +44,7 @@
     <Compile Include="Update.fs" />        
     <Compile Include="ViewHelpers.fs" />
     <Compile Include="ViewPicker.fs" />
+    <Compile Include="ViewSimplePicker.fs" />
     <Compile Include="View.fs" />
     <Compile Include="Main.fs" />
     <Compile Include="Startup.fs" />
@@ -51,7 +54,6 @@
     <PackageReference Include="Bolero" Version="0.25.65" />
     <PackageReference Include="Bolero.Build" Version="0.25.65" />
     <PackageReference Include="FSharp.UMX" Version="1.1.0" />
-    <PackageReference Include="System.Net.Http.Json" Version="11.0.*" />
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
     <PackageReference Include="Bolero.HotReload" Version="0.25.8" />

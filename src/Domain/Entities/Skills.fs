@@ -23,7 +23,7 @@ let rec arcana = {
             Name = "Arcana"         
             KeyAbility = INT
             SkillDescription = "Arcana is used when attempting to remember facts about the Weave, the source of magic and spells."
-            Grants = Simple "You have permanent Detect Thoughts."
+            Grants = Simple "You have permanent See Invisibility."
         }
 let rec intimidate = {
             Id = % nameof intimidate
@@ -65,7 +65,7 @@ let rec persuasion = {
             Name = "Persuasion"
             KeyAbility = CHA
             SkillDescription = "Persuasion is used when attempting to negotiate with or convince others. It affects the price that traders give a character when buying or selling items."
-            Grants = Simple "Reduce merchant price (like vanilla)."
+            Grants = Simple "You have permanent Speak With Animals."
         }
 let rec deception = {
             Id = % nameof deception

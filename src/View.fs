@@ -244,6 +244,12 @@ let summaryAbilities useLoreNames (chr: Character) filterPassives dispatch =
                     cl "sheet-attrs"
                     div {
                         cl "resources"
+                        // action buttons
+                        p { getAllCases<ExtraResource>()
+                            |> Seq.map (fun r -> r.Logo + if chr.ExtraResources.Contains r.Id then r.Logo else "")
+                            |> String.concat ""
+                          }
+
                         forEach resources <| fun (_, resource) ->                    
                             let anchorId = Guid.NewGuid().ToString()
                             b { cl "summary-ability-points tooltip resource"
@@ -622,8 +628,8 @@ let otherView (model: Model) (dispatch : Message -> unit) =
             | Pick ExtraResources ->
                 ph ExtraResources <| Picker.view "Extra Resources"
                     (getAllCases<ExtraResource>()
-                     |> Seq.map<_, Pickable<ExtraResource>> (fun c -> { Id = c; Name = c.Name; Description = c.Description; Icon = None }
-                     ) 
+                     |> Seq.map<_, Pickable<extraResourceId>> (fun c -> { Id = c.Id; Name = c.ToString(); Description = c.Description; Icon = None })
+                     |> Seq.toList                     
                     )
                     Set.empty
                     c.ExtraResources
@@ -853,7 +859,7 @@ let otherView (model: Model) (dispatch : Message -> unit) =
                 | SkillExps ->
                     picksDockButton "Expertises" c.SkillExpIds.Count
                 | ExtraResources ->
-                    picksDockButton "Extra Resources" 1
+                    picksDockButton "Extra Resources" c.ExtraResources.Count
                 | Cantrips -> 
                     picksDockButton "Cantrips" l.CantripIds.Count
                 | Spells -> 
